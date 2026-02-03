@@ -1,0 +1,183 @@
+# Late\APIKeysApi
+
+
+
+All URIs are relative to https://getlate.dev/api, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**createApiKey()**](APIKeysApi.md#createApiKey) | **POST** /v1/api-keys | Create a new API key |
+| [**deleteApiKey()**](APIKeysApi.md#deleteApiKey) | **DELETE** /v1/api-keys/{keyId} | Delete an API key |
+| [**listApiKeys()**](APIKeysApi.md#listApiKeys) | **GET** /v1/api-keys | List API keys for the current user |
+
+
+## `createApiKey()`
+
+```php
+createApiKey($create_api_key_request): \Late\Model\CreateApiKey201Response
+```
+
+Create a new API key
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Late\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Late\Api\APIKeysApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$create_api_key_request = {"name":"Production API Key","expiresIn":365}; // \Late\Model\CreateApiKeyRequest
+
+try {
+    $result = $apiInstance->createApiKey($create_api_key_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling APIKeysApi->createApiKey: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **create_api_key_request** | [**\Late\Model\CreateApiKeyRequest**](../Model/CreateApiKeyRequest.md)|  | |
+
+### Return type
+
+[**\Late\Model\CreateApiKey201Response**](../Model/CreateApiKey201Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteApiKey()`
+
+```php
+deleteApiKey($key_id): \Late\Model\DeleteAccountGroup200Response
+```
+
+Delete an API key
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Late\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Late\Api\APIKeysApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$key_id = 'key_id_example'; // string
+
+try {
+    $result = $apiInstance->deleteApiKey($key_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling APIKeysApi->deleteApiKey: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **key_id** | **string**|  | |
+
+### Return type
+
+[**\Late\Model\DeleteAccountGroup200Response**](../Model/DeleteAccountGroup200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listApiKeys()`
+
+```php
+listApiKeys(): \Late\Model\ListApiKeys200Response
+```
+
+List API keys for the current user
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Late\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Late\Api\APIKeysApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+
+try {
+    $result = $apiInstance->listApiKeys();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling APIKeysApi->listApiKeys: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**\Late\Model\ListApiKeys200Response**](../Model/ListApiKeys200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)

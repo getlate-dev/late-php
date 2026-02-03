@@ -1,0 +1,14 @@
+# # CreatePostRequestPlatformsInner
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**platform** | **string** |  | [optional]
+**account_id** | **string** |  | [optional]
+**custom_content** | **string** |  | [optional]
+**custom_media** | [**\Late\Model\CreatePostRequestMediaItemsInner[]**](CreatePostRequestMediaItemsInner.md) |  | [optional]
+**scheduled_for** | **\DateTime** | Optional per-platform scheduled time override. When omitted, the top-level scheduledFor is used. | [optional]
+**platform_specific_data** | [**\Late\Model\CreatePostRequestPlatformsInnerPlatformSpecificData**](CreatePostRequestPlatformsInnerPlatformSpecificData.md) |  | [optional]
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

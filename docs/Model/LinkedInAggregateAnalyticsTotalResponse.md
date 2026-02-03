@@ -1,0 +1,17 @@
+# # LinkedInAggregateAnalyticsTotalResponse
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**account_id** | **string** |  | [optional]
+**platform** | **string** |  | [optional]
+**account_type** | **string** |  | [optional]
+**username** | **string** |  | [optional]
+**aggregation** | **string** |  | [optional]
+**date_range** | [**\Late\Model\LinkedInAggregateAnalyticsTotalResponseDateRange**](LinkedInAggregateAnalyticsTotalResponseDateRange.md) |  | [optional]
+**analytics** | [**\Late\Model\LinkedInAggregateAnalyticsTotalResponseAnalytics**](LinkedInAggregateAnalyticsTotalResponseAnalytics.md) |  | [optional]
+**note** | **string** |  | [optional]
+**last_updated** | **\DateTime** |  | [optional]
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

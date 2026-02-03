@@ -1,0 +1,378 @@
+# Late\WebhooksApi
+
+Configure webhooks to receive real-time notifications about post status changes, account events, and incoming messages.  **Available Events:** - &#x60;post.scheduled&#x60; - When a post is successfully scheduled - &#x60;post.published&#x60; - When a post is successfully published - &#x60;post.failed&#x60; - When a post fails to publish on all platforms - &#x60;post.partial&#x60; - When a post publishes to some platforms but fails on others - &#x60;account.connected&#x60; - When a social account is successfully connected - &#x60;account.disconnected&#x60; - When a social account is disconnected (token expired/revoked) - &#x60;message.received&#x60; - When a new DM is received (Instagram, Telegram)  **Security:** - Optional HMAC-SHA256 signature sent in &#x60;X-Late-Signature&#x60; header - Configure a secret key in webhook settings to enable signature verification - Custom headers can be added to webhook requests for additional authentication
+
+All URIs are relative to https://getlate.dev/api, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**createWebhookSettings()**](WebhooksApi.md#createWebhookSettings) | **POST** /v1/webhooks/settings | Create a new webhook |
+| [**deleteWebhookSettings()**](WebhooksApi.md#deleteWebhookSettings) | **DELETE** /v1/webhooks/settings | Delete a webhook |
+| [**getWebhookLogs()**](WebhooksApi.md#getWebhookLogs) | **GET** /v1/webhooks/logs | Get webhook delivery logs |
+| [**getWebhookSettings()**](WebhooksApi.md#getWebhookSettings) | **GET** /v1/webhooks/settings | List all webhooks |
+| [**testWebhook()**](WebhooksApi.md#testWebhook) | **POST** /v1/webhooks/test | Send test webhook |
+| [**updateWebhookSettings()**](WebhooksApi.md#updateWebhookSettings) | **PUT** /v1/webhooks/settings | Update a webhook |
+
+
+## `createWebhookSettings()`
+
+```php
+createWebhookSettings($create_webhook_settings_request): \Late\Model\UpdateWebhookSettings200Response
+```
+
+Create a new webhook
+
+Create a new webhook configuration. Maximum 10 webhooks per user.  **Note:** Webhooks are automatically disabled after 10 consecutive delivery failures.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Late\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Late\Api\WebhooksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$create_webhook_settings_request = {"name":"My Production Webhook","url":"https://example.com/webhook","secret":"your-secret-key","events":["post.scheduled","post.published","post.failed","post.partial","account.connected","account.disconnected","message.received"],"isActive":true}; // \Late\Model\CreateWebhookSettingsRequest
+
+try {
+    $result = $apiInstance->createWebhookSettings($create_webhook_settings_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WebhooksApi->createWebhookSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **create_webhook_settings_request** | [**\Late\Model\CreateWebhookSettingsRequest**](../Model/CreateWebhookSettingsRequest.md)|  | |
+
+### Return type
+
+[**\Late\Model\UpdateWebhookSettings200Response**](../Model/UpdateWebhookSettings200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteWebhookSettings()`
+
+```php
+deleteWebhookSettings($id): \Late\Model\UpdateRedditSubreddits200Response
+```
+
+Delete a webhook
+
+Permanently delete a webhook configuration.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Late\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Late\Api\WebhooksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string | Webhook ID to delete
+
+try {
+    $result = $apiInstance->deleteWebhookSettings($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WebhooksApi->deleteWebhookSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| Webhook ID to delete | |
+
+### Return type
+
+[**\Late\Model\UpdateRedditSubreddits200Response**](../Model/UpdateRedditSubreddits200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getWebhookLogs()`
+
+```php
+getWebhookLogs($limit, $status, $event, $webhook_id): \Late\Model\GetWebhookLogs200Response
+```
+
+Get webhook delivery logs
+
+Retrieve webhook delivery history. Logs are automatically deleted after 7 days.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Late\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Late\Api\WebhooksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$limit = 50; // int | Maximum number of logs to return (max 100)
+$status = 'status_example'; // string | Filter by delivery status
+$event = 'event_example'; // string | Filter by event type
+$webhook_id = 'webhook_id_example'; // string | Filter by webhook ID
+
+try {
+    $result = $apiInstance->getWebhookLogs($limit, $status, $event, $webhook_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WebhooksApi->getWebhookLogs: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **limit** | **int**| Maximum number of logs to return (max 100) | [optional] [default to 50] |
+| **status** | **string**| Filter by delivery status | [optional] |
+| **event** | **string**| Filter by event type | [optional] |
+| **webhook_id** | **string**| Filter by webhook ID | [optional] |
+
+### Return type
+
+[**\Late\Model\GetWebhookLogs200Response**](../Model/GetWebhookLogs200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getWebhookSettings()`
+
+```php
+getWebhookSettings(): \Late\Model\GetWebhookSettings200Response
+```
+
+List all webhooks
+
+Retrieve all configured webhooks for the authenticated user. Supports up to 10 webhooks per user.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Late\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Late\Api\WebhooksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+
+try {
+    $result = $apiInstance->getWebhookSettings();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WebhooksApi->getWebhookSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**\Late\Model\GetWebhookSettings200Response**](../Model/GetWebhookSettings200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `testWebhook()`
+
+```php
+testWebhook($test_webhook_request): \Late\Model\TestWebhook200Response
+```
+
+Send test webhook
+
+Send a test webhook to verify your endpoint is configured correctly. The test payload includes `event: \"webhook.test\"` to distinguish it from real events.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Late\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Late\Api\WebhooksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$test_webhook_request = {"webhookId":"507f1f77bcf86cd799439011"}; // \Late\Model\TestWebhookRequest
+
+try {
+    $result = $apiInstance->testWebhook($test_webhook_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WebhooksApi->testWebhook: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **test_webhook_request** | [**\Late\Model\TestWebhookRequest**](../Model/TestWebhookRequest.md)|  | |
+
+### Return type
+
+[**\Late\Model\TestWebhook200Response**](../Model/TestWebhook200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateWebhookSettings()`
+
+```php
+updateWebhookSettings($update_webhook_settings_request): \Late\Model\UpdateWebhookSettings200Response
+```
+
+Update a webhook
+
+Update an existing webhook configuration. All fields except `_id` are optional - only provided fields will be updated.  **Note:** Webhooks are automatically disabled after 10 consecutive delivery failures.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Late\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Late\Api\WebhooksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$update_webhook_settings_request = {"_id":"507f1f77bcf86cd799439011","url":"https://new-example.com/webhook","events":["post.published","post.failed"]}; // \Late\Model\UpdateWebhookSettingsRequest
+
+try {
+    $result = $apiInstance->updateWebhookSettings($update_webhook_settings_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WebhooksApi->updateWebhookSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **update_webhook_settings_request** | [**\Late\Model\UpdateWebhookSettingsRequest**](../Model/UpdateWebhookSettingsRequest.md)|  | |
+
+### Return type
+
+[**\Late\Model\UpdateWebhookSettings200Response**](../Model/UpdateWebhookSettings200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)

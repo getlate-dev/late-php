@@ -1,0 +1,23 @@
+# # GetAnalytics200Response
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**post_id** | **string** |  | [optional]
+**status** | **string** |  | [optional]
+**content** | **string** |  | [optional]
+**scheduled_for** | **\DateTime** |  | [optional]
+**published_at** | **\DateTime** |  | [optional]
+**analytics** | [**\Late\Model\PostAnalytics**](PostAnalytics.md) |  | [optional]
+**platform_analytics** | [**\Late\Model\PlatformAnalytics[]**](PlatformAnalytics.md) |  | [optional]
+**platform** | **string** |  | [optional]
+**platform_post_url** | **string** |  | [optional]
+**is_external** | **bool** |  | [optional]
+**overview** | [**\Late\Model\AnalyticsOverview**](AnalyticsOverview.md) |  | [optional]
+**posts** | [**\Late\Model\AnalyticsListResponsePostsInner[]**](AnalyticsListResponsePostsInner.md) |  | [optional]
+**pagination** | [**\Late\Model\Pagination**](Pagination.md) |  | [optional]
+**accounts** | [**\Late\Model\SocialAccount[]**](SocialAccount.md) | Connected social accounts (followerCount and followersLastUpdated only included if user has analytics add-on) | [optional]
+**has_analytics_access** | **bool** | Whether user has analytics add-on access | [optional]
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
