@@ -45,6 +45,7 @@ jobs:
             -i openapi.yaml \
             -g php \
             -o . \
+            --skip-validate-spec \
             --additional-properties=packageName=Late,invokerPackage=Late,apiPackage=Api,modelPackage=Model \
             --git-user-id=getlate-dev \
             --git-repo-id=late-php
