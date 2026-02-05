@@ -1,6 +1,6 @@
 <?php
 /**
- * PostAnalytics
+ * GetGoogleBusinessFoodMenus200Response
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Late\ObjectSerializer;
 
 /**
- * PostAnalytics Class Doc Comment
+ * GetGoogleBusinessFoodMenus200Response Class Doc Comment
  *
  * @category Class
  * @package  Late
@@ -40,7 +40,7 @@ use \Late\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetGoogleBusinessFoodMenus200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'PostAnalytics';
+    protected static $openAPIModelName = 'getGoogleBusinessFoodMenus_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,16 +57,11 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'impressions' => 'int',
-        'reach' => 'int',
-        'likes' => 'int',
-        'comments' => 'int',
-        'shares' => 'int',
-        'saves' => 'int',
-        'clicks' => 'int',
-        'views' => 'int',
-        'engagement_rate' => 'float',
-        'last_updated' => '\DateTime'
+        'success' => 'bool',
+        'account_id' => 'string',
+        'location_id' => 'string',
+        'name' => 'string',
+        'menus' => '\Late\Model\FoodMenu[]'
     ];
 
     /**
@@ -77,16 +72,11 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'impressions' => null,
-        'reach' => null,
-        'likes' => null,
-        'comments' => null,
-        'shares' => null,
-        'saves' => null,
-        'clicks' => null,
-        'views' => null,
-        'engagement_rate' => null,
-        'last_updated' => 'date-time'
+        'success' => null,
+        'account_id' => null,
+        'location_id' => null,
+        'name' => null,
+        'menus' => null
     ];
 
     /**
@@ -95,16 +85,11 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'impressions' => false,
-        'reach' => false,
-        'likes' => false,
-        'comments' => false,
-        'shares' => false,
-        'saves' => false,
-        'clicks' => false,
-        'views' => false,
-        'engagement_rate' => false,
-        'last_updated' => false
+        'success' => false,
+        'account_id' => false,
+        'location_id' => false,
+        'name' => false,
+        'menus' => false
     ];
 
     /**
@@ -193,16 +178,11 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'impressions' => 'impressions',
-        'reach' => 'reach',
-        'likes' => 'likes',
-        'comments' => 'comments',
-        'shares' => 'shares',
-        'saves' => 'saves',
-        'clicks' => 'clicks',
-        'views' => 'views',
-        'engagement_rate' => 'engagementRate',
-        'last_updated' => 'lastUpdated'
+        'success' => 'success',
+        'account_id' => 'accountId',
+        'location_id' => 'locationId',
+        'name' => 'name',
+        'menus' => 'menus'
     ];
 
     /**
@@ -211,16 +191,11 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'impressions' => 'setImpressions',
-        'reach' => 'setReach',
-        'likes' => 'setLikes',
-        'comments' => 'setComments',
-        'shares' => 'setShares',
-        'saves' => 'setSaves',
-        'clicks' => 'setClicks',
-        'views' => 'setViews',
-        'engagement_rate' => 'setEngagementRate',
-        'last_updated' => 'setLastUpdated'
+        'success' => 'setSuccess',
+        'account_id' => 'setAccountId',
+        'location_id' => 'setLocationId',
+        'name' => 'setName',
+        'menus' => 'setMenus'
     ];
 
     /**
@@ -229,16 +204,11 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'impressions' => 'getImpressions',
-        'reach' => 'getReach',
-        'likes' => 'getLikes',
-        'comments' => 'getComments',
-        'shares' => 'getShares',
-        'saves' => 'getSaves',
-        'clicks' => 'getClicks',
-        'views' => 'getViews',
-        'engagement_rate' => 'getEngagementRate',
-        'last_updated' => 'getLastUpdated'
+        'success' => 'getSuccess',
+        'account_id' => 'getAccountId',
+        'location_id' => 'getLocationId',
+        'name' => 'getName',
+        'menus' => 'getMenus'
     ];
 
     /**
@@ -298,16 +268,11 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('impressions', $data ?? [], null);
-        $this->setIfExists('reach', $data ?? [], null);
-        $this->setIfExists('likes', $data ?? [], null);
-        $this->setIfExists('comments', $data ?? [], null);
-        $this->setIfExists('shares', $data ?? [], null);
-        $this->setIfExists('saves', $data ?? [], null);
-        $this->setIfExists('clicks', $data ?? [], null);
-        $this->setIfExists('views', $data ?? [], null);
-        $this->setIfExists('engagement_rate', $data ?? [], null);
-        $this->setIfExists('last_updated', $data ?? [], null);
+        $this->setIfExists('success', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
+        $this->setIfExists('location_id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('menus', $data ?? [], null);
     }
 
     /**
@@ -353,271 +318,136 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets impressions
+     * Gets success
      *
-     * @return int|null
+     * @return bool|null
      */
-    public function getImpressions()
+    public function getSuccess()
     {
-        return $this->container['impressions'];
+        return $this->container['success'];
     }
 
     /**
-     * Sets impressions
+     * Sets success
      *
-     * @param int|null $impressions impressions
+     * @param bool|null $success success
      *
      * @return self
      */
-    public function setImpressions($impressions)
+    public function setSuccess($success)
     {
-        if (is_null($impressions)) {
-            throw new \InvalidArgumentException('non-nullable impressions cannot be null');
+        if (is_null($success)) {
+            throw new \InvalidArgumentException('non-nullable success cannot be null');
         }
-        $this->container['impressions'] = $impressions;
+        $this->container['success'] = $success;
 
         return $this;
     }
 
     /**
-     * Gets reach
+     * Gets account_id
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getReach()
+    public function getAccountId()
     {
-        return $this->container['reach'];
+        return $this->container['account_id'];
     }
 
     /**
-     * Sets reach
+     * Sets account_id
      *
-     * @param int|null $reach reach
+     * @param string|null $account_id account_id
      *
      * @return self
      */
-    public function setReach($reach)
+    public function setAccountId($account_id)
     {
-        if (is_null($reach)) {
-            throw new \InvalidArgumentException('non-nullable reach cannot be null');
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
         }
-        $this->container['reach'] = $reach;
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }
 
     /**
-     * Gets likes
+     * Gets location_id
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getLikes()
+    public function getLocationId()
     {
-        return $this->container['likes'];
+        return $this->container['location_id'];
     }
 
     /**
-     * Sets likes
+     * Sets location_id
      *
-     * @param int|null $likes likes
+     * @param string|null $location_id location_id
      *
      * @return self
      */
-    public function setLikes($likes)
+    public function setLocationId($location_id)
     {
-        if (is_null($likes)) {
-            throw new \InvalidArgumentException('non-nullable likes cannot be null');
+        if (is_null($location_id)) {
+            throw new \InvalidArgumentException('non-nullable location_id cannot be null');
         }
-        $this->container['likes'] = $likes;
+        $this->container['location_id'] = $location_id;
 
         return $this;
     }
 
     /**
-     * Gets comments
+     * Gets name
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getComments()
+    public function getName()
     {
-        return $this->container['comments'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets comments
+     * Sets name
      *
-     * @param int|null $comments comments
+     * @param string|null $name Resource name of the food menus
      *
      * @return self
      */
-    public function setComments($comments)
+    public function setName($name)
     {
-        if (is_null($comments)) {
-            throw new \InvalidArgumentException('non-nullable comments cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['comments'] = $comments;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets shares
+     * Gets menus
      *
-     * @return int|null
+     * @return \Late\Model\FoodMenu[]|null
      */
-    public function getShares()
+    public function getMenus()
     {
-        return $this->container['shares'];
+        return $this->container['menus'];
     }
 
     /**
-     * Sets shares
+     * Sets menus
      *
-     * @param int|null $shares shares
+     * @param \Late\Model\FoodMenu[]|null $menus menus
      *
      * @return self
      */
-    public function setShares($shares)
+    public function setMenus($menus)
     {
-        if (is_null($shares)) {
-            throw new \InvalidArgumentException('non-nullable shares cannot be null');
+        if (is_null($menus)) {
+            throw new \InvalidArgumentException('non-nullable menus cannot be null');
         }
-        $this->container['shares'] = $shares;
-
-        return $this;
-    }
-
-    /**
-     * Gets saves
-     *
-     * @return int|null
-     */
-    public function getSaves()
-    {
-        return $this->container['saves'];
-    }
-
-    /**
-     * Sets saves
-     *
-     * @param int|null $saves Number of saves/bookmarks (Instagram, Pinterest)
-     *
-     * @return self
-     */
-    public function setSaves($saves)
-    {
-        if (is_null($saves)) {
-            throw new \InvalidArgumentException('non-nullable saves cannot be null');
-        }
-        $this->container['saves'] = $saves;
-
-        return $this;
-    }
-
-    /**
-     * Gets clicks
-     *
-     * @return int|null
-     */
-    public function getClicks()
-    {
-        return $this->container['clicks'];
-    }
-
-    /**
-     * Sets clicks
-     *
-     * @param int|null $clicks clicks
-     *
-     * @return self
-     */
-    public function setClicks($clicks)
-    {
-        if (is_null($clicks)) {
-            throw new \InvalidArgumentException('non-nullable clicks cannot be null');
-        }
-        $this->container['clicks'] = $clicks;
-
-        return $this;
-    }
-
-    /**
-     * Gets views
-     *
-     * @return int|null
-     */
-    public function getViews()
-    {
-        return $this->container['views'];
-    }
-
-    /**
-     * Sets views
-     *
-     * @param int|null $views views
-     *
-     * @return self
-     */
-    public function setViews($views)
-    {
-        if (is_null($views)) {
-            throw new \InvalidArgumentException('non-nullable views cannot be null');
-        }
-        $this->container['views'] = $views;
-
-        return $this;
-    }
-
-    /**
-     * Gets engagement_rate
-     *
-     * @return float|null
-     */
-    public function getEngagementRate()
-    {
-        return $this->container['engagement_rate'];
-    }
-
-    /**
-     * Sets engagement_rate
-     *
-     * @param float|null $engagement_rate engagement_rate
-     *
-     * @return self
-     */
-    public function setEngagementRate($engagement_rate)
-    {
-        if (is_null($engagement_rate)) {
-            throw new \InvalidArgumentException('non-nullable engagement_rate cannot be null');
-        }
-        $this->container['engagement_rate'] = $engagement_rate;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_updated
-     *
-     * @return \DateTime|null
-     */
-    public function getLastUpdated()
-    {
-        return $this->container['last_updated'];
-    }
-
-    /**
-     * Sets last_updated
-     *
-     * @param \DateTime|null $last_updated last_updated
-     *
-     * @return self
-     */
-    public function setLastUpdated($last_updated)
-    {
-        if (is_null($last_updated)) {
-            throw new \InvalidArgumentException('non-nullable last_updated cannot be null');
-        }
-        $this->container['last_updated'] = $last_updated;
+        $this->container['menus'] = $menus;
 
         return $this;
     }

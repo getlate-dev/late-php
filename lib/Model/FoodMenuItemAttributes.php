@@ -1,6 +1,6 @@
 <?php
 /**
- * PostAnalytics
+ * FoodMenuItemAttributes
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Late\ObjectSerializer;
 
 /**
- * PostAnalytics Class Doc Comment
+ * FoodMenuItemAttributes Class Doc Comment
  *
  * @category Class
  * @package  Late
@@ -40,7 +40,7 @@ use \Late\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
+class FoodMenuItemAttributes implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'PostAnalytics';
+    protected static $openAPIModelName = 'FoodMenuItemAttributes';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,16 +57,13 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'impressions' => 'int',
-        'reach' => 'int',
-        'likes' => 'int',
-        'comments' => 'int',
-        'shares' => 'int',
-        'saves' => 'int',
-        'clicks' => 'int',
-        'views' => 'int',
-        'engagement_rate' => 'float',
-        'last_updated' => '\DateTime'
+        'price' => '\Late\Model\Money',
+        'spiciness' => 'string',
+        'allergen' => 'string[]',
+        'dietary_restriction' => 'string[]',
+        'serves_num_people' => 'int',
+        'preparation_methods' => 'string[]',
+        'media_keys' => 'string[]'
     ];
 
     /**
@@ -77,16 +74,13 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'impressions' => null,
-        'reach' => null,
-        'likes' => null,
-        'comments' => null,
-        'shares' => null,
-        'saves' => null,
-        'clicks' => null,
-        'views' => null,
-        'engagement_rate' => null,
-        'last_updated' => 'date-time'
+        'price' => null,
+        'spiciness' => null,
+        'allergen' => null,
+        'dietary_restriction' => null,
+        'serves_num_people' => null,
+        'preparation_methods' => null,
+        'media_keys' => null
     ];
 
     /**
@@ -95,16 +89,13 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'impressions' => false,
-        'reach' => false,
-        'likes' => false,
-        'comments' => false,
-        'shares' => false,
-        'saves' => false,
-        'clicks' => false,
-        'views' => false,
-        'engagement_rate' => false,
-        'last_updated' => false
+        'price' => false,
+        'spiciness' => false,
+        'allergen' => false,
+        'dietary_restriction' => false,
+        'serves_num_people' => false,
+        'preparation_methods' => false,
+        'media_keys' => false
     ];
 
     /**
@@ -193,16 +184,13 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'impressions' => 'impressions',
-        'reach' => 'reach',
-        'likes' => 'likes',
-        'comments' => 'comments',
-        'shares' => 'shares',
-        'saves' => 'saves',
-        'clicks' => 'clicks',
-        'views' => 'views',
-        'engagement_rate' => 'engagementRate',
-        'last_updated' => 'lastUpdated'
+        'price' => 'price',
+        'spiciness' => 'spiciness',
+        'allergen' => 'allergen',
+        'dietary_restriction' => 'dietaryRestriction',
+        'serves_num_people' => 'servesNumPeople',
+        'preparation_methods' => 'preparationMethods',
+        'media_keys' => 'mediaKeys'
     ];
 
     /**
@@ -211,16 +199,13 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'impressions' => 'setImpressions',
-        'reach' => 'setReach',
-        'likes' => 'setLikes',
-        'comments' => 'setComments',
-        'shares' => 'setShares',
-        'saves' => 'setSaves',
-        'clicks' => 'setClicks',
-        'views' => 'setViews',
-        'engagement_rate' => 'setEngagementRate',
-        'last_updated' => 'setLastUpdated'
+        'price' => 'setPrice',
+        'spiciness' => 'setSpiciness',
+        'allergen' => 'setAllergen',
+        'dietary_restriction' => 'setDietaryRestriction',
+        'serves_num_people' => 'setServesNumPeople',
+        'preparation_methods' => 'setPreparationMethods',
+        'media_keys' => 'setMediaKeys'
     ];
 
     /**
@@ -229,16 +214,13 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'impressions' => 'getImpressions',
-        'reach' => 'getReach',
-        'likes' => 'getLikes',
-        'comments' => 'getComments',
-        'shares' => 'getShares',
-        'saves' => 'getSaves',
-        'clicks' => 'getClicks',
-        'views' => 'getViews',
-        'engagement_rate' => 'getEngagementRate',
-        'last_updated' => 'getLastUpdated'
+        'price' => 'getPrice',
+        'spiciness' => 'getSpiciness',
+        'allergen' => 'getAllergen',
+        'dietary_restriction' => 'getDietaryRestriction',
+        'serves_num_people' => 'getServesNumPeople',
+        'preparation_methods' => 'getPreparationMethods',
+        'media_keys' => 'getMediaKeys'
     ];
 
     /**
@@ -298,16 +280,13 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('impressions', $data ?? [], null);
-        $this->setIfExists('reach', $data ?? [], null);
-        $this->setIfExists('likes', $data ?? [], null);
-        $this->setIfExists('comments', $data ?? [], null);
-        $this->setIfExists('shares', $data ?? [], null);
-        $this->setIfExists('saves', $data ?? [], null);
-        $this->setIfExists('clicks', $data ?? [], null);
-        $this->setIfExists('views', $data ?? [], null);
-        $this->setIfExists('engagement_rate', $data ?? [], null);
-        $this->setIfExists('last_updated', $data ?? [], null);
+        $this->setIfExists('price', $data ?? [], null);
+        $this->setIfExists('spiciness', $data ?? [], null);
+        $this->setIfExists('allergen', $data ?? [], null);
+        $this->setIfExists('dietary_restriction', $data ?? [], null);
+        $this->setIfExists('serves_num_people', $data ?? [], null);
+        $this->setIfExists('preparation_methods', $data ?? [], null);
+        $this->setIfExists('media_keys', $data ?? [], null);
     }
 
     /**
@@ -353,271 +332,190 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets impressions
+     * Gets price
+     *
+     * @return \Late\Model\Money|null
+     */
+    public function getPrice()
+    {
+        return $this->container['price'];
+    }
+
+    /**
+     * Sets price
+     *
+     * @param \Late\Model\Money|null $price price
+     *
+     * @return self
+     */
+    public function setPrice($price)
+    {
+        if (is_null($price)) {
+            throw new \InvalidArgumentException('non-nullable price cannot be null');
+        }
+        $this->container['price'] = $price;
+
+        return $this;
+    }
+
+    /**
+     * Gets spiciness
+     *
+     * @return string|null
+     */
+    public function getSpiciness()
+    {
+        return $this->container['spiciness'];
+    }
+
+    /**
+     * Sets spiciness
+     *
+     * @param string|null $spiciness Spiciness level (e.g. MILD, MEDIUM, HOT)
+     *
+     * @return self
+     */
+    public function setSpiciness($spiciness)
+    {
+        if (is_null($spiciness)) {
+            throw new \InvalidArgumentException('non-nullable spiciness cannot be null');
+        }
+        $this->container['spiciness'] = $spiciness;
+
+        return $this;
+    }
+
+    /**
+     * Gets allergen
+     *
+     * @return string[]|null
+     */
+    public function getAllergen()
+    {
+        return $this->container['allergen'];
+    }
+
+    /**
+     * Sets allergen
+     *
+     * @param string[]|null $allergen Allergens (e.g. DAIRY, GLUTEN, SHELLFISH)
+     *
+     * @return self
+     */
+    public function setAllergen($allergen)
+    {
+        if (is_null($allergen)) {
+            throw new \InvalidArgumentException('non-nullable allergen cannot be null');
+        }
+        $this->container['allergen'] = $allergen;
+
+        return $this;
+    }
+
+    /**
+     * Gets dietary_restriction
+     *
+     * @return string[]|null
+     */
+    public function getDietaryRestriction()
+    {
+        return $this->container['dietary_restriction'];
+    }
+
+    /**
+     * Sets dietary_restriction
+     *
+     * @param string[]|null $dietary_restriction Dietary labels (e.g. VEGETARIAN, VEGAN, GLUTEN_FREE)
+     *
+     * @return self
+     */
+    public function setDietaryRestriction($dietary_restriction)
+    {
+        if (is_null($dietary_restriction)) {
+            throw new \InvalidArgumentException('non-nullable dietary_restriction cannot be null');
+        }
+        $this->container['dietary_restriction'] = $dietary_restriction;
+
+        return $this;
+    }
+
+    /**
+     * Gets serves_num_people
      *
      * @return int|null
      */
-    public function getImpressions()
+    public function getServesNumPeople()
     {
-        return $this->container['impressions'];
+        return $this->container['serves_num_people'];
     }
 
     /**
-     * Sets impressions
+     * Sets serves_num_people
      *
-     * @param int|null $impressions impressions
+     * @param int|null $serves_num_people Number of people the item serves
      *
      * @return self
      */
-    public function setImpressions($impressions)
+    public function setServesNumPeople($serves_num_people)
     {
-        if (is_null($impressions)) {
-            throw new \InvalidArgumentException('non-nullable impressions cannot be null');
+        if (is_null($serves_num_people)) {
+            throw new \InvalidArgumentException('non-nullable serves_num_people cannot be null');
         }
-        $this->container['impressions'] = $impressions;
+        $this->container['serves_num_people'] = $serves_num_people;
 
         return $this;
     }
 
     /**
-     * Gets reach
+     * Gets preparation_methods
      *
-     * @return int|null
+     * @return string[]|null
      */
-    public function getReach()
+    public function getPreparationMethods()
     {
-        return $this->container['reach'];
+        return $this->container['preparation_methods'];
     }
 
     /**
-     * Sets reach
+     * Sets preparation_methods
      *
-     * @param int|null $reach reach
+     * @param string[]|null $preparation_methods Preparation methods (e.g. GRILLED, FRIED)
      *
      * @return self
      */
-    public function setReach($reach)
+    public function setPreparationMethods($preparation_methods)
     {
-        if (is_null($reach)) {
-            throw new \InvalidArgumentException('non-nullable reach cannot be null');
+        if (is_null($preparation_methods)) {
+            throw new \InvalidArgumentException('non-nullable preparation_methods cannot be null');
         }
-        $this->container['reach'] = $reach;
+        $this->container['preparation_methods'] = $preparation_methods;
 
         return $this;
     }
 
     /**
-     * Gets likes
+     * Gets media_keys
      *
-     * @return int|null
+     * @return string[]|null
      */
-    public function getLikes()
+    public function getMediaKeys()
     {
-        return $this->container['likes'];
+        return $this->container['media_keys'];
     }
 
     /**
-     * Sets likes
+     * Sets media_keys
      *
-     * @param int|null $likes likes
+     * @param string[]|null $media_keys Media references for item photos
      *
      * @return self
      */
-    public function setLikes($likes)
+    public function setMediaKeys($media_keys)
     {
-        if (is_null($likes)) {
-            throw new \InvalidArgumentException('non-nullable likes cannot be null');
+        if (is_null($media_keys)) {
+            throw new \InvalidArgumentException('non-nullable media_keys cannot be null');
         }
-        $this->container['likes'] = $likes;
-
-        return $this;
-    }
-
-    /**
-     * Gets comments
-     *
-     * @return int|null
-     */
-    public function getComments()
-    {
-        return $this->container['comments'];
-    }
-
-    /**
-     * Sets comments
-     *
-     * @param int|null $comments comments
-     *
-     * @return self
-     */
-    public function setComments($comments)
-    {
-        if (is_null($comments)) {
-            throw new \InvalidArgumentException('non-nullable comments cannot be null');
-        }
-        $this->container['comments'] = $comments;
-
-        return $this;
-    }
-
-    /**
-     * Gets shares
-     *
-     * @return int|null
-     */
-    public function getShares()
-    {
-        return $this->container['shares'];
-    }
-
-    /**
-     * Sets shares
-     *
-     * @param int|null $shares shares
-     *
-     * @return self
-     */
-    public function setShares($shares)
-    {
-        if (is_null($shares)) {
-            throw new \InvalidArgumentException('non-nullable shares cannot be null');
-        }
-        $this->container['shares'] = $shares;
-
-        return $this;
-    }
-
-    /**
-     * Gets saves
-     *
-     * @return int|null
-     */
-    public function getSaves()
-    {
-        return $this->container['saves'];
-    }
-
-    /**
-     * Sets saves
-     *
-     * @param int|null $saves Number of saves/bookmarks (Instagram, Pinterest)
-     *
-     * @return self
-     */
-    public function setSaves($saves)
-    {
-        if (is_null($saves)) {
-            throw new \InvalidArgumentException('non-nullable saves cannot be null');
-        }
-        $this->container['saves'] = $saves;
-
-        return $this;
-    }
-
-    /**
-     * Gets clicks
-     *
-     * @return int|null
-     */
-    public function getClicks()
-    {
-        return $this->container['clicks'];
-    }
-
-    /**
-     * Sets clicks
-     *
-     * @param int|null $clicks clicks
-     *
-     * @return self
-     */
-    public function setClicks($clicks)
-    {
-        if (is_null($clicks)) {
-            throw new \InvalidArgumentException('non-nullable clicks cannot be null');
-        }
-        $this->container['clicks'] = $clicks;
-
-        return $this;
-    }
-
-    /**
-     * Gets views
-     *
-     * @return int|null
-     */
-    public function getViews()
-    {
-        return $this->container['views'];
-    }
-
-    /**
-     * Sets views
-     *
-     * @param int|null $views views
-     *
-     * @return self
-     */
-    public function setViews($views)
-    {
-        if (is_null($views)) {
-            throw new \InvalidArgumentException('non-nullable views cannot be null');
-        }
-        $this->container['views'] = $views;
-
-        return $this;
-    }
-
-    /**
-     * Gets engagement_rate
-     *
-     * @return float|null
-     */
-    public function getEngagementRate()
-    {
-        return $this->container['engagement_rate'];
-    }
-
-    /**
-     * Sets engagement_rate
-     *
-     * @param float|null $engagement_rate engagement_rate
-     *
-     * @return self
-     */
-    public function setEngagementRate($engagement_rate)
-    {
-        if (is_null($engagement_rate)) {
-            throw new \InvalidArgumentException('non-nullable engagement_rate cannot be null');
-        }
-        $this->container['engagement_rate'] = $engagement_rate;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_updated
-     *
-     * @return \DateTime|null
-     */
-    public function getLastUpdated()
-    {
-        return $this->container['last_updated'];
-    }
-
-    /**
-     * Sets last_updated
-     *
-     * @param \DateTime|null $last_updated last_updated
-     *
-     * @return self
-     */
-    public function setLastUpdated($last_updated)
-    {
-        if (is_null($last_updated)) {
-            throw new \InvalidArgumentException('non-nullable last_updated cannot be null');
-        }
-        $this->container['last_updated'] = $last_updated;
+        $this->container['media_keys'] = $media_keys;
 
         return $this;
     }

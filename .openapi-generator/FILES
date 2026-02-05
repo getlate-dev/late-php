@@ -9,6 +9,7 @@ docs/Api/AccountsApi.md
 docs/Api/AnalyticsApi.md
 docs/Api/CommentsApi.md
 docs/Api/ConnectApi.md
+docs/Api/GMBFoodMenusApi.md
 docs/Api/GMBReviewsApi.md
 docs/Api/InvitesApi.md
 docs/Api/LinkedInMentionsApi.md
@@ -80,6 +81,12 @@ docs/Model/ErrorResponse.md
 docs/Model/Expired.md
 docs/Model/FacebookPlatformData.md
 docs/Model/FollowerStatsResponse.md
+docs/Model/FoodMenu.md
+docs/Model/FoodMenuItem.md
+docs/Model/FoodMenuItemAttributes.md
+docs/Model/FoodMenuItemOptionsInner.md
+docs/Model/FoodMenuLabel.md
+docs/Model/FoodMenuSection.md
 docs/Model/GetAccountHealth200Response.md
 docs/Model/GetAccountHealth200ResponsePermissions.md
 docs/Model/GetAccountHealth200ResponsePermissionsPostingInner.md
@@ -98,6 +105,7 @@ docs/Model/GetFollowerStats200ResponseStatsValueInner.md
 docs/Model/GetFollowerStats403Response.md
 docs/Model/GetGmbLocations200Response.md
 docs/Model/GetGmbLocations200ResponseLocationsInner.md
+docs/Model/GetGoogleBusinessFoodMenus200Response.md
 docs/Model/GetGoogleBusinessReviews200Response.md
 docs/Model/GetGoogleBusinessReviews200ResponseReviewsInner.md
 docs/Model/GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply.md
@@ -205,6 +213,7 @@ docs/Model/ListUsers200Response.md
 docs/Model/ListUsers200ResponseUsersInner.md
 docs/Model/MediaItem.md
 docs/Model/MediaUploadResponse.md
+docs/Model/Money.md
 docs/Model/Pagination.md
 docs/Model/Pending.md
 docs/Model/PinterestPlatformData.md
@@ -300,6 +309,8 @@ docs/Model/UpdateFacebookPage200ResponseSelectedPage.md
 docs/Model/UpdateFacebookPageRequest.md
 docs/Model/UpdateGmbLocation200Response.md
 docs/Model/UpdateGmbLocationRequest.md
+docs/Model/UpdateGoogleBusinessFoodMenus200Response.md
+docs/Model/UpdateGoogleBusinessFoodMenusRequest.md
 docs/Model/UpdateInboxConversation200Response.md
 docs/Model/UpdateInboxConversation200ResponseData.md
 docs/Model/UpdateInboxConversationRequest.md
@@ -351,6 +362,7 @@ lib/Api/AccountsApi.php
 lib/Api/AnalyticsApi.php
 lib/Api/CommentsApi.php
 lib/Api/ConnectApi.php
+lib/Api/GMBFoodMenusApi.php
 lib/Api/GMBReviewsApi.php
 lib/Api/InvitesApi.php
 lib/Api/LinkedInMentionsApi.php
@@ -426,6 +438,12 @@ lib/Model/ErrorResponse.php
 lib/Model/Expired.php
 lib/Model/FacebookPlatformData.php
 lib/Model/FollowerStatsResponse.php
+lib/Model/FoodMenu.php
+lib/Model/FoodMenuItem.php
+lib/Model/FoodMenuItemAttributes.php
+lib/Model/FoodMenuItemOptionsInner.php
+lib/Model/FoodMenuLabel.php
+lib/Model/FoodMenuSection.php
 lib/Model/GetAccountHealth200Response.php
 lib/Model/GetAccountHealth200ResponsePermissions.php
 lib/Model/GetAccountHealth200ResponsePermissionsPostingInner.php
@@ -444,6 +462,7 @@ lib/Model/GetFollowerStats200ResponseStatsValueInner.php
 lib/Model/GetFollowerStats403Response.php
 lib/Model/GetGmbLocations200Response.php
 lib/Model/GetGmbLocations200ResponseLocationsInner.php
+lib/Model/GetGoogleBusinessFoodMenus200Response.php
 lib/Model/GetGoogleBusinessReviews200Response.php
 lib/Model/GetGoogleBusinessReviews200ResponseReviewsInner.php
 lib/Model/GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply.php
@@ -552,6 +571,7 @@ lib/Model/ListUsers200ResponseUsersInner.php
 lib/Model/MediaItem.php
 lib/Model/MediaUploadResponse.php
 lib/Model/ModelInterface.php
+lib/Model/Money.php
 lib/Model/Pagination.php
 lib/Model/Pending.php
 lib/Model/PinterestPlatformData.php
@@ -647,6 +667,8 @@ lib/Model/UpdateFacebookPage200ResponseSelectedPage.php
 lib/Model/UpdateFacebookPageRequest.php
 lib/Model/UpdateGmbLocation200Response.php
 lib/Model/UpdateGmbLocationRequest.php
+lib/Model/UpdateGoogleBusinessFoodMenus200Response.php
+lib/Model/UpdateGoogleBusinessFoodMenusRequest.php
 lib/Model/UpdateInboxConversation200Response.php
 lib/Model/UpdateInboxConversation200ResponseData.php
 lib/Model/UpdateInboxConversationRequest.php
@@ -693,3 +715,14 @@ lib/Model/YouTubeScopeMissingResponse.php
 lib/Model/YouTubeScopeMissingResponseScopeStatus.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Api/GMBFoodMenusApiTest.php
+test/Model/FoodMenuItemAttributesTest.php
+test/Model/FoodMenuItemOptionsInnerTest.php
+test/Model/FoodMenuItemTest.php
+test/Model/FoodMenuLabelTest.php
+test/Model/FoodMenuSectionTest.php
+test/Model/FoodMenuTest.php
+test/Model/GetGoogleBusinessFoodMenus200ResponseTest.php
+test/Model/MoneyTest.php
+test/Model/UpdateGoogleBusinessFoodMenus200ResponseTest.php
+test/Model/UpdateGoogleBusinessFoodMenusRequestTest.php
