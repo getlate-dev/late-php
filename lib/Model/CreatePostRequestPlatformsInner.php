@@ -391,7 +391,7 @@ class CreatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, \J
     /**
      * Sets custom_content
      *
-     * @param string|null $custom_content custom_content
+     * @param string|null $custom_content Platform-specific text override. When set, this content is used instead of the top-level post content for this platform. Useful for tailoring captions per platform (e.g. keeping tweets under 280 characters).
      *
      * @return self
      */
