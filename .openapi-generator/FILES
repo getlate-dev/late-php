@@ -37,6 +37,7 @@ docs/Model/AnalyticsListResponsePostsInner.md
 docs/Model/AnalyticsOverview.md
 docs/Model/AnalyticsSinglePostResponse.md
 docs/Model/ApiKey.md
+docs/Model/BlueskyPlatformData.md
 docs/Model/BulkUploadPosts200Response.md
 docs/Model/BulkUploadPosts200ResponseErrorsInner.md
 docs/Model/BulkUploadPosts429Response.md
@@ -50,6 +51,10 @@ docs/Model/ConnectBlueskyCredentials200Response.md
 docs/Model/ConnectBlueskyCredentialsRequest.md
 docs/Model/Connected.md
 docs/Model/ConnectedAccount.md
+docs/Model/ConnectionLog.md
+docs/Model/ConnectionLogContext.md
+docs/Model/ConnectionLogError.md
+docs/Model/ConnectionLogSuccess.md
 docs/Model/CreateAccountGroup201Response.md
 docs/Model/CreateAccountGroupRequest.md
 docs/Model/CreateApiKey201Response.md
@@ -203,6 +208,7 @@ docs/Model/ListAccountGroups200Response.md
 docs/Model/ListAccountGroups200ResponseGroupsInner.md
 docs/Model/ListAccounts200Response.md
 docs/Model/ListApiKeys200Response.md
+docs/Model/ListConnectionLogs200Response.md
 docs/Model/ListFacebookPages200Response.md
 docs/Model/ListFacebookPages200ResponsePagesInner.md
 docs/Model/ListGoogleBusinessLocations200Response.md
@@ -279,6 +285,7 @@ docs/Model/QueueSchedule.md
 docs/Model/QueueSlot.md
 docs/Model/QueueSlotsResponse.md
 docs/Model/QueueUpdateResponse.md
+docs/Model/RedditPlatformData.md
 docs/Model/ReplyToInboxPost200Response.md
 docs/Model/ReplyToInboxPost200ResponseData.md
 docs/Model/ReplyToInboxPostRequest.md
@@ -428,6 +435,7 @@ lib/Model/AnalyticsListResponsePostsInner.php
 lib/Model/AnalyticsOverview.php
 lib/Model/AnalyticsSinglePostResponse.php
 lib/Model/ApiKey.php
+lib/Model/BlueskyPlatformData.php
 lib/Model/BulkUploadPosts200Response.php
 lib/Model/BulkUploadPosts200ResponseErrorsInner.php
 lib/Model/BulkUploadPosts429Response.php
@@ -441,6 +449,10 @@ lib/Model/ConnectBlueskyCredentials200Response.php
 lib/Model/ConnectBlueskyCredentialsRequest.php
 lib/Model/Connected.php
 lib/Model/ConnectedAccount.php
+lib/Model/ConnectionLog.php
+lib/Model/ConnectionLogContext.php
+lib/Model/ConnectionLogError.php
+lib/Model/ConnectionLogSuccess.php
 lib/Model/CreateAccountGroup201Response.php
 lib/Model/CreateAccountGroupRequest.php
 lib/Model/CreateApiKey201Response.php
@@ -594,6 +606,7 @@ lib/Model/ListAccountGroups200Response.php
 lib/Model/ListAccountGroups200ResponseGroupsInner.php
 lib/Model/ListAccounts200Response.php
 lib/Model/ListApiKeys200Response.php
+lib/Model/ListConnectionLogs200Response.php
 lib/Model/ListFacebookPages200Response.php
 lib/Model/ListFacebookPages200ResponsePagesInner.php
 lib/Model/ListGoogleBusinessLocations200Response.php
@@ -671,6 +684,7 @@ lib/Model/QueueSchedule.php
 lib/Model/QueueSlot.php
 lib/Model/QueueSlotsResponse.php
 lib/Model/QueueUpdateResponse.php
+lib/Model/RedditPlatformData.php
 lib/Model/ReplyToInboxPost200Response.php
 lib/Model/ReplyToInboxPost200ResponseData.php
 lib/Model/ReplyToInboxPostRequest.php
@@ -783,3 +797,10 @@ lib/Model/YouTubeScopeMissingResponse.php
 lib/Model/YouTubeScopeMissingResponseScopeStatus.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/BlueskyPlatformDataTest.php
+test/Model/ConnectionLogContextTest.php
+test/Model/ConnectionLogErrorTest.php
+test/Model/ConnectionLogSuccessTest.php
+test/Model/ConnectionLogTest.php
+test/Model/ListConnectionLogs200ResponseTest.php
+test/Model/RedditPlatformDataTest.php

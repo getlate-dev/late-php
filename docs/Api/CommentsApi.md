@@ -44,7 +44,7 @@ $apiInstance = new Late\Api\CommentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$post_id = 'post_id_example'; // string
+$post_id = 'post_id_example'; // string | The post identifier. Accepts a Late post ID or a platform-specific post ID.
 $account_id = 'account_id_example'; // string
 $comment_id = 'comment_id_example'; // string
 
@@ -60,7 +60,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **post_id** | **string**|  | |
+| **post_id** | **string**| The post identifier. Accepts a Late post ID or a platform-specific post ID. | |
 | **account_id** | **string**|  | |
 | **comment_id** | **string**|  | |
 
@@ -108,7 +108,7 @@ $apiInstance = new Late\Api\CommentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$post_id = 'post_id_example'; // string
+$post_id = 'post_id_example'; // string | The post identifier. Accepts a Late post ID (MongoDB ObjectId) which is automatically resolved to the platform-specific post ID, or a platform-specific post ID directly (e.g. tweet ID, Facebook Graph ID, YouTube video ID).
 $account_id = 'account_id_example'; // string
 $subreddit = 'subreddit_example'; // string | (Reddit only) Subreddit name
 $limit = 25; // int | Maximum number of comments to return
@@ -127,7 +127,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **post_id** | **string**|  | |
+| **post_id** | **string**| The post identifier. Accepts a Late post ID (MongoDB ObjectId) which is automatically resolved to the platform-specific post ID, or a platform-specific post ID directly (e.g. tweet ID, Facebook Graph ID, YouTube video ID). | |
 | **account_id** | **string**|  | |
 | **subreddit** | **string**| (Reddit only) Subreddit name | [optional] |
 | **limit** | **int**| Maximum number of comments to return | [optional] [default to 25] |
@@ -382,7 +382,7 @@ $apiInstance = new Late\Api\CommentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$post_id = 'post_id_example'; // string
+$post_id = 'post_id_example'; // string | The post identifier. Accepts a Late post ID or a platform-specific post ID.
 $reply_to_inbox_post_request = new \Late\Model\ReplyToInboxPostRequest(); // \Late\Model\ReplyToInboxPostRequest
 
 try {
@@ -397,7 +397,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **post_id** | **string**|  | |
+| **post_id** | **string**| The post identifier. Accepts a Late post ID or a platform-specific post ID. | |
 | **reply_to_inbox_post_request** | [**\Late\Model\ReplyToInboxPostRequest**](../Model/ReplyToInboxPostRequest.md)|  | |
 
 ### Return type

@@ -80,7 +80,13 @@ class LogsApi
         'getPostLogs' => [
             'application/json',
         ],
+        'listConnectionLogs' => [
+            'application/json',
+        ],
         'listLogs' => [
+            'application/json',
+        ],
+        'listPostsLogs' => [
             'application/json',
         ],
     ];
@@ -753,9 +759,380 @@ class LogsApi
     }
 
     /**
+     * Operation listConnectionLogs
+     *
+     * Get connection logs
+     *
+     * @param  string|null $platform Filter by platform (optional)
+     * @param  string|null $event_type Filter by event type (optional)
+     * @param  string|null $status Filter by status (shorthand for event types) (optional)
+     * @param  int|null $days Number of days to look back (max 7) (optional, default to 7)
+     * @param  int|null $limit Maximum number of logs to return (max 100) (optional, default to 50)
+     * @param  int|null $skip Number of logs to skip (for pagination) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConnectionLogs'] to see the possible values for this operation
+     *
+     * @throws \Late\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Late\Model\ListConnectionLogs200Response|\Late\Model\InlineObject
+     */
+    public function listConnectionLogs($platform = null, $event_type = null, $status = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listConnectionLogs'][0])
+    {
+        list($response) = $this->listConnectionLogsWithHttpInfo($platform, $event_type, $status, $days, $limit, $skip, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listConnectionLogsWithHttpInfo
+     *
+     * Get connection logs
+     *
+     * @param  string|null $platform Filter by platform (optional)
+     * @param  string|null $event_type Filter by event type (optional)
+     * @param  string|null $status Filter by status (shorthand for event types) (optional)
+     * @param  int|null $days Number of days to look back (max 7) (optional, default to 7)
+     * @param  int|null $limit Maximum number of logs to return (max 100) (optional, default to 50)
+     * @param  int|null $skip Number of logs to skip (for pagination) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConnectionLogs'] to see the possible values for this operation
+     *
+     * @throws \Late\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Late\Model\ListConnectionLogs200Response|\Late\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listConnectionLogsWithHttpInfo($platform = null, $event_type = null, $status = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listConnectionLogs'][0])
+    {
+        $request = $this->listConnectionLogsRequest($platform, $event_type, $status, $days, $limit, $skip, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Late\Model\ListConnectionLogs200Response',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Late\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Late\Model\ListConnectionLogs200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Late\Model\ListConnectionLogs200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Late\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listConnectionLogsAsync
+     *
+     * Get connection logs
+     *
+     * @param  string|null $platform Filter by platform (optional)
+     * @param  string|null $event_type Filter by event type (optional)
+     * @param  string|null $status Filter by status (shorthand for event types) (optional)
+     * @param  int|null $days Number of days to look back (max 7) (optional, default to 7)
+     * @param  int|null $limit Maximum number of logs to return (max 100) (optional, default to 50)
+     * @param  int|null $skip Number of logs to skip (for pagination) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConnectionLogs'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listConnectionLogsAsync($platform = null, $event_type = null, $status = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listConnectionLogs'][0])
+    {
+        return $this->listConnectionLogsAsyncWithHttpInfo($platform, $event_type, $status, $days, $limit, $skip, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listConnectionLogsAsyncWithHttpInfo
+     *
+     * Get connection logs
+     *
+     * @param  string|null $platform Filter by platform (optional)
+     * @param  string|null $event_type Filter by event type (optional)
+     * @param  string|null $status Filter by status (shorthand for event types) (optional)
+     * @param  int|null $days Number of days to look back (max 7) (optional, default to 7)
+     * @param  int|null $limit Maximum number of logs to return (max 100) (optional, default to 50)
+     * @param  int|null $skip Number of logs to skip (for pagination) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConnectionLogs'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listConnectionLogsAsyncWithHttpInfo($platform = null, $event_type = null, $status = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listConnectionLogs'][0])
+    {
+        $returnType = '\Late\Model\ListConnectionLogs200Response';
+        $request = $this->listConnectionLogsRequest($platform, $event_type, $status, $days, $limit, $skip, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listConnectionLogs'
+     *
+     * @param  string|null $platform Filter by platform (optional)
+     * @param  string|null $event_type Filter by event type (optional)
+     * @param  string|null $status Filter by status (shorthand for event types) (optional)
+     * @param  int|null $days Number of days to look back (max 7) (optional, default to 7)
+     * @param  int|null $limit Maximum number of logs to return (max 100) (optional, default to 50)
+     * @param  int|null $skip Number of logs to skip (for pagination) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConnectionLogs'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listConnectionLogsRequest($platform = null, $event_type = null, $status = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listConnectionLogs'][0])
+    {
+
+
+
+
+        if ($days !== null && $days > 7) {
+            throw new \InvalidArgumentException('invalid value for "$days" when calling LogsApi.listConnectionLogs, must be smaller than or equal to 7.');
+        }
+        if ($days !== null && $days < 1) {
+            throw new \InvalidArgumentException('invalid value for "$days" when calling LogsApi.listConnectionLogs, must be bigger than or equal to 1.');
+        }
+        
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling LogsApi.listConnectionLogs, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling LogsApi.listConnectionLogs, must be bigger than or equal to 1.');
+        }
+        
+        if ($skip !== null && $skip < 0) {
+            throw new \InvalidArgumentException('invalid value for "$skip" when calling LogsApi.listConnectionLogs, must be bigger than or equal to 0.');
+        }
+        
+
+        $resourcePath = '/v1/connections/logs';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $platform,
+            'platform', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $event_type,
+            'eventType', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $days,
+            'days', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $skip,
+            'skip', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation listLogs
      *
-     * Get publishing logs
+     * Get publishing logs (deprecated)
      *
      * @param  string|null $status Filter by log status (optional)
      * @param  string|null $platform Filter by platform (optional)
@@ -768,6 +1145,7 @@ class LogsApi
      * @throws \Late\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Late\Model\ListLogs200Response|\Late\Model\InlineObject
+     * @deprecated
      */
     public function listLogs($status = null, $platform = null, $action = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listLogs'][0])
     {
@@ -778,7 +1156,7 @@ class LogsApi
     /**
      * Operation listLogsWithHttpInfo
      *
-     * Get publishing logs
+     * Get publishing logs (deprecated)
      *
      * @param  string|null $status Filter by log status (optional)
      * @param  string|null $platform Filter by platform (optional)
@@ -791,6 +1169,7 @@ class LogsApi
      * @throws \Late\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Late\Model\ListLogs200Response|\Late\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function listLogsWithHttpInfo($status = null, $platform = null, $action = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listLogs'][0])
     {
@@ -882,7 +1261,7 @@ class LogsApi
     /**
      * Operation listLogsAsync
      *
-     * Get publishing logs
+     * Get publishing logs (deprecated)
      *
      * @param  string|null $status Filter by log status (optional)
      * @param  string|null $platform Filter by platform (optional)
@@ -894,6 +1273,7 @@ class LogsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function listLogsAsync($status = null, $platform = null, $action = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listLogs'][0])
     {
@@ -908,7 +1288,7 @@ class LogsApi
     /**
      * Operation listLogsAsyncWithHttpInfo
      *
-     * Get publishing logs
+     * Get publishing logs (deprecated)
      *
      * @param  string|null $status Filter by log status (optional)
      * @param  string|null $platform Filter by platform (optional)
@@ -920,6 +1300,7 @@ class LogsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function listLogsAsyncWithHttpInfo($status = null, $platform = null, $action = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listLogs'][0])
     {
@@ -975,6 +1356,7 @@ class LogsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function listLogsRequest($status = null, $platform = null, $action = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listLogs'][0])
     {
@@ -1002,6 +1384,377 @@ class LogsApi
         
 
         $resourcePath = '/v1/logs';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $platform,
+            'platform', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $action,
+            'action', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $days,
+            'days', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $skip,
+            'skip', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listPostsLogs
+     *
+     * Get publishing logs
+     *
+     * @param  string|null $status Filter by log status (optional)
+     * @param  string|null $platform Filter by platform (optional)
+     * @param  string|null $action Filter by action type (optional)
+     * @param  int|null $days Number of days to look back (max 7) (optional, default to 7)
+     * @param  int|null $limit Maximum number of logs to return (max 100) (optional, default to 50)
+     * @param  int|null $skip Number of logs to skip (for pagination) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPostsLogs'] to see the possible values for this operation
+     *
+     * @throws \Late\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Late\Model\ListLogs200Response|\Late\Model\InlineObject
+     */
+    public function listPostsLogs($status = null, $platform = null, $action = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listPostsLogs'][0])
+    {
+        list($response) = $this->listPostsLogsWithHttpInfo($status, $platform, $action, $days, $limit, $skip, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listPostsLogsWithHttpInfo
+     *
+     * Get publishing logs
+     *
+     * @param  string|null $status Filter by log status (optional)
+     * @param  string|null $platform Filter by platform (optional)
+     * @param  string|null $action Filter by action type (optional)
+     * @param  int|null $days Number of days to look back (max 7) (optional, default to 7)
+     * @param  int|null $limit Maximum number of logs to return (max 100) (optional, default to 50)
+     * @param  int|null $skip Number of logs to skip (for pagination) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPostsLogs'] to see the possible values for this operation
+     *
+     * @throws \Late\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Late\Model\ListLogs200Response|\Late\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listPostsLogsWithHttpInfo($status = null, $platform = null, $action = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listPostsLogs'][0])
+    {
+        $request = $this->listPostsLogsRequest($status, $platform, $action, $days, $limit, $skip, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Late\Model\ListLogs200Response',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Late\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Late\Model\ListLogs200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Late\Model\ListLogs200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Late\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listPostsLogsAsync
+     *
+     * Get publishing logs
+     *
+     * @param  string|null $status Filter by log status (optional)
+     * @param  string|null $platform Filter by platform (optional)
+     * @param  string|null $action Filter by action type (optional)
+     * @param  int|null $days Number of days to look back (max 7) (optional, default to 7)
+     * @param  int|null $limit Maximum number of logs to return (max 100) (optional, default to 50)
+     * @param  int|null $skip Number of logs to skip (for pagination) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPostsLogs'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listPostsLogsAsync($status = null, $platform = null, $action = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listPostsLogs'][0])
+    {
+        return $this->listPostsLogsAsyncWithHttpInfo($status, $platform, $action, $days, $limit, $skip, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listPostsLogsAsyncWithHttpInfo
+     *
+     * Get publishing logs
+     *
+     * @param  string|null $status Filter by log status (optional)
+     * @param  string|null $platform Filter by platform (optional)
+     * @param  string|null $action Filter by action type (optional)
+     * @param  int|null $days Number of days to look back (max 7) (optional, default to 7)
+     * @param  int|null $limit Maximum number of logs to return (max 100) (optional, default to 50)
+     * @param  int|null $skip Number of logs to skip (for pagination) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPostsLogs'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listPostsLogsAsyncWithHttpInfo($status = null, $platform = null, $action = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listPostsLogs'][0])
+    {
+        $returnType = '\Late\Model\ListLogs200Response';
+        $request = $this->listPostsLogsRequest($status, $platform, $action, $days, $limit, $skip, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listPostsLogs'
+     *
+     * @param  string|null $status Filter by log status (optional)
+     * @param  string|null $platform Filter by platform (optional)
+     * @param  string|null $action Filter by action type (optional)
+     * @param  int|null $days Number of days to look back (max 7) (optional, default to 7)
+     * @param  int|null $limit Maximum number of logs to return (max 100) (optional, default to 50)
+     * @param  int|null $skip Number of logs to skip (for pagination) (optional, default to 0)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPostsLogs'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listPostsLogsRequest($status = null, $platform = null, $action = null, $days = 7, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listPostsLogs'][0])
+    {
+
+
+
+
+        if ($days !== null && $days > 7) {
+            throw new \InvalidArgumentException('invalid value for "$days" when calling LogsApi.listPostsLogs, must be smaller than or equal to 7.');
+        }
+        if ($days !== null && $days < 1) {
+            throw new \InvalidArgumentException('invalid value for "$days" when calling LogsApi.listPostsLogs, must be bigger than or equal to 1.');
+        }
+        
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling LogsApi.listPostsLogs, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling LogsApi.listPostsLogs, must be bigger than or equal to 1.');
+        }
+        
+        if ($skip !== null && $skip < 0) {
+            throw new \InvalidArgumentException('invalid value for "$skip" when calling LogsApi.listPostsLogs, must be bigger than or equal to 0.');
+        }
+        
+
+        $resourcePath = '/v1/posts/logs';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

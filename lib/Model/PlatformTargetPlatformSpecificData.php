@@ -100,7 +100,10 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'parse_mode' => 'string',
         'disable_web_page_preview' => 'bool',
         'disable_notification' => 'bool',
-        'protect_content' => 'bool'
+        'protect_content' => 'bool',
+        'subreddit' => 'string',
+        'url' => 'string',
+        'force_self' => 'bool'
     ];
 
     /**
@@ -153,7 +156,10 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'parse_mode' => null,
         'disable_web_page_preview' => null,
         'disable_notification' => null,
-        'protect_content' => null
+        'protect_content' => null,
+        'subreddit' => null,
+        'url' => 'uri',
+        'force_self' => null
     ];
 
     /**
@@ -204,7 +210,10 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'parse_mode' => false,
         'disable_web_page_preview' => false,
         'disable_notification' => false,
-        'protect_content' => false
+        'protect_content' => false,
+        'subreddit' => false,
+        'url' => false,
+        'force_self' => false
     ];
 
     /**
@@ -335,7 +344,10 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'parse_mode' => 'parseMode',
         'disable_web_page_preview' => 'disableWebPagePreview',
         'disable_notification' => 'disableNotification',
-        'protect_content' => 'protectContent'
+        'protect_content' => 'protectContent',
+        'subreddit' => 'subreddit',
+        'url' => 'url',
+        'force_self' => 'forceSelf'
     ];
 
     /**
@@ -386,7 +398,10 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'parse_mode' => 'setParseMode',
         'disable_web_page_preview' => 'setDisableWebPagePreview',
         'disable_notification' => 'setDisableNotification',
-        'protect_content' => 'setProtectContent'
+        'protect_content' => 'setProtectContent',
+        'subreddit' => 'setSubreddit',
+        'url' => 'setUrl',
+        'force_self' => 'setForceSelf'
     ];
 
     /**
@@ -437,7 +452,10 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'parse_mode' => 'getParseMode',
         'disable_web_page_preview' => 'getDisableWebPagePreview',
         'disable_notification' => 'getDisableNotification',
-        'protect_content' => 'getProtectContent'
+        'protect_content' => 'getProtectContent',
+        'subreddit' => 'getSubreddit',
+        'url' => 'getUrl',
+        'force_self' => 'getForceSelf'
     ];
 
     /**
@@ -623,6 +641,9 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         $this->setIfExists('disable_web_page_preview', $data ?? [], null);
         $this->setIfExists('disable_notification', $data ?? [], null);
         $this->setIfExists('protect_content', $data ?? [], null);
+        $this->setIfExists('subreddit', $data ?? [], null);
+        $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('force_self', $data ?? [], null);
     }
 
     /**
@@ -669,8 +690,8 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
             $invalidProperties[] = "invalid value for 'thumb_offset', must be bigger than or equal to 0.";
         }
 
-        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 100)) {
-            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 100.";
+        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 300)) {
+            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 300.";
         }
 
         $allowedValues = $this->getVisibilityAllowableValues();
@@ -749,7 +770,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
     /**
      * Sets thread_items
      *
-     * @param \Late\Model\TwitterPlatformDataThreadItemsInner[]|null $thread_items Sequence of posts in a Threads thread (root then replies in order).
+     * @param \Late\Model\TwitterPlatformDataThreadItemsInner[]|null $thread_items Sequence of posts in a Bluesky thread (root then replies in order).
      *
      * @return self
      */
@@ -1092,7 +1113,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
     /**
      * Sets title
      *
-     * @param string|null $title Video title. Defaults to first line of content or \"Untitled Video\". Must be ≤ 100 characters.
+     * @param string|null $title Post title. Defaults to the first line of content, truncated to 300 characters.
      *
      * @return self
      */
@@ -1101,8 +1122,8 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         if (is_null($title)) {
             throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
-        if ((mb_strlen($title) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $title when calling PlatformTargetPlatformSpecificData., must be smaller than or equal to 100.');
+        if ((mb_strlen($title) > 300)) {
+            throw new \InvalidArgumentException('invalid length for $title when calling PlatformTargetPlatformSpecificData., must be smaller than or equal to 300.');
         }
 
         $this->container['title'] = $title;
@@ -1970,6 +1991,87 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
             throw new \InvalidArgumentException('non-nullable protect_content cannot be null');
         }
         $this->container['protect_content'] = $protect_content;
+
+        return $this;
+    }
+
+    /**
+     * Gets subreddit
+     *
+     * @return string|null
+     */
+    public function getSubreddit()
+    {
+        return $this->container['subreddit'];
+    }
+
+    /**
+     * Sets subreddit
+     *
+     * @param string|null $subreddit Target subreddit name (without \"r/\" prefix). Overrides the default subreddit configured on the account connection. Use GET /api/v1/accounts/{id}/reddit-subreddits to list available subreddits.
+     *
+     * @return self
+     */
+    public function setSubreddit($subreddit)
+    {
+        if (is_null($subreddit)) {
+            throw new \InvalidArgumentException('non-nullable subreddit cannot be null');
+        }
+        $this->container['subreddit'] = $subreddit;
+
+        return $this;
+    }
+
+    /**
+     * Gets url
+     *
+     * @return string|null
+     */
+    public function getUrl()
+    {
+        return $this->container['url'];
+    }
+
+    /**
+     * Sets url
+     *
+     * @param string|null $url URL for link posts. If provided (and forceSelf is not true), creates a link post instead of a text post.
+     *
+     * @return self
+     */
+    public function setUrl($url)
+    {
+        if (is_null($url)) {
+            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        }
+        $this->container['url'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * Gets force_self
+     *
+     * @return bool|null
+     */
+    public function getForceSelf()
+    {
+        return $this->container['force_self'];
+    }
+
+    /**
+     * Sets force_self
+     *
+     * @param bool|null $force_self When true, creates a text/self post even when a URL or media is provided.
+     *
+     * @return self
+     */
+    public function setForceSelf($force_self)
+    {
+        if (is_null($force_self)) {
+            throw new \InvalidArgumentException('non-nullable force_self cannot be null');
+        }
+        $this->container['force_self'] = $force_self;
 
         return $this;
     }

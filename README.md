@@ -148,7 +148,9 @@ Class | Method | HTTP request | Description
 *LinkedInMentionsApi* | [**getLinkedInMentions**](docs/Api/LinkedInMentionsApi.md#getlinkedinmentions) | **GET** /v1/accounts/{accountId}/linkedin-mentions | Resolve a LinkedIn profile or company URL to a URN for @mentions
 *LogsApi* | [**getLog**](docs/Api/LogsApi.md#getlog) | **GET** /v1/logs/{logId} | Get a single log entry
 *LogsApi* | [**getPostLogs**](docs/Api/LogsApi.md#getpostlogs) | **GET** /v1/posts/{postId}/logs | Get logs for a specific post
-*LogsApi* | [**listLogs**](docs/Api/LogsApi.md#listlogs) | **GET** /v1/logs | Get publishing logs
+*LogsApi* | [**listConnectionLogs**](docs/Api/LogsApi.md#listconnectionlogs) | **GET** /v1/connections/logs | Get connection logs
+*LogsApi* | [**listLogs**](docs/Api/LogsApi.md#listlogs) | **GET** /v1/logs | Get publishing logs (deprecated)
+*LogsApi* | [**listPostsLogs**](docs/Api/LogsApi.md#listpostslogs) | **GET** /v1/posts/logs | Get publishing logs
 *MediaApi* | [**getMediaPresignedUrl**](docs/Api/MediaApi.md#getmediapresignedurl) | **POST** /v1/media/presign | Get a presigned URL for direct file upload (up to 5GB)
 *MessagesApi* | [**getInboxConversation**](docs/Api/MessagesApi.md#getinboxconversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation details
 *MessagesApi* | [**getInboxConversationMessages**](docs/Api/MessagesApi.md#getinboxconversationmessages) | **GET** /v1/inbox/conversations/{conversationId}/messages | Get messages in a conversation
@@ -207,6 +209,7 @@ Class | Method | HTTP request | Description
 - [AnalyticsOverview](docs/Model/AnalyticsOverview.md)
 - [AnalyticsSinglePostResponse](docs/Model/AnalyticsSinglePostResponse.md)
 - [ApiKey](docs/Model/ApiKey.md)
+- [BlueskyPlatformData](docs/Model/BlueskyPlatformData.md)
 - [BulkUploadPosts200Response](docs/Model/BulkUploadPosts200Response.md)
 - [BulkUploadPosts200ResponseErrorsInner](docs/Model/BulkUploadPosts200ResponseErrorsInner.md)
 - [BulkUploadPosts429Response](docs/Model/BulkUploadPosts429Response.md)
@@ -220,6 +223,10 @@ Class | Method | HTTP request | Description
 - [ConnectBlueskyCredentialsRequest](docs/Model/ConnectBlueskyCredentialsRequest.md)
 - [Connected](docs/Model/Connected.md)
 - [ConnectedAccount](docs/Model/ConnectedAccount.md)
+- [ConnectionLog](docs/Model/ConnectionLog.md)
+- [ConnectionLogContext](docs/Model/ConnectionLogContext.md)
+- [ConnectionLogError](docs/Model/ConnectionLogError.md)
+- [ConnectionLogSuccess](docs/Model/ConnectionLogSuccess.md)
 - [CreateAccountGroup201Response](docs/Model/CreateAccountGroup201Response.md)
 - [CreateAccountGroupRequest](docs/Model/CreateAccountGroupRequest.md)
 - [CreateApiKey201Response](docs/Model/CreateApiKey201Response.md)
@@ -373,6 +380,7 @@ Class | Method | HTTP request | Description
 - [ListAccountGroups200ResponseGroupsInner](docs/Model/ListAccountGroups200ResponseGroupsInner.md)
 - [ListAccounts200Response](docs/Model/ListAccounts200Response.md)
 - [ListApiKeys200Response](docs/Model/ListApiKeys200Response.md)
+- [ListConnectionLogs200Response](docs/Model/ListConnectionLogs200Response.md)
 - [ListFacebookPages200Response](docs/Model/ListFacebookPages200Response.md)
 - [ListFacebookPages200ResponsePagesInner](docs/Model/ListFacebookPages200ResponsePagesInner.md)
 - [ListGoogleBusinessLocations200Response](docs/Model/ListGoogleBusinessLocations200Response.md)
@@ -449,6 +457,7 @@ Class | Method | HTTP request | Description
 - [QueueSlot](docs/Model/QueueSlot.md)
 - [QueueSlotsResponse](docs/Model/QueueSlotsResponse.md)
 - [QueueUpdateResponse](docs/Model/QueueUpdateResponse.md)
+- [RedditPlatformData](docs/Model/RedditPlatformData.md)
 - [ReplyToInboxPost200Response](docs/Model/ReplyToInboxPost200Response.md)
 - [ReplyToInboxPost200ResponseData](docs/Model/ReplyToInboxPost200ResponseData.md)
 - [ReplyToInboxPostRequest](docs/Model/ReplyToInboxPostRequest.md)

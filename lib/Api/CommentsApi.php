@@ -154,7 +154,7 @@ class CommentsApi
      *
      * Delete a comment
      *
-     * @param  string $post_id post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID or a platform-specific post ID. (required)
      * @param  string $account_id account_id (required)
      * @param  string $comment_id comment_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInboxComment'] to see the possible values for this operation
@@ -174,7 +174,7 @@ class CommentsApi
      *
      * Delete a comment
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID or a platform-specific post ID. (required)
      * @param  string $account_id (required)
      * @param  string $comment_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInboxComment'] to see the possible values for this operation
@@ -275,7 +275,7 @@ class CommentsApi
      *
      * Delete a comment
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID or a platform-specific post ID. (required)
      * @param  string $account_id (required)
      * @param  string $comment_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInboxComment'] to see the possible values for this operation
@@ -298,7 +298,7 @@ class CommentsApi
      *
      * Delete a comment
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID or a platform-specific post ID. (required)
      * @param  string $account_id (required)
      * @param  string $comment_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInboxComment'] to see the possible values for this operation
@@ -350,7 +350,7 @@ class CommentsApi
     /**
      * Create request for operation 'deleteInboxComment'
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID or a platform-specific post ID. (required)
      * @param  string $account_id (required)
      * @param  string $comment_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInboxComment'] to see the possible values for this operation
@@ -482,7 +482,7 @@ class CommentsApi
      *
      * Get comments for a post
      *
-     * @param  string $post_id post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID (MongoDB ObjectId) which is automatically resolved to the platform-specific post ID, or a platform-specific post ID directly (e.g. tweet ID, Facebook Graph ID, YouTube video ID). (required)
      * @param  string $account_id account_id (required)
      * @param  string|null $subreddit (Reddit only) Subreddit name (optional)
      * @param  int|null $limit Maximum number of comments to return (optional, default to 25)
@@ -505,7 +505,7 @@ class CommentsApi
      *
      * Get comments for a post
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID (MongoDB ObjectId) which is automatically resolved to the platform-specific post ID, or a platform-specific post ID directly (e.g. tweet ID, Facebook Graph ID, YouTube video ID). (required)
      * @param  string $account_id (required)
      * @param  string|null $subreddit (Reddit only) Subreddit name (optional)
      * @param  int|null $limit Maximum number of comments to return (optional, default to 25)
@@ -609,7 +609,7 @@ class CommentsApi
      *
      * Get comments for a post
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID (MongoDB ObjectId) which is automatically resolved to the platform-specific post ID, or a platform-specific post ID directly (e.g. tweet ID, Facebook Graph ID, YouTube video ID). (required)
      * @param  string $account_id (required)
      * @param  string|null $subreddit (Reddit only) Subreddit name (optional)
      * @param  int|null $limit Maximum number of comments to return (optional, default to 25)
@@ -635,7 +635,7 @@ class CommentsApi
      *
      * Get comments for a post
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID (MongoDB ObjectId) which is automatically resolved to the platform-specific post ID, or a platform-specific post ID directly (e.g. tweet ID, Facebook Graph ID, YouTube video ID). (required)
      * @param  string $account_id (required)
      * @param  string|null $subreddit (Reddit only) Subreddit name (optional)
      * @param  int|null $limit Maximum number of comments to return (optional, default to 25)
@@ -690,7 +690,7 @@ class CommentsApi
     /**
      * Create request for operation 'getInboxPostComments'
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID (MongoDB ObjectId) which is automatically resolved to the platform-specific post ID, or a platform-specific post ID directly (e.g. tweet ID, Facebook Graph ID, YouTube video ID). (required)
      * @param  string $account_id (required)
      * @param  string|null $subreddit (Reddit only) Subreddit name (optional)
      * @param  int|null $limit Maximum number of comments to return (optional, default to 25)
@@ -1915,7 +1915,7 @@ class CommentsApi
      *
      * Reply to a post or comment
      *
-     * @param  string $post_id post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID or a platform-specific post ID. (required)
      * @param  \Late\Model\ReplyToInboxPostRequest $reply_to_inbox_post_request reply_to_inbox_post_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['replyToInboxPost'] to see the possible values for this operation
      *
@@ -1934,7 +1934,7 @@ class CommentsApi
      *
      * Reply to a post or comment
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID or a platform-specific post ID. (required)
      * @param  \Late\Model\ReplyToInboxPostRequest $reply_to_inbox_post_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['replyToInboxPost'] to see the possible values for this operation
      *
@@ -2034,7 +2034,7 @@ class CommentsApi
      *
      * Reply to a post or comment
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID or a platform-specific post ID. (required)
      * @param  \Late\Model\ReplyToInboxPostRequest $reply_to_inbox_post_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['replyToInboxPost'] to see the possible values for this operation
      *
@@ -2056,7 +2056,7 @@ class CommentsApi
      *
      * Reply to a post or comment
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID or a platform-specific post ID. (required)
      * @param  \Late\Model\ReplyToInboxPostRequest $reply_to_inbox_post_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['replyToInboxPost'] to see the possible values for this operation
      *
@@ -2107,7 +2107,7 @@ class CommentsApi
     /**
      * Create request for operation 'replyToInboxPost'
      *
-     * @param  string $post_id (required)
+     * @param  string $post_id The post identifier. Accepts a Late post ID or a platform-specific post ID. (required)
      * @param  \Late\Model\ReplyToInboxPostRequest $reply_to_inbox_post_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['replyToInboxPost'] to see the possible values for this operation
      *
