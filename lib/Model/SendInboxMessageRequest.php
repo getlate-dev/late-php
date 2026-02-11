@@ -58,7 +58,14 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPITypes = [
         'account_id' => 'string',
-        'message' => 'string'
+        'message' => 'string',
+        'quick_replies' => '\Late\Model\SendInboxMessageRequestQuickRepliesInner[]',
+        'buttons' => '\Late\Model\SendInboxMessageRequestButtonsInner[]',
+        'template' => '\Late\Model\SendInboxMessageRequestTemplate',
+        'reply_markup' => '\Late\Model\SendInboxMessageRequestReplyMarkup',
+        'messaging_type' => 'string',
+        'message_tag' => 'string',
+        'reply_to' => 'string'
     ];
 
     /**
@@ -70,7 +77,14 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPIFormats = [
         'account_id' => null,
-        'message' => null
+        'message' => null,
+        'quick_replies' => null,
+        'buttons' => null,
+        'template' => null,
+        'reply_markup' => null,
+        'messaging_type' => null,
+        'message_tag' => null,
+        'reply_to' => null
     ];
 
     /**
@@ -80,7 +94,14 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static array $openAPINullables = [
         'account_id' => false,
-        'message' => false
+        'message' => false,
+        'quick_replies' => false,
+        'buttons' => false,
+        'template' => false,
+        'reply_markup' => false,
+        'messaging_type' => false,
+        'message_tag' => false,
+        'reply_to' => false
     ];
 
     /**
@@ -170,7 +191,14 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $attributeMap = [
         'account_id' => 'accountId',
-        'message' => 'message'
+        'message' => 'message',
+        'quick_replies' => 'quickReplies',
+        'buttons' => 'buttons',
+        'template' => 'template',
+        'reply_markup' => 'replyMarkup',
+        'messaging_type' => 'messagingType',
+        'message_tag' => 'messageTag',
+        'reply_to' => 'replyTo'
     ];
 
     /**
@@ -180,7 +208,14 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $setters = [
         'account_id' => 'setAccountId',
-        'message' => 'setMessage'
+        'message' => 'setMessage',
+        'quick_replies' => 'setQuickReplies',
+        'buttons' => 'setButtons',
+        'template' => 'setTemplate',
+        'reply_markup' => 'setReplyMarkup',
+        'messaging_type' => 'setMessagingType',
+        'message_tag' => 'setMessageTag',
+        'reply_to' => 'setReplyTo'
     ];
 
     /**
@@ -190,7 +225,14 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $getters = [
         'account_id' => 'getAccountId',
-        'message' => 'getMessage'
+        'message' => 'getMessage',
+        'quick_replies' => 'getQuickReplies',
+        'buttons' => 'getButtons',
+        'template' => 'getTemplate',
+        'reply_markup' => 'getReplyMarkup',
+        'messaging_type' => 'getMessagingType',
+        'message_tag' => 'getMessageTag',
+        'reply_to' => 'getReplyTo'
     ];
 
     /**
@@ -234,6 +276,42 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         return self::$openAPIModelName;
     }
 
+    public const MESSAGING_TYPE_RESPONSE = 'RESPONSE';
+    public const MESSAGING_TYPE_UPDATE = 'UPDATE';
+    public const MESSAGING_TYPE_MESSAGE_TAG = 'MESSAGE_TAG';
+    public const MESSAGE_TAG_CONFIRMED_EVENT_UPDATE = 'CONFIRMED_EVENT_UPDATE';
+    public const MESSAGE_TAG_POST_PURCHASE_UPDATE = 'POST_PURCHASE_UPDATE';
+    public const MESSAGE_TAG_ACCOUNT_UPDATE = 'ACCOUNT_UPDATE';
+    public const MESSAGE_TAG_HUMAN_AGENT = 'HUMAN_AGENT';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getMessagingTypeAllowableValues()
+    {
+        return [
+            self::MESSAGING_TYPE_RESPONSE,
+            self::MESSAGING_TYPE_UPDATE,
+            self::MESSAGING_TYPE_MESSAGE_TAG,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getMessageTagAllowableValues()
+    {
+        return [
+            self::MESSAGE_TAG_CONFIRMED_EVENT_UPDATE,
+            self::MESSAGE_TAG_POST_PURCHASE_UPDATE,
+            self::MESSAGE_TAG_ACCOUNT_UPDATE,
+            self::MESSAGE_TAG_HUMAN_AGENT,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -252,6 +330,13 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('quick_replies', $data ?? [], null);
+        $this->setIfExists('buttons', $data ?? [], null);
+        $this->setIfExists('template', $data ?? [], null);
+        $this->setIfExists('reply_markup', $data ?? [], null);
+        $this->setIfExists('messaging_type', $data ?? [], null);
+        $this->setIfExists('message_tag', $data ?? [], null);
+        $this->setIfExists('reply_to', $data ?? [], null);
     }
 
     /**
@@ -284,9 +369,32 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         if ($this->container['account_id'] === null) {
             $invalidProperties[] = "'account_id' can't be null";
         }
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
+        if (!is_null($this->container['quick_replies']) && (count($this->container['quick_replies']) > 13)) {
+            $invalidProperties[] = "invalid value for 'quick_replies', number of items must be less than or equal to 13.";
         }
+
+        if (!is_null($this->container['buttons']) && (count($this->container['buttons']) > 3)) {
+            $invalidProperties[] = "invalid value for 'buttons', number of items must be less than or equal to 3.";
+        }
+
+        $allowedValues = $this->getMessagingTypeAllowableValues();
+        if (!is_null($this->container['messaging_type']) && !in_array($this->container['messaging_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'messaging_type', must be one of '%s'",
+                $this->container['messaging_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getMessageTagAllowableValues();
+        if (!is_null($this->container['message_tag']) && !in_array($this->container['message_tag'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'message_tag', must be one of '%s'",
+                $this->container['message_tag'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -332,7 +440,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets message
      *
-     * @return string
+     * @return string|null
      */
     public function getMessage()
     {
@@ -342,7 +450,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets message
      *
-     * @param string $message Message text
+     * @param string|null $message Message text
      *
      * @return self
      */
@@ -352,6 +460,223 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
             throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
         $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets quick_replies
+     *
+     * @return \Late\Model\SendInboxMessageRequestQuickRepliesInner[]|null
+     */
+    public function getQuickReplies()
+    {
+        return $this->container['quick_replies'];
+    }
+
+    /**
+     * Sets quick_replies
+     *
+     * @param \Late\Model\SendInboxMessageRequestQuickRepliesInner[]|null $quick_replies Quick reply buttons. Mutually exclusive with buttons. Max 13 items.
+     *
+     * @return self
+     */
+    public function setQuickReplies($quick_replies)
+    {
+        if (is_null($quick_replies)) {
+            throw new \InvalidArgumentException('non-nullable quick_replies cannot be null');
+        }
+
+        if ((count($quick_replies) > 13)) {
+            throw new \InvalidArgumentException('invalid value for $quick_replies when calling SendInboxMessageRequest., number of items must be less than or equal to 13.');
+        }
+        $this->container['quick_replies'] = $quick_replies;
+
+        return $this;
+    }
+
+    /**
+     * Gets buttons
+     *
+     * @return \Late\Model\SendInboxMessageRequestButtonsInner[]|null
+     */
+    public function getButtons()
+    {
+        return $this->container['buttons'];
+    }
+
+    /**
+     * Sets buttons
+     *
+     * @param \Late\Model\SendInboxMessageRequestButtonsInner[]|null $buttons Action buttons. Mutually exclusive with quickReplies. Max 3 items.
+     *
+     * @return self
+     */
+    public function setButtons($buttons)
+    {
+        if (is_null($buttons)) {
+            throw new \InvalidArgumentException('non-nullable buttons cannot be null');
+        }
+
+        if ((count($buttons) > 3)) {
+            throw new \InvalidArgumentException('invalid value for $buttons when calling SendInboxMessageRequest., number of items must be less than or equal to 3.');
+        }
+        $this->container['buttons'] = $buttons;
+
+        return $this;
+    }
+
+    /**
+     * Gets template
+     *
+     * @return \Late\Model\SendInboxMessageRequestTemplate|null
+     */
+    public function getTemplate()
+    {
+        return $this->container['template'];
+    }
+
+    /**
+     * Sets template
+     *
+     * @param \Late\Model\SendInboxMessageRequestTemplate|null $template template
+     *
+     * @return self
+     */
+    public function setTemplate($template)
+    {
+        if (is_null($template)) {
+            throw new \InvalidArgumentException('non-nullable template cannot be null');
+        }
+        $this->container['template'] = $template;
+
+        return $this;
+    }
+
+    /**
+     * Gets reply_markup
+     *
+     * @return \Late\Model\SendInboxMessageRequestReplyMarkup|null
+     */
+    public function getReplyMarkup()
+    {
+        return $this->container['reply_markup'];
+    }
+
+    /**
+     * Sets reply_markup
+     *
+     * @param \Late\Model\SendInboxMessageRequestReplyMarkup|null $reply_markup reply_markup
+     *
+     * @return self
+     */
+    public function setReplyMarkup($reply_markup)
+    {
+        if (is_null($reply_markup)) {
+            throw new \InvalidArgumentException('non-nullable reply_markup cannot be null');
+        }
+        $this->container['reply_markup'] = $reply_markup;
+
+        return $this;
+    }
+
+    /**
+     * Gets messaging_type
+     *
+     * @return string|null
+     */
+    public function getMessagingType()
+    {
+        return $this->container['messaging_type'];
+    }
+
+    /**
+     * Sets messaging_type
+     *
+     * @param string|null $messaging_type Facebook messaging type. Required when using messageTag.
+     *
+     * @return self
+     */
+    public function setMessagingType($messaging_type)
+    {
+        if (is_null($messaging_type)) {
+            throw new \InvalidArgumentException('non-nullable messaging_type cannot be null');
+        }
+        $allowedValues = $this->getMessagingTypeAllowableValues();
+        if (!in_array($messaging_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'messaging_type', must be one of '%s'",
+                    $messaging_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['messaging_type'] = $messaging_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets message_tag
+     *
+     * @return string|null
+     */
+    public function getMessageTag()
+    {
+        return $this->container['message_tag'];
+    }
+
+    /**
+     * Sets message_tag
+     *
+     * @param string|null $message_tag Facebook message tag for messaging outside 24h window. Requires messagingType MESSAGE_TAG. Instagram only supports HUMAN_AGENT.
+     *
+     * @return self
+     */
+    public function setMessageTag($message_tag)
+    {
+        if (is_null($message_tag)) {
+            throw new \InvalidArgumentException('non-nullable message_tag cannot be null');
+        }
+        $allowedValues = $this->getMessageTagAllowableValues();
+        if (!in_array($message_tag, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'message_tag', must be one of '%s'",
+                    $message_tag,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['message_tag'] = $message_tag;
+
+        return $this;
+    }
+
+    /**
+     * Gets reply_to
+     *
+     * @return string|null
+     */
+    public function getReplyTo()
+    {
+        return $this->container['reply_to'];
+    }
+
+    /**
+     * Sets reply_to
+     *
+     * @param string|null $reply_to Platform message ID to reply to (Telegram only).
+     *
+     * @return self
+     */
+    public function setReplyTo($reply_to)
+    {
+        if (is_null($reply_to)) {
+            throw new \InvalidArgumentException('non-nullable reply_to cannot be null');
+        }
+        $this->container['reply_to'] = $reply_to;
 
         return $this;
     }

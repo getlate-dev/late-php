@@ -74,6 +74,9 @@ class MessagesApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
+        'editInboxMessage' => [
+            'application/json',
+        ],
         'getInboxConversation' => [
             'application/json',
         ],
@@ -136,6 +139,331 @@ class MessagesApi
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * Operation editInboxMessage
+     *
+     * Edit a message (Telegram only)
+     *
+     * @param  string $conversation_id The conversation ID (required)
+     * @param  string $message_id The Telegram message ID to edit (required)
+     * @param  \Late\Model\EditInboxMessageRequest $edit_inbox_message_request edit_inbox_message_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['editInboxMessage'] to see the possible values for this operation
+     *
+     * @throws \Late\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Late\Model\EditInboxMessage200Response|\Late\Model\InlineObject
+     */
+    public function editInboxMessage($conversation_id, $message_id, $edit_inbox_message_request, string $contentType = self::contentTypes['editInboxMessage'][0])
+    {
+        list($response) = $this->editInboxMessageWithHttpInfo($conversation_id, $message_id, $edit_inbox_message_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation editInboxMessageWithHttpInfo
+     *
+     * Edit a message (Telegram only)
+     *
+     * @param  string $conversation_id The conversation ID (required)
+     * @param  string $message_id The Telegram message ID to edit (required)
+     * @param  \Late\Model\EditInboxMessageRequest $edit_inbox_message_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['editInboxMessage'] to see the possible values for this operation
+     *
+     * @throws \Late\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Late\Model\EditInboxMessage200Response|\Late\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function editInboxMessageWithHttpInfo($conversation_id, $message_id, $edit_inbox_message_request, string $contentType = self::contentTypes['editInboxMessage'][0])
+    {
+        $request = $this->editInboxMessageRequest($conversation_id, $message_id, $edit_inbox_message_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Late\Model\EditInboxMessage200Response',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Late\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Late\Model\EditInboxMessage200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Late\Model\EditInboxMessage200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Late\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation editInboxMessageAsync
+     *
+     * Edit a message (Telegram only)
+     *
+     * @param  string $conversation_id The conversation ID (required)
+     * @param  string $message_id The Telegram message ID to edit (required)
+     * @param  \Late\Model\EditInboxMessageRequest $edit_inbox_message_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['editInboxMessage'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function editInboxMessageAsync($conversation_id, $message_id, $edit_inbox_message_request, string $contentType = self::contentTypes['editInboxMessage'][0])
+    {
+        return $this->editInboxMessageAsyncWithHttpInfo($conversation_id, $message_id, $edit_inbox_message_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation editInboxMessageAsyncWithHttpInfo
+     *
+     * Edit a message (Telegram only)
+     *
+     * @param  string $conversation_id The conversation ID (required)
+     * @param  string $message_id The Telegram message ID to edit (required)
+     * @param  \Late\Model\EditInboxMessageRequest $edit_inbox_message_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['editInboxMessage'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function editInboxMessageAsyncWithHttpInfo($conversation_id, $message_id, $edit_inbox_message_request, string $contentType = self::contentTypes['editInboxMessage'][0])
+    {
+        $returnType = '\Late\Model\EditInboxMessage200Response';
+        $request = $this->editInboxMessageRequest($conversation_id, $message_id, $edit_inbox_message_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'editInboxMessage'
+     *
+     * @param  string $conversation_id The conversation ID (required)
+     * @param  string $message_id The Telegram message ID to edit (required)
+     * @param  \Late\Model\EditInboxMessageRequest $edit_inbox_message_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['editInboxMessage'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function editInboxMessageRequest($conversation_id, $message_id, $edit_inbox_message_request, string $contentType = self::contentTypes['editInboxMessage'][0])
+    {
+
+        // verify the required parameter 'conversation_id' is set
+        if ($conversation_id === null || (is_array($conversation_id) && count($conversation_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $conversation_id when calling editInboxMessage'
+            );
+        }
+
+        // verify the required parameter 'message_id' is set
+        if ($message_id === null || (is_array($message_id) && count($message_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $message_id when calling editInboxMessage'
+            );
+        }
+
+        // verify the required parameter 'edit_inbox_message_request' is set
+        if ($edit_inbox_message_request === null || (is_array($edit_inbox_message_request) && count($edit_inbox_message_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $edit_inbox_message_request when calling editInboxMessage'
+            );
+        }
+
+
+        $resourcePath = '/v1/inbox/conversations/{conversationId}/messages/{messageId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($conversation_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'conversationId' . '}',
+                ObjectSerializer::toPathValue($conversation_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($message_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'messageId' . '}',
+                ObjectSerializer::toPathValue($message_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($edit_inbox_message_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($edit_inbox_message_request));
+            } else {
+                $httpBody = $edit_inbox_message_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PATCH',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
     }
 
     /**

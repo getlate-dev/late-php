@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookPayloadMessage
+ * WebhookPayloadMessageMetadata
  *
  * PHP version 8.1
  *
@@ -32,16 +32,16 @@ use \ArrayAccess;
 use \Late\ObjectSerializer;
 
 /**
- * WebhookPayloadMessage Class Doc Comment
+ * WebhookPayloadMessageMetadata Class Doc Comment
  *
  * @category Class
- * @description Webhook payload for message received events (DMs from Instagram, Telegram)
+ * @description Interactive message metadata (present when message is a quick reply tap, postback button tap, or inline keyboard callback)
  * @package  Late
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSerializable
+class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WebhookPayloadMessage';
+    protected static $openAPIModelName = 'WebhookPayloadMessage_metadata';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,12 +58,10 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'event' => 'string',
-        'message' => '\Late\Model\WebhookPayloadMessageMessage',
-        'conversation' => '\Late\Model\WebhookPayloadMessageConversation',
-        'account' => '\Late\Model\WebhookPayloadMessageAccount',
-        'metadata' => '\Late\Model\WebhookPayloadMessageMetadata',
-        'timestamp' => '\DateTime'
+        'quick_reply_payload' => 'string',
+        'postback_payload' => 'string',
+        'postback_title' => 'string',
+        'callback_data' => 'string'
     ];
 
     /**
@@ -74,12 +72,10 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'event' => null,
-        'message' => null,
-        'conversation' => null,
-        'account' => null,
-        'metadata' => null,
-        'timestamp' => 'date-time'
+        'quick_reply_payload' => null,
+        'postback_payload' => null,
+        'postback_title' => null,
+        'callback_data' => null
     ];
 
     /**
@@ -88,12 +84,10 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'event' => false,
-        'message' => false,
-        'conversation' => false,
-        'account' => false,
-        'metadata' => false,
-        'timestamp' => false
+        'quick_reply_payload' => false,
+        'postback_payload' => false,
+        'postback_title' => false,
+        'callback_data' => false
     ];
 
     /**
@@ -182,12 +176,10 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'event' => 'event',
-        'message' => 'message',
-        'conversation' => 'conversation',
-        'account' => 'account',
-        'metadata' => 'metadata',
-        'timestamp' => 'timestamp'
+        'quick_reply_payload' => 'quickReplyPayload',
+        'postback_payload' => 'postbackPayload',
+        'postback_title' => 'postbackTitle',
+        'callback_data' => 'callbackData'
     ];
 
     /**
@@ -196,12 +188,10 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'event' => 'setEvent',
-        'message' => 'setMessage',
-        'conversation' => 'setConversation',
-        'account' => 'setAccount',
-        'metadata' => 'setMetadata',
-        'timestamp' => 'setTimestamp'
+        'quick_reply_payload' => 'setQuickReplyPayload',
+        'postback_payload' => 'setPostbackPayload',
+        'postback_title' => 'setPostbackTitle',
+        'callback_data' => 'setCallbackData'
     ];
 
     /**
@@ -210,12 +200,10 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'event' => 'getEvent',
-        'message' => 'getMessage',
-        'conversation' => 'getConversation',
-        'account' => 'getAccount',
-        'metadata' => 'getMetadata',
-        'timestamp' => 'getTimestamp'
+        'quick_reply_payload' => 'getQuickReplyPayload',
+        'postback_payload' => 'getPostbackPayload',
+        'postback_title' => 'getPostbackTitle',
+        'callback_data' => 'getCallbackData'
     ];
 
     /**
@@ -259,19 +247,6 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
         return self::$openAPIModelName;
     }
 
-    public const EVENT_MESSAGE_RECEIVED = 'message.received';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getEventAllowableValues()
-    {
-        return [
-            self::EVENT_MESSAGE_RECEIVED,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -288,12 +263,10 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('event', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('conversation', $data ?? [], null);
-        $this->setIfExists('account', $data ?? [], null);
-        $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('quick_reply_payload', $data ?? [], null);
+        $this->setIfExists('postback_payload', $data ?? [], null);
+        $this->setIfExists('postback_title', $data ?? [], null);
+        $this->setIfExists('callback_data', $data ?? [], null);
     }
 
     /**
@@ -323,15 +296,6 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getEventAllowableValues();
-        if (!is_null($this->container['event']) && !in_array($this->container['event'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'event', must be one of '%s'",
-                $this->container['event'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -348,173 +312,109 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets event
+     * Gets quick_reply_payload
      *
      * @return string|null
      */
-    public function getEvent()
+    public function getQuickReplyPayload()
     {
-        return $this->container['event'];
+        return $this->container['quick_reply_payload'];
     }
 
     /**
-     * Sets event
+     * Sets quick_reply_payload
      *
-     * @param string|null $event event
+     * @param string|null $quick_reply_payload Payload from a quick reply tap (Meta platforms)
      *
      * @return self
      */
-    public function setEvent($event)
+    public function setQuickReplyPayload($quick_reply_payload)
     {
-        if (is_null($event)) {
-            throw new \InvalidArgumentException('non-nullable event cannot be null');
+        if (is_null($quick_reply_payload)) {
+            throw new \InvalidArgumentException('non-nullable quick_reply_payload cannot be null');
         }
-        $allowedValues = $this->getEventAllowableValues();
-        if (!in_array($event, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'event', must be one of '%s'",
-                    $event,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['event'] = $event;
+        $this->container['quick_reply_payload'] = $quick_reply_payload;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets postback_payload
      *
-     * @return \Late\Model\WebhookPayloadMessageMessage|null
+     * @return string|null
      */
-    public function getMessage()
+    public function getPostbackPayload()
     {
-        return $this->container['message'];
+        return $this->container['postback_payload'];
     }
 
     /**
-     * Sets message
+     * Sets postback_payload
      *
-     * @param \Late\Model\WebhookPayloadMessageMessage|null $message message
+     * @param string|null $postback_payload Payload from a postback button tap (Meta platforms)
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setPostbackPayload($postback_payload)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($postback_payload)) {
+            throw new \InvalidArgumentException('non-nullable postback_payload cannot be null');
         }
-        $this->container['message'] = $message;
+        $this->container['postback_payload'] = $postback_payload;
 
         return $this;
     }
 
     /**
-     * Gets conversation
+     * Gets postback_title
      *
-     * @return \Late\Model\WebhookPayloadMessageConversation|null
+     * @return string|null
      */
-    public function getConversation()
+    public function getPostbackTitle()
     {
-        return $this->container['conversation'];
+        return $this->container['postback_title'];
     }
 
     /**
-     * Sets conversation
+     * Sets postback_title
      *
-     * @param \Late\Model\WebhookPayloadMessageConversation|null $conversation conversation
+     * @param string|null $postback_title Title of the tapped postback button (Meta platforms)
      *
      * @return self
      */
-    public function setConversation($conversation)
+    public function setPostbackTitle($postback_title)
     {
-        if (is_null($conversation)) {
-            throw new \InvalidArgumentException('non-nullable conversation cannot be null');
+        if (is_null($postback_title)) {
+            throw new \InvalidArgumentException('non-nullable postback_title cannot be null');
         }
-        $this->container['conversation'] = $conversation;
+        $this->container['postback_title'] = $postback_title;
 
         return $this;
     }
 
     /**
-     * Gets account
+     * Gets callback_data
      *
-     * @return \Late\Model\WebhookPayloadMessageAccount|null
+     * @return string|null
      */
-    public function getAccount()
+    public function getCallbackData()
     {
-        return $this->container['account'];
+        return $this->container['callback_data'];
     }
 
     /**
-     * Sets account
+     * Sets callback_data
      *
-     * @param \Late\Model\WebhookPayloadMessageAccount|null $account account
+     * @param string|null $callback_data Callback data from an inline keyboard button tap (Telegram)
      *
      * @return self
      */
-    public function setAccount($account)
+    public function setCallbackData($callback_data)
     {
-        if (is_null($account)) {
-            throw new \InvalidArgumentException('non-nullable account cannot be null');
+        if (is_null($callback_data)) {
+            throw new \InvalidArgumentException('non-nullable callback_data cannot be null');
         }
-        $this->container['account'] = $account;
-
-        return $this;
-    }
-
-    /**
-     * Gets metadata
-     *
-     * @return \Late\Model\WebhookPayloadMessageMetadata|null
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'];
-    }
-
-    /**
-     * Sets metadata
-     *
-     * @param \Late\Model\WebhookPayloadMessageMetadata|null $metadata metadata
-     *
-     * @return self
-     */
-    public function setMetadata($metadata)
-    {
-        if (is_null($metadata)) {
-            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
-        }
-        $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets timestamp
-     *
-     * @return \DateTime|null
-     */
-    public function getTimestamp()
-    {
-        return $this->container['timestamp'];
-    }
-
-    /**
-     * Sets timestamp
-     *
-     * @param \DateTime|null $timestamp timestamp
-     *
-     * @return self
-     */
-    public function setTimestamp($timestamp)
-    {
-        if (is_null($timestamp)) {
-            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
-        }
-        $this->container['timestamp'] = $timestamp;
+        $this->container['callback_data'] = $callback_data;
 
         return $this;
     }

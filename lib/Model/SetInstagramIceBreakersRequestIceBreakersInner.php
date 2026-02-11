@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookPayloadMessage
+ * SetInstagramIceBreakersRequestIceBreakersInner
  *
  * PHP version 8.1
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Late\ObjectSerializer;
 
 /**
- * WebhookPayloadMessage Class Doc Comment
+ * SetInstagramIceBreakersRequestIceBreakersInner Class Doc Comment
  *
  * @category Class
- * @description Webhook payload for message received events (DMs from Instagram, Telegram)
  * @package  Late
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSerializable
+class SetInstagramIceBreakersRequestIceBreakersInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WebhookPayloadMessage';
+    protected static $openAPIModelName = 'setInstagramIceBreakers_request_ice_breakers_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,12 +57,8 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'event' => 'string',
-        'message' => '\Late\Model\WebhookPayloadMessageMessage',
-        'conversation' => '\Late\Model\WebhookPayloadMessageConversation',
-        'account' => '\Late\Model\WebhookPayloadMessageAccount',
-        'metadata' => '\Late\Model\WebhookPayloadMessageMetadata',
-        'timestamp' => '\DateTime'
+        'question' => 'string',
+        'payload' => 'string'
     ];
 
     /**
@@ -74,12 +69,8 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'event' => null,
-        'message' => null,
-        'conversation' => null,
-        'account' => null,
-        'metadata' => null,
-        'timestamp' => 'date-time'
+        'question' => null,
+        'payload' => null
     ];
 
     /**
@@ -88,12 +79,8 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'event' => false,
-        'message' => false,
-        'conversation' => false,
-        'account' => false,
-        'metadata' => false,
-        'timestamp' => false
+        'question' => false,
+        'payload' => false
     ];
 
     /**
@@ -182,12 +169,8 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'event' => 'event',
-        'message' => 'message',
-        'conversation' => 'conversation',
-        'account' => 'account',
-        'metadata' => 'metadata',
-        'timestamp' => 'timestamp'
+        'question' => 'question',
+        'payload' => 'payload'
     ];
 
     /**
@@ -196,12 +179,8 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'event' => 'setEvent',
-        'message' => 'setMessage',
-        'conversation' => 'setConversation',
-        'account' => 'setAccount',
-        'metadata' => 'setMetadata',
-        'timestamp' => 'setTimestamp'
+        'question' => 'setQuestion',
+        'payload' => 'setPayload'
     ];
 
     /**
@@ -210,12 +189,8 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'event' => 'getEvent',
-        'message' => 'getMessage',
-        'conversation' => 'getConversation',
-        'account' => 'getAccount',
-        'metadata' => 'getMetadata',
-        'timestamp' => 'getTimestamp'
+        'question' => 'getQuestion',
+        'payload' => 'getPayload'
     ];
 
     /**
@@ -259,19 +234,6 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
         return self::$openAPIModelName;
     }
 
-    public const EVENT_MESSAGE_RECEIVED = 'message.received';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getEventAllowableValues()
-    {
-        return [
-            self::EVENT_MESSAGE_RECEIVED,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -288,12 +250,8 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('event', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('conversation', $data ?? [], null);
-        $this->setIfExists('account', $data ?? [], null);
-        $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('question', $data ?? [], null);
+        $this->setIfExists('payload', $data ?? [], null);
     }
 
     /**
@@ -323,15 +281,16 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getEventAllowableValues();
-        if (!is_null($this->container['event']) && !in_array($this->container['event'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'event', must be one of '%s'",
-                $this->container['event'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['question'] === null) {
+            $invalidProperties[] = "'question' can't be null";
+        }
+        if ((mb_strlen($this->container['question']) > 80)) {
+            $invalidProperties[] = "invalid value for 'question', the character length must be smaller than or equal to 80.";
         }
 
+        if ($this->container['payload'] === null) {
+            $invalidProperties[] = "'payload' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -348,173 +307,59 @@ class WebhookPayloadMessage implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets event
+     * Gets question
      *
-     * @return string|null
+     * @return string
      */
-    public function getEvent()
+    public function getQuestion()
     {
-        return $this->container['event'];
+        return $this->container['question'];
     }
 
     /**
-     * Sets event
+     * Sets question
      *
-     * @param string|null $event event
+     * @param string $question question
      *
      * @return self
      */
-    public function setEvent($event)
+    public function setQuestion($question)
     {
-        if (is_null($event)) {
-            throw new \InvalidArgumentException('non-nullable event cannot be null');
+        if (is_null($question)) {
+            throw new \InvalidArgumentException('non-nullable question cannot be null');
         }
-        $allowedValues = $this->getEventAllowableValues();
-        if (!in_array($event, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'event', must be one of '%s'",
-                    $event,
-                    implode("', '", $allowedValues)
-                )
-            );
+        if ((mb_strlen($question) > 80)) {
+            throw new \InvalidArgumentException('invalid length for $question when calling SetInstagramIceBreakersRequestIceBreakersInner., must be smaller than or equal to 80.');
         }
-        $this->container['event'] = $event;
+
+        $this->container['question'] = $question;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets payload
      *
-     * @return \Late\Model\WebhookPayloadMessageMessage|null
+     * @return string
      */
-    public function getMessage()
+    public function getPayload()
     {
-        return $this->container['message'];
+        return $this->container['payload'];
     }
 
     /**
-     * Sets message
+     * Sets payload
      *
-     * @param \Late\Model\WebhookPayloadMessageMessage|null $message message
+     * @param string $payload payload
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setPayload($payload)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($payload)) {
+            throw new \InvalidArgumentException('non-nullable payload cannot be null');
         }
-        $this->container['message'] = $message;
-
-        return $this;
-    }
-
-    /**
-     * Gets conversation
-     *
-     * @return \Late\Model\WebhookPayloadMessageConversation|null
-     */
-    public function getConversation()
-    {
-        return $this->container['conversation'];
-    }
-
-    /**
-     * Sets conversation
-     *
-     * @param \Late\Model\WebhookPayloadMessageConversation|null $conversation conversation
-     *
-     * @return self
-     */
-    public function setConversation($conversation)
-    {
-        if (is_null($conversation)) {
-            throw new \InvalidArgumentException('non-nullable conversation cannot be null');
-        }
-        $this->container['conversation'] = $conversation;
-
-        return $this;
-    }
-
-    /**
-     * Gets account
-     *
-     * @return \Late\Model\WebhookPayloadMessageAccount|null
-     */
-    public function getAccount()
-    {
-        return $this->container['account'];
-    }
-
-    /**
-     * Sets account
-     *
-     * @param \Late\Model\WebhookPayloadMessageAccount|null $account account
-     *
-     * @return self
-     */
-    public function setAccount($account)
-    {
-        if (is_null($account)) {
-            throw new \InvalidArgumentException('non-nullable account cannot be null');
-        }
-        $this->container['account'] = $account;
-
-        return $this;
-    }
-
-    /**
-     * Gets metadata
-     *
-     * @return \Late\Model\WebhookPayloadMessageMetadata|null
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'];
-    }
-
-    /**
-     * Sets metadata
-     *
-     * @param \Late\Model\WebhookPayloadMessageMetadata|null $metadata metadata
-     *
-     * @return self
-     */
-    public function setMetadata($metadata)
-    {
-        if (is_null($metadata)) {
-            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
-        }
-        $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets timestamp
-     *
-     * @return \DateTime|null
-     */
-    public function getTimestamp()
-    {
-        return $this->container['timestamp'];
-    }
-
-    /**
-     * Sets timestamp
-     *
-     * @param \DateTime|null $timestamp timestamp
-     *
-     * @return self
-     */
-    public function setTimestamp($timestamp)
-    {
-        if (is_null($timestamp)) {
-            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
-        }
-        $this->container['timestamp'] = $timestamp;
+        $this->container['payload'] = $payload;
 
         return $this;
     }
