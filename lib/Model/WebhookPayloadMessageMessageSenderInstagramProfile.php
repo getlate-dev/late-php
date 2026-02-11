@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookPayloadMessageMessageSender
+ * WebhookPayloadMessageMessageSenderInstagramProfile
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Late\ObjectSerializer;
 
 /**
- * WebhookPayloadMessageMessageSender Class Doc Comment
+ * WebhookPayloadMessageMessageSenderInstagramProfile Class Doc Comment
  *
  * @category Class
+ * @description Instagram profile data for the sender. Only present for Instagram conversations.
  * @package  Late
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookPayloadMessageMessageSender implements ModelInterface, ArrayAccess, \JsonSerializable
+class WebhookPayloadMessageMessageSenderInstagramProfile implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class WebhookPayloadMessageMessageSender implements ModelInterface, ArrayAccess,
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WebhookPayloadMessage_message_sender';
+    protected static $openAPIModelName = 'WebhookPayloadMessage_message_sender_instagramProfile';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +58,10 @@ class WebhookPayloadMessageMessageSender implements ModelInterface, ArrayAccess,
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'name' => 'string',
-        'username' => 'string',
-        'picture' => 'string',
-        'instagram_profile' => '\Late\Model\WebhookPayloadMessageMessageSenderInstagramProfile'
+        'is_follower' => 'bool',
+        'is_following' => 'bool',
+        'follower_count' => 'int',
+        'is_verified' => 'bool'
     ];
 
     /**
@@ -72,11 +72,10 @@ class WebhookPayloadMessageMessageSender implements ModelInterface, ArrayAccess,
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'name' => null,
-        'username' => null,
-        'picture' => null,
-        'instagram_profile' => null
+        'is_follower' => null,
+        'is_following' => null,
+        'follower_count' => null,
+        'is_verified' => null
     ];
 
     /**
@@ -85,11 +84,10 @@ class WebhookPayloadMessageMessageSender implements ModelInterface, ArrayAccess,
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'name' => false,
-        'username' => false,
-        'picture' => false,
-        'instagram_profile' => false
+        'is_follower' => false,
+        'is_following' => false,
+        'follower_count' => false,
+        'is_verified' => false
     ];
 
     /**
@@ -178,11 +176,10 @@ class WebhookPayloadMessageMessageSender implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'name' => 'name',
-        'username' => 'username',
-        'picture' => 'picture',
-        'instagram_profile' => 'instagramProfile'
+        'is_follower' => 'isFollower',
+        'is_following' => 'isFollowing',
+        'follower_count' => 'followerCount',
+        'is_verified' => 'isVerified'
     ];
 
     /**
@@ -191,11 +188,10 @@ class WebhookPayloadMessageMessageSender implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'name' => 'setName',
-        'username' => 'setUsername',
-        'picture' => 'setPicture',
-        'instagram_profile' => 'setInstagramProfile'
+        'is_follower' => 'setIsFollower',
+        'is_following' => 'setIsFollowing',
+        'follower_count' => 'setFollowerCount',
+        'is_verified' => 'setIsVerified'
     ];
 
     /**
@@ -204,11 +200,10 @@ class WebhookPayloadMessageMessageSender implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'name' => 'getName',
-        'username' => 'getUsername',
-        'picture' => 'getPicture',
-        'instagram_profile' => 'getInstagramProfile'
+        'is_follower' => 'getIsFollower',
+        'is_following' => 'getIsFollowing',
+        'follower_count' => 'getFollowerCount',
+        'is_verified' => 'getIsVerified'
     ];
 
     /**
@@ -268,11 +263,10 @@ class WebhookPayloadMessageMessageSender implements ModelInterface, ArrayAccess,
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('username', $data ?? [], null);
-        $this->setIfExists('picture', $data ?? [], null);
-        $this->setIfExists('instagram_profile', $data ?? [], null);
+        $this->setIfExists('is_follower', $data ?? [], null);
+        $this->setIfExists('is_following', $data ?? [], null);
+        $this->setIfExists('follower_count', $data ?? [], null);
+        $this->setIfExists('is_verified', $data ?? [], null);
     }
 
     /**
@@ -318,136 +312,109 @@ class WebhookPayloadMessageMessageSender implements ModelInterface, ArrayAccess,
 
 
     /**
-     * Gets id
+     * Gets is_follower
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getId()
+    public function getIsFollower()
     {
-        return $this->container['id'];
+        return $this->container['is_follower'];
     }
 
     /**
-     * Sets id
+     * Sets is_follower
      *
-     * @param string|null $id id
+     * @param bool|null $is_follower Whether the sender follows your Instagram business account
      *
      * @return self
      */
-    public function setId($id)
+    public function setIsFollower($is_follower)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($is_follower)) {
+            throw new \InvalidArgumentException('non-nullable is_follower cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['is_follower'] = $is_follower;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets is_following
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getName()
+    public function getIsFollowing()
     {
-        return $this->container['name'];
+        return $this->container['is_following'];
     }
 
     /**
-     * Sets name
+     * Sets is_following
      *
-     * @param string|null $name name
+     * @param bool|null $is_following Whether your Instagram business account follows the sender
      *
      * @return self
      */
-    public function setName($name)
+    public function setIsFollowing($is_following)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($is_following)) {
+            throw new \InvalidArgumentException('non-nullable is_following cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['is_following'] = $is_following;
 
         return $this;
     }
 
     /**
-     * Gets username
+     * Gets follower_count
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getUsername()
+    public function getFollowerCount()
     {
-        return $this->container['username'];
+        return $this->container['follower_count'];
     }
 
     /**
-     * Sets username
+     * Sets follower_count
      *
-     * @param string|null $username username
+     * @param int|null $follower_count The sender's follower count on Instagram
      *
      * @return self
      */
-    public function setUsername($username)
+    public function setFollowerCount($follower_count)
     {
-        if (is_null($username)) {
-            throw new \InvalidArgumentException('non-nullable username cannot be null');
+        if (is_null($follower_count)) {
+            throw new \InvalidArgumentException('non-nullable follower_count cannot be null');
         }
-        $this->container['username'] = $username;
+        $this->container['follower_count'] = $follower_count;
 
         return $this;
     }
 
     /**
-     * Gets picture
+     * Gets is_verified
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getPicture()
+    public function getIsVerified()
     {
-        return $this->container['picture'];
+        return $this->container['is_verified'];
     }
 
     /**
-     * Sets picture
+     * Sets is_verified
      *
-     * @param string|null $picture picture
+     * @param bool|null $is_verified Whether the sender is a verified Instagram user
      *
      * @return self
      */
-    public function setPicture($picture)
+    public function setIsVerified($is_verified)
     {
-        if (is_null($picture)) {
-            throw new \InvalidArgumentException('non-nullable picture cannot be null');
+        if (is_null($is_verified)) {
+            throw new \InvalidArgumentException('non-nullable is_verified cannot be null');
         }
-        $this->container['picture'] = $picture;
-
-        return $this;
-    }
-
-    /**
-     * Gets instagram_profile
-     *
-     * @return \Late\Model\WebhookPayloadMessageMessageSenderInstagramProfile|null
-     */
-    public function getInstagramProfile()
-    {
-        return $this->container['instagram_profile'];
-    }
-
-    /**
-     * Sets instagram_profile
-     *
-     * @param \Late\Model\WebhookPayloadMessageMessageSenderInstagramProfile|null $instagram_profile instagram_profile
-     *
-     * @return self
-     */
-    public function setInstagramProfile($instagram_profile)
-    {
-        if (is_null($instagram_profile)) {
-            throw new \InvalidArgumentException('non-nullable instagram_profile cannot be null');
-        }
-        $this->container['instagram_profile'] = $instagram_profile;
+        $this->container['is_verified'] = $is_verified;
 
         return $this;
     }

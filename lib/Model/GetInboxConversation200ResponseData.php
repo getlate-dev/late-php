@@ -67,7 +67,8 @@ class GetInboxConversation200ResponseData implements ModelInterface, ArrayAccess
         'last_message' => 'string',
         'last_message_at' => '\DateTime',
         'updated_time' => '\DateTime',
-        'participants' => '\Late\Model\UpdateFacebookPage200ResponseSelectedPage[]'
+        'participants' => '\Late\Model\UpdateFacebookPage200ResponseSelectedPage[]',
+        'instagram_profile' => '\Late\Model\ListInboxConversations200ResponseDataInnerInstagramProfile'
     ];
 
     /**
@@ -88,7 +89,8 @@ class GetInboxConversation200ResponseData implements ModelInterface, ArrayAccess
         'last_message' => null,
         'last_message_at' => 'date-time',
         'updated_time' => 'date-time',
-        'participants' => null
+        'participants' => null,
+        'instagram_profile' => null
     ];
 
     /**
@@ -107,7 +109,8 @@ class GetInboxConversation200ResponseData implements ModelInterface, ArrayAccess
         'last_message' => false,
         'last_message_at' => false,
         'updated_time' => false,
-        'participants' => false
+        'participants' => false,
+        'instagram_profile' => false
     ];
 
     /**
@@ -206,7 +209,8 @@ class GetInboxConversation200ResponseData implements ModelInterface, ArrayAccess
         'last_message' => 'lastMessage',
         'last_message_at' => 'lastMessageAt',
         'updated_time' => 'updatedTime',
-        'participants' => 'participants'
+        'participants' => 'participants',
+        'instagram_profile' => 'instagramProfile'
     ];
 
     /**
@@ -225,7 +229,8 @@ class GetInboxConversation200ResponseData implements ModelInterface, ArrayAccess
         'last_message' => 'setLastMessage',
         'last_message_at' => 'setLastMessageAt',
         'updated_time' => 'setUpdatedTime',
-        'participants' => 'setParticipants'
+        'participants' => 'setParticipants',
+        'instagram_profile' => 'setInstagramProfile'
     ];
 
     /**
@@ -244,7 +249,8 @@ class GetInboxConversation200ResponseData implements ModelInterface, ArrayAccess
         'last_message' => 'getLastMessage',
         'last_message_at' => 'getLastMessageAt',
         'updated_time' => 'getUpdatedTime',
-        'participants' => 'getParticipants'
+        'participants' => 'getParticipants',
+        'instagram_profile' => 'getInstagramProfile'
     ];
 
     /**
@@ -330,6 +336,7 @@ class GetInboxConversation200ResponseData implements ModelInterface, ArrayAccess
         $this->setIfExists('last_message_at', $data ?? [], null);
         $this->setIfExists('updated_time', $data ?? [], null);
         $this->setIfExists('participants', $data ?? [], null);
+        $this->setIfExists('instagram_profile', $data ?? [], null);
     }
 
     /**
@@ -686,6 +693,33 @@ class GetInboxConversation200ResponseData implements ModelInterface, ArrayAccess
             throw new \InvalidArgumentException('non-nullable participants cannot be null');
         }
         $this->container['participants'] = $participants;
+
+        return $this;
+    }
+
+    /**
+     * Gets instagram_profile
+     *
+     * @return \Late\Model\ListInboxConversations200ResponseDataInnerInstagramProfile|null
+     */
+    public function getInstagramProfile()
+    {
+        return $this->container['instagram_profile'];
+    }
+
+    /**
+     * Sets instagram_profile
+     *
+     * @param \Late\Model\ListInboxConversations200ResponseDataInnerInstagramProfile|null $instagram_profile instagram_profile
+     *
+     * @return self
+     */
+    public function setInstagramProfile($instagram_profile)
+    {
+        if (is_null($instagram_profile)) {
+            throw new \InvalidArgumentException('non-nullable instagram_profile cannot be null');
+        }
+        $this->container['instagram_profile'] = $instagram_profile;
 
         return $this;
     }

@@ -68,7 +68,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'updated_time' => '\DateTime',
         'status' => 'string',
         'unread_count' => 'int',
-        'url' => 'string'
+        'url' => 'string',
+        'instagram_profile' => '\Late\Model\ListInboxConversations200ResponseDataInnerInstagramProfile'
     ];
 
     /**
@@ -90,7 +91,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'updated_time' => 'date-time',
         'status' => null,
         'unread_count' => null,
-        'url' => null
+        'url' => null,
+        'instagram_profile' => null
     ];
 
     /**
@@ -110,7 +112,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'updated_time' => false,
         'status' => false,
         'unread_count' => false,
-        'url' => false
+        'url' => false,
+        'instagram_profile' => false
     ];
 
     /**
@@ -210,7 +213,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'updated_time' => 'updatedTime',
         'status' => 'status',
         'unread_count' => 'unreadCount',
-        'url' => 'url'
+        'url' => 'url',
+        'instagram_profile' => 'instagramProfile'
     ];
 
     /**
@@ -230,7 +234,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'updated_time' => 'setUpdatedTime',
         'status' => 'setStatus',
         'unread_count' => 'setUnreadCount',
-        'url' => 'setUrl'
+        'url' => 'setUrl',
+        'instagram_profile' => 'setInstagramProfile'
     ];
 
     /**
@@ -250,7 +255,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'updated_time' => 'getUpdatedTime',
         'status' => 'getStatus',
         'unread_count' => 'getUnreadCount',
-        'url' => 'getUrl'
+        'url' => 'getUrl',
+        'instagram_profile' => 'getInstagramProfile'
     ];
 
     /**
@@ -337,6 +343,7 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('unread_count', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('instagram_profile', $data ?? [], null);
     }
 
     /**
@@ -720,6 +727,33 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
             throw new \InvalidArgumentException('non-nullable url cannot be null');
         }
         $this->container['url'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * Gets instagram_profile
+     *
+     * @return \Late\Model\ListInboxConversations200ResponseDataInnerInstagramProfile|null
+     */
+    public function getInstagramProfile()
+    {
+        return $this->container['instagram_profile'];
+    }
+
+    /**
+     * Sets instagram_profile
+     *
+     * @param \Late\Model\ListInboxConversations200ResponseDataInnerInstagramProfile|null $instagram_profile instagram_profile
+     *
+     * @return self
+     */
+    public function setInstagramProfile($instagram_profile)
+    {
+        if (is_null($instagram_profile)) {
+            throw new \InvalidArgumentException('non-nullable instagram_profile cannot be null');
+        }
+        $this->container['instagram_profile'] = $instagram_profile;
 
         return $this;
     }
