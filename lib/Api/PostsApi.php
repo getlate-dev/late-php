@@ -2125,16 +2125,16 @@ class PostsApi
      * Update a post
      *
      * @param  string $post_id post_id (required)
-     * @param  array<string,mixed> $request_body request_body (required)
+     * @param  \Late\Model\UpdatePostRequest $update_post_request update_post_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePost'] to see the possible values for this operation
      *
      * @throws \Late\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Late\Model\PostUpdateResponse|\Late\Model\InlineObject|\Late\Model\InlineObject1
      */
-    public function updatePost($post_id, $request_body, string $contentType = self::contentTypes['updatePost'][0])
+    public function updatePost($post_id, $update_post_request, string $contentType = self::contentTypes['updatePost'][0])
     {
-        list($response) = $this->updatePostWithHttpInfo($post_id, $request_body, $contentType);
+        list($response) = $this->updatePostWithHttpInfo($post_id, $update_post_request, $contentType);
         return $response;
     }
 
@@ -2144,16 +2144,16 @@ class PostsApi
      * Update a post
      *
      * @param  string $post_id (required)
-     * @param  array<string,mixed> $request_body (required)
+     * @param  \Late\Model\UpdatePostRequest $update_post_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePost'] to see the possible values for this operation
      *
      * @throws \Late\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Late\Model\PostUpdateResponse|\Late\Model\InlineObject|\Late\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updatePostWithHttpInfo($post_id, $request_body, string $contentType = self::contentTypes['updatePost'][0])
+    public function updatePostWithHttpInfo($post_id, $update_post_request, string $contentType = self::contentTypes['updatePost'][0])
     {
-        $request = $this->updatePostRequest($post_id, $request_body, $contentType);
+        $request = $this->updatePostRequest($post_id, $update_post_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2258,15 +2258,15 @@ class PostsApi
      * Update a post
      *
      * @param  string $post_id (required)
-     * @param  array<string,mixed> $request_body (required)
+     * @param  \Late\Model\UpdatePostRequest $update_post_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updatePostAsync($post_id, $request_body, string $contentType = self::contentTypes['updatePost'][0])
+    public function updatePostAsync($post_id, $update_post_request, string $contentType = self::contentTypes['updatePost'][0])
     {
-        return $this->updatePostAsyncWithHttpInfo($post_id, $request_body, $contentType)
+        return $this->updatePostAsyncWithHttpInfo($post_id, $update_post_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2280,16 +2280,16 @@ class PostsApi
      * Update a post
      *
      * @param  string $post_id (required)
-     * @param  array<string,mixed> $request_body (required)
+     * @param  \Late\Model\UpdatePostRequest $update_post_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updatePostAsyncWithHttpInfo($post_id, $request_body, string $contentType = self::contentTypes['updatePost'][0])
+    public function updatePostAsyncWithHttpInfo($post_id, $update_post_request, string $contentType = self::contentTypes['updatePost'][0])
     {
         $returnType = '\Late\Model\PostUpdateResponse';
-        $request = $this->updatePostRequest($post_id, $request_body, $contentType);
+        $request = $this->updatePostRequest($post_id, $update_post_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2331,13 +2331,13 @@ class PostsApi
      * Create request for operation 'updatePost'
      *
      * @param  string $post_id (required)
-     * @param  array<string,mixed> $request_body (required)
+     * @param  \Late\Model\UpdatePostRequest $update_post_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updatePostRequest($post_id, $request_body, string $contentType = self::contentTypes['updatePost'][0])
+    public function updatePostRequest($post_id, $update_post_request, string $contentType = self::contentTypes['updatePost'][0])
     {
 
         // verify the required parameter 'post_id' is set
@@ -2347,10 +2347,10 @@ class PostsApi
             );
         }
 
-        // verify the required parameter 'request_body' is set
-        if ($request_body === null || (is_array($request_body) && count($request_body) === 0)) {
+        // verify the required parameter 'update_post_request' is set
+        if ($update_post_request === null || (is_array($update_post_request) && count($update_post_request) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $request_body when calling updatePost'
+                'Missing the required parameter $update_post_request when calling updatePost'
             );
         }
 
@@ -2381,12 +2381,12 @@ class PostsApi
         );
 
         // for model (json/xml)
-        if (isset($request_body)) {
+        if (isset($update_post_request)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($request_body));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_post_request));
             } else {
-                $httpBody = $request_body;
+                $httpBody = $update_post_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

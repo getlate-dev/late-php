@@ -529,6 +529,7 @@ Class | Method | HTTP request | Description
 - [UpdateInboxConversationRequest](docs/Model/UpdateInboxConversationRequest.md)
 - [UpdateLinkedInOrganizationRequest](docs/Model/UpdateLinkedInOrganizationRequest.md)
 - [UpdatePinterestBoardsRequest](docs/Model/UpdatePinterestBoardsRequest.md)
+- [UpdatePostRequest](docs/Model/UpdatePostRequest.md)
 - [UpdateProfile200Response](docs/Model/UpdateProfile200Response.md)
 - [UpdateProfileRequest](docs/Model/UpdateProfileRequest.md)
 - [UpdateQueueSlot200Response](docs/Model/UpdateQueueSlot200Response.md)

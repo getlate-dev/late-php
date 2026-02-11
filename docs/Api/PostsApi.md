@@ -392,7 +392,7 @@ try {
 ## `updatePost()`
 
 ```php
-updatePost($post_id, $request_body): \Late\Model\PostUpdateResponse
+updatePost($post_id, $update_post_request): \Late\Model\PostUpdateResponse
 ```
 
 Update a post
@@ -417,10 +417,10 @@ $apiInstance = new Late\Api\PostsApi(
     $config
 );
 $post_id = 'post_id_example'; // string
-$request_body = {"content":"Updated content for our launch post!","scheduledFor":"2024-11-02T14:00:00Z"}; // array<string,mixed>
+$update_post_request = {"content":"Updated content for our launch post!","scheduledFor":"2024-11-02T14:00:00Z"}; // \Late\Model\UpdatePostRequest
 
 try {
-    $result = $apiInstance->updatePost($post_id, $request_body);
+    $result = $apiInstance->updatePost($post_id, $update_post_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PostsApi->updatePost: ', $e->getMessage(), PHP_EOL;
@@ -432,7 +432,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **post_id** | **string**|  | |
-| **request_body** | [**array<string,mixed>**](../Model/mixed.md)|  | |
+| **update_post_request** | [**\Late\Model\UpdatePostRequest**](../Model/UpdatePostRequest.md)|  | |
 
 ### Return type
 

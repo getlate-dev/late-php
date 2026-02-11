@@ -357,6 +357,7 @@ docs/Model/UpdateInboxConversation200ResponseData.md
 docs/Model/UpdateInboxConversationRequest.md
 docs/Model/UpdateLinkedInOrganizationRequest.md
 docs/Model/UpdatePinterestBoardsRequest.md
+docs/Model/UpdatePostRequest.md
 docs/Model/UpdateProfile200Response.md
 docs/Model/UpdateProfileRequest.md
 docs/Model/UpdateQueueSlot200Response.md
@@ -756,6 +757,7 @@ lib/Model/UpdateInboxConversation200ResponseData.php
 lib/Model/UpdateInboxConversationRequest.php
 lib/Model/UpdateLinkedInOrganizationRequest.php
 lib/Model/UpdatePinterestBoardsRequest.php
+lib/Model/UpdatePostRequest.php
 lib/Model/UpdateProfile200Response.php
 lib/Model/UpdateProfileRequest.php
 lib/Model/UpdateQueueSlot200Response.php
@@ -797,10 +799,4 @@ lib/Model/YouTubeScopeMissingResponse.php
 lib/Model/YouTubeScopeMissingResponseScopeStatus.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/BlueskyPlatformDataTest.php
-test/Model/ConnectionLogContextTest.php
-test/Model/ConnectionLogErrorTest.php
-test/Model/ConnectionLogSuccessTest.php
-test/Model/ConnectionLogTest.php
-test/Model/ListConnectionLogs200ResponseTest.php
-test/Model/RedditPlatformDataTest.php
+test/Model/UpdatePostRequestTest.php
