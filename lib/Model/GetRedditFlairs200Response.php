@@ -1,6 +1,6 @@
 <?php
 /**
- * RedditPlatformData
+ * GetRedditFlairs200Response
  *
  * PHP version 8.1
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Late\ObjectSerializer;
 
 /**
- * RedditPlatformData Class Doc Comment
+ * GetRedditFlairs200Response Class Doc Comment
  *
  * @category Class
- * @description Reddit post settings: - Posts are either \&quot;link\&quot; (with URL/media) or \&quot;self\&quot; (text-only) - If media is provided, the first media item&#39;s URL is used as the link - Use forceSelf to override and create a text post with the URL in the body - Subreddit defaults to the account&#39;s configured subreddit if omitted - Use the same accountId multiple times with different subreddit values in platformSpecificData to post to multiple subreddits - Images are automatically compressed if they exceed Reddit&#39;s 20MB limit - Some subreddits require a flair; if not provided, the API will attempt to use the first available flair as fallback
  * @package  Late
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetRedditFlairs200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'RedditPlatformData';
+    protected static $openAPIModelName = 'getRedditFlairs_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +57,7 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'subreddit' => 'string',
-        'title' => 'string',
-        'url' => 'string',
-        'force_self' => 'bool',
-        'flair_id' => 'string'
+        'flairs' => '\Late\Model\GetRedditFlairs200ResponseFlairsInner[]'
     ];
 
     /**
@@ -73,11 +68,7 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'subreddit' => null,
-        'title' => null,
-        'url' => 'uri',
-        'force_self' => null,
-        'flair_id' => null
+        'flairs' => null
     ];
 
     /**
@@ -86,11 +77,7 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'subreddit' => false,
-        'title' => false,
-        'url' => false,
-        'force_self' => false,
-        'flair_id' => false
+        'flairs' => false
     ];
 
     /**
@@ -179,11 +166,7 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'subreddit' => 'subreddit',
-        'title' => 'title',
-        'url' => 'url',
-        'force_self' => 'forceSelf',
-        'flair_id' => 'flairId'
+        'flairs' => 'flairs'
     ];
 
     /**
@@ -192,11 +175,7 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'subreddit' => 'setSubreddit',
-        'title' => 'setTitle',
-        'url' => 'setUrl',
-        'force_self' => 'setForceSelf',
-        'flair_id' => 'setFlairId'
+        'flairs' => 'setFlairs'
     ];
 
     /**
@@ -205,11 +184,7 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'subreddit' => 'getSubreddit',
-        'title' => 'getTitle',
-        'url' => 'getUrl',
-        'force_self' => 'getForceSelf',
-        'flair_id' => 'getFlairId'
+        'flairs' => 'getFlairs'
     ];
 
     /**
@@ -269,11 +244,7 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('subreddit', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('url', $data ?? [], null);
-        $this->setIfExists('force_self', $data ?? [], null);
-        $this->setIfExists('flair_id', $data ?? [], null);
+        $this->setIfExists('flairs', $data ?? [], null);
     }
 
     /**
@@ -303,10 +274,6 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 300)) {
-            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 300.";
-        }
-
         return $invalidProperties;
     }
 
@@ -323,140 +290,28 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets subreddit
+     * Gets flairs
      *
-     * @return string|null
+     * @return \Late\Model\GetRedditFlairs200ResponseFlairsInner[]|null
      */
-    public function getSubreddit()
+    public function getFlairs()
     {
-        return $this->container['subreddit'];
+        return $this->container['flairs'];
     }
 
     /**
-     * Sets subreddit
+     * Sets flairs
      *
-     * @param string|null $subreddit Target subreddit name (without \"r/\" prefix). Overrides the default subreddit configured on the account connection. Use GET /api/v1/accounts/{id}/reddit-subreddits to list available subreddits.
+     * @param \Late\Model\GetRedditFlairs200ResponseFlairsInner[]|null $flairs flairs
      *
      * @return self
      */
-    public function setSubreddit($subreddit)
+    public function setFlairs($flairs)
     {
-        if (is_null($subreddit)) {
-            throw new \InvalidArgumentException('non-nullable subreddit cannot be null');
+        if (is_null($flairs)) {
+            throw new \InvalidArgumentException('non-nullable flairs cannot be null');
         }
-        $this->container['subreddit'] = $subreddit;
-
-        return $this;
-    }
-
-    /**
-     * Gets title
-     *
-     * @return string|null
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string|null $title Post title. Defaults to the first line of content, truncated to 300 characters.
-     *
-     * @return self
-     */
-    public function setTitle($title)
-    {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
-        }
-        if ((mb_strlen($title) > 300)) {
-            throw new \InvalidArgumentException('invalid length for $title when calling RedditPlatformData., must be smaller than or equal to 300.');
-        }
-
-        $this->container['title'] = $title;
-
-        return $this;
-    }
-
-    /**
-     * Gets url
-     *
-     * @return string|null
-     */
-    public function getUrl()
-    {
-        return $this->container['url'];
-    }
-
-    /**
-     * Sets url
-     *
-     * @param string|null $url URL for link posts. If provided (and forceSelf is not true), creates a link post instead of a text post.
-     *
-     * @return self
-     */
-    public function setUrl($url)
-    {
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
-        }
-        $this->container['url'] = $url;
-
-        return $this;
-    }
-
-    /**
-     * Gets force_self
-     *
-     * @return bool|null
-     */
-    public function getForceSelf()
-    {
-        return $this->container['force_self'];
-    }
-
-    /**
-     * Sets force_self
-     *
-     * @param bool|null $force_self When true, creates a text/self post even when a URL or media is provided.
-     *
-     * @return self
-     */
-    public function setForceSelf($force_self)
-    {
-        if (is_null($force_self)) {
-            throw new \InvalidArgumentException('non-nullable force_self cannot be null');
-        }
-        $this->container['force_self'] = $force_self;
-
-        return $this;
-    }
-
-    /**
-     * Gets flair_id
-     *
-     * @return string|null
-     */
-    public function getFlairId()
-    {
-        return $this->container['flair_id'];
-    }
-
-    /**
-     * Sets flair_id
-     *
-     * @param string|null $flair_id Flair ID for the post. Required by some subreddits. Use GET /api/v1/accounts/{id}/reddit-flairs?subreddit=name to list available flairs.
-     *
-     * @return self
-     */
-    public function setFlairId($flair_id)
-    {
-        if (is_null($flair_id)) {
-            throw new \InvalidArgumentException('non-nullable flair_id cannot be null');
-        }
-        $this->container['flair_id'] = $flair_id;
+        $this->container['flairs'] = $flairs;
 
         return $this;
     }

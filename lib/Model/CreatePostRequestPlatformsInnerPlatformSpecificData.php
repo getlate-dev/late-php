@@ -102,7 +102,8 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'protect_content' => 'bool',
         'subreddit' => 'string',
         'url' => 'string',
-        'force_self' => 'bool'
+        'force_self' => 'bool',
+        'flair_id' => 'string'
     ];
 
     /**
@@ -158,7 +159,8 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'protect_content' => null,
         'subreddit' => null,
         'url' => 'uri',
-        'force_self' => null
+        'force_self' => null,
+        'flair_id' => null
     ];
 
     /**
@@ -212,7 +214,8 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'protect_content' => false,
         'subreddit' => false,
         'url' => false,
-        'force_self' => false
+        'force_self' => false,
+        'flair_id' => false
     ];
 
     /**
@@ -346,7 +349,8 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'protect_content' => 'protectContent',
         'subreddit' => 'subreddit',
         'url' => 'url',
-        'force_self' => 'forceSelf'
+        'force_self' => 'forceSelf',
+        'flair_id' => 'flairId'
     ];
 
     /**
@@ -400,7 +404,8 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'protect_content' => 'setProtectContent',
         'subreddit' => 'setSubreddit',
         'url' => 'setUrl',
-        'force_self' => 'setForceSelf'
+        'force_self' => 'setForceSelf',
+        'flair_id' => 'setFlairId'
     ];
 
     /**
@@ -454,7 +459,8 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'protect_content' => 'getProtectContent',
         'subreddit' => 'getSubreddit',
         'url' => 'getUrl',
-        'force_self' => 'getForceSelf'
+        'force_self' => 'getForceSelf',
+        'flair_id' => 'getFlairId'
     ];
 
     /**
@@ -643,6 +649,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         $this->setIfExists('subreddit', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('force_self', $data ?? [], null);
+        $this->setIfExists('flair_id', $data ?? [], null);
     }
 
     /**
@@ -2071,6 +2078,33 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
             throw new \InvalidArgumentException('non-nullable force_self cannot be null');
         }
         $this->container['force_self'] = $force_self;
+
+        return $this;
+    }
+
+    /**
+     * Gets flair_id
+     *
+     * @return string|null
+     */
+    public function getFlairId()
+    {
+        return $this->container['flair_id'];
+    }
+
+    /**
+     * Sets flair_id
+     *
+     * @param string|null $flair_id Flair ID for the post. Required by some subreddits. Use GET /api/v1/accounts/{id}/reddit-flairs?subreddit=name to list available flairs.
+     *
+     * @return self
+     */
+    public function setFlairId($flair_id)
+    {
+        if (is_null($flair_id)) {
+            throw new \InvalidArgumentException('non-nullable flair_id cannot be null');
+        }
+        $this->container['flair_id'] = $flair_id;
 
         return $this;
     }

@@ -175,6 +175,8 @@ docs/Model/GetPinterestBoards200ResponseBoardsInner.md
 docs/Model/GetPostLogs200Response.md
 docs/Model/GetProfile200Response.md
 docs/Model/GetRedditFeed200Response.md
+docs/Model/GetRedditFlairs200Response.md
+docs/Model/GetRedditFlairs200ResponseFlairsInner.md
 docs/Model/GetRedditSubreddits200Response.md
 docs/Model/GetRedditSubreddits200ResponseSubredditsInner.md
 docs/Model/GetTelegramCommands200Response.md
@@ -598,6 +600,8 @@ lib/Model/GetPinterestBoards200ResponseBoardsInner.php
 lib/Model/GetPostLogs200Response.php
 lib/Model/GetProfile200Response.php
 lib/Model/GetRedditFeed200Response.php
+lib/Model/GetRedditFlairs200Response.php
+lib/Model/GetRedditFlairs200ResponseFlairsInner.php
 lib/Model/GetRedditSubreddits200Response.php
 lib/Model/GetRedditSubreddits200ResponseSubredditsInner.php
 lib/Model/GetTelegramCommands200Response.php
@@ -847,5 +851,5 @@ lib/Model/YouTubeScopeMissingResponse.php
 lib/Model/YouTubeScopeMissingResponseScopeStatus.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/ListInboxConversations200ResponseDataInnerInstagramProfileTest.php
-test/Model/WebhookPayloadMessageMessageSenderInstagramProfileTest.php
+test/Model/GetRedditFlairs200ResponseFlairsInnerTest.php
+test/Model/GetRedditFlairs200ResponseTest.php

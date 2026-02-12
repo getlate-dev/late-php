@@ -121,6 +121,7 @@ Class | Method | HTTP request | Description
 *ConnectApi* | [**getLinkedInOrganizations**](docs/Api/ConnectApi.md#getlinkedinorganizations) | **GET** /v1/accounts/{accountId}/linkedin-organizations | Get available LinkedIn organizations for a connected account
 *ConnectApi* | [**getPendingOAuthData**](docs/Api/ConnectApi.md#getpendingoauthdata) | **GET** /v1/connect/pending-data | Fetch pending OAuth selection data (Headless Mode)
 *ConnectApi* | [**getPinterestBoards**](docs/Api/ConnectApi.md#getpinterestboards) | **GET** /v1/accounts/{accountId}/pinterest-boards | List Pinterest boards for a connected account
+*ConnectApi* | [**getRedditFlairs**](docs/Api/ConnectApi.md#getredditflairs) | **GET** /v1/accounts/{accountId}/reddit-flairs | List available post flairs for a Reddit subreddit
 *ConnectApi* | [**getRedditSubreddits**](docs/Api/ConnectApi.md#getredditsubreddits) | **GET** /v1/accounts/{accountId}/reddit-subreddits | List Reddit subreddits for a connected account
 *ConnectApi* | [**getTelegramConnectStatus**](docs/Api/ConnectApi.md#gettelegramconnectstatus) | **GET** /v1/connect/telegram | Generate Telegram access code
 *ConnectApi* | [**handleOAuthCallback**](docs/Api/ConnectApi.md#handleoauthcallback) | **POST** /v1/connect/{platform} | Complete OAuth token exchange manually (for server-side flows)
@@ -356,6 +357,8 @@ Class | Method | HTTP request | Description
 - [GetPostLogs200Response](docs/Model/GetPostLogs200Response.md)
 - [GetProfile200Response](docs/Model/GetProfile200Response.md)
 - [GetRedditFeed200Response](docs/Model/GetRedditFeed200Response.md)
+- [GetRedditFlairs200Response](docs/Model/GetRedditFlairs200Response.md)
+- [GetRedditFlairs200ResponseFlairsInner](docs/Model/GetRedditFlairs200ResponseFlairsInner.md)
 - [GetRedditSubreddits200Response](docs/Model/GetRedditSubreddits200Response.md)
 - [GetRedditSubreddits200ResponseSubredditsInner](docs/Model/GetRedditSubreddits200ResponseSubredditsInner.md)
 - [GetTelegramCommands200Response](docs/Model/GetTelegramCommands200Response.md)

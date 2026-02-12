@@ -1,6 +1,6 @@
 <?php
 /**
- * RedditPlatformData
+ * GetRedditFlairs200ResponseFlairsInner
  *
  * PHP version 8.1
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Late\ObjectSerializer;
 
 /**
- * RedditPlatformData Class Doc Comment
+ * GetRedditFlairs200ResponseFlairsInner Class Doc Comment
  *
  * @category Class
- * @description Reddit post settings: - Posts are either \&quot;link\&quot; (with URL/media) or \&quot;self\&quot; (text-only) - If media is provided, the first media item&#39;s URL is used as the link - Use forceSelf to override and create a text post with the URL in the body - Subreddit defaults to the account&#39;s configured subreddit if omitted - Use the same accountId multiple times with different subreddit values in platformSpecificData to post to multiple subreddits - Images are automatically compressed if they exceed Reddit&#39;s 20MB limit - Some subreddits require a flair; if not provided, the API will attempt to use the first available flair as fallback
  * @package  Late
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetRedditFlairs200ResponseFlairsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'RedditPlatformData';
+    protected static $openAPIModelName = 'getRedditFlairs_200_response_flairs_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +57,10 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'subreddit' => 'string',
-        'title' => 'string',
-        'url' => 'string',
-        'force_self' => 'bool',
-        'flair_id' => 'string'
+        'id' => 'string',
+        'text' => 'string',
+        'text_color' => 'string',
+        'background_color' => 'string'
     ];
 
     /**
@@ -73,11 +71,10 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'subreddit' => null,
-        'title' => null,
-        'url' => 'uri',
-        'force_self' => null,
-        'flair_id' => null
+        'id' => null,
+        'text' => null,
+        'text_color' => null,
+        'background_color' => null
     ];
 
     /**
@@ -86,11 +83,10 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'subreddit' => false,
-        'title' => false,
-        'url' => false,
-        'force_self' => false,
-        'flair_id' => false
+        'id' => false,
+        'text' => false,
+        'text_color' => false,
+        'background_color' => false
     ];
 
     /**
@@ -179,11 +175,10 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'subreddit' => 'subreddit',
-        'title' => 'title',
-        'url' => 'url',
-        'force_self' => 'forceSelf',
-        'flair_id' => 'flairId'
+        'id' => 'id',
+        'text' => 'text',
+        'text_color' => 'textColor',
+        'background_color' => 'backgroundColor'
     ];
 
     /**
@@ -192,11 +187,10 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'subreddit' => 'setSubreddit',
-        'title' => 'setTitle',
-        'url' => 'setUrl',
-        'force_self' => 'setForceSelf',
-        'flair_id' => 'setFlairId'
+        'id' => 'setId',
+        'text' => 'setText',
+        'text_color' => 'setTextColor',
+        'background_color' => 'setBackgroundColor'
     ];
 
     /**
@@ -205,11 +199,10 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'subreddit' => 'getSubreddit',
-        'title' => 'getTitle',
-        'url' => 'getUrl',
-        'force_self' => 'getForceSelf',
-        'flair_id' => 'getFlairId'
+        'id' => 'getId',
+        'text' => 'getText',
+        'text_color' => 'getTextColor',
+        'background_color' => 'getBackgroundColor'
     ];
 
     /**
@@ -269,11 +262,10 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('subreddit', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('url', $data ?? [], null);
-        $this->setIfExists('force_self', $data ?? [], null);
-        $this->setIfExists('flair_id', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('text', $data ?? [], null);
+        $this->setIfExists('text_color', $data ?? [], null);
+        $this->setIfExists('background_color', $data ?? [], null);
     }
 
     /**
@@ -303,10 +295,6 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 300)) {
-            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 300.";
-        }
-
         return $invalidProperties;
     }
 
@@ -323,140 +311,109 @@ class RedditPlatformData implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets subreddit
+     * Gets id
      *
      * @return string|null
      */
-    public function getSubreddit()
+    public function getId()
     {
-        return $this->container['subreddit'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets subreddit
+     * Sets id
      *
-     * @param string|null $subreddit Target subreddit name (without \"r/\" prefix). Overrides the default subreddit configured on the account connection. Use GET /api/v1/accounts/{id}/reddit-subreddits to list available subreddits.
+     * @param string|null $id Flair ID to pass as flairId in platformSpecificData
      *
      * @return self
      */
-    public function setSubreddit($subreddit)
+    public function setId($id)
     {
-        if (is_null($subreddit)) {
-            throw new \InvalidArgumentException('non-nullable subreddit cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['subreddit'] = $subreddit;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets title
+     * Gets text
      *
      * @return string|null
      */
-    public function getTitle()
+    public function getText()
     {
-        return $this->container['title'];
+        return $this->container['text'];
     }
 
     /**
-     * Sets title
+     * Sets text
      *
-     * @param string|null $title Post title. Defaults to the first line of content, truncated to 300 characters.
+     * @param string|null $text Flair display text
      *
      * @return self
      */
-    public function setTitle($title)
+    public function setText($text)
     {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
+        if (is_null($text)) {
+            throw new \InvalidArgumentException('non-nullable text cannot be null');
         }
-        if ((mb_strlen($title) > 300)) {
-            throw new \InvalidArgumentException('invalid length for $title when calling RedditPlatformData., must be smaller than or equal to 300.');
-        }
-
-        $this->container['title'] = $title;
+        $this->container['text'] = $text;
 
         return $this;
     }
 
     /**
-     * Gets url
+     * Gets text_color
      *
      * @return string|null
      */
-    public function getUrl()
+    public function getTextColor()
     {
-        return $this->container['url'];
+        return $this->container['text_color'];
     }
 
     /**
-     * Sets url
+     * Sets text_color
      *
-     * @param string|null $url URL for link posts. If provided (and forceSelf is not true), creates a link post instead of a text post.
+     * @param string|null $text_color Text color: 'dark' or 'light'
      *
      * @return self
      */
-    public function setUrl($url)
+    public function setTextColor($text_color)
     {
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        if (is_null($text_color)) {
+            throw new \InvalidArgumentException('non-nullable text_color cannot be null');
         }
-        $this->container['url'] = $url;
+        $this->container['text_color'] = $text_color;
 
         return $this;
     }
 
     /**
-     * Gets force_self
-     *
-     * @return bool|null
-     */
-    public function getForceSelf()
-    {
-        return $this->container['force_self'];
-    }
-
-    /**
-     * Sets force_self
-     *
-     * @param bool|null $force_self When true, creates a text/self post even when a URL or media is provided.
-     *
-     * @return self
-     */
-    public function setForceSelf($force_self)
-    {
-        if (is_null($force_self)) {
-            throw new \InvalidArgumentException('non-nullable force_self cannot be null');
-        }
-        $this->container['force_self'] = $force_self;
-
-        return $this;
-    }
-
-    /**
-     * Gets flair_id
+     * Gets background_color
      *
      * @return string|null
      */
-    public function getFlairId()
+    public function getBackgroundColor()
     {
-        return $this->container['flair_id'];
+        return $this->container['background_color'];
     }
 
     /**
-     * Sets flair_id
+     * Sets background_color
      *
-     * @param string|null $flair_id Flair ID for the post. Required by some subreddits. Use GET /api/v1/accounts/{id}/reddit-flairs?subreddit=name to list available flairs.
+     * @param string|null $background_color Background hex color (e.g. '#ff4500')
      *
      * @return self
      */
-    public function setFlairId($flair_id)
+    public function setBackgroundColor($background_color)
     {
-        if (is_null($flair_id)) {
-            throw new \InvalidArgumentException('non-nullable flair_id cannot be null');
+        if (is_null($background_color)) {
+            throw new \InvalidArgumentException('non-nullable background_color cannot be null');
         }
-        $this->container['flair_id'] = $flair_id;
+        $this->container['background_color'] = $background_color;
 
         return $this;
     }
