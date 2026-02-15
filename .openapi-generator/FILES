@@ -851,5 +851,3 @@ lib/Model/YouTubeScopeMissingResponse.php
 lib/Model/YouTubeScopeMissingResponseScopeStatus.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/GetRedditFlairs200ResponseFlairsInnerTest.php
-test/Model/GetRedditFlairs200ResponseTest.php
