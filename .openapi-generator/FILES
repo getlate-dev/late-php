@@ -3157,13 +3157,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/CreateLeadFormRequestPlatformSpecificDataTest.php
-test/Model/LinkedInLeadFormPlatformDataConsentsInnerTest.php
-test/Model/LinkedInLeadFormPlatformDataLocaleTest.php
-test/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInnerTest.php
-test/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1Test.php
-test/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOfTest.php
-test/Model/LinkedInLeadFormPlatformDataQuestionsInnerTest.php
-test/Model/LinkedInLeadFormPlatformDataTest.php
-test/Model/MetaLeadFormPlatformDataContextCardTest.php
-test/Model/MetaLeadFormPlatformDataTest.php

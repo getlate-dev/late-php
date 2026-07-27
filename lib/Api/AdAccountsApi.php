@@ -1835,7 +1835,7 @@ class AdAccountsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\ListAdAccounts200Response|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\ListAdAccounts200Response|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse
      */
     public function listAdAccounts($account_id, $ad_account_id = null, $limit = null, string $contentType = self::contentTypes['listAdAccounts'][0])
     {
@@ -1855,7 +1855,7 @@ class AdAccountsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\ListAdAccounts200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\ListAdAccounts200Response|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function listAdAccountsWithHttpInfo($account_id, $ad_account_id = null, $limit = null, string $contentType = self::contentTypes['listAdAccounts'][0])
     {
@@ -1897,6 +1897,12 @@ class AdAccountsApi
                         $request,
                         $response,
                     );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -1933,6 +1939,14 @@ class AdAccountsApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
