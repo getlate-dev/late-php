@@ -1775,17 +1775,17 @@ class AccountsApi
      *
      * List accounts
      *
-     * @param  string|null $profile_id Filter accounts by profile ID (optional)
+     * @param  string|null $profile_id Filter accounts by profile ID. Must be a valid ObjectId. (optional)
      * @param  string|null $platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;). (optional)
      * @param  string|null $status Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. (optional)
      * @param  bool|null $include_over_limit When true, includes accounts from over-limit profiles. (optional, default to false)
-     * @param  int|null $page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts. (optional)
-     * @param  int|null $limit Page size. Required alongside page for pagination. (optional)
+     * @param  int|null $page Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts. (optional)
+     * @param  int|null $limit Page size. Must be provided together with page; sending only one of the two returns 400. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAccounts'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\AccountsListResponse|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\AccountsListResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
      */
     public function listAccounts($profile_id = null, $platform = null, $status = null, $include_over_limit = false, $page = null, $limit = null, string $contentType = self::contentTypes['listAccounts'][0])
     {
@@ -1798,17 +1798,17 @@ class AccountsApi
      *
      * List accounts
      *
-     * @param  string|null $profile_id Filter accounts by profile ID (optional)
+     * @param  string|null $profile_id Filter accounts by profile ID. Must be a valid ObjectId. (optional)
      * @param  string|null $platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;). (optional)
      * @param  string|null $status Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. (optional)
      * @param  bool|null $include_over_limit When true, includes accounts from over-limit profiles. (optional, default to false)
-     * @param  int|null $page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts. (optional)
-     * @param  int|null $limit Page size. Required alongside page for pagination. (optional)
+     * @param  int|null $page Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts. (optional)
+     * @param  int|null $limit Page size. Must be provided together with page; sending only one of the two returns 400. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAccounts'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\AccountsListResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\AccountsListResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function listAccountsWithHttpInfo($profile_id = null, $platform = null, $status = null, $include_over_limit = false, $page = null, $limit = null, string $contentType = self::contentTypes['listAccounts'][0])
     {
@@ -1841,6 +1841,12 @@ class AccountsApi
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\AccountsListResponse',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -1882,6 +1888,14 @@ class AccountsApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1902,12 +1916,12 @@ class AccountsApi
      *
      * List accounts
      *
-     * @param  string|null $profile_id Filter accounts by profile ID (optional)
+     * @param  string|null $profile_id Filter accounts by profile ID. Must be a valid ObjectId. (optional)
      * @param  string|null $platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;). (optional)
      * @param  string|null $status Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. (optional)
      * @param  bool|null $include_over_limit When true, includes accounts from over-limit profiles. (optional, default to false)
-     * @param  int|null $page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts. (optional)
-     * @param  int|null $limit Page size. Required alongside page for pagination. (optional)
+     * @param  int|null $page Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts. (optional)
+     * @param  int|null $limit Page size. Must be provided together with page; sending only one of the two returns 400. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAccounts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1928,12 +1942,12 @@ class AccountsApi
      *
      * List accounts
      *
-     * @param  string|null $profile_id Filter accounts by profile ID (optional)
+     * @param  string|null $profile_id Filter accounts by profile ID. Must be a valid ObjectId. (optional)
      * @param  string|null $platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;). (optional)
      * @param  string|null $status Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. (optional)
      * @param  bool|null $include_over_limit When true, includes accounts from over-limit profiles. (optional, default to false)
-     * @param  int|null $page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts. (optional)
-     * @param  int|null $limit Page size. Required alongside page for pagination. (optional)
+     * @param  int|null $page Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts. (optional)
+     * @param  int|null $limit Page size. Must be provided together with page; sending only one of the two returns 400. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAccounts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1983,12 +1997,12 @@ class AccountsApi
     /**
      * Create request for operation 'listAccounts'
      *
-     * @param  string|null $profile_id Filter accounts by profile ID (optional)
+     * @param  string|null $profile_id Filter accounts by profile ID. Must be a valid ObjectId. (optional)
      * @param  string|null $platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;). (optional)
      * @param  string|null $status Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. (optional)
      * @param  bool|null $include_over_limit When true, includes accounts from over-limit profiles. (optional, default to false)
-     * @param  int|null $page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts. (optional)
-     * @param  int|null $limit Page size. Required alongside page for pagination. (optional)
+     * @param  int|null $page Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts. (optional)
+     * @param  int|null $limit Page size. Must be provided together with page; sending only one of the two returns 400. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAccounts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
