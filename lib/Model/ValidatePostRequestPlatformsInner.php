@@ -59,6 +59,7 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
       */
     protected static $openAPITypes = [
         'platform' => 'string',
+        'account_id' => 'string',
         'custom_content' => 'string',
         'platform_specific_data' => 'object',
         'custom_media' => '\Zernio\Model\MediaItem[]'
@@ -73,6 +74,7 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
       */
     protected static $openAPIFormats = [
         'platform' => null,
+        'account_id' => null,
         'custom_content' => null,
         'platform_specific_data' => null,
         'custom_media' => null
@@ -85,6 +87,7 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
       */
     protected static array $openAPINullables = [
         'platform' => false,
+        'account_id' => false,
         'custom_content' => false,
         'platform_specific_data' => false,
         'custom_media' => false
@@ -177,6 +180,7 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
      */
     protected static $attributeMap = [
         'platform' => 'platform',
+        'account_id' => 'accountId',
         'custom_content' => 'customContent',
         'platform_specific_data' => 'platformSpecificData',
         'custom_media' => 'customMedia'
@@ -189,6 +193,7 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
      */
     protected static $setters = [
         'platform' => 'setPlatform',
+        'account_id' => 'setAccountId',
         'custom_content' => 'setCustomContent',
         'platform_specific_data' => 'setPlatformSpecificData',
         'custom_media' => 'setCustomMedia'
@@ -201,6 +206,7 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
      */
     protected static $getters = [
         'platform' => 'getPlatform',
+        'account_id' => 'getAccountId',
         'custom_content' => 'getCustomContent',
         'platform_specific_data' => 'getPlatformSpecificData',
         'custom_media' => 'getCustomMedia'
@@ -303,6 +309,7 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
     public function __construct(?array $data = null)
     {
         $this->setIfExists('platform', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('custom_content', $data ?? [], null);
         $this->setIfExists('platform_specific_data', $data ?? [], null);
         $this->setIfExists('custom_media', $data ?? [], null);
@@ -395,6 +402,33 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
             );
         }
         $this->container['platform'] = $platform;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_id
+     *
+     * @return string|null
+     */
+    public function getAccountId()
+    {
+        return $this->container['account_id'];
+    }
+
+    /**
+     * Sets account_id
+     *
+     * @param string|null $account_id Account to validate against. For twitter, resolves X Premium status to apply the 25000 character limit instead of 280.
+     *
+     * @return self
+     */
+    public function setAccountId($account_id)
+    {
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
+        }
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }
