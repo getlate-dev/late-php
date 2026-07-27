@@ -344,7 +344,7 @@ class CheckPhoneNumberAvailability200ResponseAreaOptionsInner implements ModelIn
     /**
      * Sets name
      *
-     * @param string|null $name Human-readable area name, e.g. \"Sao Paulo\".
+     * @param string|null $name Area name: state/province for US/CA (e.g. \"Minnesota\"), city otherwise (e.g. \"Sao Paulo\").
      *
      * @return self
      */
@@ -371,7 +371,7 @@ class CheckPhoneNumberAvailability200ResponseAreaOptionsInner implements ModelIn
     /**
      * Sets count
      *
-     * @param int|null $count Deliverable numbers seen in this area on the latest inventory page.
+     * @param int|null $count Numbers available in this area: country-wide count for US/CA, numbers seen on the latest inventory page otherwise.
      *
      * @return self
      */
