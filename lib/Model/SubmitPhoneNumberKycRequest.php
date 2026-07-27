@@ -486,7 +486,7 @@ class SubmitPhoneNumberKycRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets quantity
      *
-     * @param int|null $quantity Provision several same-country numbers from one submission (1-5). The single verification covers all of them; each number is billed only when it activates. Numbers that fail to order are skipped (best-effort).
+     * @param int|null $quantity Provision several same-country numbers from one submission (1-5). The single verification covers all of them; each number is billed only when it activates. Numbers that fail to order are skipped (best-effort). With `areaCode`, a quantity above that area's live stock is rejected with a 400.
      *
      * @return self
      */
