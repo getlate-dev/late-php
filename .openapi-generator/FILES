@@ -266,6 +266,7 @@ docs/Model/CreateInviteToken201Response.md
 docs/Model/CreateInviteTokenRequest.md
 docs/Model/CreateLeadForm200Response.md
 docs/Model/CreateLeadFormRequest.md
+docs/Model/CreateLeadFormRequestPlatformSpecificData.md
 docs/Model/CreateLeadFormRequestQuestionsInner.md
 docs/Model/CreateMessagingAdRequest.md
 docs/Model/CreatePhoneNumberKycLink200Response.md
@@ -828,6 +829,13 @@ docs/Model/LinkedInAggregateAnalyticsDailyResponseAnalytics.md
 docs/Model/LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner.md
 docs/Model/LinkedInAggregateAnalyticsTotalResponse.md
 docs/Model/LinkedInAggregateAnalyticsTotalResponseAnalytics.md
+docs/Model/LinkedInLeadFormPlatformData.md
+docs/Model/LinkedInLeadFormPlatformDataConsentsInner.md
+docs/Model/LinkedInLeadFormPlatformDataLocale.md
+docs/Model/LinkedInLeadFormPlatformDataQuestionsInner.md
+docs/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf.md
+docs/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1.md
+docs/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInner.md
 docs/Model/LinkedInPlatformData.md
 docs/Model/ListAccountGroups200Response.md
 docs/Model/ListAccountGroups200ResponseGroupsInner.md
@@ -987,6 +995,8 @@ docs/Model/LookupSmsNumber200Response.md
 docs/Model/MarkConversationRead200Response.md
 docs/Model/MediaItem.md
 docs/Model/MediaUploadResponse.md
+docs/Model/MetaLeadFormPlatformData.md
+docs/Model/MetaLeadFormPlatformDataContextCard.md
 docs/Model/Money.md
 docs/Model/MoneyAmount.md
 docs/Model/MoveAccountToProfile200Response.md
@@ -1834,6 +1844,7 @@ lib/Model/CreateInviteToken201Response.php
 lib/Model/CreateInviteTokenRequest.php
 lib/Model/CreateLeadForm200Response.php
 lib/Model/CreateLeadFormRequest.php
+lib/Model/CreateLeadFormRequestPlatformSpecificData.php
 lib/Model/CreateLeadFormRequestQuestionsInner.php
 lib/Model/CreateMessagingAdRequest.php
 lib/Model/CreatePhoneNumberKycLink200Response.php
@@ -2396,6 +2407,13 @@ lib/Model/LinkedInAggregateAnalyticsDailyResponseAnalytics.php
 lib/Model/LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner.php
 lib/Model/LinkedInAggregateAnalyticsTotalResponse.php
 lib/Model/LinkedInAggregateAnalyticsTotalResponseAnalytics.php
+lib/Model/LinkedInLeadFormPlatformData.php
+lib/Model/LinkedInLeadFormPlatformDataConsentsInner.php
+lib/Model/LinkedInLeadFormPlatformDataLocale.php
+lib/Model/LinkedInLeadFormPlatformDataQuestionsInner.php
+lib/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf.php
+lib/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1.php
+lib/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInner.php
 lib/Model/LinkedInPlatformData.php
 lib/Model/ListAccountGroups200Response.php
 lib/Model/ListAccountGroups200ResponseGroupsInner.php
@@ -2555,6 +2573,8 @@ lib/Model/LookupSmsNumber200Response.php
 lib/Model/MarkConversationRead200Response.php
 lib/Model/MediaItem.php
 lib/Model/MediaUploadResponse.php
+lib/Model/MetaLeadFormPlatformData.php
+lib/Model/MetaLeadFormPlatformDataContextCard.php
 lib/Model/ModelInterface.php
 lib/Model/Money.php
 lib/Model/MoneyAmount.php
@@ -3137,3 +3157,13 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/CreateLeadFormRequestPlatformSpecificDataTest.php
+test/Model/LinkedInLeadFormPlatformDataConsentsInnerTest.php
+test/Model/LinkedInLeadFormPlatformDataLocaleTest.php
+test/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInnerTest.php
+test/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1Test.php
+test/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOfTest.php
+test/Model/LinkedInLeadFormPlatformDataQuestionsInnerTest.php
+test/Model/LinkedInLeadFormPlatformDataTest.php
+test/Model/MetaLeadFormPlatformDataContextCardTest.php
+test/Model/MetaLeadFormPlatformDataTest.php

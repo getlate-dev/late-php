@@ -149,8 +149,8 @@ class LeadGenApi
      *
      * Archive a lead form
      *
-     * @param  string $form_id form_id (required)
-     * @param  string $account_id account_id (required)
+     * @param  string $form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id (selects the platform). (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['archiveLeadForm'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -168,8 +168,8 @@ class LeadGenApi
      *
      * Archive a lead form
      *
-     * @param  string $form_id (required)
-     * @param  string $account_id (required)
+     * @param  string $form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id (selects the platform). (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['archiveLeadForm'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -268,8 +268,8 @@ class LeadGenApi
      *
      * Archive a lead form
      *
-     * @param  string $form_id (required)
-     * @param  string $account_id (required)
+     * @param  string $form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id (selects the platform). (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['archiveLeadForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -290,8 +290,8 @@ class LeadGenApi
      *
      * Archive a lead form
      *
-     * @param  string $form_id (required)
-     * @param  string $account_id (required)
+     * @param  string $form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id (selects the platform). (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['archiveLeadForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -341,8 +341,8 @@ class LeadGenApi
     /**
      * Create request for operation 'archiveLeadForm'
      *
-     * @param  string $form_id (required)
-     * @param  string $account_id (required)
+     * @param  string $form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id (selects the platform). (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['archiveLeadForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1046,8 +1046,8 @@ class LeadGenApi
      *
      * Get a lead form
      *
-     * @param  string $form_id form_id (required)
-     * @param  string $account_id account_id (required)
+     * @param  string $form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id (selects the platform). (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLeadForm'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1065,8 +1065,8 @@ class LeadGenApi
      *
      * Get a lead form
      *
-     * @param  string $form_id (required)
-     * @param  string $account_id (required)
+     * @param  string $form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id (selects the platform). (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLeadForm'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1165,8 +1165,8 @@ class LeadGenApi
      *
      * Get a lead form
      *
-     * @param  string $form_id (required)
-     * @param  string $account_id (required)
+     * @param  string $form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id (selects the platform). (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLeadForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1187,8 +1187,8 @@ class LeadGenApi
      *
      * Get a lead form
      *
-     * @param  string $form_id (required)
-     * @param  string $account_id (required)
+     * @param  string $form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id (selects the platform). (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLeadForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1238,8 +1238,8 @@ class LeadGenApi
     /**
      * Create request for operation 'getLeadForm'
      *
-     * @param  string $form_id (required)
-     * @param  string $account_id (required)
+     * @param  string $form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id (selects the platform). (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLeadForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1711,7 +1711,8 @@ class LeadGenApi
      *
      * List lead forms
      *
-     * @param  string $account_id Connected facebook account id. (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id. (required)
+     * @param  string|null $ad_account_id LinkedIn only: the LinkedIn ad account id (used to resolve the owning organization). Required for LinkedIn. (optional)
      * @param  int|null $limit limit (optional, default to 25)
      * @param  string|null $cursor cursor (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLeadForms'] to see the possible values for this operation
@@ -1720,9 +1721,9 @@ class LeadGenApi
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\ListLeadForms200Response|\Zernio\Model\InlineObject
      */
-    public function listLeadForms($account_id, $limit = 25, $cursor = null, string $contentType = self::contentTypes['listLeadForms'][0])
+    public function listLeadForms($account_id, $ad_account_id = null, $limit = 25, $cursor = null, string $contentType = self::contentTypes['listLeadForms'][0])
     {
-        list($response) = $this->listLeadFormsWithHttpInfo($account_id, $limit, $cursor, $contentType);
+        list($response) = $this->listLeadFormsWithHttpInfo($account_id, $ad_account_id, $limit, $cursor, $contentType);
         return $response;
     }
 
@@ -1731,7 +1732,8 @@ class LeadGenApi
      *
      * List lead forms
      *
-     * @param  string $account_id Connected facebook account id. (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id. (required)
+     * @param  string|null $ad_account_id LinkedIn only: the LinkedIn ad account id (used to resolve the owning organization). Required for LinkedIn. (optional)
      * @param  int|null $limit (optional, default to 25)
      * @param  string|null $cursor (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLeadForms'] to see the possible values for this operation
@@ -1740,9 +1742,9 @@ class LeadGenApi
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\ListLeadForms200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listLeadFormsWithHttpInfo($account_id, $limit = 25, $cursor = null, string $contentType = self::contentTypes['listLeadForms'][0])
+    public function listLeadFormsWithHttpInfo($account_id, $ad_account_id = null, $limit = 25, $cursor = null, string $contentType = self::contentTypes['listLeadForms'][0])
     {
-        $request = $this->listLeadFormsRequest($account_id, $limit, $cursor, $contentType);
+        $request = $this->listLeadFormsRequest($account_id, $ad_account_id, $limit, $cursor, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1832,7 +1834,8 @@ class LeadGenApi
      *
      * List lead forms
      *
-     * @param  string $account_id Connected facebook account id. (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id. (required)
+     * @param  string|null $ad_account_id LinkedIn only: the LinkedIn ad account id (used to resolve the owning organization). Required for LinkedIn. (optional)
      * @param  int|null $limit (optional, default to 25)
      * @param  string|null $cursor (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLeadForms'] to see the possible values for this operation
@@ -1840,9 +1843,9 @@ class LeadGenApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listLeadFormsAsync($account_id, $limit = 25, $cursor = null, string $contentType = self::contentTypes['listLeadForms'][0])
+    public function listLeadFormsAsync($account_id, $ad_account_id = null, $limit = 25, $cursor = null, string $contentType = self::contentTypes['listLeadForms'][0])
     {
-        return $this->listLeadFormsAsyncWithHttpInfo($account_id, $limit, $cursor, $contentType)
+        return $this->listLeadFormsAsyncWithHttpInfo($account_id, $ad_account_id, $limit, $cursor, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1855,7 +1858,8 @@ class LeadGenApi
      *
      * List lead forms
      *
-     * @param  string $account_id Connected facebook account id. (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id. (required)
+     * @param  string|null $ad_account_id LinkedIn only: the LinkedIn ad account id (used to resolve the owning organization). Required for LinkedIn. (optional)
      * @param  int|null $limit (optional, default to 25)
      * @param  string|null $cursor (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLeadForms'] to see the possible values for this operation
@@ -1863,10 +1867,10 @@ class LeadGenApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listLeadFormsAsyncWithHttpInfo($account_id, $limit = 25, $cursor = null, string $contentType = self::contentTypes['listLeadForms'][0])
+    public function listLeadFormsAsyncWithHttpInfo($account_id, $ad_account_id = null, $limit = 25, $cursor = null, string $contentType = self::contentTypes['listLeadForms'][0])
     {
         $returnType = '\Zernio\Model\ListLeadForms200Response';
-        $request = $this->listLeadFormsRequest($account_id, $limit, $cursor, $contentType);
+        $request = $this->listLeadFormsRequest($account_id, $ad_account_id, $limit, $cursor, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1907,7 +1911,8 @@ class LeadGenApi
     /**
      * Create request for operation 'listLeadForms'
      *
-     * @param  string $account_id Connected facebook account id. (required)
+     * @param  string $account_id Connected facebook or linkedin ads account id. (required)
+     * @param  string|null $ad_account_id LinkedIn only: the LinkedIn ad account id (used to resolve the owning organization). Required for LinkedIn. (optional)
      * @param  int|null $limit (optional, default to 25)
      * @param  string|null $cursor (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLeadForms'] to see the possible values for this operation
@@ -1915,7 +1920,7 @@ class LeadGenApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listLeadFormsRequest($account_id, $limit = 25, $cursor = null, string $contentType = self::contentTypes['listLeadForms'][0])
+    public function listLeadFormsRequest($account_id, $ad_account_id = null, $limit = 25, $cursor = null, string $contentType = self::contentTypes['listLeadForms'][0])
     {
 
         // verify the required parameter 'account_id' is set
@@ -1924,6 +1929,7 @@ class LeadGenApi
                 'Missing the required parameter $account_id when calling listLeadForms'
             );
         }
+
 
         if ($limit !== null && $limit > 100) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling LeadGenApi.listLeadForms, must be smaller than or equal to 100.');
@@ -1949,6 +1955,15 @@ class LeadGenApi
             'form', // style
             true, // explode
             true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $ad_account_id,
+            'adAccountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
@@ -2035,19 +2050,20 @@ class LeadGenApi
      * List submitted leads
      *
      * @param  string|null $form_id Filter to a single lead form. (optional)
-     * @param  string|null $account_id Filter to a single connected account. (optional)
+     * @param  string|null $account_id Filter to a single connected account. LinkedIn ads accounts switch to the live fetch. (optional)
+     * @param  string|null $ad_account_id LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder). (optional)
      * @param  int|null $limit limit (optional, default to 25)
-     * @param  int|null $since Unix seconds; only leads created at/after this Meta timestamp. (optional)
-     * @param  string|null $cursor Keyset cursor from a previous response&#39;s pagination.cursor. (optional)
+     * @param  int|null $since Unix seconds; only leads created at/after this timestamp. (optional)
+     * @param  string|null $cursor Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLeads'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\ListLeads200Response|\Zernio\Model\InlineObject
      */
-    public function listLeads($form_id = null, $account_id = null, $limit = 25, $since = null, $cursor = null, string $contentType = self::contentTypes['listLeads'][0])
+    public function listLeads($form_id = null, $account_id = null, $ad_account_id = null, $limit = 25, $since = null, $cursor = null, string $contentType = self::contentTypes['listLeads'][0])
     {
-        list($response) = $this->listLeadsWithHttpInfo($form_id, $account_id, $limit, $since, $cursor, $contentType);
+        list($response) = $this->listLeadsWithHttpInfo($form_id, $account_id, $ad_account_id, $limit, $since, $cursor, $contentType);
         return $response;
     }
 
@@ -2057,19 +2073,20 @@ class LeadGenApi
      * List submitted leads
      *
      * @param  string|null $form_id Filter to a single lead form. (optional)
-     * @param  string|null $account_id Filter to a single connected account. (optional)
+     * @param  string|null $account_id Filter to a single connected account. LinkedIn ads accounts switch to the live fetch. (optional)
+     * @param  string|null $ad_account_id LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder). (optional)
      * @param  int|null $limit (optional, default to 25)
-     * @param  int|null $since Unix seconds; only leads created at/after this Meta timestamp. (optional)
-     * @param  string|null $cursor Keyset cursor from a previous response&#39;s pagination.cursor. (optional)
+     * @param  int|null $since Unix seconds; only leads created at/after this timestamp. (optional)
+     * @param  string|null $cursor Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLeads'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\ListLeads200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listLeadsWithHttpInfo($form_id = null, $account_id = null, $limit = 25, $since = null, $cursor = null, string $contentType = self::contentTypes['listLeads'][0])
+    public function listLeadsWithHttpInfo($form_id = null, $account_id = null, $ad_account_id = null, $limit = 25, $since = null, $cursor = null, string $contentType = self::contentTypes['listLeads'][0])
     {
-        $request = $this->listLeadsRequest($form_id, $account_id, $limit, $since, $cursor, $contentType);
+        $request = $this->listLeadsRequest($form_id, $account_id, $ad_account_id, $limit, $since, $cursor, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2160,18 +2177,19 @@ class LeadGenApi
      * List submitted leads
      *
      * @param  string|null $form_id Filter to a single lead form. (optional)
-     * @param  string|null $account_id Filter to a single connected account. (optional)
+     * @param  string|null $account_id Filter to a single connected account. LinkedIn ads accounts switch to the live fetch. (optional)
+     * @param  string|null $ad_account_id LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder). (optional)
      * @param  int|null $limit (optional, default to 25)
-     * @param  int|null $since Unix seconds; only leads created at/after this Meta timestamp. (optional)
-     * @param  string|null $cursor Keyset cursor from a previous response&#39;s pagination.cursor. (optional)
+     * @param  int|null $since Unix seconds; only leads created at/after this timestamp. (optional)
+     * @param  string|null $cursor Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLeads'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listLeadsAsync($form_id = null, $account_id = null, $limit = 25, $since = null, $cursor = null, string $contentType = self::contentTypes['listLeads'][0])
+    public function listLeadsAsync($form_id = null, $account_id = null, $ad_account_id = null, $limit = 25, $since = null, $cursor = null, string $contentType = self::contentTypes['listLeads'][0])
     {
-        return $this->listLeadsAsyncWithHttpInfo($form_id, $account_id, $limit, $since, $cursor, $contentType)
+        return $this->listLeadsAsyncWithHttpInfo($form_id, $account_id, $ad_account_id, $limit, $since, $cursor, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2185,19 +2203,20 @@ class LeadGenApi
      * List submitted leads
      *
      * @param  string|null $form_id Filter to a single lead form. (optional)
-     * @param  string|null $account_id Filter to a single connected account. (optional)
+     * @param  string|null $account_id Filter to a single connected account. LinkedIn ads accounts switch to the live fetch. (optional)
+     * @param  string|null $ad_account_id LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder). (optional)
      * @param  int|null $limit (optional, default to 25)
-     * @param  int|null $since Unix seconds; only leads created at/after this Meta timestamp. (optional)
-     * @param  string|null $cursor Keyset cursor from a previous response&#39;s pagination.cursor. (optional)
+     * @param  int|null $since Unix seconds; only leads created at/after this timestamp. (optional)
+     * @param  string|null $cursor Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLeads'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listLeadsAsyncWithHttpInfo($form_id = null, $account_id = null, $limit = 25, $since = null, $cursor = null, string $contentType = self::contentTypes['listLeads'][0])
+    public function listLeadsAsyncWithHttpInfo($form_id = null, $account_id = null, $ad_account_id = null, $limit = 25, $since = null, $cursor = null, string $contentType = self::contentTypes['listLeads'][0])
     {
         $returnType = '\Zernio\Model\ListLeads200Response';
-        $request = $this->listLeadsRequest($form_id, $account_id, $limit, $since, $cursor, $contentType);
+        $request = $this->listLeadsRequest($form_id, $account_id, $ad_account_id, $limit, $since, $cursor, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2239,17 +2258,19 @@ class LeadGenApi
      * Create request for operation 'listLeads'
      *
      * @param  string|null $form_id Filter to a single lead form. (optional)
-     * @param  string|null $account_id Filter to a single connected account. (optional)
+     * @param  string|null $account_id Filter to a single connected account. LinkedIn ads accounts switch to the live fetch. (optional)
+     * @param  string|null $ad_account_id LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder). (optional)
      * @param  int|null $limit (optional, default to 25)
-     * @param  int|null $since Unix seconds; only leads created at/after this Meta timestamp. (optional)
-     * @param  string|null $cursor Keyset cursor from a previous response&#39;s pagination.cursor. (optional)
+     * @param  int|null $since Unix seconds; only leads created at/after this timestamp. (optional)
+     * @param  string|null $cursor Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLeads'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listLeadsRequest($form_id = null, $account_id = null, $limit = 25, $since = null, $cursor = null, string $contentType = self::contentTypes['listLeads'][0])
+    public function listLeadsRequest($form_id = null, $account_id = null, $ad_account_id = null, $limit = 25, $since = null, $cursor = null, string $contentType = self::contentTypes['listLeads'][0])
     {
+
 
 
 
@@ -2283,6 +2304,15 @@ class LeadGenApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $account_id,
             'accountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $ad_account_id,
+            'adAccountId', // param base name
             'string', // openApiType
             'form', // style
             true, // explode

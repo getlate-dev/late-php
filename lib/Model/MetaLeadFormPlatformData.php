@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateLeadFormRequest
+ * MetaLeadFormPlatformData
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * CreateLeadFormRequest Class Doc Comment
+ * MetaLeadFormPlatformData Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class MetaLeadFormPlatformData implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'createLeadForm_request';
+    protected static $openAPIModelName = 'MetaLeadFormPlatformData';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +58,7 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'account_id' => 'string',
-        'name' => 'string',
         'questions' => '\Zernio\Model\CreateLeadFormRequestQuestionsInner[]',
-        'privacy_policy_url' => 'string',
         'privacy_policy_link_text' => 'string',
         'follow_up_action_url' => 'string',
         'locale' => 'string',
@@ -71,7 +68,11 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         'thank_you_button_type' => 'string',
         'thank_you_website_url' => 'string',
         'is_optimized_for_quality' => 'bool',
-        'platform_specific_data' => '\Zernio\Model\CreateLeadFormRequestPlatformSpecificData'
+        'form_type' => 'string',
+        'block_display_for_non_targeted_viewer' => 'bool',
+        'allow_organic_lead_gen' => 'bool',
+        'question_page_custom_headline' => 'string',
+        'context_card' => '\Zernio\Model\MetaLeadFormPlatformDataContextCard'
     ];
 
     /**
@@ -82,10 +83,7 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'account_id' => null,
-        'name' => null,
         'questions' => null,
-        'privacy_policy_url' => 'uri',
         'privacy_policy_link_text' => null,
         'follow_up_action_url' => 'uri',
         'locale' => null,
@@ -95,7 +93,11 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         'thank_you_button_type' => null,
         'thank_you_website_url' => 'uri',
         'is_optimized_for_quality' => null,
-        'platform_specific_data' => null
+        'form_type' => null,
+        'block_display_for_non_targeted_viewer' => null,
+        'allow_organic_lead_gen' => null,
+        'question_page_custom_headline' => null,
+        'context_card' => null
     ];
 
     /**
@@ -104,10 +106,7 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'account_id' => false,
-        'name' => false,
         'questions' => false,
-        'privacy_policy_url' => false,
         'privacy_policy_link_text' => false,
         'follow_up_action_url' => false,
         'locale' => false,
@@ -117,7 +116,11 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         'thank_you_button_type' => false,
         'thank_you_website_url' => false,
         'is_optimized_for_quality' => false,
-        'platform_specific_data' => false
+        'form_type' => false,
+        'block_display_for_non_targeted_viewer' => false,
+        'allow_organic_lead_gen' => false,
+        'question_page_custom_headline' => false,
+        'context_card' => false
     ];
 
     /**
@@ -206,10 +209,7 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'account_id' => 'accountId',
-        'name' => 'name',
         'questions' => 'questions',
-        'privacy_policy_url' => 'privacyPolicyUrl',
         'privacy_policy_link_text' => 'privacyPolicyLinkText',
         'follow_up_action_url' => 'followUpActionUrl',
         'locale' => 'locale',
@@ -219,7 +219,11 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         'thank_you_button_type' => 'thankYouButtonType',
         'thank_you_website_url' => 'thankYouWebsiteUrl',
         'is_optimized_for_quality' => 'isOptimizedForQuality',
-        'platform_specific_data' => 'platformSpecificData'
+        'form_type' => 'formType',
+        'block_display_for_non_targeted_viewer' => 'blockDisplayForNonTargetedViewer',
+        'allow_organic_lead_gen' => 'allowOrganicLeadGen',
+        'question_page_custom_headline' => 'questionPageCustomHeadline',
+        'context_card' => 'contextCard'
     ];
 
     /**
@@ -228,10 +232,7 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'account_id' => 'setAccountId',
-        'name' => 'setName',
         'questions' => 'setQuestions',
-        'privacy_policy_url' => 'setPrivacyPolicyUrl',
         'privacy_policy_link_text' => 'setPrivacyPolicyLinkText',
         'follow_up_action_url' => 'setFollowUpActionUrl',
         'locale' => 'setLocale',
@@ -241,7 +242,11 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         'thank_you_button_type' => 'setThankYouButtonType',
         'thank_you_website_url' => 'setThankYouWebsiteUrl',
         'is_optimized_for_quality' => 'setIsOptimizedForQuality',
-        'platform_specific_data' => 'setPlatformSpecificData'
+        'form_type' => 'setFormType',
+        'block_display_for_non_targeted_viewer' => 'setBlockDisplayForNonTargetedViewer',
+        'allow_organic_lead_gen' => 'setAllowOrganicLeadGen',
+        'question_page_custom_headline' => 'setQuestionPageCustomHeadline',
+        'context_card' => 'setContextCard'
     ];
 
     /**
@@ -250,10 +255,7 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'account_id' => 'getAccountId',
-        'name' => 'getName',
         'questions' => 'getQuestions',
-        'privacy_policy_url' => 'getPrivacyPolicyUrl',
         'privacy_policy_link_text' => 'getPrivacyPolicyLinkText',
         'follow_up_action_url' => 'getFollowUpActionUrl',
         'locale' => 'getLocale',
@@ -263,7 +265,11 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         'thank_you_button_type' => 'getThankYouButtonType',
         'thank_you_website_url' => 'getThankYouWebsiteUrl',
         'is_optimized_for_quality' => 'getIsOptimizedForQuality',
-        'platform_specific_data' => 'getPlatformSpecificData'
+        'form_type' => 'getFormType',
+        'block_display_for_non_targeted_viewer' => 'getBlockDisplayForNonTargetedViewer',
+        'allow_organic_lead_gen' => 'getAllowOrganicLeadGen',
+        'question_page_custom_headline' => 'getQuestionPageCustomHeadline',
+        'context_card' => 'getContextCard'
     ];
 
     /**
@@ -307,6 +313,23 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         return self::$openAPIModelName;
     }
 
+    public const FORM_TYPE_MORE_VOLUME = 'MORE_VOLUME';
+    public const FORM_TYPE_HIGHER_INTENT = 'HIGHER_INTENT';
+    public const FORM_TYPE_RICH_CREATIVE = 'RICH_CREATIVE';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getFormTypeAllowableValues()
+    {
+        return [
+            self::FORM_TYPE_MORE_VOLUME,
+            self::FORM_TYPE_HIGHER_INTENT,
+            self::FORM_TYPE_RICH_CREATIVE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -323,10 +346,7 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('account_id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('questions', $data ?? [], null);
-        $this->setIfExists('privacy_policy_url', $data ?? [], null);
         $this->setIfExists('privacy_policy_link_text', $data ?? [], null);
         $this->setIfExists('follow_up_action_url', $data ?? [], null);
         $this->setIfExists('locale', $data ?? [], null);
@@ -336,7 +356,11 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('thank_you_button_type', $data ?? [], null);
         $this->setIfExists('thank_you_website_url', $data ?? [], null);
         $this->setIfExists('is_optimized_for_quality', $data ?? [], null);
-        $this->setIfExists('platform_specific_data', $data ?? [], null);
+        $this->setIfExists('form_type', $data ?? [], null);
+        $this->setIfExists('block_display_for_non_targeted_viewer', $data ?? [], null);
+        $this->setIfExists('allow_organic_lead_gen', $data ?? [], null);
+        $this->setIfExists('question_page_custom_headline', $data ?? [], null);
+        $this->setIfExists('context_card', $data ?? [], null);
     }
 
     /**
@@ -366,25 +390,24 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $invalidProperties = [];
 
-        if ($this->container['account_id'] === null) {
-            $invalidProperties[] = "'account_id' can't be null";
+        if ($this->container['questions'] === null) {
+            $invalidProperties[] = "'questions' can't be null";
         }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ((mb_strlen($this->container['name']) > 200)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 200.";
-        }
-
-        if (!is_null($this->container['questions']) && (count($this->container['questions']) < 1)) {
+        if ((count($this->container['questions']) < 1)) {
             $invalidProperties[] = "invalid value for 'questions', number of items must be greater than or equal to 1.";
         }
 
-        if ($this->container['privacy_policy_url'] === null) {
-            $invalidProperties[] = "'privacy_policy_url' can't be null";
-        }
         if (!is_null($this->container['privacy_policy_link_text']) && (mb_strlen($this->container['privacy_policy_link_text']) > 70)) {
             $invalidProperties[] = "invalid value for 'privacy_policy_link_text', the character length must be smaller than or equal to 70.";
+        }
+
+        $allowedValues = $this->getFormTypeAllowableValues();
+        if (!is_null($this->container['form_type']) && !in_array($this->container['form_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'form_type', must be one of '%s'",
+                $this->container['form_type'],
+                implode("', '", $allowedValues)
+            );
         }
 
         return $invalidProperties;
@@ -403,67 +426,9 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets account_id
-     *
-     * @return string
-     */
-    public function getAccountId()
-    {
-        return $this->container['account_id'];
-    }
-
-    /**
-     * Sets account_id
-     *
-     * @param string $account_id account_id
-     *
-     * @return self
-     */
-    public function setAccountId($account_id)
-    {
-        if (is_null($account_id)) {
-            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
-        }
-        $this->container['account_id'] = $account_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        if ((mb_strlen($name) > 200)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling CreateLeadFormRequest., must be smaller than or equal to 200.');
-        }
-
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
      * Gets questions
      *
-     * @return \Zernio\Model\CreateLeadFormRequestQuestionsInner[]|null
+     * @return \Zernio\Model\CreateLeadFormRequestQuestionsInner[]
      */
     public function getQuestions()
     {
@@ -473,7 +438,7 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets questions
      *
-     * @param \Zernio\Model\CreateLeadFormRequestQuestionsInner[]|null $questions Deprecated (Meta legacy shape): use platformSpecificData.questions.
+     * @param \Zernio\Model\CreateLeadFormRequestQuestionsInner[] $questions questions
      *
      * @return self
      */
@@ -485,36 +450,9 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
         if ((count($questions) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $questions when calling CreateLeadFormRequest., number of items must be greater than or equal to 1.');
+            throw new \InvalidArgumentException('invalid length for $questions when calling MetaLeadFormPlatformData., number of items must be greater than or equal to 1.');
         }
         $this->container['questions'] = $questions;
-
-        return $this;
-    }
-
-    /**
-     * Gets privacy_policy_url
-     *
-     * @return string
-     */
-    public function getPrivacyPolicyUrl()
-    {
-        return $this->container['privacy_policy_url'];
-    }
-
-    /**
-     * Sets privacy_policy_url
-     *
-     * @param string $privacy_policy_url privacy_policy_url
-     *
-     * @return self
-     */
-    public function setPrivacyPolicyUrl($privacy_policy_url)
-    {
-        if (is_null($privacy_policy_url)) {
-            throw new \InvalidArgumentException('non-nullable privacy_policy_url cannot be null');
-        }
-        $this->container['privacy_policy_url'] = $privacy_policy_url;
 
         return $this;
     }
@@ -523,7 +461,6 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets privacy_policy_link_text
      *
      * @return string|null
-     * @deprecated
      */
     public function getPrivacyPolicyLinkText()
     {
@@ -533,10 +470,9 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets privacy_policy_link_text
      *
-     * @param string|null $privacy_policy_link_text Deprecated: use platformSpecificData.privacyPolicyLinkText.
+     * @param string|null $privacy_policy_link_text privacy_policy_link_text
      *
      * @return self
-     * @deprecated
      */
     public function setPrivacyPolicyLinkText($privacy_policy_link_text)
     {
@@ -544,7 +480,7 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable privacy_policy_link_text cannot be null');
         }
         if ((mb_strlen($privacy_policy_link_text) > 70)) {
-            throw new \InvalidArgumentException('invalid length for $privacy_policy_link_text when calling CreateLeadFormRequest., must be smaller than or equal to 70.');
+            throw new \InvalidArgumentException('invalid length for $privacy_policy_link_text when calling MetaLeadFormPlatformData., must be smaller than or equal to 70.');
         }
 
         $this->container['privacy_policy_link_text'] = $privacy_policy_link_text;
@@ -556,7 +492,6 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets follow_up_action_url
      *
      * @return string|null
-     * @deprecated
      */
     public function getFollowUpActionUrl()
     {
@@ -566,10 +501,9 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets follow_up_action_url
      *
-     * @param string|null $follow_up_action_url Deprecated: use platformSpecificData.followUpActionUrl.
+     * @param string|null $follow_up_action_url follow_up_action_url
      *
      * @return self
-     * @deprecated
      */
     public function setFollowUpActionUrl($follow_up_action_url)
     {
@@ -585,7 +519,6 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets locale
      *
      * @return string|null
-     * @deprecated
      */
     public function getLocale()
     {
@@ -595,10 +528,9 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets locale
      *
-     * @param string|null $locale Deprecated: use platformSpecificData.locale.
+     * @param string|null $locale locale
      *
      * @return self
-     * @deprecated
      */
     public function setLocale($locale)
     {
@@ -614,7 +546,6 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets thank_you_title
      *
      * @return string|null
-     * @deprecated
      */
     public function getThankYouTitle()
     {
@@ -624,10 +555,9 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets thank_you_title
      *
-     * @param string|null $thank_you_title Deprecated: use platformSpecificData.thankYouTitle.
+     * @param string|null $thank_you_title thank_you_title
      *
      * @return self
-     * @deprecated
      */
     public function setThankYouTitle($thank_you_title)
     {
@@ -643,7 +573,6 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets thank_you_body
      *
      * @return string|null
-     * @deprecated
      */
     public function getThankYouBody()
     {
@@ -653,10 +582,9 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets thank_you_body
      *
-     * @param string|null $thank_you_body Deprecated: use platformSpecificData.thankYouBody.
+     * @param string|null $thank_you_body thank_you_body
      *
      * @return self
-     * @deprecated
      */
     public function setThankYouBody($thank_you_body)
     {
@@ -672,7 +600,6 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets thank_you_button_text
      *
      * @return string|null
-     * @deprecated
      */
     public function getThankYouButtonText()
     {
@@ -682,10 +609,9 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets thank_you_button_text
      *
-     * @param string|null $thank_you_button_text Deprecated: use platformSpecificData.thankYouButtonText.
+     * @param string|null $thank_you_button_text thank_you_button_text
      *
      * @return self
-     * @deprecated
      */
     public function setThankYouButtonText($thank_you_button_text)
     {
@@ -701,7 +627,6 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets thank_you_button_type
      *
      * @return string|null
-     * @deprecated
      */
     public function getThankYouButtonType()
     {
@@ -711,10 +636,9 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets thank_you_button_type
      *
-     * @param string|null $thank_you_button_type Deprecated: use platformSpecificData.thankYouButtonType.
+     * @param string|null $thank_you_button_type thank_you_button_type
      *
      * @return self
-     * @deprecated
      */
     public function setThankYouButtonType($thank_you_button_type)
     {
@@ -730,7 +654,6 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets thank_you_website_url
      *
      * @return string|null
-     * @deprecated
      */
     public function getThankYouWebsiteUrl()
     {
@@ -740,10 +663,9 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets thank_you_website_url
      *
-     * @param string|null $thank_you_website_url Deprecated: use platformSpecificData.thankYouWebsiteUrl.
+     * @param string|null $thank_you_website_url thank_you_website_url
      *
      * @return self
-     * @deprecated
      */
     public function setThankYouWebsiteUrl($thank_you_website_url)
     {
@@ -759,7 +681,6 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * Gets is_optimized_for_quality
      *
      * @return bool|null
-     * @deprecated
      */
     public function getIsOptimizedForQuality()
     {
@@ -769,10 +690,9 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets is_optimized_for_quality
      *
-     * @param bool|null $is_optimized_for_quality Deprecated: use platformSpecificData.isOptimizedForQuality.
+     * @param bool|null $is_optimized_for_quality is_optimized_for_quality
      *
      * @return self
-     * @deprecated
      */
     public function setIsOptimizedForQuality($is_optimized_for_quality)
     {
@@ -785,28 +705,146 @@ class CreateLeadFormRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets platform_specific_data
+     * Gets form_type
      *
-     * @return \Zernio\Model\CreateLeadFormRequestPlatformSpecificData|null
+     * @return string|null
      */
-    public function getPlatformSpecificData()
+    public function getFormType()
     {
-        return $this->container['platform_specific_data'];
+        return $this->container['form_type'];
     }
 
     /**
-     * Sets platform_specific_data
+     * Sets form_type
      *
-     * @param \Zernio\Model\CreateLeadFormRequestPlatformSpecificData|null $platform_specific_data platform_specific_data
+     * @param string|null $form_type form_type
      *
      * @return self
      */
-    public function setPlatformSpecificData($platform_specific_data)
+    public function setFormType($form_type)
     {
-        if (is_null($platform_specific_data)) {
-            throw new \InvalidArgumentException('non-nullable platform_specific_data cannot be null');
+        if (is_null($form_type)) {
+            throw new \InvalidArgumentException('non-nullable form_type cannot be null');
         }
-        $this->container['platform_specific_data'] = $platform_specific_data;
+        $allowedValues = $this->getFormTypeAllowableValues();
+        if (!in_array($form_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'form_type', must be one of '%s'",
+                    $form_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['form_type'] = $form_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets block_display_for_non_targeted_viewer
+     *
+     * @return bool|null
+     */
+    public function getBlockDisplayForNonTargetedViewer()
+    {
+        return $this->container['block_display_for_non_targeted_viewer'];
+    }
+
+    /**
+     * Sets block_display_for_non_targeted_viewer
+     *
+     * @param bool|null $block_display_for_non_targeted_viewer block_display_for_non_targeted_viewer
+     *
+     * @return self
+     */
+    public function setBlockDisplayForNonTargetedViewer($block_display_for_non_targeted_viewer)
+    {
+        if (is_null($block_display_for_non_targeted_viewer)) {
+            throw new \InvalidArgumentException('non-nullable block_display_for_non_targeted_viewer cannot be null');
+        }
+        $this->container['block_display_for_non_targeted_viewer'] = $block_display_for_non_targeted_viewer;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_organic_lead_gen
+     *
+     * @return bool|null
+     */
+    public function getAllowOrganicLeadGen()
+    {
+        return $this->container['allow_organic_lead_gen'];
+    }
+
+    /**
+     * Sets allow_organic_lead_gen
+     *
+     * @param bool|null $allow_organic_lead_gen allow_organic_lead_gen
+     *
+     * @return self
+     */
+    public function setAllowOrganicLeadGen($allow_organic_lead_gen)
+    {
+        if (is_null($allow_organic_lead_gen)) {
+            throw new \InvalidArgumentException('non-nullable allow_organic_lead_gen cannot be null');
+        }
+        $this->container['allow_organic_lead_gen'] = $allow_organic_lead_gen;
+
+        return $this;
+    }
+
+    /**
+     * Gets question_page_custom_headline
+     *
+     * @return string|null
+     */
+    public function getQuestionPageCustomHeadline()
+    {
+        return $this->container['question_page_custom_headline'];
+    }
+
+    /**
+     * Sets question_page_custom_headline
+     *
+     * @param string|null $question_page_custom_headline question_page_custom_headline
+     *
+     * @return self
+     */
+    public function setQuestionPageCustomHeadline($question_page_custom_headline)
+    {
+        if (is_null($question_page_custom_headline)) {
+            throw new \InvalidArgumentException('non-nullable question_page_custom_headline cannot be null');
+        }
+        $this->container['question_page_custom_headline'] = $question_page_custom_headline;
+
+        return $this;
+    }
+
+    /**
+     * Gets context_card
+     *
+     * @return \Zernio\Model\MetaLeadFormPlatformDataContextCard|null
+     */
+    public function getContextCard()
+    {
+        return $this->container['context_card'];
+    }
+
+    /**
+     * Sets context_card
+     *
+     * @param \Zernio\Model\MetaLeadFormPlatformDataContextCard|null $context_card context_card
+     *
+     * @return self
+     */
+    public function setContextCard($context_card)
+    {
+        if (is_null($context_card)) {
+            throw new \InvalidArgumentException('non-nullable context_card cannot be null');
+        }
+        $this->container['context_card'] = $context_card;
 
         return $this;
     }
