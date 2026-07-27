@@ -114,6 +114,7 @@ Class | Method | HTTP request | Description
 *AdCampaignsApi* | [**getAdTree**](docs/Api/AdCampaignsApi.md#getadtree) | **GET** /v1/ads/tree | Get campaign tree
 *AdCampaignsApi* | [**getAdsTimeline**](docs/Api/AdCampaignsApi.md#getadstimeline) | **GET** /v1/ads/timeline | Get daily account metrics
 *AdCampaignsApi* | [**listAdCampaigns**](docs/Api/AdCampaignsApi.md#listadcampaigns) | **GET** /v1/ads/campaigns | List campaigns
+*AdCampaignsApi* | [**listAdKeywords**](docs/Api/AdCampaignsApi.md#listadkeywords) | **GET** /v1/ads/keywords | List Search keywords
 *AdCampaignsApi* | [**listAds**](docs/Api/AdCampaignsApi.md#listads) | **GET** /v1/ads | List ads
 *AdCampaignsApi* | [**updateAd**](docs/Api/AdCampaignsApi.md#updatead) | **PUT** /v1/ads/{adId} | Update ad
 *AdCampaignsApi* | [**updateAdCampaign**](docs/Api/AdCampaignsApi.md#updateadcampaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign
@@ -1356,6 +1357,8 @@ Class | Method | HTTP request | Description
 - [ListAdCatalogs200ResponseCatalogsInner](docs/Model/ListAdCatalogs200ResponseCatalogsInner.md)
 - [ListAdCreatives200Response](docs/Model/ListAdCreatives200Response.md)
 - [ListAdImages200Response](docs/Model/ListAdImages200Response.md)
+- [ListAdKeywords200Response](docs/Model/ListAdKeywords200Response.md)
+- [ListAdKeywords200ResponseKeywordsInner](docs/Model/ListAdKeywords200ResponseKeywordsInner.md)
 - [ListAdLabels200Response](docs/Model/ListAdLabels200Response.md)
 - [ListAdStudies200Response](docs/Model/ListAdStudies200Response.md)
 - [ListAds200Response](docs/Model/ListAds200Response.md)

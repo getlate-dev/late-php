@@ -842,6 +842,8 @@ docs/Model/ListAdCatalogs200Response.md
 docs/Model/ListAdCatalogs200ResponseCatalogsInner.md
 docs/Model/ListAdCreatives200Response.md
 docs/Model/ListAdImages200Response.md
+docs/Model/ListAdKeywords200Response.md
+docs/Model/ListAdKeywords200ResponseKeywordsInner.md
 docs/Model/ListAdLabels200Response.md
 docs/Model/ListAdStudies200Response.md
 docs/Model/ListAds200Response.md
@@ -2408,6 +2410,8 @@ lib/Model/ListAdCatalogs200Response.php
 lib/Model/ListAdCatalogs200ResponseCatalogsInner.php
 lib/Model/ListAdCreatives200Response.php
 lib/Model/ListAdImages200Response.php
+lib/Model/ListAdKeywords200Response.php
+lib/Model/ListAdKeywords200ResponseKeywordsInner.php
 lib/Model/ListAdLabels200Response.php
 lib/Model/ListAdStudies200Response.php
 lib/Model/ListAds200Response.php
@@ -3133,4 +3137,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/CheckPhoneNumberAvailability200ResponseAreaOptionsInnerTest.php
+test/Model/ListAdKeywords200ResponseKeywordsInnerTest.php
+test/Model/ListAdKeywords200ResponseTest.php

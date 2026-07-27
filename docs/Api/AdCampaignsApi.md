@@ -20,6 +20,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**getAdTree()**](AdCampaignsApi.md#getAdTree) | **GET** /v1/ads/tree | Get campaign tree |
 | [**getAdsTimeline()**](AdCampaignsApi.md#getAdsTimeline) | **GET** /v1/ads/timeline | Get daily account metrics |
 | [**listAdCampaigns()**](AdCampaignsApi.md#listAdCampaigns) | **GET** /v1/ads/campaigns | List campaigns |
+| [**listAdKeywords()**](AdCampaignsApi.md#listAdKeywords) | **GET** /v1/ads/keywords | List Search keywords |
 | [**listAds()**](AdCampaignsApi.md#listAds) | **GET** /v1/ads | List ads |
 | [**updateAd()**](AdCampaignsApi.md#updateAd) | **PUT** /v1/ads/{adId} | Update ad |
 | [**updateAdCampaign()**](AdCampaignsApi.md#updateAdCampaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign |
@@ -921,6 +922,86 @@ try {
 ### Return type
 
 [**\Zernio\Model\ListAdCampaigns200Response**](../Model/ListAdCampaigns200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAdKeywords()`
+
+```php
+listAdKeywords($page, $limit, $account_id, $ad_account_id, $profile_id, $campaign_id, $ad_set_id, $status, $match_type, $negative, $search): \Zernio\Model\ListAdKeywords200Response
+```
+
+List Search keywords
+
+Returns the Google Search keyword criteria (positive and negative) synced from connected Google Ads accounts, one row per ad-group keyword. Populated by the periodic ads discovery sweep (roughly every 3 hours per account), so keywords added on Google appear with that delay. Campaign-level negative keywords are not included; only ad-group-level criteria are.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AdCampaignsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$page = 1; // int | Page number (1-based)
+$limit = 50; // int
+$account_id = 'account_id_example'; // string | Social account ID
+$ad_account_id = 'ad_account_id_example'; // string | Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads.
+$profile_id = 'profile_id_example'; // string | Profile ID
+$campaign_id = 'campaign_id_example'; // string | Platform campaign ID
+$ad_set_id = 'ad_set_id_example'; // string | Platform ad group ID (Google ad group)
+$status = 'status_example'; // string | Keyword criterion status
+$match_type = 'match_type_example'; // string
+$negative = True; // bool | true = negative keywords only, false = positive only. Omit for both.
+$search = 'search_example'; // string | Case-insensitive substring match on the keyword text
+
+try {
+    $result = $apiInstance->listAdKeywords($page, $limit, $account_id, $ad_account_id, $profile_id, $campaign_id, $ad_set_id, $status, $match_type, $negative, $search);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdCampaignsApi->listAdKeywords: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **page** | **int**| Page number (1-based) | [optional] [default to 1] |
+| **limit** | **int**|  | [optional] [default to 50] |
+| **account_id** | **string**| Social account ID | [optional] |
+| **ad_account_id** | **string**| Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads. | [optional] |
+| **profile_id** | **string**| Profile ID | [optional] |
+| **campaign_id** | **string**| Platform campaign ID | [optional] |
+| **ad_set_id** | **string**| Platform ad group ID (Google ad group) | [optional] |
+| **status** | **string**| Keyword criterion status | [optional] |
+| **match_type** | **string**|  | [optional] |
+| **negative** | **bool**| true &#x3D; negative keywords only, false &#x3D; positive only. Omit for both. | [optional] |
+| **search** | **string**| Case-insensitive substring match on the keyword text | [optional] |
+
+### Return type
+
+[**\Zernio\Model\ListAdKeywords200Response**](../Model/ListAdKeywords200Response.md)
 
 ### Authorization
 

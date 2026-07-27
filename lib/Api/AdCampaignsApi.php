@@ -117,6 +117,9 @@ class AdCampaignsApi
         'listAdCampaigns' => [
             'application/json',
         ],
+        'listAdKeywords' => [
+            'application/json',
+        ],
         'listAds' => [
             'application/json',
         ],
@@ -4708,6 +4711,463 @@ class AdCampaignsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $to_date,
             'toDate', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listAdKeywords
+     *
+     * List Search keywords
+     *
+     * @param  int|null $page Page number (1-based) (optional, default to 1)
+     * @param  int|null $limit limit (optional, default to 50)
+     * @param  string|null $account_id Social account ID (optional)
+     * @param  string|null $ad_account_id Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads. (optional)
+     * @param  string|null $profile_id Profile ID (optional)
+     * @param  string|null $campaign_id Platform campaign ID (optional)
+     * @param  string|null $ad_set_id Platform ad group ID (Google ad group) (optional)
+     * @param  string|null $status Keyword criterion status (optional)
+     * @param  string|null $match_type match_type (optional)
+     * @param  bool|null $negative true &#x3D; negative keywords only, false &#x3D; positive only. Omit for both. (optional)
+     * @param  string|null $search Case-insensitive substring match on the keyword text (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAdKeywords'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\ListAdKeywords200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
+     */
+    public function listAdKeywords($page = 1, $limit = 50, $account_id = null, $ad_account_id = null, $profile_id = null, $campaign_id = null, $ad_set_id = null, $status = null, $match_type = null, $negative = null, $search = null, string $contentType = self::contentTypes['listAdKeywords'][0])
+    {
+        list($response) = $this->listAdKeywordsWithHttpInfo($page, $limit, $account_id, $ad_account_id, $profile_id, $campaign_id, $ad_set_id, $status, $match_type, $negative, $search, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listAdKeywordsWithHttpInfo
+     *
+     * List Search keywords
+     *
+     * @param  int|null $page Page number (1-based) (optional, default to 1)
+     * @param  int|null $limit (optional, default to 50)
+     * @param  string|null $account_id Social account ID (optional)
+     * @param  string|null $ad_account_id Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads. (optional)
+     * @param  string|null $profile_id Profile ID (optional)
+     * @param  string|null $campaign_id Platform campaign ID (optional)
+     * @param  string|null $ad_set_id Platform ad group ID (Google ad group) (optional)
+     * @param  string|null $status Keyword criterion status (optional)
+     * @param  string|null $match_type (optional)
+     * @param  bool|null $negative true &#x3D; negative keywords only, false &#x3D; positive only. Omit for both. (optional)
+     * @param  string|null $search Case-insensitive substring match on the keyword text (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAdKeywords'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\ListAdKeywords200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listAdKeywordsWithHttpInfo($page = 1, $limit = 50, $account_id = null, $ad_account_id = null, $profile_id = null, $campaign_id = null, $ad_set_id = null, $status = null, $match_type = null, $negative = null, $search = null, string $contentType = self::contentTypes['listAdKeywords'][0])
+    {
+        $request = $this->listAdKeywordsRequest($page, $limit, $account_id, $ad_account_id, $profile_id, $campaign_id, $ad_set_id, $status, $match_type, $negative, $search, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ListAdKeywords200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\ListAdKeywords200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ListAdKeywords200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listAdKeywordsAsync
+     *
+     * List Search keywords
+     *
+     * @param  int|null $page Page number (1-based) (optional, default to 1)
+     * @param  int|null $limit (optional, default to 50)
+     * @param  string|null $account_id Social account ID (optional)
+     * @param  string|null $ad_account_id Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads. (optional)
+     * @param  string|null $profile_id Profile ID (optional)
+     * @param  string|null $campaign_id Platform campaign ID (optional)
+     * @param  string|null $ad_set_id Platform ad group ID (Google ad group) (optional)
+     * @param  string|null $status Keyword criterion status (optional)
+     * @param  string|null $match_type (optional)
+     * @param  bool|null $negative true &#x3D; negative keywords only, false &#x3D; positive only. Omit for both. (optional)
+     * @param  string|null $search Case-insensitive substring match on the keyword text (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAdKeywords'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listAdKeywordsAsync($page = 1, $limit = 50, $account_id = null, $ad_account_id = null, $profile_id = null, $campaign_id = null, $ad_set_id = null, $status = null, $match_type = null, $negative = null, $search = null, string $contentType = self::contentTypes['listAdKeywords'][0])
+    {
+        return $this->listAdKeywordsAsyncWithHttpInfo($page, $limit, $account_id, $ad_account_id, $profile_id, $campaign_id, $ad_set_id, $status, $match_type, $negative, $search, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listAdKeywordsAsyncWithHttpInfo
+     *
+     * List Search keywords
+     *
+     * @param  int|null $page Page number (1-based) (optional, default to 1)
+     * @param  int|null $limit (optional, default to 50)
+     * @param  string|null $account_id Social account ID (optional)
+     * @param  string|null $ad_account_id Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads. (optional)
+     * @param  string|null $profile_id Profile ID (optional)
+     * @param  string|null $campaign_id Platform campaign ID (optional)
+     * @param  string|null $ad_set_id Platform ad group ID (Google ad group) (optional)
+     * @param  string|null $status Keyword criterion status (optional)
+     * @param  string|null $match_type (optional)
+     * @param  bool|null $negative true &#x3D; negative keywords only, false &#x3D; positive only. Omit for both. (optional)
+     * @param  string|null $search Case-insensitive substring match on the keyword text (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAdKeywords'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listAdKeywordsAsyncWithHttpInfo($page = 1, $limit = 50, $account_id = null, $ad_account_id = null, $profile_id = null, $campaign_id = null, $ad_set_id = null, $status = null, $match_type = null, $negative = null, $search = null, string $contentType = self::contentTypes['listAdKeywords'][0])
+    {
+        $returnType = '\Zernio\Model\ListAdKeywords200Response';
+        $request = $this->listAdKeywordsRequest($page, $limit, $account_id, $ad_account_id, $profile_id, $campaign_id, $ad_set_id, $status, $match_type, $negative, $search, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listAdKeywords'
+     *
+     * @param  int|null $page Page number (1-based) (optional, default to 1)
+     * @param  int|null $limit (optional, default to 50)
+     * @param  string|null $account_id Social account ID (optional)
+     * @param  string|null $ad_account_id Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads. (optional)
+     * @param  string|null $profile_id Profile ID (optional)
+     * @param  string|null $campaign_id Platform campaign ID (optional)
+     * @param  string|null $ad_set_id Platform ad group ID (Google ad group) (optional)
+     * @param  string|null $status Keyword criterion status (optional)
+     * @param  string|null $match_type (optional)
+     * @param  bool|null $negative true &#x3D; negative keywords only, false &#x3D; positive only. Omit for both. (optional)
+     * @param  string|null $search Case-insensitive substring match on the keyword text (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAdKeywords'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listAdKeywordsRequest($page = 1, $limit = 50, $account_id = null, $ad_account_id = null, $profile_id = null, $campaign_id = null, $ad_set_id = null, $status = null, $match_type = null, $negative = null, $search = null, string $contentType = self::contentTypes['listAdKeywords'][0])
+    {
+
+        if ($page !== null && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling AdCampaignsApi.listAdKeywords, must be bigger than or equal to 1.');
+        }
+        
+        if ($limit !== null && $limit > 500) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AdCampaignsApi.listAdKeywords, must be smaller than or equal to 500.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AdCampaignsApi.listAdKeywords, must be bigger than or equal to 1.');
+        }
+        
+
+
+
+
+
+
+
+
+        if ($search !== null && strlen($search) > 200) {
+            throw new \InvalidArgumentException('invalid length for "$search" when calling AdCampaignsApi.listAdKeywords, must be smaller than or equal to 200.');
+        }
+        
+
+        $resourcePath = '/v1/ads/keywords';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $account_id,
+            'accountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $ad_account_id,
+            'adAccountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $profile_id,
+            'profileId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $campaign_id,
+            'campaignId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $ad_set_id,
+            'adSetId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $match_type,
+            'matchType', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $negative,
+            'negative', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $search,
+            'search', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
