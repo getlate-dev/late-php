@@ -509,7 +509,7 @@ class CheckPhoneNumberAvailability200Response implements ModelInterface, ArrayAc
     /**
      * Sets area_options
      *
-     * @param \Zernio\Model\CheckPhoneNumberAvailability200ResponseAreaOptionsInner[]|null $area_options Live inventory grouped by area code, largest stock first. For US and CA this is the full country inventory (every area code with stock, named by state/province); other countries list the areas in the latest inventory page (up to 500 numbers, which for most countries is the entire pool). Empty when out of stock (or the area lookup failed). Pass a chosen `ndc` as `areaCode` on POST /v1/phone-numbers/purchase (or on the KYC submit for regulated countries) to require that area.
+     * @param \Zernio\Model\CheckPhoneNumberAvailability200ResponseAreaOptionsInner[]|null $area_options Live inventory grouped by area code. For US and CA this is the full country inventory (every area code with stock, recognizable metros listed first, then alphabetical); other countries are ordered largest stock first; they list the areas in the latest inventory page (up to 500 numbers, which for most countries is the entire pool). Empty when out of stock (or the area lookup failed). Pass a chosen `ndc` as `areaCode` on POST /v1/phone-numbers/purchase (or on the KYC submit for regulated countries) to require that area.
      *
      * @return self
      */

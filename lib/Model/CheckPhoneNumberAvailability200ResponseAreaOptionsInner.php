@@ -344,7 +344,7 @@ class CheckPhoneNumberAvailability200ResponseAreaOptionsInner implements ModelIn
     /**
      * Sets name
      *
-     * @param string|null $name Area name: state/province for US/CA (e.g. \"Minnesota\"), city otherwise (e.g. \"Sao Paulo\").
+     * @param string|null $name Area name: \"City, ST\" for US/CA (e.g. \"Miami, FL\"), city otherwise (e.g. \"Sao Paulo\").
      *
      * @return self
      */
