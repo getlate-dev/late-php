@@ -22,7 +22,7 @@ createWebhookSettings($create_webhook_settings_request): \Zernio\Model\UpdateWeb
 
 Create webhook
 
-Create a new webhook configuration. Maximum 10 webhooks per user.  `name`, `url` and `events` are required. `url` must be a valid URL and `events` must contain at least one event. Whitespace is trimmed from `url` before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures.
+Create a new webhook configuration. Maximum 50 webhooks per user.  `name`, `url` and `events` are required. `url` must be a valid URL and `events` must contain at least one event. Whitespace is trimmed from `url` before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures.
 
 ### Example
 
@@ -212,7 +212,7 @@ getWebhookSettings(): \Zernio\Model\GetWebhookSettings200Response
 
 List webhooks
 
-Retrieve all configured webhooks for the authenticated user. Supports up to 10 webhooks per user.
+Retrieve all configured webhooks for the authenticated user. Supports up to 50 webhooks per user.
 
 ### Example
 

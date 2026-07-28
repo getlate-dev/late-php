@@ -3165,7 +3165,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/SearchTweets200ResponseMetaTest.php
-test/Model/SearchTweets200ResponseTest.php
-test/Model/SearchTweets200ResponseTweetsInnerAuthorTest.php
-test/Model/SearchTweets200ResponseTweetsInnerTest.php
