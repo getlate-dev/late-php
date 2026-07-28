@@ -582,7 +582,7 @@ class GetLinkedInPostAnalytics200ResponseAnalytics implements ModelInterface, Ar
     /**
      * Sets views
      *
-     * @param int|null $views Video views (video posts only). Organization accounts require the connected LinkedIn user to be an ADMINISTRATOR of the page; CONTENT_ADMINISTRATOR returns 0.
+     * @param int|null $views Video views (video posts only)
      *
      * @return self
      */
