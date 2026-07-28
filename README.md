@@ -450,6 +450,7 @@ Class | Method | HTTP request | Description
 *TwitterEngagementApi* | [**followUser**](docs/Api/TwitterEngagementApi.md#followuser) | **POST** /v1/twitter/follow | Follow a user
 *TwitterEngagementApi* | [**removeBookmark**](docs/Api/TwitterEngagementApi.md#removebookmark) | **DELETE** /v1/twitter/bookmark | Remove bookmark
 *TwitterEngagementApi* | [**retweetPost**](docs/Api/TwitterEngagementApi.md#retweetpost) | **POST** /v1/twitter/retweet | Retweet a post
+*TwitterEngagementApi* | [**searchTweets**](docs/Api/TwitterEngagementApi.md#searchtweets) | **GET** /v1/twitter/search | Search recent tweets
 *TwitterEngagementApi* | [**undoRetweet**](docs/Api/TwitterEngagementApi.md#undoretweet) | **DELETE** /v1/twitter/retweet | Undo retweet
 *TwitterEngagementApi* | [**unfollowUser**](docs/Api/TwitterEngagementApi.md#unfollowuser) | **DELETE** /v1/twitter/follow | Unfollow a user
 *UsageApi* | [**getBilling**](docs/Api/UsageApi.md#getbilling) | **GET** /v1/billing | Account billing snapshot (plan, cycle, balance, caps, status)
@@ -1643,6 +1644,10 @@ Class | Method | HTTP request | Description
 - [SearchInboxConversations200ResponseMetaAccountsSkippedInner](docs/Model/SearchInboxConversations200ResponseMetaAccountsSkippedInner.md)
 - [SearchInboxConversations200ResponseMetaFailedAccountsInner](docs/Model/SearchInboxConversations200ResponseMetaFailedAccountsInner.md)
 - [SearchReddit200Response](docs/Model/SearchReddit200Response.md)
+- [SearchTweets200Response](docs/Model/SearchTweets200Response.md)
+- [SearchTweets200ResponseMeta](docs/Model/SearchTweets200ResponseMeta.md)
+- [SearchTweets200ResponseTweetsInner](docs/Model/SearchTweets200ResponseTweetsInner.md)
+- [SearchTweets200ResponseTweetsInnerAuthor](docs/Model/SearchTweets200ResponseTweetsInnerAuthor.md)
 - [SelectFacebookPage200Response](docs/Model/SelectFacebookPage200Response.md)
 - [SelectFacebookPage200ResponseAccount](docs/Model/SelectFacebookPage200ResponseAccount.md)
 - [SelectFacebookPage409Response](docs/Model/SelectFacebookPage409Response.md)

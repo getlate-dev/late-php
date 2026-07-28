@@ -10,6 +10,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**followUser()**](TwitterEngagementApi.md#followUser) | **POST** /v1/twitter/follow | Follow a user |
 | [**removeBookmark()**](TwitterEngagementApi.md#removeBookmark) | **DELETE** /v1/twitter/bookmark | Remove bookmark |
 | [**retweetPost()**](TwitterEngagementApi.md#retweetPost) | **POST** /v1/twitter/retweet | Retweet a post |
+| [**searchTweets()**](TwitterEngagementApi.md#searchTweets) | **GET** /v1/twitter/search | Search recent tweets |
 | [**undoRetweet()**](TwitterEngagementApi.md#undoRetweet) | **DELETE** /v1/twitter/retweet | Undo retweet |
 | [**unfollowUser()**](TwitterEngagementApi.md#unfollowUser) | **DELETE** /v1/twitter/follow | Unfollow a user |
 
@@ -250,6 +251,82 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `searchTweets()`
+
+```php
+searchTweets($account_id, $query, $limit, $since_id, $until_id, $start_time, $end_time, $cursor, $sort_order): \Zernio\Model\SearchTweets200Response
+```
+
+Search recent tweets
+
+Search public tweets from the last 7 days matching an X search query, e.g. to discover tweets to reply to. The query string is passed through to X unchanged and supports X's search operators (`from:user`, `-is:retweet`, `is:reply`, `lang:en`, `\"exact phrase\"`, `conversation_id:123`, boolean `OR`, ...). Note that standalone operators like `is:` / `has:` / `lang:` must be combined with a keyword or `from:` clause.  To reply to a found tweet, pass its `id` as the twitter platform entry's `platformSpecificData.replyToTweetId` when creating a post.  Rate limit: 300 requests per 15-min window per connected account.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\TwitterEngagementApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The social account ID
+$query = 'query_example'; // string | X search query, max 512 characters. Operators are passed through unchanged; X rejects malformed queries with a 400.
+$limit = 10; // int | Results per page. X requires a minimum of 10; values below 10 are rejected.
+$since_id = 'since_id_example'; // string | Only return tweets with an ID greater than (more recent than) this numeric tweet ID. Non-numeric values are rejected with 400.
+$until_id = 'until_id_example'; // string | Only return tweets with an ID less than (older than) this numeric tweet ID. Non-numeric values are rejected with 400.
+$start_time = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Oldest UTC timestamp (ISO 8601, inclusive), within the last 7 days
+$end_time = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Newest UTC timestamp (ISO 8601, exclusive), within the last 7 days
+$cursor = 'cursor_example'; // string | Pagination cursor from a previous response
+$sort_order = 'recency'; // string
+
+try {
+    $result = $apiInstance->searchTweets($account_id, $query, $limit, $since_id, $until_id, $start_time, $end_time, $cursor, $sort_order);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling TwitterEngagementApi->searchTweets: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The social account ID | |
+| **query** | **string**| X search query, max 512 characters. Operators are passed through unchanged; X rejects malformed queries with a 400. | |
+| **limit** | **int**| Results per page. X requires a minimum of 10; values below 10 are rejected. | [optional] [default to 10] |
+| **since_id** | **string**| Only return tweets with an ID greater than (more recent than) this numeric tweet ID. Non-numeric values are rejected with 400. | [optional] |
+| **until_id** | **string**| Only return tweets with an ID less than (older than) this numeric tweet ID. Non-numeric values are rejected with 400. | [optional] |
+| **start_time** | **\DateTime**| Oldest UTC timestamp (ISO 8601, inclusive), within the last 7 days | [optional] |
+| **end_time** | **\DateTime**| Newest UTC timestamp (ISO 8601, exclusive), within the last 7 days | [optional] |
+| **cursor** | **string**| Pagination cursor from a previous response | [optional] |
+| **sort_order** | **string**|  | [optional] [default to &#39;recency&#39;] |
+
+### Return type
+
+[**\Zernio\Model\SearchTweets200Response**](../Model/SearchTweets200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
