@@ -17,8 +17,10 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**listSmsRegistrations()**](SMSApi.md#listSmsRegistrations) | **GET** /v1/sms/registrations | List carrier registrations |
 | [**listSmsSenderIds()**](SMSApi.md#listSmsSenderIds) | **GET** /v1/sms/sender-ids | List alphanumeric sender IDs |
 | [**lookupSmsNumber()**](SMSApi.md#lookupSmsNumber) | **GET** /v1/sms/lookup | Look up carrier + line type |
+| [**preflightSmsRegistration()**](SMSApi.md#preflightSmsRegistration) | **POST** /v1/sms/registrations/preflight | Pre-check a carrier registration |
 | [**requestSmsSenderIdLimitIncrease()**](SMSApi.md#requestSmsSenderIdLimitIncrease) | **POST** /v1/sms/sender-ids/limit-request | Request a higher sender ID daily limit |
 | [**resendSmsRegistrationOtp()**](SMSApi.md#resendSmsRegistrationOtp) | **POST** /v1/sms/registrations/{id}/resend-otp | Re-send the sole-prop OTP |
+| [**respondToSmsRegistrationReview()**](SMSApi.md#respondToSmsRegistrationReview) | **POST** /v1/sms/registrations/{id}/respond | Reply to a change request |
 | [**reuseSmsRegistrationForNumber()**](SMSApi.md#reuseSmsRegistrationForNumber) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add number to SMS registration |
 | [**sendSms()**](SMSApi.md#sendSms) | **POST** /v1/sms/messages | Send an SMS/MMS |
 | [**shareSmsRegistration()**](SMSApi.md#shareSmsRegistration) | **POST** /v1/sms/registrations/share | Create a registration share link |
@@ -685,6 +687,66 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `preflightSmsRegistration()`
+
+```php
+preflightSmsRegistration($preflight_sms_registration_request): \Zernio\Model\PreflightSmsRegistration200Response
+```
+
+Pre-check a carrier registration
+
+Dry-run of `POST /v1/sms/registrations` for 10DLC: validates and composes the exact brand/campaign payloads a submission would store (branding, disclosures, auto-replies), runs deterministic compliance lints plus an AI reviewer over them, and returns the findings WITHOUT creating anything. Use it to fix issues before submitting; `block` severity findings indicate a near-certain carrier rejection.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\SMSApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$preflight_sms_registration_request = new \Zernio\Model\PreflightSmsRegistrationRequest(); // \Zernio\Model\PreflightSmsRegistrationRequest
+
+try {
+    $result = $apiInstance->preflightSmsRegistration($preflight_sms_registration_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling SMSApi->preflightSmsRegistration: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **preflight_sms_registration_request** | [**\Zernio\Model\PreflightSmsRegistrationRequest**](../Model/PreflightSmsRegistrationRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\PreflightSmsRegistration200Response**](../Model/PreflightSmsRegistration200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `requestSmsSenderIdLimitIncrease()`
 
 ```php
@@ -799,6 +861,68 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `respondToSmsRegistrationReview()`
+
+```php
+respondToSmsRegistrationReview($id, $respond_to_sms_registration_review_request): \Zernio\Model\RespondToSmsRegistrationReview200Response
+```
+
+Reply to a change request
+
+Replies to a reviewer change request on a registration in `changes_requested` state: a note, hosted document URLs (from `POST /v1/sms/opt-in-proof`), or both, sent together. The registration returns to `requested` (back in review) — no need to resubmit the whole registration. To change the submitted brand/campaign fields themselves, resubmit via `POST /v1/sms/registrations` with `resubmitRequestId` instead.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\SMSApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string
+$respond_to_sms_registration_review_request = new \Zernio\Model\RespondToSmsRegistrationReviewRequest(); // \Zernio\Model\RespondToSmsRegistrationReviewRequest
+
+try {
+    $result = $apiInstance->respondToSmsRegistrationReview($id, $respond_to_sms_registration_review_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling SMSApi->respondToSmsRegistrationReview: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**|  | |
+| **respond_to_sms_registration_review_request** | [**\Zernio\Model\RespondToSmsRegistrationReviewRequest**](../Model/RespondToSmsRegistrationReviewRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\RespondToSmsRegistrationReview200Response**](../Model/RespondToSmsRegistrationReview200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

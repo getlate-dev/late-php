@@ -1,6 +1,6 @@
 <?php
 /**
- * StartSmsRegistrationRequest
+ * PreflightSmsRegistrationRequest
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * StartSmsRegistrationRequest Class Doc Comment
+ * PreflightSmsRegistrationRequest Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class PreflightSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'startSmsRegistration_request';
+    protected static $openAPIModelName = 'preflightSmsRegistration_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,12 +60,9 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     protected static $openAPITypes = [
         'registration_type' => 'string',
         'phone_numbers' => 'string[]',
-        'brand' => '\Zernio\Model\StartSmsRegistrationRequestBrand',
-        'campaign' => '\Zernio\Model\StartSmsRegistrationRequestCampaign',
-        'messaging_brand_name' => 'string',
-        'wizard_values' => 'array<string,string>',
-        'resubmit_request_id' => 'string',
-        'toll_free' => '\Zernio\Model\StartSmsRegistrationRequestTollFree'
+        'brand' => 'object',
+        'campaign' => 'object',
+        'messaging_brand_name' => 'string'
     ];
 
     /**
@@ -80,10 +77,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
         'phone_numbers' => null,
         'brand' => null,
         'campaign' => null,
-        'messaging_brand_name' => null,
-        'wizard_values' => null,
-        'resubmit_request_id' => null,
-        'toll_free' => null
+        'messaging_brand_name' => null
     ];
 
     /**
@@ -96,10 +90,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
         'phone_numbers' => false,
         'brand' => false,
         'campaign' => false,
-        'messaging_brand_name' => false,
-        'wizard_values' => false,
-        'resubmit_request_id' => false,
-        'toll_free' => false
+        'messaging_brand_name' => false
     ];
 
     /**
@@ -192,10 +183,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
         'phone_numbers' => 'phoneNumbers',
         'brand' => 'brand',
         'campaign' => 'campaign',
-        'messaging_brand_name' => 'messagingBrandName',
-        'wizard_values' => 'wizardValues',
-        'resubmit_request_id' => 'resubmitRequestId',
-        'toll_free' => 'tollFree'
+        'messaging_brand_name' => 'messagingBrandName'
     ];
 
     /**
@@ -208,10 +196,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
         'phone_numbers' => 'setPhoneNumbers',
         'brand' => 'setBrand',
         'campaign' => 'setCampaign',
-        'messaging_brand_name' => 'setMessagingBrandName',
-        'wizard_values' => 'setWizardValues',
-        'resubmit_request_id' => 'setResubmitRequestId',
-        'toll_free' => 'setTollFree'
+        'messaging_brand_name' => 'setMessagingBrandName'
     ];
 
     /**
@@ -224,10 +209,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
         'phone_numbers' => 'getPhoneNumbers',
         'brand' => 'getBrand',
         'campaign' => 'getCampaign',
-        'messaging_brand_name' => 'getMessagingBrandName',
-        'wizard_values' => 'getWizardValues',
-        'resubmit_request_id' => 'getResubmitRequestId',
-        'toll_free' => 'getTollFree'
+        'messaging_brand_name' => 'getMessagingBrandName'
     ];
 
     /**
@@ -273,7 +255,6 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
 
     public const REGISTRATION_TYPE_STANDARD_10DLC = 'standard_10dlc';
     public const REGISTRATION_TYPE_SOLE_PROP_10DLC = 'sole_prop_10dlc';
-    public const REGISTRATION_TYPE_TOLL_FREE = 'toll_free';
 
     /**
      * Gets allowable values of the enum
@@ -285,7 +266,6 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
         return [
             self::REGISTRATION_TYPE_STANDARD_10DLC,
             self::REGISTRATION_TYPE_SOLE_PROP_10DLC,
-            self::REGISTRATION_TYPE_TOLL_FREE,
         ];
     }
 
@@ -309,9 +289,6 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('brand', $data ?? [], null);
         $this->setIfExists('campaign', $data ?? [], null);
         $this->setIfExists('messaging_brand_name', $data ?? [], null);
-        $this->setIfExists('wizard_values', $data ?? [], null);
-        $this->setIfExists('resubmit_request_id', $data ?? [], null);
-        $this->setIfExists('toll_free', $data ?? [], null);
     }
 
     /**
@@ -353,13 +330,12 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
             );
         }
 
-        if ($this->container['phone_numbers'] === null) {
-            $invalidProperties[] = "'phone_numbers' can't be null";
+        if ($this->container['brand'] === null) {
+            $invalidProperties[] = "'brand' can't be null";
         }
-        if ((count($this->container['phone_numbers']) < 1)) {
-            $invalidProperties[] = "invalid value for 'phone_numbers', number of items must be greater than or equal to 1.";
+        if ($this->container['campaign'] === null) {
+            $invalidProperties[] = "'campaign' can't be null";
         }
-
         if (!is_null($this->container['messaging_brand_name']) && (mb_strlen($this->container['messaging_brand_name']) > 60)) {
             $invalidProperties[] = "invalid value for 'messaging_brand_name', the character length must be smaller than or equal to 60.";
         }
@@ -423,7 +399,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets phone_numbers
      *
-     * @return string[]
+     * @return string[]|null
      */
     public function getPhoneNumbers()
     {
@@ -433,7 +409,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets phone_numbers
      *
-     * @param string[] $phone_numbers Your numbers this registration covers.
+     * @param string[]|null $phone_numbers phone_numbers
      *
      * @return self
      */
@@ -441,11 +417,6 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     {
         if (is_null($phone_numbers)) {
             throw new \InvalidArgumentException('non-nullable phone_numbers cannot be null');
-        }
-
-
-        if ((count($phone_numbers) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $phone_numbers when calling StartSmsRegistrationRequest., number of items must be greater than or equal to 1.');
         }
         $this->container['phone_numbers'] = $phone_numbers;
 
@@ -455,7 +426,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets brand
      *
-     * @return \Zernio\Model\StartSmsRegistrationRequestBrand|null
+     * @return object
      */
     public function getBrand()
     {
@@ -465,7 +436,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets brand
      *
-     * @param \Zernio\Model\StartSmsRegistrationRequestBrand|null $brand brand
+     * @param object $brand Same shape as the registration `brand`.
      *
      * @return self
      */
@@ -482,7 +453,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets campaign
      *
-     * @return \Zernio\Model\StartSmsRegistrationRequestCampaign|null
+     * @return object
      */
     public function getCampaign()
     {
@@ -492,7 +463,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets campaign
      *
-     * @param \Zernio\Model\StartSmsRegistrationRequestCampaign|null $campaign campaign
+     * @param object $campaign Same shape as the registration `campaign`.
      *
      * @return self
      */
@@ -519,7 +490,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets messaging_brand_name
      *
-     * @param string|null $messaging_brand_name DBA / trade name used to brand message content (samples and auto-replies) when it differs from the legal name, e.g. a sole proprietor texting under a business name. The legal `brand.displayName` is still what the carrier vets.
+     * @param string|null $messaging_brand_name messaging_brand_name
      *
      * @return self
      */
@@ -529,94 +500,13 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable messaging_brand_name cannot be null');
         }
         if ((mb_strlen($messaging_brand_name) > 60)) {
-            throw new \InvalidArgumentException('invalid length for $messaging_brand_name when calling StartSmsRegistrationRequest., must be smaller than or equal to 60.');
+            throw new \InvalidArgumentException('invalid length for $messaging_brand_name when calling PreflightSmsRegistrationRequest., must be smaller than or equal to 60.');
         }
         if ((mb_strlen($messaging_brand_name) < 2)) {
-            throw new \InvalidArgumentException('invalid length for $messaging_brand_name when calling StartSmsRegistrationRequest., must be bigger than or equal to 2.');
+            throw new \InvalidArgumentException('invalid length for $messaging_brand_name when calling PreflightSmsRegistrationRequest., must be bigger than or equal to 2.');
         }
 
         $this->container['messaging_brand_name'] = $messaging_brand_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets wizard_values
-     *
-     * @return array<string,string>|null
-     */
-    public function getWizardValues()
-    {
-        return $this->container['wizard_values'];
-    }
-
-    /**
-     * Sets wizard_values
-     *
-     * @param array<string,string>|null $wizard_values Raw dashboard-wizard answers, stored only to prefill edit-and-resubmit. API integrators can omit.
-     *
-     * @return self
-     */
-    public function setWizardValues($wizard_values)
-    {
-        if (is_null($wizard_values)) {
-            throw new \InvalidArgumentException('non-nullable wizard_values cannot be null');
-        }
-        $this->container['wizard_values'] = $wizard_values;
-
-        return $this;
-    }
-
-    /**
-     * Gets resubmit_request_id
-     *
-     * @return string|null
-     */
-    public function getResubmitRequestId()
-    {
-        return $this->container['resubmit_request_id'];
-    }
-
-    /**
-     * Sets resubmit_request_id
-     *
-     * @param string|null $resubmit_request_id Resubmit a registration that was returned for changes — updates it in place instead of creating a new one.
-     *
-     * @return self
-     */
-    public function setResubmitRequestId($resubmit_request_id)
-    {
-        if (is_null($resubmit_request_id)) {
-            throw new \InvalidArgumentException('non-nullable resubmit_request_id cannot be null');
-        }
-        $this->container['resubmit_request_id'] = $resubmit_request_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets toll_free
-     *
-     * @return \Zernio\Model\StartSmsRegistrationRequestTollFree|null
-     */
-    public function getTollFree()
-    {
-        return $this->container['toll_free'];
-    }
-
-    /**
-     * Sets toll_free
-     *
-     * @param \Zernio\Model\StartSmsRegistrationRequestTollFree|null $toll_free toll_free
-     *
-     * @return self
-     */
-    public function setTollFree($toll_free)
-    {
-        if (is_null($toll_free)) {
-            throw new \InvalidArgumentException('non-nullable toll_free cannot be null');
-        }
-        $this->container['toll_free'] = $toll_free;
 
         return $this;
     }

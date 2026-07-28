@@ -1035,6 +1035,10 @@ docs/Model/PostRetryResponse.md
 docs/Model/PostUpdateResponse.md
 docs/Model/PostUserId.md
 docs/Model/PostsListResponse.md
+docs/Model/PreflightSmsRegistration200Response.md
+docs/Model/PreflightSmsRegistration200ResponseAdvisoriesInner.md
+docs/Model/PreflightSmsRegistration200ResponseComposed.md
+docs/Model/PreflightSmsRegistrationRequest.md
 docs/Model/Profile.md
 docs/Model/ProfileCreateResponse.md
 docs/Model/ProfileDeleteResponse.md
@@ -1095,6 +1099,8 @@ docs/Model/ReserveRfPredictionRequest.md
 docs/Model/RespondToPhoneNumberReviewer200Response.md
 docs/Model/RespondToPhoneNumberReviewerRequest.md
 docs/Model/RespondToPhoneNumberReviewerRequestDocumentsInner.md
+docs/Model/RespondToSmsRegistrationReview200Response.md
+docs/Model/RespondToSmsRegistrationReviewRequest.md
 docs/Model/RestoreWorkflowVersion200Response.md
 docs/Model/RestoreWorkflowVersion200ResponseWorkflow.md
 docs/Model/RetweetPost200Response.md
@@ -2618,6 +2624,10 @@ lib/Model/PostRetryResponse.php
 lib/Model/PostUpdateResponse.php
 lib/Model/PostUserId.php
 lib/Model/PostsListResponse.php
+lib/Model/PreflightSmsRegistration200Response.php
+lib/Model/PreflightSmsRegistration200ResponseAdvisoriesInner.php
+lib/Model/PreflightSmsRegistration200ResponseComposed.php
+lib/Model/PreflightSmsRegistrationRequest.php
 lib/Model/Profile.php
 lib/Model/ProfileCreateResponse.php
 lib/Model/ProfileDeleteResponse.php
@@ -2678,6 +2688,8 @@ lib/Model/ReserveRfPredictionRequest.php
 lib/Model/RespondToPhoneNumberReviewer200Response.php
 lib/Model/RespondToPhoneNumberReviewerRequest.php
 lib/Model/RespondToPhoneNumberReviewerRequestDocumentsInner.php
+lib/Model/RespondToSmsRegistrationReview200Response.php
+lib/Model/RespondToSmsRegistrationReviewRequest.php
 lib/Model/RestoreWorkflowVersion200Response.php
 lib/Model/RestoreWorkflowVersion200ResponseWorkflow.php
 lib/Model/RetweetPost200Response.php
@@ -3165,3 +3177,9 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/PreflightSmsRegistration200ResponseAdvisoriesInnerTest.php
+test/Model/PreflightSmsRegistration200ResponseComposedTest.php
+test/Model/PreflightSmsRegistration200ResponseTest.php
+test/Model/PreflightSmsRegistrationRequestTest.php
+test/Model/RespondToSmsRegistrationReview200ResponseTest.php
+test/Model/RespondToSmsRegistrationReviewRequestTest.php

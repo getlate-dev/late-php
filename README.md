@@ -417,8 +417,10 @@ Class | Method | HTTP request | Description
 *SMSApi* | [**listSmsRegistrations**](docs/Api/SMSApi.md#listsmsregistrations) | **GET** /v1/sms/registrations | List carrier registrations
 *SMSApi* | [**listSmsSenderIds**](docs/Api/SMSApi.md#listsmssenderids) | **GET** /v1/sms/sender-ids | List alphanumeric sender IDs
 *SMSApi* | [**lookupSmsNumber**](docs/Api/SMSApi.md#lookupsmsnumber) | **GET** /v1/sms/lookup | Look up carrier + line type
+*SMSApi* | [**preflightSmsRegistration**](docs/Api/SMSApi.md#preflightsmsregistration) | **POST** /v1/sms/registrations/preflight | Pre-check a carrier registration
 *SMSApi* | [**requestSmsSenderIdLimitIncrease**](docs/Api/SMSApi.md#requestsmssenderidlimitincrease) | **POST** /v1/sms/sender-ids/limit-request | Request a higher sender ID daily limit
 *SMSApi* | [**resendSmsRegistrationOtp**](docs/Api/SMSApi.md#resendsmsregistrationotp) | **POST** /v1/sms/registrations/{id}/resend-otp | Re-send the sole-prop OTP
+*SMSApi* | [**respondToSmsRegistrationReview**](docs/Api/SMSApi.md#respondtosmsregistrationreview) | **POST** /v1/sms/registrations/{id}/respond | Reply to a change request
 *SMSApi* | [**reuseSmsRegistrationForNumber**](docs/Api/SMSApi.md#reusesmsregistrationfornumber) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add number to SMS registration
 *SMSApi* | [**sendSms**](docs/Api/SMSApi.md#sendsms) | **POST** /v1/sms/messages | Send an SMS/MMS
 *SMSApi* | [**shareSmsRegistration**](docs/Api/SMSApi.md#sharesmsregistration) | **POST** /v1/sms/registrations/share | Create a registration share link
@@ -1551,6 +1553,10 @@ Class | Method | HTTP request | Description
 - [PostUpdateResponse](docs/Model/PostUpdateResponse.md)
 - [PostUserId](docs/Model/PostUserId.md)
 - [PostsListResponse](docs/Model/PostsListResponse.md)
+- [PreflightSmsRegistration200Response](docs/Model/PreflightSmsRegistration200Response.md)
+- [PreflightSmsRegistration200ResponseAdvisoriesInner](docs/Model/PreflightSmsRegistration200ResponseAdvisoriesInner.md)
+- [PreflightSmsRegistration200ResponseComposed](docs/Model/PreflightSmsRegistration200ResponseComposed.md)
+- [PreflightSmsRegistrationRequest](docs/Model/PreflightSmsRegistrationRequest.md)
 - [Profile](docs/Model/Profile.md)
 - [ProfileCreateResponse](docs/Model/ProfileCreateResponse.md)
 - [ProfileDeleteResponse](docs/Model/ProfileDeleteResponse.md)
@@ -1611,6 +1617,8 @@ Class | Method | HTTP request | Description
 - [RespondToPhoneNumberReviewer200Response](docs/Model/RespondToPhoneNumberReviewer200Response.md)
 - [RespondToPhoneNumberReviewerRequest](docs/Model/RespondToPhoneNumberReviewerRequest.md)
 - [RespondToPhoneNumberReviewerRequestDocumentsInner](docs/Model/RespondToPhoneNumberReviewerRequestDocumentsInner.md)
+- [RespondToSmsRegistrationReview200Response](docs/Model/RespondToSmsRegistrationReview200Response.md)
+- [RespondToSmsRegistrationReviewRequest](docs/Model/RespondToSmsRegistrationReviewRequest.md)
 - [RestoreWorkflowVersion200Response](docs/Model/RestoreWorkflowVersion200Response.md)
 - [RestoreWorkflowVersion200ResponseWorkflow](docs/Model/RestoreWorkflowVersion200ResponseWorkflow.md)
 - [RetweetPost200Response](docs/Model/RetweetPost200Response.md)
