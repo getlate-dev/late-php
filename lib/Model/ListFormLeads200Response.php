@@ -60,7 +60,7 @@ class ListFormLeads200Response implements ModelInterface, ArrayAccess, \JsonSeri
     protected static $openAPITypes = [
         'status' => 'string',
         'leads' => '\Zernio\Model\ListFormLeads200ResponseLeadsInner[]',
-        'pagination' => '\Zernio\Model\GetInboxPostComments200ResponsePagination'
+        'pagination' => '\Zernio\Model\SearchTweets200ResponsePagination'
     ];
 
     /**
@@ -361,7 +361,7 @@ class ListFormLeads200Response implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets pagination
      *
-     * @return \Zernio\Model\GetInboxPostComments200ResponsePagination|null
+     * @return \Zernio\Model\SearchTweets200ResponsePagination|null
      */
     public function getPagination()
     {
@@ -371,7 +371,7 @@ class ListFormLeads200Response implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets pagination
      *
-     * @param \Zernio\Model\GetInboxPostComments200ResponsePagination|null $pagination pagination
+     * @param \Zernio\Model\SearchTweets200ResponsePagination|null $pagination pagination
      *
      * @return self
      */

@@ -1,11 +1,10 @@
-# # ListLeadForms200Response
+# # SearchTweets200ResponsePagination
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **string** |  | [optional]
-**forms** | **object[]** |  | [optional]
-**pagination** | [**\Zernio\Model\SearchTweets200ResponsePagination**](SearchTweets200ResponsePagination.md) |  | [optional]
+**has_more** | **bool** |  | [optional]
+**cursor** | **string** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

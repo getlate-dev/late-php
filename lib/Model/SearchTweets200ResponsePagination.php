@@ -1,6 +1,6 @@
 <?php
 /**
- * ListLeadForms200Response
+ * SearchTweets200ResponsePagination
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListLeadForms200Response Class Doc Comment
+ * SearchTweets200ResponsePagination Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListLeadForms200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class SearchTweets200ResponsePagination implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ListLeadForms200Response implements ModelInterface, ArrayAccess, \JsonSeri
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listLeadForms_200_response';
+    protected static $openAPIModelName = 'searchTweets_200_response_pagination';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +58,8 @@ class ListLeadForms200Response implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
-        'status' => 'string',
-        'forms' => 'object[]',
-        'pagination' => '\Zernio\Model\SearchTweets200ResponsePagination'
+        'has_more' => 'bool',
+        'cursor' => 'string'
     ];
 
     /**
@@ -71,9 +70,8 @@ class ListLeadForms200Response implements ModelInterface, ArrayAccess, \JsonSeri
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'status' => null,
-        'forms' => null,
-        'pagination' => null
+        'has_more' => null,
+        'cursor' => null
     ];
 
     /**
@@ -82,9 +80,8 @@ class ListLeadForms200Response implements ModelInterface, ArrayAccess, \JsonSeri
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'status' => false,
-        'forms' => false,
-        'pagination' => false
+        'has_more' => false,
+        'cursor' => true
     ];
 
     /**
@@ -173,9 +170,8 @@ class ListLeadForms200Response implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $attributeMap = [
-        'status' => 'status',
-        'forms' => 'forms',
-        'pagination' => 'pagination'
+        'has_more' => 'hasMore',
+        'cursor' => 'cursor'
     ];
 
     /**
@@ -184,9 +180,8 @@ class ListLeadForms200Response implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $setters = [
-        'status' => 'setStatus',
-        'forms' => 'setForms',
-        'pagination' => 'setPagination'
+        'has_more' => 'setHasMore',
+        'cursor' => 'setCursor'
     ];
 
     /**
@@ -195,9 +190,8 @@ class ListLeadForms200Response implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $getters = [
-        'status' => 'getStatus',
-        'forms' => 'getForms',
-        'pagination' => 'getPagination'
+        'has_more' => 'getHasMore',
+        'cursor' => 'getCursor'
     ];
 
     /**
@@ -257,9 +251,8 @@ class ListLeadForms200Response implements ModelInterface, ArrayAccess, \JsonSeri
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('forms', $data ?? [], null);
-        $this->setIfExists('pagination', $data ?? [], null);
+        $this->setIfExists('has_more', $data ?? [], null);
+        $this->setIfExists('cursor', $data ?? [], null);
     }
 
     /**
@@ -305,82 +298,62 @@ class ListLeadForms200Response implements ModelInterface, ArrayAccess, \JsonSeri
 
 
     /**
-     * Gets status
+     * Gets has_more
+     *
+     * @return bool|null
+     */
+    public function getHasMore()
+    {
+        return $this->container['has_more'];
+    }
+
+    /**
+     * Sets has_more
+     *
+     * @param bool|null $has_more has_more
+     *
+     * @return self
+     */
+    public function setHasMore($has_more)
+    {
+        if (is_null($has_more)) {
+            throw new \InvalidArgumentException('non-nullable has_more cannot be null');
+        }
+        $this->container['has_more'] = $has_more;
+
+        return $this;
+    }
+
+    /**
+     * Gets cursor
      *
      * @return string|null
      */
-    public function getStatus()
+    public function getCursor()
     {
-        return $this->container['status'];
+        return $this->container['cursor'];
     }
 
     /**
-     * Sets status
+     * Sets cursor
      *
-     * @param string|null $status status
+     * @param string|null $cursor cursor
      *
      * @return self
      */
-    public function setStatus($status)
+    public function setCursor($cursor)
     {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        if (is_null($cursor)) {
+            array_push($this->openAPINullablesSetToNull, 'cursor');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cursor', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets forms
-     *
-     * @return object[]|null
-     */
-    public function getForms()
-    {
-        return $this->container['forms'];
-    }
-
-    /**
-     * Sets forms
-     *
-     * @param object[]|null $forms forms
-     *
-     * @return self
-     */
-    public function setForms($forms)
-    {
-        if (is_null($forms)) {
-            throw new \InvalidArgumentException('non-nullable forms cannot be null');
-        }
-        $this->container['forms'] = $forms;
-
-        return $this;
-    }
-
-    /**
-     * Gets pagination
-     *
-     * @return \Zernio\Model\SearchTweets200ResponsePagination|null
-     */
-    public function getPagination()
-    {
-        return $this->container['pagination'];
-    }
-
-    /**
-     * Sets pagination
-     *
-     * @param \Zernio\Model\SearchTweets200ResponsePagination|null $pagination pagination
-     *
-     * @return self
-     */
-    public function setPagination($pagination)
-    {
-        if (is_null($pagination)) {
-            throw new \InvalidArgumentException('non-nullable pagination cannot be null');
-        }
-        $this->container['pagination'] = $pagination;
+        $this->container['cursor'] = $cursor;
 
         return $this;
     }

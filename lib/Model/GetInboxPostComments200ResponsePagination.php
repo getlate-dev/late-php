@@ -337,7 +337,7 @@ class GetInboxPostComments200ResponsePagination implements ModelInterface, Array
     /**
      * Sets cursor
      *
-     * @param string|null $cursor cursor
+     * @param string|null $cursor Only present when hasMore is true. Absent on the last page, so treat its absence as the end of the thread.
      *
      * @return self
      */

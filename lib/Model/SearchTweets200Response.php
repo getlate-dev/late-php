@@ -60,7 +60,7 @@ class SearchTweets200Response implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $openAPITypes = [
         'status' => 'string',
         'tweets' => '\Zernio\Model\SearchTweets200ResponseTweetsInner[]',
-        'pagination' => '\Zernio\Model\GetInboxPostComments200ResponsePagination',
+        'pagination' => '\Zernio\Model\SearchTweets200ResponsePagination',
         'meta' => '\Zernio\Model\SearchTweets200ResponseMeta'
     ];
 
@@ -368,7 +368,7 @@ class SearchTweets200Response implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets pagination
      *
-     * @return \Zernio\Model\GetInboxPostComments200ResponsePagination|null
+     * @return \Zernio\Model\SearchTweets200ResponsePagination|null
      */
     public function getPagination()
     {
@@ -378,7 +378,7 @@ class SearchTweets200Response implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets pagination
      *
-     * @param \Zernio\Model\GetInboxPostComments200ResponsePagination|null $pagination pagination
+     * @param \Zernio\Model\SearchTweets200ResponsePagination|null $pagination pagination
      *
      * @return self
      */
