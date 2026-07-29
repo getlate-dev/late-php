@@ -63,7 +63,8 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
         'status' => 'string',
         'platform_post_id' => 'string',
         'published_url' => 'string',
-        'error' => 'string'
+        'error' => 'string',
+        'deleted_at' => '\DateTime'
     ];
 
     /**
@@ -78,7 +79,8 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
         'status' => null,
         'platform_post_id' => null,
         'published_url' => null,
-        'error' => null
+        'error' => null,
+        'deleted_at' => 'date-time'
     ];
 
     /**
@@ -91,7 +93,8 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
         'status' => false,
         'platform_post_id' => false,
         'published_url' => false,
-        'error' => false
+        'error' => false,
+        'deleted_at' => false
     ];
 
     /**
@@ -184,7 +187,8 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
         'status' => 'status',
         'platform_post_id' => 'platformPostId',
         'published_url' => 'publishedUrl',
-        'error' => 'error'
+        'error' => 'error',
+        'deleted_at' => 'deletedAt'
     ];
 
     /**
@@ -197,7 +201,8 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
         'status' => 'setStatus',
         'platform_post_id' => 'setPlatformPostId',
         'published_url' => 'setPublishedUrl',
-        'error' => 'setError'
+        'error' => 'setError',
+        'deleted_at' => 'setDeletedAt'
     ];
 
     /**
@@ -210,7 +215,8 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
         'status' => 'getStatus',
         'platform_post_id' => 'getPlatformPostId',
         'published_url' => 'getPublishedUrl',
-        'error' => 'getError'
+        'error' => 'getError',
+        'deleted_at' => 'getDeletedAt'
     ];
 
     /**
@@ -256,6 +262,7 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
 
     public const STATUS_PUBLISHED = 'published';
     public const STATUS_FAILED = 'failed';
+    public const STATUS_DELETED = 'deleted';
 
     /**
      * Gets allowable values of the enum
@@ -267,6 +274,7 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
         return [
             self::STATUS_PUBLISHED,
             self::STATUS_FAILED,
+            self::STATUS_DELETED,
         ];
     }
 
@@ -290,6 +298,7 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
         $this->setIfExists('platform_post_id', $data ?? [], null);
         $this->setIfExists('published_url', $data ?? [], null);
         $this->setIfExists('error', $data ?? [], null);
+        $this->setIfExists('deleted_at', $data ?? [], null);
     }
 
     /**
@@ -426,7 +435,7 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
     /**
      * Sets platform_post_id
      *
-     * @param string|null $platform_post_id Platform-native post id. Present on `published`, absent on `failed`.
+     * @param string|null $platform_post_id Platform-native post id. Present on `published` and `deleted`, absent on `failed`.
      *
      * @return self
      */
@@ -453,7 +462,7 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
     /**
      * Sets published_url
      *
-     * @param string|null $published_url Public URL to the platform-side post. Present on `published` (when the platform exposes one and it is not a draft).
+     * @param string|null $published_url Public URL to the platform-side post. Present on `published` (when the platform exposes one and it is not a draft) and on `deleted` (when one was recorded at publish time).
      *
      * @return self
      */
@@ -480,7 +489,7 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
     /**
      * Sets error
      *
-     * @param string|null $error Error message from the platform. Present on `failed`, absent on `published`.
+     * @param string|null $error Error message from the platform. Present on `failed` only.
      *
      * @return self
      */
@@ -490,6 +499,33 @@ class WebhookPayloadPostPlatformPlatform implements ModelInterface, ArrayAccess,
             throw new \InvalidArgumentException('non-nullable error cannot be null');
         }
         $this->container['error'] = $error;
+
+        return $this;
+    }
+
+    /**
+     * Gets deleted_at
+     *
+     * @return \DateTime|null
+     */
+    public function getDeletedAt()
+    {
+        return $this->container['deleted_at'];
+    }
+
+    /**
+     * Sets deleted_at
+     *
+     * @param \DateTime|null $deleted_at When the platform-side deletion was detected by Zernio sync (ISO 8601). Present only on `post.platform.deleted`.
+     *
+     * @return self
+     */
+    public function setDeletedAt($deleted_at)
+    {
+        if (is_null($deleted_at)) {
+            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
+        }
+        $this->container['deleted_at'] = $deleted_at;
 
         return $this;
     }

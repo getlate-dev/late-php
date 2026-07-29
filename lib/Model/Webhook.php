@@ -286,6 +286,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
     public const EVENTS_POST_RECYCLED = 'post.recycled';
     public const EVENTS_POST_PLATFORM_PUBLISHED = 'post.platform.published';
     public const EVENTS_POST_PLATFORM_FAILED = 'post.platform.failed';
+    public const EVENTS_POST_PLATFORM_DELETED = 'post.platform.deleted';
     public const EVENTS_POST_TIKTOK_URL_RESOLVED = 'post.tiktok.url_resolved';
     public const EVENTS_POST_EXTERNAL_CREATED = 'post.external.created';
     public const EVENTS_POST_EXTERNAL_UPDATED = 'post.external.updated';
@@ -340,6 +341,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
             self::EVENTS_POST_RECYCLED,
             self::EVENTS_POST_PLATFORM_PUBLISHED,
             self::EVENTS_POST_PLATFORM_FAILED,
+            self::EVENTS_POST_PLATFORM_DELETED,
             self::EVENTS_POST_TIKTOK_URL_RESOLVED,
             self::EVENTS_POST_EXTERNAL_CREATED,
             self::EVENTS_POST_EXTERNAL_UPDATED,
