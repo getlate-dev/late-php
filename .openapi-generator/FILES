@@ -3201,6 +3201,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/GetSlackSettings200ResponseAccountTest.php
-test/Model/GetSlackSettings200ResponseTest.php
-test/Model/UpdateSlackSettingsRequestTest.php
