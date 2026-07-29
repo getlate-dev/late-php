@@ -1,6 +1,6 @@
 <?php
 /**
- * SendInboxMessage400Response
+ * SendPrivateReplyToComment400Response
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * SendInboxMessage400Response Class Doc Comment
+ * SendPrivateReplyToComment400Response Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class SendPrivateReplyToComment400Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'sendInboxMessage_400_response';
+    protected static $openAPIModelName = 'sendPrivateReplyToComment_400_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +59,7 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPITypes = [
         'error' => 'string',
-        'code' => 'string',
-        'platform_error' => '\Zernio\Model\SendInboxMessage400ResponsePlatformError'
+        'code' => 'string'
     ];
 
     /**
@@ -72,8 +71,7 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPIFormats = [
         'error' => null,
-        'code' => null,
-        'platform_error' => null
+        'code' => null
     ];
 
     /**
@@ -83,8 +81,7 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static array $openAPINullables = [
         'error' => false,
-        'code' => false,
-        'platform_error' => false
+        'code' => false
     ];
 
     /**
@@ -174,8 +171,7 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $attributeMap = [
         'error' => 'error',
-        'code' => 'code',
-        'platform_error' => 'platformError'
+        'code' => 'code'
     ];
 
     /**
@@ -185,8 +181,7 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $setters = [
         'error' => 'setError',
-        'code' => 'setCode',
-        'platform_error' => 'setPlatformError'
+        'code' => 'setCode'
     ];
 
     /**
@@ -196,8 +191,7 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $getters = [
         'error' => 'getError',
-        'code' => 'getCode',
-        'platform_error' => 'getPlatformError'
+        'code' => 'getCode'
     ];
 
     /**
@@ -242,7 +236,6 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
     }
 
     public const CODE_PLATFORM_LIMITATION = 'PLATFORM_LIMITATION';
-    public const CODE_MISSING_PARTICIPANT = 'MISSING_PARTICIPANT';
 
     /**
      * Gets allowable values of the enum
@@ -253,7 +246,6 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
     {
         return [
             self::CODE_PLATFORM_LIMITATION,
-            self::CODE_MISSING_PARTICIPANT,
         ];
     }
 
@@ -274,7 +266,6 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
     {
         $this->setIfExists('error', $data ?? [], null);
         $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('platform_error', $data ?? [], null);
     }
 
     /**
@@ -368,7 +359,7 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets code
      *
-     * @param string|null $code Stable machine-readable reason. PLATFORM_LIMITATION covers a capability the platform does not offer (e.g. Bluesky and Reddit DMs reject media); MISSING_PARTICIPANT means the stored conversation has no recipient to send to.
+     * @param string|null $code code
      *
      * @return self
      */
@@ -388,33 +379,6 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
             );
         }
         $this->container['code'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * Gets platform_error
-     *
-     * @return \Zernio\Model\SendInboxMessage400ResponsePlatformError|null
-     */
-    public function getPlatformError()
-    {
-        return $this->container['platform_error'];
-    }
-
-    /**
-     * Sets platform_error
-     *
-     * @param \Zernio\Model\SendInboxMessage400ResponsePlatformError|null $platform_error platform_error
-     *
-     * @return self
-     */
-    public function setPlatformError($platform_error)
-    {
-        if (is_null($platform_error)) {
-            throw new \InvalidArgumentException('non-nullable platform_error cannot be null');
-        }
-        $this->container['platform_error'] = $platform_error;
 
         return $this;
     }

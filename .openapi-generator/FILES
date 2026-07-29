@@ -1178,6 +1178,7 @@ docs/Model/SendDiscordDirectMessageRequestAttachmentsInner.md
 docs/Model/SendInboxMessage200Response.md
 docs/Model/SendInboxMessage200ResponseData.md
 docs/Model/SendInboxMessage400Response.md
+docs/Model/SendInboxMessage400ResponsePlatformError.md
 docs/Model/SendInboxMessageRequest.md
 docs/Model/SendInboxMessageRequestButtonsInner.md
 docs/Model/SendInboxMessageRequestContactsInner.md
@@ -1217,6 +1218,7 @@ docs/Model/SendInboxMessageRequestTemplate.md
 docs/Model/SendInboxMessageRequestTemplateElementsInner.md
 docs/Model/SendInboxMessageRequestTemplateElementsInnerButtonsInner.md
 docs/Model/SendPrivateReplyToComment200Response.md
+docs/Model/SendPrivateReplyToComment400Response.md
 docs/Model/SendPrivateReplyToCommentRequest.md
 docs/Model/SendPrivateReplyToCommentRequestButtonsInner.md
 docs/Model/SendPrivateReplyToCommentRequestButtonsInnerOneOf.md
@@ -2774,6 +2776,7 @@ lib/Model/SendDiscordDirectMessageRequestAttachmentsInner.php
 lib/Model/SendInboxMessage200Response.php
 lib/Model/SendInboxMessage200ResponseData.php
 lib/Model/SendInboxMessage400Response.php
+lib/Model/SendInboxMessage400ResponsePlatformError.php
 lib/Model/SendInboxMessageRequest.php
 lib/Model/SendInboxMessageRequestButtonsInner.php
 lib/Model/SendInboxMessageRequestContactsInner.php
@@ -2813,6 +2816,7 @@ lib/Model/SendInboxMessageRequestTemplate.php
 lib/Model/SendInboxMessageRequestTemplateElementsInner.php
 lib/Model/SendInboxMessageRequestTemplateElementsInnerButtonsInner.php
 lib/Model/SendPrivateReplyToComment200Response.php
+lib/Model/SendPrivateReplyToComment400Response.php
 lib/Model/SendPrivateReplyToCommentRequest.php
 lib/Model/SendPrivateReplyToCommentRequestButtonsInner.php
 lib/Model/SendPrivateReplyToCommentRequestButtonsInnerOneOf.php
@@ -3191,4 +3195,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/SlackPlatformDataTest.php
+test/Model/SendInboxMessage400ResponsePlatformErrorTest.php
+test/Model/SendPrivateReplyToComment400ResponseTest.php

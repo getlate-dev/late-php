@@ -2573,7 +2573,7 @@ class CommentsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\SendPrivateReplyToComment200Response|\Zernio\Model\SendInboxMessage400Response|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\SendPrivateReplyToComment200Response|\Zernio\Model\SendPrivateReplyToComment400Response|\Zernio\Model\InlineObject
      */
     public function sendPrivateReplyToComment($post_id, $comment_id, $send_private_reply_to_comment_request, string $contentType = self::contentTypes['sendPrivateReplyToComment'][0])
     {
@@ -2593,7 +2593,7 @@ class CommentsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\SendPrivateReplyToComment200Response|\Zernio\Model\SendInboxMessage400Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\SendPrivateReplyToComment200Response|\Zernio\Model\SendPrivateReplyToComment400Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function sendPrivateReplyToCommentWithHttpInfo($post_id, $comment_id, $send_private_reply_to_comment_request, string $contentType = self::contentTypes['sendPrivateReplyToComment'][0])
     {
@@ -2631,7 +2631,7 @@ class CommentsApi
                     );
                 case 400:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\SendInboxMessage400Response',
+                        '\Zernio\Model\SendPrivateReplyToComment400Response',
                         $request,
                         $response,
                     );
@@ -2676,7 +2676,7 @@ class CommentsApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\SendInboxMessage400Response',
+                        '\Zernio\Model\SendPrivateReplyToComment400Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

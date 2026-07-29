@@ -1,6 +1,6 @@
 <?php
 /**
- * SendInboxMessage400Response
+ * SendInboxMessage400ResponsePlatformError
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * SendInboxMessage400Response Class Doc Comment
+ * SendInboxMessage400ResponsePlatformError Class Doc Comment
  *
  * @category Class
+ * @description Instagram/Facebook only. Meta&#39;s own diagnostic fields for the rejected send, passed through verbatim so you can tell failure classes apart and quote them to Meta. Absent when the failure did not come from Meta.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class SendInboxMessage400ResponsePlatformError implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'sendInboxMessage_400_response';
+    protected static $openAPIModelName = 'sendInboxMessage_400_response_platformError';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +59,10 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'error' => 'string',
-        'code' => 'string',
-        'platform_error' => '\Zernio\Model\SendInboxMessage400ResponsePlatformError'
+        'code' => 'int',
+        'subcode' => 'int',
+        'fbtrace_id' => 'string',
+        'type' => 'string'
     ];
 
     /**
@@ -71,9 +73,10 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'error' => null,
         'code' => null,
-        'platform_error' => null
+        'subcode' => null,
+        'fbtrace_id' => null,
+        'type' => null
     ];
 
     /**
@@ -82,9 +85,10 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'error' => false,
         'code' => false,
-        'platform_error' => false
+        'subcode' => false,
+        'fbtrace_id' => false,
+        'type' => false
     ];
 
     /**
@@ -173,9 +177,10 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'error' => 'error',
         'code' => 'code',
-        'platform_error' => 'platformError'
+        'subcode' => 'subcode',
+        'fbtrace_id' => 'fbtraceId',
+        'type' => 'type'
     ];
 
     /**
@@ -184,9 +189,10 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'error' => 'setError',
         'code' => 'setCode',
-        'platform_error' => 'setPlatformError'
+        'subcode' => 'setSubcode',
+        'fbtrace_id' => 'setFbtraceId',
+        'type' => 'setType'
     ];
 
     /**
@@ -195,9 +201,10 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'error' => 'getError',
         'code' => 'getCode',
-        'platform_error' => 'getPlatformError'
+        'subcode' => 'getSubcode',
+        'fbtrace_id' => 'getFbtraceId',
+        'type' => 'getType'
     ];
 
     /**
@@ -241,21 +248,6 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
         return self::$openAPIModelName;
     }
 
-    public const CODE_PLATFORM_LIMITATION = 'PLATFORM_LIMITATION';
-    public const CODE_MISSING_PARTICIPANT = 'MISSING_PARTICIPANT';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getCodeAllowableValues()
-    {
-        return [
-            self::CODE_PLATFORM_LIMITATION,
-            self::CODE_MISSING_PARTICIPANT,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -272,9 +264,10 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('error', $data ?? [], null);
         $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('platform_error', $data ?? [], null);
+        $this->setIfExists('subcode', $data ?? [], null);
+        $this->setIfExists('fbtrace_id', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
     }
 
     /**
@@ -304,15 +297,6 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getCodeAllowableValues();
-        if (!is_null($this->container['code']) && !in_array($this->container['code'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'code', must be one of '%s'",
-                $this->container['code'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -329,36 +313,9 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets error
-     *
-     * @return string|null
-     */
-    public function getError()
-    {
-        return $this->container['error'];
-    }
-
-    /**
-     * Sets error
-     *
-     * @param string|null $error error
-     *
-     * @return self
-     */
-    public function setError($error)
-    {
-        if (is_null($error)) {
-            throw new \InvalidArgumentException('non-nullable error cannot be null');
-        }
-        $this->container['error'] = $error;
-
-        return $this;
-    }
-
-    /**
      * Gets code
      *
-     * @return string|null
+     * @return int|null
      */
     public function getCode()
     {
@@ -368,7 +325,7 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets code
      *
-     * @param string|null $code Stable machine-readable reason. PLATFORM_LIMITATION covers a capability the platform does not offer (e.g. Bluesky and Reddit DMs reject media); MISSING_PARTICIPANT means the stored conversation has no recipient to send to.
+     * @param int|null $code Meta error code
      *
      * @return self
      */
@@ -377,44 +334,88 @@ class SendInboxMessage400Response implements ModelInterface, ArrayAccess, \JsonS
         if (is_null($code)) {
             throw new \InvalidArgumentException('non-nullable code cannot be null');
         }
-        $allowedValues = $this->getCodeAllowableValues();
-        if (!in_array($code, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'code', must be one of '%s'",
-                    $code,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
         $this->container['code'] = $code;
 
         return $this;
     }
 
     /**
-     * Gets platform_error
+     * Gets subcode
      *
-     * @return \Zernio\Model\SendInboxMessage400ResponsePlatformError|null
+     * @return int|null
      */
-    public function getPlatformError()
+    public function getSubcode()
     {
-        return $this->container['platform_error'];
+        return $this->container['subcode'];
     }
 
     /**
-     * Sets platform_error
+     * Sets subcode
      *
-     * @param \Zernio\Model\SendInboxMessage400ResponsePlatformError|null $platform_error platform_error
+     * @param int|null $subcode Meta error_subcode
      *
      * @return self
      */
-    public function setPlatformError($platform_error)
+    public function setSubcode($subcode)
     {
-        if (is_null($platform_error)) {
-            throw new \InvalidArgumentException('non-nullable platform_error cannot be null');
+        if (is_null($subcode)) {
+            throw new \InvalidArgumentException('non-nullable subcode cannot be null');
         }
-        $this->container['platform_error'] = $platform_error;
+        $this->container['subcode'] = $subcode;
+
+        return $this;
+    }
+
+    /**
+     * Gets fbtrace_id
+     *
+     * @return string|null
+     */
+    public function getFbtraceId()
+    {
+        return $this->container['fbtrace_id'];
+    }
+
+    /**
+     * Sets fbtrace_id
+     *
+     * @param string|null $fbtrace_id Meta fbtrace_id, quote this in a Meta bug report
+     *
+     * @return self
+     */
+    public function setFbtraceId($fbtrace_id)
+    {
+        if (is_null($fbtrace_id)) {
+            throw new \InvalidArgumentException('non-nullable fbtrace_id cannot be null');
+        }
+        $this->container['fbtrace_id'] = $fbtrace_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets type
+     *
+     * @return string|null
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string|null $type Meta error type (e.g. OAuthException)
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
+        $this->container['type'] = $type;
 
         return $this;
     }
