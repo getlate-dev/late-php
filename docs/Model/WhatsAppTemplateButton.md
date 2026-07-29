@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **string** |  |
-**text** | **string** | Visible button label. Required for all types except copy_code (whose label is fixed by WhatsApp). | [optional]
+**text** | **string** | Visible button label. Required for all types except copy_code (whose label is fixed by WhatsApp) and otp (omit it and WhatsApp supplies its own label, localized to the template language; an English label on a non-English template is rejected). | [optional]
 **url** | **string** | Required when type is URL | [optional]
 **example** | **mixed** |  | [optional]
 **phone_number** | **string** | Required when type is phone_number | [optional]
