@@ -627,7 +627,7 @@ class ConversionEvent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets action_source
      *
-     * @param string|null $action_source Where the conversion happened. Used by Meta; Google ignores.
+     * @param string|null $action_source Where the conversion happened. Used by Meta. Google also requires an event source internally; omitting this field sends OTHER to Google. Send an explicit value for accurate origin reporting.
      *
      * @return self
      */

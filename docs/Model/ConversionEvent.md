@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **user** | [**\Zernio\Model\ConversionEventUser**](ConversionEventUser.md) |  |
 **items** | [**\Zernio\Model\ConversionEventItemsInner[]**](ConversionEventItemsInner.md) | Item-level detail for ecommerce events. | [optional]
 **source_url** | **string** | URL where the conversion originated (used by Meta). | [optional]
-**action_source** | **string** | Where the conversion happened. Used by Meta; Google ignores. | [optional]
+**action_source** | **string** | Where the conversion happened. Used by Meta. Google also requires an event source internally; omitting this field sends OTHER to Google. Send an explicit value for accurate origin reporting. | [optional]
 **platform_data** | **array<string,mixed>** | Escape hatch for platform-specific fields we haven&#39;t normalized. Forwarded as-is. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
