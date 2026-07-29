@@ -254,6 +254,13 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
     public const CONTENT_TYPE_VIDEO_WEBM = 'video/webm';
     public const CONTENT_TYPE_VIDEO_X_M4V = 'video/x-m4v';
     public const CONTENT_TYPE_APPLICATION_PDF = 'application/pdf';
+    public const CONTENT_TYPE_AUDIO_MPEG = 'audio/mpeg';
+    public const CONTENT_TYPE_AUDIO_MP4 = 'audio/mp4';
+    public const CONTENT_TYPE_AUDIO_AAC = 'audio/aac';
+    public const CONTENT_TYPE_AUDIO_OGG = 'audio/ogg';
+    public const CONTENT_TYPE_AUDIO_WAV = 'audio/wav';
+    public const CONTENT_TYPE_AUDIO_WEBM = 'audio/webm';
+    public const CONTENT_TYPE_AUDIO_X_M4A = 'audio/x-m4a';
 
     /**
      * Gets allowable values of the enum
@@ -276,6 +283,13 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
             self::CONTENT_TYPE_VIDEO_WEBM,
             self::CONTENT_TYPE_VIDEO_X_M4V,
             self::CONTENT_TYPE_APPLICATION_PDF,
+            self::CONTENT_TYPE_AUDIO_MPEG,
+            self::CONTENT_TYPE_AUDIO_MP4,
+            self::CONTENT_TYPE_AUDIO_AAC,
+            self::CONTENT_TYPE_AUDIO_OGG,
+            self::CONTENT_TYPE_AUDIO_WAV,
+            self::CONTENT_TYPE_AUDIO_WEBM,
+            self::CONTENT_TYPE_AUDIO_X_M4A,
         ];
     }
 
