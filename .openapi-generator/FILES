@@ -1061,6 +1061,10 @@ docs/Model/PurchasePhoneNumber200ResponseOneOf2.md
 docs/Model/PurchasePhoneNumber202Response.md
 docs/Model/PurchasePhoneNumber409Response.md
 docs/Model/PurchasePhoneNumberRequest.md
+docs/Model/PurchaseWhatsAppPhoneNumber200Response.md
+docs/Model/PurchaseWhatsAppPhoneNumber200ResponseOneOf.md
+docs/Model/PurchaseWhatsAppPhoneNumber200ResponseOneOf1.md
+docs/Model/PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumber.md
 docs/Model/PurchaseWhatsAppPhoneNumberRequest.md
 docs/Model/QueryAdInsights200Response.md
 docs/Model/QueryAdInsights200ResponsePaging.md
@@ -2663,6 +2667,10 @@ lib/Model/PurchasePhoneNumber200ResponseOneOf2.php
 lib/Model/PurchasePhoneNumber202Response.php
 lib/Model/PurchasePhoneNumber409Response.php
 lib/Model/PurchasePhoneNumberRequest.php
+lib/Model/PurchaseWhatsAppPhoneNumber200Response.php
+lib/Model/PurchaseWhatsAppPhoneNumber200ResponseOneOf.php
+lib/Model/PurchaseWhatsAppPhoneNumber200ResponseOneOf1.php
+lib/Model/PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumber.php
 lib/Model/PurchaseWhatsAppPhoneNumberRequest.php
 lib/Model/QueryAdInsights200Response.php
 lib/Model/QueryAdInsights200ResponsePaging.php
@@ -3203,3 +3211,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumberTest.php

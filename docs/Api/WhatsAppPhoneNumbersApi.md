@@ -511,7 +511,7 @@ This endpoint does not need any parameter.
 ## `purchaseWhatsAppPhoneNumber()`
 
 ```php
-purchaseWhatsAppPhoneNumber($purchase_whats_app_phone_number_request): \Zernio\Model\PurchasePhoneNumber200Response
+purchaseWhatsAppPhoneNumber($purchase_whats_app_phone_number_request): \Zernio\Model\PurchaseWhatsAppPhoneNumber200Response
 ```
 
 Purchase phone number
@@ -553,7 +553,7 @@ try {
 
 ### Return type
 
-[**\Zernio\Model\PurchasePhoneNumber200Response**](../Model/PurchasePhoneNumber200Response.md)
+[**\Zernio\Model\PurchaseWhatsAppPhoneNumber200Response**](../Model/PurchaseWhatsAppPhoneNumber200Response.md)
 
 ### Authorization
 

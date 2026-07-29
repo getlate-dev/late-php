@@ -62,7 +62,8 @@ class PurchasePhoneNumber200Response implements ModelInterface, ArrayAccess, \Js
         'checkout_url' => 'string',
         'phone_number' => 'string',
         'status' => 'string',
-        'number_id' => 'string'
+        'number_id' => 'string',
+        'profile_id' => 'string'
     ];
 
     /**
@@ -77,7 +78,8 @@ class PurchasePhoneNumber200Response implements ModelInterface, ArrayAccess, \Js
         'checkout_url' => 'uri',
         'phone_number' => null,
         'status' => null,
-        'number_id' => null
+        'number_id' => null,
+        'profile_id' => null
     ];
 
     /**
@@ -90,7 +92,8 @@ class PurchasePhoneNumber200Response implements ModelInterface, ArrayAccess, \Js
         'checkout_url' => false,
         'phone_number' => false,
         'status' => false,
-        'number_id' => false
+        'number_id' => false,
+        'profile_id' => false
     ];
 
     /**
@@ -183,7 +186,8 @@ class PurchasePhoneNumber200Response implements ModelInterface, ArrayAccess, \Js
         'checkout_url' => 'checkoutUrl',
         'phone_number' => 'phoneNumber',
         'status' => 'status',
-        'number_id' => 'numberId'
+        'number_id' => 'numberId',
+        'profile_id' => 'profileId'
     ];
 
     /**
@@ -196,7 +200,8 @@ class PurchasePhoneNumber200Response implements ModelInterface, ArrayAccess, \Js
         'checkout_url' => 'setCheckoutUrl',
         'phone_number' => 'setPhoneNumber',
         'status' => 'setStatus',
-        'number_id' => 'setNumberId'
+        'number_id' => 'setNumberId',
+        'profile_id' => 'setProfileId'
     ];
 
     /**
@@ -209,7 +214,8 @@ class PurchasePhoneNumber200Response implements ModelInterface, ArrayAccess, \Js
         'checkout_url' => 'getCheckoutUrl',
         'phone_number' => 'getPhoneNumber',
         'status' => 'getStatus',
-        'number_id' => 'getNumberId'
+        'number_id' => 'getNumberId',
+        'profile_id' => 'getProfileId'
     ];
 
     /**
@@ -287,6 +293,7 @@ class PurchasePhoneNumber200Response implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('phone_number', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('number_id', $data ?? [], null);
+        $this->setIfExists('profile_id', $data ?? [], null);
     }
 
     /**
@@ -481,6 +488,33 @@ class PurchasePhoneNumber200Response implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable number_id cannot be null');
         }
         $this->container['number_id'] = $number_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets profile_id
+     *
+     * @return string|null
+     */
+    public function getProfileId()
+    {
+        return $this->container['profile_id'];
+    }
+
+    /**
+     * Sets profile_id
+     *
+     * @param string|null $profile_id The profile the number was actually assigned to.
+     *
+     * @return self
+     */
+    public function setProfileId($profile_id)
+    {
+        if (is_null($profile_id)) {
+            throw new \InvalidArgumentException('non-nullable profile_id cannot be null');
+        }
+        $this->container['profile_id'] = $profile_id;
 
         return $this;
     }

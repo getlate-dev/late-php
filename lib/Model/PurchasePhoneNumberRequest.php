@@ -398,7 +398,7 @@ class PurchasePhoneNumberRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets profile_id
      *
-     * @param string $profile_id Profile to associate the number with
+     * @param string $profile_id Preferred profile for the number. One number = one profile, so when the requested profile already holds a number the API assigns the next free profile instead (or creates one) and returns the actual assignment in `profileId` on the response.
      *
      * @return self
      */
@@ -602,7 +602,7 @@ class PurchasePhoneNumberRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets purchase_intent_id
      *
-     * @param string|null $purchase_intent_id Optional idempotency key. Send the same value when retrying a purchase: if a number was already bought under this key, the API returns { status: \"already_purchased\", numberId, phoneNumber } instead of provisioning a second number. Generate a fresh key for each genuinely new purchase.
+     * @param string|null $purchase_intent_id Optional idempotency key. Send the same value when retrying a purchase: if a number was already bought under this key, the API returns { status: \"already_purchased\", numberId, phoneNumber, profileId } instead of provisioning a second number. Generate a fresh key for each genuinely new purchase.
      *
      * @return self
      */

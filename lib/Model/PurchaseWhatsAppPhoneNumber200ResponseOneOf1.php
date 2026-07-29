@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * PurchaseWhatsAppPhoneNumber200ResponseOneOf1 Class Doc Comment
  *
  * @category Class
- * @description Phone number provisioned inline (subsequent numbers)
+ * @description A number was already purchased under the supplied purchaseIntentId; no new number was provisioned.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -59,8 +59,9 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
       * @var string[]
       */
     protected static $openAPITypes = [
-        'message' => 'string',
-        'phone_number' => '\Zernio\Model\PurchaseWhatsAppPhoneNumber200ResponseOneOf1PhoneNumber'
+        'status' => 'string',
+        'number_id' => 'string',
+        'phone_number' => 'string'
     ];
 
     /**
@@ -71,7 +72,8 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'message' => null,
+        'status' => null,
+        'number_id' => null,
         'phone_number' => null
     ];
 
@@ -81,7 +83,8 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'message' => false,
+        'status' => false,
+        'number_id' => false,
         'phone_number' => false
     ];
 
@@ -171,7 +174,8 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
      * @var string[]
      */
     protected static $attributeMap = [
-        'message' => 'message',
+        'status' => 'status',
+        'number_id' => 'numberId',
         'phone_number' => 'phoneNumber'
     ];
 
@@ -181,7 +185,8 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
      * @var string[]
      */
     protected static $setters = [
-        'message' => 'setMessage',
+        'status' => 'setStatus',
+        'number_id' => 'setNumberId',
         'phone_number' => 'setPhoneNumber'
     ];
 
@@ -191,7 +196,8 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
      * @var string[]
      */
     protected static $getters = [
-        'message' => 'getMessage',
+        'status' => 'getStatus',
+        'number_id' => 'getNumberId',
         'phone_number' => 'getPhoneNumber'
     ];
 
@@ -236,6 +242,19 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
         return self::$openAPIModelName;
     }
 
+    public const STATUS_ALREADY_PURCHASED = 'already_purchased';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_ALREADY_PURCHASED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -252,7 +271,8 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('number_id', $data ?? [], null);
         $this->setIfExists('phone_number', $data ?? [], null);
     }
 
@@ -283,6 +303,15 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -299,28 +328,65 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
 
 
     /**
-     * Gets message
+     * Gets status
      *
      * @return string|null
      */
-    public function getMessage()
+    public function getStatus()
     {
-        return $this->container['message'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets message
+     * Sets status
      *
-     * @param string|null $message message
+     * @param string|null $status status
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setStatus($status)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['message'] = $message;
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'status', must be one of '%s'",
+                    $status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets number_id
+     *
+     * @return string|null
+     */
+    public function getNumberId()
+    {
+        return $this->container['number_id'];
+    }
+
+    /**
+     * Sets number_id
+     *
+     * @param string|null $number_id number_id
+     *
+     * @return self
+     */
+    public function setNumberId($number_id)
+    {
+        if (is_null($number_id)) {
+            throw new \InvalidArgumentException('non-nullable number_id cannot be null');
+        }
+        $this->container['number_id'] = $number_id;
 
         return $this;
     }
@@ -328,7 +394,7 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
     /**
      * Gets phone_number
      *
-     * @return \Zernio\Model\PurchaseWhatsAppPhoneNumber200ResponseOneOf1PhoneNumber|null
+     * @return string|null
      */
     public function getPhoneNumber()
     {
@@ -338,7 +404,7 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 implements ModelInterface, Ar
     /**
      * Sets phone_number
      *
-     * @param \Zernio\Model\PurchaseWhatsAppPhoneNumber200ResponseOneOf1PhoneNumber|null $phone_number phone_number
+     * @param string|null $phone_number phone_number
      *
      * @return self
      */

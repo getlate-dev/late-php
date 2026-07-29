@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * PurchaseWhatsAppPhoneNumber200ResponseOneOf Class Doc Comment
  *
  * @category Class
- * @description Checkout session created (first number)
+ * @description Phone number provisioned inline (subsequent numbers)
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,7 +60,7 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf implements ModelInterface, Arr
       */
     protected static $openAPITypes = [
         'message' => 'string',
-        'checkout_url' => 'string'
+        'phone_number' => '\Zernio\Model\PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumber'
     ];
 
     /**
@@ -72,7 +72,7 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf implements ModelInterface, Arr
       */
     protected static $openAPIFormats = [
         'message' => null,
-        'checkout_url' => 'uri'
+        'phone_number' => null
     ];
 
     /**
@@ -82,7 +82,7 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf implements ModelInterface, Arr
       */
     protected static array $openAPINullables = [
         'message' => false,
-        'checkout_url' => false
+        'phone_number' => false
     ];
 
     /**
@@ -172,7 +172,7 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf implements ModelInterface, Arr
      */
     protected static $attributeMap = [
         'message' => 'message',
-        'checkout_url' => 'checkoutUrl'
+        'phone_number' => 'phoneNumber'
     ];
 
     /**
@@ -182,7 +182,7 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf implements ModelInterface, Arr
      */
     protected static $setters = [
         'message' => 'setMessage',
-        'checkout_url' => 'setCheckoutUrl'
+        'phone_number' => 'setPhoneNumber'
     ];
 
     /**
@@ -192,7 +192,7 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf implements ModelInterface, Arr
      */
     protected static $getters = [
         'message' => 'getMessage',
-        'checkout_url' => 'getCheckoutUrl'
+        'phone_number' => 'getPhoneNumber'
     ];
 
     /**
@@ -253,7 +253,7 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf implements ModelInterface, Arr
     public function __construct(?array $data = null)
     {
         $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('checkout_url', $data ?? [], null);
+        $this->setIfExists('phone_number', $data ?? [], null);
     }
 
     /**
@@ -326,28 +326,28 @@ class PurchaseWhatsAppPhoneNumber200ResponseOneOf implements ModelInterface, Arr
     }
 
     /**
-     * Gets checkout_url
+     * Gets phone_number
      *
-     * @return string|null
+     * @return \Zernio\Model\PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumber|null
      */
-    public function getCheckoutUrl()
+    public function getPhoneNumber()
     {
-        return $this->container['checkout_url'];
+        return $this->container['phone_number'];
     }
 
     /**
-     * Sets checkout_url
+     * Sets phone_number
      *
-     * @param string|null $checkout_url checkout_url
+     * @param \Zernio\Model\PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumber|null $phone_number phone_number
      *
      * @return self
      */
-    public function setCheckoutUrl($checkout_url)
+    public function setPhoneNumber($phone_number)
     {
-        if (is_null($checkout_url)) {
-            throw new \InvalidArgumentException('non-nullable checkout_url cannot be null');
+        if (is_null($phone_number)) {
+            throw new \InvalidArgumentException('non-nullable phone_number cannot be null');
         }
-        $this->container['checkout_url'] = $checkout_url;
+        $this->container['phone_number'] = $phone_number;
 
         return $this;
     }

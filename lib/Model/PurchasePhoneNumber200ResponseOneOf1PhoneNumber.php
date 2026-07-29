@@ -64,7 +64,8 @@ class PurchasePhoneNumber200ResponseOneOf1PhoneNumber implements ModelInterface,
         'country' => 'string',
         'provisioned_at' => '\DateTime',
         'meta_preverified_id' => 'string',
-        'meta_verification_status' => 'string'
+        'meta_verification_status' => 'string',
+        'profile_id' => 'string'
     ];
 
     /**
@@ -81,7 +82,8 @@ class PurchasePhoneNumber200ResponseOneOf1PhoneNumber implements ModelInterface,
         'country' => null,
         'provisioned_at' => 'date-time',
         'meta_preverified_id' => null,
-        'meta_verification_status' => null
+        'meta_verification_status' => null,
+        'profile_id' => null
     ];
 
     /**
@@ -96,7 +98,8 @@ class PurchasePhoneNumber200ResponseOneOf1PhoneNumber implements ModelInterface,
         'country' => false,
         'provisioned_at' => false,
         'meta_preverified_id' => false,
-        'meta_verification_status' => false
+        'meta_verification_status' => false,
+        'profile_id' => false
     ];
 
     /**
@@ -191,7 +194,8 @@ class PurchasePhoneNumber200ResponseOneOf1PhoneNumber implements ModelInterface,
         'country' => 'country',
         'provisioned_at' => 'provisionedAt',
         'meta_preverified_id' => 'metaPreverifiedId',
-        'meta_verification_status' => 'metaVerificationStatus'
+        'meta_verification_status' => 'metaVerificationStatus',
+        'profile_id' => 'profileId'
     ];
 
     /**
@@ -206,7 +210,8 @@ class PurchasePhoneNumber200ResponseOneOf1PhoneNumber implements ModelInterface,
         'country' => 'setCountry',
         'provisioned_at' => 'setProvisionedAt',
         'meta_preverified_id' => 'setMetaPreverifiedId',
-        'meta_verification_status' => 'setMetaVerificationStatus'
+        'meta_verification_status' => 'setMetaVerificationStatus',
+        'profile_id' => 'setProfileId'
     ];
 
     /**
@@ -221,7 +226,8 @@ class PurchasePhoneNumber200ResponseOneOf1PhoneNumber implements ModelInterface,
         'country' => 'getCountry',
         'provisioned_at' => 'getProvisionedAt',
         'meta_preverified_id' => 'getMetaPreverifiedId',
-        'meta_verification_status' => 'getMetaVerificationStatus'
+        'meta_verification_status' => 'getMetaVerificationStatus',
+        'profile_id' => 'getProfileId'
     ];
 
     /**
@@ -288,6 +294,7 @@ class PurchasePhoneNumber200ResponseOneOf1PhoneNumber implements ModelInterface,
         $this->setIfExists('provisioned_at', $data ?? [], null);
         $this->setIfExists('meta_preverified_id', $data ?? [], null);
         $this->setIfExists('meta_verification_status', $data ?? [], null);
+        $this->setIfExists('profile_id', $data ?? [], null);
     }
 
     /**
@@ -517,6 +524,33 @@ class PurchasePhoneNumber200ResponseOneOf1PhoneNumber implements ModelInterface,
             throw new \InvalidArgumentException('non-nullable meta_verification_status cannot be null');
         }
         $this->container['meta_verification_status'] = $meta_verification_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets profile_id
+     *
+     * @return string|null
+     */
+    public function getProfileId()
+    {
+        return $this->container['profile_id'];
+    }
+
+    /**
+     * Sets profile_id
+     *
+     * @param string|null $profile_id The profile the number was actually assigned to.
+     *
+     * @return self
+     */
+    public function setProfileId($profile_id)
+    {
+        if (is_null($profile_id)) {
+            throw new \InvalidArgumentException('non-nullable profile_id cannot be null');
+        }
+        $this->container['profile_id'] = $profile_id;
 
         return $this;
     }

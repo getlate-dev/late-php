@@ -1,6 +1,6 @@
 <?php
 /**
- * PurchasePhoneNumber200ResponseOneOf2
+ * PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumber
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * PurchasePhoneNumber200ResponseOneOf2 Class Doc Comment
+ * PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumber Class Doc Comment
  *
  * @category Class
- * @description A number was already purchased under the supplied purchaseIntentId; no new number was provisioned.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAccess, \JsonSerializable
+class PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumber implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
       *
       * @var string
       */
-    protected static $openAPIModelName = 'purchasePhoneNumber_200_response_oneOf_2';
+    protected static $openAPIModelName = 'purchaseWhatsAppPhoneNumber_200_response_oneOf_phoneNumber';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,10 +58,13 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
       * @var string[]
       */
     protected static $openAPITypes = [
-        'status' => 'string',
-        'number_id' => 'string',
+        'id' => 'string',
         'phone_number' => 'string',
-        'profile_id' => 'string'
+        'status' => 'string',
+        'country' => 'string',
+        'provisioned_at' => '\DateTime',
+        'meta_preverified_id' => 'string',
+        'meta_verification_status' => 'string'
     ];
 
     /**
@@ -73,10 +75,13 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'status' => null,
-        'number_id' => null,
+        'id' => null,
         'phone_number' => null,
-        'profile_id' => null
+        'status' => null,
+        'country' => null,
+        'provisioned_at' => 'date-time',
+        'meta_preverified_id' => null,
+        'meta_verification_status' => null
     ];
 
     /**
@@ -85,10 +90,13 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'status' => false,
-        'number_id' => false,
+        'id' => false,
         'phone_number' => false,
-        'profile_id' => false
+        'status' => false,
+        'country' => false,
+        'provisioned_at' => false,
+        'meta_preverified_id' => false,
+        'meta_verification_status' => false
     ];
 
     /**
@@ -177,10 +185,13 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $attributeMap = [
-        'status' => 'status',
-        'number_id' => 'numberId',
+        'id' => 'id',
         'phone_number' => 'phoneNumber',
-        'profile_id' => 'profileId'
+        'status' => 'status',
+        'country' => 'country',
+        'provisioned_at' => 'provisionedAt',
+        'meta_preverified_id' => 'metaPreverifiedId',
+        'meta_verification_status' => 'metaVerificationStatus'
     ];
 
     /**
@@ -189,10 +200,13 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $setters = [
-        'status' => 'setStatus',
-        'number_id' => 'setNumberId',
+        'id' => 'setId',
         'phone_number' => 'setPhoneNumber',
-        'profile_id' => 'setProfileId'
+        'status' => 'setStatus',
+        'country' => 'setCountry',
+        'provisioned_at' => 'setProvisionedAt',
+        'meta_preverified_id' => 'setMetaPreverifiedId',
+        'meta_verification_status' => 'setMetaVerificationStatus'
     ];
 
     /**
@@ -201,10 +215,13 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $getters = [
-        'status' => 'getStatus',
-        'number_id' => 'getNumberId',
+        'id' => 'getId',
         'phone_number' => 'getPhoneNumber',
-        'profile_id' => 'getProfileId'
+        'status' => 'getStatus',
+        'country' => 'getCountry',
+        'provisioned_at' => 'getProvisionedAt',
+        'meta_preverified_id' => 'getMetaPreverifiedId',
+        'meta_verification_status' => 'getMetaVerificationStatus'
     ];
 
     /**
@@ -248,19 +265,6 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
         return self::$openAPIModelName;
     }
 
-    public const STATUS_ALREADY_PURCHASED = 'already_purchased';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getStatusAllowableValues()
-    {
-        return [
-            self::STATUS_ALREADY_PURCHASED,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -277,10 +281,13 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('number_id', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('phone_number', $data ?? [], null);
-        $this->setIfExists('profile_id', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('country', $data ?? [], null);
+        $this->setIfExists('provisioned_at', $data ?? [], null);
+        $this->setIfExists('meta_preverified_id', $data ?? [], null);
+        $this->setIfExists('meta_verification_status', $data ?? [], null);
     }
 
     /**
@@ -310,15 +317,6 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'status', must be one of '%s'",
-                $this->container['status'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -335,65 +333,28 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
 
 
     /**
-     * Gets status
+     * Gets id
      *
      * @return string|null
      */
-    public function getStatus()
+    public function getId()
     {
-        return $this->container['status'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets status
+     * Sets id
      *
-     * @param string|null $status status
+     * @param string|null $id id
      *
      * @return self
      */
-    public function setStatus($status)
+    public function setId($id)
     {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'status', must be one of '%s'",
-                    $status,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets number_id
-     *
-     * @return string|null
-     */
-    public function getNumberId()
-    {
-        return $this->container['number_id'];
-    }
-
-    /**
-     * Sets number_id
-     *
-     * @param string|null $number_id number_id
-     *
-     * @return self
-     */
-    public function setNumberId($number_id)
-    {
-        if (is_null($number_id)) {
-            throw new \InvalidArgumentException('non-nullable number_id cannot be null');
-        }
-        $this->container['number_id'] = $number_id;
+        $this->container['id'] = $id;
 
         return $this;
     }
@@ -426,28 +387,136 @@ class PurchasePhoneNumber200ResponseOneOf2 implements ModelInterface, ArrayAcces
     }
 
     /**
-     * Gets profile_id
+     * Gets status
      *
      * @return string|null
      */
-    public function getProfileId()
+    public function getStatus()
     {
-        return $this->container['profile_id'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets profile_id
+     * Sets status
      *
-     * @param string|null $profile_id The profile the number was actually assigned to.
+     * @param string|null $status status
      *
      * @return self
      */
-    public function setProfileId($profile_id)
+    public function setStatus($status)
     {
-        if (is_null($profile_id)) {
-            throw new \InvalidArgumentException('non-nullable profile_id cannot be null');
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['profile_id'] = $profile_id;
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets country
+     *
+     * @return string|null
+     */
+    public function getCountry()
+    {
+        return $this->container['country'];
+    }
+
+    /**
+     * Sets country
+     *
+     * @param string|null $country country
+     *
+     * @return self
+     */
+    public function setCountry($country)
+    {
+        if (is_null($country)) {
+            throw new \InvalidArgumentException('non-nullable country cannot be null');
+        }
+        $this->container['country'] = $country;
+
+        return $this;
+    }
+
+    /**
+     * Gets provisioned_at
+     *
+     * @return \DateTime|null
+     */
+    public function getProvisionedAt()
+    {
+        return $this->container['provisioned_at'];
+    }
+
+    /**
+     * Sets provisioned_at
+     *
+     * @param \DateTime|null $provisioned_at provisioned_at
+     *
+     * @return self
+     */
+    public function setProvisionedAt($provisioned_at)
+    {
+        if (is_null($provisioned_at)) {
+            throw new \InvalidArgumentException('non-nullable provisioned_at cannot be null');
+        }
+        $this->container['provisioned_at'] = $provisioned_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets meta_preverified_id
+     *
+     * @return string|null
+     */
+    public function getMetaPreverifiedId()
+    {
+        return $this->container['meta_preverified_id'];
+    }
+
+    /**
+     * Sets meta_preverified_id
+     *
+     * @param string|null $meta_preverified_id meta_preverified_id
+     *
+     * @return self
+     */
+    public function setMetaPreverifiedId($meta_preverified_id)
+    {
+        if (is_null($meta_preverified_id)) {
+            throw new \InvalidArgumentException('non-nullable meta_preverified_id cannot be null');
+        }
+        $this->container['meta_preverified_id'] = $meta_preverified_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets meta_verification_status
+     *
+     * @return string|null
+     */
+    public function getMetaVerificationStatus()
+    {
+        return $this->container['meta_verification_status'];
+    }
+
+    /**
+     * Sets meta_verification_status
+     *
+     * @param string|null $meta_verification_status meta_verification_status
+     *
+     * @return self
+     */
+    public function setMetaVerificationStatus($meta_verification_status)
+    {
+        if (is_null($meta_verification_status)) {
+            throw new \InvalidArgumentException('non-nullable meta_verification_status cannot be null');
+        }
+        $this->container['meta_verification_status'] = $meta_verification_status;
 
         return $this;
     }
