@@ -691,6 +691,8 @@ docs/Model/GetSequence200Response.md
 docs/Model/GetSequence200ResponseSequence.md
 docs/Model/GetSequence200ResponseSequenceStepsInner.md
 docs/Model/GetSequence200ResponseSequenceStepsInnerTemplate.md
+docs/Model/GetSlackSettings200Response.md
+docs/Model/GetSlackSettings200ResponseAccount.md
 docs/Model/GetSmsRegistration200Response.md
 docs/Model/GetSmsRegistration200ResponseCampaignContent.md
 docs/Model/GetSmsUsage200Response.md
@@ -1408,6 +1410,7 @@ docs/Model/UpdateSequence200ResponseSequence.md
 docs/Model/UpdateSequenceRequest.md
 docs/Model/UpdateSequenceRequestStepsInner.md
 docs/Model/UpdateSequenceRequestStepsInnerTemplate.md
+docs/Model/UpdateSlackSettingsRequest.md
 docs/Model/UpdateTrackingTagRequest.md
 docs/Model/UpdateWebhookSettings200Response.md
 docs/Model/UpdateWebhookSettingsRequest.md
@@ -2288,6 +2291,8 @@ lib/Model/GetSequence200Response.php
 lib/Model/GetSequence200ResponseSequence.php
 lib/Model/GetSequence200ResponseSequenceStepsInner.php
 lib/Model/GetSequence200ResponseSequenceStepsInnerTemplate.php
+lib/Model/GetSlackSettings200Response.php
+lib/Model/GetSlackSettings200ResponseAccount.php
 lib/Model/GetSmsRegistration200Response.php
 lib/Model/GetSmsRegistration200ResponseCampaignContent.php
 lib/Model/GetSmsUsage200Response.php
@@ -3006,6 +3011,7 @@ lib/Model/UpdateSequence200ResponseSequence.php
 lib/Model/UpdateSequenceRequest.php
 lib/Model/UpdateSequenceRequestStepsInner.php
 lib/Model/UpdateSequenceRequestStepsInnerTemplate.php
+lib/Model/UpdateSlackSettingsRequest.php
 lib/Model/UpdateTrackingTagRequest.php
 lib/Model/UpdateWebhookSettings200Response.php
 lib/Model/UpdateWebhookSettingsRequest.php
@@ -3195,3 +3201,6 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/GetSlackSettings200ResponseAccountTest.php
+test/Model/GetSlackSettings200ResponseTest.php
+test/Model/UpdateSlackSettingsRequestTest.php

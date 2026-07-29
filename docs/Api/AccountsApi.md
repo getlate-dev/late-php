@@ -10,10 +10,12 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**getAccountHealth()**](AccountsApi.md#getAccountHealth) | **GET** /v1/accounts/{accountId}/health | Check account health |
 | [**getAllAccountsHealth()**](AccountsApi.md#getAllAccountsHealth) | **GET** /v1/accounts/health | Check accounts health |
 | [**getFollowerStats()**](AccountsApi.md#getFollowerStats) | **GET** /v1/accounts/follower-stats | Get follower stats |
+| [**getSlackSettings()**](AccountsApi.md#getSlackSettings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings |
 | [**getTikTokCreatorInfo()**](AccountsApi.md#getTikTokCreatorInfo) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info |
 | [**listAccounts()**](AccountsApi.md#listAccounts) | **GET** /v1/accounts | List accounts |
 | [**moveAccountToProfile()**](AccountsApi.md#moveAccountToProfile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile |
 | [**updateAccount()**](AccountsApi.md#updateAccount) | **PUT** /v1/accounts/{accountId} | Update account |
+| [**updateSlackSettings()**](AccountsApi.md#updateSlackSettings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings |
 
 
 ## `deleteAccount()`
@@ -254,6 +256,66 @@ try {
 ### Return type
 
 [**\Zernio\Model\FollowerStatsResponse**](../Model/FollowerStatsResponse.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getSlackSettings()`
+
+```php
+getSlackSettings($account_id): \Zernio\Model\GetSlackSettings200Response
+```
+
+Get Slack account settings
+
+Returns the connected Slack channel details and the default message identity (name and avatar shown as the author on every post, with Slack's APP badge). The identity applies to messages only; the app's own Slack profile is global and cannot be changed per workspace.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string
+
+try {
+    $result = $apiInstance->getSlackSettings($account_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->getSlackSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**|  | |
+
+### Return type
+
+[**\Zernio\Model\GetSlackSettings200Response**](../Model/GetSlackSettings200Response.md)
 
 ### Authorization
 
@@ -510,6 +572,67 @@ try {
 ### Return type
 
 [**\Zernio\Model\UpdateAccount200Response**](../Model/UpdateAccount200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateSlackSettings()`
+
+```php
+updateSlackSettings($account_id, $update_slack_settings_request)
+```
+
+Update Slack account settings
+
+Set or clear the default message identity for this channel. Empty string clears a field; per-post platformSpecificData.username/iconUrl still override these defaults.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string
+$update_slack_settings_request = new \Zernio\Model\UpdateSlackSettingsRequest(); // \Zernio\Model\UpdateSlackSettingsRequest
+
+try {
+    $apiInstance->updateSlackSettings($account_id, $update_slack_settings_request);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->updateSlackSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**|  | |
+| **update_slack_settings_request** | [**\Zernio\Model\UpdateSlackSettingsRequest**](../Model/UpdateSlackSettingsRequest.md)|  | |
+
+### Return type
+
+void (empty response body)
 
 ### Authorization
 
