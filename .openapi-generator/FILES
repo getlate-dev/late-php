@@ -1245,6 +1245,7 @@ docs/Model/SetWhatsappBusinessUsernameRequest.md
 docs/Model/ShareSmsRegistration200Response.md
 docs/Model/ShareSmsRegistrationRequest.md
 docs/Model/SharedAdAccount.md
+docs/Model/SlackPlatformData.md
 docs/Model/SnapchatPlatformData.md
 docs/Model/SocialAccount.md
 docs/Model/SocialAccountProfileId.md
@@ -2840,6 +2841,7 @@ lib/Model/SetWhatsappBusinessUsernameRequest.php
 lib/Model/ShareSmsRegistration200Response.php
 lib/Model/ShareSmsRegistrationRequest.php
 lib/Model/SharedAdAccount.php
+lib/Model/SlackPlatformData.php
 lib/Model/SnapchatPlatformData.php
 lib/Model/SocialAccount.php
 lib/Model/SocialAccountProfileId.php
@@ -3189,9 +3191,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/GenerateKeywordHistoricalMetrics200ResponseTest.php
-test/Model/GenerateKeywordHistoricalMetricsRequestTest.php
-test/Model/GenerateKeywordIdeas200ResponsePagingTest.php
-test/Model/GenerateKeywordIdeas200ResponseTest.php
-test/Model/GenerateKeywordIdeasRequestTest.php
-test/Model/GetAdsActivityLog200ResponsePagingTest.php
+test/Model/SlackPlatformDataTest.php

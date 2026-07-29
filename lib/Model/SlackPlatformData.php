@@ -1,6 +1,6 @@
 <?php
 /**
- * ValidatePostRequestPlatformsInner
+ * SlackPlatformData
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ValidatePostRequestPlatformsInner Class Doc Comment
+ * SlackPlatformData Class Doc Comment
  *
  * @category Class
+ * @description Slack message settings. Posts mrkdwn text (up to 40,000 chars; Slack truncates beyond that) to the channel fixed by the connected account, with up to 10 media files per post uploaded via Slack&#39;s file API (the text becomes the caption). The target channel is chosen at connect time — one connected account per channel — so channelId is NOT accepted here (a 400 is returned); connect the desired channel via /v1/connect/slack and target its accountId. Messages over 4,000 characters cannot be edited later (Slack&#39;s edit limit is stricter than its post limit).
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class SlackPlatformData implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
       *
       * @var string
       */
-    protected static $openAPIModelName = 'validatePost_request_platforms_inner';
+    protected static $openAPIModelName = 'SlackPlatformData';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +59,11 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'platform' => 'string',
-        'account_id' => 'string',
-        'custom_content' => 'string',
-        'platform_specific_data' => 'object',
-        'custom_media' => '\Zernio\Model\MediaItem[]'
+        'thread_ts' => 'string',
+        'unfurl_links' => 'bool',
+        'unfurl_media' => 'bool',
+        'username' => 'string',
+        'icon_url' => 'string'
     ];
 
     /**
@@ -73,11 +74,11 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'platform' => null,
-        'account_id' => null,
-        'custom_content' => null,
-        'platform_specific_data' => null,
-        'custom_media' => null
+        'thread_ts' => null,
+        'unfurl_links' => null,
+        'unfurl_media' => null,
+        'username' => null,
+        'icon_url' => null
     ];
 
     /**
@@ -86,11 +87,11 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'platform' => false,
-        'account_id' => false,
-        'custom_content' => false,
-        'platform_specific_data' => false,
-        'custom_media' => false
+        'thread_ts' => false,
+        'unfurl_links' => false,
+        'unfurl_media' => false,
+        'username' => false,
+        'icon_url' => false
     ];
 
     /**
@@ -179,11 +180,11 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $attributeMap = [
-        'platform' => 'platform',
-        'account_id' => 'accountId',
-        'custom_content' => 'customContent',
-        'platform_specific_data' => 'platformSpecificData',
-        'custom_media' => 'customMedia'
+        'thread_ts' => 'threadTs',
+        'unfurl_links' => 'unfurlLinks',
+        'unfurl_media' => 'unfurlMedia',
+        'username' => 'username',
+        'icon_url' => 'iconUrl'
     ];
 
     /**
@@ -192,11 +193,11 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $setters = [
-        'platform' => 'setPlatform',
-        'account_id' => 'setAccountId',
-        'custom_content' => 'setCustomContent',
-        'platform_specific_data' => 'setPlatformSpecificData',
-        'custom_media' => 'setCustomMedia'
+        'thread_ts' => 'setThreadTs',
+        'unfurl_links' => 'setUnfurlLinks',
+        'unfurl_media' => 'setUnfurlMedia',
+        'username' => 'setUsername',
+        'icon_url' => 'setIconUrl'
     ];
 
     /**
@@ -205,11 +206,11 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $getters = [
-        'platform' => 'getPlatform',
-        'account_id' => 'getAccountId',
-        'custom_content' => 'getCustomContent',
-        'platform_specific_data' => 'getPlatformSpecificData',
-        'custom_media' => 'getCustomMedia'
+        'thread_ts' => 'getThreadTs',
+        'unfurl_links' => 'getUnfurlLinks',
+        'unfurl_media' => 'getUnfurlMedia',
+        'username' => 'getUsername',
+        'icon_url' => 'getIconUrl'
     ];
 
     /**
@@ -253,47 +254,6 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
         return self::$openAPIModelName;
     }
 
-    public const PLATFORM_TWITTER = 'twitter';
-    public const PLATFORM_INSTAGRAM = 'instagram';
-    public const PLATFORM_TIKTOK = 'tiktok';
-    public const PLATFORM_YOUTUBE = 'youtube';
-    public const PLATFORM_FACEBOOK = 'facebook';
-    public const PLATFORM_LINKEDIN = 'linkedin';
-    public const PLATFORM_BLUESKY = 'bluesky';
-    public const PLATFORM_THREADS = 'threads';
-    public const PLATFORM_REDDIT = 'reddit';
-    public const PLATFORM_PINTEREST = 'pinterest';
-    public const PLATFORM_TELEGRAM = 'telegram';
-    public const PLATFORM_SNAPCHAT = 'snapchat';
-    public const PLATFORM_GOOGLEBUSINESS = 'googlebusiness';
-    public const PLATFORM_DISCORD = 'discord';
-    public const PLATFORM_SLACK = 'slack';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getPlatformAllowableValues()
-    {
-        return [
-            self::PLATFORM_TWITTER,
-            self::PLATFORM_INSTAGRAM,
-            self::PLATFORM_TIKTOK,
-            self::PLATFORM_YOUTUBE,
-            self::PLATFORM_FACEBOOK,
-            self::PLATFORM_LINKEDIN,
-            self::PLATFORM_BLUESKY,
-            self::PLATFORM_THREADS,
-            self::PLATFORM_REDDIT,
-            self::PLATFORM_PINTEREST,
-            self::PLATFORM_TELEGRAM,
-            self::PLATFORM_SNAPCHAT,
-            self::PLATFORM_GOOGLEBUSINESS,
-            self::PLATFORM_DISCORD,
-            self::PLATFORM_SLACK,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -310,11 +270,11 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('platform', $data ?? [], null);
-        $this->setIfExists('account_id', $data ?? [], null);
-        $this->setIfExists('custom_content', $data ?? [], null);
-        $this->setIfExists('platform_specific_data', $data ?? [], null);
-        $this->setIfExists('custom_media', $data ?? [], null);
+        $this->setIfExists('thread_ts', $data ?? [], null);
+        $this->setIfExists('unfurl_links', $data ?? [], null);
+        $this->setIfExists('unfurl_media', $data ?? [], null);
+        $this->setIfExists('username', $data ?? [], null);
+        $this->setIfExists('icon_url', $data ?? [], null);
     }
 
     /**
@@ -344,18 +304,6 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
     {
         $invalidProperties = [];
 
-        if ($this->container['platform'] === null) {
-            $invalidProperties[] = "'platform' can't be null";
-        }
-        $allowedValues = $this->getPlatformAllowableValues();
-        if (!is_null($this->container['platform']) && !in_array($this->container['platform'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'platform', must be one of '%s'",
-                $this->container['platform'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -372,146 +320,136 @@ class ValidatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, 
 
 
     /**
-     * Gets platform
-     *
-     * @return string
-     */
-    public function getPlatform()
-    {
-        return $this->container['platform'];
-    }
-
-    /**
-     * Sets platform
-     *
-     * @param string $platform platform
-     *
-     * @return self
-     */
-    public function setPlatform($platform)
-    {
-        if (is_null($platform)) {
-            throw new \InvalidArgumentException('non-nullable platform cannot be null');
-        }
-        $allowedValues = $this->getPlatformAllowableValues();
-        if (!in_array($platform, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'platform', must be one of '%s'",
-                    $platform,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['platform'] = $platform;
-
-        return $this;
-    }
-
-    /**
-     * Gets account_id
+     * Gets thread_ts
      *
      * @return string|null
      */
-    public function getAccountId()
+    public function getThreadTs()
     {
-        return $this->container['account_id'];
+        return $this->container['thread_ts'];
     }
 
     /**
-     * Sets account_id
+     * Sets thread_ts
      *
-     * @param string|null $account_id Account to validate against. For twitter, resolves X Premium status to apply the 25000 character limit instead of 280.
+     * @param string|null $thread_ts Parent message ts to post this message as a thread reply (e.g. \"1503435956.000247\").
      *
      * @return self
      */
-    public function setAccountId($account_id)
+    public function setThreadTs($thread_ts)
     {
-        if (is_null($account_id)) {
-            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
+        if (is_null($thread_ts)) {
+            throw new \InvalidArgumentException('non-nullable thread_ts cannot be null');
         }
-        $this->container['account_id'] = $account_id;
+        $this->container['thread_ts'] = $thread_ts;
 
         return $this;
     }
 
     /**
-     * Gets custom_content
+     * Gets unfurl_links
+     *
+     * @return bool|null
+     */
+    public function getUnfurlLinks()
+    {
+        return $this->container['unfurl_links'];
+    }
+
+    /**
+     * Sets unfurl_links
+     *
+     * @param bool|null $unfurl_links Expand links in the message into preview cards. Default true.
+     *
+     * @return self
+     */
+    public function setUnfurlLinks($unfurl_links)
+    {
+        if (is_null($unfurl_links)) {
+            throw new \InvalidArgumentException('non-nullable unfurl_links cannot be null');
+        }
+        $this->container['unfurl_links'] = $unfurl_links;
+
+        return $this;
+    }
+
+    /**
+     * Gets unfurl_media
+     *
+     * @return bool|null
+     */
+    public function getUnfurlMedia()
+    {
+        return $this->container['unfurl_media'];
+    }
+
+    /**
+     * Sets unfurl_media
+     *
+     * @param bool|null $unfurl_media Expand media links into inline previews. Default true.
+     *
+     * @return self
+     */
+    public function setUnfurlMedia($unfurl_media)
+    {
+        if (is_null($unfurl_media)) {
+            throw new \InvalidArgumentException('non-nullable unfurl_media cannot be null');
+        }
+        $this->container['unfurl_media'] = $unfurl_media;
+
+        return $this;
+    }
+
+    /**
+     * Gets username
      *
      * @return string|null
      */
-    public function getCustomContent()
+    public function getUsername()
     {
-        return $this->container['custom_content'];
+        return $this->container['username'];
     }
 
     /**
-     * Sets custom_content
+     * Sets username
      *
-     * @param string|null $custom_content custom_content
+     * @param string|null $username Override the bot display name for this message only (requires no setup; shown with an APP badge). Does not change the app identity in the sidebar.
      *
      * @return self
      */
-    public function setCustomContent($custom_content)
+    public function setUsername($username)
     {
-        if (is_null($custom_content)) {
-            throw new \InvalidArgumentException('non-nullable custom_content cannot be null');
+        if (is_null($username)) {
+            throw new \InvalidArgumentException('non-nullable username cannot be null');
         }
-        $this->container['custom_content'] = $custom_content;
+        $this->container['username'] = $username;
 
         return $this;
     }
 
     /**
-     * Gets platform_specific_data
+     * Gets icon_url
      *
-     * @return object|null
+     * @return string|null
      */
-    public function getPlatformSpecificData()
+    public function getIconUrl()
     {
-        return $this->container['platform_specific_data'];
+        return $this->container['icon_url'];
     }
 
     /**
-     * Sets platform_specific_data
+     * Sets icon_url
      *
-     * @param object|null $platform_specific_data platform_specific_data
+     * @param string|null $icon_url Override the bot avatar image URL for this message only.
      *
      * @return self
      */
-    public function setPlatformSpecificData($platform_specific_data)
+    public function setIconUrl($icon_url)
     {
-        if (is_null($platform_specific_data)) {
-            throw new \InvalidArgumentException('non-nullable platform_specific_data cannot be null');
+        if (is_null($icon_url)) {
+            throw new \InvalidArgumentException('non-nullable icon_url cannot be null');
         }
-        $this->container['platform_specific_data'] = $platform_specific_data;
-
-        return $this;
-    }
-
-    /**
-     * Gets custom_media
-     *
-     * @return \Zernio\Model\MediaItem[]|null
-     */
-    public function getCustomMedia()
-    {
-        return $this->container['custom_media'];
-    }
-
-    /**
-     * Sets custom_media
-     *
-     * @param \Zernio\Model\MediaItem[]|null $custom_media custom_media
-     *
-     * @return self
-     */
-    public function setCustomMedia($custom_media)
-    {
-        if (is_null($custom_media)) {
-            throw new \InvalidArgumentException('non-nullable custom_media cannot be null');
-        }
-        $this->container['custom_media'] = $custom_media;
+        $this->container['icon_url'] = $icon_url;
 
         return $this;
     }

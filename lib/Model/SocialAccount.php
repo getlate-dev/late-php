@@ -321,6 +321,7 @@ class SocialAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     public const PLATFORM_TELEGRAM = 'telegram';
     public const PLATFORM_SNAPCHAT = 'snapchat';
     public const PLATFORM_DISCORD = 'discord';
+    public const PLATFORM_SLACK = 'slack';
     public const PLATFORM_WHATSAPP = 'whatsapp';
     public const PLATFORM_LINKEDINADS = 'linkedinads';
     public const PLATFORM_METAADS = 'metaads';
@@ -352,6 +353,7 @@ class SocialAccount implements ModelInterface, ArrayAccess, \JsonSerializable
             self::PLATFORM_TELEGRAM,
             self::PLATFORM_SNAPCHAT,
             self::PLATFORM_DISCORD,
+            self::PLATFORM_SLACK,
             self::PLATFORM_WHATSAPP,
             self::PLATFORM_LINKEDINADS,
             self::PLATFORM_METAADS,

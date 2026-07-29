@@ -144,7 +144,12 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'thread_from_message' => '\Zernio\Model\DiscordPlatformDataThreadFromMessage',
         'tts' => 'bool',
         'webhook_username' => 'string',
-        'webhook_avatar_url' => 'string'
+        'webhook_avatar_url' => 'string',
+        'thread_ts' => 'string',
+        'unfurl_links' => 'bool',
+        'unfurl_media' => 'bool',
+        'username' => 'string',
+        'icon_url' => 'string'
     ];
 
     /**
@@ -240,7 +245,12 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'thread_from_message' => null,
         'tts' => null,
         'webhook_username' => null,
-        'webhook_avatar_url' => null
+        'webhook_avatar_url' => null,
+        'thread_ts' => null,
+        'unfurl_links' => null,
+        'unfurl_media' => null,
+        'username' => null,
+        'icon_url' => null
     ];
 
     /**
@@ -334,7 +344,12 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'thread_from_message' => false,
         'tts' => false,
         'webhook_username' => false,
-        'webhook_avatar_url' => false
+        'webhook_avatar_url' => false,
+        'thread_ts' => false,
+        'unfurl_links' => false,
+        'unfurl_media' => false,
+        'username' => false,
+        'icon_url' => false
     ];
 
     /**
@@ -508,7 +523,12 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'thread_from_message' => 'threadFromMessage',
         'tts' => 'tts',
         'webhook_username' => 'webhookUsername',
-        'webhook_avatar_url' => 'webhookAvatarUrl'
+        'webhook_avatar_url' => 'webhookAvatarUrl',
+        'thread_ts' => 'threadTs',
+        'unfurl_links' => 'unfurlLinks',
+        'unfurl_media' => 'unfurlMedia',
+        'username' => 'username',
+        'icon_url' => 'iconUrl'
     ];
 
     /**
@@ -602,7 +622,12 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'thread_from_message' => 'setThreadFromMessage',
         'tts' => 'setTts',
         'webhook_username' => 'setWebhookUsername',
-        'webhook_avatar_url' => 'setWebhookAvatarUrl'
+        'webhook_avatar_url' => 'setWebhookAvatarUrl',
+        'thread_ts' => 'setThreadTs',
+        'unfurl_links' => 'setUnfurlLinks',
+        'unfurl_media' => 'setUnfurlMedia',
+        'username' => 'setUsername',
+        'icon_url' => 'setIconUrl'
     ];
 
     /**
@@ -696,7 +721,12 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'thread_from_message' => 'getThreadFromMessage',
         'tts' => 'getTts',
         'webhook_username' => 'getWebhookUsername',
-        'webhook_avatar_url' => 'getWebhookAvatarUrl'
+        'webhook_avatar_url' => 'getWebhookAvatarUrl',
+        'thread_ts' => 'getThreadTs',
+        'unfurl_links' => 'getUnfurlLinks',
+        'unfurl_media' => 'getUnfurlMedia',
+        'username' => 'getUsername',
+        'icon_url' => 'getIconUrl'
     ];
 
     /**
@@ -961,6 +991,11 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         $this->setIfExists('tts', $data ?? [], null);
         $this->setIfExists('webhook_username', $data ?? [], null);
         $this->setIfExists('webhook_avatar_url', $data ?? [], null);
+        $this->setIfExists('thread_ts', $data ?? [], null);
+        $this->setIfExists('unfurl_links', $data ?? [], null);
+        $this->setIfExists('unfurl_media', $data ?? [], null);
+        $this->setIfExists('username', $data ?? [], null);
+        $this->setIfExists('icon_url', $data ?? [], null);
     }
 
     /**
@@ -3556,6 +3591,141 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
             throw new \InvalidArgumentException('non-nullable webhook_avatar_url cannot be null');
         }
         $this->container['webhook_avatar_url'] = $webhook_avatar_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets thread_ts
+     *
+     * @return string|null
+     */
+    public function getThreadTs()
+    {
+        return $this->container['thread_ts'];
+    }
+
+    /**
+     * Sets thread_ts
+     *
+     * @param string|null $thread_ts Parent message ts to post this message as a thread reply (e.g. \"1503435956.000247\").
+     *
+     * @return self
+     */
+    public function setThreadTs($thread_ts)
+    {
+        if (is_null($thread_ts)) {
+            throw new \InvalidArgumentException('non-nullable thread_ts cannot be null');
+        }
+        $this->container['thread_ts'] = $thread_ts;
+
+        return $this;
+    }
+
+    /**
+     * Gets unfurl_links
+     *
+     * @return bool|null
+     */
+    public function getUnfurlLinks()
+    {
+        return $this->container['unfurl_links'];
+    }
+
+    /**
+     * Sets unfurl_links
+     *
+     * @param bool|null $unfurl_links Expand links in the message into preview cards. Default true.
+     *
+     * @return self
+     */
+    public function setUnfurlLinks($unfurl_links)
+    {
+        if (is_null($unfurl_links)) {
+            throw new \InvalidArgumentException('non-nullable unfurl_links cannot be null');
+        }
+        $this->container['unfurl_links'] = $unfurl_links;
+
+        return $this;
+    }
+
+    /**
+     * Gets unfurl_media
+     *
+     * @return bool|null
+     */
+    public function getUnfurlMedia()
+    {
+        return $this->container['unfurl_media'];
+    }
+
+    /**
+     * Sets unfurl_media
+     *
+     * @param bool|null $unfurl_media Expand media links into inline previews. Default true.
+     *
+     * @return self
+     */
+    public function setUnfurlMedia($unfurl_media)
+    {
+        if (is_null($unfurl_media)) {
+            throw new \InvalidArgumentException('non-nullable unfurl_media cannot be null');
+        }
+        $this->container['unfurl_media'] = $unfurl_media;
+
+        return $this;
+    }
+
+    /**
+     * Gets username
+     *
+     * @return string|null
+     */
+    public function getUsername()
+    {
+        return $this->container['username'];
+    }
+
+    /**
+     * Sets username
+     *
+     * @param string|null $username Override the bot display name for this message only (requires no setup; shown with an APP badge). Does not change the app identity in the sidebar.
+     *
+     * @return self
+     */
+    public function setUsername($username)
+    {
+        if (is_null($username)) {
+            throw new \InvalidArgumentException('non-nullable username cannot be null');
+        }
+        $this->container['username'] = $username;
+
+        return $this;
+    }
+
+    /**
+     * Gets icon_url
+     *
+     * @return string|null
+     */
+    public function getIconUrl()
+    {
+        return $this->container['icon_url'];
+    }
+
+    /**
+     * Sets icon_url
+     *
+     * @param string|null $icon_url Override the bot avatar image URL for this message only.
+     *
+     * @return self
+     */
+    public function setIconUrl($icon_url)
+    {
+        if (is_null($icon_url)) {
+            throw new \InvalidArgumentException('non-nullable icon_url cannot be null');
+        }
+        $this->container['icon_url'] = $icon_url;
 
         return $this;
     }
