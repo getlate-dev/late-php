@@ -1,6 +1,6 @@
 <?php
 /**
- * ListMetaBusinesses200Response
+ * GenerateKeywordHistoricalMetrics200Response
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListMetaBusinesses200Response Class Doc Comment
+ * GenerateKeywordHistoricalMetrics200Response Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GenerateKeywordHistoricalMetrics200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listMetaBusinesses_200_response';
+    protected static $openAPIModelName = 'generateKeywordHistoricalMetrics_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +58,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
+        'customer_id' => 'string',
         'data' => 'object[]',
-        'paging' => '\Zernio\Model\GetAdsActivityLog200ResponsePaging'
+        'aggregate_metric_results' => 'object'
     ];
 
     /**
@@ -70,8 +71,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'customer_id' => null,
         'data' => null,
-        'paging' => null
+        'aggregate_metric_results' => null
     ];
 
     /**
@@ -80,8 +82,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'customer_id' => false,
         'data' => false,
-        'paging' => false
+        'aggregate_metric_results' => true
     ];
 
     /**
@@ -170,8 +173,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
+        'customer_id' => 'customerId',
         'data' => 'data',
-        'paging' => 'paging'
+        'aggregate_metric_results' => 'aggregateMetricResults'
     ];
 
     /**
@@ -180,8 +184,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
+        'customer_id' => 'setCustomerId',
         'data' => 'setData',
-        'paging' => 'setPaging'
+        'aggregate_metric_results' => 'setAggregateMetricResults'
     ];
 
     /**
@@ -190,8 +195,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
+        'customer_id' => 'getCustomerId',
         'data' => 'getData',
-        'paging' => 'getPaging'
+        'aggregate_metric_results' => 'getAggregateMetricResults'
     ];
 
     /**
@@ -251,8 +257,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('customer_id', $data ?? [], null);
         $this->setIfExists('data', $data ?? [], null);
-        $this->setIfExists('paging', $data ?? [], null);
+        $this->setIfExists('aggregate_metric_results', $data ?? [], null);
     }
 
     /**
@@ -298,6 +305,33 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
+     * Gets customer_id
+     *
+     * @return string|null
+     */
+    public function getCustomerId()
+    {
+        return $this->container['customer_id'];
+    }
+
+    /**
+     * Sets customer_id
+     *
+     * @param string|null $customer_id The customer the request ran against.
+     *
+     * @return self
+     */
+    public function setCustomerId($customer_id)
+    {
+        if (is_null($customer_id)) {
+            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
+        }
+        $this->container['customer_id'] = $customer_id;
+
+        return $this;
+    }
+
+    /**
      * Gets data
      *
      * @return object[]|null
@@ -325,28 +359,35 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
     }
 
     /**
-     * Gets paging
+     * Gets aggregate_metric_results
      *
-     * @return \Zernio\Model\GetAdsActivityLog200ResponsePaging|null
+     * @return object|null
      */
-    public function getPaging()
+    public function getAggregateMetricResults()
     {
-        return $this->container['paging'];
+        return $this->container['aggregate_metric_results'];
     }
 
     /**
-     * Sets paging
+     * Sets aggregate_metric_results
      *
-     * @param \Zernio\Model\GetAdsActivityLog200ResponsePaging|null $paging paging
+     * @param object|null $aggregate_metric_results aggregate_metric_results
      *
      * @return self
      */
-    public function setPaging($paging)
+    public function setAggregateMetricResults($aggregate_metric_results)
     {
-        if (is_null($paging)) {
-            throw new \InvalidArgumentException('non-nullable paging cannot be null');
+        if (is_null($aggregate_metric_results)) {
+            array_push($this->openAPINullablesSetToNull, 'aggregate_metric_results');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('aggregate_metric_results', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['paging'] = $paging;
+        $this->container['aggregate_metric_results'] = $aggregate_metric_results;
 
         return $this;
     }

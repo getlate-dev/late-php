@@ -78,6 +78,12 @@ class AdInsightsApi
         'createAdInsightsReport' => [
             'application/json',
         ],
+        'generateKeywordHistoricalMetrics' => [
+            'application/json',
+        ],
+        'generateKeywordIdeas' => [
+            'application/json',
+        ],
         'getAdAnalytics' => [
             'application/json',
         ],
@@ -372,6 +378,576 @@ class AdInsightsApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_ad_insights_report_request));
             } else {
                 $httpBody = $create_ad_insights_report_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation generateKeywordHistoricalMetrics
+     *
+     * Historical keyword metrics (Google Keyword Planner)
+     *
+     * @param  \Zernio\Model\GenerateKeywordHistoricalMetricsRequest $generate_keyword_historical_metrics_request generate_keyword_historical_metrics_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['generateKeywordHistoricalMetrics'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\GenerateKeywordHistoricalMetrics200Response|\Zernio\Model\InlineObject
+     */
+    public function generateKeywordHistoricalMetrics($generate_keyword_historical_metrics_request, string $contentType = self::contentTypes['generateKeywordHistoricalMetrics'][0])
+    {
+        list($response) = $this->generateKeywordHistoricalMetricsWithHttpInfo($generate_keyword_historical_metrics_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation generateKeywordHistoricalMetricsWithHttpInfo
+     *
+     * Historical keyword metrics (Google Keyword Planner)
+     *
+     * @param  \Zernio\Model\GenerateKeywordHistoricalMetricsRequest $generate_keyword_historical_metrics_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['generateKeywordHistoricalMetrics'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\GenerateKeywordHistoricalMetrics200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function generateKeywordHistoricalMetricsWithHttpInfo($generate_keyword_historical_metrics_request, string $contentType = self::contentTypes['generateKeywordHistoricalMetrics'][0])
+    {
+        $request = $this->generateKeywordHistoricalMetricsRequest($generate_keyword_historical_metrics_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GenerateKeywordHistoricalMetrics200Response',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\GenerateKeywordHistoricalMetrics200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GenerateKeywordHistoricalMetrics200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation generateKeywordHistoricalMetricsAsync
+     *
+     * Historical keyword metrics (Google Keyword Planner)
+     *
+     * @param  \Zernio\Model\GenerateKeywordHistoricalMetricsRequest $generate_keyword_historical_metrics_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['generateKeywordHistoricalMetrics'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function generateKeywordHistoricalMetricsAsync($generate_keyword_historical_metrics_request, string $contentType = self::contentTypes['generateKeywordHistoricalMetrics'][0])
+    {
+        return $this->generateKeywordHistoricalMetricsAsyncWithHttpInfo($generate_keyword_historical_metrics_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation generateKeywordHistoricalMetricsAsyncWithHttpInfo
+     *
+     * Historical keyword metrics (Google Keyword Planner)
+     *
+     * @param  \Zernio\Model\GenerateKeywordHistoricalMetricsRequest $generate_keyword_historical_metrics_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['generateKeywordHistoricalMetrics'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function generateKeywordHistoricalMetricsAsyncWithHttpInfo($generate_keyword_historical_metrics_request, string $contentType = self::contentTypes['generateKeywordHistoricalMetrics'][0])
+    {
+        $returnType = '\Zernio\Model\GenerateKeywordHistoricalMetrics200Response';
+        $request = $this->generateKeywordHistoricalMetricsRequest($generate_keyword_historical_metrics_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'generateKeywordHistoricalMetrics'
+     *
+     * @param  \Zernio\Model\GenerateKeywordHistoricalMetricsRequest $generate_keyword_historical_metrics_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['generateKeywordHistoricalMetrics'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function generateKeywordHistoricalMetricsRequest($generate_keyword_historical_metrics_request, string $contentType = self::contentTypes['generateKeywordHistoricalMetrics'][0])
+    {
+
+        // verify the required parameter 'generate_keyword_historical_metrics_request' is set
+        if ($generate_keyword_historical_metrics_request === null || (is_array($generate_keyword_historical_metrics_request) && count($generate_keyword_historical_metrics_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $generate_keyword_historical_metrics_request when calling generateKeywordHistoricalMetrics'
+            );
+        }
+
+
+        $resourcePath = '/v1/ads/keywords/historical-metrics';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($generate_keyword_historical_metrics_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($generate_keyword_historical_metrics_request));
+            } else {
+                $httpBody = $generate_keyword_historical_metrics_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation generateKeywordIdeas
+     *
+     * Generate keyword ideas (Google Keyword Planner)
+     *
+     * @param  \Zernio\Model\GenerateKeywordIdeasRequest $generate_keyword_ideas_request generate_keyword_ideas_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['generateKeywordIdeas'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\GenerateKeywordIdeas200Response|\Zernio\Model\InlineObject
+     */
+    public function generateKeywordIdeas($generate_keyword_ideas_request, string $contentType = self::contentTypes['generateKeywordIdeas'][0])
+    {
+        list($response) = $this->generateKeywordIdeasWithHttpInfo($generate_keyword_ideas_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation generateKeywordIdeasWithHttpInfo
+     *
+     * Generate keyword ideas (Google Keyword Planner)
+     *
+     * @param  \Zernio\Model\GenerateKeywordIdeasRequest $generate_keyword_ideas_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['generateKeywordIdeas'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\GenerateKeywordIdeas200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function generateKeywordIdeasWithHttpInfo($generate_keyword_ideas_request, string $contentType = self::contentTypes['generateKeywordIdeas'][0])
+    {
+        $request = $this->generateKeywordIdeasRequest($generate_keyword_ideas_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GenerateKeywordIdeas200Response',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\GenerateKeywordIdeas200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GenerateKeywordIdeas200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation generateKeywordIdeasAsync
+     *
+     * Generate keyword ideas (Google Keyword Planner)
+     *
+     * @param  \Zernio\Model\GenerateKeywordIdeasRequest $generate_keyword_ideas_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['generateKeywordIdeas'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function generateKeywordIdeasAsync($generate_keyword_ideas_request, string $contentType = self::contentTypes['generateKeywordIdeas'][0])
+    {
+        return $this->generateKeywordIdeasAsyncWithHttpInfo($generate_keyword_ideas_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation generateKeywordIdeasAsyncWithHttpInfo
+     *
+     * Generate keyword ideas (Google Keyword Planner)
+     *
+     * @param  \Zernio\Model\GenerateKeywordIdeasRequest $generate_keyword_ideas_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['generateKeywordIdeas'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function generateKeywordIdeasAsyncWithHttpInfo($generate_keyword_ideas_request, string $contentType = self::contentTypes['generateKeywordIdeas'][0])
+    {
+        $returnType = '\Zernio\Model\GenerateKeywordIdeas200Response';
+        $request = $this->generateKeywordIdeasRequest($generate_keyword_ideas_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'generateKeywordIdeas'
+     *
+     * @param  \Zernio\Model\GenerateKeywordIdeasRequest $generate_keyword_ideas_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['generateKeywordIdeas'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function generateKeywordIdeasRequest($generate_keyword_ideas_request, string $contentType = self::contentTypes['generateKeywordIdeas'][0])
+    {
+
+        // verify the required parameter 'generate_keyword_ideas_request' is set
+        if ($generate_keyword_ideas_request === null || (is_array($generate_keyword_ideas_request) && count($generate_keyword_ideas_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $generate_keyword_ideas_request when calling generateKeywordIdeas'
+            );
+        }
+
+
+        $resourcePath = '/v1/ads/keywords/ideas';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($generate_keyword_ideas_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($generate_keyword_ideas_request));
+            } else {
+                $httpBody = $generate_keyword_ideas_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1504,8 +2080,11 @@ class AdInsightsApi
      *
      * Flexible live insights query
      *
-     * @param  string $account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. (required)
-     * @param  string $object_id Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id. (required)
+     * @param  string $account_id Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract. (required)
+     * @param  string|null $object_id Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id. (optional)
+     * @param  string|null $query Google only (required there): the GAQL SELECT statement to run. (optional)
+     * @param  string|null $customer_id Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts. (optional)
+     * @param  string|null $page_token Google only: cursor from paging.nextPageToken of the previous page. (optional)
      * @param  string|null $level Row granularity (optional)
      * @param  string|null $fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set. (optional)
      * @param  string|null $breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform). (optional)
@@ -1526,9 +2105,9 @@ class AdInsightsApi
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\QueryAdInsights200Response|\Zernio\Model\InlineObject
      */
-    public function queryAdInsights($account_id, $object_id, $level = null, $fields = null, $breakdowns = null, $action_breakdowns = null, $action_attribution_windows = null, $action_report_time = null, $use_unified_attribution_setting = null, $filtering = null, $date_preset = null, $from_date = null, $to_date = null, $time_increment = null, $limit = 25, $after = null, string $contentType = self::contentTypes['queryAdInsights'][0])
+    public function queryAdInsights($account_id, $object_id = null, $query = null, $customer_id = null, $page_token = null, $level = null, $fields = null, $breakdowns = null, $action_breakdowns = null, $action_attribution_windows = null, $action_report_time = null, $use_unified_attribution_setting = null, $filtering = null, $date_preset = null, $from_date = null, $to_date = null, $time_increment = null, $limit = 25, $after = null, string $contentType = self::contentTypes['queryAdInsights'][0])
     {
-        list($response) = $this->queryAdInsightsWithHttpInfo($account_id, $object_id, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after, $contentType);
+        list($response) = $this->queryAdInsightsWithHttpInfo($account_id, $object_id, $query, $customer_id, $page_token, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after, $contentType);
         return $response;
     }
 
@@ -1537,8 +2116,11 @@ class AdInsightsApi
      *
      * Flexible live insights query
      *
-     * @param  string $account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. (required)
-     * @param  string $object_id Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id. (required)
+     * @param  string $account_id Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract. (required)
+     * @param  string|null $object_id Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id. (optional)
+     * @param  string|null $query Google only (required there): the GAQL SELECT statement to run. (optional)
+     * @param  string|null $customer_id Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts. (optional)
+     * @param  string|null $page_token Google only: cursor from paging.nextPageToken of the previous page. (optional)
      * @param  string|null $level Row granularity (optional)
      * @param  string|null $fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set. (optional)
      * @param  string|null $breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform). (optional)
@@ -1559,9 +2141,9 @@ class AdInsightsApi
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\QueryAdInsights200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function queryAdInsightsWithHttpInfo($account_id, $object_id, $level = null, $fields = null, $breakdowns = null, $action_breakdowns = null, $action_attribution_windows = null, $action_report_time = null, $use_unified_attribution_setting = null, $filtering = null, $date_preset = null, $from_date = null, $to_date = null, $time_increment = null, $limit = 25, $after = null, string $contentType = self::contentTypes['queryAdInsights'][0])
+    public function queryAdInsightsWithHttpInfo($account_id, $object_id = null, $query = null, $customer_id = null, $page_token = null, $level = null, $fields = null, $breakdowns = null, $action_breakdowns = null, $action_attribution_windows = null, $action_report_time = null, $use_unified_attribution_setting = null, $filtering = null, $date_preset = null, $from_date = null, $to_date = null, $time_increment = null, $limit = 25, $after = null, string $contentType = self::contentTypes['queryAdInsights'][0])
     {
-        $request = $this->queryAdInsightsRequest($account_id, $object_id, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after, $contentType);
+        $request = $this->queryAdInsightsRequest($account_id, $object_id, $query, $customer_id, $page_token, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1651,8 +2233,11 @@ class AdInsightsApi
      *
      * Flexible live insights query
      *
-     * @param  string $account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. (required)
-     * @param  string $object_id Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id. (required)
+     * @param  string $account_id Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract. (required)
+     * @param  string|null $object_id Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id. (optional)
+     * @param  string|null $query Google only (required there): the GAQL SELECT statement to run. (optional)
+     * @param  string|null $customer_id Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts. (optional)
+     * @param  string|null $page_token Google only: cursor from paging.nextPageToken of the previous page. (optional)
      * @param  string|null $level Row granularity (optional)
      * @param  string|null $fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set. (optional)
      * @param  string|null $breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform). (optional)
@@ -1672,9 +2257,9 @@ class AdInsightsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function queryAdInsightsAsync($account_id, $object_id, $level = null, $fields = null, $breakdowns = null, $action_breakdowns = null, $action_attribution_windows = null, $action_report_time = null, $use_unified_attribution_setting = null, $filtering = null, $date_preset = null, $from_date = null, $to_date = null, $time_increment = null, $limit = 25, $after = null, string $contentType = self::contentTypes['queryAdInsights'][0])
+    public function queryAdInsightsAsync($account_id, $object_id = null, $query = null, $customer_id = null, $page_token = null, $level = null, $fields = null, $breakdowns = null, $action_breakdowns = null, $action_attribution_windows = null, $action_report_time = null, $use_unified_attribution_setting = null, $filtering = null, $date_preset = null, $from_date = null, $to_date = null, $time_increment = null, $limit = 25, $after = null, string $contentType = self::contentTypes['queryAdInsights'][0])
     {
-        return $this->queryAdInsightsAsyncWithHttpInfo($account_id, $object_id, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after, $contentType)
+        return $this->queryAdInsightsAsyncWithHttpInfo($account_id, $object_id, $query, $customer_id, $page_token, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1687,8 +2272,11 @@ class AdInsightsApi
      *
      * Flexible live insights query
      *
-     * @param  string $account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. (required)
-     * @param  string $object_id Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id. (required)
+     * @param  string $account_id Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract. (required)
+     * @param  string|null $object_id Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id. (optional)
+     * @param  string|null $query Google only (required there): the GAQL SELECT statement to run. (optional)
+     * @param  string|null $customer_id Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts. (optional)
+     * @param  string|null $page_token Google only: cursor from paging.nextPageToken of the previous page. (optional)
      * @param  string|null $level Row granularity (optional)
      * @param  string|null $fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set. (optional)
      * @param  string|null $breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform). (optional)
@@ -1708,10 +2296,10 @@ class AdInsightsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function queryAdInsightsAsyncWithHttpInfo($account_id, $object_id, $level = null, $fields = null, $breakdowns = null, $action_breakdowns = null, $action_attribution_windows = null, $action_report_time = null, $use_unified_attribution_setting = null, $filtering = null, $date_preset = null, $from_date = null, $to_date = null, $time_increment = null, $limit = 25, $after = null, string $contentType = self::contentTypes['queryAdInsights'][0])
+    public function queryAdInsightsAsyncWithHttpInfo($account_id, $object_id = null, $query = null, $customer_id = null, $page_token = null, $level = null, $fields = null, $breakdowns = null, $action_breakdowns = null, $action_attribution_windows = null, $action_report_time = null, $use_unified_attribution_setting = null, $filtering = null, $date_preset = null, $from_date = null, $to_date = null, $time_increment = null, $limit = 25, $after = null, string $contentType = self::contentTypes['queryAdInsights'][0])
     {
         $returnType = '\Zernio\Model\QueryAdInsights200Response';
-        $request = $this->queryAdInsightsRequest($account_id, $object_id, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after, $contentType);
+        $request = $this->queryAdInsightsRequest($account_id, $object_id, $query, $customer_id, $page_token, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1752,8 +2340,11 @@ class AdInsightsApi
     /**
      * Create request for operation 'queryAdInsights'
      *
-     * @param  string $account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. (required)
-     * @param  string $object_id Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id. (required)
+     * @param  string $account_id Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract. (required)
+     * @param  string|null $object_id Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id. (optional)
+     * @param  string|null $query Google only (required there): the GAQL SELECT statement to run. (optional)
+     * @param  string|null $customer_id Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts. (optional)
+     * @param  string|null $page_token Google only: cursor from paging.nextPageToken of the previous page. (optional)
      * @param  string|null $level Row granularity (optional)
      * @param  string|null $fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set. (optional)
      * @param  string|null $breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform). (optional)
@@ -1773,7 +2364,7 @@ class AdInsightsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function queryAdInsightsRequest($account_id, $object_id, $level = null, $fields = null, $breakdowns = null, $action_breakdowns = null, $action_attribution_windows = null, $action_report_time = null, $use_unified_attribution_setting = null, $filtering = null, $date_preset = null, $from_date = null, $to_date = null, $time_increment = null, $limit = 25, $after = null, string $contentType = self::contentTypes['queryAdInsights'][0])
+    public function queryAdInsightsRequest($account_id, $object_id = null, $query = null, $customer_id = null, $page_token = null, $level = null, $fields = null, $breakdowns = null, $action_breakdowns = null, $action_attribution_windows = null, $action_report_time = null, $use_unified_attribution_setting = null, $filtering = null, $date_preset = null, $from_date = null, $to_date = null, $time_increment = null, $limit = 25, $after = null, string $contentType = self::contentTypes['queryAdInsights'][0])
     {
 
         // verify the required parameter 'account_id' is set
@@ -1783,12 +2374,12 @@ class AdInsightsApi
             );
         }
 
-        // verify the required parameter 'object_id' is set
-        if ($object_id === null || (is_array($object_id) && count($object_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $object_id when calling queryAdInsights'
-            );
+
+        if ($query !== null && strlen($query) > 10000) {
+            throw new \InvalidArgumentException('invalid length for "$query" when calling AdInsightsApi.queryAdInsights, must be smaller than or equal to 10000.');
         }
+        
+
 
 
 
@@ -1834,7 +2425,34 @@ class AdInsightsApi
             'string', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $query,
+            'query', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $customer_id,
+            'customerId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_token,
+            'pageToken', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(

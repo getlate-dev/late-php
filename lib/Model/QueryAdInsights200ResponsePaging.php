@@ -58,7 +58,8 @@ class QueryAdInsights200ResponsePaging implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'after' => 'string'
+        'after' => 'string',
+        'next_page_token' => 'string'
     ];
 
     /**
@@ -69,7 +70,8 @@ class QueryAdInsights200ResponsePaging implements ModelInterface, ArrayAccess, \
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'after' => null
+        'after' => null,
+        'next_page_token' => null
     ];
 
     /**
@@ -78,7 +80,8 @@ class QueryAdInsights200ResponsePaging implements ModelInterface, ArrayAccess, \
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'after' => true
+        'after' => true,
+        'next_page_token' => true
     ];
 
     /**
@@ -167,7 +170,8 @@ class QueryAdInsights200ResponsePaging implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'after' => 'after'
+        'after' => 'after',
+        'next_page_token' => 'nextPageToken'
     ];
 
     /**
@@ -176,7 +180,8 @@ class QueryAdInsights200ResponsePaging implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'after' => 'setAfter'
+        'after' => 'setAfter',
+        'next_page_token' => 'setNextPageToken'
     ];
 
     /**
@@ -185,7 +190,8 @@ class QueryAdInsights200ResponsePaging implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'after' => 'getAfter'
+        'after' => 'getAfter',
+        'next_page_token' => 'getNextPageToken'
     ];
 
     /**
@@ -246,6 +252,7 @@ class QueryAdInsights200ResponsePaging implements ModelInterface, ArrayAccess, \
     public function __construct(?array $data = null)
     {
         $this->setIfExists('after', $data ?? [], null);
+        $this->setIfExists('next_page_token', $data ?? [], null);
     }
 
     /**
@@ -303,7 +310,7 @@ class QueryAdInsights200ResponsePaging implements ModelInterface, ArrayAccess, \
     /**
      * Sets after
      *
-     * @param string|null $after Cursor for the next page; null when exhausted.
+     * @param string|null $after Meta cursor for the next page; null when exhausted.
      *
      * @return self
      */
@@ -320,6 +327,40 @@ class QueryAdInsights200ResponsePaging implements ModelInterface, ArrayAccess, \
             }
         }
         $this->container['after'] = $after;
+
+        return $this;
+    }
+
+    /**
+     * Gets next_page_token
+     *
+     * @return string|null
+     */
+    public function getNextPageToken()
+    {
+        return $this->container['next_page_token'];
+    }
+
+    /**
+     * Sets next_page_token
+     *
+     * @param string|null $next_page_token Google cursor for the next page; null when exhausted.
+     *
+     * @return self
+     */
+    public function setNextPageToken($next_page_token)
+    {
+        if (is_null($next_page_token)) {
+            array_push($this->openAPINullablesSetToNull, 'next_page_token');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('next_page_token', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['next_page_token'] = $next_page_token;
 
         return $this;
     }

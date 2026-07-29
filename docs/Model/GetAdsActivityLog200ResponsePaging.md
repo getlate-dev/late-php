@@ -1,11 +1,9 @@
-# # ListAdLabels200Response
+# # GetAdsActivityLog200ResponsePaging
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ad_account_id** | **string** |  | [optional]
-**data** | **object[]** |  | [optional]
-**paging** | [**\Zernio\Model\GetAdsActivityLog200ResponsePaging**](GetAdsActivityLog200ResponsePaging.md) |  | [optional]
+**after** | **string** | Cursor for the next page; null when exhausted. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

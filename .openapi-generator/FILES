@@ -457,6 +457,11 @@ docs/Model/FoodMenuSection.md
 docs/Model/GenerateAdPreviews200Response.md
 docs/Model/GenerateAdPreviews200ResponsePreviewsInner.md
 docs/Model/GenerateAdPreviewsRequest.md
+docs/Model/GenerateKeywordHistoricalMetrics200Response.md
+docs/Model/GenerateKeywordHistoricalMetricsRequest.md
+docs/Model/GenerateKeywordIdeas200Response.md
+docs/Model/GenerateKeywordIdeas200ResponsePaging.md
+docs/Model/GenerateKeywordIdeasRequest.md
 docs/Model/GeoRestriction.md
 docs/Model/GetAccountHealth200Response.md
 docs/Model/GetAccountHealth200ResponsePermissions.md
@@ -479,6 +484,7 @@ docs/Model/GetAdSetDetails200Response.md
 docs/Model/GetAdTrackingTags200Response.md
 docs/Model/GetAdTree200Response.md
 docs/Model/GetAdsActivityLog200Response.md
+docs/Model/GetAdsActivityLog200ResponsePaging.md
 docs/Model/GetAdsTimeline200Response.md
 docs/Model/GetAdsTimeline200ResponseRowsInner.md
 docs/Model/GetAllAccountsHealth200Response.md
@@ -2045,6 +2051,11 @@ lib/Model/FoodMenuSection.php
 lib/Model/GenerateAdPreviews200Response.php
 lib/Model/GenerateAdPreviews200ResponsePreviewsInner.php
 lib/Model/GenerateAdPreviewsRequest.php
+lib/Model/GenerateKeywordHistoricalMetrics200Response.php
+lib/Model/GenerateKeywordHistoricalMetricsRequest.php
+lib/Model/GenerateKeywordIdeas200Response.php
+lib/Model/GenerateKeywordIdeas200ResponsePaging.php
+lib/Model/GenerateKeywordIdeasRequest.php
 lib/Model/GeoRestriction.php
 lib/Model/GetAccountHealth200Response.php
 lib/Model/GetAccountHealth200ResponsePermissions.php
@@ -2067,6 +2078,7 @@ lib/Model/GetAdSetDetails200Response.php
 lib/Model/GetAdTrackingTags200Response.php
 lib/Model/GetAdTree200Response.php
 lib/Model/GetAdsActivityLog200Response.php
+lib/Model/GetAdsActivityLog200ResponsePaging.php
 lib/Model/GetAdsTimeline200Response.php
 lib/Model/GetAdsTimeline200ResponseRowsInner.php
 lib/Model/GetAllAccountsHealth200Response.php
@@ -3177,3 +3189,9 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/GenerateKeywordHistoricalMetrics200ResponseTest.php
+test/Model/GenerateKeywordHistoricalMetricsRequestTest.php
+test/Model/GenerateKeywordIdeas200ResponsePagingTest.php
+test/Model/GenerateKeywordIdeas200ResponseTest.php
+test/Model/GenerateKeywordIdeasRequestTest.php
+test/Model/GetAdsActivityLog200ResponsePagingTest.php

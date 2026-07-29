@@ -1,6 +1,6 @@
 <?php
 /**
- * ListMetaBusinesses200Response
+ * GetAdsActivityLog200ResponsePaging
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListMetaBusinesses200Response Class Doc Comment
+ * GetAdsActivityLog200ResponsePaging Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetAdsActivityLog200ResponsePaging implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listMetaBusinesses_200_response';
+    protected static $openAPIModelName = 'getAdsActivityLog_200_response_paging';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +58,7 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data' => 'object[]',
-        'paging' => '\Zernio\Model\GetAdsActivityLog200ResponsePaging'
+        'after' => 'string'
     ];
 
     /**
@@ -70,8 +69,7 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'data' => null,
-        'paging' => null
+        'after' => null
     ];
 
     /**
@@ -80,8 +78,7 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'data' => false,
-        'paging' => false
+        'after' => true
     ];
 
     /**
@@ -170,8 +167,7 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data',
-        'paging' => 'paging'
+        'after' => 'after'
     ];
 
     /**
@@ -180,8 +176,7 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData',
-        'paging' => 'setPaging'
+        'after' => 'setAfter'
     ];
 
     /**
@@ -190,8 +185,7 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData',
-        'paging' => 'getPaging'
+        'after' => 'getAfter'
     ];
 
     /**
@@ -251,8 +245,7 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('data', $data ?? [], null);
-        $this->setIfExists('paging', $data ?? [], null);
+        $this->setIfExists('after', $data ?? [], null);
     }
 
     /**
@@ -298,55 +291,35 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets data
+     * Gets after
      *
-     * @return object[]|null
+     * @return string|null
      */
-    public function getData()
+    public function getAfter()
     {
-        return $this->container['data'];
+        return $this->container['after'];
     }
 
     /**
-     * Sets data
+     * Sets after
      *
-     * @param object[]|null $data data
+     * @param string|null $after Cursor for the next page; null when exhausted.
      *
      * @return self
      */
-    public function setData($data)
+    public function setAfter($after)
     {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+        if (is_null($after)) {
+            array_push($this->openAPINullablesSetToNull, 'after');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('after', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['data'] = $data;
-
-        return $this;
-    }
-
-    /**
-     * Gets paging
-     *
-     * @return \Zernio\Model\GetAdsActivityLog200ResponsePaging|null
-     */
-    public function getPaging()
-    {
-        return $this->container['paging'];
-    }
-
-    /**
-     * Sets paging
-     *
-     * @param \Zernio\Model\GetAdsActivityLog200ResponsePaging|null $paging paging
-     *
-     * @return self
-     */
-    public function setPaging($paging)
-    {
-        if (is_null($paging)) {
-            throw new \InvalidArgumentException('non-nullable paging cannot be null');
-        }
-        $this->container['paging'] = $paging;
+        $this->container['after'] = $after;
 
         return $this;
     }

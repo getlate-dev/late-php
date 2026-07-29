@@ -1,6 +1,6 @@
 <?php
 /**
- * QueryAdInsights200Response
+ * GenerateKeywordHistoricalMetricsRequest
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * QueryAdInsights200Response Class Doc Comment
+ * GenerateKeywordHistoricalMetricsRequest Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GenerateKeywordHistoricalMetricsRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'queryAdInsights_200_response';
+    protected static $openAPIModelName = 'generateKeywordHistoricalMetrics_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,14 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'object_id' => 'string',
+        'account_id' => 'string',
         'customer_id' => 'string',
-        'field_mask' => 'string',
-        'data' => 'object[]',
-        'paging' => '\Zernio\Model\QueryAdInsights200ResponsePaging'
+        'keywords' => 'string[]',
+        'countries' => 'string[]',
+        'language_constant_id' => 'string',
+        'network' => 'string',
+        'include_adult_keywords' => 'bool',
+        'include_average_cpc' => 'bool'
     ];
 
     /**
@@ -73,11 +76,14 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'object_id' => null,
+        'account_id' => null,
         'customer_id' => null,
-        'field_mask' => null,
-        'data' => null,
-        'paging' => null
+        'keywords' => null,
+        'countries' => null,
+        'language_constant_id' => null,
+        'network' => null,
+        'include_adult_keywords' => null,
+        'include_average_cpc' => null
     ];
 
     /**
@@ -86,11 +92,14 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'object_id' => false,
+        'account_id' => false,
         'customer_id' => false,
-        'field_mask' => true,
-        'data' => false,
-        'paging' => false
+        'keywords' => false,
+        'countries' => false,
+        'language_constant_id' => false,
+        'network' => false,
+        'include_adult_keywords' => false,
+        'include_average_cpc' => false
     ];
 
     /**
@@ -179,11 +188,14 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'object_id' => 'objectId',
+        'account_id' => 'accountId',
         'customer_id' => 'customerId',
-        'field_mask' => 'fieldMask',
-        'data' => 'data',
-        'paging' => 'paging'
+        'keywords' => 'keywords',
+        'countries' => 'countries',
+        'language_constant_id' => 'languageConstantId',
+        'network' => 'network',
+        'include_adult_keywords' => 'includeAdultKeywords',
+        'include_average_cpc' => 'includeAverageCpc'
     ];
 
     /**
@@ -192,11 +204,14 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'object_id' => 'setObjectId',
+        'account_id' => 'setAccountId',
         'customer_id' => 'setCustomerId',
-        'field_mask' => 'setFieldMask',
-        'data' => 'setData',
-        'paging' => 'setPaging'
+        'keywords' => 'setKeywords',
+        'countries' => 'setCountries',
+        'language_constant_id' => 'setLanguageConstantId',
+        'network' => 'setNetwork',
+        'include_adult_keywords' => 'setIncludeAdultKeywords',
+        'include_average_cpc' => 'setIncludeAverageCpc'
     ];
 
     /**
@@ -205,11 +220,14 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'object_id' => 'getObjectId',
+        'account_id' => 'getAccountId',
         'customer_id' => 'getCustomerId',
-        'field_mask' => 'getFieldMask',
-        'data' => 'getData',
-        'paging' => 'getPaging'
+        'keywords' => 'getKeywords',
+        'countries' => 'getCountries',
+        'language_constant_id' => 'getLanguageConstantId',
+        'network' => 'getNetwork',
+        'include_adult_keywords' => 'getIncludeAdultKeywords',
+        'include_average_cpc' => 'getIncludeAverageCpc'
     ];
 
     /**
@@ -253,6 +271,21 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
         return self::$openAPIModelName;
     }
 
+    public const NETWORK_GOOGLE_SEARCH = 'GOOGLE_SEARCH';
+    public const NETWORK_GOOGLE_SEARCH_AND_PARTNERS = 'GOOGLE_SEARCH_AND_PARTNERS';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getNetworkAllowableValues()
+    {
+        return [
+            self::NETWORK_GOOGLE_SEARCH,
+            self::NETWORK_GOOGLE_SEARCH_AND_PARTNERS,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -269,11 +302,14 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('object_id', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('customer_id', $data ?? [], null);
-        $this->setIfExists('field_mask', $data ?? [], null);
-        $this->setIfExists('data', $data ?? [], null);
-        $this->setIfExists('paging', $data ?? [], null);
+        $this->setIfExists('keywords', $data ?? [], null);
+        $this->setIfExists('countries', $data ?? [], null);
+        $this->setIfExists('language_constant_id', $data ?? [], '1000');
+        $this->setIfExists('network', $data ?? [], 'GOOGLE_SEARCH');
+        $this->setIfExists('include_adult_keywords', $data ?? [], null);
+        $this->setIfExists('include_average_cpc', $data ?? [], null);
     }
 
     /**
@@ -303,6 +339,37 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
     {
         $invalidProperties = [];
 
+        if ($this->container['account_id'] === null) {
+            $invalidProperties[] = "'account_id' can't be null";
+        }
+        if ($this->container['keywords'] === null) {
+            $invalidProperties[] = "'keywords' can't be null";
+        }
+        if ((count($this->container['keywords']) > 1000)) {
+            $invalidProperties[] = "invalid value for 'keywords', number of items must be less than or equal to 1000.";
+        }
+
+        if ((count($this->container['keywords']) < 1)) {
+            $invalidProperties[] = "invalid value for 'keywords', number of items must be greater than or equal to 1.";
+        }
+
+        if (!is_null($this->container['countries']) && (count($this->container['countries']) > 10)) {
+            $invalidProperties[] = "invalid value for 'countries', number of items must be less than or equal to 10.";
+        }
+
+        if (!is_null($this->container['countries']) && (count($this->container['countries']) < 1)) {
+            $invalidProperties[] = "invalid value for 'countries', number of items must be greater than or equal to 1.";
+        }
+
+        $allowedValues = $this->getNetworkAllowableValues();
+        if (!is_null($this->container['network']) && !in_array($this->container['network'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'network', must be one of '%s'",
+                $this->container['network'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -319,28 +386,28 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets object_id
+     * Gets account_id
      *
-     * @return string|null
+     * @return string
      */
-    public function getObjectId()
+    public function getAccountId()
     {
-        return $this->container['object_id'];
+        return $this->container['account_id'];
     }
 
     /**
-     * Sets object_id
+     * Sets account_id
      *
-     * @param string|null $object_id Meta responses only.
+     * @param string $account_id Zernio googleads SocialAccount id.
      *
      * @return self
      */
-    public function setObjectId($object_id)
+    public function setAccountId($account_id)
     {
-        if (is_null($object_id)) {
-            throw new \InvalidArgumentException('non-nullable object_id cannot be null');
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
         }
-        $this->container['object_id'] = $object_id;
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }
@@ -358,7 +425,7 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets customer_id
      *
-     * @param string|null $customer_id Google responses only: the customer the query ran against.
+     * @param string|null $customer_id Numeric Google Ads customer id (no dashes); only needed when the connection has several accounts.
      *
      * @return self
      */
@@ -373,89 +440,187 @@ class QueryAdInsights200Response implements ModelInterface, ArrayAccess, \JsonSe
     }
 
     /**
-     * Gets field_mask
+     * Gets keywords
+     *
+     * @return string[]
+     */
+    public function getKeywords()
+    {
+        return $this->container['keywords'];
+    }
+
+    /**
+     * Sets keywords
+     *
+     * @param string[] $keywords keywords
+     *
+     * @return self
+     */
+    public function setKeywords($keywords)
+    {
+        if (is_null($keywords)) {
+            throw new \InvalidArgumentException('non-nullable keywords cannot be null');
+        }
+
+        if ((count($keywords) > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $keywords when calling GenerateKeywordHistoricalMetricsRequest., number of items must be less than or equal to 1000.');
+        }
+        if ((count($keywords) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $keywords when calling GenerateKeywordHistoricalMetricsRequest., number of items must be greater than or equal to 1.');
+        }
+        $this->container['keywords'] = $keywords;
+
+        return $this;
+    }
+
+    /**
+     * Gets countries
+     *
+     * @return string[]|null
+     */
+    public function getCountries()
+    {
+        return $this->container['countries'];
+    }
+
+    /**
+     * Sets countries
+     *
+     * @param string[]|null $countries ISO 3166-1 alpha-2 country codes. Omitted = worldwide.
+     *
+     * @return self
+     */
+    public function setCountries($countries)
+    {
+        if (is_null($countries)) {
+            throw new \InvalidArgumentException('non-nullable countries cannot be null');
+        }
+
+        if ((count($countries) > 10)) {
+            throw new \InvalidArgumentException('invalid value for $countries when calling GenerateKeywordHistoricalMetricsRequest., number of items must be less than or equal to 10.');
+        }
+        if ((count($countries) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $countries when calling GenerateKeywordHistoricalMetricsRequest., number of items must be greater than or equal to 1.');
+        }
+        $this->container['countries'] = $countries;
+
+        return $this;
+    }
+
+    /**
+     * Gets language_constant_id
      *
      * @return string|null
      */
-    public function getFieldMask()
+    public function getLanguageConstantId()
     {
-        return $this->container['field_mask'];
+        return $this->container['language_constant_id'];
     }
 
     /**
-     * Sets field_mask
+     * Sets language_constant_id
      *
-     * @param string|null $field_mask Google responses only: the selected fields echoed by Google.
+     * @param string|null $language_constant_id Google languageConstant id (1000 = English).
      *
      * @return self
      */
-    public function setFieldMask($field_mask)
+    public function setLanguageConstantId($language_constant_id)
     {
-        if (is_null($field_mask)) {
-            array_push($this->openAPINullablesSetToNull, 'field_mask');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('field_mask', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($language_constant_id)) {
+            throw new \InvalidArgumentException('non-nullable language_constant_id cannot be null');
         }
-        $this->container['field_mask'] = $field_mask;
+        $this->container['language_constant_id'] = $language_constant_id;
 
         return $this;
     }
 
     /**
-     * Gets data
+     * Gets network
      *
-     * @return object[]|null
+     * @return string|null
      */
-    public function getData()
+    public function getNetwork()
     {
-        return $this->container['data'];
+        return $this->container['network'];
     }
 
     /**
-     * Sets data
+     * Sets network
      *
-     * @param object[]|null $data data
+     * @param string|null $network network
      *
      * @return self
      */
-    public function setData($data)
+    public function setNetwork($network)
     {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+        if (is_null($network)) {
+            throw new \InvalidArgumentException('non-nullable network cannot be null');
         }
-        $this->container['data'] = $data;
+        $allowedValues = $this->getNetworkAllowableValues();
+        if (!in_array($network, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'network', must be one of '%s'",
+                    $network,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['network'] = $network;
 
         return $this;
     }
 
     /**
-     * Gets paging
+     * Gets include_adult_keywords
      *
-     * @return \Zernio\Model\QueryAdInsights200ResponsePaging|null
+     * @return bool|null
      */
-    public function getPaging()
+    public function getIncludeAdultKeywords()
     {
-        return $this->container['paging'];
+        return $this->container['include_adult_keywords'];
     }
 
     /**
-     * Sets paging
+     * Sets include_adult_keywords
      *
-     * @param \Zernio\Model\QueryAdInsights200ResponsePaging|null $paging paging
+     * @param bool|null $include_adult_keywords include_adult_keywords
      *
      * @return self
      */
-    public function setPaging($paging)
+    public function setIncludeAdultKeywords($include_adult_keywords)
     {
-        if (is_null($paging)) {
-            throw new \InvalidArgumentException('non-nullable paging cannot be null');
+        if (is_null($include_adult_keywords)) {
+            throw new \InvalidArgumentException('non-nullable include_adult_keywords cannot be null');
         }
-        $this->container['paging'] = $paging;
+        $this->container['include_adult_keywords'] = $include_adult_keywords;
+
+        return $this;
+    }
+
+    /**
+     * Gets include_average_cpc
+     *
+     * @return bool|null
+     */
+    public function getIncludeAverageCpc()
+    {
+        return $this->container['include_average_cpc'];
+    }
+
+    /**
+     * Sets include_average_cpc
+     *
+     * @param bool|null $include_average_cpc Adds averageCpcMicros to each row's keywordMetrics.
+     *
+     * @return self
+     */
+    public function setIncludeAverageCpc($include_average_cpc)
+    {
+        if (is_null($include_average_cpc)) {
+            throw new \InvalidArgumentException('non-nullable include_average_cpc cannot be null');
+        }
+        $this->container['include_average_cpc'] = $include_average_cpc;
 
         return $this;
     }

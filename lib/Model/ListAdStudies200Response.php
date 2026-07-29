@@ -60,7 +60,7 @@ class ListAdStudies200Response implements ModelInterface, ArrayAccess, \JsonSeri
     protected static $openAPITypes = [
         'ad_account_id' => 'string',
         'data' => 'object[]',
-        'paging' => '\Zernio\Model\QueryAdInsights200ResponsePaging'
+        'paging' => '\Zernio\Model\GetAdsActivityLog200ResponsePaging'
     ];
 
     /**
@@ -361,7 +361,7 @@ class ListAdStudies200Response implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets paging
      *
-     * @return \Zernio\Model\QueryAdInsights200ResponsePaging|null
+     * @return \Zernio\Model\GetAdsActivityLog200ResponsePaging|null
      */
     public function getPaging()
     {
@@ -371,7 +371,7 @@ class ListAdStudies200Response implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets paging
      *
-     * @param \Zernio\Model\QueryAdInsights200ResponsePaging|null $paging paging
+     * @param \Zernio\Model\GetAdsActivityLog200ResponsePaging|null $paging paging
      *
      * @return self
      */

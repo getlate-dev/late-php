@@ -7,6 +7,8 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createAdInsightsReport()**](AdInsightsApi.md#createAdInsightsReport) | **POST** /v1/ads/insights/reports | Submit an async insights report run |
+| [**generateKeywordHistoricalMetrics()**](AdInsightsApi.md#generateKeywordHistoricalMetrics) | **POST** /v1/ads/keywords/historical-metrics | Historical keyword metrics (Google Keyword Planner) |
+| [**generateKeywordIdeas()**](AdInsightsApi.md#generateKeywordIdeas) | **POST** /v1/ads/keywords/ideas | Generate keyword ideas (Google Keyword Planner) |
 | [**getAdAnalytics()**](AdInsightsApi.md#getAdAnalytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
 | [**getAdInsightsReport()**](AdInsightsApi.md#getAdInsightsReport) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run |
 | [**getCampaignAnalytics()**](AdInsightsApi.md#getCampaignAnalytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics |
@@ -59,6 +61,126 @@ try {
 ### Return type
 
 [**\Zernio\Model\CreateAdInsightsReport202Response**](../Model/CreateAdInsightsReport202Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `generateKeywordHistoricalMetrics()`
+
+```php
+generateKeywordHistoricalMetrics($generate_keyword_historical_metrics_request): \Zernio\Model\GenerateKeywordHistoricalMetrics200Response
+```
+
+Historical keyword metrics (Google Keyword Planner)
+
+Google Ads only. Runs Keyword Planner's generateKeywordHistoricalMetrics for up to 1,000 exact keywords: historical search volume, competition and top-of-page bid ranges, plus averageCpcMicros when includeAverageCpc is set. Rows come back verbatim; counters are int64s encoded as strings, bid/CPC values are micros of the account currency.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AdInsightsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$generate_keyword_historical_metrics_request = new \Zernio\Model\GenerateKeywordHistoricalMetricsRequest(); // \Zernio\Model\GenerateKeywordHistoricalMetricsRequest
+
+try {
+    $result = $apiInstance->generateKeywordHistoricalMetrics($generate_keyword_historical_metrics_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdInsightsApi->generateKeywordHistoricalMetrics: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **generate_keyword_historical_metrics_request** | [**\Zernio\Model\GenerateKeywordHistoricalMetricsRequest**](../Model/GenerateKeywordHistoricalMetricsRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\GenerateKeywordHistoricalMetrics200Response**](../Model/GenerateKeywordHistoricalMetrics200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `generateKeywordIdeas()`
+
+```php
+generateKeywordIdeas($generate_keyword_ideas_request): \Zernio\Model\GenerateKeywordIdeas200Response
+```
+
+Generate keyword ideas (Google Keyword Planner)
+
+Google Ads only. Runs Keyword Planner's generateKeywordIdeas from seed keywords, a seed URL, or both, returning idea rows verbatim (avgMonthlySearches, competition, competitionIndex, top-of-page bid micros, monthlySearchVolumes). Counters are int64s encoded as strings; bid values are micros of the account currency. Omitting `countries` targets worldwide.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AdInsightsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$generate_keyword_ideas_request = new \Zernio\Model\GenerateKeywordIdeasRequest(); // \Zernio\Model\GenerateKeywordIdeasRequest
+
+try {
+    $result = $apiInstance->generateKeywordIdeas($generate_keyword_ideas_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdInsightsApi->generateKeywordIdeas: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **generate_keyword_ideas_request** | [**\Zernio\Model\GenerateKeywordIdeasRequest**](../Model/GenerateKeywordIdeasRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\GenerateKeywordIdeas200Response**](../Model/GenerateKeywordIdeas200Response.md)
 
 ### Authorization
 
@@ -276,12 +398,12 @@ try {
 ## `queryAdInsights()`
 
 ```php
-queryAdInsights($account_id, $object_id, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after): \Zernio\Model\QueryAdInsights200Response
+queryAdInsights($account_id, $object_id, $query, $customer_id, $page_token, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after): \Zernio\Model\QueryAdInsights200Response
 ```
 
 Flexible live insights query
 
-Live, flexible insights query against Meta's Graph API. Unlike GET /v1/ads/{adId}/analytics (fixed metric set, cached), this forwards caller-chosen `fields`, `breakdowns` and `filtering` to any Meta insights node and returns Meta's rows verbatim.  `objectId` selects the node: an ad account, campaign, ad set or ad platform id. `level` sets row granularity independently of the node.  Semantic validation is Meta's: an unknown field or invalid breakdown combination returns a 400 carrying Meta's message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports).
+Live, flexible insights query. The account's platform picks the contract:  **Meta (facebook/instagram)**: forwards caller-chosen `fields`, `breakdowns` and `filtering` to any Meta insights node and returns Meta's rows verbatim. `objectId` (required) selects the node; `level` sets row granularity. Semantic validation is Meta's: an unknown field or invalid breakdown combination returns a 400 carrying Meta's message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports).  **Google Ads (googleads)**: raw GAQL passthrough. Send any read-only GAQL SELECT via `query` (campaign/keyword/search-term/geo/demographic/asset/shopping resources, `change_event`, any `segments.*`) and rows come back verbatim (camelCase, counters as strings). Results are paged at a fixed 10,000 rows; follow `paging.nextPageToken` with `pageToken`. `customerId` is only needed when the connection has several Google Ads accounts. Semantic validation is Google's: an invalid query returns a 400 carrying Google's message (note: selecting `segments.date` requires a finite date filter).
 
 ### Example
 
@@ -300,8 +422,11 @@ $apiInstance = new Zernio\Api\AdInsightsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$account_id = 'account_id_example'; // string | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
-$object_id = 'object_id_example'; // string | Meta insights node: act_<n>, campaign id, ad set id or ad id.
+$account_id = 'account_id_example'; // string | Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract.
+$object_id = 'object_id_example'; // string | Meta only (required there): insights node — act_<n>, campaign id, ad set id or ad id.
+$query = 'query_example'; // string | Google only (required there): the GAQL SELECT statement to run.
+$customer_id = 'customer_id_example'; // string | Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts.
+$page_token = 'page_token_example'; // string | Google only: cursor from paging.nextPageToken of the previous page.
 $level = 'level_example'; // string | Row granularity
 $fields = 'fields_example'; // string | Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted = Meta's default set.
 $breakdowns = 'breakdowns_example'; // string | Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).
@@ -318,7 +443,7 @@ $limit = 25; // int | Rows per page
 $after = 'after_example'; // string | Cursor from paging.after of the previous page.
 
 try {
-    $result = $apiInstance->queryAdInsights($account_id, $object_id, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after);
+    $result = $apiInstance->queryAdInsights($account_id, $object_id, $query, $customer_id, $page_token, $level, $fields, $breakdowns, $action_breakdowns, $action_attribution_windows, $action_report_time, $use_unified_attribution_setting, $filtering, $date_preset, $from_date, $to_date, $time_increment, $limit, $after);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AdInsightsApi->queryAdInsights: ', $e->getMessage(), PHP_EOL;
@@ -329,8 +454,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **account_id** | **string**| Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. | |
-| **object_id** | **string**| Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id. | |
+| **account_id** | **string**| Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract. | |
+| **object_id** | **string**| Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id. | [optional] |
+| **query** | **string**| Google only (required there): the GAQL SELECT statement to run. | [optional] |
+| **customer_id** | **string**| Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts. | [optional] |
+| **page_token** | **string**| Google only: cursor from paging.nextPageToken of the previous page. | [optional] |
 | **level** | **string**| Row granularity | [optional] |
 | **fields** | **string**| Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set. | [optional] |
 | **breakdowns** | **string**| Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform). | [optional] |

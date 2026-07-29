@@ -1,11 +1,11 @@
-# # ListAdLabels200Response
+# # GenerateKeywordHistoricalMetrics200Response
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ad_account_id** | **string** |  | [optional]
+**customer_id** | **string** | The customer the request ran against. | [optional]
 **data** | **object[]** |  | [optional]
-**paging** | [**\Zernio\Model\GetAdsActivityLog200ResponsePaging**](GetAdsActivityLog200ResponsePaging.md) |  | [optional]
+**aggregate_metric_results** | **object** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

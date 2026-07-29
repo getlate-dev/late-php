@@ -1,6 +1,6 @@
 <?php
 /**
- * ListMetaBusinesses200Response
+ * GenerateKeywordIdeas200Response
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListMetaBusinesses200Response Class Doc Comment
+ * GenerateKeywordIdeas200Response Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GenerateKeywordIdeas200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listMetaBusinesses_200_response';
+    protected static $openAPIModelName = 'generateKeywordIdeas_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +58,10 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
+        'customer_id' => 'string',
         'data' => 'object[]',
-        'paging' => '\Zernio\Model\GetAdsActivityLog200ResponsePaging'
+        'aggregate_metric_results' => 'object',
+        'paging' => '\Zernio\Model\GenerateKeywordIdeas200ResponsePaging'
     ];
 
     /**
@@ -70,7 +72,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'customer_id' => null,
         'data' => null,
+        'aggregate_metric_results' => null,
         'paging' => null
     ];
 
@@ -80,7 +84,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'customer_id' => false,
         'data' => false,
+        'aggregate_metric_results' => true,
         'paging' => false
     ];
 
@@ -170,7 +176,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
+        'customer_id' => 'customerId',
         'data' => 'data',
+        'aggregate_metric_results' => 'aggregateMetricResults',
         'paging' => 'paging'
     ];
 
@@ -180,7 +188,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
+        'customer_id' => 'setCustomerId',
         'data' => 'setData',
+        'aggregate_metric_results' => 'setAggregateMetricResults',
         'paging' => 'setPaging'
     ];
 
@@ -190,7 +200,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
+        'customer_id' => 'getCustomerId',
         'data' => 'getData',
+        'aggregate_metric_results' => 'getAggregateMetricResults',
         'paging' => 'getPaging'
     ];
 
@@ -251,7 +263,9 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('customer_id', $data ?? [], null);
         $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('aggregate_metric_results', $data ?? [], null);
         $this->setIfExists('paging', $data ?? [], null);
     }
 
@@ -298,6 +312,33 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
+     * Gets customer_id
+     *
+     * @return string|null
+     */
+    public function getCustomerId()
+    {
+        return $this->container['customer_id'];
+    }
+
+    /**
+     * Sets customer_id
+     *
+     * @param string|null $customer_id The customer the request ran against.
+     *
+     * @return self
+     */
+    public function setCustomerId($customer_id)
+    {
+        if (is_null($customer_id)) {
+            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
+        }
+        $this->container['customer_id'] = $customer_id;
+
+        return $this;
+    }
+
+    /**
      * Gets data
      *
      * @return object[]|null
@@ -325,9 +366,43 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
     }
 
     /**
+     * Gets aggregate_metric_results
+     *
+     * @return object|null
+     */
+    public function getAggregateMetricResults()
+    {
+        return $this->container['aggregate_metric_results'];
+    }
+
+    /**
+     * Sets aggregate_metric_results
+     *
+     * @param object|null $aggregate_metric_results aggregate_metric_results
+     *
+     * @return self
+     */
+    public function setAggregateMetricResults($aggregate_metric_results)
+    {
+        if (is_null($aggregate_metric_results)) {
+            array_push($this->openAPINullablesSetToNull, 'aggregate_metric_results');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('aggregate_metric_results', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['aggregate_metric_results'] = $aggregate_metric_results;
+
+        return $this;
+    }
+
+    /**
      * Gets paging
      *
-     * @return \Zernio\Model\GetAdsActivityLog200ResponsePaging|null
+     * @return \Zernio\Model\GenerateKeywordIdeas200ResponsePaging|null
      */
     public function getPaging()
     {
@@ -337,7 +412,7 @@ class ListMetaBusinesses200Response implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets paging
      *
-     * @param \Zernio\Model\GetAdsActivityLog200ResponsePaging|null $paging paging
+     * @param \Zernio\Model\GenerateKeywordIdeas200ResponsePaging|null $paging paging
      *
      * @return self
      */
