@@ -299,25 +299,19 @@ class InstagramPlatformDataUserTagsInner implements ModelInterface, ArrayAccess,
         if ($this->container['username'] === null) {
             $invalidProperties[] = "'username' can't be null";
         }
-        if ($this->container['x'] === null) {
-            $invalidProperties[] = "'x' can't be null";
-        }
-        if (($this->container['x'] > 1)) {
+        if (!is_null($this->container['x']) && ($this->container['x'] > 1)) {
             $invalidProperties[] = "invalid value for 'x', must be smaller than or equal to 1.";
         }
 
-        if (($this->container['x'] < 0)) {
+        if (!is_null($this->container['x']) && ($this->container['x'] < 0)) {
             $invalidProperties[] = "invalid value for 'x', must be bigger than or equal to 0.";
         }
 
-        if ($this->container['y'] === null) {
-            $invalidProperties[] = "'y' can't be null";
-        }
-        if (($this->container['y'] > 1)) {
+        if (!is_null($this->container['y']) && ($this->container['y'] > 1)) {
             $invalidProperties[] = "invalid value for 'y', must be smaller than or equal to 1.";
         }
 
-        if (($this->container['y'] < 0)) {
+        if (!is_null($this->container['y']) && ($this->container['y'] < 0)) {
             $invalidProperties[] = "invalid value for 'y', must be bigger than or equal to 0.";
         }
 
@@ -370,7 +364,7 @@ class InstagramPlatformDataUserTagsInner implements ModelInterface, ArrayAccess,
     /**
      * Gets x
      *
-     * @return float
+     * @return float|null
      */
     public function getX()
     {
@@ -380,7 +374,7 @@ class InstagramPlatformDataUserTagsInner implements ModelInterface, ArrayAccess,
     /**
      * Sets x
      *
-     * @param float $x X coordinate position from left edge (0.0 = left, 0.5 = center, 1.0 = right)
+     * @param float|null $x X coordinate position from left edge (0.0 = left, 0.5 = center, 1.0 = right). Required for photos, ignored for Reels/videos, optional for stories.
      *
      * @return self
      */
@@ -405,7 +399,7 @@ class InstagramPlatformDataUserTagsInner implements ModelInterface, ArrayAccess,
     /**
      * Gets y
      *
-     * @return float
+     * @return float|null
      */
     public function getY()
     {
@@ -415,7 +409,7 @@ class InstagramPlatformDataUserTagsInner implements ModelInterface, ArrayAccess,
     /**
      * Sets y
      *
-     * @param float $y Y coordinate position from top edge (0.0 = top, 0.5 = center, 1.0 = bottom)
+     * @param float|null $y Y coordinate position from top edge (0.0 = top, 0.5 = center, 1.0 = bottom). Required for photos, ignored for Reels/videos, optional for stories.
      *
      * @return self
      */
@@ -450,7 +444,7 @@ class InstagramPlatformDataUserTagsInner implements ModelInterface, ArrayAccess,
     /**
      * Sets media_index
      *
-     * @param int|null $media_index Zero-based index of the carousel item to tag. Defaults to 0. Tags on video items or out-of-range indices are ignored.
+     * @param int|null $media_index Zero-based index of the carousel item to tag. Defaults to 0. Tags on out-of-range indices are ignored.
      *
      * @return self
      */

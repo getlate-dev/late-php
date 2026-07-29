@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **collaborators** | **string[]** | Up to 3 Instagram usernames to invite as collaborators (feed/Reels only) | [optional]
 **first_comment** | **string** | Optional first comment to add after the post is created (not applied to Stories) | [optional]
 **trial_params** | [**\Zernio\Model\InstagramPlatformDataTrialParams**](InstagramPlatformDataTrialParams.md) |  | [optional]
-**user_tags** | [**\Zernio\Model\InstagramPlatformDataUserTagsInner[]**](InstagramPlatformDataUserTagsInner.md) | Tag Instagram users in photos by username and position. Not supported for stories or videos. For carousels, use mediaIndex to target specific slides (defaults to 0). Tags on video items are silently skipped. | [optional]
+**user_tags** | [**\Zernio\Model\InstagramPlatformDataUserTagsInner[]**](InstagramPlatformDataUserTagsInner.md) | Tag Instagram users by username. The tag shape depends on the media: photos require x/y coordinates, Reels and videos take username only (coordinates are ignored), stories accept optional coordinates. For carousels, use mediaIndex to target specific slides (defaults to 0); video slides take username-only tags. Photo tags without valid coordinates are skipped. | [optional]
 **audio_name** | **string** | Custom name for original audio in Reels. Replaces the default \&quot;Original Audio\&quot; label. Can only be set once. | [optional]
 **thumb_offset** | **int** | Millisecond offset from video start for the Reel cover frame. Ignored when instagramThumbnail or reelCover is provided. Defaults to 0. | [optional]
 **instagram_thumbnail** | **string** | Custom cover image URL for Instagram Reels (JPG or PNG, publicly accessible). Overrides thumbOffset when provided. Also accepted as reelCover (alias). | [optional]

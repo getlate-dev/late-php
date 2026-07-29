@@ -1775,7 +1775,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
     /**
      * Sets user_tags
      *
-     * @param \Zernio\Model\InstagramPlatformDataUserTagsInner[]|null $user_tags Tag Instagram users in photos by username and position. Not supported for stories or videos. For carousels, use mediaIndex to target specific slides (defaults to 0). Tags on video items are silently skipped.
+     * @param \Zernio\Model\InstagramPlatformDataUserTagsInner[]|null $user_tags Tag Instagram users by username. The tag shape depends on the media: photos require x/y coordinates, Reels and videos take username only (coordinates are ignored), stories accept optional coordinates. For carousels, use mediaIndex to target specific slides (defaults to 0); video slides take username-only tags. Photo tags without valid coordinates are skipped.
      *
      * @return self
      */
