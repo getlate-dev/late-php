@@ -353,13 +353,6 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
             );
         }
 
-        if ($this->container['phone_numbers'] === null) {
-            $invalidProperties[] = "'phone_numbers' can't be null";
-        }
-        if ((count($this->container['phone_numbers']) < 1)) {
-            $invalidProperties[] = "invalid value for 'phone_numbers', number of items must be greater than or equal to 1.";
-        }
-
         if (!is_null($this->container['messaging_brand_name']) && (mb_strlen($this->container['messaging_brand_name']) > 60)) {
             $invalidProperties[] = "invalid value for 'messaging_brand_name', the character length must be smaller than or equal to 60.";
         }
@@ -423,7 +416,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets phone_numbers
      *
-     * @return string[]
+     * @return string[]|null
      */
     public function getPhoneNumbers()
     {
@@ -433,7 +426,7 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets phone_numbers
      *
-     * @param string[] $phone_numbers Your numbers this registration covers.
+     * @param string[]|null $phone_numbers Your numbers this registration covers. When omitted or empty on a 10DLC registration, defaults to your active SMS-enabled US local numbers not already covered by another registration.
      *
      * @return self
      */
@@ -441,11 +434,6 @@ class StartSmsRegistrationRequest implements ModelInterface, ArrayAccess, \JsonS
     {
         if (is_null($phone_numbers)) {
             throw new \InvalidArgumentException('non-nullable phone_numbers cannot be null');
-        }
-
-
-        if ((count($phone_numbers) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $phone_numbers when calling StartSmsRegistrationRequest., number of items must be greater than or equal to 1.');
         }
         $this->container['phone_numbers'] = $phone_numbers;
 
