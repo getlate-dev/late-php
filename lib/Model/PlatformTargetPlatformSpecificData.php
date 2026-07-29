@@ -1132,7 +1132,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
     /**
      * Sets reply_to_tweet_id
      *
-     * @param string|null $reply_to_tweet_id ID of an existing tweet to reply to. The published tweet will appear as a reply in that tweet's thread. For threads, only the first tweet replies to the target; subsequent tweets chain normally.
+     * @param string|null $reply_to_tweet_id ID of an existing tweet to reply to. The published tweet will appear as a reply in that tweet's thread. For threads, only the first tweet replies to the target; subsequent tweets chain normally. X only permits replying to your own posts or posts you are mentioned in; replying to an arbitrary other account's post is rejected by X.
      *
      * @return self
      */
