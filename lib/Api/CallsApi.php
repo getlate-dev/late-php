@@ -142,7 +142,7 @@ class CallsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\GetCall200Response|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\GetCall200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
      */
     public function getCall($id, string $contentType = self::contentTypes['getCall'][0])
     {
@@ -160,7 +160,7 @@ class CallsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\GetCall200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\GetCall200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function getCallWithHttpInfo($id, string $contentType = self::contentTypes['getCall'][0])
     {
@@ -193,6 +193,12 @@ class CallsApi
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\GetCall200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -230,6 +236,14 @@ class CallsApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\GetCall200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -429,7 +443,7 @@ class CallsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return |\Zernio\Model\GetWhatsAppCallRecording200Response|\Zernio\Model\InlineObject
+     * @return |\Zernio\Model\GetWhatsAppCallRecording200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
      */
     public function getCallRecording($id, $as = null, string $contentType = self::contentTypes['getCallRecording'][0])
     {
@@ -448,7 +462,7 @@ class CallsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of |\Zernio\Model\GetWhatsAppCallRecording200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of |\Zernio\Model\GetWhatsAppCallRecording200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function getCallRecordingWithHttpInfo($id, $as = null, string $contentType = self::contentTypes['getCallRecording'][0])
     {
@@ -481,6 +495,12 @@ class CallsApi
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\GetWhatsAppCallRecording200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -518,6 +538,14 @@ class CallsApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\GetWhatsAppCallRecording200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
