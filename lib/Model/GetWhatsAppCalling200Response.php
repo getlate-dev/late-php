@@ -68,7 +68,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'call_icon_countries' => 'string[]',
         'outbound_disabled' => 'bool',
         'caller_id_mode' => 'string',
-        'caller_id_verified' => 'bool'
+        'caller_id_verified' => 'bool',
+        'max_call_duration_seconds' => 'int',
+        'forward_caller_id' => 'string'
     ];
 
     /**
@@ -89,7 +91,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'call_icon_countries' => null,
         'outbound_disabled' => null,
         'caller_id_mode' => null,
-        'caller_id_verified' => null
+        'caller_id_verified' => null,
+        'max_call_duration_seconds' => null,
+        'forward_caller_id' => null
     ];
 
     /**
@@ -108,7 +112,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'call_icon_countries' => true,
         'outbound_disabled' => false,
         'caller_id_mode' => false,
-        'caller_id_verified' => false
+        'caller_id_verified' => false,
+        'max_call_duration_seconds' => true,
+        'forward_caller_id' => false
     ];
 
     /**
@@ -207,7 +213,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'call_icon_countries' => 'callIconCountries',
         'outbound_disabled' => 'outboundDisabled',
         'caller_id_mode' => 'callerIdMode',
-        'caller_id_verified' => 'callerIdVerified'
+        'caller_id_verified' => 'callerIdVerified',
+        'max_call_duration_seconds' => 'maxCallDurationSeconds',
+        'forward_caller_id' => 'forwardCallerId'
     ];
 
     /**
@@ -226,7 +234,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'call_icon_countries' => 'setCallIconCountries',
         'outbound_disabled' => 'setOutboundDisabled',
         'caller_id_mode' => 'setCallerIdMode',
-        'caller_id_verified' => 'setCallerIdVerified'
+        'caller_id_verified' => 'setCallerIdVerified',
+        'max_call_duration_seconds' => 'setMaxCallDurationSeconds',
+        'forward_caller_id' => 'setForwardCallerId'
     ];
 
     /**
@@ -245,7 +255,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'call_icon_countries' => 'getCallIconCountries',
         'outbound_disabled' => 'getOutboundDisabled',
         'caller_id_mode' => 'getCallerIdMode',
-        'caller_id_verified' => 'getCallerIdVerified'
+        'caller_id_verified' => 'getCallerIdVerified',
+        'max_call_duration_seconds' => 'getMaxCallDurationSeconds',
+        'forward_caller_id' => 'getForwardCallerId'
     ];
 
     /**
@@ -291,6 +303,8 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
 
     public const CALLER_ID_MODE_BUSINESS = 'business';
     public const CALLER_ID_MODE_PLATFORM = 'platform';
+    public const FORWARD_CALLER_ID_BUSINESS = 'business';
+    public const FORWARD_CALLER_ID_CALLER = 'caller';
 
     /**
      * Gets allowable values of the enum
@@ -302,6 +316,19 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         return [
             self::CALLER_ID_MODE_BUSINESS,
             self::CALLER_ID_MODE_PLATFORM,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getForwardCallerIdAllowableValues()
+    {
+        return [
+            self::FORWARD_CALLER_ID_BUSINESS,
+            self::FORWARD_CALLER_ID_CALLER,
         ];
     }
 
@@ -331,6 +358,8 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('outbound_disabled', $data ?? [], null);
         $this->setIfExists('caller_id_mode', $data ?? [], null);
         $this->setIfExists('caller_id_verified', $data ?? [], null);
+        $this->setIfExists('max_call_duration_seconds', $data ?? [], null);
+        $this->setIfExists('forward_caller_id', $data ?? [], null);
     }
 
     /**
@@ -365,6 +394,15 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'caller_id_mode', must be one of '%s'",
                 $this->container['caller_id_mode'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getForwardCallerIdAllowableValues();
+        if (!is_null($this->container['forward_caller_id']) && !in_array($this->container['forward_caller_id'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'forward_caller_id', must be one of '%s'",
+                $this->container['forward_caller_id'],
                 implode("', '", $allowedValues)
             );
         }
@@ -715,6 +753,77 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable caller_id_verified cannot be null');
         }
         $this->container['caller_id_verified'] = $caller_id_verified;
+
+        return $this;
+    }
+
+    /**
+     * Gets max_call_duration_seconds
+     *
+     * @return int|null
+     */
+    public function getMaxCallDurationSeconds()
+    {
+        return $this->container['max_call_duration_seconds'];
+    }
+
+    /**
+     * Sets max_call_duration_seconds
+     *
+     * @param int|null $max_call_duration_seconds Hard cap (seconds) on forwarded calls; null = no cap.
+     *
+     * @return self
+     */
+    public function setMaxCallDurationSeconds($max_call_duration_seconds)
+    {
+        if (is_null($max_call_duration_seconds)) {
+            array_push($this->openAPINullablesSetToNull, 'max_call_duration_seconds');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_call_duration_seconds', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['max_call_duration_seconds'] = $max_call_duration_seconds;
+
+        return $this;
+    }
+
+    /**
+     * Gets forward_caller_id
+     *
+     * @return string|null
+     */
+    public function getForwardCallerId()
+    {
+        return $this->container['forward_caller_id'];
+    }
+
+    /**
+     * Sets forward_caller_id
+     *
+     * @param string|null $forward_caller_id forward_caller_id
+     *
+     * @return self
+     */
+    public function setForwardCallerId($forward_caller_id)
+    {
+        if (is_null($forward_caller_id)) {
+            throw new \InvalidArgumentException('non-nullable forward_caller_id cannot be null');
+        }
+        $allowedValues = $this->getForwardCallerIdAllowableValues();
+        if (!in_array($forward_caller_id, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'forward_caller_id', must be one of '%s'",
+                    $forward_caller_id,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['forward_caller_id'] = $forward_caller_id;
 
         return $this;
     }

@@ -63,7 +63,9 @@ class EnableWhatsAppCallingLegacyRequest implements ModelInterface, ArrayAccess,
         'sip_auth_username' => 'string',
         'sip_auth_password' => 'string',
         'recording_enabled' => 'bool',
-        'call_icon_countries' => 'string[]'
+        'call_icon_countries' => 'string[]',
+        'max_call_duration_seconds' => 'int',
+        'forward_caller_id' => 'string'
     ];
 
     /**
@@ -79,7 +81,9 @@ class EnableWhatsAppCallingLegacyRequest implements ModelInterface, ArrayAccess,
         'sip_auth_username' => null,
         'sip_auth_password' => null,
         'recording_enabled' => null,
-        'call_icon_countries' => null
+        'call_icon_countries' => null,
+        'max_call_duration_seconds' => null,
+        'forward_caller_id' => null
     ];
 
     /**
@@ -93,7 +97,9 @@ class EnableWhatsAppCallingLegacyRequest implements ModelInterface, ArrayAccess,
         'sip_auth_username' => false,
         'sip_auth_password' => false,
         'recording_enabled' => false,
-        'call_icon_countries' => false
+        'call_icon_countries' => false,
+        'max_call_duration_seconds' => false,
+        'forward_caller_id' => false
     ];
 
     /**
@@ -187,7 +193,9 @@ class EnableWhatsAppCallingLegacyRequest implements ModelInterface, ArrayAccess,
         'sip_auth_username' => 'sipAuthUsername',
         'sip_auth_password' => 'sipAuthPassword',
         'recording_enabled' => 'recordingEnabled',
-        'call_icon_countries' => 'callIconCountries'
+        'call_icon_countries' => 'callIconCountries',
+        'max_call_duration_seconds' => 'maxCallDurationSeconds',
+        'forward_caller_id' => 'forwardCallerId'
     ];
 
     /**
@@ -201,7 +209,9 @@ class EnableWhatsAppCallingLegacyRequest implements ModelInterface, ArrayAccess,
         'sip_auth_username' => 'setSipAuthUsername',
         'sip_auth_password' => 'setSipAuthPassword',
         'recording_enabled' => 'setRecordingEnabled',
-        'call_icon_countries' => 'setCallIconCountries'
+        'call_icon_countries' => 'setCallIconCountries',
+        'max_call_duration_seconds' => 'setMaxCallDurationSeconds',
+        'forward_caller_id' => 'setForwardCallerId'
     ];
 
     /**
@@ -215,7 +225,9 @@ class EnableWhatsAppCallingLegacyRequest implements ModelInterface, ArrayAccess,
         'sip_auth_username' => 'getSipAuthUsername',
         'sip_auth_password' => 'getSipAuthPassword',
         'recording_enabled' => 'getRecordingEnabled',
-        'call_icon_countries' => 'getCallIconCountries'
+        'call_icon_countries' => 'getCallIconCountries',
+        'max_call_duration_seconds' => 'getMaxCallDurationSeconds',
+        'forward_caller_id' => 'getForwardCallerId'
     ];
 
     /**
@@ -259,6 +271,21 @@ class EnableWhatsAppCallingLegacyRequest implements ModelInterface, ArrayAccess,
         return self::$openAPIModelName;
     }
 
+    public const FORWARD_CALLER_ID_BUSINESS = 'business';
+    public const FORWARD_CALLER_ID_CALLER = 'caller';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getForwardCallerIdAllowableValues()
+    {
+        return [
+            self::FORWARD_CALLER_ID_BUSINESS,
+            self::FORWARD_CALLER_ID_CALLER,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -281,6 +308,8 @@ class EnableWhatsAppCallingLegacyRequest implements ModelInterface, ArrayAccess,
         $this->setIfExists('sip_auth_password', $data ?? [], null);
         $this->setIfExists('recording_enabled', $data ?? [], false);
         $this->setIfExists('call_icon_countries', $data ?? [], null);
+        $this->setIfExists('max_call_duration_seconds', $data ?? [], null);
+        $this->setIfExists('forward_caller_id', $data ?? [], 'business');
     }
 
     /**
@@ -316,6 +345,23 @@ class EnableWhatsAppCallingLegacyRequest implements ModelInterface, ArrayAccess,
         if ($this->container['forward_to'] === null) {
             $invalidProperties[] = "'forward_to' can't be null";
         }
+        if (!is_null($this->container['max_call_duration_seconds']) && ($this->container['max_call_duration_seconds'] > 14400)) {
+            $invalidProperties[] = "invalid value for 'max_call_duration_seconds', must be smaller than or equal to 14400.";
+        }
+
+        if (!is_null($this->container['max_call_duration_seconds']) && ($this->container['max_call_duration_seconds'] < 30)) {
+            $invalidProperties[] = "invalid value for 'max_call_duration_seconds', must be bigger than or equal to 30.";
+        }
+
+        $allowedValues = $this->getForwardCallerIdAllowableValues();
+        if (!is_null($this->container['forward_caller_id']) && !in_array($this->container['forward_caller_id'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'forward_caller_id', must be one of '%s'",
+                $this->container['forward_caller_id'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -489,6 +535,78 @@ class EnableWhatsAppCallingLegacyRequest implements ModelInterface, ArrayAccess,
             throw new \InvalidArgumentException('non-nullable call_icon_countries cannot be null');
         }
         $this->container['call_icon_countries'] = $call_icon_countries;
+
+        return $this;
+    }
+
+    /**
+     * Gets max_call_duration_seconds
+     *
+     * @return int|null
+     */
+    public function getMaxCallDurationSeconds()
+    {
+        return $this->container['max_call_duration_seconds'];
+    }
+
+    /**
+     * Sets max_call_duration_seconds
+     *
+     * @param int|null $max_call_duration_seconds Hard cap (seconds) on a forwarded call; the carrier hangs up both legs when it fires. Safety valve against dead-air billing when a destination hangs up but the signal is lost.
+     *
+     * @return self
+     */
+    public function setMaxCallDurationSeconds($max_call_duration_seconds)
+    {
+        if (is_null($max_call_duration_seconds)) {
+            throw new \InvalidArgumentException('non-nullable max_call_duration_seconds cannot be null');
+        }
+
+        if (($max_call_duration_seconds > 14400)) {
+            throw new \InvalidArgumentException('invalid value for $max_call_duration_seconds when calling EnableWhatsAppCallingLegacyRequest., must be smaller than or equal to 14400.');
+        }
+        if (($max_call_duration_seconds < 30)) {
+            throw new \InvalidArgumentException('invalid value for $max_call_duration_seconds when calling EnableWhatsAppCallingLegacyRequest., must be bigger than or equal to 30.');
+        }
+
+        $this->container['max_call_duration_seconds'] = $max_call_duration_seconds;
+
+        return $this;
+    }
+
+    /**
+     * Gets forward_caller_id
+     *
+     * @return string|null
+     */
+    public function getForwardCallerId()
+    {
+        return $this->container['forward_caller_id'];
+    }
+
+    /**
+     * Sets forward_caller_id
+     *
+     * @param string|null $forward_caller_id Caller ID presented to the forward destination. caller = the WhatsApp user's number (sip: destinations only; ignored on tel: forwards). Fixes AI-agent trunks that reject seeing the business number call itself.
+     *
+     * @return self
+     */
+    public function setForwardCallerId($forward_caller_id)
+    {
+        if (is_null($forward_caller_id)) {
+            throw new \InvalidArgumentException('non-nullable forward_caller_id cannot be null');
+        }
+        $allowedValues = $this->getForwardCallerIdAllowableValues();
+        if (!in_array($forward_caller_id, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'forward_caller_id', must be one of '%s'",
+                    $forward_caller_id,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['forward_caller_id'] = $forward_caller_id;
 
         return $this;
     }
