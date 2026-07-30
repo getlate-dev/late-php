@@ -3219,7 +3219,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/FacebookPostEarningsResponseMetricsValueTest.php
-test/Model/FacebookPostEarningsResponseTest.php
-test/Model/FacebookPostEarningsResponseUnavailableMetricsInnerTest.php
-test/Model/InstagramAccountInsightsResponseUnavailableMetricsInnerTest.php

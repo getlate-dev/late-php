@@ -3503,6 +3503,7 @@ class AdCampaignsApi
      * @param  string|null $platform platform (optional)
      * @param  \Zernio\Model\AdStatus|null $status Filter by derived campaign status (post-aggregation) (optional)
      * @param  string|null $ad_account_id Platform ad account ID (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Prunes the tree to ads whose creative is backed by this Page — campaigns and ad sets with no ad on the Page drop out, and rolled-up metrics cover only the Page&#39;s ads. Mirrors the same filter on /v1/ads and /v1/ads/campaigns. (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads. (optional)
@@ -3517,9 +3518,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\GetAdTree200Response|\Zernio\Model\InlineObject
      */
-    public function getAdTree($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
+    public function getAdTree($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
-        list($response) = $this->getAdTreeWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType);
+        list($response) = $this->getAdTreeWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType);
         return $response;
     }
 
@@ -3534,6 +3535,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  \Zernio\Model\AdStatus|null $status Filter by derived campaign status (post-aggregation) (optional)
      * @param  string|null $ad_account_id Platform ad account ID (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Prunes the tree to ads whose creative is backed by this Page — campaigns and ad sets with no ad on the Page drop out, and rolled-up metrics cover only the Page&#39;s ads. Mirrors the same filter on /v1/ads and /v1/ads/campaigns. (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads. (optional)
@@ -3548,9 +3550,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\GetAdTree200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAdTreeWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
+    public function getAdTreeWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
-        $request = $this->getAdTreeRequest($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType);
+        $request = $this->getAdTreeRequest($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3646,6 +3648,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  \Zernio\Model\AdStatus|null $status Filter by derived campaign status (post-aggregation) (optional)
      * @param  string|null $ad_account_id Platform ad account ID (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Prunes the tree to ads whose creative is backed by this Page — campaigns and ad sets with no ad on the Page drop out, and rolled-up metrics cover only the Page&#39;s ads. Mirrors the same filter on /v1/ads and /v1/ads/campaigns. (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads. (optional)
@@ -3659,9 +3662,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAdTreeAsync($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
+    public function getAdTreeAsync($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
-        return $this->getAdTreeAsyncWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType)
+        return $this->getAdTreeAsyncWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3680,6 +3683,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  \Zernio\Model\AdStatus|null $status Filter by derived campaign status (post-aggregation) (optional)
      * @param  string|null $ad_account_id Platform ad account ID (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Prunes the tree to ads whose creative is backed by this Page — campaigns and ad sets with no ad on the Page drop out, and rolled-up metrics cover only the Page&#39;s ads. Mirrors the same filter on /v1/ads and /v1/ads/campaigns. (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads. (optional)
@@ -3693,10 +3697,10 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAdTreeAsyncWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
+    public function getAdTreeAsyncWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
         $returnType = '\Zernio\Model\GetAdTree200Response';
-        $request = $this->getAdTreeRequest($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType);
+        $request = $this->getAdTreeRequest($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3743,6 +3747,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  \Zernio\Model\AdStatus|null $status Filter by derived campaign status (post-aggregation) (optional)
      * @param  string|null $ad_account_id Platform ad account ID (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Prunes the tree to ads whose creative is backed by this Page — campaigns and ad sets with no ad on the Page drop out, and rolled-up metrics cover only the Page&#39;s ads. Mirrors the same filter on /v1/ads and /v1/ads/campaigns. (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads. (optional)
@@ -3756,7 +3761,7 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAdTreeRequest($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
+    public function getAdTreeRequest($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
 
         if ($page !== null && $page < 1) {
@@ -3770,6 +3775,7 @@ class AdCampaignsApi
             throw new \InvalidArgumentException('invalid value for "$limit" when calling AdCampaignsApi.getAdTree, must be bigger than or equal to 1.');
         }
         
+
 
 
 
@@ -3839,6 +3845,15 @@ class AdCampaignsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ad_account_id,
             'adAccountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_id,
+            'pageId', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
@@ -4349,6 +4364,7 @@ class AdCampaignsApi
      * @param  string|null $platform platform (optional)
      * @param  \Zernio\Model\AdStatus|null $status Filter by derived campaign status (post-aggregation) (optional)
      * @param  string|null $ad_account_id Platform ad account ID (e.g. act_123 for Meta) (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Campaigns have no Page of their own, so this keeps campaigns having at least one ad backed by this Page, with adCount and metrics computed over those ads only. Mirrors the same filter on /v1/ads and /v1/ads/tree. (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  \DateTime|null $from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. (optional)
@@ -4359,9 +4375,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\ListAdCampaigns200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
      */
-    public function listAdCampaigns($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
+    public function listAdCampaigns($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
     {
-        list($response) = $this->listAdCampaignsWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $from_date, $to_date, $contentType);
+        list($response) = $this->listAdCampaignsWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $contentType);
         return $response;
     }
 
@@ -4376,6 +4392,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  \Zernio\Model\AdStatus|null $status Filter by derived campaign status (post-aggregation) (optional)
      * @param  string|null $ad_account_id Platform ad account ID (e.g. act_123 for Meta) (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Campaigns have no Page of their own, so this keeps campaigns having at least one ad backed by this Page, with adCount and metrics computed over those ads only. Mirrors the same filter on /v1/ads and /v1/ads/tree. (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  \DateTime|null $from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. (optional)
@@ -4386,9 +4403,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\ListAdCampaigns200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listAdCampaignsWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
+    public function listAdCampaignsWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
     {
-        $request = $this->listAdCampaignsRequest($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $from_date, $to_date, $contentType);
+        $request = $this->listAdCampaignsRequest($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4498,6 +4515,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  \Zernio\Model\AdStatus|null $status Filter by derived campaign status (post-aggregation) (optional)
      * @param  string|null $ad_account_id Platform ad account ID (e.g. act_123 for Meta) (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Campaigns have no Page of their own, so this keeps campaigns having at least one ad backed by this Page, with adCount and metrics computed over those ads only. Mirrors the same filter on /v1/ads and /v1/ads/tree. (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  \DateTime|null $from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. (optional)
@@ -4507,9 +4525,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAdCampaignsAsync($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
+    public function listAdCampaignsAsync($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
     {
-        return $this->listAdCampaignsAsyncWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $from_date, $to_date, $contentType)
+        return $this->listAdCampaignsAsyncWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4528,6 +4546,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  \Zernio\Model\AdStatus|null $status Filter by derived campaign status (post-aggregation) (optional)
      * @param  string|null $ad_account_id Platform ad account ID (e.g. act_123 for Meta) (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Campaigns have no Page of their own, so this keeps campaigns having at least one ad backed by this Page, with adCount and metrics computed over those ads only. Mirrors the same filter on /v1/ads and /v1/ads/tree. (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  \DateTime|null $from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. (optional)
@@ -4537,10 +4556,10 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAdCampaignsAsyncWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
+    public function listAdCampaignsAsyncWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
     {
         $returnType = '\Zernio\Model\ListAdCampaigns200Response';
-        $request = $this->listAdCampaignsRequest($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $from_date, $to_date, $contentType);
+        $request = $this->listAdCampaignsRequest($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4587,6 +4606,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  \Zernio\Model\AdStatus|null $status Filter by derived campaign status (post-aggregation) (optional)
      * @param  string|null $ad_account_id Platform ad account ID (e.g. act_123 for Meta) (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Campaigns have no Page of their own, so this keeps campaigns having at least one ad backed by this Page, with adCount and metrics computed over those ads only. Mirrors the same filter on /v1/ads and /v1/ads/tree. (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  \DateTime|null $from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. (optional)
@@ -4596,7 +4616,7 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listAdCampaignsRequest($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
+    public function listAdCampaignsRequest($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
     {
 
         if ($page !== null && $page < 1) {
@@ -4610,6 +4630,7 @@ class AdCampaignsApi
             throw new \InvalidArgumentException('invalid value for "$limit" when calling AdCampaignsApi.listAdCampaigns, must be bigger than or equal to 1.');
         }
         
+
 
 
 
@@ -4675,6 +4696,15 @@ class AdCampaignsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ad_account_id,
             'adAccountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_id,
+            'pageId', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
@@ -5246,6 +5276,7 @@ class AdCampaignsApi
      * @param  string|null $platform platform (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Returns only ads whose creative is backed by this Page (a Meta ad account serves ads for every Page in the Business Manager). Matches each ad&#39;s &#x60;creative.pageId&#x60;; ads with no page signal (rare IG-only creatives) never match. Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Platform campaign ID (filter ads within a campaign) (optional)
      * @param  string|null $platform_ad_id Meta ad ID. Returns the ad with this platform-side ad ID. (optional)
@@ -5259,9 +5290,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\ListAds200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
      */
-    public function listAds($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
+    public function listAds($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $page_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
     {
-        list($response) = $this->listAdsWithHttpInfo($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date, $contentType);
+        list($response) = $this->listAdsWithHttpInfo($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $page_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date, $contentType);
         return $response;
     }
 
@@ -5277,6 +5308,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Returns only ads whose creative is backed by this Page (a Meta ad account serves ads for every Page in the Business Manager). Matches each ad&#39;s &#x60;creative.pageId&#x60;; ads with no page signal (rare IG-only creatives) never match. Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Platform campaign ID (filter ads within a campaign) (optional)
      * @param  string|null $platform_ad_id Meta ad ID. Returns the ad with this platform-side ad ID. (optional)
@@ -5290,9 +5322,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\ListAds200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listAdsWithHttpInfo($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
+    public function listAdsWithHttpInfo($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $page_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
     {
-        $request = $this->listAdsRequest($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date, $contentType);
+        $request = $this->listAdsRequest($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $page_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5403,6 +5435,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Returns only ads whose creative is backed by this Page (a Meta ad account serves ads for every Page in the Business Manager). Matches each ad&#39;s &#x60;creative.pageId&#x60;; ads with no page signal (rare IG-only creatives) never match. Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Platform campaign ID (filter ads within a campaign) (optional)
      * @param  string|null $platform_ad_id Meta ad ID. Returns the ad with this platform-side ad ID. (optional)
@@ -5415,9 +5448,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAdsAsync($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
+    public function listAdsAsync($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $page_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
     {
-        return $this->listAdsAsyncWithHttpInfo($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date, $contentType)
+        return $this->listAdsAsyncWithHttpInfo($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $page_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5437,6 +5470,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Returns only ads whose creative is backed by this Page (a Meta ad account serves ads for every Page in the Business Manager). Matches each ad&#39;s &#x60;creative.pageId&#x60;; ads with no page signal (rare IG-only creatives) never match. Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Platform campaign ID (filter ads within a campaign) (optional)
      * @param  string|null $platform_ad_id Meta ad ID. Returns the ad with this platform-side ad ID. (optional)
@@ -5449,10 +5483,10 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAdsAsyncWithHttpInfo($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
+    public function listAdsAsyncWithHttpInfo($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $page_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
     {
         $returnType = '\Zernio\Model\ListAds200Response';
-        $request = $this->listAdsRequest($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date, $contentType);
+        $request = $this->listAdsRequest($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $page_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5500,6 +5534,7 @@ class AdCampaignsApi
      * @param  string|null $platform (optional)
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. (optional)
+     * @param  string|null $page_id Meta only: Facebook Page ID. Returns only ads whose creative is backed by this Page (a Meta ad account serves ads for every Page in the Business Manager). Matches each ad&#39;s &#x60;creative.pageId&#x60;; ads with no page signal (rare IG-only creatives) never match. Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Platform campaign ID (filter ads within a campaign) (optional)
      * @param  string|null $platform_ad_id Meta ad ID. Returns the ad with this platform-side ad ID. (optional)
@@ -5512,7 +5547,7 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listAdsRequest($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
+    public function listAdsRequest($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $page_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
     {
 
         if ($page !== null && $page < 1) {
@@ -5526,6 +5561,7 @@ class AdCampaignsApi
             throw new \InvalidArgumentException('invalid value for "$limit" when calling AdCampaignsApi.listAds, must be bigger than or equal to 1.');
         }
         
+
 
 
 
@@ -5604,6 +5640,15 @@ class AdCampaignsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ad_account_id,
             'adAccountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_id,
+            'pageId', // param base name
             'string', // openApiType
             'form', // style
             true, // explode

@@ -66,6 +66,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'object_type' => 'string',
         'object_story_id' => 'string',
         'effective_object_story_id' => 'string',
+        'page_id' => 'string',
         'effective_instagram_media_id' => 'string',
         'instagram_user_id' => 'string',
         'instagram_permalink_url' => 'string',
@@ -94,6 +95,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'object_type' => null,
         'object_story_id' => null,
         'effective_object_story_id' => null,
+        'page_id' => null,
         'effective_instagram_media_id' => null,
         'instagram_user_id' => null,
         'instagram_permalink_url' => null,
@@ -120,6 +122,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'object_type' => false,
         'object_story_id' => true,
         'effective_object_story_id' => true,
+        'page_id' => true,
         'effective_instagram_media_id' => true,
         'instagram_user_id' => true,
         'instagram_permalink_url' => true,
@@ -226,6 +229,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'object_type' => 'objectType',
         'object_story_id' => 'objectStoryId',
         'effective_object_story_id' => 'effectiveObjectStoryId',
+        'page_id' => 'pageId',
         'effective_instagram_media_id' => 'effectiveInstagramMediaId',
         'instagram_user_id' => 'instagramUserId',
         'instagram_permalink_url' => 'instagramPermalinkUrl',
@@ -252,6 +256,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'object_type' => 'setObjectType',
         'object_story_id' => 'setObjectStoryId',
         'effective_object_story_id' => 'setEffectiveObjectStoryId',
+        'page_id' => 'setPageId',
         'effective_instagram_media_id' => 'setEffectiveInstagramMediaId',
         'instagram_user_id' => 'setInstagramUserId',
         'instagram_permalink_url' => 'setInstagramPermalinkUrl',
@@ -278,6 +283,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'object_type' => 'getObjectType',
         'object_story_id' => 'getObjectStoryId',
         'effective_object_story_id' => 'getEffectiveObjectStoryId',
+        'page_id' => 'getPageId',
         'effective_instagram_media_id' => 'getEffectiveInstagramMediaId',
         'instagram_user_id' => 'getInstagramUserId',
         'instagram_permalink_url' => 'getInstagramPermalinkUrl',
@@ -355,6 +361,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('object_type', $data ?? [], null);
         $this->setIfExists('object_story_id', $data ?? [], null);
         $this->setIfExists('effective_object_story_id', $data ?? [], null);
+        $this->setIfExists('page_id', $data ?? [], null);
         $this->setIfExists('effective_instagram_media_id', $data ?? [], null);
         $this->setIfExists('instagram_user_id', $data ?? [], null);
         $this->setIfExists('instagram_permalink_url', $data ?? [], null);
@@ -623,6 +630,40 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['effective_object_story_id'] = $effective_object_story_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets page_id
+     *
+     * @return string|null
+     */
+    public function getPageId()
+    {
+        return $this->container['page_id'];
+    }
+
+    /**
+     * Sets page_id
+     *
+     * @param string|null $page_id Facebook Page backing the creative (Meta only). What the `pageId` filter on /v1/ads, /v1/ads/campaigns and /v1/ads/tree matches against. Absent for non-Meta ads and rare Meta creatives with no page signal.
+     *
+     * @return self
+     */
+    public function setPageId($page_id)
+    {
+        if (is_null($page_id)) {
+            array_push($this->openAPINullablesSetToNull, 'page_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('page_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['page_id'] = $page_id;
 
         return $this;
     }

@@ -707,7 +707,7 @@ try {
 ## `getAdTree()`
 
 ```php
-getAdTree($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level): \Zernio\Model\GetAdTree200Response
+getAdTree($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level): \Zernio\Model\GetAdTree200Response
 ```
 
 Get campaign tree
@@ -737,6 +737,7 @@ $source = 'all'; // string | `all` (default) returns both Zernio-created ads and
 $platform = 'platform_example'; // string
 $status = new \Zernio\Model\\Zernio\Model\AdStatus(); // \Zernio\Model\AdStatus | Filter by derived campaign status (post-aggregation)
 $ad_account_id = 'ad_account_id_example'; // string | Platform ad account ID
+$page_id = 'page_id_example'; // string | Meta only: Facebook Page ID. Prunes the tree to ads whose creative is backed by this Page — campaigns and ad sets with no ad on the Page drop out, and rolled-up metrics cover only the Page's ads. Mirrors the same filter on /v1/ads and /v1/ads/campaigns.
 $account_id = 'account_id_example'; // string | Social account ID
 $profile_id = 'profile_id_example'; // string | Profile ID
 $campaign_id = 'campaign_id_example'; // string | Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta's numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the `campaignId` filter on GET /v1/ads.
@@ -747,7 +748,7 @@ $time_increment = 56; // int | Set to `1` to also return a daily breakdown. Mirr
 $daily_level = 'campaign'; // string | Which tree levels get the `daily[]` series when `timeIncrement=1`. `campaign` (default) attaches it on campaign nodes only — the common per-campaign-trend case, and the smallest payload. `adset` adds it on ad sets too; `ad` adds it on every ad in `ads[]` as well (heaviest — a long range × up to 100 ads per ad set). Scope with `campaignId` to keep `ad`-level responses small. Ignored when `timeIncrement` is unset.
 
 try {
-    $result = $apiInstance->getAdTree($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level);
+    $result = $apiInstance->getAdTree($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AdCampaignsApi->getAdTree: ', $e->getMessage(), PHP_EOL;
@@ -764,6 +765,7 @@ try {
 | **platform** | **string**|  | [optional] |
 | **status** | [**\Zernio\Model\AdStatus**](../Model/.md)| Filter by derived campaign status (post-aggregation) | [optional] |
 | **ad_account_id** | **string**| Platform ad account ID | [optional] |
+| **page_id** | **string**| Meta only: Facebook Page ID. Prunes the tree to ads whose creative is backed by this Page — campaigns and ad sets with no ad on the Page drop out, and rolled-up metrics cover only the Page&#39;s ads. Mirrors the same filter on /v1/ads and /v1/ads/campaigns. | [optional] |
 | **account_id** | **string**| Social account ID | [optional] |
 | **profile_id** | **string**| Profile ID | [optional] |
 | **campaign_id** | **string**| Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads. | [optional] |
@@ -861,7 +863,7 @@ try {
 ## `listAdCampaigns()`
 
 ```php
-listAdCampaigns($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $from_date, $to_date): \Zernio\Model\ListAdCampaigns200Response
+listAdCampaigns($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date): \Zernio\Model\ListAdCampaigns200Response
 ```
 
 List campaigns
@@ -891,13 +893,14 @@ $source = 'all'; // string | `all` (default) returns both Zernio-created ads and
 $platform = 'platform_example'; // string
 $status = new \Zernio\Model\\Zernio\Model\AdStatus(); // \Zernio\Model\AdStatus | Filter by derived campaign status (post-aggregation)
 $ad_account_id = 'ad_account_id_example'; // string | Platform ad account ID (e.g. act_123 for Meta)
+$page_id = 'page_id_example'; // string | Meta only: Facebook Page ID. Campaigns have no Page of their own, so this keeps campaigns having at least one ad backed by this Page, with adCount and metrics computed over those ads only. Mirrors the same filter on /v1/ads and /v1/ads/tree.
 $account_id = 'account_id_example'; // string | Social account ID
 $profile_id = 'profile_id_example'; // string | Profile ID
 $from_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted.
 $to_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range.
 
 try {
-    $result = $apiInstance->listAdCampaigns($page, $limit, $source, $platform, $status, $ad_account_id, $account_id, $profile_id, $from_date, $to_date);
+    $result = $apiInstance->listAdCampaigns($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AdCampaignsApi->listAdCampaigns: ', $e->getMessage(), PHP_EOL;
@@ -914,6 +917,7 @@ try {
 | **platform** | **string**|  | [optional] |
 | **status** | [**\Zernio\Model\AdStatus**](../Model/.md)| Filter by derived campaign status (post-aggregation) | [optional] |
 | **ad_account_id** | **string**| Platform ad account ID (e.g. act_123 for Meta) | [optional] |
+| **page_id** | **string**| Meta only: Facebook Page ID. Campaigns have no Page of their own, so this keeps campaigns having at least one ad backed by this Page, with adCount and metrics computed over those ads only. Mirrors the same filter on /v1/ads and /v1/ads/tree. | [optional] |
 | **account_id** | **string**| Social account ID | [optional] |
 | **profile_id** | **string**| Profile ID | [optional] |
 | **from_date** | **\DateTime**| Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. | [optional] |
@@ -1019,7 +1023,7 @@ try {
 ## `listAds()`
 
 ```php
-listAds($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date): \Zernio\Model\ListAds200Response
+listAds($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $page_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date): \Zernio\Model\ListAds200Response
 ```
 
 List ads
@@ -1050,6 +1054,7 @@ $status = new \Zernio\Model\\Zernio\Model\AdStatus(); // \Zernio\Model\AdStatus
 $platform = 'platform_example'; // string
 $account_id = 'account_id_example'; // string | Social account ID
 $ad_account_id = 'ad_account_id_example'; // string | Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
+$page_id = 'page_id_example'; // string | Meta only: Facebook Page ID. Returns only ads whose creative is backed by this Page (a Meta ad account serves ads for every Page in the Business Manager). Matches each ad's `creative.pageId`; ads with no page signal (rare IG-only creatives) never match. Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
 $profile_id = 'profile_id_example'; // string | Profile ID
 $campaign_id = 'campaign_id_example'; // string | Platform campaign ID (filter ads within a campaign)
 $platform_ad_id = 'platform_ad_id_example'; // string | Meta ad ID. Returns the ad with this platform-side ad ID.
@@ -1059,7 +1064,7 @@ $from_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Start of
 $to_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
 
 try {
-    $result = $apiInstance->listAds($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date);
+    $result = $apiInstance->listAds($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $page_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AdCampaignsApi->listAds: ', $e->getMessage(), PHP_EOL;
@@ -1077,6 +1082,7 @@ try {
 | **platform** | **string**|  | [optional] |
 | **account_id** | **string**| Social account ID | [optional] |
 | **ad_account_id** | **string**| Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. | [optional] |
+| **page_id** | **string**| Meta only: Facebook Page ID. Returns only ads whose creative is backed by this Page (a Meta ad account serves ads for every Page in the Business Manager). Matches each ad&#39;s &#x60;creative.pageId&#x60;; ads with no page signal (rare IG-only creatives) never match. Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. | [optional] |
 | **profile_id** | **string**| Profile ID | [optional] |
 | **campaign_id** | **string**| Platform campaign ID (filter ads within a campaign) | [optional] |
 | **platform_ad_id** | **string**| Meta ad ID. Returns the ad with this platform-side ad ID. | [optional] |
