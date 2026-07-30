@@ -76,6 +76,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'page_id' => 'string',
         'carousel_cards' => '\Zernio\Model\FacebookPlatformDataCarouselCardsInner[]',
         'carousel_link' => 'string',
+        'text_format_preset_id' => 'string',
         'share_to_feed' => 'bool',
         'collaborators' => 'string[]',
         'trial_params' => '\Zernio\Model\InstagramPlatformDataTrialParams',
@@ -177,6 +178,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'page_id' => null,
         'carousel_cards' => null,
         'carousel_link' => 'uri',
+        'text_format_preset_id' => null,
         'share_to_feed' => null,
         'collaborators' => null,
         'trial_params' => null,
@@ -276,6 +278,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'page_id' => false,
         'carousel_cards' => false,
         'carousel_link' => false,
+        'text_format_preset_id' => false,
         'share_to_feed' => false,
         'collaborators' => false,
         'trial_params' => false,
@@ -455,6 +458,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'page_id' => 'pageId',
         'carousel_cards' => 'carouselCards',
         'carousel_link' => 'carouselLink',
+        'text_format_preset_id' => 'textFormatPresetId',
         'share_to_feed' => 'shareToFeed',
         'collaborators' => 'collaborators',
         'trial_params' => 'trialParams',
@@ -554,6 +558,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'page_id' => 'setPageId',
         'carousel_cards' => 'setCarouselCards',
         'carousel_link' => 'setCarouselLink',
+        'text_format_preset_id' => 'setTextFormatPresetId',
         'share_to_feed' => 'setShareToFeed',
         'collaborators' => 'setCollaborators',
         'trial_params' => 'setTrialParams',
@@ -653,6 +658,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'page_id' => 'getPageId',
         'carousel_cards' => 'getCarouselCards',
         'carousel_link' => 'getCarouselLink',
+        'text_format_preset_id' => 'getTextFormatPresetId',
         'share_to_feed' => 'getShareToFeed',
         'collaborators' => 'getCollaborators',
         'trial_params' => 'getTrialParams',
@@ -922,6 +928,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         $this->setIfExists('page_id', $data ?? [], null);
         $this->setIfExists('carousel_cards', $data ?? [], null);
         $this->setIfExists('carousel_link', $data ?? [], null);
+        $this->setIfExists('text_format_preset_id', $data ?? [], null);
         $this->setIfExists('share_to_feed', $data ?? [], true);
         $this->setIfExists('collaborators', $data ?? [], null);
         $this->setIfExists('trial_params', $data ?? [], null);
@@ -1064,6 +1071,10 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
 
         if (!is_null($this->container['carousel_cards']) && (count($this->container['carousel_cards']) < 2)) {
             $invalidProperties[] = "invalid value for 'carousel_cards', number of items must be greater than or equal to 2.";
+        }
+
+        if (!is_null($this->container['text_format_preset_id']) && !preg_match("/^\\d+$/", $this->container['text_format_preset_id'])) {
+            $invalidProperties[] = "invalid value for 'text_format_preset_id', must be conform to the pattern /^\\d+$/.";
         }
 
         if (!is_null($this->container['thumb_offset']) && ($this->container['thumb_offset'] < 0)) {
@@ -1677,6 +1688,38 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
             throw new \InvalidArgumentException('non-nullable carousel_link cannot be null');
         }
         $this->container['carousel_link'] = $carousel_link;
+
+        return $this;
+    }
+
+    /**
+     * Gets text_format_preset_id
+     *
+     * @return string|null
+     */
+    public function getTextFormatPresetId()
+    {
+        return $this->container['text_format_preset_id'];
+    }
+
+    /**
+     * Sets text_format_preset_id
+     *
+     * @param string|null $text_format_preset_id Facebook-defined preset ID that renders the post as large text on a colored background (Graph `text_format_preset_id`). Supply the raw numeric ID from Meta; we do not publish a catalog of presets and Facebook may change the available set. Pages only (ignored on personal profiles and groups) and text-only feed posts only: the request is rejected with 400 when mediaItems or carouselCards are present, when contentType is story or reel, when content is empty, or when content exceeds 130 characters. Those are Facebook limits, and above them Facebook silently drops the background and publishes a plain text post instead of returning an error, so we reject up front rather than let the background disappear. A URL detected in the content is NOT attached as a link preview while a preset is set, because a link attachment also makes Facebook drop the background.
+     *
+     * @return self
+     */
+    public function setTextFormatPresetId($text_format_preset_id)
+    {
+        if (is_null($text_format_preset_id)) {
+            throw new \InvalidArgumentException('non-nullable text_format_preset_id cannot be null');
+        }
+
+        if ((!preg_match("/^\\d+$/", ObjectSerializer::toString($text_format_preset_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$text_format_preset_id when calling CreatePostRequestPlatformsInnerPlatformSpecificData., must conform to the pattern /^\\d+$/.");
+        }
+
+        $this->container['text_format_preset_id'] = $text_format_preset_id;
 
         return $this;
     }
