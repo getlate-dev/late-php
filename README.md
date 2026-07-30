@@ -516,6 +516,7 @@ Class | Method | HTTP request | Description
 *WhatsAppApi* | [**listWhatsAppConversions**](docs/Api/WhatsAppApi.md#listwhatsappconversions) | **GET** /v1/whatsapp/conversions | List conversion events
 *WhatsAppApi* | [**listWhatsAppGroupChats**](docs/Api/WhatsAppApi.md#listwhatsappgroupchats) | **GET** /v1/whatsapp/wa-groups | List active groups
 *WhatsAppApi* | [**listWhatsAppGroupJoinRequests**](docs/Api/WhatsAppApi.md#listwhatsappgroupjoinrequests) | **GET** /v1/whatsapp/wa-groups/{groupId}/join-requests | List join requests
+*WhatsAppApi* | [**registerWhatsAppNumber**](docs/Api/WhatsAppApi.md#registerwhatsappnumber) | **POST** /v1/accounts/{accountId}/whatsapp/register | Register a connected WhatsApp number on the Cloud API
 *WhatsAppApi* | [**rejectWhatsAppGroupJoinRequests**](docs/Api/WhatsAppApi.md#rejectwhatsappgroupjoinrequests) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/join-requests | Reject join requests
 *WhatsAppApi* | [**removeWhatsAppGroupParticipants**](docs/Api/WhatsAppApi.md#removewhatsappgroupparticipants) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/participants | Remove participants
 *WhatsAppApi* | [**sendWhatsAppConversion**](docs/Api/WhatsAppApi.md#sendwhatsappconversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
@@ -1608,6 +1609,8 @@ Class | Method | HTTP request | Description
 - [RecyclingState](docs/Model/RecyclingState.md)
 - [RedditPlatformData](docs/Model/RedditPlatformData.md)
 - [RedditPost](docs/Model/RedditPost.md)
+- [RegisterWhatsAppNumber200Response](docs/Model/RegisterWhatsAppNumber200Response.md)
+- [RegisterWhatsAppNumberRequest](docs/Model/RegisterWhatsAppNumberRequest.md)
 - [RejectWhatsAppGroupJoinRequestsRequest](docs/Model/RejectWhatsAppGroupJoinRequestsRequest.md)
 - [ReleasePhoneNumber200Response](docs/Model/ReleasePhoneNumber200Response.md)
 - [ReleasePhoneNumber200ResponsePhoneNumber](docs/Model/ReleasePhoneNumber200ResponsePhoneNumber.md)

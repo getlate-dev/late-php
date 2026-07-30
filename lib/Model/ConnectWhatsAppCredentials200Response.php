@@ -59,6 +59,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
       */
     protected static $openAPITypes = [
         'message' => 'string',
+        'registration_warning' => 'string',
         'account' => '\Zernio\Model\ConnectWhatsAppCredentials200ResponseAccount'
     ];
 
@@ -71,6 +72,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
       */
     protected static $openAPIFormats = [
         'message' => null,
+        'registration_warning' => null,
         'account' => null
     ];
 
@@ -81,6 +83,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
       */
     protected static array $openAPINullables = [
         'message' => false,
+        'registration_warning' => false,
         'account' => false
     ];
 
@@ -171,6 +174,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
      */
     protected static $attributeMap = [
         'message' => 'message',
+        'registration_warning' => 'registrationWarning',
         'account' => 'account'
     ];
 
@@ -181,6 +185,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
      */
     protected static $setters = [
         'message' => 'setMessage',
+        'registration_warning' => 'setRegistrationWarning',
         'account' => 'setAccount'
     ];
 
@@ -191,6 +196,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
      */
     protected static $getters = [
         'message' => 'getMessage',
+        'registration_warning' => 'getRegistrationWarning',
         'account' => 'getAccount'
     ];
 
@@ -252,6 +258,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
     public function __construct(?array $data = null)
     {
         $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('registration_warning', $data ?? [], null);
         $this->setIfExists('account', $data ?? [], null);
     }
 
@@ -320,6 +327,33 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
             throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
         $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets registration_warning
+     *
+     * @return string|null
+     */
+    public function getRegistrationWarning()
+    {
+        return $this->container['registration_warning'];
+    }
+
+    /**
+     * Sets registration_warning
+     *
+     * @param string|null $registration_warning Present when the account was created but Meta rejected the Cloud API registration. The number cannot send messages until this is resolved.
+     *
+     * @return self
+     */
+    public function setRegistrationWarning($registration_warning)
+    {
+        if (is_null($registration_warning)) {
+            throw new \InvalidArgumentException('non-nullable registration_warning cannot be null');
+        }
+        $this->container['registration_warning'] = $registration_warning;
 
         return $this;
     }

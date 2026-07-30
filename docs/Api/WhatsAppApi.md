@@ -30,6 +30,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**listWhatsAppConversions()**](WhatsAppApi.md#listWhatsAppConversions) | **GET** /v1/whatsapp/conversions | List conversion events |
 | [**listWhatsAppGroupChats()**](WhatsAppApi.md#listWhatsAppGroupChats) | **GET** /v1/whatsapp/wa-groups | List active groups |
 | [**listWhatsAppGroupJoinRequests()**](WhatsAppApi.md#listWhatsAppGroupJoinRequests) | **GET** /v1/whatsapp/wa-groups/{groupId}/join-requests | List join requests |
+| [**registerWhatsAppNumber()**](WhatsAppApi.md#registerWhatsAppNumber) | **POST** /v1/accounts/{accountId}/whatsapp/register | Register a connected WhatsApp number on the Cloud API |
 | [**rejectWhatsAppGroupJoinRequests()**](WhatsAppApi.md#rejectWhatsAppGroupJoinRequests) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/join-requests | Reject join requests |
 | [**removeWhatsAppGroupParticipants()**](WhatsAppApi.md#removeWhatsAppGroupParticipants) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/participants | Remove participants |
 | [**sendWhatsAppConversion()**](WhatsAppApi.md#sendWhatsAppConversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
@@ -1510,6 +1511,68 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `registerWhatsAppNumber()`
+
+```php
+registerWhatsAppNumber($account_id, $register_whats_app_number_request): \Zernio\Model\RegisterWhatsAppNumber200Response
+```
+
+Register a connected WhatsApp number on the Cloud API
+
+Re-runs Meta's Cloud API registration for a WhatsApp account that is already connected. Use it when the number has its own two-step verification PIN: the connect flows register with a default PIN, Meta rejects that with error 133005, and the number then fails every send with the misleading '(#200) You do not have the necessary permission to send messages' while the account still shows as connected. The PIN is used for this call only and is not stored.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\WhatsAppApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The WhatsApp account ID
+$register_whats_app_number_request = {"pin":"481902"}; // \Zernio\Model\RegisterWhatsAppNumberRequest
+
+try {
+    $result = $apiInstance->registerWhatsAppNumber($account_id, $register_whats_app_number_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WhatsAppApi->registerWhatsAppNumber: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The WhatsApp account ID | |
+| **register_whats_app_number_request** | [**\Zernio\Model\RegisterWhatsAppNumberRequest**](../Model/RegisterWhatsAppNumberRequest.md)|  | [optional] |
+
+### Return type
+
+[**\Zernio\Model\RegisterWhatsAppNumber200Response**](../Model/RegisterWhatsAppNumber200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

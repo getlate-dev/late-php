@@ -1083,6 +1083,8 @@ docs/Model/RecyclingConfig.md
 docs/Model/RecyclingState.md
 docs/Model/RedditPlatformData.md
 docs/Model/RedditPost.md
+docs/Model/RegisterWhatsAppNumber200Response.md
+docs/Model/RegisterWhatsAppNumberRequest.md
 docs/Model/RejectWhatsAppGroupJoinRequestsRequest.md
 docs/Model/ReleasePhoneNumber200Response.md
 docs/Model/ReleasePhoneNumber200ResponsePhoneNumber.md
@@ -2696,6 +2698,8 @@ lib/Model/RecyclingConfig.php
 lib/Model/RecyclingState.php
 lib/Model/RedditPlatformData.php
 lib/Model/RedditPost.php
+lib/Model/RegisterWhatsAppNumber200Response.php
+lib/Model/RegisterWhatsAppNumberRequest.php
 lib/Model/RejectWhatsAppGroupJoinRequestsRequest.php
 lib/Model/ReleasePhoneNumber200Response.php
 lib/Model/ReleasePhoneNumber200ResponsePhoneNumber.php
@@ -3225,3 +3229,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/RegisterWhatsAppNumber200ResponseTest.php
+test/Model/RegisterWhatsAppNumberRequestTest.php

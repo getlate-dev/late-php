@@ -1,6 +1,6 @@
 <?php
 /**
- * ConnectWhatsAppCredentialsRequest
+ * RegisterWhatsAppNumber200Response
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ConnectWhatsAppCredentialsRequest Class Doc Comment
+ * RegisterWhatsAppNumber200Response Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class RegisterWhatsAppNumber200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
       *
       * @var string
       */
-    protected static $openAPIModelName = 'connectWhatsAppCredentials_request';
+    protected static $openAPIModelName = 'registerWhatsAppNumber_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,9 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'profile_id' => 'string',
-        'access_token' => 'string',
-        'waba_id' => 'string',
-        'phone_number_id' => 'string',
-        'pin' => 'string'
+        'registered' => 'bool',
+        'account_id' => 'string',
+        'phone_number_id' => 'string'
     ];
 
     /**
@@ -73,11 +71,9 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'profile_id' => null,
-        'access_token' => null,
-        'waba_id' => null,
-        'phone_number_id' => null,
-        'pin' => null
+        'registered' => null,
+        'account_id' => null,
+        'phone_number_id' => null
     ];
 
     /**
@@ -86,11 +82,9 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'profile_id' => false,
-        'access_token' => false,
-        'waba_id' => false,
-        'phone_number_id' => false,
-        'pin' => false
+        'registered' => false,
+        'account_id' => false,
+        'phone_number_id' => false
     ];
 
     /**
@@ -179,11 +173,9 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $attributeMap = [
-        'profile_id' => 'profileId',
-        'access_token' => 'accessToken',
-        'waba_id' => 'wabaId',
-        'phone_number_id' => 'phoneNumberId',
-        'pin' => 'pin'
+        'registered' => 'registered',
+        'account_id' => 'accountId',
+        'phone_number_id' => 'phoneNumberId'
     ];
 
     /**
@@ -192,11 +184,9 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $setters = [
-        'profile_id' => 'setProfileId',
-        'access_token' => 'setAccessToken',
-        'waba_id' => 'setWabaId',
-        'phone_number_id' => 'setPhoneNumberId',
-        'pin' => 'setPin'
+        'registered' => 'setRegistered',
+        'account_id' => 'setAccountId',
+        'phone_number_id' => 'setPhoneNumberId'
     ];
 
     /**
@@ -205,11 +195,9 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $getters = [
-        'profile_id' => 'getProfileId',
-        'access_token' => 'getAccessToken',
-        'waba_id' => 'getWabaId',
-        'phone_number_id' => 'getPhoneNumberId',
-        'pin' => 'getPin'
+        'registered' => 'getRegistered',
+        'account_id' => 'getAccountId',
+        'phone_number_id' => 'getPhoneNumberId'
     ];
 
     /**
@@ -269,11 +257,9 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('profile_id', $data ?? [], null);
-        $this->setIfExists('access_token', $data ?? [], null);
-        $this->setIfExists('waba_id', $data ?? [], null);
+        $this->setIfExists('registered', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('phone_number_id', $data ?? [], null);
-        $this->setIfExists('pin', $data ?? [], null);
     }
 
     /**
@@ -303,22 +289,6 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
     {
         $invalidProperties = [];
 
-        if ($this->container['profile_id'] === null) {
-            $invalidProperties[] = "'profile_id' can't be null";
-        }
-        if ($this->container['access_token'] === null) {
-            $invalidProperties[] = "'access_token' can't be null";
-        }
-        if ($this->container['waba_id'] === null) {
-            $invalidProperties[] = "'waba_id' can't be null";
-        }
-        if ($this->container['phone_number_id'] === null) {
-            $invalidProperties[] = "'phone_number_id' can't be null";
-        }
-        if (!is_null($this->container['pin']) && !preg_match("/^\\d{6}$/", $this->container['pin'])) {
-            $invalidProperties[] = "invalid value for 'pin', must be conform to the pattern /^\\d{6}$/.";
-        }
-
         return $invalidProperties;
     }
 
@@ -335,82 +305,55 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
 
 
     /**
-     * Gets profile_id
+     * Gets registered
      *
-     * @return string
+     * @return bool|null
      */
-    public function getProfileId()
+    public function getRegistered()
     {
-        return $this->container['profile_id'];
+        return $this->container['registered'];
     }
 
     /**
-     * Sets profile_id
+     * Sets registered
      *
-     * @param string $profile_id Your Zernio profile ID
+     * @param bool|null $registered registered
      *
      * @return self
      */
-    public function setProfileId($profile_id)
+    public function setRegistered($registered)
     {
-        if (is_null($profile_id)) {
-            throw new \InvalidArgumentException('non-nullable profile_id cannot be null');
+        if (is_null($registered)) {
+            throw new \InvalidArgumentException('non-nullable registered cannot be null');
         }
-        $this->container['profile_id'] = $profile_id;
+        $this->container['registered'] = $registered;
 
         return $this;
     }
 
     /**
-     * Gets access_token
+     * Gets account_id
      *
-     * @return string
+     * @return string|null
      */
-    public function getAccessToken()
+    public function getAccountId()
     {
-        return $this->container['access_token'];
+        return $this->container['account_id'];
     }
 
     /**
-     * Sets access_token
+     * Sets account_id
      *
-     * @param string $access_token Permanent System User access token from Meta Business Suite
+     * @param string|null $account_id account_id
      *
      * @return self
      */
-    public function setAccessToken($access_token)
+    public function setAccountId($account_id)
     {
-        if (is_null($access_token)) {
-            throw new \InvalidArgumentException('non-nullable access_token cannot be null');
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
         }
-        $this->container['access_token'] = $access_token;
-
-        return $this;
-    }
-
-    /**
-     * Gets waba_id
-     *
-     * @return string
-     */
-    public function getWabaId()
-    {
-        return $this->container['waba_id'];
-    }
-
-    /**
-     * Sets waba_id
-     *
-     * @param string $waba_id WhatsApp Business Account ID from Meta
-     *
-     * @return self
-     */
-    public function setWabaId($waba_id)
-    {
-        if (is_null($waba_id)) {
-            throw new \InvalidArgumentException('non-nullable waba_id cannot be null');
-        }
-        $this->container['waba_id'] = $waba_id;
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }
@@ -418,7 +361,7 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
     /**
      * Gets phone_number_id
      *
-     * @return string
+     * @return string|null
      */
     public function getPhoneNumberId()
     {
@@ -428,7 +371,7 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
     /**
      * Sets phone_number_id
      *
-     * @param string $phone_number_id Phone Number ID from Meta WhatsApp Manager
+     * @param string|null $phone_number_id phone_number_id
      *
      * @return self
      */
@@ -438,38 +381,6 @@ class ConnectWhatsAppCredentialsRequest implements ModelInterface, ArrayAccess, 
             throw new \InvalidArgumentException('non-nullable phone_number_id cannot be null');
         }
         $this->container['phone_number_id'] = $phone_number_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets pin
-     *
-     * @return string|null
-     */
-    public function getPin()
-    {
-        return $this->container['pin'];
-    }
-
-    /**
-     * Sets pin
-     *
-     * @param string|null $pin The 6-digit two-step verification PIN set on the number. Required if you enabled two-step verification for it, otherwise Meta rejects the Cloud API registration with error 133005 and the number cannot send messages.
-     *
-     * @return self
-     */
-    public function setPin($pin)
-    {
-        if (is_null($pin)) {
-            throw new \InvalidArgumentException('non-nullable pin cannot be null');
-        }
-
-        if ((!preg_match("/^\\d{6}$/", ObjectSerializer::toString($pin)))) {
-            throw new \InvalidArgumentException("invalid value for \$pin when calling ConnectWhatsAppCredentialsRequest., must conform to the pattern /^\\d{6}$/.");
-        }
-
-        $this->container['pin'] = $pin;
 
         return $this;
     }

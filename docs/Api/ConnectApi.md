@@ -514,7 +514,7 @@ $apiInstance = new Zernio\Api\ConnectApi(
     new GuzzleHttp\Client(),
     $config
 );
-$connect_whats_app_credentials_request = {"profileId":"6507a1b2c3d4e5f6a7b8c9d0","accessToken":"EAABsbCS...your-system-user-token","wabaId":"123456789012345","phoneNumberId":"987654321098765"}; // \Zernio\Model\ConnectWhatsAppCredentialsRequest
+$connect_whats_app_credentials_request = {"profileId":"6507a1b2c3d4e5f6a7b8c9d0","accessToken":"EAABsbCS...your-system-user-token","wabaId":"123456789012345","phoneNumberId":"987654321098765","pin":"481902"}; // \Zernio\Model\ConnectWhatsAppCredentialsRequest
 
 try {
     $result = $apiInstance->connectWhatsAppCredentials($connect_whats_app_credentials_request);
