@@ -338,7 +338,7 @@ class BoostPostRequestTracking implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets url_tags
      *
-     * @param \Zernio\Model\BoostPostRequestTrackingUrlTagsInner[]|null $url_tags URL parameters appended to the ad link, rendered as `key=value` pairs joined with `&`.
+     * @param \Zernio\Model\BoostPostRequestTrackingUrlTagsInner[]|null $url_tags URL parameters appended to the ad link, rendered as `key=value` pairs joined with `&`. Meta dynamic macros ({{ad.id}}, {{campaign.id}}, {{placement}}, ...) are sent through unescaped so Meta expands them; every other character is percent-encoded.
      *
      * @return self
      */

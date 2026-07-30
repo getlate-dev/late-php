@@ -338,7 +338,7 @@ class CreateStandaloneAdRequestTracking implements ModelInterface, ArrayAccess, 
     /**
      * Sets url_tags
      *
-     * @param \Zernio\Model\UpdateAdTrackingTagsRequestUrlTagsInner[]|null $url_tags Click-URL params appended to the ad's destination as `url_tags` (e.g. utm_source).
+     * @param \Zernio\Model\UpdateAdTrackingTagsRequestUrlTagsInner[]|null $url_tags Click-URL params appended to the ad's destination as `url_tags` (e.g. utm_source). Meta dynamic macros ({{ad.id}}, {{campaign.id}}, {{placement}}, ...) are sent through unescaped so Meta expands them; every other character is percent-encoded.
      *
      * @return self
      */

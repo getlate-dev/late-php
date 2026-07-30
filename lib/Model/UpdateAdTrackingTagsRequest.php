@@ -338,7 +338,7 @@ class UpdateAdTrackingTagsRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets url_tags
      *
-     * @param \Zernio\Model\UpdateAdTrackingTagsRequestUrlTagsInner[]|null $url_tags Meta only. Click-URL params appended to a freshly-rebuilt creative.
+     * @param \Zernio\Model\UpdateAdTrackingTagsRequestUrlTagsInner[]|null $url_tags Meta only. Click-URL params appended to a freshly-rebuilt creative. Meta dynamic macros ({{ad.id}}, {{campaign.id}}, {{placement}}, ...) are sent through unescaped so Meta expands them; every other character is percent-encoded.
      *
      * @return self
      */
