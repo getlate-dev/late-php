@@ -66,7 +66,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'sip_auth_username' => 'string',
         'sip_auth_password_configured' => 'bool',
         'call_icon_countries' => 'string[]',
-        'outbound_disabled' => 'bool'
+        'outbound_disabled' => 'bool',
+        'caller_id_mode' => 'string',
+        'caller_id_verified' => 'bool'
     ];
 
     /**
@@ -85,7 +87,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'sip_auth_username' => null,
         'sip_auth_password_configured' => null,
         'call_icon_countries' => null,
-        'outbound_disabled' => null
+        'outbound_disabled' => null,
+        'caller_id_mode' => null,
+        'caller_id_verified' => null
     ];
 
     /**
@@ -102,7 +106,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'sip_auth_username' => true,
         'sip_auth_password_configured' => false,
         'call_icon_countries' => true,
-        'outbound_disabled' => false
+        'outbound_disabled' => false,
+        'caller_id_mode' => false,
+        'caller_id_verified' => false
     ];
 
     /**
@@ -199,7 +205,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'sip_auth_username' => 'sipAuthUsername',
         'sip_auth_password_configured' => 'sipAuthPasswordConfigured',
         'call_icon_countries' => 'callIconCountries',
-        'outbound_disabled' => 'outboundDisabled'
+        'outbound_disabled' => 'outboundDisabled',
+        'caller_id_mode' => 'callerIdMode',
+        'caller_id_verified' => 'callerIdVerified'
     ];
 
     /**
@@ -216,7 +224,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'sip_auth_username' => 'setSipAuthUsername',
         'sip_auth_password_configured' => 'setSipAuthPasswordConfigured',
         'call_icon_countries' => 'setCallIconCountries',
-        'outbound_disabled' => 'setOutboundDisabled'
+        'outbound_disabled' => 'setOutboundDisabled',
+        'caller_id_mode' => 'setCallerIdMode',
+        'caller_id_verified' => 'setCallerIdVerified'
     ];
 
     /**
@@ -233,7 +243,9 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         'sip_auth_username' => 'getSipAuthUsername',
         'sip_auth_password_configured' => 'getSipAuthPasswordConfigured',
         'call_icon_countries' => 'getCallIconCountries',
-        'outbound_disabled' => 'getOutboundDisabled'
+        'outbound_disabled' => 'getOutboundDisabled',
+        'caller_id_mode' => 'getCallerIdMode',
+        'caller_id_verified' => 'getCallerIdVerified'
     ];
 
     /**
@@ -277,6 +289,21 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         return self::$openAPIModelName;
     }
 
+    public const CALLER_ID_MODE_BUSINESS = 'business';
+    public const CALLER_ID_MODE_PLATFORM = 'platform';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCallerIdModeAllowableValues()
+    {
+        return [
+            self::CALLER_ID_MODE_BUSINESS,
+            self::CALLER_ID_MODE_PLATFORM,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -302,6 +329,8 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('sip_auth_password_configured', $data ?? [], null);
         $this->setIfExists('call_icon_countries', $data ?? [], null);
         $this->setIfExists('outbound_disabled', $data ?? [], null);
+        $this->setIfExists('caller_id_mode', $data ?? [], null);
+        $this->setIfExists('caller_id_verified', $data ?? [], null);
     }
 
     /**
@@ -330,6 +359,15 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getCallerIdModeAllowableValues();
+        if (!is_null($this->container['caller_id_mode']) && !in_array($this->container['caller_id_mode'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'caller_id_mode', must be one of '%s'",
+                $this->container['caller_id_mode'],
+                implode("', '", $allowedValues)
+            );
+        }
 
         return $invalidProperties;
     }
@@ -613,6 +651,70 @@ class GetWhatsAppCalling200Response implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable outbound_disabled cannot be null');
         }
         $this->container['outbound_disabled'] = $outbound_disabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets caller_id_mode
+     *
+     * @return string|null
+     */
+    public function getCallerIdMode()
+    {
+        return $this->container['caller_id_mode'];
+    }
+
+    /**
+     * Sets caller_id_mode
+     *
+     * @param string|null $caller_id_mode Caller ID the forward-leg callee sees on tel: forwards. business = this WhatsApp number; platform = a Zernio number (used when the number was brought by the customer and its caller ID is not verified for PSTN origination).
+     *
+     * @return self
+     */
+    public function setCallerIdMode($caller_id_mode)
+    {
+        if (is_null($caller_id_mode)) {
+            throw new \InvalidArgumentException('non-nullable caller_id_mode cannot be null');
+        }
+        $allowedValues = $this->getCallerIdModeAllowableValues();
+        if (!in_array($caller_id_mode, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'caller_id_mode', must be one of '%s'",
+                    $caller_id_mode,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['caller_id_mode'] = $caller_id_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets caller_id_verified
+     *
+     * @return bool|null
+     */
+    public function getCallerIdVerified()
+    {
+        return $this->container['caller_id_verified'];
+    }
+
+    /**
+     * Sets caller_id_verified
+     *
+     * @param bool|null $caller_id_verified True once the number completed caller-ID verification, making tel: forwards display the business number itself.
+     *
+     * @return self
+     */
+    public function setCallerIdVerified($caller_id_verified)
+    {
+        if (is_null($caller_id_verified)) {
+            throw new \InvalidArgumentException('non-nullable caller_id_verified cannot be null');
+        }
+        $this->container['caller_id_verified'] = $caller_id_verified;
 
         return $this;
     }

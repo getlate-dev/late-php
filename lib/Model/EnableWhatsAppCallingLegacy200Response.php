@@ -61,7 +61,8 @@ class EnableWhatsAppCallingLegacy200Response implements ModelInterface, ArrayAcc
         'success' => 'bool',
         'calling_enabled' => 'bool',
         'sip_hostname' => 'string',
-        'forward_to' => 'string'
+        'forward_to' => 'string',
+        'caller_id_mode' => 'string'
     ];
 
     /**
@@ -75,7 +76,8 @@ class EnableWhatsAppCallingLegacy200Response implements ModelInterface, ArrayAcc
         'success' => null,
         'calling_enabled' => null,
         'sip_hostname' => null,
-        'forward_to' => null
+        'forward_to' => null,
+        'caller_id_mode' => null
     ];
 
     /**
@@ -87,7 +89,8 @@ class EnableWhatsAppCallingLegacy200Response implements ModelInterface, ArrayAcc
         'success' => false,
         'calling_enabled' => false,
         'sip_hostname' => false,
-        'forward_to' => false
+        'forward_to' => false,
+        'caller_id_mode' => false
     ];
 
     /**
@@ -179,7 +182,8 @@ class EnableWhatsAppCallingLegacy200Response implements ModelInterface, ArrayAcc
         'success' => 'success',
         'calling_enabled' => 'callingEnabled',
         'sip_hostname' => 'sipHostname',
-        'forward_to' => 'forwardTo'
+        'forward_to' => 'forwardTo',
+        'caller_id_mode' => 'callerIdMode'
     ];
 
     /**
@@ -191,7 +195,8 @@ class EnableWhatsAppCallingLegacy200Response implements ModelInterface, ArrayAcc
         'success' => 'setSuccess',
         'calling_enabled' => 'setCallingEnabled',
         'sip_hostname' => 'setSipHostname',
-        'forward_to' => 'setForwardTo'
+        'forward_to' => 'setForwardTo',
+        'caller_id_mode' => 'setCallerIdMode'
     ];
 
     /**
@@ -203,7 +208,8 @@ class EnableWhatsAppCallingLegacy200Response implements ModelInterface, ArrayAcc
         'success' => 'getSuccess',
         'calling_enabled' => 'getCallingEnabled',
         'sip_hostname' => 'getSipHostname',
-        'forward_to' => 'getForwardTo'
+        'forward_to' => 'getForwardTo',
+        'caller_id_mode' => 'getCallerIdMode'
     ];
 
     /**
@@ -247,6 +253,21 @@ class EnableWhatsAppCallingLegacy200Response implements ModelInterface, ArrayAcc
         return self::$openAPIModelName;
     }
 
+    public const CALLER_ID_MODE_BUSINESS = 'business';
+    public const CALLER_ID_MODE_PLATFORM = 'platform';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCallerIdModeAllowableValues()
+    {
+        return [
+            self::CALLER_ID_MODE_BUSINESS,
+            self::CALLER_ID_MODE_PLATFORM,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -267,6 +288,7 @@ class EnableWhatsAppCallingLegacy200Response implements ModelInterface, ArrayAcc
         $this->setIfExists('calling_enabled', $data ?? [], null);
         $this->setIfExists('sip_hostname', $data ?? [], null);
         $this->setIfExists('forward_to', $data ?? [], null);
+        $this->setIfExists('caller_id_mode', $data ?? [], null);
     }
 
     /**
@@ -295,6 +317,15 @@ class EnableWhatsAppCallingLegacy200Response implements ModelInterface, ArrayAcc
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getCallerIdModeAllowableValues();
+        if (!is_null($this->container['caller_id_mode']) && !in_array($this->container['caller_id_mode'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'caller_id_mode', must be one of '%s'",
+                $this->container['caller_id_mode'],
+                implode("', '", $allowedValues)
+            );
+        }
 
         return $invalidProperties;
     }
@@ -415,6 +446,43 @@ class EnableWhatsAppCallingLegacy200Response implements ModelInterface, ArrayAcc
             throw new \InvalidArgumentException('non-nullable forward_to cannot be null');
         }
         $this->container['forward_to'] = $forward_to;
+
+        return $this;
+    }
+
+    /**
+     * Gets caller_id_mode
+     *
+     * @return string|null
+     */
+    public function getCallerIdMode()
+    {
+        return $this->container['caller_id_mode'];
+    }
+
+    /**
+     * Sets caller_id_mode
+     *
+     * @param string|null $caller_id_mode Caller ID the forward-leg callee sees on tel: forwards. business = this WhatsApp number; platform = a Zernio number (customer-brought number without verified caller ID).
+     *
+     * @return self
+     */
+    public function setCallerIdMode($caller_id_mode)
+    {
+        if (is_null($caller_id_mode)) {
+            throw new \InvalidArgumentException('non-nullable caller_id_mode cannot be null');
+        }
+        $allowedValues = $this->getCallerIdModeAllowableValues();
+        if (!in_array($caller_id_mode, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'caller_id_mode', must be one of '%s'",
+                    $caller_id_mode,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['caller_id_mode'] = $caller_id_mode;
 
         return $this;
     }
