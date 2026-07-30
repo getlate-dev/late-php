@@ -164,7 +164,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\BulkUploadResult|\Zernio\Model\BulkUploadResult|\Zernio\Model\InlineObject|\Zernio\Model\GetInboxVolume400Response
+     * @return \Zernio\Model\BulkUploadResult|\Zernio\Model\BulkUploadResult|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\ErrorResponse|\Zernio\Model\GetInboxVolume400Response
      */
     public function bulkUploadPosts($dry_run = false, $file = null, string $contentType = self::contentTypes['bulkUploadPosts'][0])
     {
@@ -183,7 +183,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\BulkUploadResult|\Zernio\Model\BulkUploadResult|\Zernio\Model\InlineObject|\Zernio\Model\GetInboxVolume400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\BulkUploadResult|\Zernio\Model\BulkUploadResult|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\ErrorResponse|\Zernio\Model\GetInboxVolume400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function bulkUploadPostsWithHttpInfo($dry_run = false, $file = null, string $contentType = self::contentTypes['bulkUploadPosts'][0])
     {
@@ -225,9 +225,27 @@ class PostsApi
                         $request,
                         $response,
                     );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
                 case 401:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+                case 402:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GetYouTubeDailyViews400Response',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -277,10 +295,34 @@ class PostsApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GetYouTubeDailyViews400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -839,7 +881,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\PostDeleteResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
+     * @return \Zernio\Model\PostDeleteResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1
      */
     public function deletePost($post_id, string $contentType = self::contentTypes['deletePost'][0])
     {
@@ -857,7 +899,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\PostDeleteResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\PostDeleteResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
      */
     public function deletePostWithHttpInfo($post_id, string $contentType = self::contentTypes['deletePost'][0])
     {
@@ -893,9 +935,21 @@ class PostsApi
                         $request,
                         $response,
                     );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
                 case 401:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -937,10 +991,26 @@ class PostsApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1458,7 +1528,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\PostGetResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
+     * @return \Zernio\Model\PostGetResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1
      */
     public function getPost($post_id, string $contentType = self::contentTypes['getPost'][0])
     {
@@ -1476,7 +1546,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\PostGetResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\PostGetResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
      */
     public function getPostWithHttpInfo($post_id, string $contentType = self::contentTypes['getPost'][0])
     {
@@ -1512,9 +1582,21 @@ class PostsApi
                         $request,
                         $response,
                     );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
                 case 401:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -1556,10 +1638,26 @@ class PostsApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1754,12 +1852,12 @@ class PostsApi
      * List posts
      *
      * @param  int|null $page Page number (1-based) (optional, default to 1)
-     * @param  int|null $limit Page size (optional, default to 10)
+     * @param  int|null $limit Page size. Values above the maximum return 400 rather than being clamped. (optional, default to 10)
      * @param  string|null $source Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). (optional, default to 'zernio')
      * @param  string|null $status status (optional)
      * @param  string|null $platform platform (optional)
      * @param  string|null $profile_id profile_id (optional)
-     * @param  string|null $created_by created_by (optional)
+     * @param  string|null $created_by Filter posts to those created by a specific team user (24-char hex ObjectId). (optional)
      * @param  \DateTime|null $date_from date_from (optional)
      * @param  \DateTime|null $date_to date_to (optional)
      * @param  bool|null $include_hidden include_hidden (optional, default to false)
@@ -1770,7 +1868,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\PostsListResponse|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\PostsListResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
      */
     public function listPosts($page = 1, $limit = 10, $source = 'zernio', $status = null, $platform = null, $profile_id = null, $created_by = null, $date_from = null, $date_to = null, $include_hidden = false, $search = null, $sort_by = 'scheduled-desc', $account_id = null, string $contentType = self::contentTypes['listPosts'][0])
     {
@@ -1784,12 +1882,12 @@ class PostsApi
      * List posts
      *
      * @param  int|null $page Page number (1-based) (optional, default to 1)
-     * @param  int|null $limit Page size (optional, default to 10)
+     * @param  int|null $limit Page size. Values above the maximum return 400 rather than being clamped. (optional, default to 10)
      * @param  string|null $source Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). (optional, default to 'zernio')
      * @param  string|null $status (optional)
      * @param  string|null $platform (optional)
      * @param  string|null $profile_id (optional)
-     * @param  string|null $created_by (optional)
+     * @param  string|null $created_by Filter posts to those created by a specific team user (24-char hex ObjectId). (optional)
      * @param  \DateTime|null $date_from (optional)
      * @param  \DateTime|null $date_to (optional)
      * @param  bool|null $include_hidden (optional, default to false)
@@ -1800,7 +1898,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\PostsListResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\PostsListResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function listPostsWithHttpInfo($page = 1, $limit = 10, $source = 'zernio', $status = null, $platform = null, $profile_id = null, $created_by = null, $date_from = null, $date_to = null, $include_hidden = false, $search = null, $sort_by = 'scheduled-desc', $account_id = null, string $contentType = self::contentTypes['listPosts'][0])
     {
@@ -1833,6 +1931,12 @@ class PostsApi
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\PostsListResponse',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -1874,6 +1978,14 @@ class PostsApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1895,12 +2007,12 @@ class PostsApi
      * List posts
      *
      * @param  int|null $page Page number (1-based) (optional, default to 1)
-     * @param  int|null $limit Page size (optional, default to 10)
+     * @param  int|null $limit Page size. Values above the maximum return 400 rather than being clamped. (optional, default to 10)
      * @param  string|null $source Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). (optional, default to 'zernio')
      * @param  string|null $status (optional)
      * @param  string|null $platform (optional)
      * @param  string|null $profile_id (optional)
-     * @param  string|null $created_by (optional)
+     * @param  string|null $created_by Filter posts to those created by a specific team user (24-char hex ObjectId). (optional)
      * @param  \DateTime|null $date_from (optional)
      * @param  \DateTime|null $date_to (optional)
      * @param  bool|null $include_hidden (optional, default to false)
@@ -1928,12 +2040,12 @@ class PostsApi
      * List posts
      *
      * @param  int|null $page Page number (1-based) (optional, default to 1)
-     * @param  int|null $limit Page size (optional, default to 10)
+     * @param  int|null $limit Page size. Values above the maximum return 400 rather than being clamped. (optional, default to 10)
      * @param  string|null $source Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). (optional, default to 'zernio')
      * @param  string|null $status (optional)
      * @param  string|null $platform (optional)
      * @param  string|null $profile_id (optional)
-     * @param  string|null $created_by (optional)
+     * @param  string|null $created_by Filter posts to those created by a specific team user (24-char hex ObjectId). (optional)
      * @param  \DateTime|null $date_from (optional)
      * @param  \DateTime|null $date_to (optional)
      * @param  bool|null $include_hidden (optional, default to false)
@@ -1990,12 +2102,12 @@ class PostsApi
      * Create request for operation 'listPosts'
      *
      * @param  int|null $page Page number (1-based) (optional, default to 1)
-     * @param  int|null $limit Page size (optional, default to 10)
+     * @param  int|null $limit Page size. Values above the maximum return 400 rather than being clamped. (optional, default to 10)
      * @param  string|null $source Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). (optional, default to 'zernio')
      * @param  string|null $status (optional)
      * @param  string|null $platform (optional)
      * @param  string|null $profile_id (optional)
-     * @param  string|null $created_by (optional)
+     * @param  string|null $created_by Filter posts to those created by a specific team user (24-char hex ObjectId). (optional)
      * @param  \DateTime|null $date_from (optional)
      * @param  \DateTime|null $date_to (optional)
      * @param  bool|null $include_hidden (optional, default to false)
@@ -2014,8 +2126,8 @@ class PostsApi
             throw new \InvalidArgumentException('invalid value for "$page" when calling PostsApi.listPosts, must be bigger than or equal to 1.');
         }
         
-        if ($limit !== null && $limit > 100) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling PostsApi.listPosts, must be smaller than or equal to 100.');
+        if ($limit !== null && $limit > 500) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling PostsApi.listPosts, must be smaller than or equal to 500.');
         }
         if ($limit !== null && $limit < 1) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling PostsApi.listPosts, must be bigger than or equal to 1.');
@@ -2228,7 +2340,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\PostRetryResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1|\Zernio\Model\GetInboxVolume400Response
+     * @return \Zernio\Model\PostRetryResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1|\Zernio\Model\ErrorResponse|\Zernio\Model\GetInboxVolume400Response
      */
     public function retryPost($post_id, string $contentType = self::contentTypes['retryPost'][0])
     {
@@ -2246,7 +2358,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\PostRetryResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1|\Zernio\Model\GetInboxVolume400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\PostRetryResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1|\Zernio\Model\ErrorResponse|\Zernio\Model\GetInboxVolume400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function retryPostWithHttpInfo($post_id, string $contentType = self::contentTypes['retryPost'][0])
     {
@@ -2282,15 +2394,39 @@ class PostsApi
                         $request,
                         $response,
                     );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
                 case 401:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\InlineObject',
                         $request,
                         $response,
                     );
+                case 402:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GetYouTubeDailyViews400Response',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
                 case 404:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\InlineObject1',
+                        $request,
+                        $response,
+                    );
+                case 409:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -2332,6 +2468,14 @@ class PostsApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2340,10 +2484,34 @@ class PostsApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GetYouTubeDailyViews400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject1',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2543,7 +2711,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\UnpublishPost200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
+     * @return \Zernio\Model\UnpublishPost200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1
      */
     public function unpublishPost($post_id, $unpublish_post_request, string $contentType = self::contentTypes['unpublishPost'][0])
     {
@@ -2562,7 +2730,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\UnpublishPost200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\UnpublishPost200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
      */
     public function unpublishPostWithHttpInfo($post_id, $unpublish_post_request, string $contentType = self::contentTypes['unpublishPost'][0])
     {
@@ -2598,9 +2766,21 @@ class PostsApi
                         $request,
                         $response,
                     );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
                 case 401:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -2642,10 +2822,26 @@ class PostsApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2862,7 +3058,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\PostUpdateResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
+     * @return \Zernio\Model\PostUpdateResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1
      */
     public function updatePost($post_id, $update_post_request, string $contentType = self::contentTypes['updatePost'][0])
     {
@@ -2881,7 +3077,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\PostUpdateResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\PostUpdateResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
      */
     public function updatePostWithHttpInfo($post_id, $update_post_request, string $contentType = self::contentTypes['updatePost'][0])
     {
@@ -2917,9 +3113,21 @@ class PostsApi
                         $request,
                         $response,
                     );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
                 case 401:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -2961,10 +3169,26 @@ class PostsApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3181,7 +3405,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\UpdatePostMetadata200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
+     * @return \Zernio\Model\UpdatePostMetadata200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1
      */
     public function updatePostMetadata($post_id, $update_post_metadata_request, string $contentType = self::contentTypes['updatePostMetadata'][0])
     {
@@ -3200,7 +3424,7 @@ class PostsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\UpdatePostMetadata200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\UpdatePostMetadata200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
      */
     public function updatePostMetadataWithHttpInfo($post_id, $update_post_metadata_request, string $contentType = self::contentTypes['updatePostMetadata'][0])
     {
@@ -3236,9 +3460,21 @@ class PostsApi
                         $request,
                         $response,
                     );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
                 case 401:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -3280,10 +3516,26 @@ class PostsApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
