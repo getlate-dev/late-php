@@ -1270,6 +1270,8 @@ docs/Model/StartSmsRegistrationRequest.md
 docs/Model/StartSmsRegistrationRequestBrand.md
 docs/Model/StartSmsRegistrationRequestCampaign.md
 docs/Model/StartSmsRegistrationRequestTollFree.md
+docs/Model/StartWhatsAppCallerIdVerification200Response.md
+docs/Model/StartWhatsAppCallerIdVerificationRequest.md
 docs/Model/SubmitPhoneNumberKyc200Response.md
 docs/Model/SubmitPhoneNumberKyc200ResponseNumbersInner.md
 docs/Model/SubmitPhoneNumberKyc200ResponsePhoneNumber.md
@@ -1498,6 +1500,7 @@ docs/Model/ValidateSubreddit200ResponseOneOfSubreddit.md
 docs/Model/Verification.md
 docs/Model/VerifySmsRegistrationOtp200Response.md
 docs/Model/VerifySmsRegistrationOtpRequest.md
+docs/Model/VerifyWhatsAppCallerIdRequest.md
 docs/Model/VoteRedditThingRequest.md
 docs/Model/Webhook.md
 docs/Model/WebhookLog.md
@@ -2880,6 +2883,8 @@ lib/Model/StartSmsRegistrationRequest.php
 lib/Model/StartSmsRegistrationRequestBrand.php
 lib/Model/StartSmsRegistrationRequestCampaign.php
 lib/Model/StartSmsRegistrationRequestTollFree.php
+lib/Model/StartWhatsAppCallerIdVerification200Response.php
+lib/Model/StartWhatsAppCallerIdVerificationRequest.php
 lib/Model/SubmitPhoneNumberKyc200Response.php
 lib/Model/SubmitPhoneNumberKyc200ResponseNumbersInner.php
 lib/Model/SubmitPhoneNumberKyc200ResponsePhoneNumber.php
@@ -3108,6 +3113,7 @@ lib/Model/ValidateSubreddit200ResponseOneOfSubreddit.php
 lib/Model/Verification.php
 lib/Model/VerifySmsRegistrationOtp200Response.php
 lib/Model/VerifySmsRegistrationOtpRequest.php
+lib/Model/VerifyWhatsAppCallerIdRequest.php
 lib/Model/VoteRedditThingRequest.php
 lib/Model/Webhook.php
 lib/Model/WebhookLog.php
@@ -3219,3 +3225,6 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/StartWhatsAppCallerIdVerification200ResponseTest.php
+test/Model/StartWhatsAppCallerIdVerificationRequestTest.php
+test/Model/VerifyWhatsAppCallerIdRequestTest.php

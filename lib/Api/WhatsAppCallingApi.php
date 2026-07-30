@@ -111,10 +111,16 @@ class WhatsAppCallingApi
         'listWhatsAppCalls' => [
             'application/json',
         ],
+        'startWhatsAppCallerIdVerification' => [
+            'application/json',
+        ],
         'updateWhatsAppCalling' => [
             'application/json',
         ],
         'updateWhatsAppCallingLegacy' => [
+            'application/json',
+        ],
+        'verifyWhatsAppCallerId' => [
             'application/json',
         ],
     ];
@@ -3823,6 +3829,319 @@ class WhatsAppCallingApi
     }
 
     /**
+     * Operation startWhatsAppCallerIdVerification
+     *
+     * Start caller-ID verification for a customer-brought number
+     *
+     * @param  string $id Phone number record ID (from GET /v1/phone-numbers). (required)
+     * @param  \Zernio\Model\StartWhatsAppCallerIdVerificationRequest|null $start_whats_app_caller_id_verification_request start_whats_app_caller_id_verification_request (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['startWhatsAppCallerIdVerification'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\StartWhatsAppCallerIdVerification200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
+     */
+    public function startWhatsAppCallerIdVerification($id, $start_whats_app_caller_id_verification_request = null, string $contentType = self::contentTypes['startWhatsAppCallerIdVerification'][0])
+    {
+        list($response) = $this->startWhatsAppCallerIdVerificationWithHttpInfo($id, $start_whats_app_caller_id_verification_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation startWhatsAppCallerIdVerificationWithHttpInfo
+     *
+     * Start caller-ID verification for a customer-brought number
+     *
+     * @param  string $id Phone number record ID (from GET /v1/phone-numbers). (required)
+     * @param  \Zernio\Model\StartWhatsAppCallerIdVerificationRequest|null $start_whats_app_caller_id_verification_request (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['startWhatsAppCallerIdVerification'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\StartWhatsAppCallerIdVerification200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function startWhatsAppCallerIdVerificationWithHttpInfo($id, $start_whats_app_caller_id_verification_request = null, string $contentType = self::contentTypes['startWhatsAppCallerIdVerification'][0])
+    {
+        $request = $this->startWhatsAppCallerIdVerificationRequest($id, $start_whats_app_caller_id_verification_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\StartWhatsAppCallerIdVerification200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\StartWhatsAppCallerIdVerification200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\StartWhatsAppCallerIdVerification200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation startWhatsAppCallerIdVerificationAsync
+     *
+     * Start caller-ID verification for a customer-brought number
+     *
+     * @param  string $id Phone number record ID (from GET /v1/phone-numbers). (required)
+     * @param  \Zernio\Model\StartWhatsAppCallerIdVerificationRequest|null $start_whats_app_caller_id_verification_request (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['startWhatsAppCallerIdVerification'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function startWhatsAppCallerIdVerificationAsync($id, $start_whats_app_caller_id_verification_request = null, string $contentType = self::contentTypes['startWhatsAppCallerIdVerification'][0])
+    {
+        return $this->startWhatsAppCallerIdVerificationAsyncWithHttpInfo($id, $start_whats_app_caller_id_verification_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation startWhatsAppCallerIdVerificationAsyncWithHttpInfo
+     *
+     * Start caller-ID verification for a customer-brought number
+     *
+     * @param  string $id Phone number record ID (from GET /v1/phone-numbers). (required)
+     * @param  \Zernio\Model\StartWhatsAppCallerIdVerificationRequest|null $start_whats_app_caller_id_verification_request (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['startWhatsAppCallerIdVerification'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function startWhatsAppCallerIdVerificationAsyncWithHttpInfo($id, $start_whats_app_caller_id_verification_request = null, string $contentType = self::contentTypes['startWhatsAppCallerIdVerification'][0])
+    {
+        $returnType = '\Zernio\Model\StartWhatsAppCallerIdVerification200Response';
+        $request = $this->startWhatsAppCallerIdVerificationRequest($id, $start_whats_app_caller_id_verification_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'startWhatsAppCallerIdVerification'
+     *
+     * @param  string $id Phone number record ID (from GET /v1/phone-numbers). (required)
+     * @param  \Zernio\Model\StartWhatsAppCallerIdVerificationRequest|null $start_whats_app_caller_id_verification_request (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['startWhatsAppCallerIdVerification'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function startWhatsAppCallerIdVerificationRequest($id, $start_whats_app_caller_id_verification_request = null, string $contentType = self::contentTypes['startWhatsAppCallerIdVerification'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling startWhatsAppCallerIdVerification'
+            );
+        }
+
+
+
+        $resourcePath = '/v1/phone-numbers/{id}/whatsapp/caller-id-verification';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($start_whats_app_caller_id_verification_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($start_whats_app_caller_id_verification_request));
+            } else {
+                $httpBody = $start_whats_app_caller_id_verification_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation updateWhatsAppCalling
      *
      * Update calling config
@@ -4319,6 +4638,311 @@ class WhatsAppCallingApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'PATCH',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation verifyWhatsAppCallerId
+     *
+     * Confirm the caller-ID verification code
+     *
+     * @param  string $id Phone number record ID (from GET /v1/phone-numbers). (required)
+     * @param  \Zernio\Model\VerifyWhatsAppCallerIdRequest $verify_whats_app_caller_id_request verify_whats_app_caller_id_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifyWhatsAppCallerId'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\VerifySmsRegistrationOtp200Response|\Zernio\Model\InlineObject
+     */
+    public function verifyWhatsAppCallerId($id, $verify_whats_app_caller_id_request, string $contentType = self::contentTypes['verifyWhatsAppCallerId'][0])
+    {
+        list($response) = $this->verifyWhatsAppCallerIdWithHttpInfo($id, $verify_whats_app_caller_id_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation verifyWhatsAppCallerIdWithHttpInfo
+     *
+     * Confirm the caller-ID verification code
+     *
+     * @param  string $id Phone number record ID (from GET /v1/phone-numbers). (required)
+     * @param  \Zernio\Model\VerifyWhatsAppCallerIdRequest $verify_whats_app_caller_id_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifyWhatsAppCallerId'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\VerifySmsRegistrationOtp200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function verifyWhatsAppCallerIdWithHttpInfo($id, $verify_whats_app_caller_id_request, string $contentType = self::contentTypes['verifyWhatsAppCallerId'][0])
+    {
+        $request = $this->verifyWhatsAppCallerIdRequest($id, $verify_whats_app_caller_id_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\VerifySmsRegistrationOtp200Response',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\VerifySmsRegistrationOtp200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\VerifySmsRegistrationOtp200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation verifyWhatsAppCallerIdAsync
+     *
+     * Confirm the caller-ID verification code
+     *
+     * @param  string $id Phone number record ID (from GET /v1/phone-numbers). (required)
+     * @param  \Zernio\Model\VerifyWhatsAppCallerIdRequest $verify_whats_app_caller_id_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifyWhatsAppCallerId'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function verifyWhatsAppCallerIdAsync($id, $verify_whats_app_caller_id_request, string $contentType = self::contentTypes['verifyWhatsAppCallerId'][0])
+    {
+        return $this->verifyWhatsAppCallerIdAsyncWithHttpInfo($id, $verify_whats_app_caller_id_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation verifyWhatsAppCallerIdAsyncWithHttpInfo
+     *
+     * Confirm the caller-ID verification code
+     *
+     * @param  string $id Phone number record ID (from GET /v1/phone-numbers). (required)
+     * @param  \Zernio\Model\VerifyWhatsAppCallerIdRequest $verify_whats_app_caller_id_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifyWhatsAppCallerId'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function verifyWhatsAppCallerIdAsyncWithHttpInfo($id, $verify_whats_app_caller_id_request, string $contentType = self::contentTypes['verifyWhatsAppCallerId'][0])
+    {
+        $returnType = '\Zernio\Model\VerifySmsRegistrationOtp200Response';
+        $request = $this->verifyWhatsAppCallerIdRequest($id, $verify_whats_app_caller_id_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'verifyWhatsAppCallerId'
+     *
+     * @param  string $id Phone number record ID (from GET /v1/phone-numbers). (required)
+     * @param  \Zernio\Model\VerifyWhatsAppCallerIdRequest $verify_whats_app_caller_id_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifyWhatsAppCallerId'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function verifyWhatsAppCallerIdRequest($id, $verify_whats_app_caller_id_request, string $contentType = self::contentTypes['verifyWhatsAppCallerId'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling verifyWhatsAppCallerId'
+            );
+        }
+
+        // verify the required parameter 'verify_whats_app_caller_id_request' is set
+        if ($verify_whats_app_caller_id_request === null || (is_array($verify_whats_app_caller_id_request) && count($verify_whats_app_caller_id_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $verify_whats_app_caller_id_request when calling verifyWhatsAppCallerId'
+            );
+        }
+
+
+        $resourcePath = '/v1/phone-numbers/{id}/whatsapp/caller-id-verification/verify';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($verify_whats_app_caller_id_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($verify_whats_app_caller_id_request));
+            } else {
+                $httpBody = $verify_whats_app_caller_id_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

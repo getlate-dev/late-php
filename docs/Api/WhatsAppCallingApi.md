@@ -18,8 +18,10 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**getWhatsAppCallingConfig()**](WhatsAppCallingApi.md#getWhatsAppCallingConfig) | **GET** /v1/whatsapp/calling | Get calling config for an account |
 | [**initiateWhatsAppCall()**](WhatsAppCallingApi.md#initiateWhatsAppCall) | **POST** /v1/whatsapp/calls | Initiate outbound call |
 | [**listWhatsAppCalls()**](WhatsAppCallingApi.md#listWhatsAppCalls) | **GET** /v1/whatsapp/calls | List call history for an account |
+| [**startWhatsAppCallerIdVerification()**](WhatsAppCallingApi.md#startWhatsAppCallerIdVerification) | **POST** /v1/phone-numbers/{id}/whatsapp/caller-id-verification | Start caller-ID verification for a customer-brought number |
 | [**updateWhatsAppCalling()**](WhatsAppCallingApi.md#updateWhatsAppCalling) | **PATCH** /v1/phone-numbers/{id}/whatsapp/calling | Update calling config |
 | [**updateWhatsAppCallingLegacy()**](WhatsAppCallingApi.md#updateWhatsAppCallingLegacy) | **PATCH** /v1/whatsapp/phone-numbers/{id}/calling | Update calling config |
+| [**verifyWhatsAppCallerId()**](WhatsAppCallingApi.md#verifyWhatsAppCallerId) | **POST** /v1/phone-numbers/{id}/whatsapp/caller-id-verification/verify | Confirm the caller-ID verification code |
 
 
 ## `disableWhatsAppCalling()`
@@ -774,6 +776,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `startWhatsAppCallerIdVerification()`
+
+```php
+startWhatsAppCallerIdVerification($id, $start_whats_app_caller_id_verification_request): \Zernio\Model\StartWhatsAppCallerIdVerification200Response
+```
+
+Start caller-ID verification for a customer-brought number
+
+Customer-brought (BYO) WhatsApp numbers cannot present themselves as caller ID on `tel:` call forwards until verified (carrier anti-spoofing); until then forwarded calls show a Zernio number (`callerIdMode: platform` on the calling config). This sends a one-time code to the number by SMS or voice call. Re-POST to resend. Zernio-purchased numbers never need this and get a 400.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\WhatsAppCallingApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string | Phone number record ID (from GET /v1/phone-numbers).
+$start_whats_app_caller_id_verification_request = new \Zernio\Model\StartWhatsAppCallerIdVerificationRequest(); // \Zernio\Model\StartWhatsAppCallerIdVerificationRequest
+
+try {
+    $result = $apiInstance->startWhatsAppCallerIdVerification($id, $start_whats_app_caller_id_verification_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WhatsAppCallingApi->startWhatsAppCallerIdVerification: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| Phone number record ID (from GET /v1/phone-numbers). | |
+| **start_whats_app_caller_id_verification_request** | [**\Zernio\Model\StartWhatsAppCallerIdVerificationRequest**](../Model/StartWhatsAppCallerIdVerificationRequest.md)|  | [optional] |
+
+### Return type
+
+[**\Zernio\Model\StartWhatsAppCallerIdVerification200Response**](../Model/StartWhatsAppCallerIdVerification200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `updateWhatsAppCalling()`
 
 ```php
@@ -882,6 +946,68 @@ try {
 ### Return type
 
 void (empty response body)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `verifyWhatsAppCallerId()`
+
+```php
+verifyWhatsAppCallerId($id, $verify_whats_app_caller_id_request): \Zernio\Model\VerifySmsRegistrationOtp200Response
+```
+
+Confirm the caller-ID verification code
+
+Submits the one-time code the number received. On success, `tel:` call forwards present the business number itself as caller ID (`callerIdMode: business`).
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\WhatsAppCallingApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string | Phone number record ID (from GET /v1/phone-numbers).
+$verify_whats_app_caller_id_request = new \Zernio\Model\VerifyWhatsAppCallerIdRequest(); // \Zernio\Model\VerifyWhatsAppCallerIdRequest
+
+try {
+    $result = $apiInstance->verifyWhatsAppCallerId($id, $verify_whats_app_caller_id_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WhatsAppCallingApi->verifyWhatsAppCallerId: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| Phone number record ID (from GET /v1/phone-numbers). | |
+| **verify_whats_app_caller_id_request** | [**\Zernio\Model\VerifyWhatsAppCallerIdRequest**](../Model/VerifyWhatsAppCallerIdRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\VerifySmsRegistrationOtp200Response**](../Model/VerifySmsRegistrationOtp200Response.md)
 
 ### Authorization
 
