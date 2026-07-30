@@ -61,7 +61,7 @@ class BulkCreateContacts200Response implements ModelInterface, ArrayAccess, \Jso
         'success' => 'bool',
         'created' => 'int',
         'skipped' => 'int',
-        'errors' => 'object[]',
+        'errors' => 'string[]',
         'total' => 'int'
     ];
 
@@ -402,7 +402,7 @@ class BulkCreateContacts200Response implements ModelInterface, ArrayAccess, \Jso
     /**
      * Gets errors
      *
-     * @return object[]|null
+     * @return string[]|null
      */
     public function getErrors()
     {
@@ -412,7 +412,7 @@ class BulkCreateContacts200Response implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets errors
      *
-     * @param object[]|null $errors errors
+     * @param string[]|null $errors Per-contact failures, e.g. an identifier that is not a valid phone number
      *
      * @return self
      */

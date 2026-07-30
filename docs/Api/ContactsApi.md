@@ -23,7 +23,7 @@ bulkCreateContacts($bulk_create_contacts_request): \Zernio\Model\BulkCreateConta
 
 Bulk create contacts
 
-Import up to 1000 contacts at a time. Skips duplicates.
+Import up to 1000 contacts at a time. Skips duplicates. On phone platforms (whatsapp, sms) the platformIdentifier is normalized to digits and a value that is not phone-shaped is rejected per contact and reported in errors[], not imported.
 
 ### Example
 
