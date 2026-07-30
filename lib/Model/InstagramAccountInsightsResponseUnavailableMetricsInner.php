@@ -1,6 +1,6 @@
 <?php
 /**
- * InstagramAccountInsightsResponseMetricsValue
+ * InstagramAccountInsightsResponseUnavailableMetricsInner
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * InstagramAccountInsightsResponseMetricsValue Class Doc Comment
+ * InstagramAccountInsightsResponseUnavailableMetricsInner Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, ArrayAccess, \JsonSerializable
+class InstagramAccountInsightsResponseUnavailableMetricsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       *
       * @var string
       */
-    protected static $openAPIModelName = 'InstagramAccountInsightsResponse_metrics_value';
+    protected static $openAPIModelName = 'InstagramAccountInsightsResponse_unavailableMetrics_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,9 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       * @var string[]
       */
     protected static $openAPITypes = [
-        'total' => 'float',
-        'values' => '\Zernio\Model\InstagramAccountInsightsResponseMetricsValueValuesInner[]',
-        'breakdowns' => '\Zernio\Model\InstagramAccountInsightsResponseMetricsValueBreakdownsInner[]',
-        'unit' => 'string',
-        'currency' => 'string'
+        'metric' => 'string',
+        'reason' => 'string',
+        'message' => 'string'
     ];
 
     /**
@@ -73,11 +71,9 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'total' => null,
-        'values' => null,
-        'breakdowns' => null,
-        'unit' => null,
-        'currency' => null
+        'metric' => null,
+        'reason' => null,
+        'message' => null
     ];
 
     /**
@@ -86,11 +82,9 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'total' => false,
-        'values' => false,
-        'breakdowns' => false,
-        'unit' => false,
-        'currency' => true
+        'metric' => false,
+        'reason' => false,
+        'message' => false
     ];
 
     /**
@@ -179,11 +173,9 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
      * @var string[]
      */
     protected static $attributeMap = [
-        'total' => 'total',
-        'values' => 'values',
-        'breakdowns' => 'breakdowns',
-        'unit' => 'unit',
-        'currency' => 'currency'
+        'metric' => 'metric',
+        'reason' => 'reason',
+        'message' => 'message'
     ];
 
     /**
@@ -192,11 +184,9 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
      * @var string[]
      */
     protected static $setters = [
-        'total' => 'setTotal',
-        'values' => 'setValues',
-        'breakdowns' => 'setBreakdowns',
-        'unit' => 'setUnit',
-        'currency' => 'setCurrency'
+        'metric' => 'setMetric',
+        'reason' => 'setReason',
+        'message' => 'setMessage'
     ];
 
     /**
@@ -205,11 +195,9 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
      * @var string[]
      */
     protected static $getters = [
-        'total' => 'getTotal',
-        'values' => 'getValues',
-        'breakdowns' => 'getBreakdowns',
-        'unit' => 'getUnit',
-        'currency' => 'getCurrency'
+        'metric' => 'getMetric',
+        'reason' => 'getReason',
+        'message' => 'getMessage'
     ];
 
     /**
@@ -253,19 +241,29 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
         return self::$openAPIModelName;
     }
 
-    public const UNIT_MICRO_AMOUNT = 'micro_amount';
-    public const UNIT_UNSPECIFIED = 'unspecified';
+    public const REASON_NOT_ENROLLED = 'not_enrolled';
+    public const REASON_PERMISSION_MISSING = 'permission_missing';
+    public const REASON_UNSUPPORTED_METRIC = 'unsupported_metric';
+    public const REASON_NO_DATA = 'no_data';
+    public const REASON_UNREADABLE_VALUE = 'unreadable_value';
+    public const REASON_MIXED_CURRENCY = 'mixed_currency';
+    public const REASON_UPSTREAM_ERROR = 'upstream_error';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getUnitAllowableValues()
+    public function getReasonAllowableValues()
     {
         return [
-            self::UNIT_MICRO_AMOUNT,
-            self::UNIT_UNSPECIFIED,
+            self::REASON_NOT_ENROLLED,
+            self::REASON_PERMISSION_MISSING,
+            self::REASON_UNSUPPORTED_METRIC,
+            self::REASON_NO_DATA,
+            self::REASON_UNREADABLE_VALUE,
+            self::REASON_MIXED_CURRENCY,
+            self::REASON_UPSTREAM_ERROR,
         ];
     }
 
@@ -284,11 +282,9 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('total', $data ?? [], null);
-        $this->setIfExists('values', $data ?? [], null);
-        $this->setIfExists('breakdowns', $data ?? [], null);
-        $this->setIfExists('unit', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('metric', $data ?? [], null);
+        $this->setIfExists('reason', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
     }
 
     /**
@@ -318,11 +314,11 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getUnitAllowableValues();
-        if (!is_null($this->container['unit']) && !in_array($this->container['unit'], $allowedValues, true)) {
+        $allowedValues = $this->getReasonAllowableValues();
+        if (!is_null($this->container['reason']) && !in_array($this->container['reason'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'unit', must be one of '%s'",
-                $this->container['unit'],
+                "invalid value '%s' for 'reason', must be one of '%s'",
+                $this->container['reason'],
                 implode("', '", $allowedValues)
             );
         }
@@ -343,153 +339,92 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
 
 
     /**
-     * Gets total
-     *
-     * @return float|null
-     */
-    public function getTotal()
-    {
-        return $this->container['total'];
-    }
-
-    /**
-     * Sets total
-     *
-     * @param float|null $total Sum or aggregate value for the metric
-     *
-     * @return self
-     */
-    public function setTotal($total)
-    {
-        if (is_null($total)) {
-            throw new \InvalidArgumentException('non-nullable total cannot be null');
-        }
-        $this->container['total'] = $total;
-
-        return $this;
-    }
-
-    /**
-     * Gets values
-     *
-     * @return \Zernio\Model\InstagramAccountInsightsResponseMetricsValueValuesInner[]|null
-     */
-    public function getValues()
-    {
-        return $this->container['values'];
-    }
-
-    /**
-     * Sets values
-     *
-     * @param \Zernio\Model\InstagramAccountInsightsResponseMetricsValueValuesInner[]|null $values Daily values (for time_series, and always on monetary metrics)
-     *
-     * @return self
-     */
-    public function setValues($values)
-    {
-        if (is_null($values)) {
-            throw new \InvalidArgumentException('non-nullable values cannot be null');
-        }
-        $this->container['values'] = $values;
-
-        return $this;
-    }
-
-    /**
-     * Gets breakdowns
-     *
-     * @return \Zernio\Model\InstagramAccountInsightsResponseMetricsValueBreakdownsInner[]|null
-     */
-    public function getBreakdowns()
-    {
-        return $this->container['breakdowns'];
-    }
-
-    /**
-     * Sets breakdowns
-     *
-     * @param \Zernio\Model\InstagramAccountInsightsResponseMetricsValueBreakdownsInner[]|null $breakdowns Breakdown values (only for total_value with breakdown)
-     *
-     * @return self
-     */
-    public function setBreakdowns($breakdowns)
-    {
-        if (is_null($breakdowns)) {
-            throw new \InvalidArgumentException('non-nullable breakdowns cannot be null');
-        }
-        $this->container['breakdowns'] = $breakdowns;
-
-        return $this;
-    }
-
-    /**
-     * Gets unit
+     * Gets metric
      *
      * @return string|null
      */
-    public function getUnit()
+    public function getMetric()
     {
-        return $this->container['unit'];
+        return $this->container['metric'];
     }
 
     /**
-     * Sets unit
+     * Sets metric
      *
-     * @param string|null $unit Present on monetary metrics only. The scale of \"total\" and of every \"values[].value\", exactly as the platform returned them.  \"micro_amount\": the platform returned an object shape carrying a micro amount, and the values are that integer, summed, unconverted. Zernio does not publish a divisor because Meta does not document one; divide by the scale you have verified against the Page's own Meta Business Suite export. On Facebook Page insights this is always content_monetization_earnings.  \"unspecified\": the platform returned a bare number with no unit metadata. It is passed through as-is; the platform does not state whether it is major or minor currency units. On Facebook Page insights this is always monetization_approximate_earnings.
+     * @param string|null $metric The requested metric name.
      *
      * @return self
      */
-    public function setUnit($unit)
+    public function setMetric($metric)
     {
-        if (is_null($unit)) {
-            throw new \InvalidArgumentException('non-nullable unit cannot be null');
+        if (is_null($metric)) {
+            throw new \InvalidArgumentException('non-nullable metric cannot be null');
         }
-        $allowedValues = $this->getUnitAllowableValues();
-        if (!in_array($unit, $allowedValues, true)) {
+        $this->container['metric'] = $metric;
+
+        return $this;
+    }
+
+    /**
+     * Gets reason
+     *
+     * @return string|null
+     */
+    public function getReason()
+    {
+        return $this->container['reason'];
+    }
+
+    /**
+     * Sets reason
+     *
+     * @param string|null $reason \"not_enrolled\": the account is not enrolled in the program behind this metric. \"permission_missing\": the connected user lacks access to this metric. \"unsupported_metric\": the platform does not accept this metric name on the API version Zernio uses. \"no_data\": the platform returned no bucket for this metric over the requested range. \"unreadable_value\": the platform returned a value shape Zernio cannot read, so no total is reported. \"mixed_currency\": readable values disagree on currency or unit within the range. \"upstream_error\": any other platform failure.  \"no_data\" is the common case in practice. The others are defensive: \"not_enrolled\" and \"unsupported_metric\" in particular have not been observed on live Facebook traffic, since a non-enrolled Page returns zeros rather than an error and metric names are validated before any platform call.
+     *
+     * @return self
+     */
+    public function setReason($reason)
+    {
+        if (is_null($reason)) {
+            throw new \InvalidArgumentException('non-nullable reason cannot be null');
+        }
+        $allowedValues = $this->getReasonAllowableValues();
+        if (!in_array($reason, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'unit', must be one of '%s'",
-                    $unit,
+                    "Invalid value '%s' for 'reason', must be one of '%s'",
+                    $reason,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['unit'] = $unit;
+        $this->container['reason'] = $reason;
 
         return $this;
     }
 
     /**
-     * Gets currency
+     * Gets message
      *
      * @return string|null
      */
-    public function getCurrency()
+    public function getMessage()
     {
-        return $this->container['currency'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets currency
+     * Sets message
      *
-     * @param string|null $currency ISO 4217 currency of a monetary metric, or null when the platform omitted it. Always null on monetization_approximate_earnings, which Meta returns as a bare number with no currency; always present on content_monetization_earnings.
+     * @param string|null $message Platform-provided explanation when available (access tokens redacted), otherwise Zernio copy.
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setMessage($message)
     {
-        if (is_null($currency)) {
-            array_push($this->openAPINullablesSetToNull, 'currency');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('currency', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        $this->container['currency'] = $currency;
+        $this->container['message'] = $message;
 
         return $this;
     }

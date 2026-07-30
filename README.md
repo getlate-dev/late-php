@@ -152,6 +152,7 @@ Class | Method | HTTP request | Description
 *AnalyticsApi* | [**getContentDecay**](docs/Api/AnalyticsApi.md#getcontentdecay) | **GET** /v1/analytics/content-decay | Get content performance decay
 *AnalyticsApi* | [**getDailyMetrics**](docs/Api/AnalyticsApi.md#getdailymetrics) | **GET** /v1/analytics/daily-metrics | Get daily aggregated metrics
 *AnalyticsApi* | [**getFacebookPageInsights**](docs/Api/AnalyticsApi.md#getfacebookpageinsights) | **GET** /v1/analytics/facebook/page-insights | Get Facebook Page insights
+*AnalyticsApi* | [**getFacebookPostEarnings**](docs/Api/AnalyticsApi.md#getfacebookpostearnings) | **GET** /v1/analytics/facebook/post-earnings | Get Facebook post monetization earnings
 *AnalyticsApi* | [**getFacebookPostReactions**](docs/Api/AnalyticsApi.md#getfacebookpostreactions) | **GET** /v1/accounts/{accountId}/facebook-post-reactions | Get Facebook post reactions
 *AnalyticsApi* | [**getFollowerStats**](docs/Api/AnalyticsApi.md#getfollowerstats) | **GET** /v1/accounts/follower-stats | Get follower stats
 *AnalyticsApi* | [**getGoogleBusinessPerformance**](docs/Api/AnalyticsApi.md#getgooglebusinessperformance) | **GET** /v1/analytics/googlebusiness/performance | Get GBP performance metrics
@@ -962,6 +963,9 @@ Class | Method | HTTP request | Description
 - [ExternalPostWebhookPost](docs/Model/ExternalPostWebhookPost.md)
 - [FacebookPlatformData](docs/Model/FacebookPlatformData.md)
 - [FacebookPlatformDataCarouselCardsInner](docs/Model/FacebookPlatformDataCarouselCardsInner.md)
+- [FacebookPostEarningsResponse](docs/Model/FacebookPostEarningsResponse.md)
+- [FacebookPostEarningsResponseMetricsValue](docs/Model/FacebookPostEarningsResponseMetricsValue.md)
+- [FacebookPostEarningsResponseUnavailableMetricsInner](docs/Model/FacebookPostEarningsResponseUnavailableMetricsInner.md)
 - [FetchGoogleBusinessVerificationOptions200Response](docs/Model/FetchGoogleBusinessVerificationOptions200Response.md)
 - [FetchGoogleBusinessVerificationOptions200ResponseOptionsInner](docs/Model/FetchGoogleBusinessVerificationOptions200ResponseOptionsInner.md)
 - [FetchGoogleBusinessVerificationOptionsRequest](docs/Model/FetchGoogleBusinessVerificationOptionsRequest.md)
@@ -1330,6 +1334,7 @@ Class | Method | HTTP request | Description
 - [InstagramAccountInsightsResponseMetricsValue](docs/Model/InstagramAccountInsightsResponseMetricsValue.md)
 - [InstagramAccountInsightsResponseMetricsValueBreakdownsInner](docs/Model/InstagramAccountInsightsResponseMetricsValueBreakdownsInner.md)
 - [InstagramAccountInsightsResponseMetricsValueValuesInner](docs/Model/InstagramAccountInsightsResponseMetricsValueValuesInner.md)
+- [InstagramAccountInsightsResponseUnavailableMetricsInner](docs/Model/InstagramAccountInsightsResponseUnavailableMetricsInner.md)
 - [InstagramDemographicsResponse](docs/Model/InstagramDemographicsResponse.md)
 - [InstagramDemographicsResponseDemographicsValueInner](docs/Model/InstagramDemographicsResponseDemographicsValueInner.md)
 - [InstagramPlatformData](docs/Model/InstagramPlatformData.md)

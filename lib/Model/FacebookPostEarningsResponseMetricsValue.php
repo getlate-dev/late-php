@@ -1,6 +1,6 @@
 <?php
 /**
- * InstagramAccountInsightsResponseMetricsValue
+ * FacebookPostEarningsResponseMetricsValue
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * InstagramAccountInsightsResponseMetricsValue Class Doc Comment
+ * FacebookPostEarningsResponseMetricsValue Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, ArrayAccess, \JsonSerializable
+class FacebookPostEarningsResponseMetricsValue implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       *
       * @var string
       */
-    protected static $openAPIModelName = 'InstagramAccountInsightsResponse_metrics_value';
+    protected static $openAPIModelName = 'FacebookPostEarningsResponse_metrics_value';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +59,6 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       */
     protected static $openAPITypes = [
         'total' => 'float',
-        'values' => '\Zernio\Model\InstagramAccountInsightsResponseMetricsValueValuesInner[]',
-        'breakdowns' => '\Zernio\Model\InstagramAccountInsightsResponseMetricsValueBreakdownsInner[]',
         'unit' => 'string',
         'currency' => 'string'
     ];
@@ -74,8 +72,6 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       */
     protected static $openAPIFormats = [
         'total' => null,
-        'values' => null,
-        'breakdowns' => null,
         'unit' => null,
         'currency' => null
     ];
@@ -87,8 +83,6 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       */
     protected static array $openAPINullables = [
         'total' => false,
-        'values' => false,
-        'breakdowns' => false,
         'unit' => false,
         'currency' => true
     ];
@@ -180,8 +174,6 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
      */
     protected static $attributeMap = [
         'total' => 'total',
-        'values' => 'values',
-        'breakdowns' => 'breakdowns',
         'unit' => 'unit',
         'currency' => 'currency'
     ];
@@ -193,8 +185,6 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
      */
     protected static $setters = [
         'total' => 'setTotal',
-        'values' => 'setValues',
-        'breakdowns' => 'setBreakdowns',
         'unit' => 'setUnit',
         'currency' => 'setCurrency'
     ];
@@ -206,8 +196,6 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
      */
     protected static $getters = [
         'total' => 'getTotal',
-        'values' => 'getValues',
-        'breakdowns' => 'getBreakdowns',
         'unit' => 'getUnit',
         'currency' => 'getCurrency'
     ];
@@ -285,8 +273,6 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
     public function __construct(?array $data = null)
     {
         $this->setIfExists('total', $data ?? [], null);
-        $this->setIfExists('values', $data ?? [], null);
-        $this->setIfExists('breakdowns', $data ?? [], null);
         $this->setIfExists('unit', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
     }
@@ -355,7 +341,7 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
     /**
      * Sets total
      *
-     * @param float|null $total Sum or aggregate value for the metric
+     * @param float|null $total Lifetime earnings in \"unit\", exactly as Meta returned them. Never rescaled.
      *
      * @return self
      */
@@ -365,60 +351,6 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
             throw new \InvalidArgumentException('non-nullable total cannot be null');
         }
         $this->container['total'] = $total;
-
-        return $this;
-    }
-
-    /**
-     * Gets values
-     *
-     * @return \Zernio\Model\InstagramAccountInsightsResponseMetricsValueValuesInner[]|null
-     */
-    public function getValues()
-    {
-        return $this->container['values'];
-    }
-
-    /**
-     * Sets values
-     *
-     * @param \Zernio\Model\InstagramAccountInsightsResponseMetricsValueValuesInner[]|null $values Daily values (for time_series, and always on monetary metrics)
-     *
-     * @return self
-     */
-    public function setValues($values)
-    {
-        if (is_null($values)) {
-            throw new \InvalidArgumentException('non-nullable values cannot be null');
-        }
-        $this->container['values'] = $values;
-
-        return $this;
-    }
-
-    /**
-     * Gets breakdowns
-     *
-     * @return \Zernio\Model\InstagramAccountInsightsResponseMetricsValueBreakdownsInner[]|null
-     */
-    public function getBreakdowns()
-    {
-        return $this->container['breakdowns'];
-    }
-
-    /**
-     * Sets breakdowns
-     *
-     * @param \Zernio\Model\InstagramAccountInsightsResponseMetricsValueBreakdownsInner[]|null $breakdowns Breakdown values (only for total_value with breakdown)
-     *
-     * @return self
-     */
-    public function setBreakdowns($breakdowns)
-    {
-        if (is_null($breakdowns)) {
-            throw new \InvalidArgumentException('non-nullable breakdowns cannot be null');
-        }
-        $this->container['breakdowns'] = $breakdowns;
 
         return $this;
     }
@@ -436,7 +368,7 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
     /**
      * Sets unit
      *
-     * @param string|null $unit Present on monetary metrics only. The scale of \"total\" and of every \"values[].value\", exactly as the platform returned them.  \"micro_amount\": the platform returned an object shape carrying a micro amount, and the values are that integer, summed, unconverted. Zernio does not publish a divisor because Meta does not document one; divide by the scale you have verified against the Page's own Meta Business Suite export. On Facebook Page insights this is always content_monetization_earnings.  \"unspecified\": the platform returned a bare number with no unit metadata. It is passed through as-is; the platform does not state whether it is major or minor currency units. On Facebook Page insights this is always monetization_approximate_earnings.
+     * @param string|null $unit \"micro_amount\": Meta returned an object shape carrying a micro amount, and \"total\" is that integer, unconverted. Zernio does not publish a divisor because Meta does not document one; divide by the scale you have verified against the Page's own Meta Business Suite export. This is always content_monetization_earnings.  \"unspecified\": Meta returned a bare number with no unit metadata, passed through as-is; Meta does not state whether it is major or minor currency units. This is always monetization_approximate_earnings.
      *
      * @return self
      */
@@ -473,7 +405,7 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
     /**
      * Sets currency
      *
-     * @param string|null $currency ISO 4217 currency of a monetary metric, or null when the platform omitted it. Always null on monetization_approximate_earnings, which Meta returns as a bare number with no currency; always present on content_monetization_earnings.
+     * @param string|null $currency ISO 4217 currency, or null when Meta omitted it. Always null on monetization_approximate_earnings; always present on content_monetization_earnings.
      *
      * @return self
      */

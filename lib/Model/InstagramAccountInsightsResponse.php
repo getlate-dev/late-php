@@ -66,6 +66,7 @@ class InstagramAccountInsightsResponse implements ModelInterface, ArrayAccess, \
         'metric_type' => 'string',
         'breakdown' => 'string',
         'metrics' => 'array<string,\Zernio\Model\InstagramAccountInsightsResponseMetricsValue>',
+        'unavailable_metrics' => '\Zernio\Model\InstagramAccountInsightsResponseUnavailableMetricsInner[]',
         'data_delay' => 'string'
     ];
 
@@ -84,6 +85,7 @@ class InstagramAccountInsightsResponse implements ModelInterface, ArrayAccess, \
         'metric_type' => null,
         'breakdown' => null,
         'metrics' => null,
+        'unavailable_metrics' => null,
         'data_delay' => null
     ];
 
@@ -100,6 +102,7 @@ class InstagramAccountInsightsResponse implements ModelInterface, ArrayAccess, \
         'metric_type' => false,
         'breakdown' => false,
         'metrics' => false,
+        'unavailable_metrics' => false,
         'data_delay' => false
     ];
 
@@ -196,6 +199,7 @@ class InstagramAccountInsightsResponse implements ModelInterface, ArrayAccess, \
         'metric_type' => 'metricType',
         'breakdown' => 'breakdown',
         'metrics' => 'metrics',
+        'unavailable_metrics' => 'unavailableMetrics',
         'data_delay' => 'dataDelay'
     ];
 
@@ -212,6 +216,7 @@ class InstagramAccountInsightsResponse implements ModelInterface, ArrayAccess, \
         'metric_type' => 'setMetricType',
         'breakdown' => 'setBreakdown',
         'metrics' => 'setMetrics',
+        'unavailable_metrics' => 'setUnavailableMetrics',
         'data_delay' => 'setDataDelay'
     ];
 
@@ -228,6 +233,7 @@ class InstagramAccountInsightsResponse implements ModelInterface, ArrayAccess, \
         'metric_type' => 'getMetricType',
         'breakdown' => 'getBreakdown',
         'metrics' => 'getMetrics',
+        'unavailable_metrics' => 'getUnavailableMetrics',
         'data_delay' => 'getDataDelay'
     ];
 
@@ -331,6 +337,7 @@ class InstagramAccountInsightsResponse implements ModelInterface, ArrayAccess, \
         $this->setIfExists('metric_type', $data ?? [], null);
         $this->setIfExists('breakdown', $data ?? [], null);
         $this->setIfExists('metrics', $data ?? [], null);
+        $this->setIfExists('unavailable_metrics', $data ?? [], null);
         $this->setIfExists('data_delay', $data ?? [], null);
     }
 
@@ -589,7 +596,7 @@ class InstagramAccountInsightsResponse implements ModelInterface, ArrayAccess, \
     /**
      * Sets metrics
      *
-     * @param array<string,\Zernio\Model\InstagramAccountInsightsResponseMetricsValue>|null $metrics Object keyed by metric name. For time_series: each metric has \"total\" (number) and \"values\" (array of {date, value}). For total_value: each metric has \"total\" (number) and optionally \"breakdowns\" (array of {dimension, value}).
+     * @param array<string,\Zernio\Model\InstagramAccountInsightsResponseMetricsValue>|null $metrics Object keyed by metric name. For time_series: each metric has \"total\" (number) and \"values\" (array of {date, value}). For total_value: each metric has \"total\" (number) and optionally \"breakdowns\" (array of {dimension, value}).  Monetary metrics additionally carry \"unit\" and \"currency\". Zernio never rescales money: \"total\" and every \"values[].value\" are the platform's raw numbers in the stated unit. Monetary metrics also keep \"values\" on metricType=total_value, because their \"total\" is the sum of the daily buckets the platform returned over the range: keep the series so you can reconcile that sum against the platform's own reporting before invoicing on it. A metric that could not be served is absent from this object and listed in \"unavailableMetrics\" instead, so an unavailable metric is never reported as a zero.
      *
      * @return self
      */
@@ -599,6 +606,33 @@ class InstagramAccountInsightsResponse implements ModelInterface, ArrayAccess, \
             throw new \InvalidArgumentException('non-nullable metrics cannot be null');
         }
         $this->container['metrics'] = $metrics;
+
+        return $this;
+    }
+
+    /**
+     * Gets unavailable_metrics
+     *
+     * @return \Zernio\Model\InstagramAccountInsightsResponseUnavailableMetricsInner[]|null
+     */
+    public function getUnavailableMetrics()
+    {
+        return $this->container['unavailable_metrics'];
+    }
+
+    /**
+     * Sets unavailable_metrics
+     *
+     * @param \Zernio\Model\InstagramAccountInsightsResponseUnavailableMetricsInner[]|null $unavailable_metrics Requested metrics that could not be served. Present only when at least one metric is unavailable, and absent otherwise. Each listed metric is OMITTED from \"metrics\" rather than reported as 0, which is how an unavailable metric is distinguished from a genuine zero. The request itself still succeeds with HTTP 200.
+     *
+     * @return self
+     */
+    public function setUnavailableMetrics($unavailable_metrics)
+    {
+        if (is_null($unavailable_metrics)) {
+            throw new \InvalidArgumentException('non-nullable unavailable_metrics cannot be null');
+        }
+        $this->container['unavailable_metrics'] = $unavailable_metrics;
 
         return $this;
     }

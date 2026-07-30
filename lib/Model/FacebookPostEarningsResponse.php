@@ -1,6 +1,6 @@
 <?php
 /**
- * InstagramAccountInsightsResponseMetricsValue
+ * FacebookPostEarningsResponse
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * InstagramAccountInsightsResponseMetricsValue Class Doc Comment
+ * FacebookPostEarningsResponse Class Doc Comment
  *
  * @category Class
+ * @description Lifetime monetization earnings for one Facebook post. Same \&quot;unit\&quot; / \&quot;currency\&quot; contract and same unavailable-vs-zero contract as the Page-level response; there is no date range, no metricType, and no daily \&quot;values\&quot;, because the single lifetime bucket IS the total.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, ArrayAccess, \JsonSerializable
+class FacebookPostEarningsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       *
       * @var string
       */
-    protected static $openAPIModelName = 'InstagramAccountInsightsResponse_metrics_value';
+    protected static $openAPIModelName = 'FacebookPostEarningsResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +59,14 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       * @var string[]
       */
     protected static $openAPITypes = [
-        'total' => 'float',
-        'values' => '\Zernio\Model\InstagramAccountInsightsResponseMetricsValueValuesInner[]',
-        'breakdowns' => '\Zernio\Model\InstagramAccountInsightsResponseMetricsValueBreakdownsInner[]',
-        'unit' => 'string',
-        'currency' => 'string'
+        'success' => 'bool',
+        'account_id' => 'string',
+        'post_id' => 'string',
+        'platform' => 'string',
+        'period' => 'string',
+        'metrics' => 'array<string,\Zernio\Model\FacebookPostEarningsResponseMetricsValue>',
+        'unavailable_metrics' => '\Zernio\Model\FacebookPostEarningsResponseUnavailableMetricsInner[]',
+        'data_delay' => 'string'
     ];
 
     /**
@@ -73,11 +77,14 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'total' => null,
-        'values' => null,
-        'breakdowns' => null,
-        'unit' => null,
-        'currency' => null
+        'success' => null,
+        'account_id' => null,
+        'post_id' => null,
+        'platform' => null,
+        'period' => null,
+        'metrics' => null,
+        'unavailable_metrics' => null,
+        'data_delay' => null
     ];
 
     /**
@@ -86,11 +93,14 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'total' => false,
-        'values' => false,
-        'breakdowns' => false,
-        'unit' => false,
-        'currency' => true
+        'success' => false,
+        'account_id' => false,
+        'post_id' => false,
+        'platform' => false,
+        'period' => false,
+        'metrics' => false,
+        'unavailable_metrics' => false,
+        'data_delay' => false
     ];
 
     /**
@@ -179,11 +189,14 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
      * @var string[]
      */
     protected static $attributeMap = [
-        'total' => 'total',
-        'values' => 'values',
-        'breakdowns' => 'breakdowns',
-        'unit' => 'unit',
-        'currency' => 'currency'
+        'success' => 'success',
+        'account_id' => 'accountId',
+        'post_id' => 'postId',
+        'platform' => 'platform',
+        'period' => 'period',
+        'metrics' => 'metrics',
+        'unavailable_metrics' => 'unavailableMetrics',
+        'data_delay' => 'dataDelay'
     ];
 
     /**
@@ -192,11 +205,14 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
      * @var string[]
      */
     protected static $setters = [
-        'total' => 'setTotal',
-        'values' => 'setValues',
-        'breakdowns' => 'setBreakdowns',
-        'unit' => 'setUnit',
-        'currency' => 'setCurrency'
+        'success' => 'setSuccess',
+        'account_id' => 'setAccountId',
+        'post_id' => 'setPostId',
+        'platform' => 'setPlatform',
+        'period' => 'setPeriod',
+        'metrics' => 'setMetrics',
+        'unavailable_metrics' => 'setUnavailableMetrics',
+        'data_delay' => 'setDataDelay'
     ];
 
     /**
@@ -205,11 +221,14 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
      * @var string[]
      */
     protected static $getters = [
-        'total' => 'getTotal',
-        'values' => 'getValues',
-        'breakdowns' => 'getBreakdowns',
-        'unit' => 'getUnit',
-        'currency' => 'getCurrency'
+        'success' => 'getSuccess',
+        'account_id' => 'getAccountId',
+        'post_id' => 'getPostId',
+        'platform' => 'getPlatform',
+        'period' => 'getPeriod',
+        'metrics' => 'getMetrics',
+        'unavailable_metrics' => 'getUnavailableMetrics',
+        'data_delay' => 'getDataDelay'
     ];
 
     /**
@@ -253,19 +272,17 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
         return self::$openAPIModelName;
     }
 
-    public const UNIT_MICRO_AMOUNT = 'micro_amount';
-    public const UNIT_UNSPECIFIED = 'unspecified';
+    public const PERIOD_LIFETIME = 'lifetime';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getUnitAllowableValues()
+    public function getPeriodAllowableValues()
     {
         return [
-            self::UNIT_MICRO_AMOUNT,
-            self::UNIT_UNSPECIFIED,
+            self::PERIOD_LIFETIME,
         ];
     }
 
@@ -284,11 +301,14 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('total', $data ?? [], null);
-        $this->setIfExists('values', $data ?? [], null);
-        $this->setIfExists('breakdowns', $data ?? [], null);
-        $this->setIfExists('unit', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('success', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
+        $this->setIfExists('post_id', $data ?? [], null);
+        $this->setIfExists('platform', $data ?? [], null);
+        $this->setIfExists('period', $data ?? [], null);
+        $this->setIfExists('metrics', $data ?? [], null);
+        $this->setIfExists('unavailable_metrics', $data ?? [], null);
+        $this->setIfExists('data_delay', $data ?? [], null);
     }
 
     /**
@@ -318,11 +338,11 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getUnitAllowableValues();
-        if (!is_null($this->container['unit']) && !in_array($this->container['unit'], $allowedValues, true)) {
+        $allowedValues = $this->getPeriodAllowableValues();
+        if (!is_null($this->container['period']) && !in_array($this->container['period'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'unit', must be one of '%s'",
-                $this->container['unit'],
+                "invalid value '%s' for 'period', must be one of '%s'",
+                $this->container['period'],
                 implode("', '", $allowedValues)
             );
         }
@@ -343,153 +363,227 @@ class InstagramAccountInsightsResponseMetricsValue implements ModelInterface, Ar
 
 
     /**
-     * Gets total
+     * Gets success
      *
-     * @return float|null
+     * @return bool|null
      */
-    public function getTotal()
+    public function getSuccess()
     {
-        return $this->container['total'];
+        return $this->container['success'];
     }
 
     /**
-     * Sets total
+     * Sets success
      *
-     * @param float|null $total Sum or aggregate value for the metric
+     * @param bool|null $success success
      *
      * @return self
      */
-    public function setTotal($total)
+    public function setSuccess($success)
     {
-        if (is_null($total)) {
-            throw new \InvalidArgumentException('non-nullable total cannot be null');
+        if (is_null($success)) {
+            throw new \InvalidArgumentException('non-nullable success cannot be null');
         }
-        $this->container['total'] = $total;
+        $this->container['success'] = $success;
 
         return $this;
     }
 
     /**
-     * Gets values
-     *
-     * @return \Zernio\Model\InstagramAccountInsightsResponseMetricsValueValuesInner[]|null
-     */
-    public function getValues()
-    {
-        return $this->container['values'];
-    }
-
-    /**
-     * Sets values
-     *
-     * @param \Zernio\Model\InstagramAccountInsightsResponseMetricsValueValuesInner[]|null $values Daily values (for time_series, and always on monetary metrics)
-     *
-     * @return self
-     */
-    public function setValues($values)
-    {
-        if (is_null($values)) {
-            throw new \InvalidArgumentException('non-nullable values cannot be null');
-        }
-        $this->container['values'] = $values;
-
-        return $this;
-    }
-
-    /**
-     * Gets breakdowns
-     *
-     * @return \Zernio\Model\InstagramAccountInsightsResponseMetricsValueBreakdownsInner[]|null
-     */
-    public function getBreakdowns()
-    {
-        return $this->container['breakdowns'];
-    }
-
-    /**
-     * Sets breakdowns
-     *
-     * @param \Zernio\Model\InstagramAccountInsightsResponseMetricsValueBreakdownsInner[]|null $breakdowns Breakdown values (only for total_value with breakdown)
-     *
-     * @return self
-     */
-    public function setBreakdowns($breakdowns)
-    {
-        if (is_null($breakdowns)) {
-            throw new \InvalidArgumentException('non-nullable breakdowns cannot be null');
-        }
-        $this->container['breakdowns'] = $breakdowns;
-
-        return $this;
-    }
-
-    /**
-     * Gets unit
+     * Gets account_id
      *
      * @return string|null
      */
-    public function getUnit()
+    public function getAccountId()
     {
-        return $this->container['unit'];
+        return $this->container['account_id'];
     }
 
     /**
-     * Sets unit
+     * Sets account_id
      *
-     * @param string|null $unit Present on monetary metrics only. The scale of \"total\" and of every \"values[].value\", exactly as the platform returned them.  \"micro_amount\": the platform returned an object shape carrying a micro amount, and the values are that integer, summed, unconverted. Zernio does not publish a divisor because Meta does not document one; divide by the scale you have verified against the Page's own Meta Business Suite export. On Facebook Page insights this is always content_monetization_earnings.  \"unspecified\": the platform returned a bare number with no unit metadata. It is passed through as-is; the platform does not state whether it is major or minor currency units. On Facebook Page insights this is always monetization_approximate_earnings.
+     * @param string|null $account_id account_id
      *
      * @return self
      */
-    public function setUnit($unit)
+    public function setAccountId($account_id)
     {
-        if (is_null($unit)) {
-            throw new \InvalidArgumentException('non-nullable unit cannot be null');
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
         }
-        $allowedValues = $this->getUnitAllowableValues();
-        if (!in_array($unit, $allowedValues, true)) {
+        $this->container['account_id'] = $account_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets post_id
+     *
+     * @return string|null
+     */
+    public function getPostId()
+    {
+        return $this->container['post_id'];
+    }
+
+    /**
+     * Sets post_id
+     *
+     * @param string|null $post_id The platform post ID that was queried, echoed back.
+     *
+     * @return self
+     */
+    public function setPostId($post_id)
+    {
+        if (is_null($post_id)) {
+            throw new \InvalidArgumentException('non-nullable post_id cannot be null');
+        }
+        $this->container['post_id'] = $post_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets platform
+     *
+     * @return string|null
+     */
+    public function getPlatform()
+    {
+        return $this->container['platform'];
+    }
+
+    /**
+     * Sets platform
+     *
+     * @param string|null $platform platform
+     *
+     * @return self
+     */
+    public function setPlatform($platform)
+    {
+        if (is_null($platform)) {
+            throw new \InvalidArgumentException('non-nullable platform cannot be null');
+        }
+        $this->container['platform'] = $platform;
+
+        return $this;
+    }
+
+    /**
+     * Gets period
+     *
+     * @return string|null
+     */
+    public function getPeriod()
+    {
+        return $this->container['period'];
+    }
+
+    /**
+     * Sets period
+     *
+     * @param string|null $period Always \"lifetime\": the total is cumulative since publication and must not be summed across dates or across posts.
+     *
+     * @return self
+     */
+    public function setPeriod($period)
+    {
+        if (is_null($period)) {
+            throw new \InvalidArgumentException('non-nullable period cannot be null');
+        }
+        $allowedValues = $this->getPeriodAllowableValues();
+        if (!in_array($period, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'unit', must be one of '%s'",
-                    $unit,
+                    "Invalid value '%s' for 'period', must be one of '%s'",
+                    $period,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['unit'] = $unit;
+        $this->container['period'] = $period;
 
         return $this;
     }
 
     /**
-     * Gets currency
+     * Gets metrics
      *
-     * @return string|null
+     * @return array<string,\Zernio\Model\FacebookPostEarningsResponseMetricsValue>|null
      */
-    public function getCurrency()
+    public function getMetrics()
     {
-        return $this->container['currency'];
+        return $this->container['metrics'];
     }
 
     /**
-     * Sets currency
+     * Sets metrics
      *
-     * @param string|null $currency ISO 4217 currency of a monetary metric, or null when the platform omitted it. Always null on monetization_approximate_earnings, which Meta returns as a bare number with no currency; always present on content_monetization_earnings.
+     * @param array<string,\Zernio\Model\FacebookPostEarningsResponseMetricsValue>|null $metrics One entry per served metric. A metric reported here with \"total\": 0 genuinely earned nothing (or its Page is not enrolled, which Meta reports identically).
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setMetrics($metrics)
     {
-        if (is_null($currency)) {
-            array_push($this->openAPINullablesSetToNull, 'currency');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('currency', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($metrics)) {
+            throw new \InvalidArgumentException('non-nullable metrics cannot be null');
         }
-        $this->container['currency'] = $currency;
+        $this->container['metrics'] = $metrics;
+
+        return $this;
+    }
+
+    /**
+     * Gets unavailable_metrics
+     *
+     * @return \Zernio\Model\FacebookPostEarningsResponseUnavailableMetricsInner[]|null
+     */
+    public function getUnavailableMetrics()
+    {
+        return $this->container['unavailable_metrics'];
+    }
+
+    /**
+     * Sets unavailable_metrics
+     *
+     * @param \Zernio\Model\FacebookPostEarningsResponseUnavailableMetricsInner[]|null $unavailable_metrics Requested metrics Meta could not serve. Present only when at least one metric is unavailable, and absent otherwise. Each listed metric is OMITTED from \"metrics\" rather than reported as 0. The request itself still succeeds with HTTP 200.
+     *
+     * @return self
+     */
+    public function setUnavailableMetrics($unavailable_metrics)
+    {
+        if (is_null($unavailable_metrics)) {
+            throw new \InvalidArgumentException('non-nullable unavailable_metrics cannot be null');
+        }
+        $this->container['unavailable_metrics'] = $unavailable_metrics;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_delay
+     *
+     * @return string|null
+     */
+    public function getDataDelay()
+    {
+        return $this->container['data_delay'];
+    }
+
+    /**
+     * Sets data_delay
+     *
+     * @param string|null $data_delay data_delay
+     *
+     * @return self
+     */
+    public function setDataDelay($data_delay)
+    {
+        if (is_null($data_delay)) {
+            throw new \InvalidArgumentException('non-nullable data_delay cannot be null');
+        }
+        $this->container['data_delay'] = $data_delay;
 
         return $this;
     }

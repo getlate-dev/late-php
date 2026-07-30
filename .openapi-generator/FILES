@@ -440,6 +440,9 @@ docs/Model/ExternalPostSummaryAnalytics.md
 docs/Model/ExternalPostWebhookPost.md
 docs/Model/FacebookPlatformData.md
 docs/Model/FacebookPlatformDataCarouselCardsInner.md
+docs/Model/FacebookPostEarningsResponse.md
+docs/Model/FacebookPostEarningsResponseMetricsValue.md
+docs/Model/FacebookPostEarningsResponseUnavailableMetricsInner.md
 docs/Model/FetchGoogleBusinessVerificationOptions200Response.md
 docs/Model/FetchGoogleBusinessVerificationOptions200ResponseOptionsInner.md
 docs/Model/FetchGoogleBusinessVerificationOptionsRequest.md
@@ -808,6 +811,7 @@ docs/Model/InstagramAccountInsightsResponseDateRange.md
 docs/Model/InstagramAccountInsightsResponseMetricsValue.md
 docs/Model/InstagramAccountInsightsResponseMetricsValueBreakdownsInner.md
 docs/Model/InstagramAccountInsightsResponseMetricsValueValuesInner.md
+docs/Model/InstagramAccountInsightsResponseUnavailableMetricsInner.md
 docs/Model/InstagramDemographicsResponse.md
 docs/Model/InstagramDemographicsResponseDemographicsValueInner.md
 docs/Model/InstagramPlatformData.md
@@ -2045,6 +2049,9 @@ lib/Model/ExternalPostSummaryAnalytics.php
 lib/Model/ExternalPostWebhookPost.php
 lib/Model/FacebookPlatformData.php
 lib/Model/FacebookPlatformDataCarouselCardsInner.php
+lib/Model/FacebookPostEarningsResponse.php
+lib/Model/FacebookPostEarningsResponseMetricsValue.php
+lib/Model/FacebookPostEarningsResponseUnavailableMetricsInner.php
 lib/Model/FetchGoogleBusinessVerificationOptions200Response.php
 lib/Model/FetchGoogleBusinessVerificationOptions200ResponseOptionsInner.php
 lib/Model/FetchGoogleBusinessVerificationOptionsRequest.php
@@ -2413,6 +2420,7 @@ lib/Model/InstagramAccountInsightsResponseDateRange.php
 lib/Model/InstagramAccountInsightsResponseMetricsValue.php
 lib/Model/InstagramAccountInsightsResponseMetricsValueBreakdownsInner.php
 lib/Model/InstagramAccountInsightsResponseMetricsValueValuesInner.php
+lib/Model/InstagramAccountInsightsResponseUnavailableMetricsInner.php
 lib/Model/InstagramDemographicsResponse.php
 lib/Model/InstagramDemographicsResponseDemographicsValueInner.php
 lib/Model/InstagramPlatformData.php
@@ -3211,3 +3219,7 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/FacebookPostEarningsResponseMetricsValueTest.php
+test/Model/FacebookPostEarningsResponseTest.php
+test/Model/FacebookPostEarningsResponseUnavailableMetricsInnerTest.php
+test/Model/InstagramAccountInsightsResponseUnavailableMetricsInnerTest.php

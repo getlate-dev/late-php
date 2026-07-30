@@ -90,6 +90,9 @@ class AnalyticsApi
         'getFacebookPageInsights' => [
             'application/json',
         ],
+        'getFacebookPostEarnings' => [
+            'application/json',
+        ],
         'getFacebookPostReactions' => [
             'application/json',
         ],
@@ -1790,7 +1793,7 @@ class AnalyticsApi
      * Get Facebook Page insights
      *
      * @param  string $account_id The Zernio SocialAccount ID for the connected Facebook Page. (required)
-     * @param  string|null $metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost (optional)
+     * @param  string|null $metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost  Monetization (opt-in, not in the defaults):   - content_monetization_earnings   - monetization_approximate_earnings  Each monetization metric is fetched with its own separate Graph call, so requesting both adds two calls. Values are approximate and Meta restates them after the fact.  content_monetization_earnings returns an object per day and always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings returns a bare number per day, so its unit is always \&quot;unspecified\&quot; and its \&quot;currency\&quot; is always null. The two are on different scales and are not comparable to each other. Both keep their daily \&quot;values\&quot; on every metricType and are never rescaled by Zernio.  Earnings here are Page-level daily buckets and \&quot;total\&quot; is their sum. Meta does not document whether a bucket carries that day&#39;s earnings or a running total, and every Page measured so far earned exactly 0, so reconcile \&quot;total\&quot; against the Page&#39;s own Meta export before relying on it; the daily \&quot;values\&quot; are always returned for that purpose. Per-post lifetime earnings are served by GET /v1/analytics/facebook/post-earnings.  A Page that is not enrolled in monetization, or that earned nothing, returns normal daily buckets of 0 in \&quot;metrics\&quot;: Meta does not distinguish the two, so a 0 total here does NOT mean the Page is enrolled. \&quot;unavailableMetrics\&quot; covers the narrower case where Meta returned no bucket for the metric at all (\&quot;no_data\&quot;) or rejected the request outright, and the metric is then omitted from \&quot;metrics\&quot; rather than reported as 0. (optional)
      * @param  \DateTime|null $since Start date (YYYY-MM-DD). Defaults to 30 days ago. (optional)
      * @param  \DateTime|null $until End date (YYYY-MM-DD). Defaults to today. (optional)
      * @param  string|null $metric_type \&quot;total_value\&quot; (default) returns aggregated totals only. \&quot;time_series\&quot; returns daily values in the \&quot;values\&quot; array. (optional, default to 'total_value')
@@ -1812,7 +1815,7 @@ class AnalyticsApi
      * Get Facebook Page insights
      *
      * @param  string $account_id The Zernio SocialAccount ID for the connected Facebook Page. (required)
-     * @param  string|null $metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost (optional)
+     * @param  string|null $metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost  Monetization (opt-in, not in the defaults):   - content_monetization_earnings   - monetization_approximate_earnings  Each monetization metric is fetched with its own separate Graph call, so requesting both adds two calls. Values are approximate and Meta restates them after the fact.  content_monetization_earnings returns an object per day and always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings returns a bare number per day, so its unit is always \&quot;unspecified\&quot; and its \&quot;currency\&quot; is always null. The two are on different scales and are not comparable to each other. Both keep their daily \&quot;values\&quot; on every metricType and are never rescaled by Zernio.  Earnings here are Page-level daily buckets and \&quot;total\&quot; is their sum. Meta does not document whether a bucket carries that day&#39;s earnings or a running total, and every Page measured so far earned exactly 0, so reconcile \&quot;total\&quot; against the Page&#39;s own Meta export before relying on it; the daily \&quot;values\&quot; are always returned for that purpose. Per-post lifetime earnings are served by GET /v1/analytics/facebook/post-earnings.  A Page that is not enrolled in monetization, or that earned nothing, returns normal daily buckets of 0 in \&quot;metrics\&quot;: Meta does not distinguish the two, so a 0 total here does NOT mean the Page is enrolled. \&quot;unavailableMetrics\&quot; covers the narrower case where Meta returned no bucket for the metric at all (\&quot;no_data\&quot;) or rejected the request outright, and the metric is then omitted from \&quot;metrics\&quot; rather than reported as 0. (optional)
      * @param  \DateTime|null $since Start date (YYYY-MM-DD). Defaults to 30 days ago. (optional)
      * @param  \DateTime|null $until End date (YYYY-MM-DD). Defaults to today. (optional)
      * @param  string|null $metric_type \&quot;total_value\&quot; (default) returns aggregated totals only. \&quot;time_series\&quot; returns daily values in the \&quot;values\&quot; array. (optional, default to 'total_value')
@@ -1915,7 +1918,7 @@ class AnalyticsApi
      * Get Facebook Page insights
      *
      * @param  string $account_id The Zernio SocialAccount ID for the connected Facebook Page. (required)
-     * @param  string|null $metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost (optional)
+     * @param  string|null $metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost  Monetization (opt-in, not in the defaults):   - content_monetization_earnings   - monetization_approximate_earnings  Each monetization metric is fetched with its own separate Graph call, so requesting both adds two calls. Values are approximate and Meta restates them after the fact.  content_monetization_earnings returns an object per day and always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings returns a bare number per day, so its unit is always \&quot;unspecified\&quot; and its \&quot;currency\&quot; is always null. The two are on different scales and are not comparable to each other. Both keep their daily \&quot;values\&quot; on every metricType and are never rescaled by Zernio.  Earnings here are Page-level daily buckets and \&quot;total\&quot; is their sum. Meta does not document whether a bucket carries that day&#39;s earnings or a running total, and every Page measured so far earned exactly 0, so reconcile \&quot;total\&quot; against the Page&#39;s own Meta export before relying on it; the daily \&quot;values\&quot; are always returned for that purpose. Per-post lifetime earnings are served by GET /v1/analytics/facebook/post-earnings.  A Page that is not enrolled in monetization, or that earned nothing, returns normal daily buckets of 0 in \&quot;metrics\&quot;: Meta does not distinguish the two, so a 0 total here does NOT mean the Page is enrolled. \&quot;unavailableMetrics\&quot; covers the narrower case where Meta returned no bucket for the metric at all (\&quot;no_data\&quot;) or rejected the request outright, and the metric is then omitted from \&quot;metrics\&quot; rather than reported as 0. (optional)
      * @param  \DateTime|null $since Start date (YYYY-MM-DD). Defaults to 30 days ago. (optional)
      * @param  \DateTime|null $until End date (YYYY-MM-DD). Defaults to today. (optional)
      * @param  string|null $metric_type \&quot;total_value\&quot; (default) returns aggregated totals only. \&quot;time_series\&quot; returns daily values in the \&quot;values\&quot; array. (optional, default to 'total_value')
@@ -1940,7 +1943,7 @@ class AnalyticsApi
      * Get Facebook Page insights
      *
      * @param  string $account_id The Zernio SocialAccount ID for the connected Facebook Page. (required)
-     * @param  string|null $metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost (optional)
+     * @param  string|null $metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost  Monetization (opt-in, not in the defaults):   - content_monetization_earnings   - monetization_approximate_earnings  Each monetization metric is fetched with its own separate Graph call, so requesting both adds two calls. Values are approximate and Meta restates them after the fact.  content_monetization_earnings returns an object per day and always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings returns a bare number per day, so its unit is always \&quot;unspecified\&quot; and its \&quot;currency\&quot; is always null. The two are on different scales and are not comparable to each other. Both keep their daily \&quot;values\&quot; on every metricType and are never rescaled by Zernio.  Earnings here are Page-level daily buckets and \&quot;total\&quot; is their sum. Meta does not document whether a bucket carries that day&#39;s earnings or a running total, and every Page measured so far earned exactly 0, so reconcile \&quot;total\&quot; against the Page&#39;s own Meta export before relying on it; the daily \&quot;values\&quot; are always returned for that purpose. Per-post lifetime earnings are served by GET /v1/analytics/facebook/post-earnings.  A Page that is not enrolled in monetization, or that earned nothing, returns normal daily buckets of 0 in \&quot;metrics\&quot;: Meta does not distinguish the two, so a 0 total here does NOT mean the Page is enrolled. \&quot;unavailableMetrics\&quot; covers the narrower case where Meta returned no bucket for the metric at all (\&quot;no_data\&quot;) or rejected the request outright, and the metric is then omitted from \&quot;metrics\&quot; rather than reported as 0. (optional)
      * @param  \DateTime|null $since Start date (YYYY-MM-DD). Defaults to 30 days ago. (optional)
      * @param  \DateTime|null $until End date (YYYY-MM-DD). Defaults to today. (optional)
      * @param  string|null $metric_type \&quot;total_value\&quot; (default) returns aggregated totals only. \&quot;time_series\&quot; returns daily values in the \&quot;values\&quot; array. (optional, default to 'total_value')
@@ -1994,7 +1997,7 @@ class AnalyticsApi
      * Create request for operation 'getFacebookPageInsights'
      *
      * @param  string $account_id The Zernio SocialAccount ID for the connected Facebook Page. (required)
-     * @param  string|null $metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost (optional)
+     * @param  string|null $metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost  Monetization (opt-in, not in the defaults):   - content_monetization_earnings   - monetization_approximate_earnings  Each monetization metric is fetched with its own separate Graph call, so requesting both adds two calls. Values are approximate and Meta restates them after the fact.  content_monetization_earnings returns an object per day and always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings returns a bare number per day, so its unit is always \&quot;unspecified\&quot; and its \&quot;currency\&quot; is always null. The two are on different scales and are not comparable to each other. Both keep their daily \&quot;values\&quot; on every metricType and are never rescaled by Zernio.  Earnings here are Page-level daily buckets and \&quot;total\&quot; is their sum. Meta does not document whether a bucket carries that day&#39;s earnings or a running total, and every Page measured so far earned exactly 0, so reconcile \&quot;total\&quot; against the Page&#39;s own Meta export before relying on it; the daily \&quot;values\&quot; are always returned for that purpose. Per-post lifetime earnings are served by GET /v1/analytics/facebook/post-earnings.  A Page that is not enrolled in monetization, or that earned nothing, returns normal daily buckets of 0 in \&quot;metrics\&quot;: Meta does not distinguish the two, so a 0 total here does NOT mean the Page is enrolled. \&quot;unavailableMetrics\&quot; covers the narrower case where Meta returned no bucket for the metric at all (\&quot;no_data\&quot;) or rejected the request outright, and the metric is then omitted from \&quot;metrics\&quot; rather than reported as 0. (optional)
      * @param  \DateTime|null $since Start date (YYYY-MM-DD). Defaults to 30 days ago. (optional)
      * @param  \DateTime|null $until End date (YYYY-MM-DD). Defaults to today. (optional)
      * @param  string|null $metric_type \&quot;total_value\&quot; (default) returns aggregated totals only. \&quot;time_series\&quot; returns daily values in the \&quot;values\&quot; array. (optional, default to 'total_value')
@@ -2065,6 +2068,329 @@ class AnalyticsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $metric_type,
             'metricType', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getFacebookPostEarnings
+     *
+     * Get Facebook post monetization earnings
+     *
+     * @param  string $account_id The Zernio SocialAccount ID for the connected Facebook Page. (required)
+     * @param  string $post_id The platform post ID, exactly as returned in platformAnalytics[].platformPostId by /v1/analytics: \&quot;{pageId}_{postId}\&quot;, or the bare video ID for Reels. (required)
+     * @param  string|null $metrics Comma-separated list of monetization metrics. Defaults to both:   - content_monetization_earnings   - monetization_approximate_earnings  content_monetization_earnings always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings is always a bare number, so its unit is \&quot;unspecified\&quot; and its \&quot;currency\&quot; is null. The two are on different scales and are not comparable to each other. Any other metric name is rejected with 400. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFacebookPostEarnings'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\FacebookPostEarningsResponse|\Zernio\Model\InlineObject
+     */
+    public function getFacebookPostEarnings($account_id, $post_id, $metrics = null, string $contentType = self::contentTypes['getFacebookPostEarnings'][0])
+    {
+        list($response) = $this->getFacebookPostEarningsWithHttpInfo($account_id, $post_id, $metrics, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getFacebookPostEarningsWithHttpInfo
+     *
+     * Get Facebook post monetization earnings
+     *
+     * @param  string $account_id The Zernio SocialAccount ID for the connected Facebook Page. (required)
+     * @param  string $post_id The platform post ID, exactly as returned in platformAnalytics[].platformPostId by /v1/analytics: \&quot;{pageId}_{postId}\&quot;, or the bare video ID for Reels. (required)
+     * @param  string|null $metrics Comma-separated list of monetization metrics. Defaults to both:   - content_monetization_earnings   - monetization_approximate_earnings  content_monetization_earnings always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings is always a bare number, so its unit is \&quot;unspecified\&quot; and its \&quot;currency\&quot; is null. The two are on different scales and are not comparable to each other. Any other metric name is rejected with 400. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFacebookPostEarnings'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\FacebookPostEarningsResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getFacebookPostEarningsWithHttpInfo($account_id, $post_id, $metrics = null, string $contentType = self::contentTypes['getFacebookPostEarnings'][0])
+    {
+        $request = $this->getFacebookPostEarningsRequest($account_id, $post_id, $metrics, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\FacebookPostEarningsResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\FacebookPostEarningsResponse',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\FacebookPostEarningsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getFacebookPostEarningsAsync
+     *
+     * Get Facebook post monetization earnings
+     *
+     * @param  string $account_id The Zernio SocialAccount ID for the connected Facebook Page. (required)
+     * @param  string $post_id The platform post ID, exactly as returned in platformAnalytics[].platformPostId by /v1/analytics: \&quot;{pageId}_{postId}\&quot;, or the bare video ID for Reels. (required)
+     * @param  string|null $metrics Comma-separated list of monetization metrics. Defaults to both:   - content_monetization_earnings   - monetization_approximate_earnings  content_monetization_earnings always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings is always a bare number, so its unit is \&quot;unspecified\&quot; and its \&quot;currency\&quot; is null. The two are on different scales and are not comparable to each other. Any other metric name is rejected with 400. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFacebookPostEarnings'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getFacebookPostEarningsAsync($account_id, $post_id, $metrics = null, string $contentType = self::contentTypes['getFacebookPostEarnings'][0])
+    {
+        return $this->getFacebookPostEarningsAsyncWithHttpInfo($account_id, $post_id, $metrics, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getFacebookPostEarningsAsyncWithHttpInfo
+     *
+     * Get Facebook post monetization earnings
+     *
+     * @param  string $account_id The Zernio SocialAccount ID for the connected Facebook Page. (required)
+     * @param  string $post_id The platform post ID, exactly as returned in platformAnalytics[].platformPostId by /v1/analytics: \&quot;{pageId}_{postId}\&quot;, or the bare video ID for Reels. (required)
+     * @param  string|null $metrics Comma-separated list of monetization metrics. Defaults to both:   - content_monetization_earnings   - monetization_approximate_earnings  content_monetization_earnings always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings is always a bare number, so its unit is \&quot;unspecified\&quot; and its \&quot;currency\&quot; is null. The two are on different scales and are not comparable to each other. Any other metric name is rejected with 400. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFacebookPostEarnings'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getFacebookPostEarningsAsyncWithHttpInfo($account_id, $post_id, $metrics = null, string $contentType = self::contentTypes['getFacebookPostEarnings'][0])
+    {
+        $returnType = '\Zernio\Model\FacebookPostEarningsResponse';
+        $request = $this->getFacebookPostEarningsRequest($account_id, $post_id, $metrics, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getFacebookPostEarnings'
+     *
+     * @param  string $account_id The Zernio SocialAccount ID for the connected Facebook Page. (required)
+     * @param  string $post_id The platform post ID, exactly as returned in platformAnalytics[].platformPostId by /v1/analytics: \&quot;{pageId}_{postId}\&quot;, or the bare video ID for Reels. (required)
+     * @param  string|null $metrics Comma-separated list of monetization metrics. Defaults to both:   - content_monetization_earnings   - monetization_approximate_earnings  content_monetization_earnings always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings is always a bare number, so its unit is \&quot;unspecified\&quot; and its \&quot;currency\&quot; is null. The two are on different scales and are not comparable to each other. Any other metric name is rejected with 400. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFacebookPostEarnings'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getFacebookPostEarningsRequest($account_id, $post_id, $metrics = null, string $contentType = self::contentTypes['getFacebookPostEarnings'][0])
+    {
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling getFacebookPostEarnings'
+            );
+        }
+
+        // verify the required parameter 'post_id' is set
+        if ($post_id === null || (is_array($post_id) && count($post_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $post_id when calling getFacebookPostEarnings'
+            );
+        }
+
+
+
+        $resourcePath = '/v1/analytics/facebook/post-earnings';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $account_id,
+            'accountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $post_id,
+            'postId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $metrics,
+            'metrics', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
