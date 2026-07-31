@@ -58,6 +58,7 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
+        'account_id' => 'string',
         'platform' => 'string',
         'budget' => '\Zernio\Model\UpdateAdCampaignRequestBudget',
         'bid_strategy' => '\Zernio\Model\BidStrategy',
@@ -73,6 +74,7 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'account_id' => null,
         'platform' => null,
         'budget' => null,
         'bid_strategy' => null,
@@ -86,6 +88,7 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'account_id' => false,
         'platform' => false,
         'budget' => false,
         'bid_strategy' => false,
@@ -179,6 +182,7 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
+        'account_id' => 'accountId',
         'platform' => 'platform',
         'budget' => 'budget',
         'bid_strategy' => 'bidStrategy',
@@ -192,6 +196,7 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
+        'account_id' => 'setAccountId',
         'platform' => 'setPlatform',
         'budget' => 'setBudget',
         'bid_strategy' => 'setBidStrategy',
@@ -205,6 +210,7 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
+        'account_id' => 'getAccountId',
         'platform' => 'getPlatform',
         'budget' => 'getBudget',
         'bid_strategy' => 'getBidStrategy',
@@ -284,6 +290,7 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('platform', $data ?? [], null);
         $this->setIfExists('budget', $data ?? [], null);
         $this->setIfExists('bid_strategy', $data ?? [], null);
@@ -348,6 +355,33 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets account_id
+     *
+     * @return string|null
+     */
+    public function getAccountId()
+    {
+        return $this->container['account_id'];
+    }
+
+    /**
+     * Sets account_id
+     *
+     * @param string|null $account_id Zernio SocialAccount id owning the ad account. Required only to update an EMPTY campaign (zero ads), which has no local Ad documents to resolve a token from.
+     *
+     * @return self
+     */
+    public function setAccountId($account_id)
+    {
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
+        }
+        $this->container['account_id'] = $account_id;
+
+        return $this;
+    }
 
     /**
      * Gets platform
