@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateStandaloneAdRequestVideo
+ * CreateStandaloneAdRequestTranslationsInner
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * CreateStandaloneAdRequestVideo Class Doc Comment
+ * CreateStandaloneAdRequestTranslationsInner Class Doc Comment
  *
  * @category Class
- * @description Meta (facebook, instagram) and LinkedIn. When set, creates a VIDEO ad on the legacy (or, for Meta, attach) shape. Mutually exclusive with &#x60;imageUrl&#x60;. For Meta multi-creative, set &#x60;video&#x60; per entry inside &#x60;creatives[]&#x60; instead. For LinkedIn the video is uploaded to LinkedIn under the authoring Company Page (see &#x60;organizationId&#x60;) and the campaign format is set to SINGLE_VIDEO; LinkedIn ignores &#x60;thumbnailUrl&#x60; (it auto-generates the poster frame) — supply MP4 H.264/AAC, 3s-30min, 75KB-500MB.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
       *
       * @var string
       */
-    protected static $openAPIModelName = 'createStandaloneAd_request_video';
+    protected static $openAPIModelName = 'createStandaloneAd_request_translations_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +58,12 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
-        'url' => 'string',
-        'id' => 'string',
+        'locale' => 'string',
+        'headline' => 'string',
+        'body' => 'string',
+        'description' => 'string',
+        'image_url' => 'string',
+        'video_url' => 'string',
         'thumbnail_url' => 'string'
     ];
 
@@ -72,8 +75,12 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'url' => 'uri',
-        'id' => null,
+        'locale' => null,
+        'headline' => null,
+        'body' => null,
+        'description' => null,
+        'image_url' => 'uri',
+        'video_url' => 'uri',
         'thumbnail_url' => 'uri'
     ];
 
@@ -83,8 +90,12 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'url' => false,
-        'id' => false,
+        'locale' => false,
+        'headline' => false,
+        'body' => false,
+        'description' => false,
+        'image_url' => false,
+        'video_url' => false,
         'thumbnail_url' => false
     ];
 
@@ -174,8 +185,12 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
-        'url' => 'url',
-        'id' => 'id',
+        'locale' => 'locale',
+        'headline' => 'headline',
+        'body' => 'body',
+        'description' => 'description',
+        'image_url' => 'imageUrl',
+        'video_url' => 'videoUrl',
         'thumbnail_url' => 'thumbnailUrl'
     ];
 
@@ -185,8 +200,12 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
-        'url' => 'setUrl',
-        'id' => 'setId',
+        'locale' => 'setLocale',
+        'headline' => 'setHeadline',
+        'body' => 'setBody',
+        'description' => 'setDescription',
+        'image_url' => 'setImageUrl',
+        'video_url' => 'setVideoUrl',
         'thumbnail_url' => 'setThumbnailUrl'
     ];
 
@@ -196,8 +215,12 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
-        'url' => 'getUrl',
-        'id' => 'getId',
+        'locale' => 'getLocale',
+        'headline' => 'getHeadline',
+        'body' => 'getBody',
+        'description' => 'getDescription',
+        'image_url' => 'getImageUrl',
+        'video_url' => 'getVideoUrl',
         'thumbnail_url' => 'getThumbnailUrl'
     ];
 
@@ -258,8 +281,12 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('url', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('locale', $data ?? [], null);
+        $this->setIfExists('headline', $data ?? [], null);
+        $this->setIfExists('body', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('image_url', $data ?? [], null);
+        $this->setIfExists('video_url', $data ?? [], null);
         $this->setIfExists('thumbnail_url', $data ?? [], null);
     }
 
@@ -290,6 +317,17 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
     {
         $invalidProperties = [];
 
+        if ($this->container['locale'] === null) {
+            $invalidProperties[] = "'locale' can't be null";
+        }
+        if (!is_null($this->container['headline']) && (mb_strlen($this->container['headline']) > 255)) {
+            $invalidProperties[] = "invalid value for 'headline', the character length must be smaller than or equal to 255.";
+        }
+
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 255)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 255.";
+        }
+
         return $invalidProperties;
     }
 
@@ -306,55 +344,171 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
 
 
     /**
-     * Gets url
+     * Gets locale
      *
-     * @return string|null
+     * @return string
      */
-    public function getUrl()
+    public function getLocale()
     {
-        return $this->container['url'];
+        return $this->container['locale'];
     }
 
     /**
-     * Sets url
+     * Sets locale
      *
-     * @param string|null $url Public URL of the video. Meta: uploaded via chunked transfer on /act_X/advideos, then the request blocks on Meta's transcoding until status.video_status === 'ready'. LinkedIn: uploaded via the Videos API (multipart), then the request blocks until LinkedIn finishes transcoding (status AVAILABLE) — short clips take ~10-30s. Provide either `url` or `id`.
+     * @param string $locale Language code, resolved to Meta's numeric locale id. Bare codes target the '(All)' umbrella (`es` = every Spanish variant); region-qualified codes target the variant (`pt_BR`, `en_GB`).
      *
      * @return self
      */
-    public function setUrl($url)
+    public function setLocale($locale)
     {
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        if (is_null($locale)) {
+            throw new \InvalidArgumentException('non-nullable locale cannot be null');
         }
-        $this->container['url'] = $url;
+        $this->container['locale'] = $locale;
 
         return $this;
     }
 
     /**
-     * Gets id
+     * Gets headline
      *
      * @return string|null
      */
-    public function getId()
+    public function getHeadline()
     {
-        return $this->container['id'];
+        return $this->container['headline'];
     }
 
     /**
-     * Sets id
+     * Sets headline
      *
-     * @param string|null $id Meta only. Reuse a video ALREADY uploaded to this ad account instead of re-uploading the file: pass the `videoId` returned by a previous create. Wins over `url`, so N ads that differ only in copy share one upload (`existingCreativeId` only covers the identical-copy case). Provide either `url` or `id`.
+     * @param string|null $headline Headline for this language. Inherits the top-level `headline` when omitted.
      *
      * @return self
      */
-    public function setId($id)
+    public function setHeadline($headline)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($headline)) {
+            throw new \InvalidArgumentException('non-nullable headline cannot be null');
         }
-        $this->container['id'] = $id;
+        if ((mb_strlen($headline) > 255)) {
+            throw new \InvalidArgumentException('invalid length for $headline when calling CreateStandaloneAdRequestTranslationsInner., must be smaller than or equal to 255.');
+        }
+
+        $this->container['headline'] = $headline;
+
+        return $this;
+    }
+
+    /**
+     * Gets body
+     *
+     * @return string|null
+     */
+    public function getBody()
+    {
+        return $this->container['body'];
+    }
+
+    /**
+     * Sets body
+     *
+     * @param string|null $body Primary text for this language. Inherits the top-level `body` when omitted.
+     *
+     * @return self
+     */
+    public function setBody($body)
+    {
+        if (is_null($body)) {
+            throw new \InvalidArgumentException('non-nullable body cannot be null');
+        }
+        $this->container['body'] = $body;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description Link description for this language. Inherits the top-level `description` when omitted.
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+        if ((mb_strlen($description) > 255)) {
+            throw new \InvalidArgumentException('invalid length for $description when calling CreateStandaloneAdRequestTranslationsInner., must be smaller than or equal to 255.');
+        }
+
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets image_url
+     *
+     * @return string|null
+     */
+    public function getImageUrl()
+    {
+        return $this->container['image_url'];
+    }
+
+    /**
+     * Sets image_url
+     *
+     * @param string|null $image_url Image for this language. Inherits the ad's `imageUrl` when omitted. The feed is all-image OR all-video.
+     *
+     * @return self
+     */
+    public function setImageUrl($image_url)
+    {
+        if (is_null($image_url)) {
+            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
+        }
+        $this->container['image_url'] = $image_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets video_url
+     *
+     * @return string|null
+     */
+    public function getVideoUrl()
+    {
+        return $this->container['video_url'];
+    }
+
+    /**
+     * Sets video_url
+     *
+     * @param string|null $video_url Video for this language. Inherits the ad's `video.url` when omitted. The feed is all-image OR all-video.
+     *
+     * @return self
+     */
+    public function setVideoUrl($video_url)
+    {
+        if (is_null($video_url)) {
+            throw new \InvalidArgumentException('non-nullable video_url cannot be null');
+        }
+        $this->container['video_url'] = $video_url;
 
         return $this;
     }
@@ -372,7 +526,7 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets thumbnail_url
      *
-     * @param string|null $thumbnail_url Public URL of a still-image thumbnail for the video. OPTIONAL: when omitted on Meta, the poster is auto-generated from Meta's own preferred video thumbnail (the same candidates Ads Manager shows), so video ads publish without supplying one. Provide it to control the poster frame exactly (uploaded as an ad image and referenced in object_story_spec.video_data). Ignored by LinkedIn (auto-generated poster frame).
+     * @param string|null $thumbnail_url Poster frame for this language's video.
      *
      * @return self
      */

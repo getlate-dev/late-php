@@ -66,7 +66,7 @@ class AdMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
         'cpc' => 'float',
         'cpm' => 'float',
         'engagement' => 'int',
-        'conversions' => 'int',
+        'conversions' => 'float',
         'cost_per_conversion' => 'float',
         'actions' => 'array<string,int>',
         'action_values' => 'array<string,float>',
@@ -670,7 +670,7 @@ class AdMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets conversions
      *
-     * @return int|null
+     * @return float|null
      */
     public function getConversions()
     {
@@ -680,7 +680,7 @@ class AdMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets conversions
      *
-     * @param int|null $conversions Count of conversion events over the requested date range. Meta: events matching the campaign's promoted_object.custom_event_type (PURCHASE, LEAD, etc.). Google: the account's tracked conversions. X and LinkedIn: their reported website/lead conversions (added 2026-07). 0 for non-conversion campaigns or when no events have fired.
+     * @param float|null $conversions Count of conversion events over the requested date range. FRACTIONAL: attribution splits one conversion across touchpoints and Google additionally reports modeled conversions, so values like 0.347 are normal. Meta: events matching the campaign's promoted_object.custom_event_type (PURCHASE, LEAD, etc.). Google: the account's tracked conversions. X and LinkedIn: their reported website/lead conversions (added 2026-07). 0 for non-conversion campaigns or when no events have fired.
      *
      * @return self
      */

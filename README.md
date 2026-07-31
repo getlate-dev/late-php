@@ -852,6 +852,7 @@ Class | Method | HTTP request | Description
 - [CreateStandaloneAdRequestPromotedObject](docs/Model/CreateStandaloneAdRequestPromotedObject.md)
 - [CreateStandaloneAdRequestRegionsInner](docs/Model/CreateStandaloneAdRequestRegionsInner.md)
 - [CreateStandaloneAdRequestTracking](docs/Model/CreateStandaloneAdRequestTracking.md)
+- [CreateStandaloneAdRequestTranslationsInner](docs/Model/CreateStandaloneAdRequestTranslationsInner.md)
 - [CreateStandaloneAdRequestVideo](docs/Model/CreateStandaloneAdRequestVideo.md)
 - [CreateTestLead200Response](docs/Model/CreateTestLead200Response.md)
 - [CreateTestLead200ResponseTestLead](docs/Model/CreateTestLead200ResponseTestLead.md)

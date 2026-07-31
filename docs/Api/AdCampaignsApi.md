@@ -153,12 +153,12 @@ try {
 ## `createAdCampaign()`
 
 ```php
-createAdCampaign($create_ad_campaign_request): \Zernio\Model\CreateAdCampaign201Response
+createAdCampaign($create_ad_campaign_request, $idempotency_key): \Zernio\Model\CreateAdCampaign201Response
 ```
 
 Create a standalone campaign
 
-Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via `existingCampaignId` on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created `PAUSED` unless `status: ACTIVE`. The campaign materializes in `/v1/ads/tree` via the next sync discovery pass.
+Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via `existingCampaignId` on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created `PAUSED` unless `status: ACTIVE`. The campaign materializes in `/v1/ads/tree` via the next sync discovery pass.  **Idempotency:** send an `Idempotency-Key` header to make retries safe.
 
 ### Example
 
@@ -178,9 +178,10 @@ $apiInstance = new Zernio\Api\AdCampaignsApi(
     $config
 );
 $create_ad_campaign_request = new \Zernio\Model\CreateAdCampaignRequest(); // \Zernio\Model\CreateAdCampaignRequest
+$idempotency_key = 'idempotency_key_example'; // string | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
 
 try {
-    $result = $apiInstance->createAdCampaign($create_ad_campaign_request);
+    $result = $apiInstance->createAdCampaign($create_ad_campaign_request, $idempotency_key);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AdCampaignsApi->createAdCampaign: ', $e->getMessage(), PHP_EOL;
@@ -192,6 +193,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **create_ad_campaign_request** | [**\Zernio\Model\CreateAdCampaignRequest**](../Model/CreateAdCampaignRequest.md)|  | |
+| **idempotency_key** | **string**| Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. | [optional] |
 
 ### Return type
 
@@ -397,7 +399,7 @@ try {
 ## `duplicateAd()`
 
 ```php
-duplicateAd($ad_id, $duplicate_ad_request): \Zernio\Model\DuplicateAd200Response
+duplicateAd($ad_id, $idempotency_key, $duplicate_ad_request): \Zernio\Model\DuplicateAd200Response
 ```
 
 Duplicate an ad
@@ -422,10 +424,11 @@ $apiInstance = new Zernio\Api\AdCampaignsApi(
     $config
 );
 $ad_id = 'ad_id_example'; // string | Zernio ad ID or platform ad ID
+$idempotency_key = 'idempotency_key_example'; // string | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
 $duplicate_ad_request = new \Zernio\Model\DuplicateAdRequest(); // \Zernio\Model\DuplicateAdRequest
 
 try {
-    $result = $apiInstance->duplicateAd($ad_id, $duplicate_ad_request);
+    $result = $apiInstance->duplicateAd($ad_id, $idempotency_key, $duplicate_ad_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AdCampaignsApi->duplicateAd: ', $e->getMessage(), PHP_EOL;
@@ -437,6 +440,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **ad_id** | **string**| Zernio ad ID or platform ad ID | |
+| **idempotency_key** | **string**| Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. | [optional] |
 | **duplicate_ad_request** | [**\Zernio\Model\DuplicateAdRequest**](../Model/DuplicateAdRequest.md)|  | [optional] |
 
 ### Return type
@@ -459,7 +463,7 @@ try {
 ## `duplicateAdCampaign()`
 
 ```php
-duplicateAdCampaign($campaign_id, $duplicate_ad_campaign_request): \Zernio\Model\DuplicateAdCampaign200Response
+duplicateAdCampaign($campaign_id, $duplicate_ad_campaign_request, $idempotency_key): \Zernio\Model\DuplicateAdCampaign200Response
 ```
 
 Duplicate a campaign
@@ -485,9 +489,10 @@ $apiInstance = new Zernio\Api\AdCampaignsApi(
 );
 $campaign_id = 'campaign_id_example'; // string | Source platform campaign ID
 $duplicate_ad_campaign_request = new \Zernio\Model\DuplicateAdCampaignRequest(); // \Zernio\Model\DuplicateAdCampaignRequest
+$idempotency_key = 'idempotency_key_example'; // string | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
 
 try {
-    $result = $apiInstance->duplicateAdCampaign($campaign_id, $duplicate_ad_campaign_request);
+    $result = $apiInstance->duplicateAdCampaign($campaign_id, $duplicate_ad_campaign_request, $idempotency_key);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AdCampaignsApi->duplicateAdCampaign: ', $e->getMessage(), PHP_EOL;
@@ -500,6 +505,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **campaign_id** | **string**| Source platform campaign ID | |
 | **duplicate_ad_campaign_request** | [**\Zernio\Model\DuplicateAdCampaignRequest**](../Model/DuplicateAdCampaignRequest.md)|  | |
+| **idempotency_key** | **string**| Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. | [optional] |
 
 ### Return type
 
@@ -521,7 +527,7 @@ try {
 ## `duplicateAdSet()`
 
 ```php
-duplicateAdSet($ad_set_id, $duplicate_ad_set_request): \Zernio\Model\DuplicateAdSet200Response
+duplicateAdSet($ad_set_id, $duplicate_ad_set_request, $idempotency_key): \Zernio\Model\DuplicateAdSet200Response
 ```
 
 Duplicate an ad set
@@ -547,9 +553,10 @@ $apiInstance = new Zernio\Api\AdCampaignsApi(
 );
 $ad_set_id = 'ad_set_id_example'; // string | Source platform ad set ID
 $duplicate_ad_set_request = new \Zernio\Model\DuplicateAdSetRequest(); // \Zernio\Model\DuplicateAdSetRequest
+$idempotency_key = 'idempotency_key_example'; // string | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
 
 try {
-    $result = $apiInstance->duplicateAdSet($ad_set_id, $duplicate_ad_set_request);
+    $result = $apiInstance->duplicateAdSet($ad_set_id, $duplicate_ad_set_request, $idempotency_key);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AdCampaignsApi->duplicateAdSet: ', $e->getMessage(), PHP_EOL;
@@ -562,6 +569,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **ad_set_id** | **string**| Source platform ad set ID | |
 | **duplicate_ad_set_request** | [**\Zernio\Model\DuplicateAdSetRequest**](../Model/DuplicateAdSetRequest.md)|  | |
+| **idempotency_key** | **string**| Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. | [optional] |
 
 ### Return type
 

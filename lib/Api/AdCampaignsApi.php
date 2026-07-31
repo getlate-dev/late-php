@@ -765,15 +765,16 @@ class AdCampaignsApi
      * Create a standalone campaign
      *
      * @param  \Zernio\Model\CreateAdCampaignRequest $create_ad_campaign_request create_ad_campaign_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAdCampaign'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\CreateAdCampaign201Response|\Zernio\Model\InlineObject
      */
-    public function createAdCampaign($create_ad_campaign_request, string $contentType = self::contentTypes['createAdCampaign'][0])
+    public function createAdCampaign($create_ad_campaign_request, $idempotency_key = null, string $contentType = self::contentTypes['createAdCampaign'][0])
     {
-        list($response) = $this->createAdCampaignWithHttpInfo($create_ad_campaign_request, $contentType);
+        list($response) = $this->createAdCampaignWithHttpInfo($create_ad_campaign_request, $idempotency_key, $contentType);
         return $response;
     }
 
@@ -783,15 +784,16 @@ class AdCampaignsApi
      * Create a standalone campaign
      *
      * @param  \Zernio\Model\CreateAdCampaignRequest $create_ad_campaign_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAdCampaign'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\CreateAdCampaign201Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createAdCampaignWithHttpInfo($create_ad_campaign_request, string $contentType = self::contentTypes['createAdCampaign'][0])
+    public function createAdCampaignWithHttpInfo($create_ad_campaign_request, $idempotency_key = null, string $contentType = self::contentTypes['createAdCampaign'][0])
     {
-        $request = $this->createAdCampaignRequest($create_ad_campaign_request, $contentType);
+        $request = $this->createAdCampaignRequest($create_ad_campaign_request, $idempotency_key, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -882,14 +884,15 @@ class AdCampaignsApi
      * Create a standalone campaign
      *
      * @param  \Zernio\Model\CreateAdCampaignRequest $create_ad_campaign_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAdCampaign'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createAdCampaignAsync($create_ad_campaign_request, string $contentType = self::contentTypes['createAdCampaign'][0])
+    public function createAdCampaignAsync($create_ad_campaign_request, $idempotency_key = null, string $contentType = self::contentTypes['createAdCampaign'][0])
     {
-        return $this->createAdCampaignAsyncWithHttpInfo($create_ad_campaign_request, $contentType)
+        return $this->createAdCampaignAsyncWithHttpInfo($create_ad_campaign_request, $idempotency_key, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -903,15 +906,16 @@ class AdCampaignsApi
      * Create a standalone campaign
      *
      * @param  \Zernio\Model\CreateAdCampaignRequest $create_ad_campaign_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAdCampaign'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createAdCampaignAsyncWithHttpInfo($create_ad_campaign_request, string $contentType = self::contentTypes['createAdCampaign'][0])
+    public function createAdCampaignAsyncWithHttpInfo($create_ad_campaign_request, $idempotency_key = null, string $contentType = self::contentTypes['createAdCampaign'][0])
     {
         $returnType = '\Zernio\Model\CreateAdCampaign201Response';
-        $request = $this->createAdCampaignRequest($create_ad_campaign_request, $contentType);
+        $request = $this->createAdCampaignRequest($create_ad_campaign_request, $idempotency_key, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -953,12 +957,13 @@ class AdCampaignsApi
      * Create request for operation 'createAdCampaign'
      *
      * @param  \Zernio\Model\CreateAdCampaignRequest $create_ad_campaign_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAdCampaign'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createAdCampaignRequest($create_ad_campaign_request, string $contentType = self::contentTypes['createAdCampaign'][0])
+    public function createAdCampaignRequest($create_ad_campaign_request, $idempotency_key = null, string $contentType = self::contentTypes['createAdCampaign'][0])
     {
 
         // verify the required parameter 'create_ad_campaign_request' is set
@@ -968,6 +973,10 @@ class AdCampaignsApi
             );
         }
 
+        if ($idempotency_key !== null && strlen($idempotency_key) > 255) {
+            throw new \InvalidArgumentException('invalid length for "$idempotency_key" when calling AdCampaignsApi.createAdCampaign, must be smaller than or equal to 255.');
+        }
+        
 
         $resourcePath = '/v1/ads/campaigns';
         $formParams = [];
@@ -977,6 +986,10 @@ class AdCampaignsApi
         $multipart = false;
 
 
+        // header params
+        if ($idempotency_key !== null) {
+            $headerParams['Idempotency-Key'] = ObjectSerializer::toHeaderValue($idempotency_key);
+        }
 
 
 
@@ -1967,6 +1980,7 @@ class AdCampaignsApi
      * Duplicate an ad
      *
      * @param  string $ad_id Zernio ad ID or platform ad ID (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  \Zernio\Model\DuplicateAdRequest|null $duplicate_ad_request duplicate_ad_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAd'] to see the possible values for this operation
      *
@@ -1974,9 +1988,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\DuplicateAd200Response|\Zernio\Model\InlineObject
      */
-    public function duplicateAd($ad_id, $duplicate_ad_request = null, string $contentType = self::contentTypes['duplicateAd'][0])
+    public function duplicateAd($ad_id, $idempotency_key = null, $duplicate_ad_request = null, string $contentType = self::contentTypes['duplicateAd'][0])
     {
-        list($response) = $this->duplicateAdWithHttpInfo($ad_id, $duplicate_ad_request, $contentType);
+        list($response) = $this->duplicateAdWithHttpInfo($ad_id, $idempotency_key, $duplicate_ad_request, $contentType);
         return $response;
     }
 
@@ -1986,6 +2000,7 @@ class AdCampaignsApi
      * Duplicate an ad
      *
      * @param  string $ad_id Zernio ad ID or platform ad ID (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  \Zernio\Model\DuplicateAdRequest|null $duplicate_ad_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAd'] to see the possible values for this operation
      *
@@ -1993,9 +2008,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\DuplicateAd200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function duplicateAdWithHttpInfo($ad_id, $duplicate_ad_request = null, string $contentType = self::contentTypes['duplicateAd'][0])
+    public function duplicateAdWithHttpInfo($ad_id, $idempotency_key = null, $duplicate_ad_request = null, string $contentType = self::contentTypes['duplicateAd'][0])
     {
-        $request = $this->duplicateAdRequest($ad_id, $duplicate_ad_request, $contentType);
+        $request = $this->duplicateAdRequest($ad_id, $idempotency_key, $duplicate_ad_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2086,15 +2101,16 @@ class AdCampaignsApi
      * Duplicate an ad
      *
      * @param  string $ad_id Zernio ad ID or platform ad ID (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  \Zernio\Model\DuplicateAdRequest|null $duplicate_ad_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAd'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function duplicateAdAsync($ad_id, $duplicate_ad_request = null, string $contentType = self::contentTypes['duplicateAd'][0])
+    public function duplicateAdAsync($ad_id, $idempotency_key = null, $duplicate_ad_request = null, string $contentType = self::contentTypes['duplicateAd'][0])
     {
-        return $this->duplicateAdAsyncWithHttpInfo($ad_id, $duplicate_ad_request, $contentType)
+        return $this->duplicateAdAsyncWithHttpInfo($ad_id, $idempotency_key, $duplicate_ad_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2108,16 +2124,17 @@ class AdCampaignsApi
      * Duplicate an ad
      *
      * @param  string $ad_id Zernio ad ID or platform ad ID (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  \Zernio\Model\DuplicateAdRequest|null $duplicate_ad_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAd'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function duplicateAdAsyncWithHttpInfo($ad_id, $duplicate_ad_request = null, string $contentType = self::contentTypes['duplicateAd'][0])
+    public function duplicateAdAsyncWithHttpInfo($ad_id, $idempotency_key = null, $duplicate_ad_request = null, string $contentType = self::contentTypes['duplicateAd'][0])
     {
         $returnType = '\Zernio\Model\DuplicateAd200Response';
-        $request = $this->duplicateAdRequest($ad_id, $duplicate_ad_request, $contentType);
+        $request = $this->duplicateAdRequest($ad_id, $idempotency_key, $duplicate_ad_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2159,13 +2176,14 @@ class AdCampaignsApi
      * Create request for operation 'duplicateAd'
      *
      * @param  string $ad_id Zernio ad ID or platform ad ID (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  \Zernio\Model\DuplicateAdRequest|null $duplicate_ad_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAd'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function duplicateAdRequest($ad_id, $duplicate_ad_request = null, string $contentType = self::contentTypes['duplicateAd'][0])
+    public function duplicateAdRequest($ad_id, $idempotency_key = null, $duplicate_ad_request = null, string $contentType = self::contentTypes['duplicateAd'][0])
     {
 
         // verify the required parameter 'ad_id' is set
@@ -2175,6 +2193,10 @@ class AdCampaignsApi
             );
         }
 
+        if ($idempotency_key !== null && strlen($idempotency_key) > 255) {
+            throw new \InvalidArgumentException('invalid length for "$idempotency_key" when calling AdCampaignsApi.duplicateAd, must be smaller than or equal to 255.');
+        }
+        
 
 
         $resourcePath = '/v1/ads/{adId}/duplicate';
@@ -2185,6 +2207,10 @@ class AdCampaignsApi
         $multipart = false;
 
 
+        // header params
+        if ($idempotency_key !== null) {
+            $headerParams['Idempotency-Key'] = ObjectSerializer::toHeaderValue($idempotency_key);
+        }
 
         // path params
         if ($ad_id !== null) {
@@ -2267,15 +2293,16 @@ class AdCampaignsApi
      *
      * @param  string $campaign_id Source platform campaign ID (required)
      * @param  \Zernio\Model\DuplicateAdCampaignRequest $duplicate_ad_campaign_request duplicate_ad_campaign_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAdCampaign'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\DuplicateAdCampaign200Response|\Zernio\Model\InlineObject
      */
-    public function duplicateAdCampaign($campaign_id, $duplicate_ad_campaign_request, string $contentType = self::contentTypes['duplicateAdCampaign'][0])
+    public function duplicateAdCampaign($campaign_id, $duplicate_ad_campaign_request, $idempotency_key = null, string $contentType = self::contentTypes['duplicateAdCampaign'][0])
     {
-        list($response) = $this->duplicateAdCampaignWithHttpInfo($campaign_id, $duplicate_ad_campaign_request, $contentType);
+        list($response) = $this->duplicateAdCampaignWithHttpInfo($campaign_id, $duplicate_ad_campaign_request, $idempotency_key, $contentType);
         return $response;
     }
 
@@ -2286,15 +2313,16 @@ class AdCampaignsApi
      *
      * @param  string $campaign_id Source platform campaign ID (required)
      * @param  \Zernio\Model\DuplicateAdCampaignRequest $duplicate_ad_campaign_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAdCampaign'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\DuplicateAdCampaign200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function duplicateAdCampaignWithHttpInfo($campaign_id, $duplicate_ad_campaign_request, string $contentType = self::contentTypes['duplicateAdCampaign'][0])
+    public function duplicateAdCampaignWithHttpInfo($campaign_id, $duplicate_ad_campaign_request, $idempotency_key = null, string $contentType = self::contentTypes['duplicateAdCampaign'][0])
     {
-        $request = $this->duplicateAdCampaignRequest($campaign_id, $duplicate_ad_campaign_request, $contentType);
+        $request = $this->duplicateAdCampaignRequest($campaign_id, $duplicate_ad_campaign_request, $idempotency_key, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2386,14 +2414,15 @@ class AdCampaignsApi
      *
      * @param  string $campaign_id Source platform campaign ID (required)
      * @param  \Zernio\Model\DuplicateAdCampaignRequest $duplicate_ad_campaign_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAdCampaign'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function duplicateAdCampaignAsync($campaign_id, $duplicate_ad_campaign_request, string $contentType = self::contentTypes['duplicateAdCampaign'][0])
+    public function duplicateAdCampaignAsync($campaign_id, $duplicate_ad_campaign_request, $idempotency_key = null, string $contentType = self::contentTypes['duplicateAdCampaign'][0])
     {
-        return $this->duplicateAdCampaignAsyncWithHttpInfo($campaign_id, $duplicate_ad_campaign_request, $contentType)
+        return $this->duplicateAdCampaignAsyncWithHttpInfo($campaign_id, $duplicate_ad_campaign_request, $idempotency_key, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2408,15 +2437,16 @@ class AdCampaignsApi
      *
      * @param  string $campaign_id Source platform campaign ID (required)
      * @param  \Zernio\Model\DuplicateAdCampaignRequest $duplicate_ad_campaign_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAdCampaign'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function duplicateAdCampaignAsyncWithHttpInfo($campaign_id, $duplicate_ad_campaign_request, string $contentType = self::contentTypes['duplicateAdCampaign'][0])
+    public function duplicateAdCampaignAsyncWithHttpInfo($campaign_id, $duplicate_ad_campaign_request, $idempotency_key = null, string $contentType = self::contentTypes['duplicateAdCampaign'][0])
     {
         $returnType = '\Zernio\Model\DuplicateAdCampaign200Response';
-        $request = $this->duplicateAdCampaignRequest($campaign_id, $duplicate_ad_campaign_request, $contentType);
+        $request = $this->duplicateAdCampaignRequest($campaign_id, $duplicate_ad_campaign_request, $idempotency_key, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2459,12 +2489,13 @@ class AdCampaignsApi
      *
      * @param  string $campaign_id Source platform campaign ID (required)
      * @param  \Zernio\Model\DuplicateAdCampaignRequest $duplicate_ad_campaign_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAdCampaign'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function duplicateAdCampaignRequest($campaign_id, $duplicate_ad_campaign_request, string $contentType = self::contentTypes['duplicateAdCampaign'][0])
+    public function duplicateAdCampaignRequest($campaign_id, $duplicate_ad_campaign_request, $idempotency_key = null, string $contentType = self::contentTypes['duplicateAdCampaign'][0])
     {
 
         // verify the required parameter 'campaign_id' is set
@@ -2481,6 +2512,10 @@ class AdCampaignsApi
             );
         }
 
+        if ($idempotency_key !== null && strlen($idempotency_key) > 255) {
+            throw new \InvalidArgumentException('invalid length for "$idempotency_key" when calling AdCampaignsApi.duplicateAdCampaign, must be smaller than or equal to 255.');
+        }
+        
 
         $resourcePath = '/v1/ads/campaigns/{campaignId}/duplicate';
         $formParams = [];
@@ -2490,6 +2525,10 @@ class AdCampaignsApi
         $multipart = false;
 
 
+        // header params
+        if ($idempotency_key !== null) {
+            $headerParams['Idempotency-Key'] = ObjectSerializer::toHeaderValue($idempotency_key);
+        }
 
         // path params
         if ($campaign_id !== null) {
@@ -2572,15 +2611,16 @@ class AdCampaignsApi
      *
      * @param  string $ad_set_id Source platform ad set ID (required)
      * @param  \Zernio\Model\DuplicateAdSetRequest $duplicate_ad_set_request duplicate_ad_set_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAdSet'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\DuplicateAdSet200Response|\Zernio\Model\InlineObject
      */
-    public function duplicateAdSet($ad_set_id, $duplicate_ad_set_request, string $contentType = self::contentTypes['duplicateAdSet'][0])
+    public function duplicateAdSet($ad_set_id, $duplicate_ad_set_request, $idempotency_key = null, string $contentType = self::contentTypes['duplicateAdSet'][0])
     {
-        list($response) = $this->duplicateAdSetWithHttpInfo($ad_set_id, $duplicate_ad_set_request, $contentType);
+        list($response) = $this->duplicateAdSetWithHttpInfo($ad_set_id, $duplicate_ad_set_request, $idempotency_key, $contentType);
         return $response;
     }
 
@@ -2591,15 +2631,16 @@ class AdCampaignsApi
      *
      * @param  string $ad_set_id Source platform ad set ID (required)
      * @param  \Zernio\Model\DuplicateAdSetRequest $duplicate_ad_set_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAdSet'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\DuplicateAdSet200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function duplicateAdSetWithHttpInfo($ad_set_id, $duplicate_ad_set_request, string $contentType = self::contentTypes['duplicateAdSet'][0])
+    public function duplicateAdSetWithHttpInfo($ad_set_id, $duplicate_ad_set_request, $idempotency_key = null, string $contentType = self::contentTypes['duplicateAdSet'][0])
     {
-        $request = $this->duplicateAdSetRequest($ad_set_id, $duplicate_ad_set_request, $contentType);
+        $request = $this->duplicateAdSetRequest($ad_set_id, $duplicate_ad_set_request, $idempotency_key, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2691,14 +2732,15 @@ class AdCampaignsApi
      *
      * @param  string $ad_set_id Source platform ad set ID (required)
      * @param  \Zernio\Model\DuplicateAdSetRequest $duplicate_ad_set_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAdSet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function duplicateAdSetAsync($ad_set_id, $duplicate_ad_set_request, string $contentType = self::contentTypes['duplicateAdSet'][0])
+    public function duplicateAdSetAsync($ad_set_id, $duplicate_ad_set_request, $idempotency_key = null, string $contentType = self::contentTypes['duplicateAdSet'][0])
     {
-        return $this->duplicateAdSetAsyncWithHttpInfo($ad_set_id, $duplicate_ad_set_request, $contentType)
+        return $this->duplicateAdSetAsyncWithHttpInfo($ad_set_id, $duplicate_ad_set_request, $idempotency_key, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2713,15 +2755,16 @@ class AdCampaignsApi
      *
      * @param  string $ad_set_id Source platform ad set ID (required)
      * @param  \Zernio\Model\DuplicateAdSetRequest $duplicate_ad_set_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAdSet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function duplicateAdSetAsyncWithHttpInfo($ad_set_id, $duplicate_ad_set_request, string $contentType = self::contentTypes['duplicateAdSet'][0])
+    public function duplicateAdSetAsyncWithHttpInfo($ad_set_id, $duplicate_ad_set_request, $idempotency_key = null, string $contentType = self::contentTypes['duplicateAdSet'][0])
     {
         $returnType = '\Zernio\Model\DuplicateAdSet200Response';
-        $request = $this->duplicateAdSetRequest($ad_set_id, $duplicate_ad_set_request, $contentType);
+        $request = $this->duplicateAdSetRequest($ad_set_id, $duplicate_ad_set_request, $idempotency_key, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2764,12 +2807,13 @@ class AdCampaignsApi
      *
      * @param  string $ad_set_id Source platform ad set ID (required)
      * @param  \Zernio\Model\DuplicateAdSetRequest $duplicate_ad_set_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateAdSet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function duplicateAdSetRequest($ad_set_id, $duplicate_ad_set_request, string $contentType = self::contentTypes['duplicateAdSet'][0])
+    public function duplicateAdSetRequest($ad_set_id, $duplicate_ad_set_request, $idempotency_key = null, string $contentType = self::contentTypes['duplicateAdSet'][0])
     {
 
         // verify the required parameter 'ad_set_id' is set
@@ -2786,6 +2830,10 @@ class AdCampaignsApi
             );
         }
 
+        if ($idempotency_key !== null && strlen($idempotency_key) > 255) {
+            throw new \InvalidArgumentException('invalid length for "$idempotency_key" when calling AdCampaignsApi.duplicateAdSet, must be smaller than or equal to 255.');
+        }
+        
 
         $resourcePath = '/v1/ads/ad-sets/{adSetId}/duplicate';
         $formParams = [];
@@ -2795,6 +2843,10 @@ class AdCampaignsApi
         $multipart = false;
 
 
+        // header params
+        if ($idempotency_key !== null) {
+            $headerParams['Idempotency-Key'] = ObjectSerializer::toHeaderValue($idempotency_key);
+        }
 
         // path params
         if ($ad_set_id !== null) {

@@ -117,6 +117,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'instagram_account_id' => 'string',
         'dynamic_creative' => '\Zernio\Model\CreateStandaloneAdRequestDynamicCreative',
         'carousel_cards' => '\Zernio\Model\CreateStandaloneAdRequestCarouselCardsInner[]',
+        'default_locale' => 'string',
+        'translations' => '\Zernio\Model\CreateStandaloneAdRequestTranslationsInner[]',
         'placement_assets' => '\Zernio\Model\CreateStandaloneAdRequestPlacementAssets',
         'audience_id' => 'string',
         'campaign_type' => 'string',
@@ -204,6 +206,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'instagram_account_id' => null,
         'dynamic_creative' => null,
         'carousel_cards' => null,
+        'default_locale' => null,
+        'translations' => null,
         'placement_assets' => null,
         'audience_id' => null,
         'campaign_type' => null,
@@ -289,6 +293,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'instagram_account_id' => false,
         'dynamic_creative' => false,
         'carousel_cards' => false,
+        'default_locale' => false,
+        'translations' => false,
         'placement_assets' => false,
         'audience_id' => false,
         'campaign_type' => false,
@@ -454,6 +460,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'instagram_account_id' => 'instagramAccountId',
         'dynamic_creative' => 'dynamicCreative',
         'carousel_cards' => 'carouselCards',
+        'default_locale' => 'defaultLocale',
+        'translations' => 'translations',
         'placement_assets' => 'placementAssets',
         'audience_id' => 'audienceId',
         'campaign_type' => 'campaignType',
@@ -539,6 +547,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'instagram_account_id' => 'setInstagramAccountId',
         'dynamic_creative' => 'setDynamicCreative',
         'carousel_cards' => 'setCarouselCards',
+        'default_locale' => 'setDefaultLocale',
+        'translations' => 'setTranslations',
         'placement_assets' => 'setPlacementAssets',
         'audience_id' => 'setAudienceId',
         'campaign_type' => 'setCampaignType',
@@ -624,6 +634,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'instagram_account_id' => 'getInstagramAccountId',
         'dynamic_creative' => 'getDynamicCreative',
         'carousel_cards' => 'getCarouselCards',
+        'default_locale' => 'getDefaultLocale',
+        'translations' => 'getTranslations',
         'placement_assets' => 'getPlacementAssets',
         'audience_id' => 'getAudienceId',
         'campaign_type' => 'getCampaignType',
@@ -1049,6 +1061,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('instagram_account_id', $data ?? [], null);
         $this->setIfExists('dynamic_creative', $data ?? [], null);
         $this->setIfExists('carousel_cards', $data ?? [], null);
+        $this->setIfExists('default_locale', $data ?? [], null);
+        $this->setIfExists('translations', $data ?? [], null);
         $this->setIfExists('placement_assets', $data ?? [], null);
         $this->setIfExists('audience_id', $data ?? [], null);
         $this->setIfExists('campaign_type', $data ?? [], 'display');
@@ -1222,6 +1236,14 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
 
         if (!is_null($this->container['carousel_cards']) && (count($this->container['carousel_cards']) < 2)) {
             $invalidProperties[] = "invalid value for 'carousel_cards', number of items must be greater than or equal to 2.";
+        }
+
+        if (!is_null($this->container['translations']) && (count($this->container['translations']) > 10)) {
+            $invalidProperties[] = "invalid value for 'translations', number of items must be less than or equal to 10.";
+        }
+
+        if (!is_null($this->container['translations']) && (count($this->container['translations']) < 1)) {
+            $invalidProperties[] = "invalid value for 'translations', number of items must be greater than or equal to 1.";
         }
 
         $allowedValues = $this->getCampaignTypeAllowableValues();
@@ -3024,6 +3046,67 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('invalid length for $carousel_cards when calling CreateStandaloneAdRequest., number of items must be greater than or equal to 2.');
         }
         $this->container['carousel_cards'] = $carousel_cards;
+
+        return $this;
+    }
+
+    /**
+     * Gets default_locale
+     *
+     * @return string|null
+     */
+    public function getDefaultLocale()
+    {
+        return $this->container['default_locale'];
+    }
+
+    /**
+     * Sets default_locale
+     *
+     * @param string|null $default_locale Meta only. Language the top-level copy is written in (e.g. `en`, `pt_BR`), used by the `translations` default rule. Defaults to `en`. Meta rejects a language asset feed whose default rule carries no locales of its own.
+     *
+     * @return self
+     */
+    public function setDefaultLocale($default_locale)
+    {
+        if (is_null($default_locale)) {
+            throw new \InvalidArgumentException('non-nullable default_locale cannot be null');
+        }
+        $this->container['default_locale'] = $default_locale;
+
+        return $this;
+    }
+
+    /**
+     * Gets translations
+     *
+     * @return \Zernio\Model\CreateStandaloneAdRequestTranslationsInner[]|null
+     */
+    public function getTranslations()
+    {
+        return $this->container['translations'];
+    }
+
+    /**
+     * Sets translations
+     *
+     * @param \Zernio\Model\CreateStandaloneAdRequestTranslationsInner[]|null $translations Meta only. Multi-language ads (Dynamic Language Optimization): ONE ad carrying per-locale copy and, optionally, per-locale media — the \"Languages\" toggle in Ads Manager. Keeps social proof (likes/comments/shares) on a SINGLE post instead of splitting it across one ad per language.  The ad's top-level copy and media are the DEFAULT every unlisted locale falls back to, and a variant inherits any field it omits, so send only what differs per language. Media shared across languages is uploaded once.  Mutually exclusive with `dynamicCreative`, `placementAssets`, `carouselCards` and `existingCreativeId` — Meta allows one `asset_feed_spec` shape per creative.
+     *
+     * @return self
+     */
+    public function setTranslations($translations)
+    {
+        if (is_null($translations)) {
+            throw new \InvalidArgumentException('non-nullable translations cannot be null');
+        }
+
+        if ((count($translations) > 10)) {
+            throw new \InvalidArgumentException('invalid value for $translations when calling CreateStandaloneAdRequest., number of items must be less than or equal to 10.');
+        }
+        if ((count($translations) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $translations when calling CreateStandaloneAdRequest., number of items must be greater than or equal to 1.');
+        }
+        $this->container['translations'] = $translations;
 
         return $this;
     }

@@ -325,6 +325,7 @@ docs/Model/CreateStandaloneAdRequestPlacements.md
 docs/Model/CreateStandaloneAdRequestPromotedObject.md
 docs/Model/CreateStandaloneAdRequestRegionsInner.md
 docs/Model/CreateStandaloneAdRequestTracking.md
+docs/Model/CreateStandaloneAdRequestTranslationsInner.md
 docs/Model/CreateStandaloneAdRequestVideo.md
 docs/Model/CreateTestLead200Response.md
 docs/Model/CreateTestLead200ResponseTestLead.md
@@ -1943,6 +1944,7 @@ lib/Model/CreateStandaloneAdRequestPlacements.php
 lib/Model/CreateStandaloneAdRequestPromotedObject.php
 lib/Model/CreateStandaloneAdRequestRegionsInner.php
 lib/Model/CreateStandaloneAdRequestTracking.php
+lib/Model/CreateStandaloneAdRequestTranslationsInner.php
 lib/Model/CreateStandaloneAdRequestVideo.php
 lib/Model/CreateTestLead200Response.php
 lib/Model/CreateTestLead200ResponseTestLead.php
@@ -3237,3 +3239,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/CreateStandaloneAdRequestTranslationsInnerTest.php

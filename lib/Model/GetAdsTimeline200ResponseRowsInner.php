@@ -67,7 +67,7 @@ class GetAdsTimeline200ResponseRowsInner implements ModelInterface, ArrayAccess,
         'ctr' => 'float',
         'cpc' => 'float',
         'cpm' => 'float',
-        'conversions' => 'int',
+        'conversions' => 'float',
         'cost_per_conversion' => 'float',
         'actions' => 'array<string,float>',
         'action_values' => 'array<string,float>',
@@ -634,7 +634,7 @@ class GetAdsTimeline200ResponseRowsInner implements ModelInterface, ArrayAccess,
     /**
      * Gets conversions
      *
-     * @return int|null
+     * @return float|null
      */
     public function getConversions()
     {
@@ -644,7 +644,7 @@ class GetAdsTimeline200ResponseRowsInner implements ModelInterface, ArrayAccess,
     /**
      * Sets conversions
      *
-     * @param int|null $conversions Sum of conversion events over the range. Meta: events matching the campaign optimization goal. Google: tracked conversions. X / LinkedIn: reported website/lead conversions (added 2026-07).
+     * @param float|null $conversions Sum of conversion events over the range. Fractional values are normal (attribution splitting + Google modeled conversions). Meta: events matching the campaign optimization goal. Google: tracked conversions. X / LinkedIn: reported website/lead conversions (added 2026-07).
      *
      * @return self
      */

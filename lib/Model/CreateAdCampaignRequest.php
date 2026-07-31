@@ -65,7 +65,10 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'special_ad_categories' => 'string[]',
         'budget_amount' => 'float',
         'budget_type' => 'string',
-        'status' => 'string'
+        'status' => 'string',
+        'bid_strategy' => 'string',
+        'bid_amount' => 'float',
+        'roas_average_floor' => 'float'
     ];
 
     /**
@@ -83,7 +86,10 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'special_ad_categories' => null,
         'budget_amount' => null,
         'budget_type' => null,
-        'status' => null
+        'status' => null,
+        'bid_strategy' => null,
+        'bid_amount' => null,
+        'roas_average_floor' => null
     ];
 
     /**
@@ -99,7 +105,10 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'special_ad_categories' => false,
         'budget_amount' => false,
         'budget_type' => false,
-        'status' => false
+        'status' => false,
+        'bid_strategy' => false,
+        'bid_amount' => false,
+        'roas_average_floor' => false
     ];
 
     /**
@@ -195,7 +204,10 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'special_ad_categories' => 'specialAdCategories',
         'budget_amount' => 'budgetAmount',
         'budget_type' => 'budgetType',
-        'status' => 'status'
+        'status' => 'status',
+        'bid_strategy' => 'bidStrategy',
+        'bid_amount' => 'bidAmount',
+        'roas_average_floor' => 'roasAverageFloor'
     ];
 
     /**
@@ -211,7 +223,10 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'special_ad_categories' => 'setSpecialAdCategories',
         'budget_amount' => 'setBudgetAmount',
         'budget_type' => 'setBudgetType',
-        'status' => 'setStatus'
+        'status' => 'setStatus',
+        'bid_strategy' => 'setBidStrategy',
+        'bid_amount' => 'setBidAmount',
+        'roas_average_floor' => 'setRoasAverageFloor'
     ];
 
     /**
@@ -227,7 +242,10 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'special_ad_categories' => 'getSpecialAdCategories',
         'budget_amount' => 'getBudgetAmount',
         'budget_type' => 'getBudgetType',
-        'status' => 'getStatus'
+        'status' => 'getStatus',
+        'bid_strategy' => 'getBidStrategy',
+        'bid_amount' => 'getBidAmount',
+        'roas_average_floor' => 'getRoasAverageFloor'
     ];
 
     /**
@@ -291,6 +309,10 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
     public const BUDGET_TYPE_LIFETIME = 'lifetime';
     public const STATUS_ACTIVE = 'ACTIVE';
     public const STATUS_PAUSED = 'PAUSED';
+    public const BID_STRATEGY_LOWEST_COST_WITHOUT_CAP = 'LOWEST_COST_WITHOUT_CAP';
+    public const BID_STRATEGY_LOWEST_COST_WITH_BID_CAP = 'LOWEST_COST_WITH_BID_CAP';
+    public const BID_STRATEGY_COST_CAP = 'COST_CAP';
+    public const BID_STRATEGY_LOWEST_COST_WITH_MIN_ROAS = 'LOWEST_COST_WITH_MIN_ROAS';
 
     /**
      * Gets allowable values of the enum
@@ -357,6 +379,21 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getBidStrategyAllowableValues()
+    {
+        return [
+            self::BID_STRATEGY_LOWEST_COST_WITHOUT_CAP,
+            self::BID_STRATEGY_LOWEST_COST_WITH_BID_CAP,
+            self::BID_STRATEGY_COST_CAP,
+            self::BID_STRATEGY_LOWEST_COST_WITH_MIN_ROAS,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -379,6 +416,9 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('budget_amount', $data ?? [], null);
         $this->setIfExists('budget_type', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], 'PAUSED');
+        $this->setIfExists('bid_strategy', $data ?? [], null);
+        $this->setIfExists('bid_amount', $data ?? [], null);
+        $this->setIfExists('roas_average_floor', $data ?? [], null);
     }
 
     /**
@@ -447,6 +487,15 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getBidStrategyAllowableValues();
+        if (!is_null($this->container['bid_strategy']) && !in_array($this->container['bid_strategy'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'bid_strategy', must be one of '%s'",
+                $this->container['bid_strategy'],
                 implode("', '", $allowedValues)
             );
         }
@@ -721,6 +770,97 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
             );
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets bid_strategy
+     *
+     * @return string|null
+     */
+    public function getBidStrategy()
+    {
+        return $this->container['bid_strategy'];
+    }
+
+    /**
+     * Sets bid_strategy
+     *
+     * @param string|null $bid_strategy Campaign bid strategy. Meta puts `bid_strategy` where the budget lives, so this applies only alongside a campaign budget (CBO). Previously settable only via `PUT /v1/ads/campaigns/{campaignId}`.
+     *
+     * @return self
+     */
+    public function setBidStrategy($bid_strategy)
+    {
+        if (is_null($bid_strategy)) {
+            throw new \InvalidArgumentException('non-nullable bid_strategy cannot be null');
+        }
+        $allowedValues = $this->getBidStrategyAllowableValues();
+        if (!in_array($bid_strategy, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'bid_strategy', must be one of '%s'",
+                    $bid_strategy,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['bid_strategy'] = $bid_strategy;
+
+        return $this;
+    }
+
+    /**
+     * Gets bid_amount
+     *
+     * @return float|null
+     */
+    public function getBidAmount()
+    {
+        return $this->container['bid_amount'];
+    }
+
+    /**
+     * Sets bid_amount
+     *
+     * @param float|null $bid_amount Whole currency units (USD: 5 = $5.00). Required for LOWEST_COST_WITH_BID_CAP and COST_CAP; ignored otherwise.
+     *
+     * @return self
+     */
+    public function setBidAmount($bid_amount)
+    {
+        if (is_null($bid_amount)) {
+            throw new \InvalidArgumentException('non-nullable bid_amount cannot be null');
+        }
+        $this->container['bid_amount'] = $bid_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets roas_average_floor
+     *
+     * @return float|null
+     */
+    public function getRoasAverageFloor()
+    {
+        return $this->container['roas_average_floor'];
+    }
+
+    /**
+     * Sets roas_average_floor
+     *
+     * @param float|null $roas_average_floor Decimal ROAS multiplier (2.0 = 2.0x). Required for LOWEST_COST_WITH_MIN_ROAS.
+     *
+     * @return self
+     */
+    public function setRoasAverageFloor($roas_average_floor)
+    {
+        if (is_null($roas_average_floor)) {
+            throw new \InvalidArgumentException('non-nullable roas_average_floor cannot be null');
+        }
+        $this->container['roas_average_floor'] = $roas_average_floor;
 
         return $this;
     }
