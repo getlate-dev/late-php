@@ -686,7 +686,7 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets budget_amount
      *
-     * @param float|null $budget_amount Campaign-level (CBO) budget in whole currency units. Requires budgetType.
+     * @param float|null $budget_amount Campaign-level (CBO) budget in WHOLE currency units (USD: 50 = $50.00), NOT cents — Meta's own Marketing API takes this same number in minor units, so it is an easy and expensive mix-up. Requires budgetType.
      *
      * @return self
      */
@@ -787,7 +787,7 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets bid_strategy
      *
-     * @param string|null $bid_strategy Campaign bid strategy. Meta puts `bid_strategy` where the budget lives, so this applies only alongside a campaign budget (CBO). Previously settable only via `PUT /v1/ads/campaigns/{campaignId}`.
+     * @param string|null $bid_strategy Campaign bid strategy. Meta stores `bid_strategy` alongside the budget, so this REQUIRES `budgetAmount` + `budgetType` on the same request; sending it without a campaign budget is a 400. A campaign carrying a strategy without its `bid_amount` makes every ad set created under it fail with an error that names the ad set (code 100, subcode 1815857), so the bad state is rejected up front rather than accepted. To bid at ad-set level, set the strategy there instead.
      *
      * @return self
      */

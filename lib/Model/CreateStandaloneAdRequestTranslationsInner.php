@@ -320,11 +320,20 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
         if ($this->container['locale'] === null) {
             $invalidProperties[] = "'locale' can't be null";
         }
-        if (!is_null($this->container['headline']) && (mb_strlen($this->container['headline']) > 255)) {
+        if ($this->container['headline'] === null) {
+            $invalidProperties[] = "'headline' can't be null";
+        }
+        if ((mb_strlen($this->container['headline']) > 255)) {
             $invalidProperties[] = "invalid value for 'headline', the character length must be smaller than or equal to 255.";
         }
 
-        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 255)) {
+        if ($this->container['body'] === null) {
+            $invalidProperties[] = "'body' can't be null";
+        }
+        if ($this->container['description'] === null) {
+            $invalidProperties[] = "'description' can't be null";
+        }
+        if ((mb_strlen($this->container['description']) > 255)) {
             $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 255.";
         }
 
@@ -373,7 +382,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
     /**
      * Gets headline
      *
-     * @return string|null
+     * @return string
      */
     public function getHeadline()
     {
@@ -383,7 +392,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
     /**
      * Sets headline
      *
-     * @param string|null $headline Headline for this language. Inherits the top-level `headline` when omitted.
+     * @param string $headline Headline for this language. REQUIRED, and must differ from every other locale and from the ad's top-level headline.
      *
      * @return self
      */
@@ -404,7 +413,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
     /**
      * Gets body
      *
-     * @return string|null
+     * @return string
      */
     public function getBody()
     {
@@ -414,7 +423,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
     /**
      * Sets body
      *
-     * @param string|null $body Primary text for this language. Inherits the top-level `body` when omitted.
+     * @param string $body Primary text for this language. REQUIRED, and must differ from every other locale and from the ad's top-level body.
      *
      * @return self
      */
@@ -431,7 +440,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
     /**
      * Gets description
      *
-     * @return string|null
+     * @return string
      */
     public function getDescription()
     {
@@ -441,7 +450,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
     /**
      * Sets description
      *
-     * @param string|null $description Link description for this language. Inherits the top-level `description` when omitted.
+     * @param string $description Link description for this language. REQUIRED, and must differ from every other locale and from the ad's top-level description.
      *
      * @return self
      */

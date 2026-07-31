@@ -1749,7 +1749,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets budget_amount
      *
-     * @param float|null $budget_amount Required on legacy + multi-creative shapes. Inherited on attach. OpenAI Ads requires a $1 minimum (its budget is lifetime-only, see budgetType).
+     * @param float|null $budget_amount Budget in WHOLE currency units (USD: 50 = $50.00), NOT cents — Meta's own Marketing API takes this same number in minor units, so it is an easy and expensive mix-up. Required on legacy + multi-creative shapes. Inherited on attach. OpenAI Ads requires a $1 minimum (its budget is lifetime-only, see budgetType).
      *
      * @return self
      */
@@ -3063,7 +3063,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets default_locale
      *
-     * @param string|null $default_locale Meta only. Language the top-level copy is written in (e.g. `en`, `pt_BR`), used by the `translations` default rule. Defaults to `en`. Meta rejects a language asset feed whose default rule carries no locales of its own.
+     * @param string|null $default_locale Meta only. Language the top-level copy is written in (e.g. `en`, `pt_BR`), used by the `translations` default rule. Defaults to `en`. Meta rejects a language asset feed whose default rule carries no locales of its own. Must NOT also appear as an entry in `translations`.
      *
      * @return self
      */
@@ -3090,7 +3090,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets translations
      *
-     * @param \Zernio\Model\CreateStandaloneAdRequestTranslationsInner[]|null $translations Meta only. Multi-language ads (Dynamic Language Optimization): ONE ad carrying per-locale copy and, optionally, per-locale media — the \"Languages\" toggle in Ads Manager. Keeps social proof (likes/comments/shares) on a SINGLE post instead of splitting it across one ad per language.  The ad's top-level copy and media are the DEFAULT every unlisted locale falls back to, and a variant inherits any field it omits, so send only what differs per language. Media shared across languages is uploaded once.  Mutually exclusive with `dynamicCreative`, `placementAssets`, `carouselCards` and `existingCreativeId` — Meta allows one `asset_feed_spec` shape per creative.
+     * @param \Zernio\Model\CreateStandaloneAdRequestTranslationsInner[]|null $translations Meta only. Multi-language ads (Dynamic Language Optimization): ONE ad carrying per-locale copy and, optionally, per-locale media — the \"Languages\" toggle in Ads Manager. Keeps social proof (likes/comments/shares) on a SINGLE post instead of splitting it across one ad per language.  The ad's top-level copy is the DEFAULT shown to every locale you do NOT list, and it counts as one of the language variants.  IMPORTANT, and the opposite of what you might expect: text does NOT inherit. Every entry must carry its own `headline`, `body` AND `description`, and all of them must be DISTINCT from each other and from the ad's top-level copy. Meta deduplicates identical strings inside the asset feed, so two locales sharing a string collapse into one asset and the create fails with a misleading \"Too few ... texts provided in asset creation\" (subcode 1885817) that names a field which is actually present. We validate this before calling Meta and return a 400 naming the offending locale and field. `description` is therefore effectively required on the ad whenever `translations` is present, even though it is optional otherwise.  Do NOT list `defaultLocale` inside `translations`: Meta rejects the duplicate with \"The language asset feed includes an unsupported targeting field\" (subcode 1885985).  Media DOES inherit and is uploaded once when shared. Note that Meta enforces Dynamic Creative image dimensions on language feeds, so an `imageUrl` that works on a normal ad may be rejected with \"The following images have invalid dimensions for Dynamic Creative\" (subcode 1885558). Video is not affected.  Mutually exclusive with `dynamicCreative`, `placementAssets`, `carouselCards` and `existingCreativeId` — Meta allows one `asset_feed_spec` shape per creative.
      *
      * @return self
      */

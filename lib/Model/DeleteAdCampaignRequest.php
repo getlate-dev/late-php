@@ -58,7 +58,8 @@ class DeleteAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'platform' => 'string'
+        'platform' => 'string',
+        'account_id' => 'string'
     ];
 
     /**
@@ -69,7 +70,8 @@ class DeleteAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'platform' => null
+        'platform' => null,
+        'account_id' => null
     ];
 
     /**
@@ -78,7 +80,8 @@ class DeleteAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'platform' => false
+        'platform' => false,
+        'account_id' => false
     ];
 
     /**
@@ -167,7 +170,8 @@ class DeleteAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'platform' => 'platform'
+        'platform' => 'platform',
+        'account_id' => 'accountId'
     ];
 
     /**
@@ -176,7 +180,8 @@ class DeleteAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'platform' => 'setPlatform'
+        'platform' => 'setPlatform',
+        'account_id' => 'setAccountId'
     ];
 
     /**
@@ -185,7 +190,8 @@ class DeleteAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'platform' => 'getPlatform'
+        'platform' => 'getPlatform',
+        'account_id' => 'getAccountId'
     ];
 
     /**
@@ -261,6 +267,7 @@ class DeleteAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
     public function __construct(?array $data = null)
     {
         $this->setIfExists('platform', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
     }
 
     /**
@@ -350,6 +357,33 @@ class DeleteAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
             );
         }
         $this->container['platform'] = $platform;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_id
+     *
+     * @return string|null
+     */
+    public function getAccountId()
+    {
+        return $this->container['account_id'];
+    }
+
+    /**
+     * Sets account_id
+     *
+     * @param string|null $account_id Zernio SocialAccount id owning the ad account. Required only to delete an EMPTY campaign (zero ads), which has no local Ad documents to resolve a token from.
+     *
+     * @return self
+     */
+    public function setAccountId($account_id)
+    {
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
+        }
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }
