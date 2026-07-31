@@ -19,6 +19,7 @@ docs/Api/CallsApi.md
 docs/Api/CommentAutomationsApi.md
 docs/Api/CommentsApi.md
 docs/Api/ConnectApi.md
+docs/Api/ConnectedAppsApi.md
 docs/Api/ContactsApi.md
 docs/Api/ConversionsApi.md
 docs/Api/CustomFieldsApi.md
@@ -197,6 +198,7 @@ docs/Model/ConnectWhatsAppCredentials200ResponseAccount.md
 docs/Model/ConnectWhatsAppCredentialsRequest.md
 docs/Model/Connected.md
 docs/Model/ConnectedAccount.md
+docs/Model/ConnectedApp.md
 docs/Model/ConversionDestination.md
 docs/Model/ConversionEvent.md
 docs/Model/ConversionEventItemsInner.md
@@ -879,6 +881,7 @@ docs/Model/ListCommentAutomationLogs200Response.md
 docs/Model/ListCommentAutomations200Response.md
 docs/Model/ListCommentAutomations200ResponseAutomationsInner.md
 docs/Model/ListCommentAutomations200ResponseAutomationsInnerStats.md
+docs/Model/ListConnectedApps200Response.md
 docs/Model/ListContacts200Response.md
 docs/Model/ListContacts200ResponseContactsInner.md
 docs/Model/ListContacts200ResponseFilters.md
@@ -1130,6 +1133,7 @@ docs/Model/ReviewPhoneNumberKycPacketRequest.md
 docs/Model/ReviewWebhookReview.md
 docs/Model/ReviewWebhookReviewReply.md
 docs/Model/ReviewWebhookReviewReviewer.md
+docs/Model/RevokeConnectedApp200Response.md
 docs/Model/RfPrediction.md
 docs/Model/SavedTargetingAudience.md
 docs/Model/ScheduleBroadcast200Response.md
@@ -1629,6 +1633,7 @@ lib/Api/CallsApi.php
 lib/Api/CommentAutomationsApi.php
 lib/Api/CommentsApi.php
 lib/Api/ConnectApi.php
+lib/Api/ConnectedAppsApi.php
 lib/Api/ContactsApi.php
 lib/Api/ConversionsApi.php
 lib/Api/CustomFieldsApi.php
@@ -1811,6 +1816,7 @@ lib/Model/ConnectWhatsAppCredentials200ResponseAccount.php
 lib/Model/ConnectWhatsAppCredentialsRequest.php
 lib/Model/Connected.php
 lib/Model/ConnectedAccount.php
+lib/Model/ConnectedApp.php
 lib/Model/ConversionDestination.php
 lib/Model/ConversionEvent.php
 lib/Model/ConversionEventItemsInner.php
@@ -2493,6 +2499,7 @@ lib/Model/ListCommentAutomationLogs200Response.php
 lib/Model/ListCommentAutomations200Response.php
 lib/Model/ListCommentAutomations200ResponseAutomationsInner.php
 lib/Model/ListCommentAutomations200ResponseAutomationsInnerStats.php
+lib/Model/ListConnectedApps200Response.php
 lib/Model/ListContacts200Response.php
 lib/Model/ListContacts200ResponseContactsInner.php
 lib/Model/ListContacts200ResponseFilters.php
@@ -2745,6 +2752,7 @@ lib/Model/ReviewPhoneNumberKycPacketRequest.php
 lib/Model/ReviewWebhookReview.php
 lib/Model/ReviewWebhookReviewReply.php
 lib/Model/ReviewWebhookReviewReviewer.php
+lib/Model/RevokeConnectedApp200Response.php
 lib/Model/RfPrediction.php
 lib/Model/SavedTargetingAudience.php
 lib/Model/ScheduleBroadcast200Response.php
@@ -3229,3 +3237,7 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Api/ConnectedAppsApiTest.php
+test/Model/ConnectedAppTest.php
+test/Model/ListConnectedApps200ResponseTest.php
+test/Model/RevokeConnectedApp200ResponseTest.php
