@@ -168,7 +168,7 @@ class CommentsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\DeleteInboxComment200Response|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\DeleteInboxComment200Response|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse
      */
     public function deleteInboxComment($post_id, $account_id, $comment_id, string $contentType = self::contentTypes['deleteInboxComment'][0])
     {
@@ -188,7 +188,7 @@ class CommentsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\DeleteInboxComment200Response|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\DeleteInboxComment200Response|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function deleteInboxCommentWithHttpInfo($post_id, $account_id, $comment_id, string $contentType = self::contentTypes['deleteInboxComment'][0])
     {
@@ -236,6 +236,12 @@ class CommentsApi
                         $request,
                         $response,
                     );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -280,6 +286,14 @@ class CommentsApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -838,7 +852,7 @@ class CommentsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\GetInboxPostComments200Response|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\GetInboxPostComments200Response|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse
      */
     public function getInboxPostComments($post_id, $account_id, $subreddit = null, $limit = 25, $cursor = null, $comment_id = null, string $contentType = self::contentTypes['getInboxPostComments'][0])
     {
@@ -861,7 +875,7 @@ class CommentsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\GetInboxPostComments200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\GetInboxPostComments200Response|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getInboxPostCommentsWithHttpInfo($post_id, $account_id, $subreddit = null, $limit = 25, $cursor = null, $comment_id = null, string $contentType = self::contentTypes['getInboxPostComments'][0])
     {
@@ -903,6 +917,12 @@ class CommentsApi
                         $request,
                         $response,
                     );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -939,6 +959,14 @@ class CommentsApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2267,7 +2295,7 @@ class CommentsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\ReplyToInboxPost200Response|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\ReplyToInboxPost200Response|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse
      */
     public function replyToInboxPost($post_id, $reply_to_inbox_post_request, string $contentType = self::contentTypes['replyToInboxPost'][0])
     {
@@ -2286,7 +2314,7 @@ class CommentsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\ReplyToInboxPost200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\ReplyToInboxPost200Response|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function replyToInboxPostWithHttpInfo($post_id, $reply_to_inbox_post_request, string $contentType = self::contentTypes['replyToInboxPost'][0])
     {
@@ -2328,6 +2356,12 @@ class CommentsApi
                         $request,
                         $response,
                     );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -2364,6 +2398,14 @@ class CommentsApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

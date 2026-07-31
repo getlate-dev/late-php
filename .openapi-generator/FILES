@@ -3229,5 +3229,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/RegisterWhatsAppNumber200ResponseTest.php
-test/Model/RegisterWhatsAppNumberRequestTest.php
