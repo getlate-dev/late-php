@@ -75,7 +75,7 @@ class UpdatePostRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'queued_from_profile' => 'string',
         'queue_id' => 'string',
         'tiktok_settings' => '\Zernio\Model\TikTokPlatformData',
-        'facebook_settings' => '\Zernio\Model\FacebookPlatformData',
+        'facebook_settings' => '\Zernio\Model\FacebookSettings',
         'recycling' => '\Zernio\Model\RecyclingConfig'
     ];
 
@@ -914,7 +914,7 @@ class UpdatePostRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets facebook_settings
      *
-     * @return \Zernio\Model\FacebookPlatformData|null
+     * @return \Zernio\Model\FacebookSettings|null
      */
     public function getFacebookSettings()
     {
@@ -924,7 +924,7 @@ class UpdatePostRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets facebook_settings
      *
-     * @param \Zernio\Model\FacebookPlatformData|null $facebook_settings Root-level Facebook settings applied to all Facebook platforms. Merged into each platform's platformSpecificData, with platform-specific settings taking precedence.
+     * @param \Zernio\Model\FacebookSettings|null $facebook_settings Root-level Facebook settings applied to all Facebook platforms. Merged into each platform's platformSpecificData.facebookSettings, with platform-specific settings taking precedence.
      *
      * @return self
      */

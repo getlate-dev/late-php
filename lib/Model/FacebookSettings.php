@@ -1,6 +1,6 @@
 <?php
 /**
- * FacebookPlatformData
+ * FacebookSettings
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * FacebookPlatformData Class Doc Comment
+ * FacebookSettings Class Doc Comment
  *
  * @category Class
- * @description Feed posts support up to 10 images (no mixed video+image). Stories require single media (24h, no captions). Reels require single vertical video (9:16, 3-60s). Geo-restriction is a hard visibility restriction: users outside the specified countries cannot see the post. Not supported for stories. Draft, carousel, and colored-background text options live under facebookSettings, see FacebookSettings.
+ * @description Facebook options that must be nested under platformSpecificData.facebookSettings, or sent at the request root as facebookSettings. The remaining Facebook options sit directly on platformSpecificData, see FacebookPlatformData.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializable
+class FacebookSettings implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'FacebookPlatformData';
+    protected static $openAPIModelName = 'FacebookSettings';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,12 +59,10 @@ class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'content_type' => 'string',
-        'title' => 'string',
-        'first_comment' => 'string',
-        'page_id' => 'string',
-        'geo_restriction' => '\Zernio\Model\GeoRestriction',
-        'facebook_settings' => '\Zernio\Model\FacebookSettings'
+        'draft' => 'bool',
+        'carousel_cards' => '\Zernio\Model\FacebookSettingsCarouselCardsInner[]',
+        'carousel_link' => 'string',
+        'text_format_preset_id' => 'string'
     ];
 
     /**
@@ -75,12 +73,10 @@ class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'content_type' => null,
-        'title' => null,
-        'first_comment' => null,
-        'page_id' => null,
-        'geo_restriction' => null,
-        'facebook_settings' => null
+        'draft' => null,
+        'carousel_cards' => null,
+        'carousel_link' => 'uri',
+        'text_format_preset_id' => null
     ];
 
     /**
@@ -89,12 +85,10 @@ class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'content_type' => false,
-        'title' => false,
-        'first_comment' => false,
-        'page_id' => false,
-        'geo_restriction' => false,
-        'facebook_settings' => false
+        'draft' => false,
+        'carousel_cards' => false,
+        'carousel_link' => false,
+        'text_format_preset_id' => false
     ];
 
     /**
@@ -183,12 +177,10 @@ class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'content_type' => 'contentType',
-        'title' => 'title',
-        'first_comment' => 'firstComment',
-        'page_id' => 'pageId',
-        'geo_restriction' => 'geoRestriction',
-        'facebook_settings' => 'facebookSettings'
+        'draft' => 'draft',
+        'carousel_cards' => 'carouselCards',
+        'carousel_link' => 'carouselLink',
+        'text_format_preset_id' => 'textFormatPresetId'
     ];
 
     /**
@@ -197,12 +189,10 @@ class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'content_type' => 'setContentType',
-        'title' => 'setTitle',
-        'first_comment' => 'setFirstComment',
-        'page_id' => 'setPageId',
-        'geo_restriction' => 'setGeoRestriction',
-        'facebook_settings' => 'setFacebookSettings'
+        'draft' => 'setDraft',
+        'carousel_cards' => 'setCarouselCards',
+        'carousel_link' => 'setCarouselLink',
+        'text_format_preset_id' => 'setTextFormatPresetId'
     ];
 
     /**
@@ -211,12 +201,10 @@ class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'content_type' => 'getContentType',
-        'title' => 'getTitle',
-        'first_comment' => 'getFirstComment',
-        'page_id' => 'getPageId',
-        'geo_restriction' => 'getGeoRestriction',
-        'facebook_settings' => 'getFacebookSettings'
+        'draft' => 'getDraft',
+        'carousel_cards' => 'getCarouselCards',
+        'carousel_link' => 'getCarouselLink',
+        'text_format_preset_id' => 'getTextFormatPresetId'
     ];
 
     /**
@@ -260,21 +248,6 @@ class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
         return self::$openAPIModelName;
     }
 
-    public const CONTENT_TYPE_STORY = 'story';
-    public const CONTENT_TYPE_REEL = 'reel';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getContentTypeAllowableValues()
-    {
-        return [
-            self::CONTENT_TYPE_STORY,
-            self::CONTENT_TYPE_REEL,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -291,12 +264,10 @@ class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('content_type', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('first_comment', $data ?? [], null);
-        $this->setIfExists('page_id', $data ?? [], null);
-        $this->setIfExists('geo_restriction', $data ?? [], null);
-        $this->setIfExists('facebook_settings', $data ?? [], null);
+        $this->setIfExists('draft', $data ?? [], false);
+        $this->setIfExists('carousel_cards', $data ?? [], null);
+        $this->setIfExists('carousel_link', $data ?? [], null);
+        $this->setIfExists('text_format_preset_id', $data ?? [], null);
     }
 
     /**
@@ -326,13 +297,16 @@ class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getContentTypeAllowableValues();
-        if (!is_null($this->container['content_type']) && !in_array($this->container['content_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'content_type', must be one of '%s'",
-                $this->container['content_type'],
-                implode("', '", $allowedValues)
-            );
+        if (!is_null($this->container['carousel_cards']) && (count($this->container['carousel_cards']) > 5)) {
+            $invalidProperties[] = "invalid value for 'carousel_cards', number of items must be less than or equal to 5.";
+        }
+
+        if (!is_null($this->container['carousel_cards']) && (count($this->container['carousel_cards']) < 2)) {
+            $invalidProperties[] = "invalid value for 'carousel_cards', number of items must be greater than or equal to 2.";
+        }
+
+        if (!is_null($this->container['text_format_preset_id']) && !preg_match("/^\\d+$/", $this->container['text_format_preset_id'])) {
+            $invalidProperties[] = "invalid value for 'text_format_preset_id', must be conform to the pattern /^\\d+$/.";
         }
 
         return $invalidProperties;
@@ -351,173 +325,121 @@ class FacebookPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets content_type
+     * Gets draft
+     *
+     * @return bool|null
+     */
+    public function getDraft()
+    {
+        return $this->container['draft'];
+    }
+
+    /**
+     * Sets draft
+     *
+     * @param bool|null $draft When true, creates the post as a draft in Facebook Publishing Tools instead of publishing immediately. Supported for feed posts (text, link, image, video) and reels. Not supported for stories. Drafts expire after ~30 days.
+     *
+     * @return self
+     */
+    public function setDraft($draft)
+    {
+        if (is_null($draft)) {
+            throw new \InvalidArgumentException('non-nullable draft cannot be null');
+        }
+        $this->container['draft'] = $draft;
+
+        return $this;
+    }
+
+    /**
+     * Gets carousel_cards
+     *
+     * @return \Zernio\Model\FacebookSettingsCarouselCardsInner[]|null
+     */
+    public function getCarouselCards()
+    {
+        return $this->container['carousel_cards'];
+    }
+
+    /**
+     * Sets carousel_cards
+     *
+     * @param \Zernio\Model\FacebookSettingsCarouselCardsInner[]|null $carousel_cards Renders the post as a multi-link carousel (organic Page post). When set, mediaItems must be provided with the same length and all items must be images (no videos). Each cards[i] adds the click-through link and headline for the image at mediaItems[i]. Mutually exclusive with contentType=story|reel. Facebook display truncates name at ~35 chars and description at ~30 chars; longer strings are accepted but get truncated on render.
+     *
+     * @return self
+     */
+    public function setCarouselCards($carousel_cards)
+    {
+        if (is_null($carousel_cards)) {
+            throw new \InvalidArgumentException('non-nullable carousel_cards cannot be null');
+        }
+
+        if ((count($carousel_cards) > 5)) {
+            throw new \InvalidArgumentException('invalid value for $carousel_cards when calling FacebookSettings., number of items must be less than or equal to 5.');
+        }
+        if ((count($carousel_cards) < 2)) {
+            throw new \InvalidArgumentException('invalid length for $carousel_cards when calling FacebookSettings., number of items must be greater than or equal to 2.');
+        }
+        $this->container['carousel_cards'] = $carousel_cards;
+
+        return $this;
+    }
+
+    /**
+     * Gets carousel_link
      *
      * @return string|null
      */
-    public function getContentType()
+    public function getCarouselLink()
     {
-        return $this->container['content_type'];
+        return $this->container['carousel_link'];
     }
 
     /**
-     * Sets content_type
+     * Sets carousel_link
      *
-     * @param string|null $content_type Set to 'story' for Page Stories (24h ephemeral) or 'reel' for Reels (short vertical video). Defaults to feed post if omitted.
+     * @param string|null $carousel_link Optional top-level \"See more\" destination shown on the carousel end card. Defaults to the first card's link when omitted. Only used together with carouselCards.
      *
      * @return self
      */
-    public function setContentType($content_type)
+    public function setCarouselLink($carousel_link)
     {
-        if (is_null($content_type)) {
-            throw new \InvalidArgumentException('non-nullable content_type cannot be null');
+        if (is_null($carousel_link)) {
+            throw new \InvalidArgumentException('non-nullable carousel_link cannot be null');
         }
-        $allowedValues = $this->getContentTypeAllowableValues();
-        if (!in_array($content_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'content_type', must be one of '%s'",
-                    $content_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['content_type'] = $content_type;
+        $this->container['carousel_link'] = $carousel_link;
 
         return $this;
     }
 
     /**
-     * Gets title
+     * Gets text_format_preset_id
      *
      * @return string|null
      */
-    public function getTitle()
+    public function getTextFormatPresetId()
     {
-        return $this->container['title'];
+        return $this->container['text_format_preset_id'];
     }
 
     /**
-     * Sets title
+     * Sets text_format_preset_id
      *
-     * @param string|null $title Reel title (only for contentType=reel). Separate from the caption/content field.
+     * @param string|null $text_format_preset_id Facebook-defined preset ID that renders the post as large text on a colored background (Graph `text_format_preset_id`). Supply the raw numeric ID from Meta; we do not publish a catalog of presets and Facebook may change the available set. Pages only (ignored on personal profiles and groups) and text-only feed posts only: the request is rejected with 400 when mediaItems or carouselCards are present, when contentType is story or reel, or when content is empty. An attachment makes Facebook drop the background silently, so those are rejected up front. Length is NOT rejected: Facebook's composer stops offering a background at around 130 characters, but Meta documents no API limit, so longer content publishes and returns a warning instead. A URL detected in the content is NOT attached as a link preview while a preset is set, because a link attachment also makes Facebook drop the background.
      *
      * @return self
      */
-    public function setTitle($title)
+    public function setTextFormatPresetId($text_format_preset_id)
     {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
+        if (is_null($text_format_preset_id)) {
+            throw new \InvalidArgumentException('non-nullable text_format_preset_id cannot be null');
         }
-        $this->container['title'] = $title;
 
-        return $this;
-    }
-
-    /**
-     * Gets first_comment
-     *
-     * @return string|null
-     */
-    public function getFirstComment()
-    {
-        return $this->container['first_comment'];
-    }
-
-    /**
-     * Sets first_comment
-     *
-     * @param string|null $first_comment Optional first comment to post immediately after publishing (feed posts and reels, not stories). Skipped when facebookSettings.draft is true.
-     *
-     * @return self
-     */
-    public function setFirstComment($first_comment)
-    {
-        if (is_null($first_comment)) {
-            throw new \InvalidArgumentException('non-nullable first_comment cannot be null');
+        if ((!preg_match("/^\\d+$/", ObjectSerializer::toString($text_format_preset_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$text_format_preset_id when calling FacebookSettings., must conform to the pattern /^\\d+$/.");
         }
-        $this->container['first_comment'] = $first_comment;
 
-        return $this;
-    }
-
-    /**
-     * Gets page_id
-     *
-     * @return string|null
-     */
-    public function getPageId()
-    {
-        return $this->container['page_id'];
-    }
-
-    /**
-     * Sets page_id
-     *
-     * @param string|null $page_id Target Facebook Page ID for multi-page posting. If omitted, uses the default page. Use GET /v1/accounts/{id}/facebook-page to list pages.
-     *
-     * @return self
-     */
-    public function setPageId($page_id)
-    {
-        if (is_null($page_id)) {
-            throw new \InvalidArgumentException('non-nullable page_id cannot be null');
-        }
-        $this->container['page_id'] = $page_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets geo_restriction
-     *
-     * @return \Zernio\Model\GeoRestriction|null
-     */
-    public function getGeoRestriction()
-    {
-        return $this->container['geo_restriction'];
-    }
-
-    /**
-     * Sets geo_restriction
-     *
-     * @param \Zernio\Model\GeoRestriction|null $geo_restriction geo_restriction
-     *
-     * @return self
-     */
-    public function setGeoRestriction($geo_restriction)
-    {
-        if (is_null($geo_restriction)) {
-            throw new \InvalidArgumentException('non-nullable geo_restriction cannot be null');
-        }
-        $this->container['geo_restriction'] = $geo_restriction;
-
-        return $this;
-    }
-
-    /**
-     * Gets facebook_settings
-     *
-     * @return \Zernio\Model\FacebookSettings|null
-     */
-    public function getFacebookSettings()
-    {
-        return $this->container['facebook_settings'];
-    }
-
-    /**
-     * Sets facebook_settings
-     *
-     * @param \Zernio\Model\FacebookSettings|null $facebook_settings facebook_settings
-     *
-     * @return self
-     */
-    public function setFacebookSettings($facebook_settings)
-    {
-        if (is_null($facebook_settings)) {
-            throw new \InvalidArgumentException('non-nullable facebook_settings cannot be null');
-        }
-        $this->container['facebook_settings'] = $facebook_settings;
+        $this->container['text_format_preset_id'] = $text_format_preset_id;
 
         return $this;
     }

@@ -442,10 +442,11 @@ docs/Model/ExternalPostSummary.md
 docs/Model/ExternalPostSummaryAnalytics.md
 docs/Model/ExternalPostWebhookPost.md
 docs/Model/FacebookPlatformData.md
-docs/Model/FacebookPlatformDataCarouselCardsInner.md
 docs/Model/FacebookPostEarningsResponse.md
 docs/Model/FacebookPostEarningsResponseMetricsValue.md
 docs/Model/FacebookPostEarningsResponseUnavailableMetricsInner.md
+docs/Model/FacebookSettings.md
+docs/Model/FacebookSettingsCarouselCardsInner.md
 docs/Model/FetchGoogleBusinessVerificationOptions200Response.md
 docs/Model/FetchGoogleBusinessVerificationOptions200ResponseOptionsInner.md
 docs/Model/FetchGoogleBusinessVerificationOptionsRequest.md
@@ -2061,10 +2062,11 @@ lib/Model/ExternalPostSummary.php
 lib/Model/ExternalPostSummaryAnalytics.php
 lib/Model/ExternalPostWebhookPost.php
 lib/Model/FacebookPlatformData.php
-lib/Model/FacebookPlatformDataCarouselCardsInner.php
 lib/Model/FacebookPostEarningsResponse.php
 lib/Model/FacebookPostEarningsResponseMetricsValue.php
 lib/Model/FacebookPostEarningsResponseUnavailableMetricsInner.php
+lib/Model/FacebookSettings.php
+lib/Model/FacebookSettingsCarouselCardsInner.php
 lib/Model/FetchGoogleBusinessVerificationOptions200Response.php
 lib/Model/FetchGoogleBusinessVerificationOptions200ResponseOptionsInner.php
 lib/Model/FetchGoogleBusinessVerificationOptionsRequest.php
@@ -3239,3 +3241,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/FacebookSettingsCarouselCardsInnerTest.php
+test/Model/FacebookSettingsTest.php

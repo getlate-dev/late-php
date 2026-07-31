@@ -70,14 +70,11 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'made_with_ai' => 'bool',
         'sensitive_media' => '\Zernio\Model\TwitterPlatformDataSensitiveMedia',
         'topic_tag' => 'string',
-        'draft' => 'bool',
         'content_type' => 'string',
         'title' => 'string',
         'first_comment' => 'string',
         'page_id' => 'string',
-        'carousel_cards' => '\Zernio\Model\FacebookPlatformDataCarouselCardsInner[]',
-        'carousel_link' => 'string',
-        'text_format_preset_id' => 'string',
+        'facebook_settings' => '\Zernio\Model\FacebookSettings',
         'share_to_feed' => 'bool',
         'collaborators' => 'string[]',
         'trial_params' => '\Zernio\Model\InstagramPlatformDataTrialParams',
@@ -106,6 +103,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'call_to_action' => '\Zernio\Model\GoogleBusinessPlatformDataCallToAction',
         'event' => '\Zernio\Model\GoogleBusinessPlatformDataEvent',
         'offer' => '\Zernio\Model\GoogleBusinessPlatformDataOffer',
+        'draft' => 'bool',
         'privacy_level' => 'string',
         'allow_comment' => 'bool',
         'allow_duet' => 'bool',
@@ -172,14 +170,11 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'made_with_ai' => null,
         'sensitive_media' => null,
         'topic_tag' => null,
-        'draft' => null,
         'content_type' => null,
         'title' => null,
         'first_comment' => null,
         'page_id' => null,
-        'carousel_cards' => null,
-        'carousel_link' => 'uri',
-        'text_format_preset_id' => null,
+        'facebook_settings' => null,
         'share_to_feed' => null,
         'collaborators' => null,
         'trial_params' => null,
@@ -208,6 +203,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'call_to_action' => null,
         'event' => null,
         'offer' => null,
+        'draft' => null,
         'privacy_level' => null,
         'allow_comment' => null,
         'allow_duet' => null,
@@ -272,14 +268,11 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'made_with_ai' => false,
         'sensitive_media' => false,
         'topic_tag' => false,
-        'draft' => false,
         'content_type' => false,
         'title' => false,
         'first_comment' => false,
         'page_id' => false,
-        'carousel_cards' => false,
-        'carousel_link' => false,
-        'text_format_preset_id' => false,
+        'facebook_settings' => false,
         'share_to_feed' => false,
         'collaborators' => false,
         'trial_params' => false,
@@ -308,6 +301,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'call_to_action' => false,
         'event' => false,
         'offer' => false,
+        'draft' => false,
         'privacy_level' => false,
         'allow_comment' => false,
         'allow_duet' => false,
@@ -452,14 +446,11 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'made_with_ai' => 'madeWithAi',
         'sensitive_media' => 'sensitiveMedia',
         'topic_tag' => 'topic_tag',
-        'draft' => 'draft',
         'content_type' => 'contentType',
         'title' => 'title',
         'first_comment' => 'firstComment',
         'page_id' => 'pageId',
-        'carousel_cards' => 'carouselCards',
-        'carousel_link' => 'carouselLink',
-        'text_format_preset_id' => 'textFormatPresetId',
+        'facebook_settings' => 'facebookSettings',
         'share_to_feed' => 'shareToFeed',
         'collaborators' => 'collaborators',
         'trial_params' => 'trialParams',
@@ -488,6 +479,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'call_to_action' => 'callToAction',
         'event' => 'event',
         'offer' => 'offer',
+        'draft' => 'draft',
         'privacy_level' => 'privacyLevel',
         'allow_comment' => 'allowComment',
         'allow_duet' => 'allowDuet',
@@ -552,14 +544,11 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'made_with_ai' => 'setMadeWithAi',
         'sensitive_media' => 'setSensitiveMedia',
         'topic_tag' => 'setTopicTag',
-        'draft' => 'setDraft',
         'content_type' => 'setContentType',
         'title' => 'setTitle',
         'first_comment' => 'setFirstComment',
         'page_id' => 'setPageId',
-        'carousel_cards' => 'setCarouselCards',
-        'carousel_link' => 'setCarouselLink',
-        'text_format_preset_id' => 'setTextFormatPresetId',
+        'facebook_settings' => 'setFacebookSettings',
         'share_to_feed' => 'setShareToFeed',
         'collaborators' => 'setCollaborators',
         'trial_params' => 'setTrialParams',
@@ -588,6 +577,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'call_to_action' => 'setCallToAction',
         'event' => 'setEvent',
         'offer' => 'setOffer',
+        'draft' => 'setDraft',
         'privacy_level' => 'setPrivacyLevel',
         'allow_comment' => 'setAllowComment',
         'allow_duet' => 'setAllowDuet',
@@ -652,14 +642,11 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'made_with_ai' => 'getMadeWithAi',
         'sensitive_media' => 'getSensitiveMedia',
         'topic_tag' => 'getTopicTag',
-        'draft' => 'getDraft',
         'content_type' => 'getContentType',
         'title' => 'getTitle',
         'first_comment' => 'getFirstComment',
         'page_id' => 'getPageId',
-        'carousel_cards' => 'getCarouselCards',
-        'carousel_link' => 'getCarouselLink',
-        'text_format_preset_id' => 'getTextFormatPresetId',
+        'facebook_settings' => 'getFacebookSettings',
         'share_to_feed' => 'getShareToFeed',
         'collaborators' => 'getCollaborators',
         'trial_params' => 'getTrialParams',
@@ -688,6 +675,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'call_to_action' => 'getCallToAction',
         'event' => 'getEvent',
         'offer' => 'getOffer',
+        'draft' => 'getDraft',
         'privacy_level' => 'getPrivacyLevel',
         'allow_comment' => 'getAllowComment',
         'allow_duet' => 'getAllowDuet',
@@ -922,14 +910,11 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         $this->setIfExists('made_with_ai', $data ?? [], false);
         $this->setIfExists('sensitive_media', $data ?? [], null);
         $this->setIfExists('topic_tag', $data ?? [], null);
-        $this->setIfExists('draft', $data ?? [], null);
         $this->setIfExists('content_type', $data ?? [], 'story');
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('first_comment', $data ?? [], null);
         $this->setIfExists('page_id', $data ?? [], null);
-        $this->setIfExists('carousel_cards', $data ?? [], null);
-        $this->setIfExists('carousel_link', $data ?? [], null);
-        $this->setIfExists('text_format_preset_id', $data ?? [], null);
+        $this->setIfExists('facebook_settings', $data ?? [], null);
         $this->setIfExists('share_to_feed', $data ?? [], true);
         $this->setIfExists('collaborators', $data ?? [], null);
         $this->setIfExists('trial_params', $data ?? [], null);
@@ -958,6 +943,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         $this->setIfExists('call_to_action', $data ?? [], null);
         $this->setIfExists('event', $data ?? [], null);
         $this->setIfExists('offer', $data ?? [], null);
+        $this->setIfExists('draft', $data ?? [], null);
         $this->setIfExists('privacy_level', $data ?? [], null);
         $this->setIfExists('allow_comment', $data ?? [], null);
         $this->setIfExists('allow_duet', $data ?? [], null);
@@ -1064,18 +1050,6 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
 
         if (!is_null($this->container['first_comment']) && (mb_strlen($this->container['first_comment']) > 10000)) {
             $invalidProperties[] = "invalid value for 'first_comment', the character length must be smaller than or equal to 10000.";
-        }
-
-        if (!is_null($this->container['carousel_cards']) && (count($this->container['carousel_cards']) > 5)) {
-            $invalidProperties[] = "invalid value for 'carousel_cards', number of items must be less than or equal to 5.";
-        }
-
-        if (!is_null($this->container['carousel_cards']) && (count($this->container['carousel_cards']) < 2)) {
-            $invalidProperties[] = "invalid value for 'carousel_cards', number of items must be greater than or equal to 2.";
-        }
-
-        if (!is_null($this->container['text_format_preset_id']) && !preg_match("/^\\d+$/", $this->container['text_format_preset_id'])) {
-            $invalidProperties[] = "invalid value for 'text_format_preset_id', must be conform to the pattern /^\\d+$/.";
         }
 
         if (!is_null($this->container['thumb_offset']) && ($this->container['thumb_offset'] < 0)) {
@@ -1480,33 +1454,6 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
     }
 
     /**
-     * Gets draft
-     *
-     * @return bool|null
-     */
-    public function getDraft()
-    {
-        return $this->container['draft'];
-    }
-
-    /**
-     * Sets draft
-     *
-     * @param bool|null $draft When true, sends the post to the TikTok Creator Inbox as a draft instead of publishing immediately. The creator receives an inbox notification to complete posting via TikTok's editing flow. Maps to TikTok API post_mode: \"MEDIA_UPLOAD\" (photos) or the dedicated inbox endpoint (videos). When false or omitted, publishes directly via post_mode: \"DIRECT_POST\". Note: publish_type is not a supported field. Use this field instead.
-     *
-     * @return self
-     */
-    public function setDraft($draft)
-    {
-        if (is_null($draft)) {
-            throw new \InvalidArgumentException('non-nullable draft cannot be null');
-        }
-        $this->container['draft'] = $draft;
-
-        return $this;
-    }
-
-    /**
      * Gets content_type
      *
      * @return string|null
@@ -1633,94 +1580,28 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
     }
 
     /**
-     * Gets carousel_cards
+     * Gets facebook_settings
      *
-     * @return \Zernio\Model\FacebookPlatformDataCarouselCardsInner[]|null
+     * @return \Zernio\Model\FacebookSettings|null
      */
-    public function getCarouselCards()
+    public function getFacebookSettings()
     {
-        return $this->container['carousel_cards'];
+        return $this->container['facebook_settings'];
     }
 
     /**
-     * Sets carousel_cards
+     * Sets facebook_settings
      *
-     * @param \Zernio\Model\FacebookPlatformDataCarouselCardsInner[]|null $carousel_cards Renders the post as a multi-link carousel (organic Page post). When set, mediaItems must be provided with the same length and all items must be images (no videos). Each cards[i] adds the click-through link and headline for the image at mediaItems[i]. Mutually exclusive with contentType=story|reel. Facebook display truncates name at ~35 chars and description at ~30 chars; longer strings are accepted but get truncated on render.
+     * @param \Zernio\Model\FacebookSettings|null $facebook_settings facebook_settings
      *
      * @return self
      */
-    public function setCarouselCards($carousel_cards)
+    public function setFacebookSettings($facebook_settings)
     {
-        if (is_null($carousel_cards)) {
-            throw new \InvalidArgumentException('non-nullable carousel_cards cannot be null');
+        if (is_null($facebook_settings)) {
+            throw new \InvalidArgumentException('non-nullable facebook_settings cannot be null');
         }
-
-        if ((count($carousel_cards) > 5)) {
-            throw new \InvalidArgumentException('invalid value for $carousel_cards when calling PlatformTargetPlatformSpecificData., number of items must be less than or equal to 5.');
-        }
-        if ((count($carousel_cards) < 2)) {
-            throw new \InvalidArgumentException('invalid length for $carousel_cards when calling PlatformTargetPlatformSpecificData., number of items must be greater than or equal to 2.');
-        }
-        $this->container['carousel_cards'] = $carousel_cards;
-
-        return $this;
-    }
-
-    /**
-     * Gets carousel_link
-     *
-     * @return string|null
-     */
-    public function getCarouselLink()
-    {
-        return $this->container['carousel_link'];
-    }
-
-    /**
-     * Sets carousel_link
-     *
-     * @param string|null $carousel_link Optional top-level \"See more\" destination shown on the carousel end card. Defaults to the first card's link when omitted. Only used together with carouselCards.
-     *
-     * @return self
-     */
-    public function setCarouselLink($carousel_link)
-    {
-        if (is_null($carousel_link)) {
-            throw new \InvalidArgumentException('non-nullable carousel_link cannot be null');
-        }
-        $this->container['carousel_link'] = $carousel_link;
-
-        return $this;
-    }
-
-    /**
-     * Gets text_format_preset_id
-     *
-     * @return string|null
-     */
-    public function getTextFormatPresetId()
-    {
-        return $this->container['text_format_preset_id'];
-    }
-
-    /**
-     * Sets text_format_preset_id
-     *
-     * @param string|null $text_format_preset_id Facebook-defined preset ID that renders the post as large text on a colored background (Graph `text_format_preset_id`). Supply the raw numeric ID from Meta; we do not publish a catalog of presets and Facebook may change the available set. Pages only (ignored on personal profiles and groups) and text-only feed posts only: the request is rejected with 400 when mediaItems or carouselCards are present, when contentType is story or reel, or when content is empty. An attachment makes Facebook drop the background silently, so those are rejected up front. Length is NOT rejected: Facebook's composer stops offering a background at around 130 characters, but Meta documents no API limit, so longer content publishes and returns a warning instead. A URL detected in the content is NOT attached as a link preview while a preset is set, because a link attachment also makes Facebook drop the background.
-     *
-     * @return self
-     */
-    public function setTextFormatPresetId($text_format_preset_id)
-    {
-        if (is_null($text_format_preset_id)) {
-            throw new \InvalidArgumentException('non-nullable text_format_preset_id cannot be null');
-        }
-
-        if ((!preg_match("/^\\d+$/", ObjectSerializer::toString($text_format_preset_id)))) {
-            throw new \InvalidArgumentException("invalid value for \$text_format_preset_id when calling PlatformTargetPlatformSpecificData., must conform to the pattern /^\\d+$/.");
-        }
-
-        $this->container['text_format_preset_id'] = $text_format_preset_id;
+        $this->container['facebook_settings'] = $facebook_settings;
 
         return $this;
     }
@@ -2502,6 +2383,33 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
             throw new \InvalidArgumentException('non-nullable offer cannot be null');
         }
         $this->container['offer'] = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Gets draft
+     *
+     * @return bool|null
+     */
+    public function getDraft()
+    {
+        return $this->container['draft'];
+    }
+
+    /**
+     * Sets draft
+     *
+     * @param bool|null $draft When true, sends the post to the TikTok Creator Inbox as a draft instead of publishing immediately. The creator receives an inbox notification to complete posting via TikTok's editing flow. Maps to TikTok API post_mode: \"MEDIA_UPLOAD\" (photos) or the dedicated inbox endpoint (videos). When false or omitted, publishes directly via post_mode: \"DIRECT_POST\". Note: publish_type is not a supported field. Use this field instead.
+     *
+     * @return self
+     */
+    public function setDraft($draft)
+    {
+        if (is_null($draft)) {
+            throw new \InvalidArgumentException('non-nullable draft cannot be null');
+        }
+        $this->container['draft'] = $draft;
 
         return $this;
     }
