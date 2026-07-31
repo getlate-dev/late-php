@@ -138,7 +138,7 @@ class LinkedInMentionsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\GetLinkedInMentions200Response|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\InlineObject|\Zernio\Model\GetYouTubeDailyViews400Response
+     * @return \Zernio\Model\GetLinkedInMentions200Response|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\InlineObject|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\GetYouTubeDailyViews400Response
      */
     public function getLinkedInMentions($account_id, $url, $display_name = null, string $contentType = self::contentTypes['getLinkedInMentions'][0])
     {
@@ -158,7 +158,7 @@ class LinkedInMentionsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\GetLinkedInMentions200Response|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\InlineObject|\Zernio\Model\GetYouTubeDailyViews400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\GetLinkedInMentions200Response|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\InlineObject|\Zernio\Model\GetYouTubeDailyViews400Response|\Zernio\Model\GetYouTubeDailyViews400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getLinkedInMentionsWithHttpInfo($account_id, $url, $display_name = null, string $contentType = self::contentTypes['getLinkedInMentions'][0])
     {
@@ -203,6 +203,12 @@ class LinkedInMentionsApi
                 case 401:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GetYouTubeDailyViews400Response',
                         $request,
                         $response,
                     );
@@ -256,6 +262,14 @@ class LinkedInMentionsApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GetYouTubeDailyViews400Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
