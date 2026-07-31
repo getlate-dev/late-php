@@ -299,12 +299,6 @@ class BulkCreateContactsRequest implements ModelInterface, ArrayAccess, \JsonSer
         if ($this->container['profile_id'] === null) {
             $invalidProperties[] = "'profile_id' can't be null";
         }
-        if ($this->container['account_id'] === null) {
-            $invalidProperties[] = "'account_id' can't be null";
-        }
-        if ($this->container['platform'] === null) {
-            $invalidProperties[] = "'platform' can't be null";
-        }
         if ($this->container['contacts'] === null) {
             $invalidProperties[] = "'contacts' can't be null";
         }
@@ -357,7 +351,7 @@ class BulkCreateContactsRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets account_id
      *
-     * @return string
+     * @return string|null
      */
     public function getAccountId()
     {
@@ -367,7 +361,7 @@ class BulkCreateContactsRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets account_id
      *
-     * @param string $account_id account_id
+     * @param string|null $account_id Required when contacts carry channel data (platformIdentifier or a row-level accountId). Omit for a plain CRM import with no channels.
      *
      * @return self
      */
@@ -384,7 +378,7 @@ class BulkCreateContactsRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets platform
      *
-     * @return string
+     * @return string|null
      */
     public function getPlatform()
     {
@@ -394,7 +388,7 @@ class BulkCreateContactsRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets platform
      *
-     * @param string $platform platform
+     * @param string|null $platform Ignored when accountId is set: the platform is derived from the resolved account. Only relevant to disambiguate accountId lookup; a mismatch 404s.
      *
      * @return self
      */
