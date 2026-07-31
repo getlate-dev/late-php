@@ -766,7 +766,7 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets gender
      *
-     * @param string|null $gender Restrict by gender. 'all' (default) targets everyone.
+     * @param string|null $gender Restrict by gender. 'all' (default) targets everyone. Applied on Meta, TikTok and Pinterest. Ignored on Google, LinkedIn and X.
      *
      * @return self
      */

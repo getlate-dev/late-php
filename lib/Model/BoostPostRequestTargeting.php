@@ -517,7 +517,7 @@ class BoostPostRequestTargeting implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets gender
      *
-     * @param string|null $gender Meta only.
+     * @param string|null $gender Applied on Meta, TikTok and Pinterest. Ignored on Google, LinkedIn and X.
      *
      * @return self
      */
