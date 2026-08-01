@@ -317,7 +317,7 @@ try {
 ## `listContacts()`
 
 ```php
-listContacts($profile_id, $search, $tag, $platform, $is_subscribed, $limit, $skip): \Zernio\Model\ListContacts200Response
+listContacts($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip): \Zernio\Model\ListContacts200Response
 ```
 
 List contacts
@@ -344,13 +344,14 @@ $apiInstance = new Zernio\Api\ContactsApi(
 $profile_id = 'profile_id_example'; // string | Filter by profile. Omit to list across all profiles
 $search = 'search_example'; // string
 $tag = 'tag_example'; // string
+$tags = 'tags_example'; // string | Comma-separated tags, matches contacts carrying any of them
 $platform = 'platform_example'; // string
 $is_subscribed = 'is_subscribed_example'; // string
 $limit = 50; // int
 $skip = 0; // int
 
 try {
-    $result = $apiInstance->listContacts($profile_id, $search, $tag, $platform, $is_subscribed, $limit, $skip);
+    $result = $apiInstance->listContacts($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ContactsApi->listContacts: ', $e->getMessage(), PHP_EOL;
@@ -364,6 +365,7 @@ try {
 | **profile_id** | **string**| Filter by profile. Omit to list across all profiles | [optional] |
 | **search** | **string**|  | [optional] |
 | **tag** | **string**|  | [optional] |
+| **tags** | **string**| Comma-separated tags, matches contacts carrying any of them | [optional] |
 | **platform** | **string**|  | [optional] |
 | **is_subscribed** | **string**|  | [optional] |
 | **limit** | **int**|  | [optional] [default to 50] |

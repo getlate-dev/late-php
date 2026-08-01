@@ -1560,6 +1560,7 @@ class ContactsApi
      * @param  string|null $profile_id Filter by profile. Omit to list across all profiles (optional)
      * @param  string|null $search search (optional)
      * @param  string|null $tag tag (optional)
+     * @param  string|null $tags Comma-separated tags, matches contacts carrying any of them (optional)
      * @param  string|null $platform platform (optional)
      * @param  string|null $is_subscribed is_subscribed (optional)
      * @param  int|null $limit limit (optional, default to 50)
@@ -1570,9 +1571,9 @@ class ContactsApi
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\ListContacts200Response|\Zernio\Model\InlineObject
      */
-    public function listContacts($profile_id = null, $search = null, $tag = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
+    public function listContacts($profile_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
     {
-        list($response) = $this->listContactsWithHttpInfo($profile_id, $search, $tag, $platform, $is_subscribed, $limit, $skip, $contentType);
+        list($response) = $this->listContactsWithHttpInfo($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType);
         return $response;
     }
 
@@ -1584,6 +1585,7 @@ class ContactsApi
      * @param  string|null $profile_id Filter by profile. Omit to list across all profiles (optional)
      * @param  string|null $search (optional)
      * @param  string|null $tag (optional)
+     * @param  string|null $tags Comma-separated tags, matches contacts carrying any of them (optional)
      * @param  string|null $platform (optional)
      * @param  string|null $is_subscribed (optional)
      * @param  int|null $limit (optional, default to 50)
@@ -1594,9 +1596,9 @@ class ContactsApi
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\ListContacts200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listContactsWithHttpInfo($profile_id = null, $search = null, $tag = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
+    public function listContactsWithHttpInfo($profile_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
     {
-        $request = $this->listContactsRequest($profile_id, $search, $tag, $platform, $is_subscribed, $limit, $skip, $contentType);
+        $request = $this->listContactsRequest($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1689,6 +1691,7 @@ class ContactsApi
      * @param  string|null $profile_id Filter by profile. Omit to list across all profiles (optional)
      * @param  string|null $search (optional)
      * @param  string|null $tag (optional)
+     * @param  string|null $tags Comma-separated tags, matches contacts carrying any of them (optional)
      * @param  string|null $platform (optional)
      * @param  string|null $is_subscribed (optional)
      * @param  int|null $limit (optional, default to 50)
@@ -1698,9 +1701,9 @@ class ContactsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listContactsAsync($profile_id = null, $search = null, $tag = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
+    public function listContactsAsync($profile_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
     {
-        return $this->listContactsAsyncWithHttpInfo($profile_id, $search, $tag, $platform, $is_subscribed, $limit, $skip, $contentType)
+        return $this->listContactsAsyncWithHttpInfo($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1716,6 +1719,7 @@ class ContactsApi
      * @param  string|null $profile_id Filter by profile. Omit to list across all profiles (optional)
      * @param  string|null $search (optional)
      * @param  string|null $tag (optional)
+     * @param  string|null $tags Comma-separated tags, matches contacts carrying any of them (optional)
      * @param  string|null $platform (optional)
      * @param  string|null $is_subscribed (optional)
      * @param  int|null $limit (optional, default to 50)
@@ -1725,10 +1729,10 @@ class ContactsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listContactsAsyncWithHttpInfo($profile_id = null, $search = null, $tag = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
+    public function listContactsAsyncWithHttpInfo($profile_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
     {
         $returnType = '\Zernio\Model\ListContacts200Response';
-        $request = $this->listContactsRequest($profile_id, $search, $tag, $platform, $is_subscribed, $limit, $skip, $contentType);
+        $request = $this->listContactsRequest($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1772,6 +1776,7 @@ class ContactsApi
      * @param  string|null $profile_id Filter by profile. Omit to list across all profiles (optional)
      * @param  string|null $search (optional)
      * @param  string|null $tag (optional)
+     * @param  string|null $tags Comma-separated tags, matches contacts carrying any of them (optional)
      * @param  string|null $platform (optional)
      * @param  string|null $is_subscribed (optional)
      * @param  int|null $limit (optional, default to 50)
@@ -1781,8 +1786,9 @@ class ContactsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listContactsRequest($profile_id = null, $search = null, $tag = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
+    public function listContactsRequest($profile_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
     {
+
 
 
 
@@ -1824,6 +1830,15 @@ class ContactsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $tag,
             'tag', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $tags,
+            'tags', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
