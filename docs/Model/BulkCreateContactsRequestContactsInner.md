@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **string** |  |
-**platform_identifier** | **string** |  |
+**platform_identifier** | **string** | Required when the top-level accountId is set (channel mode). A row missing it in that mode is rejected individually and reported in errors[], not a 400 for the whole import. | [optional]
 **display_identifier** | **string** |  | [optional]
 **email** | **string** |  | [optional]
 **company** | **string** |  | [optional]

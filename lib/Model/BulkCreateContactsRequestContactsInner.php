@@ -313,9 +313,6 @@ class BulkCreateContactsRequestContactsInner implements ModelInterface, ArrayAcc
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['platform_identifier'] === null) {
-            $invalidProperties[] = "'platform_identifier' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -361,7 +358,7 @@ class BulkCreateContactsRequestContactsInner implements ModelInterface, ArrayAcc
     /**
      * Gets platform_identifier
      *
-     * @return string
+     * @return string|null
      */
     public function getPlatformIdentifier()
     {
@@ -371,7 +368,7 @@ class BulkCreateContactsRequestContactsInner implements ModelInterface, ArrayAcc
     /**
      * Sets platform_identifier
      *
-     * @param string $platform_identifier platform_identifier
+     * @param string|null $platform_identifier Required when the top-level accountId is set (channel mode). A row missing it in that mode is rejected individually and reported in errors[], not a 400 for the whole import.
      *
      * @return self
      */
