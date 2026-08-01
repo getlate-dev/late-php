@@ -1196,7 +1196,7 @@ class AdTreeCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets optimization_goal
      *
-     * @param string|null $optimization_goal Meta optimization goal shared across ad sets, or comma-separated values when ad sets differ (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION)
+     * @param string|null $optimization_goal Optimization goal shared across ad sets, or comma-separated values when ad sets differ. Meta: e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION. LinkedIn: the campaign optimizationTargetType (e.g. MAX_CLICK, MAX_IMPRESSION, NONE); `NONE` with a manual costType is a campaign LinkedIn will not deliver.
      *
      * @return self
      */
@@ -1264,7 +1264,7 @@ class AdTreeCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets bid_amount
      *
-     * @param float|null $bid_amount Representative bid cap for the campaign — bubbled up from the top-spending ad set's `bid_amount` (whole currency units). Populated when the ad-set bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP.
+     * @param float|null $bid_amount Representative bid for the campaign, bubbled up from the top-spending ad set (whole currency units). Meta: populated when the ad-set bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP. LinkedIn: the campaign unitCost, which has no bidStrategy gate and where 0 is a real, delivery-stopping value rather than unset.
      *
      * @return self
      */

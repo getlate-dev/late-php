@@ -70,6 +70,8 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'bid_strategy' => '\Zernio\Model\BidStrategy',
         'bid_amount' => 'float',
         'roas_average_floor' => 'float',
+        'cost_type' => 'string',
+        'serving_statuses' => 'string[]',
         'promoted_object' => '\Zernio\Model\AdTreeAdSetPromotedObject',
         'ads' => '\Zernio\Model\Ad[]',
         'daily' => '\Zernio\Model\AdDailyMetrics[]'
@@ -94,6 +96,8 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'bid_strategy' => null,
         'bid_amount' => null,
         'roas_average_floor' => null,
+        'cost_type' => null,
+        'serving_statuses' => null,
         'promoted_object' => null,
         'ads' => null,
         'daily' => null
@@ -116,6 +120,8 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'bid_strategy' => true,
         'bid_amount' => true,
         'roas_average_floor' => true,
+        'cost_type' => true,
+        'serving_statuses' => false,
         'promoted_object' => false,
         'ads' => false,
         'daily' => false
@@ -218,6 +224,8 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'bid_strategy' => 'bidStrategy',
         'bid_amount' => 'bidAmount',
         'roas_average_floor' => 'roasAverageFloor',
+        'cost_type' => 'costType',
+        'serving_statuses' => 'servingStatuses',
         'promoted_object' => 'promotedObject',
         'ads' => 'ads',
         'daily' => 'daily'
@@ -240,6 +248,8 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'bid_strategy' => 'setBidStrategy',
         'bid_amount' => 'setBidAmount',
         'roas_average_floor' => 'setRoasAverageFloor',
+        'cost_type' => 'setCostType',
+        'serving_statuses' => 'setServingStatuses',
         'promoted_object' => 'setPromotedObject',
         'ads' => 'setAds',
         'daily' => 'setDaily'
@@ -262,6 +272,8 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'bid_strategy' => 'getBidStrategy',
         'bid_amount' => 'getBidAmount',
         'roas_average_floor' => 'getRoasAverageFloor',
+        'cost_type' => 'getCostType',
+        'serving_statuses' => 'getServingStatuses',
         'promoted_object' => 'getPromotedObject',
         'ads' => 'getAds',
         'daily' => 'getDaily'
@@ -335,6 +347,8 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('bid_strategy', $data ?? [], null);
         $this->setIfExists('bid_amount', $data ?? [], null);
         $this->setIfExists('roas_average_floor', $data ?? [], null);
+        $this->setIfExists('cost_type', $data ?? [], null);
+        $this->setIfExists('serving_statuses', $data ?? [], null);
         $this->setIfExists('promoted_object', $data ?? [], null);
         $this->setIfExists('ads', $data ?? [], null);
         $this->setIfExists('daily', $data ?? [], null);
@@ -584,7 +598,7 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets optimization_goal
      *
-     * @param string|null $optimization_goal Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION)
+     * @param string|null $optimization_goal What the delivery system optimizes for. Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION), or on LinkedIn the campaign's effective optimizationTargetType (NONE means manual bidding). See the `optimizationGoal` field on `Ad` for the full value spaces.
      *
      * @return self
      */
@@ -652,7 +666,7 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets bid_amount
      *
-     * @param float|null $bid_amount Bid cap in whole currency units. Populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP.
+     * @param float|null $bid_amount Bid amount in whole currency units. On Meta/TikTok populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP; on LinkedIn it is the campaign's effective unitCost and pairs with `costType`, where 0 is a real, delivery-stopping value.
      *
      * @return self
      */
@@ -703,6 +717,67 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['roas_average_floor'] = $roas_average_floor;
+
+        return $this;
+    }
+
+    /**
+     * Gets cost_type
+     *
+     * @return string|null
+     */
+    public function getCostType()
+    {
+        return $this->container['cost_type'];
+    }
+
+    /**
+     * Sets cost_type
+     *
+     * @param string|null $cost_type LinkedIn only. Effective cost model (billing event) of the LinkedIn campaign backing this ad set: CPM, CPC or CPV. Null for non-LinkedIn ad sets.
+     *
+     * @return self
+     */
+    public function setCostType($cost_type)
+    {
+        if (is_null($cost_type)) {
+            array_push($this->openAPINullablesSetToNull, 'cost_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cost_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cost_type'] = $cost_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets serving_statuses
+     *
+     * @return string[]|null
+     */
+    public function getServingStatuses()
+    {
+        return $this->container['serving_statuses'];
+    }
+
+    /**
+     * Sets serving_statuses
+     *
+     * @param string[]|null $serving_statuses LinkedIn only. Why the LinkedIn campaign backing this ad set is (or is not) delivering. A LinkedIn Campaign maps to this ad-set node, so this is the level where LinkedIn's holds actually apply. Empty means no serving data, [\"RUNNABLE\"] means eligible to serve, anything else is a hold. See the `servingStatuses` field on `Ad` for the known values.
+     *
+     * @return self
+     */
+    public function setServingStatuses($serving_statuses)
+    {
+        if (is_null($serving_statuses)) {
+            throw new \InvalidArgumentException('non-nullable serving_statuses cannot be null');
+        }
+        $this->container['serving_statuses'] = $serving_statuses;
 
         return $this;
     }

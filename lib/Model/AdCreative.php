@@ -71,6 +71,8 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'instagram_user_id' => 'string',
         'instagram_permalink_url' => 'string',
         'media_urls' => 'string[]',
+        'is_serving' => 'bool',
+        'serving_hold_reasons' => 'string[]',
         'body' => 'string',
         'google_headline' => 'string',
         'google_description' => 'string',
@@ -100,6 +102,8 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'instagram_user_id' => null,
         'instagram_permalink_url' => null,
         'media_urls' => null,
+        'is_serving' => null,
+        'serving_hold_reasons' => null,
         'body' => null,
         'google_headline' => null,
         'google_description' => null,
@@ -127,6 +131,8 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'instagram_user_id' => true,
         'instagram_permalink_url' => true,
         'media_urls' => false,
+        'is_serving' => true,
+        'serving_hold_reasons' => false,
         'body' => false,
         'google_headline' => false,
         'google_description' => false,
@@ -234,6 +240,8 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'instagram_user_id' => 'instagramUserId',
         'instagram_permalink_url' => 'instagramPermalinkUrl',
         'media_urls' => 'mediaUrls',
+        'is_serving' => 'isServing',
+        'serving_hold_reasons' => 'servingHoldReasons',
         'body' => 'body',
         'google_headline' => 'googleHeadline',
         'google_description' => 'googleDescription',
@@ -261,6 +269,8 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'instagram_user_id' => 'setInstagramUserId',
         'instagram_permalink_url' => 'setInstagramPermalinkUrl',
         'media_urls' => 'setMediaUrls',
+        'is_serving' => 'setIsServing',
+        'serving_hold_reasons' => 'setServingHoldReasons',
         'body' => 'setBody',
         'google_headline' => 'setGoogleHeadline',
         'google_description' => 'setGoogleDescription',
@@ -288,6 +298,8 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'instagram_user_id' => 'getInstagramUserId',
         'instagram_permalink_url' => 'getInstagramPermalinkUrl',
         'media_urls' => 'getMediaUrls',
+        'is_serving' => 'getIsServing',
+        'serving_hold_reasons' => 'getServingHoldReasons',
         'body' => 'getBody',
         'google_headline' => 'getGoogleHeadline',
         'google_description' => 'getGoogleDescription',
@@ -366,6 +378,8 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('instagram_user_id', $data ?? [], null);
         $this->setIfExists('instagram_permalink_url', $data ?? [], null);
         $this->setIfExists('media_urls', $data ?? [], null);
+        $this->setIfExists('is_serving', $data ?? [], null);
+        $this->setIfExists('serving_hold_reasons', $data ?? [], null);
         $this->setIfExists('body', $data ?? [], null);
         $this->setIfExists('google_headline', $data ?? [], null);
         $this->setIfExists('google_description', $data ?? [], null);
@@ -793,6 +807,67 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable media_urls cannot be null');
         }
         $this->container['media_urls'] = $media_urls;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_serving
+     *
+     * @return bool|null
+     */
+    public function getIsServing()
+    {
+        return $this->container['is_serving'];
+    }
+
+    /**
+     * Sets is_serving
+     *
+     * @param bool|null $is_serving LinkedIn only. Whether LinkedIn is currently serving this specific creative. Complements the ad-level `servingStatuses`, which describes the parent campaign.
+     *
+     * @return self
+     */
+    public function setIsServing($is_serving)
+    {
+        if (is_null($is_serving)) {
+            array_push($this->openAPINullablesSetToNull, 'is_serving');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('is_serving', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['is_serving'] = $is_serving;
+
+        return $this;
+    }
+
+    /**
+     * Gets serving_hold_reasons
+     *
+     * @return string[]|null
+     */
+    public function getServingHoldReasons()
+    {
+        return $this->container['serving_hold_reasons'];
+    }
+
+    /**
+     * Sets serving_hold_reasons
+     *
+     * @param string[]|null $serving_hold_reasons LinkedIn only. Why this specific creative is not being served. Empty when it is serving. A superset of the ad-level `servingStatuses`: it repeats the inherited campaign, campaign group and account holds AND adds creative-only causes such as UNDER_REVIEW, REJECTED, PROCESSING, PROCESSING_FAILED, FORM_HOLD (lead-gen-form creatives), REFERRED_CONTENT_QUALITY_HOLD, JOB_POSTING_ON_HOLD and JOB_POSTING_INVALID (job ads). Some values are format-specific and will never appear on other ad formats. The list is open, so treat unrecognized values as holds rather than errors.
+     *
+     * @return self
+     */
+    public function setServingHoldReasons($serving_hold_reasons)
+    {
+        if (is_null($serving_hold_reasons)) {
+            throw new \InvalidArgumentException('non-nullable serving_hold_reasons cannot be null');
+        }
+        $this->container['serving_hold_reasons'] = $serving_hold_reasons;
 
         return $this;
     }

@@ -77,6 +77,8 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_set_name' => 'string',
         'platform_objective' => 'string',
         'optimization_goal' => 'string',
+        'cost_type' => 'string',
+        'serving_statuses' => 'string[]',
         'platform_ad_account_name' => 'string',
         'platform_created_at' => '\DateTime',
         'bid_strategy' => '\Zernio\Model\BidStrategy',
@@ -118,6 +120,8 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_set_name' => null,
         'platform_objective' => null,
         'optimization_goal' => null,
+        'cost_type' => null,
+        'serving_statuses' => null,
         'platform_ad_account_name' => null,
         'platform_created_at' => 'date-time',
         'bid_strategy' => null,
@@ -157,6 +161,8 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_set_name' => false,
         'platform_objective' => true,
         'optimization_goal' => true,
+        'cost_type' => true,
+        'serving_statuses' => false,
         'platform_ad_account_name' => true,
         'platform_created_at' => true,
         'bid_strategy' => true,
@@ -276,6 +282,8 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_set_name' => 'adSetName',
         'platform_objective' => 'platformObjective',
         'optimization_goal' => 'optimizationGoal',
+        'cost_type' => 'costType',
+        'serving_statuses' => 'servingStatuses',
         'platform_ad_account_name' => 'platformAdAccountName',
         'platform_created_at' => 'platformCreatedAt',
         'bid_strategy' => 'bidStrategy',
@@ -315,6 +323,8 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_set_name' => 'setAdSetName',
         'platform_objective' => 'setPlatformObjective',
         'optimization_goal' => 'setOptimizationGoal',
+        'cost_type' => 'setCostType',
+        'serving_statuses' => 'setServingStatuses',
         'platform_ad_account_name' => 'setPlatformAdAccountName',
         'platform_created_at' => 'setPlatformCreatedAt',
         'bid_strategy' => 'setBidStrategy',
@@ -354,6 +364,8 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_set_name' => 'getAdSetName',
         'platform_objective' => 'getPlatformObjective',
         'optimization_goal' => 'getOptimizationGoal',
+        'cost_type' => 'getCostType',
+        'serving_statuses' => 'getServingStatuses',
         'platform_ad_account_name' => 'getPlatformAdAccountName',
         'platform_created_at' => 'getPlatformCreatedAt',
         'bid_strategy' => 'getBidStrategy',
@@ -517,6 +529,8 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('ad_set_name', $data ?? [], null);
         $this->setIfExists('platform_objective', $data ?? [], null);
         $this->setIfExists('optimization_goal', $data ?? [], null);
+        $this->setIfExists('cost_type', $data ?? [], null);
+        $this->setIfExists('serving_statuses', $data ?? [], null);
         $this->setIfExists('platform_ad_account_name', $data ?? [], null);
         $this->setIfExists('platform_created_at', $data ?? [], null);
         $this->setIfExists('bid_strategy', $data ?? [], null);
@@ -1150,7 +1164,7 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets optimization_goal
      *
-     * @param string|null $optimization_goal Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION, LINK_CLICKS). Only present for Meta ads.
+     * @param string|null $optimization_goal What the delivery system optimizes for, at ad-set level. The value space depends on `platform`:  - Meta: ad set `optimization_goal` (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION, LINK_CLICKS). - LinkedIn: the campaign's EFFECTIVE `optimizationTargetType`, refreshed from LinkedIn on every   sync rather than echoing what was passed on create. `NONE` means manual bidding, and it is a   real value, not missing data. Auto-bid values are MAX_IMPRESSION / MAX_CLICK / MAX_CONVERSION /   MAX_VIDEO_VIEW / MAX_LEAD / MAX_REACH; target-cost values are TARGET_COST_PER_CLICK /   TARGET_COST_PER_IMPRESSION / TARGET_COST_PER_VIDEO_VIEW; cost-cap values are the   CAP_COST_AND_MAXIMIZE_* family.
      *
      * @return self
      */
@@ -1167,6 +1181,67 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['optimization_goal'] = $optimization_goal;
+
+        return $this;
+    }
+
+    /**
+     * Gets cost_type
+     *
+     * @return string|null
+     */
+    public function getCostType()
+    {
+        return $this->container['cost_type'];
+    }
+
+    /**
+     * Sets cost_type
+     *
+     * @param string|null $cost_type LinkedIn only. The campaign's EFFECTIVE cost model (billing event) as applied by LinkedIn, refreshed on every sync rather than echoing what was passed on create. One of `CPM` (cost per thousand impressions), `CPC` (cost per click) or `CPV` (cost per video view). On LinkedIn this is the axis that pairs with `bidAmount`; there is no `bidStrategy`. For campaign type SPONSORED_INMAILS, `CPM` bills as cost-per-send x 1000. `null` for non-LinkedIn ads.
+     *
+     * @return self
+     */
+    public function setCostType($cost_type)
+    {
+        if (is_null($cost_type)) {
+            array_push($this->openAPINullablesSetToNull, 'cost_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cost_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cost_type'] = $cost_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets serving_statuses
+     *
+     * @return string[]|null
+     */
+    public function getServingStatuses()
+    {
+        return $this->container['serving_statuses'];
+    }
+
+    /**
+     * Sets serving_statuses
+     *
+     * @param string[]|null $serving_statuses LinkedIn only. Why the parent campaign is (or is not) delivering, verbatim from LinkedIn. A campaign can report `status: ACTIVE` and still serve nothing; this array is what says so.  - `[]` means no serving data: a non-LinkedIn ad, or a LinkedIn ad not yet re-synced. - `[\"RUNNABLE\"]` means the campaign is eligible to serve. - Anything else is a hold. Known values include ACCOUNT_SERVING_HOLD, ACCOUNT_TOTAL_BUDGET_HOLD,   ACCOUNT_END_DATE_HOLD, CAMPAIGN_START_DATE_HOLD, CAMPAIGN_END_DATE_HOLD,   CAMPAIGN_TOTAL_BUDGET_HOLD, CAMPAIGN_AUDIENCE_COUNT_HOLD, CAMPAIGN_GROUP_START_DATE_HOLD,   CAMPAIGN_GROUP_END_DATE_HOLD, CAMPAIGN_GROUP_TOTAL_BUDGET_HOLD, CAMPAIGN_GROUP_STATUS_HOLD and   STOPPED. The list is open on purpose, so treat unrecognized values as holds rather than errors.  The end-date and total-budget holds are terminal and surface as `status: completed`; the rest surface as `status: paused`. Note that a hold is not the only cause of zero delivery: with manual, target-cost or cost-cap bidding, a `bidAmount` of 0 stops delivery while `servingStatuses` still reads `[\"RUNNABLE\"]`. Check `costType` / `bidAmount` / `optimizationGoal` as well.
+     *
+     * @return self
+     */
+    public function setServingStatuses($serving_statuses)
+    {
+        if (is_null($serving_statuses)) {
+            throw new \InvalidArgumentException('non-nullable serving_statuses cannot be null');
+        }
+        $this->container['serving_statuses'] = $serving_statuses;
 
         return $this;
     }
@@ -1286,7 +1361,7 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets bid_amount
      *
-     * @param float|null $bid_amount Bid cap in WHOLE currency units of the ad account (USD: 5 = $5.00; JPY: 100 = ¥100). Populated when bidStrategy is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`. `null` for auto-bid (`LOWEST_COST_WITHOUT_CAP`).  - Meta source: `bid_amount` on the ad set (smallest-denomination int, decoded here). - TikTok source: priority order `bid_price` -> `conversion_bid_price` -> `deep_cpa_bid`   (whichever is set on the ad group). TikTok stores all three in whole currency units.  Source: facebook-business-sdk-codegen api_specs/specs/AdSet.json (`bid_amount`).
+     * @param float|null $bid_amount Bid amount in WHOLE currency units of the ad account (USD: 5 = $5.00; JPY: 100 = ¥100).  - Meta source: `bid_amount` on the ad set (smallest-denomination int, decoded here). Populated   when bidStrategy is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`; `null` for auto-bid   (`LOWEST_COST_WITHOUT_CAP`). - TikTok source: priority order `bid_price` -> `conversion_bid_price` -> `deep_cpa_bid`   (whichever is set on the ad group). TikTok stores all three in whole currency units. - LinkedIn source: the campaign's EFFECTIVE `unitCost`, refreshed on every sync rather than   echoing what was passed on create. Its meaning depends on the bidding mode implied by   `optimizationGoal`: bid amount (manual), target cost, or cost cap. It pairs with `costType`,   NOT with `bidStrategy`, which LinkedIn does not have. A value of `0` is a real, delivery-   stopping configuration and not \"unset\", so do not gate this field on `bidStrategy` for   LinkedIn ads.  Source: facebook-business-sdk-codegen api_specs/specs/AdSet.json (`bid_amount`).
      *
      * @return self
      */
