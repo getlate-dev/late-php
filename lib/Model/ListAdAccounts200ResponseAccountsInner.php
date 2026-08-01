@@ -62,6 +62,9 @@ class ListAdAccounts200ResponseAccountsInner implements ModelInterface, ArrayAcc
         'name' => 'string',
         'currency' => 'string',
         'status' => 'string',
+        'account_status' => 'mixed',
+        'approval_status' => 'string',
+        'disable_reason' => 'int',
         'timezone_name' => 'string',
         'timezone_offset_hours_utc' => 'float',
         'minimum_daily_budget' => 'float',
@@ -81,6 +84,9 @@ class ListAdAccounts200ResponseAccountsInner implements ModelInterface, ArrayAcc
         'name' => null,
         'currency' => null,
         'status' => null,
+        'account_status' => null,
+        'approval_status' => null,
+        'disable_reason' => null,
         'timezone_name' => null,
         'timezone_offset_hours_utc' => null,
         'minimum_daily_budget' => null,
@@ -98,6 +104,9 @@ class ListAdAccounts200ResponseAccountsInner implements ModelInterface, ArrayAcc
         'name' => false,
         'currency' => false,
         'status' => false,
+        'account_status' => true,
+        'approval_status' => false,
+        'disable_reason' => false,
         'timezone_name' => false,
         'timezone_offset_hours_utc' => false,
         'minimum_daily_budget' => false,
@@ -195,6 +204,9 @@ class ListAdAccounts200ResponseAccountsInner implements ModelInterface, ArrayAcc
         'name' => 'name',
         'currency' => 'currency',
         'status' => 'status',
+        'account_status' => 'accountStatus',
+        'approval_status' => 'approvalStatus',
+        'disable_reason' => 'disableReason',
         'timezone_name' => 'timezoneName',
         'timezone_offset_hours_utc' => 'timezoneOffsetHoursUtc',
         'minimum_daily_budget' => 'minimumDailyBudget',
@@ -212,6 +224,9 @@ class ListAdAccounts200ResponseAccountsInner implements ModelInterface, ArrayAcc
         'name' => 'setName',
         'currency' => 'setCurrency',
         'status' => 'setStatus',
+        'account_status' => 'setAccountStatus',
+        'approval_status' => 'setApprovalStatus',
+        'disable_reason' => 'setDisableReason',
         'timezone_name' => 'setTimezoneName',
         'timezone_offset_hours_utc' => 'setTimezoneOffsetHoursUtc',
         'minimum_daily_budget' => 'setMinimumDailyBudget',
@@ -229,6 +244,9 @@ class ListAdAccounts200ResponseAccountsInner implements ModelInterface, ArrayAcc
         'name' => 'getName',
         'currency' => 'getCurrency',
         'status' => 'getStatus',
+        'account_status' => 'getAccountStatus',
+        'approval_status' => 'getApprovalStatus',
+        'disable_reason' => 'getDisableReason',
         'timezone_name' => 'getTimezoneName',
         'timezone_offset_hours_utc' => 'getTimezoneOffsetHoursUtc',
         'minimum_daily_budget' => 'getMinimumDailyBudget',
@@ -297,6 +315,9 @@ class ListAdAccounts200ResponseAccountsInner implements ModelInterface, ArrayAcc
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('account_status', $data ?? [], null);
+        $this->setIfExists('approval_status', $data ?? [], null);
+        $this->setIfExists('disable_reason', $data ?? [], null);
         $this->setIfExists('timezone_name', $data ?? [], null);
         $this->setIfExists('timezone_offset_hours_utc', $data ?? [], null);
         $this->setIfExists('minimum_daily_budget', $data ?? [], null);
@@ -440,7 +461,7 @@ class ListAdAccounts200ResponseAccountsInner implements ModelInterface, ArrayAcc
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status LinkedIn only. LinkedIn's own ad account status. In practice always `ACTIVE`, because the LinkedIn query filters to active accounts. Meta, Google, TikTok and Pinterest report `accountStatus` instead; X reports `approvalStatus`.
      *
      * @return self
      */
@@ -450,6 +471,94 @@ class ListAdAccounts200ResponseAccountsInner implements ModelInterface, ArrayAcc
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_status
+     *
+     * @return mixed|null
+     */
+    public function getAccountStatus()
+    {
+        return $this->container['account_status'];
+    }
+
+    /**
+     * Sets account_status
+     *
+     * @param mixed|null $account_status account_status
+     *
+     * @return self
+     */
+    public function setAccountStatus($account_status)
+    {
+        if (is_null($account_status)) {
+            array_push($this->openAPINullablesSetToNull, 'account_status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('account_status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['account_status'] = $account_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets approval_status
+     *
+     * @return string|null
+     */
+    public function getApprovalStatus()
+    {
+        return $this->container['approval_status'];
+    }
+
+    /**
+     * Sets approval_status
+     *
+     * @param string|null $approval_status X only. X's own ad account approval status. Observed values are `ACCEPTED`, `PENDING` and `REJECTED`, but X does not publish the full vocabulary, so treat an unrecognised value as not usable. Other platforms report `accountStatus` or `status` instead.
+     *
+     * @return self
+     */
+    public function setApprovalStatus($approval_status)
+    {
+        if (is_null($approval_status)) {
+            throw new \InvalidArgumentException('non-nullable approval_status cannot be null');
+        }
+        $this->container['approval_status'] = $approval_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets disable_reason
+     *
+     * @return int|null
+     */
+    public function getDisableReason()
+    {
+        return $this->container['disable_reason'];
+    }
+
+    /**
+     * Sets disable_reason
+     *
+     * @param int|null $disable_reason Meta only. Meta's `disable_reason` code, forwarded unchanged. Present when `accountStatus` is `2` (DISABLED) and Meta gives a reason, which is what separates a policy action from a payment problem. Meta does not publish a stable list of values for this field, so none are enumerated here: resolve the code against Meta's own ad account reference. Absent when Meta reports no reason, or when the connected token cannot read the field.
+     *
+     * @return self
+     */
+    public function setDisableReason($disable_reason)
+    {
+        if (is_null($disable_reason)) {
+            throw new \InvalidArgumentException('non-nullable disable_reason cannot be null');
+        }
+        $this->container['disable_reason'] = $disable_reason;
 
         return $this;
     }
