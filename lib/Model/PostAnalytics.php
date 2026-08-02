@@ -69,6 +69,7 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => 'int',
         'ig_reels_avg_watch_time' => 'int',
         'ig_reels_video_view_total_time' => 'int',
+        'video_duration_seconds' => 'int',
         'engagement_rate' => 'float',
         'last_updated' => '\DateTime'
     ];
@@ -92,6 +93,7 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => null,
         'ig_reels_avg_watch_time' => null,
         'ig_reels_video_view_total_time' => null,
+        'video_duration_seconds' => null,
         'engagement_rate' => null,
         'last_updated' => 'date-time'
     ];
@@ -113,6 +115,7 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => false,
         'ig_reels_avg_watch_time' => false,
         'ig_reels_video_view_total_time' => false,
+        'video_duration_seconds' => true,
         'engagement_rate' => false,
         'last_updated' => false
     ];
@@ -214,6 +217,7 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => 'follows',
         'ig_reels_avg_watch_time' => 'igReelsAvgWatchTime',
         'ig_reels_video_view_total_time' => 'igReelsVideoViewTotalTime',
+        'video_duration_seconds' => 'videoDurationSeconds',
         'engagement_rate' => 'engagementRate',
         'last_updated' => 'lastUpdated'
     ];
@@ -235,6 +239,7 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => 'setFollows',
         'ig_reels_avg_watch_time' => 'setIgReelsAvgWatchTime',
         'ig_reels_video_view_total_time' => 'setIgReelsVideoViewTotalTime',
+        'video_duration_seconds' => 'setVideoDurationSeconds',
         'engagement_rate' => 'setEngagementRate',
         'last_updated' => 'setLastUpdated'
     ];
@@ -256,6 +261,7 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => 'getFollows',
         'ig_reels_avg_watch_time' => 'getIgReelsAvgWatchTime',
         'ig_reels_video_view_total_time' => 'getIgReelsVideoViewTotalTime',
+        'video_duration_seconds' => 'getVideoDurationSeconds',
         'engagement_rate' => 'getEngagementRate',
         'last_updated' => 'getLastUpdated'
     ];
@@ -328,6 +334,7 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('follows', $data ?? [], null);
         $this->setIfExists('ig_reels_avg_watch_time', $data ?? [], null);
         $this->setIfExists('ig_reels_video_view_total_time', $data ?? [], null);
+        $this->setIfExists('video_duration_seconds', $data ?? [], null);
         $this->setIfExists('engagement_rate', $data ?? [], null);
         $this->setIfExists('last_updated', $data ?? [], null);
     }
@@ -667,6 +674,40 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable ig_reels_video_view_total_time cannot be null');
         }
         $this->container['ig_reels_video_view_total_time'] = $ig_reels_video_view_total_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets video_duration_seconds
+     *
+     * @return int|null
+     */
+    public function getVideoDurationSeconds()
+    {
+        return $this->container['video_duration_seconds'];
+    }
+
+    /**
+     * Sets video_duration_seconds
+     *
+     * @param int|null $video_duration_seconds Video length in seconds. Currently Instagram Reels only; combine with igReelsAvgWatchTime (ms) to estimate retention. Null when unknown (other platforms, non-video media, or when Instagram does not expose the media URL, e.g. reels with copyrighted audio).
+     *
+     * @return self
+     */
+    public function setVideoDurationSeconds($video_duration_seconds)
+    {
+        if (is_null($video_duration_seconds)) {
+            array_push($this->openAPINullablesSetToNull, 'video_duration_seconds');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('video_duration_seconds', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['video_duration_seconds'] = $video_duration_seconds;
 
         return $this;
     }
