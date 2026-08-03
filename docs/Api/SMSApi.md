@@ -100,7 +100,7 @@ createSmsSenderId($create_sms_sender_id_request): \Zernio\Model\CreateSmsSenderI
 
 Create an alphanumeric sender ID
 
-Registers an alphanumeric sender ID (e.g. `ZERNIO`) — a branded `from` for one-way international SMS. No phone number purchase or carrier registration is needed; once created, pass it as `from` on `POST /v1/sms/messages`.  Constraints: 3-11 characters (letters, digits, spaces; at least one letter). Sends cannot reach the US, Canada, or Puerto Rico, are text-only, and recipients cannot reply. Sender IDs that impersonate well-known brands or institutions are rejected, and an ID already registered by another workspace returns 409 (active sender IDs are globally unique, first-come-first-served). Creating the same sender ID again is a no-op (re-activates it after a delete).
+Registers an alphanumeric sender ID (e.g. `ZERNIO`) — a branded `from` for one-way international SMS. No phone number purchase or carrier registration is needed; once created, pass it as `from` on `POST /v1/sms/messages`.  Constraints: 3-11 characters (letters, digits, spaces; at least one letter). Sends cannot reach the US, Canada, or Puerto Rico, are text-only, and recipients cannot reply. Sender IDs that impersonate well-known brands or institutions are rejected. Names are not exclusive: the same sender ID can be registered by any number of workspaces. Creating the same sender ID again is a no-op (re-activates it after a delete).
 
 ### Example
 
