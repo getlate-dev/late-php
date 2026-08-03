@@ -47,7 +47,7 @@ $apiInstance = new Zernio\Api\VoiceApi(
     $config
 );
 $create_voice_call_request = new \Zernio\Model\CreateVoiceCallRequest(); // \Zernio\Model\CreateVoiceCallRequest
-$idempotency_key = 'idempotency_key_example'; // string | Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+$idempotency_key = 'idempotency_key_example'; // string | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
 
 try {
     $result = $apiInstance->createVoiceCall($create_voice_call_request, $idempotency_key);
@@ -62,7 +62,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **create_voice_call_request** | [**\Zernio\Model\CreateVoiceCallRequest**](../Model/CreateVoiceCallRequest.md)|  | |
-| **idempotency_key** | **string**| Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
+| **idempotency_key** | **string**| Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
 ### Return type
 

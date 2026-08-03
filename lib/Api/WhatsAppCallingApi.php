@@ -3153,7 +3153,7 @@ class WhatsAppCallingApi
      * Initiate outbound call
      *
      * @param  \Zernio\Model\InitiateWhatsAppCallRequest $initiate_whats_app_call_request initiate_whats_app_call_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['initiateWhatsAppCall'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3172,7 +3172,7 @@ class WhatsAppCallingApi
      * Initiate outbound call
      *
      * @param  \Zernio\Model\InitiateWhatsAppCallRequest $initiate_whats_app_call_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['initiateWhatsAppCall'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3272,7 +3272,7 @@ class WhatsAppCallingApi
      * Initiate outbound call
      *
      * @param  \Zernio\Model\InitiateWhatsAppCallRequest $initiate_whats_app_call_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['initiateWhatsAppCall'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3294,7 +3294,7 @@ class WhatsAppCallingApi
      * Initiate outbound call
      *
      * @param  \Zernio\Model\InitiateWhatsAppCallRequest $initiate_whats_app_call_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['initiateWhatsAppCall'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3345,7 +3345,7 @@ class WhatsAppCallingApi
      * Create request for operation 'initiateWhatsAppCall'
      *
      * @param  \Zernio\Model\InitiateWhatsAppCallRequest $initiate_whats_app_call_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['initiateWhatsAppCall'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

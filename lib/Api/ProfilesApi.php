@@ -144,7 +144,7 @@ class ProfilesApi
      * Create profile
      *
      * @param  \Zernio\Model\CreateProfileRequest $create_profile_request create_profile_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProfile'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -163,7 +163,7 @@ class ProfilesApi
      * Create profile
      *
      * @param  \Zernio\Model\CreateProfileRequest $create_profile_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProfile'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -277,7 +277,7 @@ class ProfilesApi
      * Create profile
      *
      * @param  \Zernio\Model\CreateProfileRequest $create_profile_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProfile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -299,7 +299,7 @@ class ProfilesApi
      * Create profile
      *
      * @param  \Zernio\Model\CreateProfileRequest $create_profile_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProfile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -350,7 +350,7 @@ class ProfilesApi
      * Create request for operation 'createProfile'
      *
      * @param  \Zernio\Model\CreateProfileRequest $create_profile_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProfile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

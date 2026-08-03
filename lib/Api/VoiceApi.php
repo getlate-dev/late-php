@@ -162,7 +162,7 @@ class VoiceApi
      * Place an outbound phone call
      *
      * @param  \Zernio\Model\CreateVoiceCallRequest $create_voice_call_request create_voice_call_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVoiceCall'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -181,7 +181,7 @@ class VoiceApi
      * Place an outbound phone call
      *
      * @param  \Zernio\Model\CreateVoiceCallRequest $create_voice_call_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVoiceCall'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -281,7 +281,7 @@ class VoiceApi
      * Place an outbound phone call
      *
      * @param  \Zernio\Model\CreateVoiceCallRequest $create_voice_call_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVoiceCall'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -303,7 +303,7 @@ class VoiceApi
      * Place an outbound phone call
      *
      * @param  \Zernio\Model\CreateVoiceCallRequest $create_voice_call_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVoiceCall'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -354,7 +354,7 @@ class VoiceApi
      * Create request for operation 'createVoiceCall'
      *
      * @param  \Zernio\Model\CreateVoiceCallRequest $create_voice_call_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVoiceCall'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

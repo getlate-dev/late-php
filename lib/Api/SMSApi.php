@@ -4913,7 +4913,7 @@ class SMSApi
      * Send an SMS/MMS
      *
      * @param  \Zernio\Model\SendSmsRequest $send_sms_request send_sms_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes send retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendSms'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4932,7 +4932,7 @@ class SMSApi
      * Send an SMS/MMS
      *
      * @param  \Zernio\Model\SendSmsRequest $send_sms_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes send retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendSms'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -5032,7 +5032,7 @@ class SMSApi
      * Send an SMS/MMS
      *
      * @param  \Zernio\Model\SendSmsRequest $send_sms_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes send retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendSms'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5054,7 +5054,7 @@ class SMSApi
      * Send an SMS/MMS
      *
      * @param  \Zernio\Model\SendSmsRequest $send_sms_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes send retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendSms'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5105,7 +5105,7 @@ class SMSApi
      * Create request for operation 'sendSms'
      *
      * @param  \Zernio\Model\SendSmsRequest $send_sms_request (required)
-     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes send retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendSms'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

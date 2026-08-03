@@ -3527,15 +3527,16 @@ class MessagesApi
      *
      * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
      * @param  \Zernio\Model\SendInboxMessageRequest $send_inbox_message_request send_inbox_message_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendInboxMessage'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\SendInboxMessage200Response|\Zernio\Model\SendInboxMessage400Response|\Zernio\Model\InlineObject
      */
-    public function sendInboxMessage($conversation_id, $send_inbox_message_request, string $contentType = self::contentTypes['sendInboxMessage'][0])
+    public function sendInboxMessage($conversation_id, $send_inbox_message_request, $idempotency_key = null, string $contentType = self::contentTypes['sendInboxMessage'][0])
     {
-        list($response) = $this->sendInboxMessageWithHttpInfo($conversation_id, $send_inbox_message_request, $contentType);
+        list($response) = $this->sendInboxMessageWithHttpInfo($conversation_id, $send_inbox_message_request, $idempotency_key, $contentType);
         return $response;
     }
 
@@ -3546,15 +3547,16 @@ class MessagesApi
      *
      * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
      * @param  \Zernio\Model\SendInboxMessageRequest $send_inbox_message_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendInboxMessage'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\SendInboxMessage200Response|\Zernio\Model\SendInboxMessage400Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function sendInboxMessageWithHttpInfo($conversation_id, $send_inbox_message_request, string $contentType = self::contentTypes['sendInboxMessage'][0])
+    public function sendInboxMessageWithHttpInfo($conversation_id, $send_inbox_message_request, $idempotency_key = null, string $contentType = self::contentTypes['sendInboxMessage'][0])
     {
-        $request = $this->sendInboxMessageRequest($conversation_id, $send_inbox_message_request, $contentType);
+        $request = $this->sendInboxMessageRequest($conversation_id, $send_inbox_message_request, $idempotency_key, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3660,14 +3662,15 @@ class MessagesApi
      *
      * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
      * @param  \Zernio\Model\SendInboxMessageRequest $send_inbox_message_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendInboxMessage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function sendInboxMessageAsync($conversation_id, $send_inbox_message_request, string $contentType = self::contentTypes['sendInboxMessage'][0])
+    public function sendInboxMessageAsync($conversation_id, $send_inbox_message_request, $idempotency_key = null, string $contentType = self::contentTypes['sendInboxMessage'][0])
     {
-        return $this->sendInboxMessageAsyncWithHttpInfo($conversation_id, $send_inbox_message_request, $contentType)
+        return $this->sendInboxMessageAsyncWithHttpInfo($conversation_id, $send_inbox_message_request, $idempotency_key, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3682,15 +3685,16 @@ class MessagesApi
      *
      * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
      * @param  \Zernio\Model\SendInboxMessageRequest $send_inbox_message_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendInboxMessage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function sendInboxMessageAsyncWithHttpInfo($conversation_id, $send_inbox_message_request, string $contentType = self::contentTypes['sendInboxMessage'][0])
+    public function sendInboxMessageAsyncWithHttpInfo($conversation_id, $send_inbox_message_request, $idempotency_key = null, string $contentType = self::contentTypes['sendInboxMessage'][0])
     {
         $returnType = '\Zernio\Model\SendInboxMessage200Response';
-        $request = $this->sendInboxMessageRequest($conversation_id, $send_inbox_message_request, $contentType);
+        $request = $this->sendInboxMessageRequest($conversation_id, $send_inbox_message_request, $idempotency_key, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3733,12 +3737,13 @@ class MessagesApi
      *
      * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
      * @param  \Zernio\Model\SendInboxMessageRequest $send_inbox_message_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendInboxMessage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function sendInboxMessageRequest($conversation_id, $send_inbox_message_request, string $contentType = self::contentTypes['sendInboxMessage'][0])
+    public function sendInboxMessageRequest($conversation_id, $send_inbox_message_request, $idempotency_key = null, string $contentType = self::contentTypes['sendInboxMessage'][0])
     {
 
         // verify the required parameter 'conversation_id' is set
@@ -3755,6 +3760,10 @@ class MessagesApi
             );
         }
 
+        if ($idempotency_key !== null && strlen($idempotency_key) > 255) {
+            throw new \InvalidArgumentException('invalid length for "$idempotency_key" when calling MessagesApi.sendInboxMessage, must be smaller than or equal to 255.');
+        }
+        
 
         $resourcePath = '/v1/inbox/conversations/{conversationId}/messages';
         $formParams = [];
@@ -3764,6 +3773,10 @@ class MessagesApi
         $multipart = false;
 
 
+        // header params
+        if ($idempotency_key !== null) {
+            $headerParams['Idempotency-Key'] = ObjectSerializer::toHeaderValue($idempotency_key);
+        }
 
         // path params
         if ($conversation_id !== null) {
