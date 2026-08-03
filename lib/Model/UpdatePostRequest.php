@@ -897,7 +897,7 @@ class UpdatePostRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets tiktok_settings
      *
-     * @param \Zernio\Model\TikTokPlatformData|null $tiktok_settings Root-level TikTok settings applied to all TikTok platforms. Merged into each platform's platformSpecificData, with platform-specific settings taking precedence.
+     * @param \Zernio\Model\TikTokPlatformData|null $tiktok_settings Root-level TikTok settings applied to the TikTok platforms sent in the same request. Merged into each platform's platformSpecificData, with platform-specific settings taking precedence. Returns 400 if sent without a platforms array.
      *
      * @return self
      */
@@ -924,7 +924,7 @@ class UpdatePostRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets facebook_settings
      *
-     * @param \Zernio\Model\FacebookSettings|null $facebook_settings Root-level Facebook settings applied to all Facebook platforms. Merged into each platform's platformSpecificData.facebookSettings, with platform-specific settings taking precedence.
+     * @param \Zernio\Model\FacebookSettings|null $facebook_settings Root-level Facebook settings applied to the Facebook platforms sent in the same request. Merged into each platform's platformSpecificData.facebookSettings, with platform-specific settings taking precedence. Returns 400 if sent without a platforms array.
      *
      * @return self
      */

@@ -20,8 +20,8 @@ Name | Type | Description | Notes
 **metadata** | **array<string,mixed>** |  | [optional]
 **queued_from_profile** | **string** | Profile ID to schedule via queue. | [optional]
 **queue_id** | **string** | Specific queue ID to use when scheduling via queue. | [optional]
-**tiktok_settings** | [**\Zernio\Model\TikTokPlatformData**](TikTokPlatformData.md) | Root-level TikTok settings applied to all TikTok platforms. Merged into each platform&#39;s platformSpecificData, with platform-specific settings taking precedence. | [optional]
-**facebook_settings** | [**\Zernio\Model\FacebookSettings**](FacebookSettings.md) | Root-level Facebook settings applied to all Facebook platforms. Merged into each platform&#39;s platformSpecificData.facebookSettings, with platform-specific settings taking precedence. | [optional]
+**tiktok_settings** | [**\Zernio\Model\TikTokPlatformData**](TikTokPlatformData.md) | Root-level TikTok settings applied to the TikTok platforms sent in the same request. Merged into each platform&#39;s platformSpecificData, with platform-specific settings taking precedence. Returns 400 if sent without a platforms array. | [optional]
+**facebook_settings** | [**\Zernio\Model\FacebookSettings**](FacebookSettings.md) | Root-level Facebook settings applied to the Facebook platforms sent in the same request. Merged into each platform&#39;s platformSpecificData.facebookSettings, with platform-specific settings taking precedence. Returns 400 if sent without a platforms array. | [optional]
 **recycling** | [**\Zernio\Model\RecyclingConfig**](RecyclingConfig.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
