@@ -310,6 +310,7 @@ class CreatePhoneNumberPortInRequestEndUser implements ModelInterface, ArrayAcce
     public const COUNTRY_CODE_FR = 'FR';
     public const COUNTRY_CODE_NL = 'NL';
     public const COUNTRY_CODE_AU = 'AU';
+    public const COUNTRY_CODE_BR = 'BR';
 
     /**
      * Gets allowable values of the enum
@@ -327,6 +328,7 @@ class CreatePhoneNumberPortInRequestEndUser implements ModelInterface, ArrayAcce
             self::COUNTRY_CODE_FR,
             self::COUNTRY_CODE_NL,
             self::COUNTRY_CODE_AU,
+            self::COUNTRY_CODE_BR,
         ];
     }
 
