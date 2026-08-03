@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * CreateStandaloneAdRequestDynamicCreative Class Doc Comment
  *
  * @category Class
- * @description Meta only. Dynamic Creative: supply a POOL of assets and Meta auto-combines and optimises them into the best-performing variations within a single ad (mapped to the creative&#39;s &#x60;asset_feed_spec&#x60;). When set, the top-level single-creative fields (&#x60;imageUrl&#x60;, &#x60;headline&#x60;, &#x60;body&#x60;, &#x60;linkUrl&#x60;, &#x60;callToAction&#x60;) are ignored. Mutually exclusive with the &#x60;creatives[]&#x60; multi-creative shape. Meta limits: ≤10 images, ≤5 bodies / titles / descriptions.
+ * @description Meta only. Dynamic Creative: supply a POOL of assets and Meta auto-combines and optimises them into the best-performing variations within a single ad (mapped to the creative&#39;s &#x60;asset_feed_spec&#x60;). When set, the top-level single-creative fields (&#x60;imageUrl&#x60;, &#x60;headline&#x60;, &#x60;body&#x60;, &#x60;linkUrl&#x60;, &#x60;callToAction&#x60;) are ignored. Mutually exclusive with the &#x60;creatives[]&#x60; multi-creative shape. Exactly ONE of &#x60;imageUrls&#x60; / &#x60;videoUrls&#x60; is required (Meta allows one ad format per asset feed; sending both → 400). Meta limits: ≤10 images or ≤10 videos, ≤5 bodies / titles / descriptions.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,6 +60,7 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
       */
     protected static $openAPITypes = [
         'image_urls' => 'string[]',
+        'video_urls' => 'string[]',
         'bodies' => 'string[]',
         'titles' => 'string[]',
         'descriptions' => 'string[]',
@@ -77,6 +78,7 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
       */
     protected static $openAPIFormats = [
         'image_urls' => 'uri',
+        'video_urls' => 'uri',
         'bodies' => null,
         'titles' => null,
         'descriptions' => null,
@@ -92,6 +94,7 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
       */
     protected static array $openAPINullables = [
         'image_urls' => false,
+        'video_urls' => false,
         'bodies' => false,
         'titles' => false,
         'descriptions' => false,
@@ -187,6 +190,7 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
      */
     protected static $attributeMap = [
         'image_urls' => 'imageUrls',
+        'video_urls' => 'videoUrls',
         'bodies' => 'bodies',
         'titles' => 'titles',
         'descriptions' => 'descriptions',
@@ -202,6 +206,7 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
      */
     protected static $setters = [
         'image_urls' => 'setImageUrls',
+        'video_urls' => 'setVideoUrls',
         'bodies' => 'setBodies',
         'titles' => 'setTitles',
         'descriptions' => 'setDescriptions',
@@ -217,6 +222,7 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
      */
     protected static $getters = [
         'image_urls' => 'getImageUrls',
+        'video_urls' => 'getVideoUrls',
         'bodies' => 'getBodies',
         'titles' => 'getTitles',
         'descriptions' => 'getDescriptions',
@@ -302,6 +308,7 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
     public const CALL_TO_ACTION_TYPES_BUY_NOW = 'BUY_NOW';
     public const AD_FORMAT_SINGLE_IMAGE = 'SINGLE_IMAGE';
     public const AD_FORMAT_CAROUSEL_IMAGE = 'CAROUSEL_IMAGE';
+    public const AD_FORMAT_SINGLE_VIDEO = 'SINGLE_VIDEO';
 
     /**
      * Gets allowable values of the enum
@@ -358,6 +365,7 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
         return [
             self::AD_FORMAT_SINGLE_IMAGE,
             self::AD_FORMAT_CAROUSEL_IMAGE,
+            self::AD_FORMAT_SINGLE_VIDEO,
         ];
     }
 
@@ -377,12 +385,13 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
     public function __construct(?array $data = null)
     {
         $this->setIfExists('image_urls', $data ?? [], null);
+        $this->setIfExists('video_urls', $data ?? [], null);
         $this->setIfExists('bodies', $data ?? [], null);
         $this->setIfExists('titles', $data ?? [], null);
         $this->setIfExists('descriptions', $data ?? [], null);
         $this->setIfExists('link_urls', $data ?? [], null);
         $this->setIfExists('call_to_action_types', $data ?? [], null);
-        $this->setIfExists('ad_format', $data ?? [], 'SINGLE_IMAGE');
+        $this->setIfExists('ad_format', $data ?? [], null);
     }
 
     /**
@@ -412,15 +421,20 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
     {
         $invalidProperties = [];
 
-        if ($this->container['image_urls'] === null) {
-            $invalidProperties[] = "'image_urls' can't be null";
-        }
-        if ((count($this->container['image_urls']) > 10)) {
+        if (!is_null($this->container['image_urls']) && (count($this->container['image_urls']) > 10)) {
             $invalidProperties[] = "invalid value for 'image_urls', number of items must be less than or equal to 10.";
         }
 
-        if ((count($this->container['image_urls']) < 1)) {
+        if (!is_null($this->container['image_urls']) && (count($this->container['image_urls']) < 1)) {
             $invalidProperties[] = "invalid value for 'image_urls', number of items must be greater than or equal to 1.";
+        }
+
+        if (!is_null($this->container['video_urls']) && (count($this->container['video_urls']) > 10)) {
+            $invalidProperties[] = "invalid value for 'video_urls', number of items must be less than or equal to 10.";
+        }
+
+        if (!is_null($this->container['video_urls']) && (count($this->container['video_urls']) < 1)) {
+            $invalidProperties[] = "invalid value for 'video_urls', number of items must be greater than or equal to 1.";
         }
 
         if (!is_null($this->container['bodies']) && (count($this->container['bodies']) > 5)) {
@@ -462,7 +476,7 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
     /**
      * Gets image_urls
      *
-     * @return string[]
+     * @return string[]|null
      */
     public function getImageUrls()
     {
@@ -472,7 +486,7 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
     /**
      * Sets image_urls
      *
-     * @param string[] $image_urls Pool of image URLs (1-10). Uploaded to the ad account and referenced by hash in the asset feed.
+     * @param string[]|null $image_urls Pool of image URLs (1-10). Uploaded to the ad account and referenced by hash in the asset feed. Mutually exclusive with `videoUrls`.
      *
      * @return self
      */
@@ -489,6 +503,40 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
             throw new \InvalidArgumentException('invalid length for $image_urls when calling CreateStandaloneAdRequestDynamicCreative., number of items must be greater than or equal to 1.');
         }
         $this->container['image_urls'] = $image_urls;
+
+        return $this;
+    }
+
+    /**
+     * Gets video_urls
+     *
+     * @return string[]|null
+     */
+    public function getVideoUrls()
+    {
+        return $this->container['video_urls'];
+    }
+
+    /**
+     * Sets video_urls
+     *
+     * @param string[]|null $video_urls Pool of video URLs (1-10). Uploaded to the ad account and referenced by video id in the asset feed. No thumbnails are needed: Meta auto-generates a poster per video. Mutually exclusive with `imageUrls`; `adFormat` defaults to SINGLE_VIDEO.
+     *
+     * @return self
+     */
+    public function setVideoUrls($video_urls)
+    {
+        if (is_null($video_urls)) {
+            throw new \InvalidArgumentException('non-nullable video_urls cannot be null');
+        }
+
+        if ((count($video_urls) > 10)) {
+            throw new \InvalidArgumentException('invalid value for $video_urls when calling CreateStandaloneAdRequestDynamicCreative., number of items must be less than or equal to 10.');
+        }
+        if ((count($video_urls) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $video_urls when calling CreateStandaloneAdRequestDynamicCreative., number of items must be greater than or equal to 1.');
+        }
+        $this->container['video_urls'] = $video_urls;
 
         return $this;
     }
@@ -662,7 +710,7 @@ class CreateStandaloneAdRequestDynamicCreative implements ModelInterface, ArrayA
     /**
      * Sets ad_format
      *
-     * @param string|null $ad_format Asset-feed ad format. Defaults to SINGLE_IMAGE.
+     * @param string|null $ad_format Asset-feed ad format. Must match the pool: SINGLE_IMAGE / CAROUSEL_IMAGE require `imageUrls`, SINGLE_VIDEO requires `videoUrls` (400 otherwise). Defaults to SINGLE_IMAGE with `imageUrls`, SINGLE_VIDEO with `videoUrls`.
      *
      * @return self
      */
