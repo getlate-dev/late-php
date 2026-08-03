@@ -71,7 +71,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'status' => 'string',
         'unread_count' => 'int',
         'url' => 'string',
-        'instagram_profile' => '\Zernio\Model\ListInboxConversations200ResponseDataInnerInstagramProfile'
+        'instagram_profile' => '\Zernio\Model\ListInboxConversations200ResponseDataInnerInstagramProfile',
+        'metadata' => '\Zernio\Model\ListInboxConversations200ResponseDataInnerMetadata'
     ];
 
     /**
@@ -95,7 +96,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'status' => null,
         'unread_count' => null,
         'url' => null,
-        'instagram_profile' => null
+        'instagram_profile' => null,
+        'metadata' => null
     ];
 
     /**
@@ -117,7 +119,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'status' => false,
         'unread_count' => true,
         'url' => true,
-        'instagram_profile' => false
+        'instagram_profile' => false,
+        'metadata' => false
     ];
 
     /**
@@ -219,7 +222,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'status' => 'status',
         'unread_count' => 'unreadCount',
         'url' => 'url',
-        'instagram_profile' => 'instagramProfile'
+        'instagram_profile' => 'instagramProfile',
+        'metadata' => 'metadata'
     ];
 
     /**
@@ -241,7 +245,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'status' => 'setStatus',
         'unread_count' => 'setUnreadCount',
         'url' => 'setUrl',
-        'instagram_profile' => 'setInstagramProfile'
+        'instagram_profile' => 'setInstagramProfile',
+        'metadata' => 'setMetadata'
     ];
 
     /**
@@ -263,7 +268,8 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         'status' => 'getStatus',
         'unread_count' => 'getUnreadCount',
         'url' => 'getUrl',
-        'instagram_profile' => 'getInstagramProfile'
+        'instagram_profile' => 'getInstagramProfile',
+        'metadata' => 'getMetadata'
     ];
 
     /**
@@ -371,6 +377,7 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
         $this->setIfExists('unread_count', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('instagram_profile', $data ?? [], null);
+        $this->setIfExists('metadata', $data ?? [], null);
     }
 
     /**
@@ -855,6 +862,33 @@ class ListInboxConversations200ResponseDataInner implements ModelInterface, Arra
             throw new \InvalidArgumentException('non-nullable instagram_profile cannot be null');
         }
         $this->container['instagram_profile'] = $instagram_profile;
+
+        return $this;
+    }
+
+    /**
+     * Gets metadata
+     *
+     * @return \Zernio\Model\ListInboxConversations200ResponseDataInnerMetadata|null
+     */
+    public function getMetadata()
+    {
+        return $this->container['metadata'];
+    }
+
+    /**
+     * Sets metadata
+     *
+     * @param \Zernio\Model\ListInboxConversations200ResponseDataInnerMetadata|null $metadata metadata
+     *
+     * @return self
+     */
+    public function setMetadata($metadata)
+    {
+        if (is_null($metadata)) {
+            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
+        }
+        $this->container['metadata'] = $metadata;
 
         return $this;
     }

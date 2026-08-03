@@ -599,6 +599,7 @@ docs/Model/GetGoogleBusinessVerifications200ResponseVoiceOfMerchantState.md
 docs/Model/GetGoogleBusinessVerifications200ResponseVoiceOfMerchantStateVerify.md
 docs/Model/GetInboxConversation200Response.md
 docs/Model/GetInboxConversation200ResponseData.md
+docs/Model/GetInboxConversation200ResponseDataMetadata.md
 docs/Model/GetInboxConversationAnalytics200Response.md
 docs/Model/GetInboxConversationAnalytics200ResponseBySourceInner.md
 docs/Model/GetInboxConversationAnalytics200ResponseSummary.md
@@ -921,6 +922,7 @@ docs/Model/ListInboxConversationAnalytics200ResponsePagination.md
 docs/Model/ListInboxConversations200Response.md
 docs/Model/ListInboxConversations200ResponseDataInner.md
 docs/Model/ListInboxConversations200ResponseDataInnerInstagramProfile.md
+docs/Model/ListInboxConversations200ResponseDataInnerMetadata.md
 docs/Model/ListInboxConversations200ResponseMeta.md
 docs/Model/ListInboxConversations200ResponseMetaFailedAccountsInner.md
 docs/Model/ListInboxConversations200ResponsePagination.md
@@ -2219,6 +2221,7 @@ lib/Model/GetGoogleBusinessVerifications200ResponseVoiceOfMerchantState.php
 lib/Model/GetGoogleBusinessVerifications200ResponseVoiceOfMerchantStateVerify.php
 lib/Model/GetInboxConversation200Response.php
 lib/Model/GetInboxConversation200ResponseData.php
+lib/Model/GetInboxConversation200ResponseDataMetadata.php
 lib/Model/GetInboxConversationAnalytics200Response.php
 lib/Model/GetInboxConversationAnalytics200ResponseBySourceInner.php
 lib/Model/GetInboxConversationAnalytics200ResponseSummary.php
@@ -2541,6 +2544,7 @@ lib/Model/ListInboxConversationAnalytics200ResponsePagination.php
 lib/Model/ListInboxConversations200Response.php
 lib/Model/ListInboxConversations200ResponseDataInner.php
 lib/Model/ListInboxConversations200ResponseDataInnerInstagramProfile.php
+lib/Model/ListInboxConversations200ResponseDataInnerMetadata.php
 lib/Model/ListInboxConversations200ResponseMeta.php
 lib/Model/ListInboxConversations200ResponseMetaFailedAccountsInner.php
 lib/Model/ListInboxConversations200ResponsePagination.php
@@ -3241,3 +3245,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/GetInboxConversation200ResponseDataMetadataTest.php
+test/Model/ListInboxConversations200ResponseDataInnerMetadataTest.php
