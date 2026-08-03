@@ -479,7 +479,7 @@ class UpdatePostRequestPlatformsInner implements ModelInterface, ArrayAccess, \J
     /**
      * Sets platform_specific_data
      *
-     * @param array<string,mixed>|null $platform_specific_data platform_specific_data
+     * @param array<string,mixed>|null $platform_specific_data A <platform>Settings namespace (e.g. facebookSettings, tiktokSettings) omitted from the request is preserved from the stored post. Sending the key replaces the whole namespace; it is not deep-merged.
      *
      * @return self
      */
