@@ -367,7 +367,7 @@ class CreateStandaloneAdRequestPromotedObject implements ModelInterface, ArrayAc
     /**
      * Sets pixel_id
      *
-     * @param string|null $pixel_id Pixel ID. **Meta:** Facebook Pixel ID, required for `goal: conversions`. **TikTok:** TikTok Pixel ID, required for `goal: conversions`.
+     * @param string|null $pixel_id Pixel ID. **Meta:** Facebook Pixel ID, required for `goal: conversions`. **TikTok:** TikTok Pixel ID, required for `goal: conversions`. To discover the pixels an ad account can use, call `GET /v1/accounts/{accountId}/tracking-tags?adAccountId=act_...` (each entry carries `kind` and `ownerAdAccountId`), or `GET /v1/accounts/{accountId}/conversion-destinations`. Note this is a different resource from `GET /v1/ads/{adId}/tracking-tags`, which reads an ad's click-URL params (`url_tags`), not pixels.
      *
      * @return self
      */
