@@ -64,6 +64,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'message' => 'string',
         'skip_dm_check' => 'bool',
         'template_name' => 'string',
+        'category' => 'string',
         'template_language' => 'string',
         'template_params' => 'string[]',
         'header_media' => '\Zernio\Model\CreateInboxConversationRequestHeaderMedia'
@@ -83,6 +84,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'message' => null,
         'skip_dm_check' => null,
         'template_name' => null,
+        'category' => null,
         'template_language' => null,
         'template_params' => null,
         'header_media' => null
@@ -100,6 +102,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'message' => false,
         'skip_dm_check' => false,
         'template_name' => false,
+        'category' => false,
         'template_language' => false,
         'template_params' => false,
         'header_media' => false
@@ -197,6 +200,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'message' => 'message',
         'skip_dm_check' => 'skipDmCheck',
         'template_name' => 'templateName',
+        'category' => 'category',
         'template_language' => 'templateLanguage',
         'template_params' => 'templateParams',
         'header_media' => 'headerMedia'
@@ -214,6 +218,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'message' => 'setMessage',
         'skip_dm_check' => 'setSkipDmCheck',
         'template_name' => 'setTemplateName',
+        'category' => 'setCategory',
         'template_language' => 'setTemplateLanguage',
         'template_params' => 'setTemplateParams',
         'header_media' => 'setHeaderMedia'
@@ -231,6 +236,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'message' => 'getMessage',
         'skip_dm_check' => 'getSkipDmCheck',
         'template_name' => 'getTemplateName',
+        'category' => 'getCategory',
         'template_language' => 'getTemplateLanguage',
         'template_params' => 'getTemplateParams',
         'header_media' => 'getHeaderMedia'
@@ -277,6 +283,19 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         return self::$openAPIModelName;
     }
 
+    public const CATEGORY_UTILITY = 'utility';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCategoryAllowableValues()
+    {
+        return [
+            self::CATEGORY_UTILITY,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -299,6 +318,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('message', $data ?? [], null);
         $this->setIfExists('skip_dm_check', $data ?? [], false);
         $this->setIfExists('template_name', $data ?? [], null);
+        $this->setIfExists('category', $data ?? [], null);
         $this->setIfExists('template_language', $data ?? [], null);
         $this->setIfExists('template_params', $data ?? [], null);
         $this->setIfExists('header_media', $data ?? [], null);
@@ -334,6 +354,15 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         if ($this->container['account_id'] === null) {
             $invalidProperties[] = "'account_id' can't be null";
         }
+        $allowedValues = $this->getCategoryAllowableValues();
+        if (!is_null($this->container['category']) && !in_array($this->container['category'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'category', must be one of '%s'",
+                $this->container['category'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -443,7 +472,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets message
      *
-     * @param string|null $message Text content of the message. At least one of message, attachment, or (for WhatsApp) templateName is required.
+     * @param string|null $message Text content of the message. At least one of message, attachment, or (for WhatsApp) templateName is required. Required when category is set (a Direct Send utility message is a text message).
      *
      * @return self
      */
@@ -497,7 +526,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets template_name
      *
-     * @param string|null $template_name WhatsApp only. Name of the approved template to start the conversation with (required for WhatsApp).
+     * @param string|null $template_name WhatsApp only. Name of the approved template to start the conversation with. Required for WhatsApp unless category is used instead (Direct Send). Cannot be combined with category.
      *
      * @return self
      */
@@ -507,6 +536,43 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable template_name cannot be null');
         }
         $this->container['template_name'] = $template_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets category
+     *
+     * @return string|null
+     */
+    public function getCategory()
+    {
+        return $this->container['category'];
+    }
+
+    /**
+     * Sets category
+     *
+     * @param string|null $category WhatsApp only (Meta Direct Send). Combined with message and without templateName, starts the conversation with a business-initiated UTILITY message and no pre-approved template; Meta matches or auto-creates a template asynchronously. The WhatsApp Business Account must be eligible for Direct Send, otherwise the send fails with an error telling you to use an approved message template instead. Cannot be combined with templateName (templates are already categorized at creation). Utility messages only; marketing content is not allowed under this category. Accepted on the JSON body only, not on multipart requests.
+     *
+     * @return self
+     */
+    public function setCategory($category)
+    {
+        if (is_null($category)) {
+            throw new \InvalidArgumentException('non-nullable category cannot be null');
+        }
+        $allowedValues = $this->getCategoryAllowableValues();
+        if (!in_array($category, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'category', must be one of '%s'",
+                    $category,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['category'] = $category;
 
         return $this;
     }

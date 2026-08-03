@@ -61,6 +61,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'account_id' => 'string',
         'message' => 'string',
         'attachment_url' => 'string',
+        'category' => 'string',
         'attachment_type' => 'string',
         'attachment_name' => 'string',
         'voice_note' => 'bool',
@@ -87,6 +88,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'account_id' => null,
         'message' => null,
         'attachment_url' => null,
+        'category' => null,
         'attachment_type' => null,
         'attachment_name' => null,
         'voice_note' => null,
@@ -111,6 +113,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'account_id' => false,
         'message' => false,
         'attachment_url' => false,
+        'category' => false,
         'attachment_type' => false,
         'attachment_name' => false,
         'voice_note' => false,
@@ -215,6 +218,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'account_id' => 'accountId',
         'message' => 'message',
         'attachment_url' => 'attachmentUrl',
+        'category' => 'category',
         'attachment_type' => 'attachmentType',
         'attachment_name' => 'attachmentName',
         'voice_note' => 'voiceNote',
@@ -239,6 +243,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'account_id' => 'setAccountId',
         'message' => 'setMessage',
         'attachment_url' => 'setAttachmentUrl',
+        'category' => 'setCategory',
         'attachment_type' => 'setAttachmentType',
         'attachment_name' => 'setAttachmentName',
         'voice_note' => 'setVoiceNote',
@@ -263,6 +268,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'account_id' => 'getAccountId',
         'message' => 'getMessage',
         'attachment_url' => 'getAttachmentUrl',
+        'category' => 'getCategory',
         'attachment_type' => 'getAttachmentType',
         'attachment_name' => 'getAttachmentName',
         'voice_note' => 'getVoiceNote',
@@ -319,6 +325,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         return self::$openAPIModelName;
     }
 
+    public const CATEGORY_UTILITY = 'utility';
     public const ATTACHMENT_TYPE_IMAGE = 'image';
     public const ATTACHMENT_TYPE_VIDEO = 'video';
     public const ATTACHMENT_TYPE_AUDIO = 'audio';
@@ -330,6 +337,18 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
     public const MESSAGE_TAG_POST_PURCHASE_UPDATE = 'POST_PURCHASE_UPDATE';
     public const MESSAGE_TAG_ACCOUNT_UPDATE = 'ACCOUNT_UPDATE';
     public const MESSAGE_TAG_HUMAN_AGENT = 'HUMAN_AGENT';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCategoryAllowableValues()
+    {
+        return [
+            self::CATEGORY_UTILITY,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -393,6 +412,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('message', $data ?? [], null);
         $this->setIfExists('attachment_url', $data ?? [], null);
+        $this->setIfExists('category', $data ?? [], null);
         $this->setIfExists('attachment_type', $data ?? [], null);
         $this->setIfExists('attachment_name', $data ?? [], null);
         $this->setIfExists('voice_note', $data ?? [], null);
@@ -438,6 +458,15 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         if ($this->container['account_id'] === null) {
             $invalidProperties[] = "'account_id' can't be null";
         }
+        $allowedValues = $this->getCategoryAllowableValues();
+        if (!is_null($this->container['category']) && !in_array($this->container['category'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'category', must be one of '%s'",
+                $this->container['category'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         $allowedValues = $this->getAttachmentTypeAllowableValues();
         if (!is_null($this->container['attachment_type']) && !in_array($this->container['attachment_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -565,6 +594,43 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
             throw new \InvalidArgumentException('non-nullable attachment_url cannot be null');
         }
         $this->container['attachment_url'] = $attachment_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets category
+     *
+     * @return string|null
+     */
+    public function getCategory()
+    {
+        return $this->container['category'];
+    }
+
+    /**
+     * Sets category
+     *
+     * @param string|null $category WhatsApp only (Meta Direct Send). Sends this message as a business-initiated UTILITY message without an approved template, for example outside the 24-hour customer service window; Meta matches or auto-creates a template asynchronously. The WhatsApp Business Account must be eligible for Direct Send, otherwise the send fails with an error telling you to use an approved message template instead. Supported only for text messages (link preview ok) and interactive messages (reply buttons, CTA URL buttons, voice-call button, header of text/image/video/document). Cannot be combined with template, attachments, location, or contacts. Utility messages only; marketing content is not allowed under this category. Accepted on the JSON body only, not on multipart requests.
+     *
+     * @return self
+     */
+    public function setCategory($category)
+    {
+        if (is_null($category)) {
+            throw new \InvalidArgumentException('non-nullable category cannot be null');
+        }
+        $allowedValues = $this->getCategoryAllowableValues();
+        if (!in_array($category, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'category', must be one of '%s'",
+                    $category,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['category'] = $category;
 
         return $this;
     }
