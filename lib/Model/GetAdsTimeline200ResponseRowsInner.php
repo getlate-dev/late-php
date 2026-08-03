@@ -482,7 +482,7 @@ class GetAdsTimeline200ResponseRowsInner implements ModelInterface, ArrayAccess,
     /**
      * Sets reach
      *
-     * @param int|null $reach reach
+     * @param int|null $reach Reach summed across the account's ads for this single day. A person seen by two ads the same day counts twice, and reach is de-duplicated per day only: do NOT sum it across days (people reached on multiple days would be double-counted).
      *
      * @return self
      */

@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * AdDailyMetrics Class Doc Comment
  *
  * @category Class
- * @description One day of metrics. Same fields as &#x60;AdMetrics&#x60; plus the &#x60;date&#x60; they apply to. Returned inside a node&#39;s &#x60;daily[]&#x60; when &#x60;GET /v1/ads/tree&#x60; is called with &#x60;timeIncrement&#x3D;1&#x60;. Rate metrics (ctr/cpc/cpm/costPerConversion/ roas/videoAvgTimeWatchedActions) are recomputed per day from that day&#39;s sums, so summing the additive fields across a node&#39;s &#x60;daily[]&#x60; reproduces its aggregated &#x60;metrics&#x60; total. Do NOT sum or plain-average &#x60;videoAvgTimeWatchedActions&#x60; across days: the range value is the play-weighted average of the daily values.
+ * @description One day of metrics. Same fields as &#x60;AdMetrics&#x60; plus the &#x60;date&#x60; they apply to. Returned inside a node&#39;s &#x60;daily[]&#x60; when &#x60;GET /v1/ads/tree&#x60; is called with &#x60;timeIncrement&#x3D;1&#x60;. Rate metrics (ctr/cpc/cpm/costPerConversion/ roas/videoAvgTimeWatchedActions) are recomputed per day from that day&#39;s sums, so summing the additive fields across a node&#39;s &#x60;daily[]&#x60; reproduces its aggregated &#x60;metrics&#x60; total. &#x60;reach&#x60; is the exception: on Meta the aggregated total is de-duplicated across the range, so daily reach does not sum to it. Do NOT sum or plain-average &#x60;videoAvgTimeWatchedActions&#x60; across days: the range value is the play-weighted average of the daily values.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -526,7 +526,7 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets reach
      *
-     * @param int|null $reach reach
+     * @param int|null $reach Unique people reached in the requested date range. Meta (facebook/instagram): Meta's own de-duplicated reach for the exact range, fetched live and cached up to ~1 hour (may lag recent delivery; on a transient Meta error the value temporarily falls back to a sum of per-day reach, which overcounts people reached on multiple days or by multiple child ads). Because it is de-duplicated, Meta reach is NOT additive: neither daily values nor child nodes sum to the range total. TikTok: sum of per-day reach, so multi-day ranges overcount vs TikTok Ads Manager. Google, LinkedIn, X, Pinterest and OpenAI report 0 (reach not synced). Only derive frequency (impressions / reach) for Meta.
      *
      * @return self
      */
