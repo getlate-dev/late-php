@@ -119,7 +119,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'thumbnail_url' => false,
+        'thumbnail_url' => true,
         'image_url' => false,
         'video_id' => true,
         'video_url' => true,
@@ -451,7 +451,14 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setThumbnailUrl($thumbnail_url)
     {
         if (is_null($thumbnail_url)) {
-            throw new \InvalidArgumentException('non-nullable thumbnail_url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'thumbnail_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('thumbnail_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['thumbnail_url'] = $thumbnail_url;
 
