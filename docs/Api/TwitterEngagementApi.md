@@ -8,6 +8,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | ------------- | ------------- | ------------- |
 | [**bookmarkPost()**](TwitterEngagementApi.md#bookmarkPost) | **POST** /v1/twitter/bookmark | Bookmark a tweet |
 | [**followUser()**](TwitterEngagementApi.md#followUser) | **POST** /v1/twitter/follow | Follow a user |
+| [**getTweet()**](TwitterEngagementApi.md#getTweet) | **GET** /v1/twitter/tweet | Look up a tweet |
 | [**removeBookmark()**](TwitterEngagementApi.md#removeBookmark) | **DELETE** /v1/twitter/bookmark | Remove bookmark |
 | [**retweetPost()**](TwitterEngagementApi.md#retweetPost) | **POST** /v1/twitter/retweet | Retweet a post |
 | [**searchTweets()**](TwitterEngagementApi.md#searchTweets) | **GET** /v1/twitter/search | Search recent tweets |
@@ -129,6 +130,68 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getTweet()`
+
+```php
+getTweet($account_id, $id): \Zernio\Model\GetTweet200Response
+```
+
+Look up a tweet
+
+Resolve a single tweet by ID or URL into its text, author and public metrics.  Use this to render a post you are referencing, e.g. the tweet quoted by a quote-style post. Unlike `/v1/twitter/search` this is not limited to the last 7 days and works for any tweet visible to the connected account.  Billed as an X posts read ($0.005). Repeat lookups of the same tweet within the same UTC day are charged once.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\TwitterEngagementApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The social account ID whose X token is used for the lookup
+$id = 'id_example'; // string | Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...)
+
+try {
+    $result = $apiInstance->getTweet($account_id, $id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling TwitterEngagementApi->getTweet: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The social account ID whose X token is used for the lookup | |
+| **id** | **string**| Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...) | |
+
+### Return type
+
+[**\Zernio\Model\GetTweet200Response**](../Model/GetTweet200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

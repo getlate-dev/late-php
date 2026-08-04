@@ -678,7 +678,7 @@ getDiscordGuildMember($guild_id, $user_id, $account_id): \Zernio\Model\GetDiscor
 
 Get a Discord guild member
 
-Fetch a single guild member by Discord user id.  Does not require the privileged Server Members Intent, so this works even where the full member listing returns 403.
+Fetch a single guild member by Discord user id.  Cheaper than paginating the full member listing when you already know who you are looking for.
 
 ### Example
 
@@ -864,7 +864,7 @@ listDiscordGuildMembers($guild_id, $account_id, $limit, $after): \Zernio\Model\L
 
 List Discord guild members
 
-Cursor-paginated list of guild members. Returns Discord's raw member objects so callers can build community-ops automation (e.g. \"add role to all members joined in the last 7 days\") on the actual platform shape.  **Important:** this endpoint requires the privileged \"Server Members Intent\" on the Discord application. If the intent is not enabled, Discord rejects the call and this endpoint returns **403**. Single member lookup and prefix search (see the sibling endpoints) do not need the intent.  Pagination: pass `after` = the last `user.id` from the previous page. Omit on the first call. Response includes a `nextCursor` and `hasMore` flag so callers don't need to know Discord's pagination shape.
+Cursor-paginated list of guild members. Returns Discord's raw member objects so callers can build community-ops automation (e.g. \"add role to all members joined in the last 7 days\") on the actual platform shape.  Pagination: pass `after` = the last `user.id` from the previous page. Omit on the first call. Response includes a `nextCursor` and `hasMore` flag so callers don't need to know Discord's pagination shape.
 
 ### Example
 
@@ -1248,7 +1248,7 @@ searchDiscordGuildMembers($guild_id, $account_id, $query, $limit): \Zernio\Model
 
 Search Discord guild members
 
-Search guild members whose username or nickname **starts with** the query (Discord matches prefixes only, not substrings).  Does not require the privileged Server Members Intent, so this works even where the full member listing returns 403.
+Search guild members whose username or nickname **starts with** the query (Discord matches prefixes only, not substrings).  Cheaper than paginating the full member listing when you already know who you are looking for.
 
 ### Example
 

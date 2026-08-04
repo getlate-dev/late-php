@@ -719,6 +719,8 @@ docs/Model/GetTikTokCreatorInfo200ResponsePrivacyLevelsInner.md
 docs/Model/GetTrackingTag200Response.md
 docs/Model/GetTrackingTagStats200Response.md
 docs/Model/GetTrackingTagStats200ResponseStats.md
+docs/Model/GetTweet200Response.md
+docs/Model/GetTweet200ResponseTweet.md
 docs/Model/GetUsage200Response.md
 docs/Model/GetUser200Response.md
 docs/Model/GetUser200ResponseUser.md
@@ -2342,6 +2344,8 @@ lib/Model/GetTikTokCreatorInfo200ResponsePrivacyLevelsInner.php
 lib/Model/GetTrackingTag200Response.php
 lib/Model/GetTrackingTagStats200Response.php
 lib/Model/GetTrackingTagStats200ResponseStats.php
+lib/Model/GetTweet200Response.php
+lib/Model/GetTweet200ResponseTweet.php
 lib/Model/GetUsage200Response.php
 lib/Model/GetUser200Response.php
 lib/Model/GetUser200ResponseUser.php
@@ -3247,3 +3251,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/GetTweet200ResponseTest.php
+test/Model/GetTweet200ResponseTweetTest.php
