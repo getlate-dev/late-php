@@ -62,6 +62,7 @@ class CreateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
         'name' => 'string',
         'category' => 'string',
         'language' => 'string',
+        'parameter_format' => 'string',
         'components' => '\Zernio\Model\WhatsAppTemplateComponent[]',
         'library_template_name' => 'string',
         'library_template_body_inputs' => 'object',
@@ -80,6 +81,7 @@ class CreateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
         'name' => null,
         'category' => null,
         'language' => null,
+        'parameter_format' => null,
         'components' => null,
         'library_template_name' => null,
         'library_template_body_inputs' => null,
@@ -96,6 +98,7 @@ class CreateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
         'name' => false,
         'category' => false,
         'language' => false,
+        'parameter_format' => false,
         'components' => false,
         'library_template_name' => false,
         'library_template_body_inputs' => false,
@@ -192,6 +195,7 @@ class CreateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
         'name' => 'name',
         'category' => 'category',
         'language' => 'language',
+        'parameter_format' => 'parameter_format',
         'components' => 'components',
         'library_template_name' => 'library_template_name',
         'library_template_body_inputs' => 'library_template_body_inputs',
@@ -208,6 +212,7 @@ class CreateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
         'name' => 'setName',
         'category' => 'setCategory',
         'language' => 'setLanguage',
+        'parameter_format' => 'setParameterFormat',
         'components' => 'setComponents',
         'library_template_name' => 'setLibraryTemplateName',
         'library_template_body_inputs' => 'setLibraryTemplateBodyInputs',
@@ -224,6 +229,7 @@ class CreateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
         'name' => 'getName',
         'category' => 'getCategory',
         'language' => 'getLanguage',
+        'parameter_format' => 'getParameterFormat',
         'components' => 'getComponents',
         'library_template_name' => 'getLibraryTemplateName',
         'library_template_body_inputs' => 'getLibraryTemplateBodyInputs',
@@ -274,6 +280,10 @@ class CreateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
     public const CATEGORY_AUTHENTICATION = 'AUTHENTICATION';
     public const CATEGORY_MARKETING = 'MARKETING';
     public const CATEGORY_UTILITY = 'UTILITY';
+    public const PARAMETER_FORMAT_POSITIONAL = 'POSITIONAL';
+    public const PARAMETER_FORMAT_NAMED = 'NAMED';
+    public const PARAMETER_FORMAT_POSITIONAL2 = 'positional';
+    public const PARAMETER_FORMAT_NAMED2 = 'named';
 
     /**
      * Gets allowable values of the enum
@@ -286,6 +296,21 @@ class CreateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
             self::CATEGORY_AUTHENTICATION,
             self::CATEGORY_MARKETING,
             self::CATEGORY_UTILITY,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getParameterFormatAllowableValues()
+    {
+        return [
+            self::PARAMETER_FORMAT_POSITIONAL,
+            self::PARAMETER_FORMAT_NAMED,
+            self::PARAMETER_FORMAT_POSITIONAL2,
+            self::PARAMETER_FORMAT_NAMED2,
         ];
     }
 
@@ -308,6 +333,7 @@ class CreateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('category', $data ?? [], null);
         $this->setIfExists('language', $data ?? [], null);
+        $this->setIfExists('parameter_format', $data ?? [], null);
         $this->setIfExists('components', $data ?? [], null);
         $this->setIfExists('library_template_name', $data ?? [], null);
         $this->setIfExists('library_template_body_inputs', $data ?? [], null);
@@ -366,6 +392,15 @@ class CreateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
         if ($this->container['language'] === null) {
             $invalidProperties[] = "'language' can't be null";
         }
+        $allowedValues = $this->getParameterFormatAllowableValues();
+        if (!is_null($this->container['parameter_format']) && !in_array($this->container['parameter_format'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'parameter_format', must be one of '%s'",
+                $this->container['parameter_format'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if (!is_null($this->container['components']) && (count($this->container['components']) < 1)) {
             $invalidProperties[] = "invalid value for 'components', number of items must be greater than or equal to 1.";
         }
@@ -504,6 +539,43 @@ class CreateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable language cannot be null');
         }
         $this->container['language'] = $language;
+
+        return $this;
+    }
+
+    /**
+     * Gets parameter_format
+     *
+     * @return string|null
+     */
+    public function getParameterFormat()
+    {
+        return $this->container['parameter_format'];
+    }
+
+    /**
+     * Sets parameter_format
+     *
+     * @param string|null $parameter_format Variable style: POSITIONAL ({{1}}, the default) or NAMED ({{customer_name}}). Named templates provide examples via body_text_named_params / header_text_named_params. Inferred as NAMED when omitted but a named-params example is present.
+     *
+     * @return self
+     */
+    public function setParameterFormat($parameter_format)
+    {
+        if (is_null($parameter_format)) {
+            throw new \InvalidArgumentException('non-nullable parameter_format cannot be null');
+        }
+        $allowedValues = $this->getParameterFormatAllowableValues();
+        if (!in_array($parameter_format, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'parameter_format', must be one of '%s'",
+                    $parameter_format,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['parameter_format'] = $parameter_format;
 
         return $this;
     }

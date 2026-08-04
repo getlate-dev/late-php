@@ -1,6 +1,6 @@
 <?php
 /**
- * WhatsAppBodyComponentExample
+ * WhatsAppNamedParamExample
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * WhatsAppBodyComponentExample Class Doc Comment
+ * WhatsAppNamedParamExample Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WhatsAppBodyComponentExample implements ModelInterface, ArrayAccess, \JsonSerializable
+class WhatsAppNamedParamExample implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class WhatsAppBodyComponentExample implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WhatsAppBodyComponent_example';
+    protected static $openAPIModelName = 'WhatsAppNamedParamExample';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +58,8 @@ class WhatsAppBodyComponentExample implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'body_text' => 'string[][]',
-        'body_text_named_params' => '\Zernio\Model\WhatsAppNamedParamExample[]'
+        'param_name' => 'string',
+        'example' => 'string'
     ];
 
     /**
@@ -70,8 +70,8 @@ class WhatsAppBodyComponentExample implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'body_text' => null,
-        'body_text_named_params' => null
+        'param_name' => null,
+        'example' => null
     ];
 
     /**
@@ -80,8 +80,8 @@ class WhatsAppBodyComponentExample implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'body_text' => false,
-        'body_text_named_params' => false
+        'param_name' => false,
+        'example' => false
     ];
 
     /**
@@ -170,8 +170,8 @@ class WhatsAppBodyComponentExample implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
-        'body_text' => 'body_text',
-        'body_text_named_params' => 'body_text_named_params'
+        'param_name' => 'param_name',
+        'example' => 'example'
     ];
 
     /**
@@ -180,8 +180,8 @@ class WhatsAppBodyComponentExample implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
-        'body_text' => 'setBodyText',
-        'body_text_named_params' => 'setBodyTextNamedParams'
+        'param_name' => 'setParamName',
+        'example' => 'setExample'
     ];
 
     /**
@@ -190,8 +190,8 @@ class WhatsAppBodyComponentExample implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
-        'body_text' => 'getBodyText',
-        'body_text_named_params' => 'getBodyTextNamedParams'
+        'param_name' => 'getParamName',
+        'example' => 'getExample'
     ];
 
     /**
@@ -251,8 +251,8 @@ class WhatsAppBodyComponentExample implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('body_text', $data ?? [], null);
-        $this->setIfExists('body_text_named_params', $data ?? [], null);
+        $this->setIfExists('param_name', $data ?? [], null);
+        $this->setIfExists('example', $data ?? [], null);
     }
 
     /**
@@ -282,6 +282,16 @@ class WhatsAppBodyComponentExample implements ModelInterface, ArrayAccess, \Json
     {
         $invalidProperties = [];
 
+        if ($this->container['param_name'] === null) {
+            $invalidProperties[] = "'param_name' can't be null";
+        }
+        if (!preg_match("/^[a-z0-9_]+$/", $this->container['param_name'])) {
+            $invalidProperties[] = "invalid value for 'param_name', must be conform to the pattern /^[a-z0-9_]+$/.";
+        }
+
+        if ($this->container['example'] === null) {
+            $invalidProperties[] = "'example' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -298,55 +308,60 @@ class WhatsAppBodyComponentExample implements ModelInterface, ArrayAccess, \Json
 
 
     /**
-     * Gets body_text
+     * Gets param_name
      *
-     * @return string[][]|null
+     * @return string
      */
-    public function getBodyText()
+    public function getParamName()
     {
-        return $this->container['body_text'];
+        return $this->container['param_name'];
     }
 
     /**
-     * Sets body_text
+     * Sets param_name
      *
-     * @param string[][]|null $body_text Sample values for body variables (array of arrays)
+     * @param string $param_name Variable name as it appears in the text, without braces (e.g. customer_name for {{customer_name}}).
      *
      * @return self
      */
-    public function setBodyText($body_text)
+    public function setParamName($param_name)
     {
-        if (is_null($body_text)) {
-            throw new \InvalidArgumentException('non-nullable body_text cannot be null');
+        if (is_null($param_name)) {
+            throw new \InvalidArgumentException('non-nullable param_name cannot be null');
         }
-        $this->container['body_text'] = $body_text;
+
+        if ((!preg_match("/^[a-z0-9_]+$/", ObjectSerializer::toString($param_name)))) {
+            throw new \InvalidArgumentException("invalid value for \$param_name when calling WhatsAppNamedParamExample., must conform to the pattern /^[a-z0-9_]+$/.");
+        }
+
+        $this->container['param_name'] = $param_name;
 
         return $this;
     }
 
     /**
-     * Gets body_text_named_params
+     * Gets example
      *
-     * @return \Zernio\Model\WhatsAppNamedParamExample[]|null
+     * @return string
      */
-    public function getBodyTextNamedParams()
+    public function getExample()
     {
-        return $this->container['body_text_named_params'];
+        return $this->container['example'];
     }
 
     /**
-     * Sets body_text_named_params
+     * Sets example
      *
-     * @param \Zernio\Model\WhatsAppNamedParamExample[]|null $body_text_named_params Sample values for NAMED body variables (templates using {{customer_name}}-style tokens with parameter_format: NAMED).
+     * @param string $example Sample value for this variable.
      *
      * @return self
      */
-    public function setBodyTextNamedParams($body_text_named_params)
+    public function setExample($example)
     {
-        if (is_null($body_text_named_params)) {
-            throw new \InvalidArgumentException('non-nullable body_text_named_params cannot be null');
+        if (is_null($example)) {
+            throw new \InvalidArgumentException('non-nullable example cannot be null');
         }
-        $this->container['body_text_named_params'] = $body_text_named_params;
+        $this->container['example'] = $example;
 
         return $this;
     }

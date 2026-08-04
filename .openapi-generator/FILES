@@ -1597,6 +1597,7 @@ docs/Model/WhatsAppHeaderComponent.md
 docs/Model/WhatsAppHeaderComponentExample.md
 docs/Model/WhatsAppLimitedTimeOfferComponent.md
 docs/Model/WhatsAppLimitedTimeOfferComponentLimitedTimeOffer.md
+docs/Model/WhatsAppNamedParamExample.md
 docs/Model/WhatsAppSandboxSession.md
 docs/Model/WhatsAppTemplateButton.md
 docs/Model/WhatsAppTemplateComponent.md
@@ -3220,6 +3221,7 @@ lib/Model/WhatsAppHeaderComponent.php
 lib/Model/WhatsAppHeaderComponentExample.php
 lib/Model/WhatsAppLimitedTimeOfferComponent.php
 lib/Model/WhatsAppLimitedTimeOfferComponentLimitedTimeOffer.php
+lib/Model/WhatsAppNamedParamExample.php
 lib/Model/WhatsAppSandboxSession.php
 lib/Model/WhatsAppTemplateButton.php
 lib/Model/WhatsAppTemplateComponent.php
@@ -3245,3 +3247,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/WhatsAppNamedParamExampleTest.php

@@ -59,6 +59,7 @@ class WhatsAppHeaderComponentExample implements ModelInterface, ArrayAccess, \Js
       */
     protected static $openAPITypes = [
         'header_text' => 'string[]',
+        'header_text_named_params' => '\Zernio\Model\WhatsAppNamedParamExample[]',
         'header_handle' => 'string[]'
     ];
 
@@ -71,6 +72,7 @@ class WhatsAppHeaderComponentExample implements ModelInterface, ArrayAccess, \Js
       */
     protected static $openAPIFormats = [
         'header_text' => null,
+        'header_text_named_params' => null,
         'header_handle' => 'uri'
     ];
 
@@ -81,6 +83,7 @@ class WhatsAppHeaderComponentExample implements ModelInterface, ArrayAccess, \Js
       */
     protected static array $openAPINullables = [
         'header_text' => false,
+        'header_text_named_params' => false,
         'header_handle' => false
     ];
 
@@ -171,6 +174,7 @@ class WhatsAppHeaderComponentExample implements ModelInterface, ArrayAccess, \Js
      */
     protected static $attributeMap = [
         'header_text' => 'header_text',
+        'header_text_named_params' => 'header_text_named_params',
         'header_handle' => 'header_handle'
     ];
 
@@ -181,6 +185,7 @@ class WhatsAppHeaderComponentExample implements ModelInterface, ArrayAccess, \Js
      */
     protected static $setters = [
         'header_text' => 'setHeaderText',
+        'header_text_named_params' => 'setHeaderTextNamedParams',
         'header_handle' => 'setHeaderHandle'
     ];
 
@@ -191,6 +196,7 @@ class WhatsAppHeaderComponentExample implements ModelInterface, ArrayAccess, \Js
      */
     protected static $getters = [
         'header_text' => 'getHeaderText',
+        'header_text_named_params' => 'getHeaderTextNamedParams',
         'header_handle' => 'getHeaderHandle'
     ];
 
@@ -252,6 +258,7 @@ class WhatsAppHeaderComponentExample implements ModelInterface, ArrayAccess, \Js
     public function __construct(?array $data = null)
     {
         $this->setIfExists('header_text', $data ?? [], null);
+        $this->setIfExists('header_text_named_params', $data ?? [], null);
         $this->setIfExists('header_handle', $data ?? [], null);
     }
 
@@ -328,6 +335,33 @@ class WhatsAppHeaderComponentExample implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable header_text cannot be null');
         }
         $this->container['header_text'] = $header_text;
+
+        return $this;
+    }
+
+    /**
+     * Gets header_text_named_params
+     *
+     * @return \Zernio\Model\WhatsAppNamedParamExample[]|null
+     */
+    public function getHeaderTextNamedParams()
+    {
+        return $this->container['header_text_named_params'];
+    }
+
+    /**
+     * Sets header_text_named_params
+     *
+     * @param \Zernio\Model\WhatsAppNamedParamExample[]|null $header_text_named_params Sample values for NAMED header variables (templates using {{customer_name}}-style tokens with parameter_format: NAMED).
+     *
+     * @return self
+     */
+    public function setHeaderTextNamedParams($header_text_named_params)
+    {
+        if (is_null($header_text_named_params)) {
+            throw new \InvalidArgumentException('non-nullable header_text_named_params cannot be null');
+        }
+        $this->container['header_text_named_params'] = $header_text_named_params;
 
         return $this;
     }
