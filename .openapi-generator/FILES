@@ -51,6 +51,7 @@ docs/Api/RedditSearchApi.md
 docs/Api/ReviewsApi.md
 docs/Api/SMSApi.md
 docs/Api/SequencesApi.md
+docs/Api/SlackApi.md
 docs/Api/TrackingTagsApi.md
 docs/Api/TwitterEngagementApi.md
 docs/Api/UsageApi.md
@@ -969,6 +970,8 @@ docs/Model/ListSequenceEnrollments200Response.md
 docs/Model/ListSequenceEnrollments200ResponseEnrollmentsInner.md
 docs/Model/ListSequences200Response.md
 docs/Model/ListSequences200ResponseSequencesInner.md
+docs/Model/ListSlackMembers200Response.md
+docs/Model/ListSlackMembers200ResponseMembersInner.md
 docs/Model/ListSmsOptOuts200Response.md
 docs/Model/ListSmsOptOuts200ResponseOptOutsInner.md
 docs/Model/ListSmsRegistrations200Response.md
@@ -1684,6 +1687,7 @@ lib/Api/RedditSearchApi.php
 lib/Api/ReviewsApi.php
 lib/Api/SMSApi.php
 lib/Api/SequencesApi.php
+lib/Api/SlackApi.php
 lib/Api/TrackingTagsApi.php
 lib/Api/TwitterEngagementApi.php
 lib/Api/UsageApi.php
@@ -2606,6 +2610,8 @@ lib/Model/ListSequenceEnrollments200Response.php
 lib/Model/ListSequenceEnrollments200ResponseEnrollmentsInner.php
 lib/Model/ListSequences200Response.php
 lib/Model/ListSequences200ResponseSequencesInner.php
+lib/Model/ListSlackMembers200Response.php
+lib/Model/ListSlackMembers200ResponseMembersInner.php
 lib/Model/ListSmsOptOuts200Response.php
 lib/Model/ListSmsOptOuts200ResponseOptOutsInner.php
 lib/Model/ListSmsRegistrations200Response.php
@@ -3275,3 +3281,6 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Api/SlackApiTest.php
+test/Model/ListSlackMembers200ResponseMembersInnerTest.php
+test/Model/ListSlackMembers200ResponseTest.php
