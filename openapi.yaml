@@ -15268,7 +15268,8 @@ paths:
         '400': { description: Invalid params }
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { description: BYOK required for AppSumo Twitter }
-        '500': { description: Failed to connect account }
+        '500': { description: 'Internal error while connecting the account' }
+        '502': { description: 'The platform rejected the token exchange (type: platform_error; an upstream 4xx status is forwarded instead of 502)' }
 
   /v1/connect/{platform}/ads:
     get:
@@ -39587,6 +39588,7 @@ paths:
         '400': { $ref: '#/components/responses/BadRequest' }
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { description: Ads add-on required. }
+        '422': { description: "Meta rejected the lead form with error code 3. The Facebook Page normally needs a Page admin to accept the Lead Ads Terms of Service." }
 
   /v1/ads/lead-forms/{formId}:
     get:
