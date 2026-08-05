@@ -358,8 +358,8 @@ $status = 'status_example'; // string
 $platform = twitter; // string
 $profile_id = 'profile_id_example'; // string | Filter posts to a specific profile (24-char hex ObjectId). Omit it, or send `all` or an empty value, to list posts across every profile.
 $created_by = 'created_by_example'; // string | Filter posts to those created by a specific team user (24-char hex ObjectId).
-$date_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
-$date_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
+$date_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400.
+$date_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400.
 $include_hidden = false; // bool
 $search = 'search_example'; // string | Search posts by text content.
 $sort_by = 'scheduled-desc'; // string | Sort order for results.
@@ -384,8 +384,8 @@ try {
 | **platform** | **string**|  | [optional] |
 | **profile_id** | **string**| Filter posts to a specific profile (24-char hex ObjectId). Omit it, or send &#x60;all&#x60; or an empty value, to list posts across every profile. | [optional] |
 | **created_by** | **string**| Filter posts to those created by a specific team user (24-char hex ObjectId). | [optional] |
-| **date_from** | **\DateTime**|  | [optional] |
-| **date_to** | **\DateTime**|  | [optional] |
+| **date_from** | **\DateTime**| Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400. | [optional] |
+| **date_to** | **\DateTime**| Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400. | [optional] |
 | **include_hidden** | **bool**|  | [optional] [default to false] |
 | **search** | **string**| Search posts by text content. | [optional] |
 | **sort_by** | **string**| Sort order for results. | [optional] [default to &#39;scheduled-desc&#39;] |
