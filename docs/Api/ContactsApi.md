@@ -317,7 +317,7 @@ try {
 ## `listContacts()`
 
 ```php
-listContacts($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip): \Zernio\Model\ListContacts200Response
+listContacts($profile_id, $account_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip): \Zernio\Model\ListContacts200Response
 ```
 
 List contacts
@@ -341,7 +341,8 @@ $apiInstance = new Zernio\Api\ContactsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$profile_id = 'profile_id_example'; // string | Filter by profile. Omit to list across all profiles
+$profile_id = 'profile_id_example'; // string | Filter by profile. Omit to list across all profiles. Matches the profile recorded on the contact itself, which is set when the contact is created and is independent of the profile its account currently belongs to. Filter by accountId to list a contact through its channel instead.
+$account_id = 'account_id_example'; // string | Filter by the SocialAccount that owns the contact channel. Contacts are resolved through their channels, so the profileId contact filter is not applied while accountId is set. A profileId sent alongside is still access-checked and still scopes the returned filters.tags list.
 $search = 'search_example'; // string
 $tag = 'tag_example'; // string
 $tags = 'tags_example'; // string | Comma-separated tags, matches contacts carrying any of them
@@ -351,7 +352,7 @@ $limit = 50; // int
 $skip = 0; // int
 
 try {
-    $result = $apiInstance->listContacts($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip);
+    $result = $apiInstance->listContacts($profile_id, $account_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ContactsApi->listContacts: ', $e->getMessage(), PHP_EOL;
@@ -362,7 +363,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **profile_id** | **string**| Filter by profile. Omit to list across all profiles | [optional] |
+| **profile_id** | **string**| Filter by profile. Omit to list across all profiles. Matches the profile recorded on the contact itself, which is set when the contact is created and is independent of the profile its account currently belongs to. Filter by accountId to list a contact through its channel instead. | [optional] |
+| **account_id** | **string**| Filter by the SocialAccount that owns the contact channel. Contacts are resolved through their channels, so the profileId contact filter is not applied while accountId is set. A profileId sent alongside is still access-checked and still scopes the returned filters.tags list. | [optional] |
 | **search** | **string**|  | [optional] |
 | **tag** | **string**|  | [optional] |
 | **tags** | **string**| Comma-separated tags, matches contacts carrying any of them | [optional] |

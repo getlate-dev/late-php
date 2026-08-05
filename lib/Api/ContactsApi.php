@@ -1557,7 +1557,8 @@ class ContactsApi
      *
      * List contacts
      *
-     * @param  string|null $profile_id Filter by profile. Omit to list across all profiles (optional)
+     * @param  string|null $profile_id Filter by profile. Omit to list across all profiles. Matches the profile recorded on the contact itself, which is set when the contact is created and is independent of the profile its account currently belongs to. Filter by accountId to list a contact through its channel instead. (optional)
+     * @param  string|null $account_id Filter by the SocialAccount that owns the contact channel. Contacts are resolved through their channels, so the profileId contact filter is not applied while accountId is set. A profileId sent alongside is still access-checked and still scopes the returned filters.tags list. (optional)
      * @param  string|null $search search (optional)
      * @param  string|null $tag tag (optional)
      * @param  string|null $tags Comma-separated tags, matches contacts carrying any of them (optional)
@@ -1571,9 +1572,9 @@ class ContactsApi
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\ListContacts200Response|\Zernio\Model\InlineObject
      */
-    public function listContacts($profile_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
+    public function listContacts($profile_id = null, $account_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
     {
-        list($response) = $this->listContactsWithHttpInfo($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType);
+        list($response) = $this->listContactsWithHttpInfo($profile_id, $account_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType);
         return $response;
     }
 
@@ -1582,7 +1583,8 @@ class ContactsApi
      *
      * List contacts
      *
-     * @param  string|null $profile_id Filter by profile. Omit to list across all profiles (optional)
+     * @param  string|null $profile_id Filter by profile. Omit to list across all profiles. Matches the profile recorded on the contact itself, which is set when the contact is created and is independent of the profile its account currently belongs to. Filter by accountId to list a contact through its channel instead. (optional)
+     * @param  string|null $account_id Filter by the SocialAccount that owns the contact channel. Contacts are resolved through their channels, so the profileId contact filter is not applied while accountId is set. A profileId sent alongside is still access-checked and still scopes the returned filters.tags list. (optional)
      * @param  string|null $search (optional)
      * @param  string|null $tag (optional)
      * @param  string|null $tags Comma-separated tags, matches contacts carrying any of them (optional)
@@ -1596,9 +1598,9 @@ class ContactsApi
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\ListContacts200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listContactsWithHttpInfo($profile_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
+    public function listContactsWithHttpInfo($profile_id = null, $account_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
     {
-        $request = $this->listContactsRequest($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType);
+        $request = $this->listContactsRequest($profile_id, $account_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1688,7 +1690,8 @@ class ContactsApi
      *
      * List contacts
      *
-     * @param  string|null $profile_id Filter by profile. Omit to list across all profiles (optional)
+     * @param  string|null $profile_id Filter by profile. Omit to list across all profiles. Matches the profile recorded on the contact itself, which is set when the contact is created and is independent of the profile its account currently belongs to. Filter by accountId to list a contact through its channel instead. (optional)
+     * @param  string|null $account_id Filter by the SocialAccount that owns the contact channel. Contacts are resolved through their channels, so the profileId contact filter is not applied while accountId is set. A profileId sent alongside is still access-checked and still scopes the returned filters.tags list. (optional)
      * @param  string|null $search (optional)
      * @param  string|null $tag (optional)
      * @param  string|null $tags Comma-separated tags, matches contacts carrying any of them (optional)
@@ -1701,9 +1704,9 @@ class ContactsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listContactsAsync($profile_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
+    public function listContactsAsync($profile_id = null, $account_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
     {
-        return $this->listContactsAsyncWithHttpInfo($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType)
+        return $this->listContactsAsyncWithHttpInfo($profile_id, $account_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1716,7 +1719,8 @@ class ContactsApi
      *
      * List contacts
      *
-     * @param  string|null $profile_id Filter by profile. Omit to list across all profiles (optional)
+     * @param  string|null $profile_id Filter by profile. Omit to list across all profiles. Matches the profile recorded on the contact itself, which is set when the contact is created and is independent of the profile its account currently belongs to. Filter by accountId to list a contact through its channel instead. (optional)
+     * @param  string|null $account_id Filter by the SocialAccount that owns the contact channel. Contacts are resolved through their channels, so the profileId contact filter is not applied while accountId is set. A profileId sent alongside is still access-checked and still scopes the returned filters.tags list. (optional)
      * @param  string|null $search (optional)
      * @param  string|null $tag (optional)
      * @param  string|null $tags Comma-separated tags, matches contacts carrying any of them (optional)
@@ -1729,10 +1733,10 @@ class ContactsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listContactsAsyncWithHttpInfo($profile_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
+    public function listContactsAsyncWithHttpInfo($profile_id = null, $account_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
     {
         $returnType = '\Zernio\Model\ListContacts200Response';
-        $request = $this->listContactsRequest($profile_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType);
+        $request = $this->listContactsRequest($profile_id, $account_id, $search, $tag, $tags, $platform, $is_subscribed, $limit, $skip, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1773,7 +1777,8 @@ class ContactsApi
     /**
      * Create request for operation 'listContacts'
      *
-     * @param  string|null $profile_id Filter by profile. Omit to list across all profiles (optional)
+     * @param  string|null $profile_id Filter by profile. Omit to list across all profiles. Matches the profile recorded on the contact itself, which is set when the contact is created and is independent of the profile its account currently belongs to. Filter by accountId to list a contact through its channel instead. (optional)
+     * @param  string|null $account_id Filter by the SocialAccount that owns the contact channel. Contacts are resolved through their channels, so the profileId contact filter is not applied while accountId is set. A profileId sent alongside is still access-checked and still scopes the returned filters.tags list. (optional)
      * @param  string|null $search (optional)
      * @param  string|null $tag (optional)
      * @param  string|null $tags Comma-separated tags, matches contacts carrying any of them (optional)
@@ -1786,8 +1791,9 @@ class ContactsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listContactsRequest($profile_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
+    public function listContactsRequest($profile_id = null, $account_id = null, $search = null, $tag = null, $tags = null, $platform = null, $is_subscribed = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listContacts'][0])
     {
+
 
 
 
@@ -1812,6 +1818,15 @@ class ContactsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $profile_id,
             'profileId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $account_id,
+            'accountId', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
