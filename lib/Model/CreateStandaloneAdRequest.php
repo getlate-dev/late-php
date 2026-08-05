@@ -131,6 +131,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'bid_strategy' => '\Zernio\Model\BidStrategy',
         'bid_amount' => 'float',
         'roas_average_floor' => 'float',
+        'value_rule_set_id' => 'string',
+        'value_rules_applied' => 'bool',
         'platform_specific_data' => '\Zernio\Model\LinkedInAdsPlatformData',
         'dsa_beneficiary' => 'string',
         'dsa_payor' => 'string',
@@ -220,6 +222,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'bid_strategy' => null,
         'bid_amount' => null,
         'roas_average_floor' => null,
+        'value_rule_set_id' => null,
+        'value_rules_applied' => null,
         'platform_specific_data' => null,
         'dsa_beneficiary' => null,
         'dsa_payor' => null,
@@ -307,6 +311,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'bid_strategy' => false,
         'bid_amount' => false,
         'roas_average_floor' => false,
+        'value_rule_set_id' => false,
+        'value_rules_applied' => false,
         'platform_specific_data' => false,
         'dsa_beneficiary' => false,
         'dsa_payor' => false,
@@ -474,6 +480,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'bid_strategy' => 'bidStrategy',
         'bid_amount' => 'bidAmount',
         'roas_average_floor' => 'roasAverageFloor',
+        'value_rule_set_id' => 'valueRuleSetId',
+        'value_rules_applied' => 'valueRulesApplied',
         'platform_specific_data' => 'platformSpecificData',
         'dsa_beneficiary' => 'dsaBeneficiary',
         'dsa_payor' => 'dsaPayor',
@@ -561,6 +569,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'bid_strategy' => 'setBidStrategy',
         'bid_amount' => 'setBidAmount',
         'roas_average_floor' => 'setRoasAverageFloor',
+        'value_rule_set_id' => 'setValueRuleSetId',
+        'value_rules_applied' => 'setValueRulesApplied',
         'platform_specific_data' => 'setPlatformSpecificData',
         'dsa_beneficiary' => 'setDsaBeneficiary',
         'dsa_payor' => 'setDsaPayor',
@@ -648,6 +658,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'bid_strategy' => 'getBidStrategy',
         'bid_amount' => 'getBidAmount',
         'roas_average_floor' => 'getRoasAverageFloor',
+        'value_rule_set_id' => 'getValueRuleSetId',
+        'value_rules_applied' => 'getValueRulesApplied',
         'platform_specific_data' => 'getPlatformSpecificData',
         'dsa_beneficiary' => 'getDsaBeneficiary',
         'dsa_payor' => 'getDsaPayor',
@@ -1075,6 +1087,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('bid_strategy', $data ?? [], null);
         $this->setIfExists('bid_amount', $data ?? [], null);
         $this->setIfExists('roas_average_floor', $data ?? [], null);
+        $this->setIfExists('value_rule_set_id', $data ?? [], null);
+        $this->setIfExists('value_rules_applied', $data ?? [], null);
         $this->setIfExists('platform_specific_data', $data ?? [], null);
         $this->setIfExists('dsa_beneficiary', $data ?? [], null);
         $this->setIfExists('dsa_payor', $data ?? [], null);
@@ -1279,6 +1293,10 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
                 $this->container['gender'],
                 implode("', '", $allowedValues)
             );
+        }
+
+        if (!is_null($this->container['value_rule_set_id']) && !preg_match("/^\\d+$/", $this->container['value_rule_set_id'])) {
+            $invalidProperties[] = "invalid value for 'value_rule_set_id', must be conform to the pattern /^\\d+$/.";
         }
 
         if (!is_null($this->container['dsa_beneficiary']) && (mb_strlen($this->container['dsa_beneficiary']) > 100)) {
@@ -3468,6 +3486,65 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable roas_average_floor cannot be null');
         }
         $this->container['roas_average_floor'] = $roas_average_floor;
+
+        return $this;
+    }
+
+    /**
+     * Gets value_rule_set_id
+     *
+     * @return string|null
+     */
+    public function getValueRuleSetId()
+    {
+        return $this->container['value_rule_set_id'];
+    }
+
+    /**
+     * Sets value_rule_set_id
+     *
+     * @param string|null $value_rule_set_id Meta only (facebook, instagram; other platforms return 400). Value rule set to attach to the new ad set, from `/v1/ads/value-rule-sets`. Attachment is driven by this id, so `valueRulesApplied` is optional alongside it.  Rejected with 400 in `adSetId` attach mode: that shape inherits the existing ad set's attachment, so the field would be silently ignored. Use `PUT /v1/ads/ad-sets/{adSetId}` there instead.  Ignored (stripped before the ad-set create) when `buyingType` is `RESERVED`: value rules only apply to auction ad sets on `LOWEST_COST_WITHOUT_CAP` or `COST_CAP`, and a Reach & Frequency reservation has no auction bid strategy.  Read back with `GET /v1/ads/ad-sets/{adSetId}?fields=value_rule_set_id`; the attachment is not mirrored onto Zernio's ad documents.
+     *
+     * @return self
+     */
+    public function setValueRuleSetId($value_rule_set_id)
+    {
+        if (is_null($value_rule_set_id)) {
+            throw new \InvalidArgumentException('non-nullable value_rule_set_id cannot be null');
+        }
+
+        if ((!preg_match("/^\\d+$/", ObjectSerializer::toString($value_rule_set_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$value_rule_set_id when calling CreateStandaloneAdRequest., must conform to the pattern /^\\d+$/.");
+        }
+
+        $this->container['value_rule_set_id'] = $value_rule_set_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets value_rules_applied
+     *
+     * @return bool|null
+     */
+    public function getValueRulesApplied()
+    {
+        return $this->container['value_rules_applied'];
+    }
+
+    /**
+     * Sets value_rules_applied
+     *
+     * @param bool|null $value_rules_applied Meta only (facebook, instagram; other platforms return 400). Optional when attaching, and requires `valueRuleSetId`. `false` is REJECTED here with 400: a newly created ad set has nothing to detach, so detaching lives on `PUT /v1/ads/ad-sets/{adSetId}`.
+     *
+     * @return self
+     */
+    public function setValueRulesApplied($value_rules_applied)
+    {
+        if (is_null($value_rules_applied)) {
+            throw new \InvalidArgumentException('non-nullable value_rules_applied cannot be null');
+        }
+        $this->container['value_rules_applied'] = $value_rules_applied;
 
         return $this;
     }

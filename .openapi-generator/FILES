@@ -333,6 +333,8 @@ docs/Model/CreateTestLeadRequest.md
 docs/Model/CreateTestLeadRequestFieldDataInner.md
 docs/Model/CreateTrackingTag201Response.md
 docs/Model/CreateTrackingTagRequest.md
+docs/Model/CreateValueRuleSet201Response.md
+docs/Model/CreateValueRuleSetRequest.md
 docs/Model/CreateVerificationRequest.md
 docs/Model/CreateVoiceCall200Response.md
 docs/Model/CreateVoiceCallRequest.md
@@ -380,6 +382,7 @@ docs/Model/DeleteInboxComment200Response.md
 docs/Model/DeleteInboxReviewReply200Response.md
 docs/Model/DeleteInboxReviewReplyRequest.md
 docs/Model/DeleteSmsSenderId200Response.md
+docs/Model/DeleteValueRuleSet200Response.md
 docs/Model/DeleteWhatsappBusinessUsernameRequest.md
 docs/Model/DialVoiceWebCall200Response.md
 docs/Model/DialVoiceWebCallRequest.md
@@ -724,6 +727,7 @@ docs/Model/GetTweet200ResponseTweet.md
 docs/Model/GetUsage200Response.md
 docs/Model/GetUser200Response.md
 docs/Model/GetUser200ResponseUser.md
+docs/Model/GetValueRuleSet200Response.md
 docs/Model/GetVoiceCall200Response.md
 docs/Model/GetVoiceCallEstimate200Response.md
 docs/Model/GetVoiceCallEstimate200ResponseBreakdown.md
@@ -980,6 +984,8 @@ docs/Model/ListTrackingTagSharedAccounts200Response.md
 docs/Model/ListTrackingTags200Response.md
 docs/Model/ListUsers200Response.md
 docs/Model/ListUsers200ResponseUsersInner.md
+docs/Model/ListValueRuleSets200Response.md
+docs/Model/ListValueRuleSets200ResponsePaging.md
 docs/Model/ListVoiceCalls200Response.md
 docs/Model/ListWhatsAppCalls200Response.md
 docs/Model/ListWhatsAppCalls200ResponseCallsInner.md
@@ -1435,6 +1441,8 @@ docs/Model/UpdateSequenceRequestStepsInner.md
 docs/Model/UpdateSequenceRequestStepsInnerTemplate.md
 docs/Model/UpdateSlackSettingsRequest.md
 docs/Model/UpdateTrackingTagRequest.md
+docs/Model/UpdateValueRuleSet200Response.md
+docs/Model/UpdateValueRuleSetRequest.md
 docs/Model/UpdateWebhookSettings200Response.md
 docs/Model/UpdateWebhookSettingsRequest.md
 docs/Model/UpdateWhatsAppBusinessProfileRequest.md
@@ -1509,6 +1517,9 @@ docs/Model/ValidateSubreddit200Response.md
 docs/Model/ValidateSubreddit200ResponseOneOf.md
 docs/Model/ValidateSubreddit200ResponseOneOf1.md
 docs/Model/ValidateSubreddit200ResponseOneOfSubreddit.md
+docs/Model/ValueRule.md
+docs/Model/ValueRuleCriterion.md
+docs/Model/ValueRuleSet.md
 docs/Model/Verification.md
 docs/Model/VerifySmsRegistrationOtp200Response.md
 docs/Model/VerifySmsRegistrationOtpRequest.md
@@ -1958,6 +1969,8 @@ lib/Model/CreateTestLeadRequest.php
 lib/Model/CreateTestLeadRequestFieldDataInner.php
 lib/Model/CreateTrackingTag201Response.php
 lib/Model/CreateTrackingTagRequest.php
+lib/Model/CreateValueRuleSet201Response.php
+lib/Model/CreateValueRuleSetRequest.php
 lib/Model/CreateVerificationRequest.php
 lib/Model/CreateVoiceCall200Response.php
 lib/Model/CreateVoiceCallRequest.php
@@ -2005,6 +2018,7 @@ lib/Model/DeleteInboxComment200Response.php
 lib/Model/DeleteInboxReviewReply200Response.php
 lib/Model/DeleteInboxReviewReplyRequest.php
 lib/Model/DeleteSmsSenderId200Response.php
+lib/Model/DeleteValueRuleSet200Response.php
 lib/Model/DeleteWhatsappBusinessUsernameRequest.php
 lib/Model/DialVoiceWebCall200Response.php
 lib/Model/DialVoiceWebCallRequest.php
@@ -2349,6 +2363,7 @@ lib/Model/GetTweet200ResponseTweet.php
 lib/Model/GetUsage200Response.php
 lib/Model/GetUser200Response.php
 lib/Model/GetUser200ResponseUser.php
+lib/Model/GetValueRuleSet200Response.php
 lib/Model/GetVoiceCall200Response.php
 lib/Model/GetVoiceCallEstimate200Response.php
 lib/Model/GetVoiceCallEstimate200ResponseBreakdown.php
@@ -2605,6 +2620,8 @@ lib/Model/ListTrackingTagSharedAccounts200Response.php
 lib/Model/ListTrackingTags200Response.php
 lib/Model/ListUsers200Response.php
 lib/Model/ListUsers200ResponseUsersInner.php
+lib/Model/ListValueRuleSets200Response.php
+lib/Model/ListValueRuleSets200ResponsePaging.php
 lib/Model/ListVoiceCalls200Response.php
 lib/Model/ListWhatsAppCalls200Response.php
 lib/Model/ListWhatsAppCalls200ResponseCallsInner.php
@@ -3061,6 +3078,8 @@ lib/Model/UpdateSequenceRequestStepsInner.php
 lib/Model/UpdateSequenceRequestStepsInnerTemplate.php
 lib/Model/UpdateSlackSettingsRequest.php
 lib/Model/UpdateTrackingTagRequest.php
+lib/Model/UpdateValueRuleSet200Response.php
+lib/Model/UpdateValueRuleSetRequest.php
 lib/Model/UpdateWebhookSettings200Response.php
 lib/Model/UpdateWebhookSettingsRequest.php
 lib/Model/UpdateWhatsAppBusinessProfileRequest.php
@@ -3135,6 +3154,9 @@ lib/Model/ValidateSubreddit200Response.php
 lib/Model/ValidateSubreddit200ResponseOneOf.php
 lib/Model/ValidateSubreddit200ResponseOneOf1.php
 lib/Model/ValidateSubreddit200ResponseOneOfSubreddit.php
+lib/Model/ValueRule.php
+lib/Model/ValueRuleCriterion.php
+lib/Model/ValueRuleSet.php
 lib/Model/Verification.php
 lib/Model/VerifySmsRegistrationOtp200Response.php
 lib/Model/VerifySmsRegistrationOtpRequest.php
@@ -3251,3 +3273,14 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/CreateValueRuleSet201ResponseTest.php
+test/Model/CreateValueRuleSetRequestTest.php
+test/Model/DeleteValueRuleSet200ResponseTest.php
+test/Model/GetValueRuleSet200ResponseTest.php
+test/Model/ListValueRuleSets200ResponsePagingTest.php
+test/Model/ListValueRuleSets200ResponseTest.php
+test/Model/UpdateValueRuleSet200ResponseTest.php
+test/Model/UpdateValueRuleSetRequestTest.php
+test/Model/ValueRuleCriterionTest.php
+test/Model/ValueRuleSetTest.php
+test/Model/ValueRuleTest.php

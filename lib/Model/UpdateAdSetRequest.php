@@ -65,6 +65,8 @@ class UpdateAdSetRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'bid_strategy' => '\Zernio\Model\BidStrategy',
         'bid_amount' => 'float',
         'roas_average_floor' => 'float',
+        'value_rule_set_id' => 'string',
+        'value_rules_applied' => 'bool',
         'platform_specific_data' => '\Zernio\Model\UpdateAdSetRequestPlatformSpecificData'
     ];
 
@@ -83,6 +85,8 @@ class UpdateAdSetRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'bid_strategy' => null,
         'bid_amount' => null,
         'roas_average_floor' => null,
+        'value_rule_set_id' => null,
+        'value_rules_applied' => null,
         'platform_specific_data' => null
     ];
 
@@ -99,6 +103,8 @@ class UpdateAdSetRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'bid_strategy' => false,
         'bid_amount' => false,
         'roas_average_floor' => false,
+        'value_rule_set_id' => false,
+        'value_rules_applied' => false,
         'platform_specific_data' => false
     ];
 
@@ -195,6 +201,8 @@ class UpdateAdSetRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'bid_strategy' => 'bidStrategy',
         'bid_amount' => 'bidAmount',
         'roas_average_floor' => 'roasAverageFloor',
+        'value_rule_set_id' => 'valueRuleSetId',
+        'value_rules_applied' => 'valueRulesApplied',
         'platform_specific_data' => 'platformSpecificData'
     ];
 
@@ -211,6 +219,8 @@ class UpdateAdSetRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'bid_strategy' => 'setBidStrategy',
         'bid_amount' => 'setBidAmount',
         'roas_average_floor' => 'setRoasAverageFloor',
+        'value_rule_set_id' => 'setValueRuleSetId',
+        'value_rules_applied' => 'setValueRulesApplied',
         'platform_specific_data' => 'setPlatformSpecificData'
     ];
 
@@ -227,6 +237,8 @@ class UpdateAdSetRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'bid_strategy' => 'getBidStrategy',
         'bid_amount' => 'getBidAmount',
         'roas_average_floor' => 'getRoasAverageFloor',
+        'value_rule_set_id' => 'getValueRuleSetId',
+        'value_rules_applied' => 'getValueRulesApplied',
         'platform_specific_data' => 'getPlatformSpecificData'
     ];
 
@@ -336,6 +348,8 @@ class UpdateAdSetRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('bid_strategy', $data ?? [], null);
         $this->setIfExists('bid_amount', $data ?? [], null);
         $this->setIfExists('roas_average_floor', $data ?? [], null);
+        $this->setIfExists('value_rule_set_id', $data ?? [], null);
+        $this->setIfExists('value_rules_applied', $data ?? [], null);
         $this->setIfExists('platform_specific_data', $data ?? [], null);
     }
 
@@ -389,6 +403,10 @@ class UpdateAdSetRequest implements ModelInterface, ArrayAccess, \JsonSerializab
 
         if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 255)) {
             $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 255.";
+        }
+
+        if (!is_null($this->container['value_rule_set_id']) && !preg_match("/^\\d+$/", $this->container['value_rule_set_id'])) {
+            $invalidProperties[] = "invalid value for 'value_rule_set_id', must be conform to the pattern /^\\d+$/.";
         }
 
         return $invalidProperties;
@@ -615,6 +633,65 @@ class UpdateAdSetRequest implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable roas_average_floor cannot be null');
         }
         $this->container['roas_average_floor'] = $roas_average_floor;
+
+        return $this;
+    }
+
+    /**
+     * Gets value_rule_set_id
+     *
+     * @return string|null
+     */
+    public function getValueRuleSetId()
+    {
+        return $this->container['value_rule_set_id'];
+    }
+
+    /**
+     * Sets value_rule_set_id
+     *
+     * @param string|null $value_rule_set_id Meta only (other platforms return 501). Value rule set to attach to this ad set, from `/v1/ads/value-rule-sets`. Sending a different id replaces the current association. To DETACH, send `valueRulesApplied: false` and omit this field.
+     *
+     * @return self
+     */
+    public function setValueRuleSetId($value_rule_set_id)
+    {
+        if (is_null($value_rule_set_id)) {
+            throw new \InvalidArgumentException('non-nullable value_rule_set_id cannot be null');
+        }
+
+        if ((!preg_match("/^\\d+$/", ObjectSerializer::toString($value_rule_set_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$value_rule_set_id when calling UpdateAdSetRequest., must conform to the pattern /^\\d+$/.");
+        }
+
+        $this->container['value_rule_set_id'] = $value_rule_set_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets value_rules_applied
+     *
+     * @return bool|null
+     */
+    public function getValueRulesApplied()
+    {
+        return $this->container['value_rules_applied'];
+    }
+
+    /**
+     * Sets value_rules_applied
+     *
+     * @param bool|null $value_rules_applied Meta only (other platforms return 501). `false` DETACHES the ad set's value rule set and must be sent WITHOUT `valueRuleSetId`; the combination returns 400. `true` is optional when attaching, since attachment is driven by `valueRuleSetId`, and requires it to be present.
+     *
+     * @return self
+     */
+    public function setValueRulesApplied($value_rules_applied)
+    {
+        if (is_null($value_rules_applied)) {
+            throw new \InvalidArgumentException('non-nullable value_rules_applied cannot be null');
+        }
+        $this->container['value_rules_applied'] = $value_rules_applied;
 
         return $this;
     }
