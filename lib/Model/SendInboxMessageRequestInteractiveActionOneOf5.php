@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * SendInboxMessageRequestInteractiveActionOneOf5 Class Doc Comment
  *
  * @category Class
- * @description Single-product action. &#x60;type&#x60; on the parent must be &#x60;product&#x60;. Requires a Meta catalog connected to the WhatsApp Business Account in Commerce Manager.
+ * @description Contact-info request action. &#x60;type&#x60; on the parent must be &#x60;request_contact_info&#x60;. May be omitted entirely; it is defaulted.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -59,8 +59,7 @@ class SendInboxMessageRequestInteractiveActionOneOf5 implements ModelInterface, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'catalog_id' => 'string',
-        'product_retailer_id' => 'string'
+        'name' => 'string'
     ];
 
     /**
@@ -71,8 +70,7 @@ class SendInboxMessageRequestInteractiveActionOneOf5 implements ModelInterface, 
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'catalog_id' => null,
-        'product_retailer_id' => null
+        'name' => null
     ];
 
     /**
@@ -81,8 +79,7 @@ class SendInboxMessageRequestInteractiveActionOneOf5 implements ModelInterface, 
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'catalog_id' => false,
-        'product_retailer_id' => false
+        'name' => false
     ];
 
     /**
@@ -171,8 +168,7 @@ class SendInboxMessageRequestInteractiveActionOneOf5 implements ModelInterface, 
      * @var string[]
      */
     protected static $attributeMap = [
-        'catalog_id' => 'catalog_id',
-        'product_retailer_id' => 'product_retailer_id'
+        'name' => 'name'
     ];
 
     /**
@@ -181,8 +177,7 @@ class SendInboxMessageRequestInteractiveActionOneOf5 implements ModelInterface, 
      * @var string[]
      */
     protected static $setters = [
-        'catalog_id' => 'setCatalogId',
-        'product_retailer_id' => 'setProductRetailerId'
+        'name' => 'setName'
     ];
 
     /**
@@ -191,8 +186,7 @@ class SendInboxMessageRequestInteractiveActionOneOf5 implements ModelInterface, 
      * @var string[]
      */
     protected static $getters = [
-        'catalog_id' => 'getCatalogId',
-        'product_retailer_id' => 'getProductRetailerId'
+        'name' => 'getName'
     ];
 
     /**
@@ -236,6 +230,19 @@ class SendInboxMessageRequestInteractiveActionOneOf5 implements ModelInterface, 
         return self::$openAPIModelName;
     }
 
+    public const NAME_REQUEST_CONTACT_INFO = 'request_contact_info';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getNameAllowableValues()
+    {
+        return [
+            self::NAME_REQUEST_CONTACT_INFO,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -252,8 +259,7 @@ class SendInboxMessageRequestInteractiveActionOneOf5 implements ModelInterface, 
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('catalog_id', $data ?? [], null);
-        $this->setIfExists('product_retailer_id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
     }
 
     /**
@@ -283,12 +289,18 @@ class SendInboxMessageRequestInteractiveActionOneOf5 implements ModelInterface, 
     {
         $invalidProperties = [];
 
-        if ($this->container['catalog_id'] === null) {
-            $invalidProperties[] = "'catalog_id' can't be null";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['product_retailer_id'] === null) {
-            $invalidProperties[] = "'product_retailer_id' can't be null";
+        $allowedValues = $this->getNameAllowableValues();
+        if (!is_null($this->container['name']) && !in_array($this->container['name'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'name', must be one of '%s'",
+                $this->container['name'],
+                implode("', '", $allowedValues)
+            );
         }
+
         return $invalidProperties;
     }
 
@@ -305,55 +317,38 @@ class SendInboxMessageRequestInteractiveActionOneOf5 implements ModelInterface, 
 
 
     /**
-     * Gets catalog_id
+     * Gets name
      *
      * @return string
      */
-    public function getCatalogId()
+    public function getName()
     {
-        return $this->container['catalog_id'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets catalog_id
+     * Sets name
      *
-     * @param string $catalog_id Meta catalog ID connected to the WhatsApp Business Account.
+     * @param string $name name
      *
      * @return self
      */
-    public function setCatalogId($catalog_id)
+    public function setName($name)
     {
-        if (is_null($catalog_id)) {
-            throw new \InvalidArgumentException('non-nullable catalog_id cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['catalog_id'] = $catalog_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets product_retailer_id
-     *
-     * @return string
-     */
-    public function getProductRetailerId()
-    {
-        return $this->container['product_retailer_id'];
-    }
-
-    /**
-     * Sets product_retailer_id
-     *
-     * @param string $product_retailer_id Retailer ID (SKU) of the product inside the catalog.
-     *
-     * @return self
-     */
-    public function setProductRetailerId($product_retailer_id)
-    {
-        if (is_null($product_retailer_id)) {
-            throw new \InvalidArgumentException('non-nullable product_retailer_id cannot be null');
+        $allowedValues = $this->getNameAllowableValues();
+        if (!in_array($name, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'name', must be one of '%s'",
+                    $name,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
-        $this->container['product_retailer_id'] = $product_retailer_id;
+        $this->container['name'] = $name;
 
         return $this;
     }

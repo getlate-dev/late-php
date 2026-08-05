@@ -59,12 +59,12 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
       */
     protected static $openAPITypes = [
         'button' => 'string',
-        'sections' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf6SectionsInner[]',
+        'sections' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7SectionsInner[]',
         'name' => 'string',
-        'parameters' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7Parameters',
+        'parameters' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8Parameters',
         'catalog_id' => 'string',
         'product_retailer_id' => 'string',
-        'cards' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8CardsInner[]'
+        'cards' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf9CardsInner[]'
     ];
 
     /**
@@ -421,7 +421,7 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
     /**
      * Gets sections
      *
-     * @return \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf6SectionsInner[]
+     * @return \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7SectionsInner[]
      */
     public function getSections()
     {
@@ -431,7 +431,7 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
     /**
      * Sets sections
      *
-     * @param \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf6SectionsInner[] $sections 1-10 sections. Total products across all sections cannot exceed 30.
+     * @param \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7SectionsInner[] $sections 1-10 sections. Total products across all sections cannot exceed 30.
      *
      * @return self
      */
@@ -492,7 +492,7 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
     /**
      * Gets parameters
      *
-     * @return \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7Parameters
+     * @return \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8Parameters
      */
     public function getParameters()
     {
@@ -502,7 +502,7 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
     /**
      * Sets parameters
      *
-     * @param \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7Parameters $parameters parameters
+     * @param \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8Parameters $parameters parameters
      *
      * @return self
      */
@@ -573,7 +573,7 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
     /**
      * Gets cards
      *
-     * @return \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8CardsInner[]
+     * @return \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf9CardsInner[]
      */
     public function getCards()
     {
@@ -583,7 +583,7 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
     /**
      * Sets cards
      *
-     * @param \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8CardsInner[] $cards cards
+     * @param \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf9CardsInner[] $cards cards
      *
      * @return self
      */

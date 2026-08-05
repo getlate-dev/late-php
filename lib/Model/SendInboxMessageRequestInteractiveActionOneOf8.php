@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * SendInboxMessageRequestInteractiveActionOneOf8 Class Doc Comment
  *
  * @category Class
- * @description Carousel action. &#x60;type&#x60; on the parent must be &#x60;carousel&#x60;. Carries 2-10 cards, either all product cards (&#x60;type: \&quot;product\&quot;&#x60;, all referencing the same &#x60;catalog_id&#x60;) or media cards (any other &#x60;type&#x60;, e.g. &#x60;cta_url&#x60;, with a required image/video &#x60;header&#x60; on each card). &#x60;card_index&#x60; (0-9, non-repeating) is auto-filled sequentially when omitted. Product carousels require a Meta catalog connected to the WhatsApp Business Account in Commerce Manager; media carousels do not.
+ * @description Catalog-message action. &#x60;type&#x60; on the parent must be &#x60;catalog_message&#x60;. May be omitted entirely; it is defaulted to &#x60;{ \&quot;name\&quot;: \&quot;catalog_message\&quot; }&#x60;. Requires a Meta catalog connected to the WhatsApp Business Account in Commerce Manager.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -59,7 +59,8 @@ class SendInboxMessageRequestInteractiveActionOneOf8 implements ModelInterface, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'cards' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8CardsInner[]'
+        'name' => 'string',
+        'parameters' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8Parameters'
     ];
 
     /**
@@ -70,7 +71,8 @@ class SendInboxMessageRequestInteractiveActionOneOf8 implements ModelInterface, 
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'cards' => null
+        'name' => null,
+        'parameters' => null
     ];
 
     /**
@@ -79,7 +81,8 @@ class SendInboxMessageRequestInteractiveActionOneOf8 implements ModelInterface, 
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'cards' => false
+        'name' => false,
+        'parameters' => false
     ];
 
     /**
@@ -168,7 +171,8 @@ class SendInboxMessageRequestInteractiveActionOneOf8 implements ModelInterface, 
      * @var string[]
      */
     protected static $attributeMap = [
-        'cards' => 'cards'
+        'name' => 'name',
+        'parameters' => 'parameters'
     ];
 
     /**
@@ -177,7 +181,8 @@ class SendInboxMessageRequestInteractiveActionOneOf8 implements ModelInterface, 
      * @var string[]
      */
     protected static $setters = [
-        'cards' => 'setCards'
+        'name' => 'setName',
+        'parameters' => 'setParameters'
     ];
 
     /**
@@ -186,7 +191,8 @@ class SendInboxMessageRequestInteractiveActionOneOf8 implements ModelInterface, 
      * @var string[]
      */
     protected static $getters = [
-        'cards' => 'getCards'
+        'name' => 'getName',
+        'parameters' => 'getParameters'
     ];
 
     /**
@@ -230,6 +236,19 @@ class SendInboxMessageRequestInteractiveActionOneOf8 implements ModelInterface, 
         return self::$openAPIModelName;
     }
 
+    public const NAME_CATALOG_MESSAGE = 'catalog_message';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getNameAllowableValues()
+    {
+        return [
+            self::NAME_CATALOG_MESSAGE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -246,7 +265,8 @@ class SendInboxMessageRequestInteractiveActionOneOf8 implements ModelInterface, 
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('cards', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('parameters', $data ?? [], null);
     }
 
     /**
@@ -276,15 +296,16 @@ class SendInboxMessageRequestInteractiveActionOneOf8 implements ModelInterface, 
     {
         $invalidProperties = [];
 
-        if ($this->container['cards'] === null) {
-            $invalidProperties[] = "'cards' can't be null";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
         }
-        if ((count($this->container['cards']) > 10)) {
-            $invalidProperties[] = "invalid value for 'cards', number of items must be less than or equal to 10.";
-        }
-
-        if ((count($this->container['cards']) < 2)) {
-            $invalidProperties[] = "invalid value for 'cards', number of items must be greater than or equal to 2.";
+        $allowedValues = $this->getNameAllowableValues();
+        if (!is_null($this->container['name']) && !in_array($this->container['name'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'name', must be one of '%s'",
+                $this->container['name'],
+                implode("', '", $allowedValues)
+            );
         }
 
         return $invalidProperties;
@@ -303,35 +324,65 @@ class SendInboxMessageRequestInteractiveActionOneOf8 implements ModelInterface, 
 
 
     /**
-     * Gets cards
+     * Gets name
      *
-     * @return \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8CardsInner[]
+     * @return string
      */
-    public function getCards()
+    public function getName()
     {
-        return $this->container['cards'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets cards
+     * Sets name
      *
-     * @param \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8CardsInner[] $cards cards
+     * @param string $name name
      *
      * @return self
      */
-    public function setCards($cards)
+    public function setName($name)
     {
-        if (is_null($cards)) {
-            throw new \InvalidArgumentException('non-nullable cards cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
+        $allowedValues = $this->getNameAllowableValues();
+        if (!in_array($name, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'name', must be one of '%s'",
+                    $name,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['name'] = $name;
 
-        if ((count($cards) > 10)) {
-            throw new \InvalidArgumentException('invalid value for $cards when calling SendInboxMessageRequestInteractiveActionOneOf8., number of items must be less than or equal to 10.');
+        return $this;
+    }
+
+    /**
+     * Gets parameters
+     *
+     * @return \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8Parameters|null
+     */
+    public function getParameters()
+    {
+        return $this->container['parameters'];
+    }
+
+    /**
+     * Sets parameters
+     *
+     * @param \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf8Parameters|null $parameters parameters
+     *
+     * @return self
+     */
+    public function setParameters($parameters)
+    {
+        if (is_null($parameters)) {
+            throw new \InvalidArgumentException('non-nullable parameters cannot be null');
         }
-        if ((count($cards) < 2)) {
-            throw new \InvalidArgumentException('invalid length for $cards when calling SendInboxMessageRequestInteractiveActionOneOf8., number of items must be greater than or equal to 2.');
-        }
-        $this->container['cards'] = $cards;
+        $this->container['parameters'] = $parameters;
 
         return $this;
     }

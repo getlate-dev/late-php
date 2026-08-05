@@ -1,6 +1,6 @@
 <?php
 /**
- * SendInboxMessageRequestInteractiveActionOneOf7
+ * SendInboxMessageRequestInteractiveActionOneOf9CardsInner
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * SendInboxMessageRequestInteractiveActionOneOf7 Class Doc Comment
+ * SendInboxMessageRequestInteractiveActionOneOf9CardsInner Class Doc Comment
  *
  * @category Class
- * @description Multi-product action. &#x60;type&#x60; on the parent must be &#x60;product_list&#x60;. Requires a Meta catalog connected to the WhatsApp Business Account in Commerce Manager.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SendInboxMessageRequestInteractiveActionOneOf7 implements ModelInterface, ArrayAccess, \JsonSerializable
+class SendInboxMessageRequestInteractiveActionOneOf9CardsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class SendInboxMessageRequestInteractiveActionOneOf7 implements ModelInterface, 
       *
       * @var string
       */
-    protected static $openAPIModelName = 'sendInboxMessage_request_interactive_action_oneOf_7';
+    protected static $openAPIModelName = 'sendInboxMessage_request_interactive_action_oneOf_9_cards_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +58,11 @@ class SendInboxMessageRequestInteractiveActionOneOf7 implements ModelInterface, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'catalog_id' => 'string',
-        'sections' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7SectionsInner[]'
+        'card_index' => 'int',
+        'type' => 'string',
+        'header' => 'object',
+        'body' => 'object',
+        'action' => 'object'
     ];
 
     /**
@@ -71,8 +73,11 @@ class SendInboxMessageRequestInteractiveActionOneOf7 implements ModelInterface, 
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'catalog_id' => null,
-        'sections' => null
+        'card_index' => null,
+        'type' => null,
+        'header' => null,
+        'body' => null,
+        'action' => null
     ];
 
     /**
@@ -81,8 +86,11 @@ class SendInboxMessageRequestInteractiveActionOneOf7 implements ModelInterface, 
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'catalog_id' => false,
-        'sections' => false
+        'card_index' => false,
+        'type' => false,
+        'header' => false,
+        'body' => false,
+        'action' => false
     ];
 
     /**
@@ -171,8 +179,11 @@ class SendInboxMessageRequestInteractiveActionOneOf7 implements ModelInterface, 
      * @var string[]
      */
     protected static $attributeMap = [
-        'catalog_id' => 'catalog_id',
-        'sections' => 'sections'
+        'card_index' => 'card_index',
+        'type' => 'type',
+        'header' => 'header',
+        'body' => 'body',
+        'action' => 'action'
     ];
 
     /**
@@ -181,8 +192,11 @@ class SendInboxMessageRequestInteractiveActionOneOf7 implements ModelInterface, 
      * @var string[]
      */
     protected static $setters = [
-        'catalog_id' => 'setCatalogId',
-        'sections' => 'setSections'
+        'card_index' => 'setCardIndex',
+        'type' => 'setType',
+        'header' => 'setHeader',
+        'body' => 'setBody',
+        'action' => 'setAction'
     ];
 
     /**
@@ -191,8 +205,11 @@ class SendInboxMessageRequestInteractiveActionOneOf7 implements ModelInterface, 
      * @var string[]
      */
     protected static $getters = [
-        'catalog_id' => 'getCatalogId',
-        'sections' => 'getSections'
+        'card_index' => 'getCardIndex',
+        'type' => 'getType',
+        'header' => 'getHeader',
+        'body' => 'getBody',
+        'action' => 'getAction'
     ];
 
     /**
@@ -252,8 +269,11 @@ class SendInboxMessageRequestInteractiveActionOneOf7 implements ModelInterface, 
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('catalog_id', $data ?? [], null);
-        $this->setIfExists('sections', $data ?? [], null);
+        $this->setIfExists('card_index', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('header', $data ?? [], null);
+        $this->setIfExists('body', $data ?? [], null);
+        $this->setIfExists('action', $data ?? [], null);
     }
 
     /**
@@ -283,18 +303,12 @@ class SendInboxMessageRequestInteractiveActionOneOf7 implements ModelInterface, 
     {
         $invalidProperties = [];
 
-        if ($this->container['catalog_id'] === null) {
-            $invalidProperties[] = "'catalog_id' can't be null";
-        }
-        if ($this->container['sections'] === null) {
-            $invalidProperties[] = "'sections' can't be null";
-        }
-        if ((count($this->container['sections']) > 10)) {
-            $invalidProperties[] = "invalid value for 'sections', number of items must be less than or equal to 10.";
+        if (!is_null($this->container['card_index']) && ($this->container['card_index'] > 9)) {
+            $invalidProperties[] = "invalid value for 'card_index', must be smaller than or equal to 9.";
         }
 
-        if ((count($this->container['sections']) < 1)) {
-            $invalidProperties[] = "invalid value for 'sections', number of items must be greater than or equal to 1.";
+        if (!is_null($this->container['card_index']) && ($this->container['card_index'] < 0)) {
+            $invalidProperties[] = "invalid value for 'card_index', must be bigger than or equal to 0.";
         }
 
         return $invalidProperties;
@@ -313,62 +327,144 @@ class SendInboxMessageRequestInteractiveActionOneOf7 implements ModelInterface, 
 
 
     /**
-     * Gets catalog_id
+     * Gets card_index
      *
-     * @return string
+     * @return int|null
      */
-    public function getCatalogId()
+    public function getCardIndex()
     {
-        return $this->container['catalog_id'];
+        return $this->container['card_index'];
     }
 
     /**
-     * Sets catalog_id
+     * Sets card_index
      *
-     * @param string $catalog_id Meta catalog ID connected to the WhatsApp Business Account.
+     * @param int|null $card_index Card position. Auto-filled sequentially when omitted.
      *
      * @return self
      */
-    public function setCatalogId($catalog_id)
+    public function setCardIndex($card_index)
     {
-        if (is_null($catalog_id)) {
-            throw new \InvalidArgumentException('non-nullable catalog_id cannot be null');
+        if (is_null($card_index)) {
+            throw new \InvalidArgumentException('non-nullable card_index cannot be null');
         }
-        $this->container['catalog_id'] = $catalog_id;
+
+        if (($card_index > 9)) {
+            throw new \InvalidArgumentException('invalid value for $card_index when calling SendInboxMessageRequestInteractiveActionOneOf9CardsInner., must be smaller than or equal to 9.');
+        }
+        if (($card_index < 0)) {
+            throw new \InvalidArgumentException('invalid value for $card_index when calling SendInboxMessageRequestInteractiveActionOneOf9CardsInner., must be bigger than or equal to 0.');
+        }
+
+        $this->container['card_index'] = $card_index;
 
         return $this;
     }
 
     /**
-     * Gets sections
+     * Gets type
      *
-     * @return \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7SectionsInner[]
+     * @return string|null
      */
-    public function getSections()
+    public function getType()
     {
-        return $this->container['sections'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets sections
+     * Sets type
      *
-     * @param \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7SectionsInner[] $sections 1-10 sections. Total products across all sections cannot exceed 30.
+     * @param string|null $type `product` for a product card; media cards use `cta_url` or a quick-reply type.
      *
      * @return self
      */
-    public function setSections($sections)
+    public function setType($type)
     {
-        if (is_null($sections)) {
-            throw new \InvalidArgumentException('non-nullable sections cannot be null');
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
+        $this->container['type'] = $type;
 
-        if ((count($sections) > 10)) {
-            throw new \InvalidArgumentException('invalid value for $sections when calling SendInboxMessageRequestInteractiveActionOneOf7., number of items must be less than or equal to 10.');
+        return $this;
+    }
+
+    /**
+     * Gets header
+     *
+     * @return object|null
+     */
+    public function getHeader()
+    {
+        return $this->container['header'];
+    }
+
+    /**
+     * Sets header
+     *
+     * @param object|null $header Media cards only, required. Carries the card's image or video.
+     *
+     * @return self
+     */
+    public function setHeader($header)
+    {
+        if (is_null($header)) {
+            throw new \InvalidArgumentException('non-nullable header cannot be null');
         }
-        if ((count($sections) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $sections when calling SendInboxMessageRequestInteractiveActionOneOf7., number of items must be greater than or equal to 1.');
+        $this->container['header'] = $header;
+
+        return $this;
+    }
+
+    /**
+     * Gets body
+     *
+     * @return object|null
+     */
+    public function getBody()
+    {
+        return $this->container['body'];
+    }
+
+    /**
+     * Sets body
+     *
+     * @param object|null $body Optional card body text.
+     *
+     * @return self
+     */
+    public function setBody($body)
+    {
+        if (is_null($body)) {
+            throw new \InvalidArgumentException('non-nullable body cannot be null');
         }
-        $this->container['sections'] = $sections;
+        $this->container['body'] = $body;
+
+        return $this;
+    }
+
+    /**
+     * Gets action
+     *
+     * @return object|null
+     */
+    public function getAction()
+    {
+        return $this->container['action'];
+    }
+
+    /**
+     * Sets action
+     *
+     * @param object|null $action Product cards: `{ catalog_id, product_retailer_id }` (required). Media cards: the card's button action (e.g. `cta_url` with `parameters.display_text` and `parameters.url`).
+     *
+     * @return self
+     */
+    public function setAction($action)
+    {
+        if (is_null($action)) {
+            throw new \InvalidArgumentException('non-nullable action cannot be null');
+        }
+        $this->container['action'] = $action;
 
         return $this;
     }

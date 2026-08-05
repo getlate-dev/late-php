@@ -70,6 +70,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'flow_response_data' => 'array<string,mixed>',
         'order' => '\Zernio\Model\WebhookPayloadMessageMetadataOrder',
         'referred_product' => '\Zernio\Model\WebhookPayloadMessageMetadataReferredProduct',
+        'contacts' => 'array<string,mixed>[]',
+        'contacts_origin' => 'string',
         'story_reply' => '\Zernio\Model\WebhookPayloadMessageMetadataStoryReply',
         'is_story_mention' => 'bool',
         'referral' => '\Zernio\Model\WebhookPayloadMessageMetadataReferral'
@@ -94,6 +96,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'flow_response_data' => null,
         'order' => null,
         'referred_product' => null,
+        'contacts' => null,
+        'contacts_origin' => null,
         'story_reply' => null,
         'is_story_mention' => null,
         'referral' => null
@@ -116,6 +120,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'flow_response_data' => false,
         'order' => false,
         'referred_product' => false,
+        'contacts' => false,
+        'contacts_origin' => false,
         'story_reply' => false,
         'is_story_mention' => false,
         'referral' => false
@@ -218,6 +224,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'flow_response_data' => 'flowResponseData',
         'order' => 'order',
         'referred_product' => 'referredProduct',
+        'contacts' => 'contacts',
+        'contacts_origin' => 'contactsOrigin',
         'story_reply' => 'storyReply',
         'is_story_mention' => 'isStoryMention',
         'referral' => 'referral'
@@ -240,6 +248,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'flow_response_data' => 'setFlowResponseData',
         'order' => 'setOrder',
         'referred_product' => 'setReferredProduct',
+        'contacts' => 'setContacts',
+        'contacts_origin' => 'setContactsOrigin',
         'story_reply' => 'setStoryReply',
         'is_story_mention' => 'setIsStoryMention',
         'referral' => 'setReferral'
@@ -262,6 +272,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'flow_response_data' => 'getFlowResponseData',
         'order' => 'getOrder',
         'referred_product' => 'getReferredProduct',
+        'contacts' => 'getContacts',
+        'contacts_origin' => 'getContactsOrigin',
         'story_reply' => 'getStoryReply',
         'is_story_mention' => 'getIsStoryMention',
         'referral' => 'getReferral'
@@ -311,6 +323,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
     public const INTERACTIVE_TYPE_BUTTON_REPLY = 'button_reply';
     public const INTERACTIVE_TYPE_LIST_REPLY = 'list_reply';
     public const INTERACTIVE_TYPE_NFM_REPLY = 'nfm_reply';
+    public const CONTACTS_ORIGIN_CONTACT_REQUEST = 'contact_request';
+    public const CONTACTS_ORIGIN_OTHER = 'other';
 
     /**
      * Gets allowable values of the enum
@@ -323,6 +337,19 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
             self::INTERACTIVE_TYPE_BUTTON_REPLY,
             self::INTERACTIVE_TYPE_LIST_REPLY,
             self::INTERACTIVE_TYPE_NFM_REPLY,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getContactsOriginAllowableValues()
+    {
+        return [
+            self::CONTACTS_ORIGIN_CONTACT_REQUEST,
+            self::CONTACTS_ORIGIN_OTHER,
         ];
     }
 
@@ -352,6 +379,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('flow_response_data', $data ?? [], null);
         $this->setIfExists('order', $data ?? [], null);
         $this->setIfExists('referred_product', $data ?? [], null);
+        $this->setIfExists('contacts', $data ?? [], null);
+        $this->setIfExists('contacts_origin', $data ?? [], null);
         $this->setIfExists('story_reply', $data ?? [], null);
         $this->setIfExists('is_story_mention', $data ?? [], null);
         $this->setIfExists('referral', $data ?? [], null);
@@ -389,6 +418,15 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'interactive_type', must be one of '%s'",
                 $this->container['interactive_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getContactsOriginAllowableValues();
+        if (!is_null($this->container['contacts_origin']) && !in_array($this->container['contacts_origin'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'contacts_origin', must be one of '%s'",
+                $this->container['contacts_origin'],
                 implode("', '", $allowedValues)
             );
         }
@@ -711,6 +749,70 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable referred_product cannot be null');
         }
         $this->container['referred_product'] = $referred_product;
+
+        return $this;
+    }
+
+    /**
+     * Gets contacts
+     *
+     * @return array<string,mixed>[]|null
+     */
+    public function getContacts()
+    {
+        return $this->container['contacts'];
+    }
+
+    /**
+     * Sets contacts
+     *
+     * @param array<string,mixed>[]|null $contacts WhatsApp only. Contact cards the user shared, forwarded verbatim from Meta. Read `contactsOrigin` before treating any number here as the sender's own.
+     *
+     * @return self
+     */
+    public function setContacts($contacts)
+    {
+        if (is_null($contacts)) {
+            throw new \InvalidArgumentException('non-nullable contacts cannot be null');
+        }
+        $this->container['contacts'] = $contacts;
+
+        return $this;
+    }
+
+    /**
+     * Gets contacts_origin
+     *
+     * @return string|null
+     */
+    public function getContactsOrigin()
+    {
+        return $this->container['contacts_origin'];
+    }
+
+    /**
+     * Sets contacts_origin
+     *
+     * @param string|null $contacts_origin WhatsApp only. How the contact card was shared. `contact_request` means the user tapped a `request_contact_info` button, so the number is their own and consented. `other` means they picked a card from their address book: it may be anyone's, and must NOT be stored as the sender's identity. Omitted when Meta sends no origin.
+     *
+     * @return self
+     */
+    public function setContactsOrigin($contacts_origin)
+    {
+        if (is_null($contacts_origin)) {
+            throw new \InvalidArgumentException('non-nullable contacts_origin cannot be null');
+        }
+        $allowedValues = $this->getContactsOriginAllowableValues();
+        if (!in_array($contacts_origin, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'contacts_origin', must be one of '%s'",
+                    $contacts_origin,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['contacts_origin'] = $contacts_origin;
 
         return $this;
     }
