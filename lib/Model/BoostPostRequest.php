@@ -80,7 +80,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'call_to_action' => 'string',
         'spark_auth_code' => 'string',
         'dsa_beneficiary' => 'string',
-        'dsa_payor' => 'string'
+        'dsa_payor' => 'string',
+        'optimization_goal' => 'string'
     ];
 
     /**
@@ -113,7 +114,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'call_to_action' => null,
         'spark_auth_code' => null,
         'dsa_beneficiary' => null,
-        'dsa_payor' => null
+        'dsa_payor' => null,
+        'optimization_goal' => null
     ];
 
     /**
@@ -144,7 +146,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'call_to_action' => false,
         'spark_auth_code' => false,
         'dsa_beneficiary' => false,
-        'dsa_payor' => false
+        'dsa_payor' => false,
+        'optimization_goal' => false
     ];
 
     /**
@@ -255,7 +258,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'call_to_action' => 'callToAction',
         'spark_auth_code' => 'sparkAuthCode',
         'dsa_beneficiary' => 'dsaBeneficiary',
-        'dsa_payor' => 'dsaPayor'
+        'dsa_payor' => 'dsaPayor',
+        'optimization_goal' => 'optimizationGoal'
     ];
 
     /**
@@ -286,7 +290,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'call_to_action' => 'setCallToAction',
         'spark_auth_code' => 'setSparkAuthCode',
         'dsa_beneficiary' => 'setDsaBeneficiary',
-        'dsa_payor' => 'setDsaPayor'
+        'dsa_payor' => 'setDsaPayor',
+        'optimization_goal' => 'setOptimizationGoal'
     ];
 
     /**
@@ -317,7 +322,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'call_to_action' => 'getCallToAction',
         'spark_auth_code' => 'getSparkAuthCode',
         'dsa_beneficiary' => 'getDsaBeneficiary',
-        'dsa_payor' => 'getDsaPayor'
+        'dsa_payor' => 'getDsaPayor',
+        'optimization_goal' => 'getOptimizationGoal'
     ];
 
     /**
@@ -448,6 +454,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('spark_auth_code', $data ?? [], null);
         $this->setIfExists('dsa_beneficiary', $data ?? [], null);
         $this->setIfExists('dsa_payor', $data ?? [], null);
+        $this->setIfExists('optimization_goal', $data ?? [], null);
     }
 
     /**
@@ -1176,6 +1183,33 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['dsa_payor'] = $dsa_payor;
+
+        return $this;
+    }
+
+    /**
+     * Gets optimization_goal
+     *
+     * @return string|null
+     */
+    public function getOptimizationGoal()
+    {
+        return $this->container['optimization_goal'];
+    }
+
+    /**
+     * Sets optimization_goal
+     *
+     * @param string|null $optimization_goal Meta only. Explicit ad-set `optimization_goal` override. When omitted, defaults to the value derived from `goal`. The value must be compatible with the objective Meta derives from `goal`, not with the objective used by `POST /v1/ads/create` for the same `goal` name: boost maps `goal: \"engagement\"` to objective `OUTCOME_AWARENESS`, which accepts `REACH`, `IMPRESSIONS`, `AD_RECALL_LIFT`, or THRUPLAY-class values, and rejects `POST_ENGAGEMENT` (that value is only valid under `OUTCOME_ENGAGEMENT`, which create uses for the same goal name).
+     *
+     * @return self
+     */
+    public function setOptimizationGoal($optimization_goal)
+    {
+        if (is_null($optimization_goal)) {
+            throw new \InvalidArgumentException('non-nullable optimization_goal cannot be null');
+        }
+        $this->container['optimization_goal'] = $optimization_goal;
 
         return $this;
     }
