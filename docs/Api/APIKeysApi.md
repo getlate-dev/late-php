@@ -9,6 +9,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**createApiKey()**](APIKeysApi.md#createApiKey) | **POST** /v1/api-keys | Create key |
 | [**deleteApiKey()**](APIKeysApi.md#deleteApiKey) | **DELETE** /v1/api-keys/{keyId} | Delete key |
 | [**listApiKeys()**](APIKeysApi.md#listApiKeys) | **GET** /v1/api-keys | List keys |
+| [**verifyCredential()**](APIKeysApi.md#verifyCredential) | **GET** /v1/auth/verify | Verify credential |
 
 
 ## `createApiKey()`
@@ -174,6 +175,63 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**\Zernio\Model\ListApiKeys200Response**](../Model/ListApiKeys200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `verifyCredential()`
+
+```php
+verifyCredential(): \Zernio\Model\VerifyCredential200Response
+```
+
+Verify credential
+
+Checks whether the bearer credential on this request is valid, without reading any data. Accepts an API key or an OAuth access token. Intended for clients that must validate a credential before use (for example an MCP server verifying an incoming token) so they do not have to call a data endpoint to do it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\APIKeysApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+
+try {
+    $result = $apiInstance->verifyCredential();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling APIKeysApi->verifyCredential: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**\Zernio\Model\VerifyCredential200Response**](../Model/VerifyCredential200Response.md)
 
 ### Authorization
 

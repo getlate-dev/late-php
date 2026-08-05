@@ -1521,6 +1521,7 @@ docs/Model/ValueRule.md
 docs/Model/ValueRuleCriterion.md
 docs/Model/ValueRuleSet.md
 docs/Model/Verification.md
+docs/Model/VerifyCredential200Response.md
 docs/Model/VerifySmsRegistrationOtp200Response.md
 docs/Model/VerifySmsRegistrationOtpRequest.md
 docs/Model/VerifyWhatsAppCallerIdRequest.md
@@ -3158,6 +3159,7 @@ lib/Model/ValueRule.php
 lib/Model/ValueRuleCriterion.php
 lib/Model/ValueRuleSet.php
 lib/Model/Verification.php
+lib/Model/VerifyCredential200Response.php
 lib/Model/VerifySmsRegistrationOtp200Response.php
 lib/Model/VerifySmsRegistrationOtpRequest.php
 lib/Model/VerifyWhatsAppCallerIdRequest.php
@@ -3273,3 +3275,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/VerifyCredential200ResponseTest.php
