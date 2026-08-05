@@ -594,7 +594,7 @@ class MediaItem implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets thumbnail
      *
-     * @param string|null $thumbnail Optional custom thumbnail/cover image URL for videos. Supported for Facebook video posts, Facebook Reels, and regular video uploads. Max 10MB, JPG/PNG recommended.
+     * @param string|null $thumbnail Optional custom thumbnail/cover image URL for videos. Supported for Facebook video posts, Facebook Reels, regular video uploads, and LinkedIn video posts. Max 10MB, JPG/PNG recommended.
      *
      * @return self
      */
