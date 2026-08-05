@@ -356,7 +356,7 @@ $limit = 10; // int | Page size. Values above the maximum return 400 rather than
 $source = 'zernio'; // string | Which collection to read. `zernio` (default) returns posts authored through Zernio. `external` returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with `accountId` and paginate via `page`/`limit` to walk the full synced history (we keep up to the last ~12 months per account).
 $status = 'status_example'; // string
 $platform = twitter; // string
-$profile_id = 'profile_id_example'; // string
+$profile_id = 'profile_id_example'; // string | Filter posts to a specific profile (24-char hex ObjectId). Omit it, or send `all` or an empty value, to list posts across every profile.
 $created_by = 'created_by_example'; // string | Filter posts to those created by a specific team user (24-char hex ObjectId).
 $date_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
 $date_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
@@ -382,7 +382,7 @@ try {
 | **source** | **string**| Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). | [optional] [default to &#39;zernio&#39;] |
 | **status** | **string**|  | [optional] |
 | **platform** | **string**|  | [optional] |
-| **profile_id** | **string**|  | [optional] |
+| **profile_id** | **string**| Filter posts to a specific profile (24-char hex ObjectId). Omit it, or send &#x60;all&#x60; or an empty value, to list posts across every profile. | [optional] |
 | **created_by** | **string**| Filter posts to those created by a specific team user (24-char hex ObjectId). | [optional] |
 | **date_from** | **\DateTime**|  | [optional] |
 | **date_to** | **\DateTime**|  | [optional] |
