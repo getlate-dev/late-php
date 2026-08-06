@@ -81,6 +81,8 @@ docs/Model/AdCampaignBudget.md
 docs/Model/AdCampaignCampaignBudget.md
 docs/Model/AdCreative.md
 docs/Model/AdDailyMetrics.md
+docs/Model/AdEngagementCounts.md
+docs/Model/AdFunnelCounts.md
 docs/Model/AdMetrics.md
 docs/Model/AdPromotedObject.md
 docs/Model/AdReviewStatus.md
@@ -1723,6 +1725,8 @@ lib/Model/AdCampaignBudget.php
 lib/Model/AdCampaignCampaignBudget.php
 lib/Model/AdCreative.php
 lib/Model/AdDailyMetrics.php
+lib/Model/AdEngagementCounts.php
+lib/Model/AdFunnelCounts.php
 lib/Model/AdMetrics.php
 lib/Model/AdPromotedObject.php
 lib/Model/AdReviewStatus.php
@@ -3285,3 +3289,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/AdEngagementCountsTest.php
+test/Model/AdFunnelCountsTest.php

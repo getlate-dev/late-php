@@ -65,6 +65,7 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'configured_status' => 'string',
         'review_status' => '\Zernio\Model\AdReviewStatus',
         'ad_type' => 'string',
+        'creative_type' => 'string',
         'goal' => 'string',
         'is_external' => 'bool',
         'budget' => '\Zernio\Model\AdBudget',
@@ -108,6 +109,7 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'configured_status' => null,
         'review_status' => null,
         'ad_type' => null,
+        'creative_type' => null,
         'goal' => null,
         'is_external' => null,
         'budget' => null,
@@ -149,6 +151,7 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'configured_status' => true,
         'review_status' => false,
         'ad_type' => false,
+        'creative_type' => true,
         'goal' => false,
         'is_external' => false,
         'budget' => false,
@@ -270,6 +273,7 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'configured_status' => 'configuredStatus',
         'review_status' => 'reviewStatus',
         'ad_type' => 'adType',
+        'creative_type' => 'creativeType',
         'goal' => 'goal',
         'is_external' => 'isExternal',
         'budget' => 'budget',
@@ -311,6 +315,7 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'configured_status' => 'setConfiguredStatus',
         'review_status' => 'setReviewStatus',
         'ad_type' => 'setAdType',
+        'creative_type' => 'setCreativeType',
         'goal' => 'setGoal',
         'is_external' => 'setIsExternal',
         'budget' => 'setBudget',
@@ -352,6 +357,7 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         'configured_status' => 'getConfiguredStatus',
         'review_status' => 'getReviewStatus',
         'ad_type' => 'getAdType',
+        'creative_type' => 'getCreativeType',
         'goal' => 'getGoal',
         'is_external' => 'getIsExternal',
         'budget' => 'getBudget',
@@ -431,6 +437,10 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
     public const PLATFORM_OPENAI = 'openai';
     public const AD_TYPE_BOOST = 'boost';
     public const AD_TYPE_STANDALONE = 'standalone';
+    public const CREATIVE_TYPE_CAROUSEL = 'carousel';
+    public const CREATIVE_TYPE_VIDEO = 'video';
+    public const CREATIVE_TYPE_DOCUMENT = 'document';
+    public const CREATIVE_TYPE_IMAGE = 'image';
     public const GOAL_ENGAGEMENT = 'engagement';
     public const GOAL_TRAFFIC = 'traffic';
     public const GOAL_AWARENESS = 'awareness';
@@ -479,6 +489,21 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return string[]
      */
+    public function getCreativeTypeAllowableValues()
+    {
+        return [
+            self::CREATIVE_TYPE_CAROUSEL,
+            self::CREATIVE_TYPE_VIDEO,
+            self::CREATIVE_TYPE_DOCUMENT,
+            self::CREATIVE_TYPE_IMAGE,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
     public function getGoalAllowableValues()
     {
         return [
@@ -517,6 +542,7 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('configured_status', $data ?? [], null);
         $this->setIfExists('review_status', $data ?? [], null);
         $this->setIfExists('ad_type', $data ?? [], null);
+        $this->setIfExists('creative_type', $data ?? [], null);
         $this->setIfExists('goal', $data ?? [], null);
         $this->setIfExists('is_external', $data ?? [], null);
         $this->setIfExists('budget', $data ?? [], null);
@@ -586,6 +612,15 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'ad_type', must be one of '%s'",
                 $this->container['ad_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getCreativeTypeAllowableValues();
+        if (!is_null($this->container['creative_type']) && !in_array($this->container['creative_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'creative_type', must be one of '%s'",
+                $this->container['creative_type'],
                 implode("', '", $allowedValues)
             );
         }
@@ -826,6 +861,50 @@ class Ad implements ModelInterface, ArrayAccess, \JsonSerializable
             );
         }
         $this->container['ad_type'] = $ad_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets creative_type
+     *
+     * @return string|null
+     */
+    public function getCreativeType()
+    {
+        return $this->container['creative_type'];
+    }
+
+    /**
+     * Sets creative_type
+     *
+     * @param string|null $creative_type Creative format, classified from the media the creative carries. `null` when the creative carries no media to classify — an unsynced creative and a genuine text-only ad are indistinguishable, so neither is guessed at. Returned by `GET /v1/ads`, `GET /v1/ads/{adId}` and the ad nodes of `GET /v1/ads/tree`.
+     *
+     * @return self
+     */
+    public function setCreativeType($creative_type)
+    {
+        if (is_null($creative_type)) {
+            array_push($this->openAPINullablesSetToNull, 'creative_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('creative_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getCreativeTypeAllowableValues();
+        if (!is_null($creative_type) && !in_array($creative_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'creative_type', must be one of '%s'",
+                    $creative_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['creative_type'] = $creative_type;
 
         return $this;
     }

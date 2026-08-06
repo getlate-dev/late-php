@@ -27,6 +27,9 @@ Name | Type | Description | Notes
 **video_p95_watched_actions** | **int** | Views reaching 95% of the video&#39;s length. Meta &#x60;video_p95_watched_actions&#x60;. | [optional]
 **video_p100_watched_actions** | **int** | Views reaching 100% of the video&#39;s length. Meta &#x60;video_p100_watched_actions&#x60;. | [optional]
 **video_avg_time_watched_actions** | **float** | Average seconds watched per play (Meta &#x60;video_avg_time_watched_actions&#x60;). Aggregated over date ranges and across children as a play-weighted average (total watch time / total plays), never a plain average of averages. | [optional]
+**cost_per_thruplay** | **float** | Derived &#x60;spend / videoThruplayWatchedActions&#x60;, in ad-account native currency. Rounded to 4 decimals rather than the usual 2 because a ThruPlay routinely costs well under a cent. 0 when the ad has no ThruPlays. | [optional]
+**funnel** | [**\Zernio\Model\AdFunnelCounts**](AdFunnelCounts.md) |  | [optional]
+**engagement_breakdown** | [**\Zernio\Model\AdEngagementCounts**](AdEngagementCounts.md) |  | [optional]
 **last_synced_at** | **\DateTime** | Present on individual ads only, not on campaign aggregations | [optional]
 **date** | **\DateTime** |  | [optional]
 

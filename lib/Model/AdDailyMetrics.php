@@ -82,6 +82,9 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
         'video_p95_watched_actions' => 'int',
         'video_p100_watched_actions' => 'int',
         'video_avg_time_watched_actions' => 'float',
+        'cost_per_thruplay' => 'float',
+        'funnel' => '\Zernio\Model\AdFunnelCounts',
+        'engagement_breakdown' => '\Zernio\Model\AdEngagementCounts',
         'last_synced_at' => '\DateTime',
         'date' => '\DateTime'
     ];
@@ -117,6 +120,9 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
         'video_p95_watched_actions' => null,
         'video_p100_watched_actions' => null,
         'video_avg_time_watched_actions' => null,
+        'cost_per_thruplay' => null,
+        'funnel' => null,
+        'engagement_breakdown' => null,
         'last_synced_at' => 'date-time',
         'date' => 'date'
     ];
@@ -150,6 +156,9 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
         'video_p95_watched_actions' => false,
         'video_p100_watched_actions' => false,
         'video_avg_time_watched_actions' => false,
+        'cost_per_thruplay' => false,
+        'funnel' => false,
+        'engagement_breakdown' => false,
         'last_synced_at' => false,
         'date' => false
     ];
@@ -263,6 +272,9 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
         'video_p95_watched_actions' => 'videoP95WatchedActions',
         'video_p100_watched_actions' => 'videoP100WatchedActions',
         'video_avg_time_watched_actions' => 'videoAvgTimeWatchedActions',
+        'cost_per_thruplay' => 'costPerThruplay',
+        'funnel' => 'funnel',
+        'engagement_breakdown' => 'engagementBreakdown',
         'last_synced_at' => 'lastSyncedAt',
         'date' => 'date'
     ];
@@ -296,6 +308,9 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
         'video_p95_watched_actions' => 'setVideoP95WatchedActions',
         'video_p100_watched_actions' => 'setVideoP100WatchedActions',
         'video_avg_time_watched_actions' => 'setVideoAvgTimeWatchedActions',
+        'cost_per_thruplay' => 'setCostPerThruplay',
+        'funnel' => 'setFunnel',
+        'engagement_breakdown' => 'setEngagementBreakdown',
         'last_synced_at' => 'setLastSyncedAt',
         'date' => 'setDate'
     ];
@@ -329,6 +344,9 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
         'video_p95_watched_actions' => 'getVideoP95WatchedActions',
         'video_p100_watched_actions' => 'getVideoP100WatchedActions',
         'video_avg_time_watched_actions' => 'getVideoAvgTimeWatchedActions',
+        'cost_per_thruplay' => 'getCostPerThruplay',
+        'funnel' => 'getFunnel',
+        'engagement_breakdown' => 'getEngagementBreakdown',
         'last_synced_at' => 'getLastSyncedAt',
         'date' => 'getDate'
     ];
@@ -413,6 +431,9 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('video_p95_watched_actions', $data ?? [], null);
         $this->setIfExists('video_p100_watched_actions', $data ?? [], null);
         $this->setIfExists('video_avg_time_watched_actions', $data ?? [], null);
+        $this->setIfExists('cost_per_thruplay', $data ?? [], null);
+        $this->setIfExists('funnel', $data ?? [], null);
+        $this->setIfExists('engagement_breakdown', $data ?? [], null);
         $this->setIfExists('last_synced_at', $data ?? [], null);
         $this->setIfExists('date', $data ?? [], null);
     }
@@ -1076,6 +1097,87 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable video_avg_time_watched_actions cannot be null');
         }
         $this->container['video_avg_time_watched_actions'] = $video_avg_time_watched_actions;
+
+        return $this;
+    }
+
+    /**
+     * Gets cost_per_thruplay
+     *
+     * @return float|null
+     */
+    public function getCostPerThruplay()
+    {
+        return $this->container['cost_per_thruplay'];
+    }
+
+    /**
+     * Sets cost_per_thruplay
+     *
+     * @param float|null $cost_per_thruplay Derived `spend / videoThruplayWatchedActions`, in ad-account native currency. Rounded to 4 decimals rather than the usual 2 because a ThruPlay routinely costs well under a cent. 0 when the ad has no ThruPlays.
+     *
+     * @return self
+     */
+    public function setCostPerThruplay($cost_per_thruplay)
+    {
+        if (is_null($cost_per_thruplay)) {
+            throw new \InvalidArgumentException('non-nullable cost_per_thruplay cannot be null');
+        }
+        $this->container['cost_per_thruplay'] = $cost_per_thruplay;
+
+        return $this;
+    }
+
+    /**
+     * Gets funnel
+     *
+     * @return \Zernio\Model\AdFunnelCounts|null
+     */
+    public function getFunnel()
+    {
+        return $this->container['funnel'];
+    }
+
+    /**
+     * Sets funnel
+     *
+     * @param \Zernio\Model\AdFunnelCounts|null $funnel funnel
+     *
+     * @return self
+     */
+    public function setFunnel($funnel)
+    {
+        if (is_null($funnel)) {
+            throw new \InvalidArgumentException('non-nullable funnel cannot be null');
+        }
+        $this->container['funnel'] = $funnel;
+
+        return $this;
+    }
+
+    /**
+     * Gets engagement_breakdown
+     *
+     * @return \Zernio\Model\AdEngagementCounts|null
+     */
+    public function getEngagementBreakdown()
+    {
+        return $this->container['engagement_breakdown'];
+    }
+
+    /**
+     * Sets engagement_breakdown
+     *
+     * @param \Zernio\Model\AdEngagementCounts|null $engagement_breakdown engagement_breakdown
+     *
+     * @return self
+     */
+    public function setEngagementBreakdown($engagement_breakdown)
+    {
+        if (is_null($engagement_breakdown)) {
+            throw new \InvalidArgumentException('non-nullable engagement_breakdown cannot be null');
+        }
+        $this->container['engagement_breakdown'] = $engagement_breakdown;
 
         return $this;
     }
