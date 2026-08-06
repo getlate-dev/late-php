@@ -62,6 +62,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
         'headline' => 'string',
         'body' => 'string',
         'description' => 'string',
+        'link_url' => 'string',
         'image_url' => 'string',
         'video_url' => 'string',
         'thumbnail_url' => 'string'
@@ -79,6 +80,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
         'headline' => null,
         'body' => null,
         'description' => null,
+        'link_url' => 'uri',
         'image_url' => 'uri',
         'video_url' => 'uri',
         'thumbnail_url' => 'uri'
@@ -94,6 +96,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
         'headline' => false,
         'body' => false,
         'description' => false,
+        'link_url' => false,
         'image_url' => false,
         'video_url' => false,
         'thumbnail_url' => false
@@ -189,6 +192,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
         'headline' => 'headline',
         'body' => 'body',
         'description' => 'description',
+        'link_url' => 'linkUrl',
         'image_url' => 'imageUrl',
         'video_url' => 'videoUrl',
         'thumbnail_url' => 'thumbnailUrl'
@@ -204,6 +208,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
         'headline' => 'setHeadline',
         'body' => 'setBody',
         'description' => 'setDescription',
+        'link_url' => 'setLinkUrl',
         'image_url' => 'setImageUrl',
         'video_url' => 'setVideoUrl',
         'thumbnail_url' => 'setThumbnailUrl'
@@ -219,6 +224,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
         'headline' => 'getHeadline',
         'body' => 'getBody',
         'description' => 'getDescription',
+        'link_url' => 'getLinkUrl',
         'image_url' => 'getImageUrl',
         'video_url' => 'getVideoUrl',
         'thumbnail_url' => 'getThumbnailUrl'
@@ -285,6 +291,7 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
         $this->setIfExists('headline', $data ?? [], null);
         $this->setIfExists('body', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('link_url', $data ?? [], null);
         $this->setIfExists('image_url', $data ?? [], null);
         $this->setIfExists('video_url', $data ?? [], null);
         $this->setIfExists('thumbnail_url', $data ?? [], null);
@@ -464,6 +471,33 @@ class CreateStandaloneAdRequestTranslationsInner implements ModelInterface, Arra
         }
 
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets link_url
+     *
+     * @return string|null
+     */
+    public function getLinkUrl()
+    {
+        return $this->container['link_url'];
+    }
+
+    /**
+     * Sets link_url
+     *
+     * @param string|null $link_url Destination URL for this language. Inherits the ad's top-level `linkUrl` when omitted, and requires it to be present (400 otherwise): the top-level URL is the destination for every locale you did not override. Unlike text, identical URLs across locales are fine (they share one asset).
+     *
+     * @return self
+     */
+    public function setLinkUrl($link_url)
+    {
+        if (is_null($link_url)) {
+            throw new \InvalidArgumentException('non-nullable link_url cannot be null');
+        }
+        $this->container['link_url'] = $link_url;
 
         return $this;
     }
