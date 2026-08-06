@@ -817,7 +817,8 @@ docs/Model/InitiateWhatsAppCallRequest.md
 docs/Model/InlineObject.md
 docs/Model/InlineObject1.md
 docs/Model/InlineObject2.md
-docs/Model/InlineObject2Details.md
+docs/Model/InlineObject3.md
+docs/Model/InlineObject3Details.md
 docs/Model/InstagramAccountInsightsResponse.md
 docs/Model/InstagramAccountInsightsResponseDateRange.md
 docs/Model/InstagramAccountInsightsResponseMetricsValue.md
@@ -2458,7 +2459,8 @@ lib/Model/InitiateWhatsAppCallRequest.php
 lib/Model/InlineObject.php
 lib/Model/InlineObject1.php
 lib/Model/InlineObject2.php
-lib/Model/InlineObject2Details.php
+lib/Model/InlineObject3.php
+lib/Model/InlineObject3Details.php
 lib/Model/InstagramAccountInsightsResponse.php
 lib/Model/InstagramAccountInsightsResponseDateRange.php
 lib/Model/InstagramAccountInsightsResponseMetricsValue.php
@@ -3283,3 +3285,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/InlineObject3DetailsTest.php
+test/Model/InlineObject3Test.php

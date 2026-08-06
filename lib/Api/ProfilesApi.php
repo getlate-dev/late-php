@@ -149,7 +149,7 @@ class ProfilesApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\ProfileCreateResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject2
+     * @return \Zernio\Model\ProfileCreateResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject3
      */
     public function createProfile($create_profile_request, $idempotency_key = null, string $contentType = self::contentTypes['createProfile'][0])
     {
@@ -168,7 +168,7 @@ class ProfilesApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\ProfileCreateResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject2, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\ProfileCreateResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject3, HTTP status code, HTTP response headers (array of strings)
      */
     public function createProfileWithHttpInfo($create_profile_request, $idempotency_key = null, string $contentType = self::contentTypes['createProfile'][0])
     {
@@ -212,7 +212,7 @@ class ProfilesApi
                     );
                 case 402:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\InlineObject2',
+                        '\Zernio\Model\InlineObject3',
                         $request,
                         $response,
                     );
@@ -259,7 +259,7 @@ class ProfilesApi
                 case 402:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\InlineObject2',
+                        '\Zernio\Model\InlineObject3',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

@@ -39,7 +39,7 @@ $apiInstance = new Zernio\Api\APIKeysApi(
     new GuzzleHttp\Client(),
     $config
 );
-$create_api_key_request = {"name":"Analytics Read-Only Key","scope":"profiles","profileIds":["6507a1b2c3d4e5f6a7b8c9d0"],"permission":"read"}; // \Zernio\Model\CreateApiKeyRequest
+$create_api_key_request = {"name":"No Private Messages Key","disabledResourceGroups":["messages","contacts","webhooks"]}; // \Zernio\Model\CreateApiKeyRequest
 
 try {
     $result = $apiInstance->createApiKey($create_api_key_request);

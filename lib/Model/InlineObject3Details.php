@@ -1,6 +1,6 @@
 <?php
 /**
- * InlineObject2
+ * InlineObject3Details
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * InlineObject2 Class Doc Comment
+ * InlineObject3Details Class Doc Comment
  *
  * @category Class
+ * @description Structured context for SDK clients that want to render their own UX. Keys vary by &#x60;reason&#x60;.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
+class InlineObject3Details implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'inline_object_2';
+    protected static $openAPIModelName = 'inline_object_3_details';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +59,10 @@ class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'error' => 'string',
-        'code' => 'string',
-        'required_group' => 'string'
+        'free_tier_account_limit' => 'int',
+        'current_account_count' => 'int',
+        'has_payment_method' => 'bool',
+        'effective_account_limit' => 'int'
     ];
 
     /**
@@ -71,9 +73,10 @@ class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'error' => null,
-        'code' => null,
-        'required_group' => null
+        'free_tier_account_limit' => null,
+        'current_account_count' => null,
+        'has_payment_method' => null,
+        'effective_account_limit' => null
     ];
 
     /**
@@ -82,9 +85,10 @@ class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'error' => false,
-        'code' => false,
-        'required_group' => false
+        'free_tier_account_limit' => false,
+        'current_account_count' => false,
+        'has_payment_method' => false,
+        'effective_account_limit' => false
     ];
 
     /**
@@ -173,9 +177,10 @@ class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'error' => 'error',
-        'code' => 'code',
-        'required_group' => 'required_group'
+        'free_tier_account_limit' => 'free_tier_account_limit',
+        'current_account_count' => 'current_account_count',
+        'has_payment_method' => 'has_payment_method',
+        'effective_account_limit' => 'effective_account_limit'
     ];
 
     /**
@@ -184,9 +189,10 @@ class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'error' => 'setError',
-        'code' => 'setCode',
-        'required_group' => 'setRequiredGroup'
+        'free_tier_account_limit' => 'setFreeTierAccountLimit',
+        'current_account_count' => 'setCurrentAccountCount',
+        'has_payment_method' => 'setHasPaymentMethod',
+        'effective_account_limit' => 'setEffectiveAccountLimit'
     ];
 
     /**
@@ -195,9 +201,10 @@ class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'error' => 'getError',
-        'code' => 'getCode',
-        'required_group' => 'getRequiredGroup'
+        'free_tier_account_limit' => 'getFreeTierAccountLimit',
+        'current_account_count' => 'getCurrentAccountCount',
+        'has_payment_method' => 'getHasPaymentMethod',
+        'effective_account_limit' => 'getEffectiveAccountLimit'
     ];
 
     /**
@@ -241,52 +248,6 @@ class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const CODE_INSUFFICIENT_PERMISSIONS = 'insufficient_permissions';
-    public const CODE_UNCLASSIFIED_RESOURCE = 'unclassified_resource';
-    public const REQUIRED_GROUP_PUBLISHING = 'publishing';
-    public const REQUIRED_GROUP_ENGAGEMENT = 'engagement';
-    public const REQUIRED_GROUP_MESSAGES = 'messages';
-    public const REQUIRED_GROUP_CONTACTS = 'contacts';
-    public const REQUIRED_GROUP_ANALYTICS = 'analytics';
-    public const REQUIRED_GROUP_ADS = 'ads';
-    public const REQUIRED_GROUP_TELEPHONY = 'telephony';
-    public const REQUIRED_GROUP_ACCOUNTS = 'accounts';
-    public const REQUIRED_GROUP_BILLING = 'billing';
-    public const REQUIRED_GROUP_WEBHOOKS = 'webhooks';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getCodeAllowableValues()
-    {
-        return [
-            self::CODE_INSUFFICIENT_PERMISSIONS,
-            self::CODE_UNCLASSIFIED_RESOURCE,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getRequiredGroupAllowableValues()
-    {
-        return [
-            self::REQUIRED_GROUP_PUBLISHING,
-            self::REQUIRED_GROUP_ENGAGEMENT,
-            self::REQUIRED_GROUP_MESSAGES,
-            self::REQUIRED_GROUP_CONTACTS,
-            self::REQUIRED_GROUP_ANALYTICS,
-            self::REQUIRED_GROUP_ADS,
-            self::REQUIRED_GROUP_TELEPHONY,
-            self::REQUIRED_GROUP_ACCOUNTS,
-            self::REQUIRED_GROUP_BILLING,
-            self::REQUIRED_GROUP_WEBHOOKS,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -303,9 +264,10 @@ class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('error', $data ?? [], null);
-        $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('required_group', $data ?? [], null);
+        $this->setIfExists('free_tier_account_limit', $data ?? [], null);
+        $this->setIfExists('current_account_count', $data ?? [], null);
+        $this->setIfExists('has_payment_method', $data ?? [], null);
+        $this->setIfExists('effective_account_limit', $data ?? [], null);
     }
 
     /**
@@ -335,24 +297,6 @@ class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getCodeAllowableValues();
-        if (!is_null($this->container['code']) && !in_array($this->container['code'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'code', must be one of '%s'",
-                $this->container['code'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        $allowedValues = $this->getRequiredGroupAllowableValues();
-        if (!is_null($this->container['required_group']) && !in_array($this->container['required_group'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'required_group', must be one of '%s'",
-                $this->container['required_group'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -369,102 +313,109 @@ class InlineObject2 implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets error
+     * Gets free_tier_account_limit
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getError()
+    public function getFreeTierAccountLimit()
     {
-        return $this->container['error'];
+        return $this->container['free_tier_account_limit'];
     }
 
     /**
-     * Sets error
+     * Sets free_tier_account_limit
      *
-     * @param string|null $error error
+     * @param int|null $free_tier_account_limit How many accounts the free tier allows. Only set when reason=free_tier_exceeded.
      *
      * @return self
      */
-    public function setError($error)
+    public function setFreeTierAccountLimit($free_tier_account_limit)
     {
-        if (is_null($error)) {
-            throw new \InvalidArgumentException('non-nullable error cannot be null');
+        if (is_null($free_tier_account_limit)) {
+            throw new \InvalidArgumentException('non-nullable free_tier_account_limit cannot be null');
         }
-        $this->container['error'] = $error;
+        $this->container['free_tier_account_limit'] = $free_tier_account_limit;
 
         return $this;
     }
 
     /**
-     * Gets code
+     * Gets current_account_count
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getCode()
+    public function getCurrentAccountCount()
     {
-        return $this->container['code'];
+        return $this->container['current_account_count'];
     }
 
     /**
-     * Sets code
+     * Sets current_account_count
      *
-     * @param string|null $code code
+     * @param int|null $current_account_count How many accounts the team currently has connected. Set when reason=free_tier_exceeded or reason=enterprise_required.
      *
      * @return self
      */
-    public function setCode($code)
+    public function setCurrentAccountCount($current_account_count)
     {
-        if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
+        if (is_null($current_account_count)) {
+            throw new \InvalidArgumentException('non-nullable current_account_count cannot be null');
         }
-        $allowedValues = $this->getCodeAllowableValues();
-        if (!in_array($code, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'code', must be one of '%s'",
-                    $code,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['code'] = $code;
+        $this->container['current_account_count'] = $current_account_count;
 
         return $this;
     }
 
     /**
-     * Gets required_group
+     * Gets has_payment_method
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getRequiredGroup()
+    public function getHasPaymentMethod()
     {
-        return $this->container['required_group'];
+        return $this->container['has_payment_method'];
     }
 
     /**
-     * Sets required_group
+     * Sets has_payment_method
      *
-     * @param string|null $required_group The resource group the key needs for this operation. Absent on admin-plane and unclassified-path denials.
+     * @param bool|null $has_payment_method Whether the team currently has a card on file in Stripe. Set when reason=free_tier_exceeded or reason=twitter_passthrough.
      *
      * @return self
      */
-    public function setRequiredGroup($required_group)
+    public function setHasPaymentMethod($has_payment_method)
     {
-        if (is_null($required_group)) {
-            throw new \InvalidArgumentException('non-nullable required_group cannot be null');
+        if (is_null($has_payment_method)) {
+            throw new \InvalidArgumentException('non-nullable has_payment_method cannot be null');
         }
-        $allowedValues = $this->getRequiredGroupAllowableValues();
-        if (!in_array($required_group, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'required_group', must be one of '%s'",
-                    $required_group,
-                    implode("', '", $allowedValues)
-                )
-            );
+        $this->container['has_payment_method'] = $has_payment_method;
+
+        return $this;
+    }
+
+    /**
+     * Gets effective_account_limit
+     *
+     * @return int|null
+     */
+    public function getEffectiveAccountLimit()
+    {
+        return $this->container['effective_account_limit'];
+    }
+
+    /**
+     * Sets effective_account_limit
+     *
+     * @param int|null $effective_account_limit The negotiated connected-account cap from the team's enterprise contract. Self-service teams have no cap and never receive this reason. Only set when reason=enterprise_required.
+     *
+     * @return self
+     */
+    public function setEffectiveAccountLimit($effective_account_limit)
+    {
+        if (is_null($effective_account_limit)) {
+            throw new \InvalidArgumentException('non-nullable effective_account_limit cannot be null');
         }
-        $this->container['required_group'] = $required_group;
+        $this->container['effective_account_limit'] = $effective_account_limit;
 
         return $this;
     }

@@ -22,7 +22,7 @@ createWebhookSettings($create_webhook_settings_request): \Zernio\Model\UpdateWeb
 
 Create webhook
 
-Create a new webhook configuration. Maximum 50 webhooks per user.  `name`, `url` and `events` are required. `url` must be a valid URL and `events` must contain at least one event. Whitespace is trimmed from `url` before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures.
+Create a new webhook configuration. Maximum 50 webhooks per user.  `name`, `url` and `events` are required. `url` must be a valid URL and `events` must contain at least one event. Whitespace is trimmed from `url` before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures.  A restricted (zrk_) API key can only subscribe to events whose resource group the key holds; an event outside the key's groups is rejected with 403. Note that the KEY cannot access private messages; the ACCOUNT's pre-existing webhook subscriptions are a separate grant surface.
 
 ### Example
 
@@ -142,7 +142,7 @@ getWebhookLogs($limit, $skip, $status, $event, $webhook_id, $event_id): \Zernio\
 
 List webhook delivery logs
 
-Retrieve recorded webhook delivery attempts for the authenticated user, most recent first. Logs are retained for 30 days. Supports filtering by status, event type, webhook ID, and event ID, plus offset-based pagination.
+Retrieve recorded webhook delivery attempts for the authenticated user, most recent first. Logs are retained for 30 days. Supports filtering by status, event type, webhook ID, and event ID, plus offset-based pagination.  For a restricted (zrk_) API key, rows for events outside the key's resource groups are omitted (`pagination.total` may over-count), and an `event` filter naming such an event is rejected with 403.
 
 ### Example
 
@@ -329,7 +329,7 @@ updateWebhookSettings($update_webhook_settings_request): \Zernio\Model\UpdateWeb
 
 Update webhook
 
-Update an existing webhook configuration. All fields except `_id` are optional; only provided fields will be updated.  When provided, `name` must be 1-50 characters, `url` must be a valid URL, and `events` must contain at least one event. Whitespace is trimmed from `url` before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures.
+Update an existing webhook configuration. All fields except `_id` are optional; only provided fields will be updated.  When provided, `name` must be 1-50 characters, `url` must be a valid URL, and `events` must contain at least one event. Whitespace is trimmed from `url` before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures.  A restricted (zrk_) API key can only set `events` to events whose resource group the key holds; an event outside the key's groups is rejected with 403.
 
 ### Example
 

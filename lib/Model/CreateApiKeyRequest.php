@@ -62,7 +62,8 @@ class CreateApiKeyRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'expires_in' => 'int',
         'scope' => 'string',
         'profile_ids' => 'string[]',
-        'permission' => 'string'
+        'permission' => 'string',
+        'disabled_resource_groups' => 'string[]'
     ];
 
     /**
@@ -77,7 +78,8 @@ class CreateApiKeyRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'expires_in' => null,
         'scope' => null,
         'profile_ids' => null,
-        'permission' => null
+        'permission' => null,
+        'disabled_resource_groups' => null
     ];
 
     /**
@@ -90,7 +92,8 @@ class CreateApiKeyRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'expires_in' => false,
         'scope' => false,
         'profile_ids' => false,
-        'permission' => false
+        'permission' => false,
+        'disabled_resource_groups' => false
     ];
 
     /**
@@ -183,7 +186,8 @@ class CreateApiKeyRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'expires_in' => 'expiresIn',
         'scope' => 'scope',
         'profile_ids' => 'profileIds',
-        'permission' => 'permission'
+        'permission' => 'permission',
+        'disabled_resource_groups' => 'disabledResourceGroups'
     ];
 
     /**
@@ -196,7 +200,8 @@ class CreateApiKeyRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'expires_in' => 'setExpiresIn',
         'scope' => 'setScope',
         'profile_ids' => 'setProfileIds',
-        'permission' => 'setPermission'
+        'permission' => 'setPermission',
+        'disabled_resource_groups' => 'setDisabledResourceGroups'
     ];
 
     /**
@@ -209,7 +214,8 @@ class CreateApiKeyRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'expires_in' => 'getExpiresIn',
         'scope' => 'getScope',
         'profile_ids' => 'getProfileIds',
-        'permission' => 'getPermission'
+        'permission' => 'getPermission',
+        'disabled_resource_groups' => 'getDisabledResourceGroups'
     ];
 
     /**
@@ -257,6 +263,16 @@ class CreateApiKeyRequest implements ModelInterface, ArrayAccess, \JsonSerializa
     public const SCOPE_PROFILES = 'profiles';
     public const PERMISSION_READ_WRITE = 'read-write';
     public const PERMISSION_READ = 'read';
+    public const DISABLED_RESOURCE_GROUPS_PUBLISHING = 'publishing';
+    public const DISABLED_RESOURCE_GROUPS_ENGAGEMENT = 'engagement';
+    public const DISABLED_RESOURCE_GROUPS_MESSAGES = 'messages';
+    public const DISABLED_RESOURCE_GROUPS_CONTACTS = 'contacts';
+    public const DISABLED_RESOURCE_GROUPS_ANALYTICS = 'analytics';
+    public const DISABLED_RESOURCE_GROUPS_ADS = 'ads';
+    public const DISABLED_RESOURCE_GROUPS_TELEPHONY = 'telephony';
+    public const DISABLED_RESOURCE_GROUPS_ACCOUNTS = 'accounts';
+    public const DISABLED_RESOURCE_GROUPS_BILLING = 'billing';
+    public const DISABLED_RESOURCE_GROUPS_WEBHOOKS = 'webhooks';
 
     /**
      * Gets allowable values of the enum
@@ -285,6 +301,27 @@ class CreateApiKeyRequest implements ModelInterface, ArrayAccess, \JsonSerializa
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getDisabledResourceGroupsAllowableValues()
+    {
+        return [
+            self::DISABLED_RESOURCE_GROUPS_PUBLISHING,
+            self::DISABLED_RESOURCE_GROUPS_ENGAGEMENT,
+            self::DISABLED_RESOURCE_GROUPS_MESSAGES,
+            self::DISABLED_RESOURCE_GROUPS_CONTACTS,
+            self::DISABLED_RESOURCE_GROUPS_ANALYTICS,
+            self::DISABLED_RESOURCE_GROUPS_ADS,
+            self::DISABLED_RESOURCE_GROUPS_TELEPHONY,
+            self::DISABLED_RESOURCE_GROUPS_ACCOUNTS,
+            self::DISABLED_RESOURCE_GROUPS_BILLING,
+            self::DISABLED_RESOURCE_GROUPS_WEBHOOKS,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -304,6 +341,7 @@ class CreateApiKeyRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('scope', $data ?? [], 'full');
         $this->setIfExists('profile_ids', $data ?? [], null);
         $this->setIfExists('permission', $data ?? [], 'read-write');
+        $this->setIfExists('disabled_resource_groups', $data ?? [], null);
     }
 
     /**
@@ -520,6 +558,42 @@ class CreateApiKeyRequest implements ModelInterface, ArrayAccess, \JsonSerializa
             );
         }
         $this->container['permission'] = $permission;
+
+        return $this;
+    }
+
+    /**
+     * Gets disabled_resource_groups
+     *
+     * @return string[]|null
+     */
+    public function getDisabledResourceGroups()
+    {
+        return $this->container['disabled_resource_groups'];
+    }
+
+    /**
+     * Sets disabled_resource_groups
+     *
+     * @param string[]|null $disabled_resource_groups Resource groups to DISABLE on this key (opt-out denylist). Omit for a legacy full-access key. A key with any group disabled mints with the zrk_ prefix, gets 403 with code=insufficient_permissions and required_group on operations in disabled groups (each operation's group is published as x-resource-group), and can never manage API keys, invites, or member identity. With 'messages' disabled, the KEY cannot access private messages; the ACCOUNT's pre-existing webhook subscriptions are a separate grant surface.
+     *
+     * @return self
+     */
+    public function setDisabledResourceGroups($disabled_resource_groups)
+    {
+        if (is_null($disabled_resource_groups)) {
+            throw new \InvalidArgumentException('non-nullable disabled_resource_groups cannot be null');
+        }
+        $allowedValues = $this->getDisabledResourceGroupsAllowableValues();
+        if (array_diff($disabled_resource_groups, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'disabled_resource_groups', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['disabled_resource_groups'] = $disabled_resource_groups;
 
         return $this;
     }

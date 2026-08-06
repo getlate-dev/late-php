@@ -41,7 +41,7 @@ $apiInstance = new Zernio\Api\APIKeysApi(
     new GuzzleHttp\Client(),
     $config
 );
-$create_api_key_request = {"name":"Analytics Read-Only Key","scope":"profiles","profileIds":["6507a1b2c3d4e5f6a7b8c9d0"],"permission":"read"}; // \Zernio\Model\CreateApiKeyRequest
+$create_api_key_request = {"name":"No Private Messages Key","disabledResourceGroups":["messages","contacts","webhooks"]}; // \Zernio\Model\CreateApiKeyRequest
 
 try {
     $result = $apiInstance->createApiKey($create_api_key_request);
@@ -1351,7 +1351,8 @@ Class | Method | HTTP request | Description
 - [InlineObject](docs/Model/InlineObject.md)
 - [InlineObject1](docs/Model/InlineObject1.md)
 - [InlineObject2](docs/Model/InlineObject2.md)
-- [InlineObject2Details](docs/Model/InlineObject2Details.md)
+- [InlineObject3](docs/Model/InlineObject3.md)
+- [InlineObject3Details](docs/Model/InlineObject3Details.md)
 - [InstagramAccountInsightsResponse](docs/Model/InstagramAccountInsightsResponse.md)
 - [InstagramAccountInsightsResponseDateRange](docs/Model/InstagramAccountInsightsResponseDateRange.md)
 - [InstagramAccountInsightsResponseMetricsValue](docs/Model/InstagramAccountInsightsResponseMetricsValue.md)
