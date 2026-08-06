@@ -1,6 +1,6 @@
 <?php
 /**
- * ListCommentAutomationLogs200Response
+ * ListCommentAutomationLogs200ResponseMissesSamplesInner
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListCommentAutomationLogs200Response Class Doc Comment
+ * ListCommentAutomationLogs200ResponseMissesSamplesInner Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListCommentAutomationLogs200ResponseMissesSamplesInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listCommentAutomationLogs_200_response';
+    protected static $openAPIModelName = 'listCommentAutomationLogs_200_response_misses_samples_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +58,10 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
       * @var string[]
       */
     protected static $openAPITypes = [
-        'success' => 'bool',
-        'logs' => '\Zernio\Model\GetCommentAutomation200ResponseLogsInner[]',
-        'pagination' => '\Zernio\Model\ListContacts200ResponsePagination',
-        'misses' => '\Zernio\Model\ListCommentAutomationLogs200ResponseMisses'
+        'comment_text' => 'string',
+        'commenter_name' => 'string',
+        'excluded_by' => 'string',
+        'at' => '\DateTime'
     ];
 
     /**
@@ -72,10 +72,10 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'success' => null,
-        'logs' => null,
-        'pagination' => null,
-        'misses' => null
+        'comment_text' => null,
+        'commenter_name' => null,
+        'excluded_by' => null,
+        'at' => 'date-time'
     ];
 
     /**
@@ -84,10 +84,10 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'success' => false,
-        'logs' => false,
-        'pagination' => false,
-        'misses' => false
+        'comment_text' => false,
+        'commenter_name' => false,
+        'excluded_by' => false,
+        'at' => false
     ];
 
     /**
@@ -176,10 +176,10 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $attributeMap = [
-        'success' => 'success',
-        'logs' => 'logs',
-        'pagination' => 'pagination',
-        'misses' => 'misses'
+        'comment_text' => 'commentText',
+        'commenter_name' => 'commenterName',
+        'excluded_by' => 'excludedBy',
+        'at' => 'at'
     ];
 
     /**
@@ -188,10 +188,10 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $setters = [
-        'success' => 'setSuccess',
-        'logs' => 'setLogs',
-        'pagination' => 'setPagination',
-        'misses' => 'setMisses'
+        'comment_text' => 'setCommentText',
+        'commenter_name' => 'setCommenterName',
+        'excluded_by' => 'setExcludedBy',
+        'at' => 'setAt'
     ];
 
     /**
@@ -200,10 +200,10 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $getters = [
-        'success' => 'getSuccess',
-        'logs' => 'getLogs',
-        'pagination' => 'getPagination',
-        'misses' => 'getMisses'
+        'comment_text' => 'getCommentText',
+        'commenter_name' => 'getCommenterName',
+        'excluded_by' => 'getExcludedBy',
+        'at' => 'getAt'
     ];
 
     /**
@@ -263,10 +263,10 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('success', $data ?? [], null);
-        $this->setIfExists('logs', $data ?? [], null);
-        $this->setIfExists('pagination', $data ?? [], null);
-        $this->setIfExists('misses', $data ?? [], null);
+        $this->setIfExists('comment_text', $data ?? [], null);
+        $this->setIfExists('commenter_name', $data ?? [], null);
+        $this->setIfExists('excluded_by', $data ?? [], null);
+        $this->setIfExists('at', $data ?? [], null);
     }
 
     /**
@@ -312,109 +312,109 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
 
 
     /**
-     * Gets success
+     * Gets comment_text
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getSuccess()
+    public function getCommentText()
     {
-        return $this->container['success'];
+        return $this->container['comment_text'];
     }
 
     /**
-     * Sets success
+     * Sets comment_text
      *
-     * @param bool|null $success success
+     * @param string|null $comment_text comment_text
      *
      * @return self
      */
-    public function setSuccess($success)
+    public function setCommentText($comment_text)
     {
-        if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
+        if (is_null($comment_text)) {
+            throw new \InvalidArgumentException('non-nullable comment_text cannot be null');
         }
-        $this->container['success'] = $success;
+        $this->container['comment_text'] = $comment_text;
 
         return $this;
     }
 
     /**
-     * Gets logs
+     * Gets commenter_name
      *
-     * @return \Zernio\Model\GetCommentAutomation200ResponseLogsInner[]|null
+     * @return string|null
      */
-    public function getLogs()
+    public function getCommenterName()
     {
-        return $this->container['logs'];
+        return $this->container['commenter_name'];
     }
 
     /**
-     * Sets logs
+     * Sets commenter_name
      *
-     * @param \Zernio\Model\GetCommentAutomation200ResponseLogsInner[]|null $logs logs
+     * @param string|null $commenter_name commenter_name
      *
      * @return self
      */
-    public function setLogs($logs)
+    public function setCommenterName($commenter_name)
     {
-        if (is_null($logs)) {
-            throw new \InvalidArgumentException('non-nullable logs cannot be null');
+        if (is_null($commenter_name)) {
+            throw new \InvalidArgumentException('non-nullable commenter_name cannot be null');
         }
-        $this->container['logs'] = $logs;
+        $this->container['commenter_name'] = $commenter_name;
 
         return $this;
     }
 
     /**
-     * Gets pagination
+     * Gets excluded_by
      *
-     * @return \Zernio\Model\ListContacts200ResponsePagination|null
+     * @return string|null
      */
-    public function getPagination()
+    public function getExcludedBy()
     {
-        return $this->container['pagination'];
+        return $this->container['excluded_by'];
     }
 
     /**
-     * Sets pagination
+     * Sets excluded_by
      *
-     * @param \Zernio\Model\ListContacts200ResponsePagination|null $pagination pagination
+     * @param string|null $excluded_by Set when an exclusion keyword vetoed an otherwise matching comment
      *
      * @return self
      */
-    public function setPagination($pagination)
+    public function setExcludedBy($excluded_by)
     {
-        if (is_null($pagination)) {
-            throw new \InvalidArgumentException('non-nullable pagination cannot be null');
+        if (is_null($excluded_by)) {
+            throw new \InvalidArgumentException('non-nullable excluded_by cannot be null');
         }
-        $this->container['pagination'] = $pagination;
+        $this->container['excluded_by'] = $excluded_by;
 
         return $this;
     }
 
     /**
-     * Gets misses
+     * Gets at
      *
-     * @return \Zernio\Model\ListCommentAutomationLogs200ResponseMisses|null
+     * @return \DateTime|null
      */
-    public function getMisses()
+    public function getAt()
     {
-        return $this->container['misses'];
+        return $this->container['at'];
     }
 
     /**
-     * Sets misses
+     * Sets at
      *
-     * @param \Zernio\Model\ListCommentAutomationLogs200ResponseMisses|null $misses misses
+     * @param \DateTime|null $at at
      *
      * @return self
      */
-    public function setMisses($misses)
+    public function setAt($at)
     {
-        if (is_null($misses)) {
-            throw new \InvalidArgumentException('non-nullable misses cannot be null');
+        if (is_null($at)) {
+            throw new \InvalidArgumentException('non-nullable at cannot be null');
         }
-        $this->container['misses'] = $misses;
+        $this->container['at'] = $at;
 
         return $this;
     }

@@ -977,7 +977,7 @@ class CommentAutomationsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\ListCommentAutomationLogs200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
+     * @return \Zernio\Model\ListCommentAutomationLogs200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
      */
     public function listCommentAutomationLogs($automation_id, $status = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listCommentAutomationLogs'][0])
     {
@@ -998,7 +998,7 @@ class CommentAutomationsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\ListCommentAutomationLogs200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\ListCommentAutomationLogs200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
      */
     public function listCommentAutomationLogsWithHttpInfo($automation_id, $status = null, $limit = 50, $skip = 0, string $contentType = self::contentTypes['listCommentAutomationLogs'][0])
     {
@@ -1031,6 +1031,12 @@ class CommentAutomationsApi
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\ListCommentAutomationLogs200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -1074,6 +1080,14 @@ class CommentAutomationsApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\ListCommentAutomationLogs200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1203,8 +1217,17 @@ class CommentAutomationsApi
         }
 
 
-
-
+        if ($limit !== null && $limit > 200) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling CommentAutomationsApi.listCommentAutomationLogs, must be smaller than or equal to 200.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling CommentAutomationsApi.listCommentAutomationLogs, must be bigger than or equal to 1.');
+        }
+        
+        if ($skip !== null && $skip < 0) {
+            throw new \InvalidArgumentException('invalid value for "$skip" when calling CommentAutomationsApi.listCommentAutomationLogs, must be bigger than or equal to 0.');
+        }
+        
 
         $resourcePath = '/v1/comment-automations/{automationId}/logs';
         $formParams = [];

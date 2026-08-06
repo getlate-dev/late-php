@@ -1,6 +1,6 @@
 <?php
 /**
- * ListCommentAutomationLogs200Response
+ * ListCommentAutomationLogs200ResponseMisses
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListCommentAutomationLogs200Response Class Doc Comment
+ * ListCommentAutomationLogs200ResponseMisses Class Doc Comment
  *
  * @category Class
+ * @description Comments that reached this automation but matched none of its keywords. These produce no log entry, so this is the only signal that a keyword is catching nothing. Retained for a short window, then dropped.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListCommentAutomationLogs200ResponseMisses implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listCommentAutomationLogs_200_response';
+    protected static $openAPIModelName = 'listCommentAutomationLogs_200_response_misses';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +59,9 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
       * @var string[]
       */
     protected static $openAPITypes = [
-        'success' => 'bool',
-        'logs' => '\Zernio\Model\GetCommentAutomation200ResponseLogsInner[]',
-        'pagination' => '\Zernio\Model\ListContacts200ResponsePagination',
-        'misses' => '\Zernio\Model\ListCommentAutomationLogs200ResponseMisses'
+        'total' => 'int',
+        'retention_days' => 'int',
+        'samples' => '\Zernio\Model\ListCommentAutomationLogs200ResponseMissesSamplesInner[]'
     ];
 
     /**
@@ -72,10 +72,9 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'success' => null,
-        'logs' => null,
-        'pagination' => null,
-        'misses' => null
+        'total' => null,
+        'retention_days' => null,
+        'samples' => null
     ];
 
     /**
@@ -84,10 +83,9 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'success' => false,
-        'logs' => false,
-        'pagination' => false,
-        'misses' => false
+        'total' => false,
+        'retention_days' => false,
+        'samples' => false
     ];
 
     /**
@@ -176,10 +174,9 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $attributeMap = [
-        'success' => 'success',
-        'logs' => 'logs',
-        'pagination' => 'pagination',
-        'misses' => 'misses'
+        'total' => 'total',
+        'retention_days' => 'retentionDays',
+        'samples' => 'samples'
     ];
 
     /**
@@ -188,10 +185,9 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $setters = [
-        'success' => 'setSuccess',
-        'logs' => 'setLogs',
-        'pagination' => 'setPagination',
-        'misses' => 'setMisses'
+        'total' => 'setTotal',
+        'retention_days' => 'setRetentionDays',
+        'samples' => 'setSamples'
     ];
 
     /**
@@ -200,10 +196,9 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $getters = [
-        'success' => 'getSuccess',
-        'logs' => 'getLogs',
-        'pagination' => 'getPagination',
-        'misses' => 'getMisses'
+        'total' => 'getTotal',
+        'retention_days' => 'getRetentionDays',
+        'samples' => 'getSamples'
     ];
 
     /**
@@ -263,10 +258,9 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('success', $data ?? [], null);
-        $this->setIfExists('logs', $data ?? [], null);
-        $this->setIfExists('pagination', $data ?? [], null);
-        $this->setIfExists('misses', $data ?? [], null);
+        $this->setIfExists('total', $data ?? [], null);
+        $this->setIfExists('retention_days', $data ?? [], null);
+        $this->setIfExists('samples', $data ?? [], null);
     }
 
     /**
@@ -312,109 +306,82 @@ class ListCommentAutomationLogs200Response implements ModelInterface, ArrayAcces
 
 
     /**
-     * Gets success
+     * Gets total
      *
-     * @return bool|null
+     * @return int|null
      */
-    public function getSuccess()
+    public function getTotal()
     {
-        return $this->container['success'];
+        return $this->container['total'];
     }
 
     /**
-     * Sets success
+     * Sets total
      *
-     * @param bool|null $success success
+     * @param int|null $total Number of non-matching comments in the retention window
      *
      * @return self
      */
-    public function setSuccess($success)
+    public function setTotal($total)
     {
-        if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
+        if (is_null($total)) {
+            throw new \InvalidArgumentException('non-nullable total cannot be null');
         }
-        $this->container['success'] = $success;
+        $this->container['total'] = $total;
 
         return $this;
     }
 
     /**
-     * Gets logs
+     * Gets retention_days
      *
-     * @return \Zernio\Model\GetCommentAutomation200ResponseLogsInner[]|null
+     * @return int|null
      */
-    public function getLogs()
+    public function getRetentionDays()
     {
-        return $this->container['logs'];
+        return $this->container['retention_days'];
     }
 
     /**
-     * Sets logs
+     * Sets retention_days
      *
-     * @param \Zernio\Model\GetCommentAutomation200ResponseLogsInner[]|null $logs logs
+     * @param int|null $retention_days How many days of non-matching comments the total covers
      *
      * @return self
      */
-    public function setLogs($logs)
+    public function setRetentionDays($retention_days)
     {
-        if (is_null($logs)) {
-            throw new \InvalidArgumentException('non-nullable logs cannot be null');
+        if (is_null($retention_days)) {
+            throw new \InvalidArgumentException('non-nullable retention_days cannot be null');
         }
-        $this->container['logs'] = $logs;
+        $this->container['retention_days'] = $retention_days;
 
         return $this;
     }
 
     /**
-     * Gets pagination
+     * Gets samples
      *
-     * @return \Zernio\Model\ListContacts200ResponsePagination|null
+     * @return \Zernio\Model\ListCommentAutomationLogs200ResponseMissesSamplesInner[]|null
      */
-    public function getPagination()
+    public function getSamples()
     {
-        return $this->container['pagination'];
+        return $this->container['samples'];
     }
 
     /**
-     * Sets pagination
+     * Sets samples
      *
-     * @param \Zernio\Model\ListContacts200ResponsePagination|null $pagination pagination
+     * @param \Zernio\Model\ListCommentAutomationLogs200ResponseMissesSamplesInner[]|null $samples A few of the most recent non-matching comments, for diagnosing a keyword setup.
      *
      * @return self
      */
-    public function setPagination($pagination)
+    public function setSamples($samples)
     {
-        if (is_null($pagination)) {
-            throw new \InvalidArgumentException('non-nullable pagination cannot be null');
+        if (is_null($samples)) {
+            throw new \InvalidArgumentException('non-nullable samples cannot be null');
         }
-        $this->container['pagination'] = $pagination;
-
-        return $this;
-    }
-
-    /**
-     * Gets misses
-     *
-     * @return \Zernio\Model\ListCommentAutomationLogs200ResponseMisses|null
-     */
-    public function getMisses()
-    {
-        return $this->container['misses'];
-    }
-
-    /**
-     * Sets misses
-     *
-     * @param \Zernio\Model\ListCommentAutomationLogs200ResponseMisses|null $misses misses
-     *
-     * @return self
-     */
-    public function setMisses($misses)
-    {
-        if (is_null($misses)) {
-            throw new \InvalidArgumentException('non-nullable misses cannot be null');
-        }
-        $this->container['misses'] = $misses;
+        $this->container['samples'] = $samples;
 
         return $this;
     }

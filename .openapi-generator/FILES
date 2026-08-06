@@ -891,6 +891,8 @@ docs/Model/ListBroadcasts200ResponseBroadcastsInner.md
 docs/Model/ListCalls200Response.md
 docs/Model/ListCalls200ResponseCallsInner.md
 docs/Model/ListCommentAutomationLogs200Response.md
+docs/Model/ListCommentAutomationLogs200ResponseMisses.md
+docs/Model/ListCommentAutomationLogs200ResponseMissesSamplesInner.md
 docs/Model/ListCommentAutomations200Response.md
 docs/Model/ListCommentAutomations200ResponseAutomationsInner.md
 docs/Model/ListCommentAutomations200ResponseAutomationsInnerStats.md
@@ -2535,6 +2537,8 @@ lib/Model/ListBroadcasts200ResponseBroadcastsInner.php
 lib/Model/ListCalls200Response.php
 lib/Model/ListCalls200ResponseCallsInner.php
 lib/Model/ListCommentAutomationLogs200Response.php
+lib/Model/ListCommentAutomationLogs200ResponseMisses.php
+lib/Model/ListCommentAutomationLogs200ResponseMissesSamplesInner.php
 lib/Model/ListCommentAutomations200Response.php
 lib/Model/ListCommentAutomations200ResponseAutomationsInner.php
 lib/Model/ListCommentAutomations200ResponseAutomationsInnerStats.php
@@ -3289,3 +3293,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/ListCommentAutomationLogs200ResponseMissesSamplesInnerTest.php
+test/Model/ListCommentAutomationLogs200ResponseMissesTest.php
