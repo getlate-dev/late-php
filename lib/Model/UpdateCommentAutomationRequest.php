@@ -59,6 +59,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
       */
     protected static $openAPITypes = [
         'name' => 'string',
+        'trigger' => 'string',
         'keywords' => 'string[]',
         'match_mode' => 'string',
         'exclude_keywords' => 'string[]',
@@ -82,6 +83,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
       */
     protected static $openAPIFormats = [
         'name' => null,
+        'trigger' => null,
         'keywords' => null,
         'match_mode' => null,
         'exclude_keywords' => null,
@@ -103,6 +105,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
       */
     protected static array $openAPINullables = [
         'name' => false,
+        'trigger' => false,
         'keywords' => false,
         'match_mode' => false,
         'exclude_keywords' => false,
@@ -204,6 +207,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
      */
     protected static $attributeMap = [
         'name' => 'name',
+        'trigger' => 'trigger',
         'keywords' => 'keywords',
         'match_mode' => 'matchMode',
         'exclude_keywords' => 'excludeKeywords',
@@ -225,6 +229,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
      */
     protected static $setters = [
         'name' => 'setName',
+        'trigger' => 'setTrigger',
         'keywords' => 'setKeywords',
         'match_mode' => 'setMatchMode',
         'exclude_keywords' => 'setExcludeKeywords',
@@ -246,6 +251,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
      */
     protected static $getters = [
         'name' => 'getName',
+        'trigger' => 'getTrigger',
         'keywords' => 'getKeywords',
         'match_mode' => 'getMatchMode',
         'exclude_keywords' => 'getExcludeKeywords',
@@ -301,9 +307,24 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         return self::$openAPIModelName;
     }
 
+    public const TRIGGER_COMMENT = 'comment';
+    public const TRIGGER_STORY_REPLY = 'story_reply';
     public const MATCH_MODE_EXACT = 'exact';
     public const MATCH_MODE_CONTAINS = 'contains';
     public const MATCH_MODE_WORD = 'word';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getTriggerAllowableValues()
+    {
+        return [
+            self::TRIGGER_COMMENT,
+            self::TRIGGER_STORY_REPLY,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -335,6 +356,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
     public function __construct(?array $data = null)
     {
         $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('trigger', $data ?? [], null);
         $this->setIfExists('keywords', $data ?? [], null);
         $this->setIfExists('match_mode', $data ?? [], null);
         $this->setIfExists('exclude_keywords', $data ?? [], null);
@@ -375,6 +397,15 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getTriggerAllowableValues();
+        if (!is_null($this->container['trigger']) && !in_array($this->container['trigger'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'trigger', must be one of '%s'",
+                $this->container['trigger'],
+                implode("', '", $allowedValues)
+            );
+        }
 
         $allowedValues = $this->getMatchModeAllowableValues();
         if (!is_null($this->container['match_mode']) && !in_array($this->container['match_mode'], $allowedValues, true)) {
@@ -435,6 +466,43 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets trigger
+     *
+     * @return string|null
+     */
+    public function getTrigger()
+    {
+        return $this->container['trigger'];
+    }
+
+    /**
+     * Sets trigger
+     *
+     * @param string|null $trigger What fires the automation. Changing it detaches the automation from its bound post or story (a post id and a story id are different objects), unless this same request sets a new binding. 'story_reply' is Instagram only.
+     *
+     * @return self
+     */
+    public function setTrigger($trigger)
+    {
+        if (is_null($trigger)) {
+            throw new \InvalidArgumentException('non-nullable trigger cannot be null');
+        }
+        $allowedValues = $this->getTriggerAllowableValues();
+        if (!in_array($trigger, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'trigger', must be one of '%s'",
+                    $trigger,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['trigger'] = $trigger;
 
         return $this;
     }
