@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pixel_id** | **string** |  | [optional]
 **custom_event_type** | **string** |  | [optional]
+**custom_event_str** | **string** | Pixel custom-event name (custom_event_str); requires customEventType OTHER. Same pairing rules as /v1/ads/create. | [optional]
 **page_id** | **string** |  | [optional]
 **application_id** | **string** |  | [optional]
 **object_store_url** | **string** |  | [optional]

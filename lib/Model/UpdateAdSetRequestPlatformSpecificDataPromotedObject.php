@@ -61,6 +61,7 @@ class UpdateAdSetRequestPlatformSpecificDataPromotedObject implements ModelInter
     protected static $openAPITypes = [
         'pixel_id' => 'string',
         'custom_event_type' => 'string',
+        'custom_event_str' => 'string',
         'page_id' => 'string',
         'application_id' => 'string',
         'object_store_url' => 'string',
@@ -81,6 +82,7 @@ class UpdateAdSetRequestPlatformSpecificDataPromotedObject implements ModelInter
     protected static $openAPIFormats = [
         'pixel_id' => null,
         'custom_event_type' => null,
+        'custom_event_str' => null,
         'page_id' => null,
         'application_id' => null,
         'object_store_url' => null,
@@ -99,6 +101,7 @@ class UpdateAdSetRequestPlatformSpecificDataPromotedObject implements ModelInter
     protected static array $openAPINullables = [
         'pixel_id' => false,
         'custom_event_type' => false,
+        'custom_event_str' => false,
         'page_id' => false,
         'application_id' => false,
         'object_store_url' => false,
@@ -197,6 +200,7 @@ class UpdateAdSetRequestPlatformSpecificDataPromotedObject implements ModelInter
     protected static $attributeMap = [
         'pixel_id' => 'pixelId',
         'custom_event_type' => 'customEventType',
+        'custom_event_str' => 'customEventStr',
         'page_id' => 'pageId',
         'application_id' => 'applicationId',
         'object_store_url' => 'objectStoreUrl',
@@ -215,6 +219,7 @@ class UpdateAdSetRequestPlatformSpecificDataPromotedObject implements ModelInter
     protected static $setters = [
         'pixel_id' => 'setPixelId',
         'custom_event_type' => 'setCustomEventType',
+        'custom_event_str' => 'setCustomEventStr',
         'page_id' => 'setPageId',
         'application_id' => 'setApplicationId',
         'object_store_url' => 'setObjectStoreUrl',
@@ -233,6 +238,7 @@ class UpdateAdSetRequestPlatformSpecificDataPromotedObject implements ModelInter
     protected static $getters = [
         'pixel_id' => 'getPixelId',
         'custom_event_type' => 'getCustomEventType',
+        'custom_event_str' => 'getCustomEventStr',
         'page_id' => 'getPageId',
         'application_id' => 'getApplicationId',
         'object_store_url' => 'getObjectStoreUrl',
@@ -302,6 +308,7 @@ class UpdateAdSetRequestPlatformSpecificDataPromotedObject implements ModelInter
     {
         $this->setIfExists('pixel_id', $data ?? [], null);
         $this->setIfExists('custom_event_type', $data ?? [], null);
+        $this->setIfExists('custom_event_str', $data ?? [], null);
         $this->setIfExists('page_id', $data ?? [], null);
         $this->setIfExists('application_id', $data ?? [], null);
         $this->setIfExists('object_store_url', $data ?? [], null);
@@ -404,6 +411,33 @@ class UpdateAdSetRequestPlatformSpecificDataPromotedObject implements ModelInter
             throw new \InvalidArgumentException('non-nullable custom_event_type cannot be null');
         }
         $this->container['custom_event_type'] = $custom_event_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets custom_event_str
+     *
+     * @return string|null
+     */
+    public function getCustomEventStr()
+    {
+        return $this->container['custom_event_str'];
+    }
+
+    /**
+     * Sets custom_event_str
+     *
+     * @param string|null $custom_event_str Pixel custom-event name (custom_event_str); requires customEventType OTHER. Same pairing rules as /v1/ads/create.
+     *
+     * @return self
+     */
+    public function setCustomEventStr($custom_event_str)
+    {
+        if (is_null($custom_event_str)) {
+            throw new \InvalidArgumentException('non-nullable custom_event_str cannot be null');
+        }
+        $this->container['custom_event_str'] = $custom_event_str;
 
         return $this;
     }

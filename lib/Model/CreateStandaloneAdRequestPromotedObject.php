@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * CreateStandaloneAdRequestPromotedObject Class Doc Comment
  *
  * @category Class
- * @description What the ad optimises against. Behaviour depends on the platform.  **Meta**: forwarded to the ad set&#39;s &#x60;promoted_object&#x60; (snake-cased). Required for goals whose ad-set optimization_goal points at a specific event/page/app (without it Meta rejects the ad-set create with &#x60;error_subcode: 1815430&#x60; \&quot;Please select a promoted object for your ad set\&quot;):   - &#x60;goal: conversions&#x60; / &#x60;lead_conversion&#x60; (OFFSITE_CONVERSIONS): requires &#x60;pixelId&#x60; + &#x60;customEventType&#x60;, or &#x60;customConversionId&#x60; when optimising against a Custom Conversion (the conversion carries its own event definition)   - &#x60;goal: app_promotion&#x60; (APP_INSTALLS): requires &#x60;applicationId&#x60; + &#x60;objectStoreUrl&#x60;   - &#x60;goal: lead_generation&#x60; (LEAD_GENERATION): &#x60;pageId&#x60; is auto-filled from the connected Page when omitted  Other Meta goals (engagement, traffic, awareness, video_views) ignore this field.  **TikTok**: only &#x60;goal: conversions&#x60; uses it.   - &#x60;pixelId&#x60; maps to the ad group&#39;s &#x60;pixel_id&#x60;. Required: a TikTok website-conversion     ad group without a pixel is rejected with &#x60;40002: Please select a pixel&#x60;.   - &#x60;customEventType&#x60; maps to the ad group&#39;s &#x60;optimization_event&#x60; (the pixel event to     optimise for). Optional: TikTok accepts a pixel-only auto-bid conversion ad group.     See the &#x60;customEventType&#x60; field below for the valid TikTok codes.  The remaining &#x60;promotedObject.*&#x60; fields are Meta-only. Platforms other than Meta and TikTok ignore &#x60;promotedObject&#x60; entirely.
+ * @description What the ad optimises against. Behaviour depends on the platform.  **Meta**: forwarded to the ad set&#39;s &#x60;promoted_object&#x60; (snake-cased). Required for goals whose ad-set optimization_goal points at a specific event/page/app (without it Meta rejects the ad-set create with &#x60;error_subcode: 1815430&#x60; \&quot;Please select a promoted object for your ad set\&quot;):   - &#x60;goal: conversions&#x60; / &#x60;lead_conversion&#x60; (OFFSITE_CONVERSIONS): requires &#x60;pixelId&#x60; + &#x60;customEventType&#x60;, or &#x60;customConversionId&#x60; when optimising against a Custom Conversion (the conversion carries its own event definition). For a pixel CUSTOM event (one you named yourself in CAPI/Events Manager), send &#x60;customEventType: OTHER&#x60; + &#x60;customEventStr&#x60; with the event name.   - &#x60;goal: app_promotion&#x60; (APP_INSTALLS): requires &#x60;applicationId&#x60; + &#x60;objectStoreUrl&#x60;   - &#x60;goal: lead_generation&#x60; (LEAD_GENERATION): &#x60;pageId&#x60; is auto-filled from the connected Page when omitted  Other Meta goals (engagement, traffic, awareness, video_views) ignore this field.  **TikTok**: only &#x60;goal: conversions&#x60; uses it.   - &#x60;pixelId&#x60; maps to the ad group&#39;s &#x60;pixel_id&#x60;. Required: a TikTok website-conversion     ad group without a pixel is rejected with &#x60;40002: Please select a pixel&#x60;.   - &#x60;customEventType&#x60; maps to the ad group&#39;s &#x60;optimization_event&#x60; (the pixel event to     optimise for). Optional: TikTok accepts a pixel-only auto-bid conversion ad group.     See the &#x60;customEventType&#x60; field below for the valid TikTok codes.  The remaining &#x60;promotedObject.*&#x60; fields are Meta-only. Platforms other than Meta and TikTok ignore &#x60;promotedObject&#x60; entirely.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -61,6 +61,7 @@ class CreateStandaloneAdRequestPromotedObject implements ModelInterface, ArrayAc
     protected static $openAPITypes = [
         'pixel_id' => 'string',
         'custom_event_type' => 'string',
+        'custom_event_str' => 'string',
         'page_id' => 'string',
         'application_id' => 'string',
         'object_store_url' => 'string',
@@ -81,6 +82,7 @@ class CreateStandaloneAdRequestPromotedObject implements ModelInterface, ArrayAc
     protected static $openAPIFormats = [
         'pixel_id' => null,
         'custom_event_type' => null,
+        'custom_event_str' => null,
         'page_id' => null,
         'application_id' => null,
         'object_store_url' => 'uri',
@@ -99,6 +101,7 @@ class CreateStandaloneAdRequestPromotedObject implements ModelInterface, ArrayAc
     protected static array $openAPINullables = [
         'pixel_id' => false,
         'custom_event_type' => false,
+        'custom_event_str' => false,
         'page_id' => false,
         'application_id' => false,
         'object_store_url' => false,
@@ -197,6 +200,7 @@ class CreateStandaloneAdRequestPromotedObject implements ModelInterface, ArrayAc
     protected static $attributeMap = [
         'pixel_id' => 'pixelId',
         'custom_event_type' => 'customEventType',
+        'custom_event_str' => 'customEventStr',
         'page_id' => 'pageId',
         'application_id' => 'applicationId',
         'object_store_url' => 'objectStoreUrl',
@@ -215,6 +219,7 @@ class CreateStandaloneAdRequestPromotedObject implements ModelInterface, ArrayAc
     protected static $setters = [
         'pixel_id' => 'setPixelId',
         'custom_event_type' => 'setCustomEventType',
+        'custom_event_str' => 'setCustomEventStr',
         'page_id' => 'setPageId',
         'application_id' => 'setApplicationId',
         'object_store_url' => 'setObjectStoreUrl',
@@ -233,6 +238,7 @@ class CreateStandaloneAdRequestPromotedObject implements ModelInterface, ArrayAc
     protected static $getters = [
         'pixel_id' => 'getPixelId',
         'custom_event_type' => 'getCustomEventType',
+        'custom_event_str' => 'getCustomEventStr',
         'page_id' => 'getPageId',
         'application_id' => 'getApplicationId',
         'object_store_url' => 'getObjectStoreUrl',
@@ -302,6 +308,7 @@ class CreateStandaloneAdRequestPromotedObject implements ModelInterface, ArrayAc
     {
         $this->setIfExists('pixel_id', $data ?? [], null);
         $this->setIfExists('custom_event_type', $data ?? [], null);
+        $this->setIfExists('custom_event_str', $data ?? [], null);
         $this->setIfExists('page_id', $data ?? [], null);
         $this->setIfExists('application_id', $data ?? [], null);
         $this->setIfExists('object_store_url', $data ?? [], null);
@@ -404,6 +411,33 @@ class CreateStandaloneAdRequestPromotedObject implements ModelInterface, ArrayAc
             throw new \InvalidArgumentException('non-nullable custom_event_type cannot be null');
         }
         $this->container['custom_event_type'] = $custom_event_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets custom_event_str
+     *
+     * @return string|null
+     */
+    public function getCustomEventStr()
+    {
+        return $this->container['custom_event_str'];
+    }
+
+    /**
+     * Sets custom_event_str
+     *
+     * @param string|null $custom_event_str Meta only. Pixel custom-event name to optimise against (Meta's `custom_event_str`), exactly as it appears in Events Manager and in your CAPI payloads (case-sensitive, not uppercased). Requires `customEventType: OTHER`, and `OTHER` requires this field (400 either way). The same as picking a custom event in Ads Manager's conversion-event dropdown. For rule-based Custom Conversions use `customConversionId` instead.
+     *
+     * @return self
+     */
+    public function setCustomEventStr($custom_event_str)
+    {
+        if (is_null($custom_event_str)) {
+            throw new \InvalidArgumentException('non-nullable custom_event_str cannot be null');
+        }
+        $this->container['custom_event_str'] = $custom_event_str;
 
         return $this;
     }
