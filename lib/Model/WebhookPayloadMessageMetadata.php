@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * WebhookPayloadMessageMetadata Class Doc Comment
  *
  * @category Class
- * @description Interactive message metadata (present when message is a quick reply tap, postback button tap, or inline keyboard callback)
+ * @description Platform-specific message context (present when the message is a quick reply tap, postback button tap, inline keyboard callback, or a quote-reply to an earlier message)
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -59,6 +59,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
+        'quoted_message_id' => 'string',
         'quick_reply_payload' => 'string',
         'postback_payload' => 'string',
         'postback_title' => 'string',
@@ -85,6 +86,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'quoted_message_id' => null,
         'quick_reply_payload' => null,
         'postback_payload' => null,
         'postback_title' => null,
@@ -109,6 +111,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'quoted_message_id' => false,
         'quick_reply_payload' => false,
         'postback_payload' => false,
         'postback_title' => false,
@@ -213,6 +216,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
+        'quoted_message_id' => 'quotedMessageId',
         'quick_reply_payload' => 'quickReplyPayload',
         'postback_payload' => 'postbackPayload',
         'postback_title' => 'postbackTitle',
@@ -237,6 +241,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
+        'quoted_message_id' => 'setQuotedMessageId',
         'quick_reply_payload' => 'setQuickReplyPayload',
         'postback_payload' => 'setPostbackPayload',
         'postback_title' => 'setPostbackTitle',
@@ -261,6 +266,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
+        'quoted_message_id' => 'getQuotedMessageId',
         'quick_reply_payload' => 'getQuickReplyPayload',
         'postback_payload' => 'getPostbackPayload',
         'postback_title' => 'getPostbackTitle',
@@ -368,6 +374,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('quoted_message_id', $data ?? [], null);
         $this->setIfExists('quick_reply_payload', $data ?? [], null);
         $this->setIfExists('postback_payload', $data ?? [], null);
         $this->setIfExists('postback_title', $data ?? [], null);
@@ -445,6 +452,33 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets quoted_message_id
+     *
+     * @return string|null
+     */
+    public function getQuotedMessageId()
+    {
+        return $this->container['quoted_message_id'];
+    }
+
+    /**
+     * Sets quoted_message_id
+     *
+     * @param string|null $quoted_message_id platformMessageId of the message this one is a quote-reply to. WhatsApp (`context.id`), Instagram and Facebook Messenger (`reply_to.mid`). On `message.sent` echoes (operator replied from the native app) this is the only metadata field populated.
+     *
+     * @return self
+     */
+    public function setQuotedMessageId($quoted_message_id)
+    {
+        if (is_null($quoted_message_id)) {
+            throw new \InvalidArgumentException('non-nullable quoted_message_id cannot be null');
+        }
+        $this->container['quoted_message_id'] = $quoted_message_id;
+
+        return $this;
+    }
 
     /**
      * Gets quick_reply_payload

@@ -956,7 +956,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets reply_to
      *
-     * @param string|null $reply_to Platform message ID to quote-reply to. For WhatsApp, pass the wamid (available in message.platformMessageId from webhooks). For Telegram, pass the Telegram message ID.
+     * @param string|null $reply_to Platform message ID to quote-reply to. For WhatsApp, pass the wamid; for Telegram, the Telegram message ID; for Instagram, the Meta mid (all available in message.platformMessageId from webhooks or the list-messages endpoint). On Slack it threads the reply (thread_ts) instead of quoting. Silently ignored on platforms without reply support, including Facebook Messenger (Meta's Messenger Send API has no reply_to).
      *
      * @return self
      */
