@@ -182,6 +182,8 @@ docs/Model/CheckPhoneNumberPortability200ResponseResultsInner.md
 docs/Model/CheckPhoneNumberPortabilityRequest.md
 docs/Model/CheckVerification200Response.md
 docs/Model/CheckVerificationRequest.md
+docs/Model/CommentAutomationAudience.md
+docs/Model/CommentAutomationFollowGate.md
 docs/Model/CompleteGoogleBusinessVerificationRequest.md
 docs/Model/CompleteTelegramConnect200Response.md
 docs/Model/CompleteWhatsAppPhoneSelection200Response.md
@@ -639,6 +641,7 @@ docs/Model/GetInboxVolume200ResponseSummary.md
 docs/Model/GetInboxVolume200ResponseTimeseriesInner.md
 docs/Model/GetInboxVolume400Response.md
 docs/Model/GetInstagramAccountInsights404Response.md
+docs/Model/GetInstagramFollowStatus200Response.md
 docs/Model/GetInstagramPublishingLimit200Response.md
 docs/Model/GetInstagramStoryInsights200Response.md
 docs/Model/GetInstagramStoryInsights200ResponseData.md
@@ -1564,6 +1567,7 @@ docs/Model/WebhookPayloadCommentComment.md
 docs/Model/WebhookPayloadCommentCommentAd.md
 docs/Model/WebhookPayloadCommentCommentAttachment.md
 docs/Model/WebhookPayloadCommentCommentAuthor.md
+docs/Model/WebhookPayloadCommentCommentAuthorInstagramProfile.md
 docs/Model/WebhookPayloadCommentPost.md
 docs/Model/WebhookPayloadConversationStarted.md
 docs/Model/WebhookPayloadConversationStartedConversation.md
@@ -1828,6 +1832,8 @@ lib/Model/CheckPhoneNumberPortability200ResponseResultsInner.php
 lib/Model/CheckPhoneNumberPortabilityRequest.php
 lib/Model/CheckVerification200Response.php
 lib/Model/CheckVerificationRequest.php
+lib/Model/CommentAutomationAudience.php
+lib/Model/CommentAutomationFollowGate.php
 lib/Model/CompleteGoogleBusinessVerificationRequest.php
 lib/Model/CompleteTelegramConnect200Response.php
 lib/Model/CompleteWhatsAppPhoneSelection200Response.php
@@ -2285,6 +2291,7 @@ lib/Model/GetInboxVolume200ResponseSummary.php
 lib/Model/GetInboxVolume200ResponseTimeseriesInner.php
 lib/Model/GetInboxVolume400Response.php
 lib/Model/GetInstagramAccountInsights404Response.php
+lib/Model/GetInstagramFollowStatus200Response.php
 lib/Model/GetInstagramPublishingLimit200Response.php
 lib/Model/GetInstagramStoryInsights200Response.php
 lib/Model/GetInstagramStoryInsights200ResponseData.php
@@ -3211,6 +3218,7 @@ lib/Model/WebhookPayloadCommentComment.php
 lib/Model/WebhookPayloadCommentCommentAd.php
 lib/Model/WebhookPayloadCommentCommentAttachment.php
 lib/Model/WebhookPayloadCommentCommentAuthor.php
+lib/Model/WebhookPayloadCommentCommentAuthorInstagramProfile.php
 lib/Model/WebhookPayloadCommentPost.php
 lib/Model/WebhookPayloadConversationStarted.php
 lib/Model/WebhookPayloadConversationStartedConversation.php
@@ -3293,5 +3301,7 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/ListCommentAutomationLogs200ResponseMissesSamplesInnerTest.php
-test/Model/ListCommentAutomationLogs200ResponseMissesTest.php
+test/Model/CommentAutomationAudienceTest.php
+test/Model/CommentAutomationFollowGateTest.php
+test/Model/GetInstagramFollowStatus200ResponseTest.php
+test/Model/WebhookPayloadCommentCommentAuthorInstagramProfileTest.php

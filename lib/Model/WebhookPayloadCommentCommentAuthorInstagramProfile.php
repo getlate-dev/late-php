@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookPayloadCommentCommentAuthor
+ * WebhookPayloadCommentCommentAuthorInstagramProfile
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * WebhookPayloadCommentCommentAuthor Class Doc Comment
+ * WebhookPayloadCommentCommentAuthorInstagramProfile Class Doc Comment
  *
  * @category Class
+ * @description Instagram only, best-effort. Present ONLY for commenters who have messaged the account before: Meta gates the follow relationship behind messaging consent, and commenting does not grant it. Absent otherwise - treat a missing object as \&quot;unknown\&quot;, never as \&quot;not a follower\&quot;. To check on demand, call GET /v1/accounts/{accountId}/follow-status/{userId}.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess, \JsonSerializable
+class WebhookPayloadCommentCommentAuthorInstagramProfile implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WebhookPayloadComment_comment_author';
+    protected static $openAPIModelName = 'WebhookPayloadComment_comment_author_instagramProfile';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +59,10 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'username' => 'string',
-        'name' => 'string',
-        'picture' => 'string',
-        'instagram_profile' => '\Zernio\Model\WebhookPayloadCommentCommentAuthorInstagramProfile'
+        'is_follower' => 'bool',
+        'is_following' => 'bool',
+        'follower_count' => 'int',
+        'is_verified' => 'bool'
     ];
 
     /**
@@ -73,11 +73,10 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'username' => null,
-        'name' => null,
-        'picture' => null,
-        'instagram_profile' => null
+        'is_follower' => null,
+        'is_following' => null,
+        'follower_count' => null,
+        'is_verified' => null
     ];
 
     /**
@@ -86,11 +85,10 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'username' => false,
-        'name' => false,
-        'picture' => true,
-        'instagram_profile' => false
+        'is_follower' => true,
+        'is_following' => true,
+        'follower_count' => true,
+        'is_verified' => true
     ];
 
     /**
@@ -179,11 +177,10 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'username' => 'username',
-        'name' => 'name',
-        'picture' => 'picture',
-        'instagram_profile' => 'instagramProfile'
+        'is_follower' => 'isFollower',
+        'is_following' => 'isFollowing',
+        'follower_count' => 'followerCount',
+        'is_verified' => 'isVerified'
     ];
 
     /**
@@ -192,11 +189,10 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'username' => 'setUsername',
-        'name' => 'setName',
-        'picture' => 'setPicture',
-        'instagram_profile' => 'setInstagramProfile'
+        'is_follower' => 'setIsFollower',
+        'is_following' => 'setIsFollowing',
+        'follower_count' => 'setFollowerCount',
+        'is_verified' => 'setIsVerified'
     ];
 
     /**
@@ -205,11 +201,10 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'username' => 'getUsername',
-        'name' => 'getName',
-        'picture' => 'getPicture',
-        'instagram_profile' => 'getInstagramProfile'
+        'is_follower' => 'getIsFollower',
+        'is_following' => 'getIsFollowing',
+        'follower_count' => 'getFollowerCount',
+        'is_verified' => 'getIsVerified'
     ];
 
     /**
@@ -269,11 +264,10 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('username', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('picture', $data ?? [], null);
-        $this->setIfExists('instagram_profile', $data ?? [], null);
+        $this->setIfExists('is_follower', $data ?? [], null);
+        $this->setIfExists('is_following', $data ?? [], null);
+        $this->setIfExists('follower_count', $data ?? [], null);
+        $this->setIfExists('is_verified', $data ?? [], null);
     }
 
     /**
@@ -303,9 +297,6 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -322,143 +313,137 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
 
 
     /**
-     * Gets id
+     * Gets is_follower
      *
-     * @return string
+     * @return bool|null
      */
-    public function getId()
+    public function getIsFollower()
     {
-        return $this->container['id'];
+        return $this->container['is_follower'];
     }
 
     /**
-     * Sets id
+     * Sets is_follower
      *
-     * @param string $id Author's platform ID
+     * @param bool|null $is_follower The commenter follows this account.
      *
      * @return self
      */
-    public function setId($id)
+    public function setIsFollower($is_follower)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets username
-     *
-     * @return string|null
-     */
-    public function getUsername()
-    {
-        return $this->container['username'];
-    }
-
-    /**
-     * Sets username
-     *
-     * @param string|null $username username
-     *
-     * @return self
-     */
-    public function setUsername($username)
-    {
-        if (is_null($username)) {
-            throw new \InvalidArgumentException('non-nullable username cannot be null');
-        }
-        $this->container['username'] = $username;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets picture
-     *
-     * @return string|null
-     */
-    public function getPicture()
-    {
-        return $this->container['picture'];
-    }
-
-    /**
-     * Sets picture
-     *
-     * @param string|null $picture picture
-     *
-     * @return self
-     */
-    public function setPicture($picture)
-    {
-        if (is_null($picture)) {
-            array_push($this->openAPINullablesSetToNull, 'picture');
+        if (is_null($is_follower)) {
+            array_push($this->openAPINullablesSetToNull, 'is_follower');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('picture', $nullablesSetToNull);
+            $index = array_search('is_follower', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['picture'] = $picture;
+        $this->container['is_follower'] = $is_follower;
 
         return $this;
     }
 
     /**
-     * Gets instagram_profile
+     * Gets is_following
      *
-     * @return \Zernio\Model\WebhookPayloadCommentCommentAuthorInstagramProfile|null
+     * @return bool|null
      */
-    public function getInstagramProfile()
+    public function getIsFollowing()
     {
-        return $this->container['instagram_profile'];
+        return $this->container['is_following'];
     }
 
     /**
-     * Sets instagram_profile
+     * Sets is_following
      *
-     * @param \Zernio\Model\WebhookPayloadCommentCommentAuthorInstagramProfile|null $instagram_profile instagram_profile
+     * @param bool|null $is_following This account follows the commenter.
      *
      * @return self
      */
-    public function setInstagramProfile($instagram_profile)
+    public function setIsFollowing($is_following)
     {
-        if (is_null($instagram_profile)) {
-            throw new \InvalidArgumentException('non-nullable instagram_profile cannot be null');
+        if (is_null($is_following)) {
+            array_push($this->openAPINullablesSetToNull, 'is_following');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('is_following', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['instagram_profile'] = $instagram_profile;
+        $this->container['is_following'] = $is_following;
+
+        return $this;
+    }
+
+    /**
+     * Gets follower_count
+     *
+     * @return int|null
+     */
+    public function getFollowerCount()
+    {
+        return $this->container['follower_count'];
+    }
+
+    /**
+     * Sets follower_count
+     *
+     * @param int|null $follower_count follower_count
+     *
+     * @return self
+     */
+    public function setFollowerCount($follower_count)
+    {
+        if (is_null($follower_count)) {
+            array_push($this->openAPINullablesSetToNull, 'follower_count');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('follower_count', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['follower_count'] = $follower_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_verified
+     *
+     * @return bool|null
+     */
+    public function getIsVerified()
+    {
+        return $this->container['is_verified'];
+    }
+
+    /**
+     * Sets is_verified
+     *
+     * @param bool|null $is_verified is_verified
+     *
+     * @return self
+     */
+    public function setIsVerified($is_verified)
+    {
+        if (is_null($is_verified)) {
+            array_push($this->openAPINullablesSetToNull, 'is_verified');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('is_verified', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['is_verified'] = $is_verified;
 
         return $this;
     }

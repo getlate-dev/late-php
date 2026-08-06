@@ -79,6 +79,7 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**getAccountHealth**](docs/Api/AccountsApi.md#getaccounthealth) | **GET** /v1/accounts/{accountId}/health | Check account health
 *AccountsApi* | [**getAllAccountsHealth**](docs/Api/AccountsApi.md#getallaccountshealth) | **GET** /v1/accounts/health | Check accounts health
 *AccountsApi* | [**getFollowerStats**](docs/Api/AccountsApi.md#getfollowerstats) | **GET** /v1/accounts/follower-stats | Get follower stats
+*AccountsApi* | [**getInstagramFollowStatus**](docs/Api/AccountsApi.md#getinstagramfollowstatus) | **GET** /v1/accounts/{accountId}/follow-status/{userId} | Check whether an Instagram user follows the account
 *AccountsApi* | [**getSlackSettings**](docs/Api/AccountsApi.md#getslacksettings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings
 *AccountsApi* | [**getTikTokCreatorInfo**](docs/Api/AccountsApi.md#gettiktokcreatorinfo) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info
 *AccountsApi* | [**listAccounts**](docs/Api/AccountsApi.md#listaccounts) | **GET** /v1/accounts | List accounts
@@ -716,6 +717,8 @@ Class | Method | HTTP request | Description
 - [CheckPhoneNumberPortabilityRequest](docs/Model/CheckPhoneNumberPortabilityRequest.md)
 - [CheckVerification200Response](docs/Model/CheckVerification200Response.md)
 - [CheckVerificationRequest](docs/Model/CheckVerificationRequest.md)
+- [CommentAutomationAudience](docs/Model/CommentAutomationAudience.md)
+- [CommentAutomationFollowGate](docs/Model/CommentAutomationFollowGate.md)
 - [CompleteGoogleBusinessVerificationRequest](docs/Model/CompleteGoogleBusinessVerificationRequest.md)
 - [CompleteTelegramConnect200Response](docs/Model/CompleteTelegramConnect200Response.md)
 - [CompleteWhatsAppPhoneSelection200Response](docs/Model/CompleteWhatsAppPhoneSelection200Response.md)
@@ -1173,6 +1176,7 @@ Class | Method | HTTP request | Description
 - [GetInboxVolume200ResponseTimeseriesInner](docs/Model/GetInboxVolume200ResponseTimeseriesInner.md)
 - [GetInboxVolume400Response](docs/Model/GetInboxVolume400Response.md)
 - [GetInstagramAccountInsights404Response](docs/Model/GetInstagramAccountInsights404Response.md)
+- [GetInstagramFollowStatus200Response](docs/Model/GetInstagramFollowStatus200Response.md)
 - [GetInstagramPublishingLimit200Response](docs/Model/GetInstagramPublishingLimit200Response.md)
 - [GetInstagramStoryInsights200Response](docs/Model/GetInstagramStoryInsights200Response.md)
 - [GetInstagramStoryInsights200ResponseData](docs/Model/GetInstagramStoryInsights200ResponseData.md)
@@ -2098,6 +2102,7 @@ Class | Method | HTTP request | Description
 - [WebhookPayloadCommentCommentAd](docs/Model/WebhookPayloadCommentCommentAd.md)
 - [WebhookPayloadCommentCommentAttachment](docs/Model/WebhookPayloadCommentCommentAttachment.md)
 - [WebhookPayloadCommentCommentAuthor](docs/Model/WebhookPayloadCommentCommentAuthor.md)
+- [WebhookPayloadCommentCommentAuthorInstagramProfile](docs/Model/WebhookPayloadCommentCommentAuthorInstagramProfile.md)
 - [WebhookPayloadCommentPost](docs/Model/WebhookPayloadCommentPost.md)
 - [WebhookPayloadConversationStarted](docs/Model/WebhookPayloadConversationStarted.md)
 - [WebhookPayloadConversationStartedConversation](docs/Model/WebhookPayloadConversationStartedConversation.md)

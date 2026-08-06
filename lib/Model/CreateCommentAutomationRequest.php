@@ -75,7 +75,9 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'dm_message_variations' => 'string[]',
         'comment_reply_variations' => 'string[]',
         'link_tracking' => 'bool',
-        'click_tag' => 'string'
+        'click_tag' => 'string',
+        'audience' => '\Zernio\Model\CommentAutomationAudience',
+        'follow_gate' => '\Zernio\Model\CommentAutomationFollowGate'
     ];
 
     /**
@@ -103,7 +105,9 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'dm_message_variations' => null,
         'comment_reply_variations' => null,
         'link_tracking' => null,
-        'click_tag' => null
+        'click_tag' => null,
+        'audience' => null,
+        'follow_gate' => null
     ];
 
     /**
@@ -129,7 +133,9 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'dm_message_variations' => false,
         'comment_reply_variations' => false,
         'link_tracking' => false,
-        'click_tag' => false
+        'click_tag' => false,
+        'audience' => false,
+        'follow_gate' => false
     ];
 
     /**
@@ -235,7 +241,9 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'dm_message_variations' => 'dmMessageVariations',
         'comment_reply_variations' => 'commentReplyVariations',
         'link_tracking' => 'linkTracking',
-        'click_tag' => 'clickTag'
+        'click_tag' => 'clickTag',
+        'audience' => 'audience',
+        'follow_gate' => 'followGate'
     ];
 
     /**
@@ -261,7 +269,9 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'dm_message_variations' => 'setDmMessageVariations',
         'comment_reply_variations' => 'setCommentReplyVariations',
         'link_tracking' => 'setLinkTracking',
-        'click_tag' => 'setClickTag'
+        'click_tag' => 'setClickTag',
+        'audience' => 'setAudience',
+        'follow_gate' => 'setFollowGate'
     ];
 
     /**
@@ -287,7 +297,9 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'dm_message_variations' => 'getDmMessageVariations',
         'comment_reply_variations' => 'getCommentReplyVariations',
         'link_tracking' => 'getLinkTracking',
-        'click_tag' => 'getClickTag'
+        'click_tag' => 'getClickTag',
+        'audience' => 'getAudience',
+        'follow_gate' => 'getFollowGate'
     ];
 
     /**
@@ -397,6 +409,8 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('comment_reply_variations', $data ?? [], null);
         $this->setIfExists('link_tracking', $data ?? [], true);
         $this->setIfExists('click_tag', $data ?? [], null);
+        $this->setIfExists('audience', $data ?? [], null);
+        $this->setIfExists('follow_gate', $data ?? [], null);
     }
 
     /**
@@ -997,6 +1011,60 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable click_tag cannot be null');
         }
         $this->container['click_tag'] = $click_tag;
+
+        return $this;
+    }
+
+    /**
+     * Gets audience
+     *
+     * @return \Zernio\Model\CommentAutomationAudience|null
+     */
+    public function getAudience()
+    {
+        return $this->container['audience'];
+    }
+
+    /**
+     * Sets audience
+     *
+     * @param \Zernio\Model\CommentAutomationAudience|null $audience audience
+     *
+     * @return self
+     */
+    public function setAudience($audience)
+    {
+        if (is_null($audience)) {
+            throw new \InvalidArgumentException('non-nullable audience cannot be null');
+        }
+        $this->container['audience'] = $audience;
+
+        return $this;
+    }
+
+    /**
+     * Gets follow_gate
+     *
+     * @return \Zernio\Model\CommentAutomationFollowGate|null
+     */
+    public function getFollowGate()
+    {
+        return $this->container['follow_gate'];
+    }
+
+    /**
+     * Sets follow_gate
+     *
+     * @param \Zernio\Model\CommentAutomationFollowGate|null $follow_gate follow_gate
+     *
+     * @return self
+     */
+    public function setFollowGate($follow_gate)
+    {
+        if (is_null($follow_gate)) {
+            throw new \InvalidArgumentException('non-nullable follow_gate cannot be null');
+        }
+        $this->container['follow_gate'] = $follow_gate;
 
         return $this;
     }

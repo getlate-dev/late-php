@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookPayloadCommentCommentAuthor
+ * CommentAutomationFollowGate
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * WebhookPayloadCommentCommentAuthor Class Doc Comment
+ * CommentAutomationFollowGate Class Doc Comment
  *
  * @category Class
+ * @description Copy for the follow gate. Sensible defaults are used for any field left empty.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess, \JsonSerializable
+class CommentAutomationFollowGate implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WebhookPayloadComment_comment_author';
+    protected static $openAPIModelName = 'CommentAutomationFollowGate';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +59,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'username' => 'string',
-        'name' => 'string',
-        'picture' => 'string',
-        'instagram_profile' => '\Zernio\Model\WebhookPayloadCommentCommentAuthorInstagramProfile'
+        'message' => 'string',
+        'button_label' => 'string',
+        'not_following_message' => 'string'
     ];
 
     /**
@@ -73,11 +72,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'username' => null,
-        'name' => null,
-        'picture' => null,
-        'instagram_profile' => null
+        'message' => null,
+        'button_label' => null,
+        'not_following_message' => null
     ];
 
     /**
@@ -86,11 +83,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'username' => false,
-        'name' => false,
-        'picture' => true,
-        'instagram_profile' => false
+        'message' => false,
+        'button_label' => false,
+        'not_following_message' => false
     ];
 
     /**
@@ -179,11 +174,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'username' => 'username',
-        'name' => 'name',
-        'picture' => 'picture',
-        'instagram_profile' => 'instagramProfile'
+        'message' => 'message',
+        'button_label' => 'buttonLabel',
+        'not_following_message' => 'notFollowingMessage'
     ];
 
     /**
@@ -192,11 +185,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'username' => 'setUsername',
-        'name' => 'setName',
-        'picture' => 'setPicture',
-        'instagram_profile' => 'setInstagramProfile'
+        'message' => 'setMessage',
+        'button_label' => 'setButtonLabel',
+        'not_following_message' => 'setNotFollowingMessage'
     ];
 
     /**
@@ -205,11 +196,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'username' => 'getUsername',
-        'name' => 'getName',
-        'picture' => 'getPicture',
-        'instagram_profile' => 'getInstagramProfile'
+        'message' => 'getMessage',
+        'button_label' => 'getButtonLabel',
+        'not_following_message' => 'getNotFollowingMessage'
     ];
 
     /**
@@ -269,11 +258,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('username', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('picture', $data ?? [], null);
-        $this->setIfExists('instagram_profile', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('button_label', $data ?? [], null);
+        $this->setIfExists('not_following_message', $data ?? [], null);
     }
 
     /**
@@ -303,9 +290,18 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
+        if (!is_null($this->container['message']) && (mb_strlen($this->container['message']) > 640)) {
+            $invalidProperties[] = "invalid value for 'message', the character length must be smaller than or equal to 640.";
         }
+
+        if (!is_null($this->container['button_label']) && (mb_strlen($this->container['button_label']) > 20)) {
+            $invalidProperties[] = "invalid value for 'button_label', the character length must be smaller than or equal to 20.";
+        }
+
+        if (!is_null($this->container['not_following_message']) && (mb_strlen($this->container['not_following_message']) > 1000)) {
+            $invalidProperties[] = "invalid value for 'not_following_message', the character length must be smaller than or equal to 1000.";
+        }
+
         return $invalidProperties;
     }
 
@@ -322,143 +318,94 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
 
 
     /**
-     * Gets id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string $id Author's platform ID
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets username
+     * Gets message
      *
      * @return string|null
      */
-    public function getUsername()
+    public function getMessage()
     {
-        return $this->container['username'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets username
+     * Sets message
      *
-     * @param string|null $username username
+     * @param string|null $message Confirmation DM sent when whenUnknown=verify.
      *
      * @return self
      */
-    public function setUsername($username)
+    public function setMessage($message)
     {
-        if (is_null($username)) {
-            throw new \InvalidArgumentException('non-nullable username cannot be null');
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        $this->container['username'] = $username;
+        if ((mb_strlen($message) > 640)) {
+            throw new \InvalidArgumentException('invalid length for $message when calling CommentAutomationFollowGate., must be smaller than or equal to 640.');
+        }
+
+        $this->container['message'] = $message;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets button_label
      *
      * @return string|null
      */
-    public function getName()
+    public function getButtonLabel()
     {
-        return $this->container['name'];
+        return $this->container['button_label'];
     }
 
     /**
-     * Sets name
+     * Sets button_label
      *
-     * @param string|null $name name
+     * @param string|null $button_label Confirm button label. Defaults to \"I'm following\".
      *
      * @return self
      */
-    public function setName($name)
+    public function setButtonLabel($button_label)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($button_label)) {
+            throw new \InvalidArgumentException('non-nullable button_label cannot be null');
         }
-        $this->container['name'] = $name;
+        if ((mb_strlen($button_label) > 20)) {
+            throw new \InvalidArgumentException('invalid length for $button_label when calling CommentAutomationFollowGate., must be smaller than or equal to 20.');
+        }
+
+        $this->container['button_label'] = $button_label;
 
         return $this;
     }
 
     /**
-     * Gets picture
+     * Gets not_following_message
      *
      * @return string|null
      */
-    public function getPicture()
+    public function getNotFollowingMessage()
     {
-        return $this->container['picture'];
+        return $this->container['not_following_message'];
     }
 
     /**
-     * Sets picture
+     * Sets not_following_message
      *
-     * @param string|null $picture picture
+     * @param string|null $not_following_message Sent to a commenter we know does not follow (followerStatus=follower). Omit to stay silent on a keyword comment; a confirm tap always gets an answer.
      *
      * @return self
      */
-    public function setPicture($picture)
+    public function setNotFollowingMessage($not_following_message)
     {
-        if (is_null($picture)) {
-            array_push($this->openAPINullablesSetToNull, 'picture');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('picture', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($not_following_message)) {
+            throw new \InvalidArgumentException('non-nullable not_following_message cannot be null');
         }
-        $this->container['picture'] = $picture;
-
-        return $this;
-    }
-
-    /**
-     * Gets instagram_profile
-     *
-     * @return \Zernio\Model\WebhookPayloadCommentCommentAuthorInstagramProfile|null
-     */
-    public function getInstagramProfile()
-    {
-        return $this->container['instagram_profile'];
-    }
-
-    /**
-     * Sets instagram_profile
-     *
-     * @param \Zernio\Model\WebhookPayloadCommentCommentAuthorInstagramProfile|null $instagram_profile instagram_profile
-     *
-     * @return self
-     */
-    public function setInstagramProfile($instagram_profile)
-    {
-        if (is_null($instagram_profile)) {
-            throw new \InvalidArgumentException('non-nullable instagram_profile cannot be null');
+        if ((mb_strlen($not_following_message) > 1000)) {
+            throw new \InvalidArgumentException('invalid length for $not_following_message when calling CommentAutomationFollowGate., must be smaller than or equal to 1000.');
         }
-        $this->container['instagram_profile'] = $instagram_profile;
+
+        $this->container['not_following_message'] = $not_following_message;
 
         return $this;
     }

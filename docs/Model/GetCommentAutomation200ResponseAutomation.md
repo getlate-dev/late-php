@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **comment_reply_variations** | **string[]** | Alternate public replies rotated at random with commentReply. Omitted when none. | [optional]
 **link_tracking** | **bool** |  | [optional]
 **click_tag** | **string** |  | [optional]
+**audience** | [**\Zernio\Model\CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional]
+**follow_gate** | [**\Zernio\Model\CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional]
 **is_active** | **bool** |  | [optional]
 **stats** | [**\Zernio\Model\CreateCommentAutomation200ResponseAutomationStats**](CreateCommentAutomation200ResponseAutomationStats.md) |  | [optional]
 **created_at** | **\DateTime** |  | [optional]

@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **comment_reply** | **string** |  | [optional]
 **dm_message_variations** | **string[]** | Alternate DM texts rotated at random with dmMessage. Omitted when none. | [optional]
 **comment_reply_variations** | **string[]** | Alternate public replies rotated at random with commentReply. Omitted when none. | [optional]
+**audience** | [**\Zernio\Model\CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional]
+**follow_gate** | [**\Zernio\Model\CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional]
 **is_active** | **bool** |  | [optional]
 **updated_at** | **\DateTime** |  | [optional]
 

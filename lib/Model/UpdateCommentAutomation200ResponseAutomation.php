@@ -69,6 +69,8 @@ class UpdateCommentAutomation200ResponseAutomation implements ModelInterface, Ar
         'comment_reply' => 'string',
         'dm_message_variations' => 'string[]',
         'comment_reply_variations' => 'string[]',
+        'audience' => '\Zernio\Model\CommentAutomationAudience',
+        'follow_gate' => '\Zernio\Model\CommentAutomationFollowGate',
         'is_active' => 'bool',
         'updated_at' => '\DateTime'
     ];
@@ -92,6 +94,8 @@ class UpdateCommentAutomation200ResponseAutomation implements ModelInterface, Ar
         'comment_reply' => null,
         'dm_message_variations' => null,
         'comment_reply_variations' => null,
+        'audience' => null,
+        'follow_gate' => null,
         'is_active' => null,
         'updated_at' => 'date-time'
     ];
@@ -113,6 +117,8 @@ class UpdateCommentAutomation200ResponseAutomation implements ModelInterface, Ar
         'comment_reply' => false,
         'dm_message_variations' => false,
         'comment_reply_variations' => false,
+        'audience' => false,
+        'follow_gate' => false,
         'is_active' => false,
         'updated_at' => false
     ];
@@ -214,6 +220,8 @@ class UpdateCommentAutomation200ResponseAutomation implements ModelInterface, Ar
         'comment_reply' => 'commentReply',
         'dm_message_variations' => 'dmMessageVariations',
         'comment_reply_variations' => 'commentReplyVariations',
+        'audience' => 'audience',
+        'follow_gate' => 'followGate',
         'is_active' => 'isActive',
         'updated_at' => 'updatedAt'
     ];
@@ -235,6 +243,8 @@ class UpdateCommentAutomation200ResponseAutomation implements ModelInterface, Ar
         'comment_reply' => 'setCommentReply',
         'dm_message_variations' => 'setDmMessageVariations',
         'comment_reply_variations' => 'setCommentReplyVariations',
+        'audience' => 'setAudience',
+        'follow_gate' => 'setFollowGate',
         'is_active' => 'setIsActive',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -256,6 +266,8 @@ class UpdateCommentAutomation200ResponseAutomation implements ModelInterface, Ar
         'comment_reply' => 'getCommentReply',
         'dm_message_variations' => 'getDmMessageVariations',
         'comment_reply_variations' => 'getCommentReplyVariations',
+        'audience' => 'getAudience',
+        'follow_gate' => 'getFollowGate',
         'is_active' => 'getIsActive',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -345,6 +357,8 @@ class UpdateCommentAutomation200ResponseAutomation implements ModelInterface, Ar
         $this->setIfExists('comment_reply', $data ?? [], null);
         $this->setIfExists('dm_message_variations', $data ?? [], null);
         $this->setIfExists('comment_reply_variations', $data ?? [], null);
+        $this->setIfExists('audience', $data ?? [], null);
+        $this->setIfExists('follow_gate', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -703,6 +717,60 @@ class UpdateCommentAutomation200ResponseAutomation implements ModelInterface, Ar
             throw new \InvalidArgumentException('non-nullable comment_reply_variations cannot be null');
         }
         $this->container['comment_reply_variations'] = $comment_reply_variations;
+
+        return $this;
+    }
+
+    /**
+     * Gets audience
+     *
+     * @return \Zernio\Model\CommentAutomationAudience|null
+     */
+    public function getAudience()
+    {
+        return $this->container['audience'];
+    }
+
+    /**
+     * Sets audience
+     *
+     * @param \Zernio\Model\CommentAutomationAudience|null $audience audience
+     *
+     * @return self
+     */
+    public function setAudience($audience)
+    {
+        if (is_null($audience)) {
+            throw new \InvalidArgumentException('non-nullable audience cannot be null');
+        }
+        $this->container['audience'] = $audience;
+
+        return $this;
+    }
+
+    /**
+     * Gets follow_gate
+     *
+     * @return \Zernio\Model\CommentAutomationFollowGate|null
+     */
+    public function getFollowGate()
+    {
+        return $this->container['follow_gate'];
+    }
+
+    /**
+     * Sets follow_gate
+     *
+     * @param \Zernio\Model\CommentAutomationFollowGate|null $follow_gate follow_gate
+     *
+     * @return self
+     */
+    public function setFollowGate($follow_gate)
+    {
+        if (is_null($follow_gate)) {
+            throw new \InvalidArgumentException('non-nullable follow_gate cannot be null');
+        }
+        $this->container['follow_gate'] = $follow_gate;
 
         return $this;
     }

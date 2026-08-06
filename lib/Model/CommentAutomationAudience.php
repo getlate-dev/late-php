@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookPayloadCommentCommentAuthor
+ * CommentAutomationAudience
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * WebhookPayloadCommentCommentAuthor Class Doc Comment
+ * CommentAutomationAudience Class Doc Comment
  *
  * @category Class
+ * @description Who a comment automation answers. Instagram only - Meta exposes the follow relationship on no other platform, and only for people who have MESSAGED the account (a comment grants no consent). &#x60;whenUnknown&#x60; is therefore the important setting: it decides what happens for a first-time commenter.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess, \JsonSerializable
+class CommentAutomationAudience implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WebhookPayloadComment_comment_author';
+    protected static $openAPIModelName = 'CommentAutomationAudience';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +59,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'username' => 'string',
-        'name' => 'string',
-        'picture' => 'string',
-        'instagram_profile' => '\Zernio\Model\WebhookPayloadCommentCommentAuthorInstagramProfile'
+        'follower_status' => 'string',
+        'min_follower_count' => 'int',
+        'when_unknown' => 'string'
     ];
 
     /**
@@ -73,11 +72,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'username' => null,
-        'name' => null,
-        'picture' => null,
-        'instagram_profile' => null
+        'follower_status' => null,
+        'min_follower_count' => null,
+        'when_unknown' => null
     ];
 
     /**
@@ -86,11 +83,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'username' => false,
-        'name' => false,
-        'picture' => true,
-        'instagram_profile' => false
+        'follower_status' => false,
+        'min_follower_count' => false,
+        'when_unknown' => false
     ];
 
     /**
@@ -179,11 +174,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'username' => 'username',
-        'name' => 'name',
-        'picture' => 'picture',
-        'instagram_profile' => 'instagramProfile'
+        'follower_status' => 'followerStatus',
+        'min_follower_count' => 'minFollowerCount',
+        'when_unknown' => 'whenUnknown'
     ];
 
     /**
@@ -192,11 +185,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'username' => 'setUsername',
-        'name' => 'setName',
-        'picture' => 'setPicture',
-        'instagram_profile' => 'setInstagramProfile'
+        'follower_status' => 'setFollowerStatus',
+        'min_follower_count' => 'setMinFollowerCount',
+        'when_unknown' => 'setWhenUnknown'
     ];
 
     /**
@@ -205,11 +196,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'username' => 'getUsername',
-        'name' => 'getName',
-        'picture' => 'getPicture',
-        'instagram_profile' => 'getInstagramProfile'
+        'follower_status' => 'getFollowerStatus',
+        'min_follower_count' => 'getMinFollowerCount',
+        'when_unknown' => 'getWhenUnknown'
     ];
 
     /**
@@ -253,6 +242,40 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
         return self::$openAPIModelName;
     }
 
+    public const FOLLOWER_STATUS_ANY = 'any';
+    public const FOLLOWER_STATUS_FOLLOWER = 'follower';
+    public const FOLLOWER_STATUS_NON_FOLLOWER = 'non_follower';
+    public const WHEN_UNKNOWN_SEND = 'send';
+    public const WHEN_UNKNOWN_SKIP = 'skip';
+    public const WHEN_UNKNOWN_VERIFY = 'verify';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getFollowerStatusAllowableValues()
+    {
+        return [
+            self::FOLLOWER_STATUS_ANY,
+            self::FOLLOWER_STATUS_FOLLOWER,
+            self::FOLLOWER_STATUS_NON_FOLLOWER,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getWhenUnknownAllowableValues()
+    {
+        return [
+            self::WHEN_UNKNOWN_SEND,
+            self::WHEN_UNKNOWN_SKIP,
+            self::WHEN_UNKNOWN_VERIFY,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -269,11 +292,9 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('username', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('picture', $data ?? [], null);
-        $this->setIfExists('instagram_profile', $data ?? [], null);
+        $this->setIfExists('follower_status', $data ?? [], 'any');
+        $this->setIfExists('min_follower_count', $data ?? [], null);
+        $this->setIfExists('when_unknown', $data ?? [], 'send');
     }
 
     /**
@@ -303,9 +324,28 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
+        $allowedValues = $this->getFollowerStatusAllowableValues();
+        if (!is_null($this->container['follower_status']) && !in_array($this->container['follower_status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'follower_status', must be one of '%s'",
+                $this->container['follower_status'],
+                implode("', '", $allowedValues)
+            );
         }
+
+        if (!is_null($this->container['min_follower_count']) && ($this->container['min_follower_count'] < 0)) {
+            $invalidProperties[] = "invalid value for 'min_follower_count', must be bigger than or equal to 0.";
+        }
+
+        $allowedValues = $this->getWhenUnknownAllowableValues();
+        if (!is_null($this->container['when_unknown']) && !in_array($this->container['when_unknown'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'when_unknown', must be one of '%s'",
+                $this->container['when_unknown'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -322,143 +362,107 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
 
 
     /**
-     * Gets id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string $id Author's platform ID
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets username
+     * Gets follower_status
      *
      * @return string|null
      */
-    public function getUsername()
+    public function getFollowerStatus()
     {
-        return $this->container['username'];
+        return $this->container['follower_status'];
     }
 
     /**
-     * Sets username
+     * Sets follower_status
      *
-     * @param string|null $username username
+     * @param string|null $follower_status follower_status
      *
      * @return self
      */
-    public function setUsername($username)
+    public function setFollowerStatus($follower_status)
     {
-        if (is_null($username)) {
-            throw new \InvalidArgumentException('non-nullable username cannot be null');
+        if (is_null($follower_status)) {
+            throw new \InvalidArgumentException('non-nullable follower_status cannot be null');
         }
-        $this->container['username'] = $username;
+        $allowedValues = $this->getFollowerStatusAllowableValues();
+        if (!in_array($follower_status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'follower_status', must be one of '%s'",
+                    $follower_status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['follower_status'] = $follower_status;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets min_follower_count
+     *
+     * @return int|null
+     */
+    public function getMinFollowerCount()
+    {
+        return $this->container['min_follower_count'];
+    }
+
+    /**
+     * Sets min_follower_count
+     *
+     * @param int|null $min_follower_count Skip commenters with fewer followers than this. Omit for no size rule.
+     *
+     * @return self
+     */
+    public function setMinFollowerCount($min_follower_count)
+    {
+        if (is_null($min_follower_count)) {
+            throw new \InvalidArgumentException('non-nullable min_follower_count cannot be null');
+        }
+
+        if (($min_follower_count < 0)) {
+            throw new \InvalidArgumentException('invalid value for $min_follower_count when calling CommentAutomationAudience., must be bigger than or equal to 0.');
+        }
+
+        $this->container['min_follower_count'] = $min_follower_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets when_unknown
      *
      * @return string|null
      */
-    public function getName()
+    public function getWhenUnknown()
     {
-        return $this->container['name'];
+        return $this->container['when_unknown'];
     }
 
     /**
-     * Sets name
+     * Sets when_unknown
      *
-     * @param string|null $name name
+     * @param string|null $when_unknown What to do when Instagram will not reveal the follow relationship.   * `send` (default) - deliver the DM anyway (fails open).   * `skip` - stay silent.   * `verify` - send `followGate.message` with a confirm button. Tapping it is a     message, which grants consent, so the re-check on the tap resolves and the     real DM (or `followGate.notFollowingMessage`) follows automatically.
      *
      * @return self
      */
-    public function setName($name)
+    public function setWhenUnknown($when_unknown)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($when_unknown)) {
+            throw new \InvalidArgumentException('non-nullable when_unknown cannot be null');
         }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets picture
-     *
-     * @return string|null
-     */
-    public function getPicture()
-    {
-        return $this->container['picture'];
-    }
-
-    /**
-     * Sets picture
-     *
-     * @param string|null $picture picture
-     *
-     * @return self
-     */
-    public function setPicture($picture)
-    {
-        if (is_null($picture)) {
-            array_push($this->openAPINullablesSetToNull, 'picture');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('picture', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        $allowedValues = $this->getWhenUnknownAllowableValues();
+        if (!in_array($when_unknown, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'when_unknown', must be one of '%s'",
+                    $when_unknown,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
-        $this->container['picture'] = $picture;
-
-        return $this;
-    }
-
-    /**
-     * Gets instagram_profile
-     *
-     * @return \Zernio\Model\WebhookPayloadCommentCommentAuthorInstagramProfile|null
-     */
-    public function getInstagramProfile()
-    {
-        return $this->container['instagram_profile'];
-    }
-
-    /**
-     * Sets instagram_profile
-     *
-     * @param \Zernio\Model\WebhookPayloadCommentCommentAuthorInstagramProfile|null $instagram_profile instagram_profile
-     *
-     * @return self
-     */
-    public function setInstagramProfile($instagram_profile)
-    {
-        if (is_null($instagram_profile)) {
-            throw new \InvalidArgumentException('non-nullable instagram_profile cannot be null');
-        }
-        $this->container['instagram_profile'] = $instagram_profile;
+        $this->container['when_unknown'] = $when_unknown;
 
         return $this;
     }

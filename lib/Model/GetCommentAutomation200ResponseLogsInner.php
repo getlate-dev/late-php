@@ -64,6 +64,9 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_name' => 'string',
         'comment_text' => 'string',
         'status' => 'string',
+        'audience_outcome' => 'string',
+        'commenter_is_follower' => 'bool',
+        'commenter_follower_count' => 'int',
         'error' => 'string',
         'comment_reply_status' => 'string',
         'comment_reply_error' => 'string',
@@ -84,6 +87,9 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_name' => null,
         'comment_text' => null,
         'status' => null,
+        'audience_outcome' => null,
+        'commenter_is_follower' => null,
+        'commenter_follower_count' => null,
         'error' => null,
         'comment_reply_status' => null,
         'comment_reply_error' => null,
@@ -102,6 +108,9 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_name' => false,
         'comment_text' => false,
         'status' => false,
+        'audience_outcome' => false,
+        'commenter_is_follower' => false,
+        'commenter_follower_count' => false,
         'error' => false,
         'comment_reply_status' => false,
         'comment_reply_error' => false,
@@ -200,6 +209,9 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_name' => 'commenterName',
         'comment_text' => 'commentText',
         'status' => 'status',
+        'audience_outcome' => 'audienceOutcome',
+        'commenter_is_follower' => 'commenterIsFollower',
+        'commenter_follower_count' => 'commenterFollowerCount',
         'error' => 'error',
         'comment_reply_status' => 'commentReplyStatus',
         'comment_reply_error' => 'commentReplyError',
@@ -218,6 +230,9 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_name' => 'setCommenterName',
         'comment_text' => 'setCommentText',
         'status' => 'setStatus',
+        'audience_outcome' => 'setAudienceOutcome',
+        'commenter_is_follower' => 'setCommenterIsFollower',
+        'commenter_follower_count' => 'setCommenterFollowerCount',
         'error' => 'setError',
         'comment_reply_status' => 'setCommentReplyStatus',
         'comment_reply_error' => 'setCommentReplyError',
@@ -236,6 +251,9 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_name' => 'getCommenterName',
         'comment_text' => 'getCommentText',
         'status' => 'getStatus',
+        'audience_outcome' => 'getAudienceOutcome',
+        'commenter_is_follower' => 'getCommenterIsFollower',
+        'commenter_follower_count' => 'getCommenterFollowerCount',
         'error' => 'getError',
         'comment_reply_status' => 'getCommentReplyStatus',
         'comment_reply_error' => 'getCommentReplyError',
@@ -286,6 +304,12 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
     public const STATUS_SENT = 'sent';
     public const STATUS_FAILED = 'failed';
     public const STATUS_SKIPPED = 'skipped';
+    public const STATUS_GATED = 'gated';
+    public const AUDIENCE_OUTCOME_PASSED = 'passed';
+    public const AUDIENCE_OUTCOME_BLOCKED = 'blocked';
+    public const AUDIENCE_OUTCOME_GATE_SENT = 'gate_sent';
+    public const AUDIENCE_OUTCOME_GATE_PASSED = 'gate_passed';
+    public const AUDIENCE_OUTCOME_GATE_FAILED = 'gate_failed';
     public const COMMENT_REPLY_STATUS_SENT = 'sent';
     public const COMMENT_REPLY_STATUS_FAILED = 'failed';
     public const COMMENT_REPLY_STATUS_SKIPPED = 'skipped';
@@ -301,6 +325,23 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
             self::STATUS_SENT,
             self::STATUS_FAILED,
             self::STATUS_SKIPPED,
+            self::STATUS_GATED,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAudienceOutcomeAllowableValues()
+    {
+        return [
+            self::AUDIENCE_OUTCOME_PASSED,
+            self::AUDIENCE_OUTCOME_BLOCKED,
+            self::AUDIENCE_OUTCOME_GATE_SENT,
+            self::AUDIENCE_OUTCOME_GATE_PASSED,
+            self::AUDIENCE_OUTCOME_GATE_FAILED,
         ];
     }
 
@@ -339,6 +380,9 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         $this->setIfExists('commenter_name', $data ?? [], null);
         $this->setIfExists('comment_text', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('audience_outcome', $data ?? [], null);
+        $this->setIfExists('commenter_is_follower', $data ?? [], null);
+        $this->setIfExists('commenter_follower_count', $data ?? [], null);
         $this->setIfExists('error', $data ?? [], null);
         $this->setIfExists('comment_reply_status', $data ?? [], null);
         $this->setIfExists('comment_reply_error', $data ?? [], null);
@@ -377,6 +421,15 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getAudienceOutcomeAllowableValues();
+        if (!is_null($this->container['audience_outcome']) && !in_array($this->container['audience_outcome'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'audience_outcome', must be one of '%s'",
+                $this->container['audience_outcome'],
                 implode("', '", $allowedValues)
             );
         }
@@ -553,7 +606,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
     /**
      * Sets status
      *
-     * @param string|null $status DM outcome
+     * @param string|null $status DM outcome. 'gated' = the follow-gate confirmation DM went out and we are waiting for the tap; it flips to 'sent' or 'skipped' when they tap.
      *
      * @return self
      */
@@ -573,6 +626,97 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
             );
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets audience_outcome
+     *
+     * @return string|null
+     */
+    public function getAudienceOutcome()
+    {
+        return $this->container['audience_outcome'];
+    }
+
+    /**
+     * Sets audience_outcome
+     *
+     * @param string|null $audience_outcome How the audience rule resolved. Absent on automations without one.
+     *
+     * @return self
+     */
+    public function setAudienceOutcome($audience_outcome)
+    {
+        if (is_null($audience_outcome)) {
+            throw new \InvalidArgumentException('non-nullable audience_outcome cannot be null');
+        }
+        $allowedValues = $this->getAudienceOutcomeAllowableValues();
+        if (!in_array($audience_outcome, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'audience_outcome', must be one of '%s'",
+                    $audience_outcome,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['audience_outcome'] = $audience_outcome;
+
+        return $this;
+    }
+
+    /**
+     * Gets commenter_is_follower
+     *
+     * @return bool|null
+     */
+    public function getCommenterIsFollower()
+    {
+        return $this->container['commenter_is_follower'];
+    }
+
+    /**
+     * Sets commenter_is_follower
+     *
+     * @param bool|null $commenter_is_follower Follow relationship at decision time. Absent when Instagram would not tell us (the commenter never messaged the account).
+     *
+     * @return self
+     */
+    public function setCommenterIsFollower($commenter_is_follower)
+    {
+        if (is_null($commenter_is_follower)) {
+            throw new \InvalidArgumentException('non-nullable commenter_is_follower cannot be null');
+        }
+        $this->container['commenter_is_follower'] = $commenter_is_follower;
+
+        return $this;
+    }
+
+    /**
+     * Gets commenter_follower_count
+     *
+     * @return int|null
+     */
+    public function getCommenterFollowerCount()
+    {
+        return $this->container['commenter_follower_count'];
+    }
+
+    /**
+     * Sets commenter_follower_count
+     *
+     * @param int|null $commenter_follower_count commenter_follower_count
+     *
+     * @return self
+     */
+    public function setCommenterFollowerCount($commenter_follower_count)
+    {
+        if (is_null($commenter_follower_count)) {
+            throw new \InvalidArgumentException('non-nullable commenter_follower_count cannot be null');
+        }
+        $this->container['commenter_follower_count'] = $commenter_follower_count;
 
         return $this;
     }
