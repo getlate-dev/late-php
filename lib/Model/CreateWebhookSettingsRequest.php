@@ -63,7 +63,8 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
         'secret' => 'string',
         'events' => 'string[]',
         'is_active' => 'bool',
-        'custom_headers' => 'array<string,string>'
+        'custom_headers' => 'array<string,string>',
+        'disabled_resource_groups' => 'string[]'
     ];
 
     /**
@@ -79,7 +80,8 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
         'secret' => null,
         'events' => null,
         'is_active' => null,
-        'custom_headers' => null
+        'custom_headers' => null,
+        'disabled_resource_groups' => null
     ];
 
     /**
@@ -93,7 +95,8 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
         'secret' => false,
         'events' => false,
         'is_active' => false,
-        'custom_headers' => false
+        'custom_headers' => false,
+        'disabled_resource_groups' => false
     ];
 
     /**
@@ -187,7 +190,8 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
         'secret' => 'secret',
         'events' => 'events',
         'is_active' => 'isActive',
-        'custom_headers' => 'customHeaders'
+        'custom_headers' => 'customHeaders',
+        'disabled_resource_groups' => 'disabledResourceGroups'
     ];
 
     /**
@@ -201,7 +205,8 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
         'secret' => 'setSecret',
         'events' => 'setEvents',
         'is_active' => 'setIsActive',
-        'custom_headers' => 'setCustomHeaders'
+        'custom_headers' => 'setCustomHeaders',
+        'disabled_resource_groups' => 'setDisabledResourceGroups'
     ];
 
     /**
@@ -215,7 +220,8 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
         'secret' => 'getSecret',
         'events' => 'getEvents',
         'is_active' => 'getIsActive',
-        'custom_headers' => 'getCustomHeaders'
+        'custom_headers' => 'getCustomHeaders',
+        'disabled_resource_groups' => 'getDisabledResourceGroups'
     ];
 
     /**
@@ -305,6 +311,16 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
     public const EVENTS_WHATSAPP_NUMBER_KYC_SUBMITTED = 'whatsapp.number.kyc_submitted';
     public const EVENTS_VERIFICATION_APPROVED = 'verification.approved';
     public const EVENTS_VERIFICATION_FAILED = 'verification.failed';
+    public const DISABLED_RESOURCE_GROUPS_PUBLISHING = 'publishing';
+    public const DISABLED_RESOURCE_GROUPS_ENGAGEMENT = 'engagement';
+    public const DISABLED_RESOURCE_GROUPS_MESSAGES = 'messages';
+    public const DISABLED_RESOURCE_GROUPS_CONTACTS = 'contacts';
+    public const DISABLED_RESOURCE_GROUPS_ANALYTICS = 'analytics';
+    public const DISABLED_RESOURCE_GROUPS_ADS = 'ads';
+    public const DISABLED_RESOURCE_GROUPS_TELEPHONY = 'telephony';
+    public const DISABLED_RESOURCE_GROUPS_ACCOUNTS = 'accounts';
+    public const DISABLED_RESOURCE_GROUPS_BILLING = 'billing';
+    public const DISABLED_RESOURCE_GROUPS_WEBHOOKS = 'webhooks';
 
     /**
      * Gets allowable values of the enum
@@ -364,6 +380,27 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getDisabledResourceGroupsAllowableValues()
+    {
+        return [
+            self::DISABLED_RESOURCE_GROUPS_PUBLISHING,
+            self::DISABLED_RESOURCE_GROUPS_ENGAGEMENT,
+            self::DISABLED_RESOURCE_GROUPS_MESSAGES,
+            self::DISABLED_RESOURCE_GROUPS_CONTACTS,
+            self::DISABLED_RESOURCE_GROUPS_ANALYTICS,
+            self::DISABLED_RESOURCE_GROUPS_ADS,
+            self::DISABLED_RESOURCE_GROUPS_TELEPHONY,
+            self::DISABLED_RESOURCE_GROUPS_ACCOUNTS,
+            self::DISABLED_RESOURCE_GROUPS_BILLING,
+            self::DISABLED_RESOURCE_GROUPS_WEBHOOKS,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -384,6 +421,7 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
         $this->setIfExists('events', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], true);
         $this->setIfExists('custom_headers', $data ?? [], null);
+        $this->setIfExists('disabled_resource_groups', $data ?? [], null);
     }
 
     /**
@@ -628,6 +666,42 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
             throw new \InvalidArgumentException('non-nullable custom_headers cannot be null');
         }
         $this->container['custom_headers'] = $custom_headers;
+
+        return $this;
+    }
+
+    /**
+     * Gets disabled_resource_groups
+     *
+     * @return string[]|null
+     */
+    public function getDisabledResourceGroups()
+    {
+        return $this->container['disabled_resource_groups'];
+    }
+
+    /**
+     * Sets disabled_resource_groups
+     *
+     * @param string[]|null $disabled_resource_groups Resource groups this subscription does not receive (opt-out denylist). Omit or send an empty array to receive every event in `events`. Listing a group here drops its events before delivery and on every replay path. Set at creation it applies to everything this subscription ever receives; changed later via PUT it applies to events emitted after the change, with a five-minute tail for events already queued (see that operation). When the caller is a restricted (zrk_) key, that key's own disabled groups are unioned into whatever you send here, so a restricted key can never create a subscription wider than itself.
+     *
+     * @return self
+     */
+    public function setDisabledResourceGroups($disabled_resource_groups)
+    {
+        if (is_null($disabled_resource_groups)) {
+            throw new \InvalidArgumentException('non-nullable disabled_resource_groups cannot be null');
+        }
+        $allowedValues = $this->getDisabledResourceGroupsAllowableValues();
+        if (array_diff($disabled_resource_groups, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'disabled_resource_groups', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['disabled_resource_groups'] = $disabled_resource_groups;
 
         return $this;
     }

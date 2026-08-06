@@ -67,7 +67,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_active' => 'bool',
         'last_fired_at' => '\DateTime',
         'failure_count' => 'int',
-        'custom_headers' => 'array<string,string>'
+        'custom_headers' => 'array<string,string>',
+        'disabled_resource_groups' => 'string[]'
     ];
 
     /**
@@ -86,7 +87,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_active' => null,
         'last_fired_at' => 'date-time',
         'failure_count' => null,
-        'custom_headers' => null
+        'custom_headers' => null,
+        'disabled_resource_groups' => null
     ];
 
     /**
@@ -103,7 +105,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_active' => false,
         'last_fired_at' => false,
         'failure_count' => false,
-        'custom_headers' => false
+        'custom_headers' => false,
+        'disabled_resource_groups' => false
     ];
 
     /**
@@ -200,7 +203,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_active' => 'isActive',
         'last_fired_at' => 'lastFiredAt',
         'failure_count' => 'failureCount',
-        'custom_headers' => 'customHeaders'
+        'custom_headers' => 'customHeaders',
+        'disabled_resource_groups' => 'disabledResourceGroups'
     ];
 
     /**
@@ -217,7 +221,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_active' => 'setIsActive',
         'last_fired_at' => 'setLastFiredAt',
         'failure_count' => 'setFailureCount',
-        'custom_headers' => 'setCustomHeaders'
+        'custom_headers' => 'setCustomHeaders',
+        'disabled_resource_groups' => 'setDisabledResourceGroups'
     ];
 
     /**
@@ -234,7 +239,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_active' => 'getIsActive',
         'last_fired_at' => 'getLastFiredAt',
         'failure_count' => 'getFailureCount',
-        'custom_headers' => 'getCustomHeaders'
+        'custom_headers' => 'getCustomHeaders',
+        'disabled_resource_groups' => 'getDisabledResourceGroups'
     ];
 
     /**
@@ -324,6 +330,16 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
     public const EVENTS_WHATSAPP_NUMBER_KYC_SUBMITTED = 'whatsapp.number.kyc_submitted';
     public const EVENTS_VERIFICATION_APPROVED = 'verification.approved';
     public const EVENTS_VERIFICATION_FAILED = 'verification.failed';
+    public const DISABLED_RESOURCE_GROUPS_PUBLISHING = 'publishing';
+    public const DISABLED_RESOURCE_GROUPS_ENGAGEMENT = 'engagement';
+    public const DISABLED_RESOURCE_GROUPS_MESSAGES = 'messages';
+    public const DISABLED_RESOURCE_GROUPS_CONTACTS = 'contacts';
+    public const DISABLED_RESOURCE_GROUPS_ANALYTICS = 'analytics';
+    public const DISABLED_RESOURCE_GROUPS_ADS = 'ads';
+    public const DISABLED_RESOURCE_GROUPS_TELEPHONY = 'telephony';
+    public const DISABLED_RESOURCE_GROUPS_ACCOUNTS = 'accounts';
+    public const DISABLED_RESOURCE_GROUPS_BILLING = 'billing';
+    public const DISABLED_RESOURCE_GROUPS_WEBHOOKS = 'webhooks';
 
     /**
      * Gets allowable values of the enum
@@ -383,6 +399,27 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getDisabledResourceGroupsAllowableValues()
+    {
+        return [
+            self::DISABLED_RESOURCE_GROUPS_PUBLISHING,
+            self::DISABLED_RESOURCE_GROUPS_ENGAGEMENT,
+            self::DISABLED_RESOURCE_GROUPS_MESSAGES,
+            self::DISABLED_RESOURCE_GROUPS_CONTACTS,
+            self::DISABLED_RESOURCE_GROUPS_ANALYTICS,
+            self::DISABLED_RESOURCE_GROUPS_ADS,
+            self::DISABLED_RESOURCE_GROUPS_TELEPHONY,
+            self::DISABLED_RESOURCE_GROUPS_ACCOUNTS,
+            self::DISABLED_RESOURCE_GROUPS_BILLING,
+            self::DISABLED_RESOURCE_GROUPS_WEBHOOKS,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -406,6 +443,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('last_fired_at', $data ?? [], null);
         $this->setIfExists('failure_count', $data ?? [], null);
         $this->setIfExists('custom_headers', $data ?? [], null);
+        $this->setIfExists('disabled_resource_groups', $data ?? [], null);
     }
 
     /**
@@ -706,6 +744,42 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable custom_headers cannot be null');
         }
         $this->container['custom_headers'] = $custom_headers;
+
+        return $this;
+    }
+
+    /**
+     * Gets disabled_resource_groups
+     *
+     * @return string[]|null
+     */
+    public function getDisabledResourceGroups()
+    {
+        return $this->container['disabled_resource_groups'];
+    }
+
+    /**
+     * Sets disabled_resource_groups
+     *
+     * @param string[]|null $disabled_resource_groups Resource groups this subscription does not receive (opt-out denylist, same vocabulary and same semantics as the field on API keys). Absent or empty means the subscription receives every event listed in `events`, which is how every subscription created before this field existed behaves. An event whose group is listed here is dropped before delivery even when it is still present in `events`, and the same check runs on every replay path (test fire, redelivery, dead-letter requeue). Editing the denylist applies to every event emitted afterwards; events already queued when the edit landed can still be delivered for up to five minutes after they were enqueued.
+     *
+     * @return self
+     */
+    public function setDisabledResourceGroups($disabled_resource_groups)
+    {
+        if (is_null($disabled_resource_groups)) {
+            throw new \InvalidArgumentException('non-nullable disabled_resource_groups cannot be null');
+        }
+        $allowedValues = $this->getDisabledResourceGroupsAllowableValues();
+        if (array_diff($disabled_resource_groups, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'disabled_resource_groups', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['disabled_resource_groups'] = $disabled_resource_groups;
 
         return $this;
     }
