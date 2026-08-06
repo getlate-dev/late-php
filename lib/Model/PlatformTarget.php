@@ -68,6 +68,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_post_id' => 'string',
         'platform_post_url' => 'string',
         'published_at' => '\DateTime',
+        'removed_from_platform_at' => '\DateTime',
         'is_trial_reel' => 'bool',
         'trial_graduation_strategy' => 'string',
         'error_message' => 'string',
@@ -93,6 +94,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_post_id' => null,
         'platform_post_url' => 'uri',
         'published_at' => 'date-time',
+        'removed_from_platform_at' => 'date-time',
         'is_trial_reel' => null,
         'trial_graduation_strategy' => null,
         'error_message' => null,
@@ -116,6 +118,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_post_id' => false,
         'platform_post_url' => false,
         'published_at' => false,
+        'removed_from_platform_at' => true,
         'is_trial_reel' => false,
         'trial_graduation_strategy' => false,
         'error_message' => false,
@@ -219,6 +222,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_post_id' => 'platformPostId',
         'platform_post_url' => 'platformPostUrl',
         'published_at' => 'publishedAt',
+        'removed_from_platform_at' => 'removedFromPlatformAt',
         'is_trial_reel' => 'isTrialReel',
         'trial_graduation_strategy' => 'trialGraduationStrategy',
         'error_message' => 'errorMessage',
@@ -242,6 +246,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_post_id' => 'setPlatformPostId',
         'platform_post_url' => 'setPlatformPostUrl',
         'published_at' => 'setPublishedAt',
+        'removed_from_platform_at' => 'setRemovedFromPlatformAt',
         'is_trial_reel' => 'setIsTrialReel',
         'trial_graduation_strategy' => 'setTrialGraduationStrategy',
         'error_message' => 'setErrorMessage',
@@ -265,6 +270,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_post_id' => 'getPlatformPostId',
         'platform_post_url' => 'getPlatformPostUrl',
         'published_at' => 'getPublishedAt',
+        'removed_from_platform_at' => 'getRemovedFromPlatformAt',
         'is_trial_reel' => 'getIsTrialReel',
         'trial_graduation_strategy' => 'getTrialGraduationStrategy',
         'error_message' => 'getErrorMessage',
@@ -398,6 +404,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('platform_post_id', $data ?? [], null);
         $this->setIfExists('platform_post_url', $data ?? [], null);
         $this->setIfExists('published_at', $data ?? [], null);
+        $this->setIfExists('removed_from_platform_at', $data ?? [], null);
         $this->setIfExists('is_trial_reel', $data ?? [], null);
         $this->setIfExists('trial_graduation_strategy', $data ?? [], null);
         $this->setIfExists('error_message', $data ?? [], null);
@@ -740,6 +747,40 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable published_at cannot be null');
         }
         $this->container['published_at'] = $published_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets removed_from_platform_at
+     *
+     * @return \DateTime|null
+     */
+    public function getRemovedFromPlatformAt()
+    {
+        return $this->container['removed_from_platform_at'];
+    }
+
+    /**
+     * Sets removed_from_platform_at
+     *
+     * @param \DateTime|null $removed_from_platform_at Set when a post that was successfully published later disappears from the platform (deleted on-platform or taken down by the platform). status stays \"published\" (it reflects the publish outcome); poll this field to detect post-publish removals. Absent while the post is live, and cleared if the post reappears. Detection runs with the analytics sync, so expect up to a few hours of lag.
+     *
+     * @return self
+     */
+    public function setRemovedFromPlatformAt($removed_from_platform_at)
+    {
+        if (is_null($removed_from_platform_at)) {
+            array_push($this->openAPINullablesSetToNull, 'removed_from_platform_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('removed_from_platform_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['removed_from_platform_at'] = $removed_from_platform_at;
 
         return $this;
     }
