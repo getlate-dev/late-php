@@ -68,6 +68,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'post_title' => 'string',
         'keywords' => 'string[]',
         'match_mode' => 'string',
+        'exclude_keywords' => 'string[]',
+        'typo_tolerance' => 'bool',
         'dm_message' => 'string',
         'buttons' => '\Zernio\Model\DmButton[]',
         'comment_reply' => 'string',
@@ -99,6 +101,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'post_title' => null,
         'keywords' => null,
         'match_mode' => null,
+        'exclude_keywords' => null,
+        'typo_tolerance' => null,
         'dm_message' => null,
         'buttons' => null,
         'comment_reply' => null,
@@ -128,6 +132,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'post_title' => false,
         'keywords' => false,
         'match_mode' => false,
+        'exclude_keywords' => false,
+        'typo_tolerance' => false,
         'dm_message' => false,
         'buttons' => false,
         'comment_reply' => false,
@@ -237,6 +243,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'post_title' => 'postTitle',
         'keywords' => 'keywords',
         'match_mode' => 'matchMode',
+        'exclude_keywords' => 'excludeKeywords',
+        'typo_tolerance' => 'typoTolerance',
         'dm_message' => 'dmMessage',
         'buttons' => 'buttons',
         'comment_reply' => 'commentReply',
@@ -266,6 +274,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'post_title' => 'setPostTitle',
         'keywords' => 'setKeywords',
         'match_mode' => 'setMatchMode',
+        'exclude_keywords' => 'setExcludeKeywords',
+        'typo_tolerance' => 'setTypoTolerance',
         'dm_message' => 'setDmMessage',
         'buttons' => 'setButtons',
         'comment_reply' => 'setCommentReply',
@@ -295,6 +305,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'post_title' => 'getPostTitle',
         'keywords' => 'getKeywords',
         'match_mode' => 'getMatchMode',
+        'exclude_keywords' => 'getExcludeKeywords',
+        'typo_tolerance' => 'getTypoTolerance',
         'dm_message' => 'getDmMessage',
         'buttons' => 'getButtons',
         'comment_reply' => 'getCommentReply',
@@ -353,6 +365,7 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
     public const TRIGGER_STORY_REPLY = 'story_reply';
     public const MATCH_MODE_EXACT = 'exact';
     public const MATCH_MODE_CONTAINS = 'contains';
+    public const MATCH_MODE_WORD = 'word';
 
     /**
      * Gets allowable values of the enum
@@ -377,6 +390,7 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         return [
             self::MATCH_MODE_EXACT,
             self::MATCH_MODE_CONTAINS,
+            self::MATCH_MODE_WORD,
         ];
     }
 
@@ -405,6 +419,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         $this->setIfExists('post_title', $data ?? [], null);
         $this->setIfExists('keywords', $data ?? [], null);
         $this->setIfExists('match_mode', $data ?? [], null);
+        $this->setIfExists('exclude_keywords', $data ?? [], null);
+        $this->setIfExists('typo_tolerance', $data ?? [], null);
         $this->setIfExists('dm_message', $data ?? [], null);
         $this->setIfExists('buttons', $data ?? [], null);
         $this->setIfExists('comment_reply', $data ?? [], null);
@@ -744,7 +760,7 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
     /**
      * Sets match_mode
      *
-     * @param string|null $match_mode match_mode
+     * @param string|null $match_mode How a keyword is compared with the comment. 'contains' (default) matches anywhere, even inside another word (keyword 'app' fires on 'happy'). 'word' matches the keyword only as a standalone word. 'exact' requires the whole comment to be exactly the keyword.
      *
      * @return self
      */
@@ -764,6 +780,60 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
             );
         }
         $this->container['match_mode'] = $match_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets exclude_keywords
+     *
+     * @return string[]|null
+     */
+    public function getExcludeKeywords()
+    {
+        return $this->container['exclude_keywords'];
+    }
+
+    /**
+     * Sets exclude_keywords
+     *
+     * @param string[]|null $exclude_keywords Comments containing one of these never trigger the automation, even when a trigger keyword also matches. Compared using the same matchMode.
+     *
+     * @return self
+     */
+    public function setExcludeKeywords($exclude_keywords)
+    {
+        if (is_null($exclude_keywords)) {
+            throw new \InvalidArgumentException('non-nullable exclude_keywords cannot be null');
+        }
+        $this->container['exclude_keywords'] = $exclude_keywords;
+
+        return $this;
+    }
+
+    /**
+     * Gets typo_tolerance
+     *
+     * @return bool|null
+     */
+    public function getTypoTolerance()
+    {
+        return $this->container['typo_tolerance'];
+    }
+
+    /**
+     * Sets typo_tolerance
+     *
+     * @param bool|null $typo_tolerance Only with matchMode=word: also fire on close misspellings of a keyword (one edit for 4-7 character keywords, two from 8 up). Keywords shorter than 4 characters are never fuzzy-matched.
+     *
+     * @return self
+     */
+    public function setTypoTolerance($typo_tolerance)
+    {
+        if (is_null($typo_tolerance)) {
+            throw new \InvalidArgumentException('non-nullable typo_tolerance cannot be null');
+        }
+        $this->container['typo_tolerance'] = $typo_tolerance;
 
         return $this;
     }
