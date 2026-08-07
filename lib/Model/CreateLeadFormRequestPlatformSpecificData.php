@@ -69,9 +69,7 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
         'thank_you_button_type' => 'string',
         'thank_you_website_url' => 'string',
         'is_optimized_for_quality' => 'bool',
-        'form_type' => 'string',
         'block_display_for_non_targeted_viewer' => 'bool',
-        'allow_organic_lead_gen' => 'bool',
         'question_page_custom_headline' => 'string',
         'context_card' => '\Zernio\Model\MetaLeadFormPlatformDataContextCard',
         'ad_account_id' => 'string',
@@ -99,9 +97,7 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
         'thank_you_button_type' => null,
         'thank_you_website_url' => 'uri',
         'is_optimized_for_quality' => null,
-        'form_type' => null,
         'block_display_for_non_targeted_viewer' => null,
-        'allow_organic_lead_gen' => null,
         'question_page_custom_headline' => null,
         'context_card' => null,
         'ad_account_id' => null,
@@ -127,9 +123,7 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
         'thank_you_button_type' => false,
         'thank_you_website_url' => false,
         'is_optimized_for_quality' => false,
-        'form_type' => false,
         'block_display_for_non_targeted_viewer' => false,
-        'allow_organic_lead_gen' => false,
         'question_page_custom_headline' => false,
         'context_card' => false,
         'ad_account_id' => false,
@@ -235,9 +229,7 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
         'thank_you_button_type' => 'thankYouButtonType',
         'thank_you_website_url' => 'thankYouWebsiteUrl',
         'is_optimized_for_quality' => 'isOptimizedForQuality',
-        'form_type' => 'formType',
         'block_display_for_non_targeted_viewer' => 'blockDisplayForNonTargetedViewer',
-        'allow_organic_lead_gen' => 'allowOrganicLeadGen',
         'question_page_custom_headline' => 'questionPageCustomHeadline',
         'context_card' => 'contextCard',
         'ad_account_id' => 'adAccountId',
@@ -263,9 +255,7 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
         'thank_you_button_type' => 'setThankYouButtonType',
         'thank_you_website_url' => 'setThankYouWebsiteUrl',
         'is_optimized_for_quality' => 'setIsOptimizedForQuality',
-        'form_type' => 'setFormType',
         'block_display_for_non_targeted_viewer' => 'setBlockDisplayForNonTargetedViewer',
-        'allow_organic_lead_gen' => 'setAllowOrganicLeadGen',
         'question_page_custom_headline' => 'setQuestionPageCustomHeadline',
         'context_card' => 'setContextCard',
         'ad_account_id' => 'setAdAccountId',
@@ -291,9 +281,7 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
         'thank_you_button_type' => 'getThankYouButtonType',
         'thank_you_website_url' => 'getThankYouWebsiteUrl',
         'is_optimized_for_quality' => 'getIsOptimizedForQuality',
-        'form_type' => 'getFormType',
         'block_display_for_non_targeted_viewer' => 'getBlockDisplayForNonTargetedViewer',
-        'allow_organic_lead_gen' => 'getAllowOrganicLeadGen',
         'question_page_custom_headline' => 'getQuestionPageCustomHeadline',
         'context_card' => 'getContextCard',
         'ad_account_id' => 'getAdAccountId',
@@ -344,25 +332,8 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
         return self::$openAPIModelName;
     }
 
-    public const FORM_TYPE_MORE_VOLUME = 'MORE_VOLUME';
-    public const FORM_TYPE_HIGHER_INTENT = 'HIGHER_INTENT';
-    public const FORM_TYPE_RICH_CREATIVE = 'RICH_CREATIVE';
     public const STATE_DRAFT = 'DRAFT';
     public const STATE_PUBLISHED = 'PUBLISHED';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getFormTypeAllowableValues()
-    {
-        return [
-            self::FORM_TYPE_MORE_VOLUME,
-            self::FORM_TYPE_HIGHER_INTENT,
-            self::FORM_TYPE_RICH_CREATIVE,
-        ];
-    }
 
     /**
      * Gets allowable values of the enum
@@ -402,9 +373,7 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
         $this->setIfExists('thank_you_button_type', $data ?? [], null);
         $this->setIfExists('thank_you_website_url', $data ?? [], null);
         $this->setIfExists('is_optimized_for_quality', $data ?? [], null);
-        $this->setIfExists('form_type', $data ?? [], null);
         $this->setIfExists('block_display_for_non_targeted_viewer', $data ?? [], null);
-        $this->setIfExists('allow_organic_lead_gen', $data ?? [], null);
         $this->setIfExists('question_page_custom_headline', $data ?? [], null);
         $this->setIfExists('context_card', $data ?? [], null);
         $this->setIfExists('ad_account_id', $data ?? [], null);
@@ -450,15 +419,6 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
 
         if (!is_null($this->container['privacy_policy_link_text']) && (mb_strlen($this->container['privacy_policy_link_text']) > 70)) {
             $invalidProperties[] = "invalid value for 'privacy_policy_link_text', the character length must be smaller than or equal to 70.";
-        }
-
-        $allowedValues = $this->getFormTypeAllowableValues();
-        if (!is_null($this->container['form_type']) && !in_array($this->container['form_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'form_type', must be one of '%s'",
-                $this->container['form_type'],
-                implode("', '", $allowedValues)
-            );
         }
 
         if ($this->container['ad_account_id'] === null) {
@@ -767,7 +727,7 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
     /**
      * Sets is_optimized_for_quality
      *
-     * @param bool|null $is_optimized_for_quality is_optimized_for_quality
+     * @param bool|null $is_optimized_for_quality Set true for a higher-intent form (adds a review step before submit).
      *
      * @return self
      */
@@ -777,43 +737,6 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
             throw new \InvalidArgumentException('non-nullable is_optimized_for_quality cannot be null');
         }
         $this->container['is_optimized_for_quality'] = $is_optimized_for_quality;
-
-        return $this;
-    }
-
-    /**
-     * Gets form_type
-     *
-     * @return string|null
-     */
-    public function getFormType()
-    {
-        return $this->container['form_type'];
-    }
-
-    /**
-     * Sets form_type
-     *
-     * @param string|null $form_type form_type
-     *
-     * @return self
-     */
-    public function setFormType($form_type)
-    {
-        if (is_null($form_type)) {
-            throw new \InvalidArgumentException('non-nullable form_type cannot be null');
-        }
-        $allowedValues = $this->getFormTypeAllowableValues();
-        if (!in_array($form_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'form_type', must be one of '%s'",
-                    $form_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['form_type'] = $form_type;
 
         return $this;
     }
@@ -841,33 +764,6 @@ class CreateLeadFormRequestPlatformSpecificData implements ModelInterface, Array
             throw new \InvalidArgumentException('non-nullable block_display_for_non_targeted_viewer cannot be null');
         }
         $this->container['block_display_for_non_targeted_viewer'] = $block_display_for_non_targeted_viewer;
-
-        return $this;
-    }
-
-    /**
-     * Gets allow_organic_lead_gen
-     *
-     * @return bool|null
-     */
-    public function getAllowOrganicLeadGen()
-    {
-        return $this->container['allow_organic_lead_gen'];
-    }
-
-    /**
-     * Sets allow_organic_lead_gen
-     *
-     * @param bool|null $allow_organic_lead_gen allow_organic_lead_gen
-     *
-     * @return self
-     */
-    public function setAllowOrganicLeadGen($allow_organic_lead_gen)
-    {
-        if (is_null($allow_organic_lead_gen)) {
-            throw new \InvalidArgumentException('non-nullable allow_organic_lead_gen cannot be null');
-        }
-        $this->container['allow_organic_lead_gen'] = $allow_organic_lead_gen;
 
         return $this;
     }

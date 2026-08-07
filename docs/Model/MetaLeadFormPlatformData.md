@@ -13,10 +13,8 @@ Name | Type | Description | Notes
 **thank_you_button_text** | **string** |  | [optional]
 **thank_you_button_type** | **string** |  | [optional]
 **thank_you_website_url** | **string** |  | [optional]
-**is_optimized_for_quality** | **bool** |  | [optional]
-**form_type** | **string** |  | [optional]
+**is_optimized_for_quality** | **bool** | Set true for a higher-intent form (adds a review step before submit). | [optional]
 **block_display_for_non_targeted_viewer** | **bool** |  | [optional]
-**allow_organic_lead_gen** | **bool** |  | [optional]
 **question_page_custom_headline** | **string** |  | [optional]
 **context_card** | [**\Zernio\Model\MetaLeadFormPlatformDataContextCard**](MetaLeadFormPlatformDataContextCard.md) |  | [optional]
 
