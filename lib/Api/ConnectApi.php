@@ -561,7 +561,7 @@ class ConnectApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\CompleteTelegramConnect200Response|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\CompleteTelegramConnect200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
      */
     public function completeTelegramConnect($code, string $contentType = self::contentTypes['completeTelegramConnect'][0])
     {
@@ -579,7 +579,7 @@ class ConnectApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\CompleteTelegramConnect200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\CompleteTelegramConnect200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function completeTelegramConnectWithHttpInfo($code, string $contentType = self::contentTypes['completeTelegramConnect'][0])
     {
@@ -612,6 +612,12 @@ class ConnectApi
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\CompleteTelegramConnect200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -649,6 +655,14 @@ class ConnectApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\CompleteTelegramConnect200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
