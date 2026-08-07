@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **zip** | **string** | Meta advanced matching (zp). US uses first 5 digits; hashed server-side. Meta only. | [optional]
 **dob** | **string** | Meta advanced matching (db). YYYYMMDD; hashed server-side. Meta only. | [optional]
 **gender** | **string** | Meta advanced matching (ge). &#39;f&#39; or &#39;m&#39;; hashed server-side. Meta only. | [optional]
+**lead_id** | **string** | Meta lead ID from a Lead Ad submission, as a string. Required for Conversion Leads CRM events: send it with &#x60;actionSource: &#39;crm&#39;&#x60; and &#x60;platformData: { event_source: &#39;crm&#39;, lead_event_source: &#39;&lt;CRM name&gt;&#39; }&#x60;. Forwarded unhashed to Meta&#39;s &#x60;user_data.lead_id&#x60;. Meta only. | [optional]
 **click_ids** | [**\Zernio\Model\ConversionEventUserClickIds**](ConversionEventUserClickIds.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

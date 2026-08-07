@@ -3301,7 +3301,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/CommentAutomationAudienceTest.php
-test/Model/CommentAutomationFollowGateTest.php
-test/Model/GetInstagramFollowStatus200ResponseTest.php
-test/Model/WebhookPayloadCommentCommentAuthorInstagramProfileTest.php

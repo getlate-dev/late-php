@@ -77,6 +77,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_variations' => 'string[]',
         'link_tracking' => 'bool',
         'click_tag' => 'string',
+        'dm_delay_seconds' => 'int',
+        'comment_reply_delay_seconds' => 'int',
         'audience' => '\Zernio\Model\CommentAutomationAudience',
         'follow_gate' => '\Zernio\Model\CommentAutomationFollowGate',
         'is_active' => 'bool',
@@ -112,6 +114,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_variations' => null,
         'link_tracking' => null,
         'click_tag' => null,
+        'dm_delay_seconds' => null,
+        'comment_reply_delay_seconds' => null,
         'audience' => null,
         'follow_gate' => null,
         'is_active' => null,
@@ -145,6 +149,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_variations' => false,
         'link_tracking' => false,
         'click_tag' => false,
+        'dm_delay_seconds' => false,
+        'comment_reply_delay_seconds' => false,
         'audience' => false,
         'follow_gate' => false,
         'is_active' => false,
@@ -258,6 +264,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_variations' => 'commentReplyVariations',
         'link_tracking' => 'linkTracking',
         'click_tag' => 'clickTag',
+        'dm_delay_seconds' => 'dmDelaySeconds',
+        'comment_reply_delay_seconds' => 'commentReplyDelaySeconds',
         'audience' => 'audience',
         'follow_gate' => 'followGate',
         'is_active' => 'isActive',
@@ -291,6 +299,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_variations' => 'setCommentReplyVariations',
         'link_tracking' => 'setLinkTracking',
         'click_tag' => 'setClickTag',
+        'dm_delay_seconds' => 'setDmDelaySeconds',
+        'comment_reply_delay_seconds' => 'setCommentReplyDelaySeconds',
         'audience' => 'setAudience',
         'follow_gate' => 'setFollowGate',
         'is_active' => 'setIsActive',
@@ -324,6 +334,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_variations' => 'getCommentReplyVariations',
         'link_tracking' => 'getLinkTracking',
         'click_tag' => 'getClickTag',
+        'dm_delay_seconds' => 'getDmDelaySeconds',
+        'comment_reply_delay_seconds' => 'getCommentReplyDelaySeconds',
         'audience' => 'getAudience',
         'follow_gate' => 'getFollowGate',
         'is_active' => 'getIsActive',
@@ -440,6 +452,8 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         $this->setIfExists('comment_reply_variations', $data ?? [], null);
         $this->setIfExists('link_tracking', $data ?? [], null);
         $this->setIfExists('click_tag', $data ?? [], null);
+        $this->setIfExists('dm_delay_seconds', $data ?? [], null);
+        $this->setIfExists('comment_reply_delay_seconds', $data ?? [], null);
         $this->setIfExists('audience', $data ?? [], null);
         $this->setIfExists('follow_gate', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
@@ -1037,6 +1051,60 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
             throw new \InvalidArgumentException('non-nullable click_tag cannot be null');
         }
         $this->container['click_tag'] = $click_tag;
+
+        return $this;
+    }
+
+    /**
+     * Gets dm_delay_seconds
+     *
+     * @return int|null
+     */
+    public function getDmDelaySeconds()
+    {
+        return $this->container['dm_delay_seconds'];
+    }
+
+    /**
+     * Sets dm_delay_seconds
+     *
+     * @param int|null $dm_delay_seconds Seconds waited after the trigger before the DM is sent. Absent when the DM goes out immediately.
+     *
+     * @return self
+     */
+    public function setDmDelaySeconds($dm_delay_seconds)
+    {
+        if (is_null($dm_delay_seconds)) {
+            throw new \InvalidArgumentException('non-nullable dm_delay_seconds cannot be null');
+        }
+        $this->container['dm_delay_seconds'] = $dm_delay_seconds;
+
+        return $this;
+    }
+
+    /**
+     * Gets comment_reply_delay_seconds
+     *
+     * @return int|null
+     */
+    public function getCommentReplyDelaySeconds()
+    {
+        return $this->container['comment_reply_delay_seconds'];
+    }
+
+    /**
+     * Sets comment_reply_delay_seconds
+     *
+     * @param int|null $comment_reply_delay_seconds Seconds waited before the public reply is posted. Absent when it follows the DM immediately.
+     *
+     * @return self
+     */
+    public function setCommentReplyDelaySeconds($comment_reply_delay_seconds)
+    {
+        if (is_null($comment_reply_delay_seconds)) {
+            throw new \InvalidArgumentException('non-nullable comment_reply_delay_seconds cannot be null');
+        }
+        $this->container['comment_reply_delay_seconds'] = $comment_reply_delay_seconds;
 
         return $this;
     }

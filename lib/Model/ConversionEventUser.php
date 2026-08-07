@@ -72,6 +72,7 @@ class ConversionEventUser implements ModelInterface, ArrayAccess, \JsonSerializa
         'zip' => 'string',
         'dob' => 'string',
         'gender' => 'string',
+        'lead_id' => 'string',
         'click_ids' => '\Zernio\Model\ConversionEventUserClickIds'
     ];
 
@@ -96,6 +97,7 @@ class ConversionEventUser implements ModelInterface, ArrayAccess, \JsonSerializa
         'zip' => null,
         'dob' => null,
         'gender' => null,
+        'lead_id' => null,
         'click_ids' => null
     ];
 
@@ -118,6 +120,7 @@ class ConversionEventUser implements ModelInterface, ArrayAccess, \JsonSerializa
         'zip' => false,
         'dob' => false,
         'gender' => false,
+        'lead_id' => false,
         'click_ids' => false
     ];
 
@@ -220,6 +223,7 @@ class ConversionEventUser implements ModelInterface, ArrayAccess, \JsonSerializa
         'zip' => 'zip',
         'dob' => 'dob',
         'gender' => 'gender',
+        'lead_id' => 'leadId',
         'click_ids' => 'clickIds'
     ];
 
@@ -242,6 +246,7 @@ class ConversionEventUser implements ModelInterface, ArrayAccess, \JsonSerializa
         'zip' => 'setZip',
         'dob' => 'setDob',
         'gender' => 'setGender',
+        'lead_id' => 'setLeadId',
         'click_ids' => 'setClickIds'
     ];
 
@@ -264,6 +269,7 @@ class ConversionEventUser implements ModelInterface, ArrayAccess, \JsonSerializa
         'zip' => 'getZip',
         'dob' => 'getDob',
         'gender' => 'getGender',
+        'lead_id' => 'getLeadId',
         'click_ids' => 'getClickIds'
     ];
 
@@ -337,6 +343,7 @@ class ConversionEventUser implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('zip', $data ?? [], null);
         $this->setIfExists('dob', $data ?? [], null);
         $this->setIfExists('gender', $data ?? [], null);
+        $this->setIfExists('lead_id', $data ?? [], null);
         $this->setIfExists('click_ids', $data ?? [], null);
     }
 
@@ -729,6 +736,33 @@ class ConversionEventUser implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable gender cannot be null');
         }
         $this->container['gender'] = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Gets lead_id
+     *
+     * @return string|null
+     */
+    public function getLeadId()
+    {
+        return $this->container['lead_id'];
+    }
+
+    /**
+     * Sets lead_id
+     *
+     * @param string|null $lead_id Meta lead ID from a Lead Ad submission, as a string. Required for Conversion Leads CRM events: send it with `actionSource: 'crm'` and `platformData: { event_source: 'crm', lead_event_source: '<CRM name>' }`. Forwarded unhashed to Meta's `user_data.lead_id`. Meta only.
+     *
+     * @return self
+     */
+    public function setLeadId($lead_id)
+    {
+        if (is_null($lead_id)) {
+            throw new \InvalidArgumentException('non-nullable lead_id cannot be null');
+        }
+        $this->container['lead_id'] = $lead_id;
 
         return $this;
     }

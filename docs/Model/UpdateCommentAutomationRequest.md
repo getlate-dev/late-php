@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **comment_reply_variations** | **string[]** | Alternate public replies for random rotation. Pass [] to clear. | [optional]
 **link_tracking** | **bool** | Wrap link buttons in a tracked redirect to count clicks. Pass false to send links untouched. | [optional]
 **click_tag** | **string** | Tag applied to a contact when they click a tracked link (requires linkTracking). Empty string clears it. | [optional]
+**dm_delay_seconds** | **int** | Seconds to wait after the trigger before sending the DM. Send 0 to clear the delay and reply immediately. | [optional]
+**comment_reply_delay_seconds** | **int** | Seconds to wait before posting the public comment reply. Send 0 to clear it. The reply never goes out before the DM. | [optional]
 **audience** | [**\Zernio\Model\CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional]
 **follow_gate** | [**\Zernio\Model\CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional]
 **is_active** | **bool** |  | [optional]

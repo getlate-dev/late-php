@@ -664,7 +664,7 @@ class ConversionEvent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets platform_data
      *
-     * @param array<string,mixed>|null $platform_data Escape hatch for platform-specific fields we haven't normalized. Forwarded as-is.
+     * @param array<string,mixed>|null $platform_data Escape hatch for platform-specific fields we haven't normalized. On Meta, keys are shallow-merged into `custom_data` only: fields Zernio already builds (`value`, `currency`, `contents`, `num_items`) always win on collision, and `user_data` (hashed match keys) is never touched. Use first-class fields (e.g. `user.leadId`) for anything that must reach `user_data`.
      *
      * @return self
      */

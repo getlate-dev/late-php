@@ -22,6 +22,8 @@ Name | Type | Description | Notes
 **comment_reply_variations** | **string[]** | Alternate public replies rotated at random with commentReply. Omitted when none. | [optional]
 **link_tracking** | **bool** | Whether link buttons in the DM are wrapped in a tracked redirect to count clicks. | [optional]
 **click_tag** | **string** | Tag applied to a contact when they click a tracked link. | [optional]
+**dm_delay_seconds** | **int** | Seconds waited after the trigger before the DM is sent. Absent when the DM goes out immediately. | [optional]
+**comment_reply_delay_seconds** | **int** | Seconds waited before the public reply is posted. Absent when it follows the DM immediately. | [optional]
 **is_active** | **bool** |  | [optional]
 **stats** | [**\Zernio\Model\ListCommentAutomations200ResponseAutomationsInnerStats**](ListCommentAutomations200ResponseAutomationsInnerStats.md) |  | [optional]
 **created_at** | **\DateTime** |  | [optional]

@@ -70,6 +70,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'error' => 'string',
         'comment_reply_status' => 'string',
         'comment_reply_error' => 'string',
+        'next_due_at' => '\DateTime',
         'created_at' => '\DateTime'
     ];
 
@@ -93,6 +94,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'error' => null,
         'comment_reply_status' => null,
         'comment_reply_error' => null,
+        'next_due_at' => 'date-time',
         'created_at' => 'date-time'
     ];
 
@@ -114,6 +116,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'error' => false,
         'comment_reply_status' => false,
         'comment_reply_error' => false,
+        'next_due_at' => false,
         'created_at' => false
     ];
 
@@ -215,6 +218,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'error' => 'error',
         'comment_reply_status' => 'commentReplyStatus',
         'comment_reply_error' => 'commentReplyError',
+        'next_due_at' => 'nextDueAt',
         'created_at' => 'createdAt'
     ];
 
@@ -236,6 +240,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'error' => 'setError',
         'comment_reply_status' => 'setCommentReplyStatus',
         'comment_reply_error' => 'setCommentReplyError',
+        'next_due_at' => 'setNextDueAt',
         'created_at' => 'setCreatedAt'
     ];
 
@@ -257,6 +262,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'error' => 'getError',
         'comment_reply_status' => 'getCommentReplyStatus',
         'comment_reply_error' => 'getCommentReplyError',
+        'next_due_at' => 'getNextDueAt',
         'created_at' => 'getCreatedAt'
     ];
 
@@ -301,6 +307,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         return self::$openAPIModelName;
     }
 
+    public const STATUS_PENDING = 'pending';
     public const STATUS_SENT = 'sent';
     public const STATUS_FAILED = 'failed';
     public const STATUS_SKIPPED = 'skipped';
@@ -322,6 +329,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
     public function getStatusAllowableValues()
     {
         return [
+            self::STATUS_PENDING,
             self::STATUS_SENT,
             self::STATUS_FAILED,
             self::STATUS_SKIPPED,
@@ -386,6 +394,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         $this->setIfExists('error', $data ?? [], null);
         $this->setIfExists('comment_reply_status', $data ?? [], null);
         $this->setIfExists('comment_reply_error', $data ?? [], null);
+        $this->setIfExists('next_due_at', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
     }
 
@@ -606,7 +615,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
     /**
      * Sets status
      *
-     * @param string|null $status DM outcome. 'gated' = the follow-gate confirmation DM went out and we are waiting for the tap; it flips to 'sent' or 'skipped' when they tap.
+     * @param string|null $status DM outcome. 'pending' = the automation has a dmDelaySeconds and the response is queued but not sent yet. 'gated' = the follow-gate confirmation DM went out and we are waiting for the tap; it flips to 'sent' or 'skipped' when they tap.
      *
      * @return self
      */
@@ -808,6 +817,33 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
             throw new \InvalidArgumentException('non-nullable comment_reply_error cannot be null');
         }
         $this->container['comment_reply_error'] = $comment_reply_error;
+
+        return $this;
+    }
+
+    /**
+     * Gets next_due_at
+     *
+     * @return \DateTime|null
+     */
+    public function getNextDueAt()
+    {
+        return $this->container['next_due_at'];
+    }
+
+    /**
+     * Sets next_due_at
+     *
+     * @param \DateTime|null $next_due_at When the next queued send fires. Present only while something is still pending.
+     *
+     * @return self
+     */
+    public function setNextDueAt($next_due_at)
+    {
+        if (is_null($next_due_at)) {
+            throw new \InvalidArgumentException('non-nullable next_due_at cannot be null');
+        }
+        $this->container['next_due_at'] = $next_due_at;
 
         return $this;
     }

@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **comment_reply_variations** | **string[]** | Alternate public replies rotated at random with commentReply. Omitted when none. | [optional]
 **link_tracking** | **bool** |  | [optional]
 **click_tag** | **string** |  | [optional]
+**dm_delay_seconds** | **int** | Seconds waited after the trigger before the DM is sent. Absent when the DM goes out immediately. | [optional]
+**comment_reply_delay_seconds** | **int** | Seconds waited before the public reply is posted. Absent when it follows the DM immediately. | [optional]
 **audience** | [**\Zernio\Model\CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional]
 **follow_gate** | [**\Zernio\Model\CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional]
 **is_active** | **bool** |  | [optional]

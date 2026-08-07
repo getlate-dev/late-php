@@ -76,6 +76,8 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => 'string[]',
         'link_tracking' => 'bool',
         'click_tag' => 'string',
+        'dm_delay_seconds' => 'int',
+        'comment_reply_delay_seconds' => 'int',
         'audience' => '\Zernio\Model\CommentAutomationAudience',
         'follow_gate' => '\Zernio\Model\CommentAutomationFollowGate'
     ];
@@ -106,6 +108,8 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => null,
         'link_tracking' => null,
         'click_tag' => null,
+        'dm_delay_seconds' => null,
+        'comment_reply_delay_seconds' => null,
         'audience' => null,
         'follow_gate' => null
     ];
@@ -134,6 +138,8 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => false,
         'link_tracking' => false,
         'click_tag' => false,
+        'dm_delay_seconds' => false,
+        'comment_reply_delay_seconds' => false,
         'audience' => false,
         'follow_gate' => false
     ];
@@ -242,6 +248,8 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => 'commentReplyVariations',
         'link_tracking' => 'linkTracking',
         'click_tag' => 'clickTag',
+        'dm_delay_seconds' => 'dmDelaySeconds',
+        'comment_reply_delay_seconds' => 'commentReplyDelaySeconds',
         'audience' => 'audience',
         'follow_gate' => 'followGate'
     ];
@@ -270,6 +278,8 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => 'setCommentReplyVariations',
         'link_tracking' => 'setLinkTracking',
         'click_tag' => 'setClickTag',
+        'dm_delay_seconds' => 'setDmDelaySeconds',
+        'comment_reply_delay_seconds' => 'setCommentReplyDelaySeconds',
         'audience' => 'setAudience',
         'follow_gate' => 'setFollowGate'
     ];
@@ -298,6 +308,8 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => 'getCommentReplyVariations',
         'link_tracking' => 'getLinkTracking',
         'click_tag' => 'getClickTag',
+        'dm_delay_seconds' => 'getDmDelaySeconds',
+        'comment_reply_delay_seconds' => 'getCommentReplyDelaySeconds',
         'audience' => 'getAudience',
         'follow_gate' => 'getFollowGate'
     ];
@@ -409,6 +421,8 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('comment_reply_variations', $data ?? [], null);
         $this->setIfExists('link_tracking', $data ?? [], true);
         $this->setIfExists('click_tag', $data ?? [], null);
+        $this->setIfExists('dm_delay_seconds', $data ?? [], null);
+        $this->setIfExists('comment_reply_delay_seconds', $data ?? [], null);
         $this->setIfExists('audience', $data ?? [], null);
         $this->setIfExists('follow_gate', $data ?? [], null);
     }
@@ -480,6 +494,22 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
 
         if (!is_null($this->container['comment_reply_variations']) && (count($this->container['comment_reply_variations']) > 5)) {
             $invalidProperties[] = "invalid value for 'comment_reply_variations', number of items must be less than or equal to 5.";
+        }
+
+        if (!is_null($this->container['dm_delay_seconds']) && ($this->container['dm_delay_seconds'] > 86400)) {
+            $invalidProperties[] = "invalid value for 'dm_delay_seconds', must be smaller than or equal to 86400.";
+        }
+
+        if (!is_null($this->container['dm_delay_seconds']) && ($this->container['dm_delay_seconds'] < 0)) {
+            $invalidProperties[] = "invalid value for 'dm_delay_seconds', must be bigger than or equal to 0.";
+        }
+
+        if (!is_null($this->container['comment_reply_delay_seconds']) && ($this->container['comment_reply_delay_seconds'] > 86400)) {
+            $invalidProperties[] = "invalid value for 'comment_reply_delay_seconds', must be smaller than or equal to 86400.";
+        }
+
+        if (!is_null($this->container['comment_reply_delay_seconds']) && ($this->container['comment_reply_delay_seconds'] < 0)) {
+            $invalidProperties[] = "invalid value for 'comment_reply_delay_seconds', must be bigger than or equal to 0.";
         }
 
         return $invalidProperties;
@@ -1011,6 +1041,76 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable click_tag cannot be null');
         }
         $this->container['click_tag'] = $click_tag;
+
+        return $this;
+    }
+
+    /**
+     * Gets dm_delay_seconds
+     *
+     * @return int|null
+     */
+    public function getDmDelaySeconds()
+    {
+        return $this->container['dm_delay_seconds'];
+    }
+
+    /**
+     * Sets dm_delay_seconds
+     *
+     * @param int|null $dm_delay_seconds Seconds to wait after the trigger before sending the DM. Omit or send 0 to reply immediately (the default). Max 86400 (24h). The trigger is still matched and deduplicated the moment the comment arrives, so a delay only moves when the response is sent.
+     *
+     * @return self
+     */
+    public function setDmDelaySeconds($dm_delay_seconds)
+    {
+        if (is_null($dm_delay_seconds)) {
+            throw new \InvalidArgumentException('non-nullable dm_delay_seconds cannot be null');
+        }
+
+        if (($dm_delay_seconds > 86400)) {
+            throw new \InvalidArgumentException('invalid value for $dm_delay_seconds when calling CreateCommentAutomationRequest., must be smaller than or equal to 86400.');
+        }
+        if (($dm_delay_seconds < 0)) {
+            throw new \InvalidArgumentException('invalid value for $dm_delay_seconds when calling CreateCommentAutomationRequest., must be bigger than or equal to 0.');
+        }
+
+        $this->container['dm_delay_seconds'] = $dm_delay_seconds;
+
+        return $this;
+    }
+
+    /**
+     * Gets comment_reply_delay_seconds
+     *
+     * @return int|null
+     */
+    public function getCommentReplyDelaySeconds()
+    {
+        return $this->container['comment_reply_delay_seconds'];
+    }
+
+    /**
+     * Sets comment_reply_delay_seconds
+     *
+     * @param int|null $comment_reply_delay_seconds Seconds to wait before posting the public comment reply. Omit or send 0 to post it right after the DM (the default). The reply never goes out before the DM, so a value below dmDelaySeconds is raised to it. Ignored when trigger=story_reply, which has no public reply.
+     *
+     * @return self
+     */
+    public function setCommentReplyDelaySeconds($comment_reply_delay_seconds)
+    {
+        if (is_null($comment_reply_delay_seconds)) {
+            throw new \InvalidArgumentException('non-nullable comment_reply_delay_seconds cannot be null');
+        }
+
+        if (($comment_reply_delay_seconds > 86400)) {
+            throw new \InvalidArgumentException('invalid value for $comment_reply_delay_seconds when calling CreateCommentAutomationRequest., must be smaller than or equal to 86400.');
+        }
+        if (($comment_reply_delay_seconds < 0)) {
+            throw new \InvalidArgumentException('invalid value for $comment_reply_delay_seconds when calling CreateCommentAutomationRequest., must be bigger than or equal to 0.');
+        }
+
+        $this->container['comment_reply_delay_seconds'] = $comment_reply_delay_seconds;
 
         return $this;
     }
