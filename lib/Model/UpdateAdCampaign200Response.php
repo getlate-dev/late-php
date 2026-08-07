@@ -36,6 +36,7 @@ use \Zernio\ObjectSerializer;
  * UpdateAdCampaign200Response Class Doc Comment
  *
  * @category Class
+ * @description Echoes back only the fields you sent, plus &#x60;updated&#x60;.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -62,6 +63,8 @@ class UpdateAdCampaign200Response implements ModelInterface, ArrayAccess, \JsonS
         'budget' => '\Zernio\Model\AdBudget',
         'budget_level' => 'string',
         'bid_strategy' => '\Zernio\Model\BidStrategy',
+        'bid_amount' => 'float',
+        'roas_average_floor' => 'float',
         'platform_specific_data' => 'object'
     ];
 
@@ -77,6 +80,8 @@ class UpdateAdCampaign200Response implements ModelInterface, ArrayAccess, \JsonS
         'budget' => null,
         'budget_level' => null,
         'bid_strategy' => null,
+        'bid_amount' => null,
+        'roas_average_floor' => null,
         'platform_specific_data' => null
     ];
 
@@ -90,6 +95,8 @@ class UpdateAdCampaign200Response implements ModelInterface, ArrayAccess, \JsonS
         'budget' => false,
         'budget_level' => false,
         'bid_strategy' => false,
+        'bid_amount' => false,
+        'roas_average_floor' => false,
         'platform_specific_data' => false
     ];
 
@@ -183,6 +190,8 @@ class UpdateAdCampaign200Response implements ModelInterface, ArrayAccess, \JsonS
         'budget' => 'budget',
         'budget_level' => 'budgetLevel',
         'bid_strategy' => 'bidStrategy',
+        'bid_amount' => 'bidAmount',
+        'roas_average_floor' => 'roasAverageFloor',
         'platform_specific_data' => 'platformSpecificData'
     ];
 
@@ -196,6 +205,8 @@ class UpdateAdCampaign200Response implements ModelInterface, ArrayAccess, \JsonS
         'budget' => 'setBudget',
         'budget_level' => 'setBudgetLevel',
         'bid_strategy' => 'setBidStrategy',
+        'bid_amount' => 'setBidAmount',
+        'roas_average_floor' => 'setRoasAverageFloor',
         'platform_specific_data' => 'setPlatformSpecificData'
     ];
 
@@ -209,6 +220,8 @@ class UpdateAdCampaign200Response implements ModelInterface, ArrayAccess, \JsonS
         'budget' => 'getBudget',
         'budget_level' => 'getBudgetLevel',
         'bid_strategy' => 'getBidStrategy',
+        'bid_amount' => 'getBidAmount',
+        'roas_average_floor' => 'getRoasAverageFloor',
         'platform_specific_data' => 'getPlatformSpecificData'
     ];
 
@@ -286,6 +299,8 @@ class UpdateAdCampaign200Response implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('budget', $data ?? [], null);
         $this->setIfExists('budget_level', $data ?? [], null);
         $this->setIfExists('bid_strategy', $data ?? [], null);
+        $this->setIfExists('bid_amount', $data ?? [], null);
+        $this->setIfExists('roas_average_floor', $data ?? [], null);
         $this->setIfExists('platform_specific_data', $data ?? [], null);
     }
 
@@ -353,7 +368,7 @@ class UpdateAdCampaign200Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets updated
      *
-     * @param int|null $updated updated
+     * @param int|null $updated Local Ad documents mirrored. 0 on the empty-campaign path.
      *
      * @return self
      */
@@ -454,6 +469,60 @@ class UpdateAdCampaign200Response implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable bid_strategy cannot be null');
         }
         $this->container['bid_strategy'] = $bid_strategy;
+
+        return $this;
+    }
+
+    /**
+     * Gets bid_amount
+     *
+     * @return float|null
+     */
+    public function getBidAmount()
+    {
+        return $this->container['bid_amount'];
+    }
+
+    /**
+     * Sets bid_amount
+     *
+     * @param float|null $bid_amount bid_amount
+     *
+     * @return self
+     */
+    public function setBidAmount($bid_amount)
+    {
+        if (is_null($bid_amount)) {
+            throw new \InvalidArgumentException('non-nullable bid_amount cannot be null');
+        }
+        $this->container['bid_amount'] = $bid_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets roas_average_floor
+     *
+     * @return float|null
+     */
+    public function getRoasAverageFloor()
+    {
+        return $this->container['roas_average_floor'];
+    }
+
+    /**
+     * Sets roas_average_floor
+     *
+     * @param float|null $roas_average_floor roas_average_floor
+     *
+     * @return self
+     */
+    public function setRoasAverageFloor($roas_average_floor)
+    {
+        if (is_null($roas_average_floor)) {
+            throw new \InvalidArgumentException('non-nullable roas_average_floor cannot be null');
+        }
+        $this->container['roas_average_floor'] = $roas_average_floor;
 
         return $this;
     }

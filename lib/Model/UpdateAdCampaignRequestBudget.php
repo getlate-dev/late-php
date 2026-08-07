@@ -36,6 +36,7 @@ use \Zernio\ObjectSerializer;
  * UpdateAdCampaignRequestBudget Class Doc Comment
  *
  * @category Class
+ * @description **Meta only.** The CBO budget.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

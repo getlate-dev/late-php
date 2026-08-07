@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * UpdateAdCampaignRequestPlatformSpecificData Class Doc Comment
  *
  * @category Class
- * @description Platform-specific campaign settings. The platform is implied by the &#x60;platform&#x60; body param (same convention as platformSpecificData on POST /v1/ads/create). Meta (facebook/instagram) only; other platforms return 400.
+ * @description **Meta only.** Platform implied by the &#x60;platform&#x60; body param, same convention as POST /v1/ads/create.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -304,7 +304,7 @@ class UpdateAdCampaignRequestPlatformSpecificData implements ModelInterface, Arr
     /**
      * Sets spend_cap
      *
-     * @param float|null $spend_cap Campaign lifetime spend cap, in the ad account's currency (Meta `spend_cap`). Pass null to remove the cap (0 is rejected by Meta).
+     * @param float|null $spend_cap Campaign lifetime spend cap, in the ad account's currency (Meta `spend_cap`). Pass null to remove the cap; 0 is rejected by Meta.
      *
      * @return self
      */

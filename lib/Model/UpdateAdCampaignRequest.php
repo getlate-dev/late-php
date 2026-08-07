@@ -58,10 +58,12 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'account_id' => 'string',
         'platform' => 'string',
-        'budget' => '\Zernio\Model\UpdateAdCampaignRequestBudget',
+        'account_id' => 'string',
         'bid_strategy' => '\Zernio\Model\BidStrategy',
+        'bid_amount' => 'float',
+        'roas_average_floor' => 'float',
+        'budget' => '\Zernio\Model\UpdateAdCampaignRequestBudget',
         'name' => 'string',
         'platform_specific_data' => '\Zernio\Model\UpdateAdCampaignRequestPlatformSpecificData'
     ];
@@ -74,10 +76,12 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'account_id' => null,
         'platform' => null,
-        'budget' => null,
+        'account_id' => null,
         'bid_strategy' => null,
+        'bid_amount' => null,
+        'roas_average_floor' => null,
+        'budget' => null,
         'name' => null,
         'platform_specific_data' => null
     ];
@@ -88,10 +92,12 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'account_id' => false,
         'platform' => false,
-        'budget' => false,
+        'account_id' => false,
         'bid_strategy' => false,
+        'bid_amount' => false,
+        'roas_average_floor' => false,
+        'budget' => false,
         'name' => false,
         'platform_specific_data' => false
     ];
@@ -182,10 +188,12 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'account_id' => 'accountId',
         'platform' => 'platform',
-        'budget' => 'budget',
+        'account_id' => 'accountId',
         'bid_strategy' => 'bidStrategy',
+        'bid_amount' => 'bidAmount',
+        'roas_average_floor' => 'roasAverageFloor',
+        'budget' => 'budget',
         'name' => 'name',
         'platform_specific_data' => 'platformSpecificData'
     ];
@@ -196,10 +204,12 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'account_id' => 'setAccountId',
         'platform' => 'setPlatform',
-        'budget' => 'setBudget',
+        'account_id' => 'setAccountId',
         'bid_strategy' => 'setBidStrategy',
+        'bid_amount' => 'setBidAmount',
+        'roas_average_floor' => 'setRoasAverageFloor',
+        'budget' => 'setBudget',
         'name' => 'setName',
         'platform_specific_data' => 'setPlatformSpecificData'
     ];
@@ -210,10 +220,12 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'account_id' => 'getAccountId',
         'platform' => 'getPlatform',
-        'budget' => 'getBudget',
+        'account_id' => 'getAccountId',
         'bid_strategy' => 'getBidStrategy',
+        'bid_amount' => 'getBidAmount',
+        'roas_average_floor' => 'getRoasAverageFloor',
+        'budget' => 'getBudget',
         'name' => 'getName',
         'platform_specific_data' => 'getPlatformSpecificData'
     ];
@@ -261,6 +273,7 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
 
     public const PLATFORM_FACEBOOK = 'facebook';
     public const PLATFORM_INSTAGRAM = 'instagram';
+    public const PLATFORM_GOOGLE = 'google';
 
     /**
      * Gets allowable values of the enum
@@ -272,6 +285,7 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
         return [
             self::PLATFORM_FACEBOOK,
             self::PLATFORM_INSTAGRAM,
+            self::PLATFORM_GOOGLE,
         ];
     }
 
@@ -290,10 +304,12 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('platform', $data ?? [], null);
-        $this->setIfExists('budget', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('bid_strategy', $data ?? [], null);
+        $this->setIfExists('bid_amount', $data ?? [], null);
+        $this->setIfExists('roas_average_floor', $data ?? [], null);
+        $this->setIfExists('budget', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('platform_specific_data', $data ?? [], null);
     }
@@ -357,33 +373,6 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets account_id
-     *
-     * @return string|null
-     */
-    public function getAccountId()
-    {
-        return $this->container['account_id'];
-    }
-
-    /**
-     * Sets account_id
-     *
-     * @param string|null $account_id Zernio SocialAccount id owning the ad account. Required only to update an EMPTY campaign (zero ads), which has no local Ad documents to resolve a token from.
-     *
-     * @return self
-     */
-    public function setAccountId($account_id)
-    {
-        if (is_null($account_id)) {
-            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
-        }
-        $this->container['account_id'] = $account_id;
-
-        return $this;
-    }
-
-    /**
      * Gets platform
      *
      * @return string
@@ -396,7 +385,7 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets platform
      *
-     * @param string $platform platform
+     * @param string $platform Required: platform campaign IDs are not globally unique.
      *
      * @return self
      */
@@ -416,6 +405,114 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
             );
         }
         $this->container['platform'] = $platform;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_id
+     *
+     * @return string|null
+     */
+    public function getAccountId()
+    {
+        return $this->container['account_id'];
+    }
+
+    /**
+     * Sets account_id
+     *
+     * @param string|null $account_id **Meta only.** Zernio SocialAccount id owning the ad account. Needed only for an EMPTY campaign (zero ads); ignored otherwise.
+     *
+     * @return self
+     */
+    public function setAccountId($account_id)
+    {
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
+        }
+        $this->container['account_id'] = $account_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets bid_strategy
+     *
+     * @return \Zernio\Model\BidStrategy|null
+     */
+    public function getBidStrategy()
+    {
+        return $this->container['bid_strategy'];
+    }
+
+    /**
+     * Sets bid_strategy
+     *
+     * @param \Zernio\Model\BidStrategy|null $bid_strategy **Meta + Google.** On Meta, the campaign default that ad sets inherit unless they override it. On Google, the campaign's own bidding strategy.
+     *
+     * @return self
+     */
+    public function setBidStrategy($bid_strategy)
+    {
+        if (is_null($bid_strategy)) {
+            throw new \InvalidArgumentException('non-nullable bid_strategy cannot be null');
+        }
+        $this->container['bid_strategy'] = $bid_strategy;
+
+        return $this;
+    }
+
+    /**
+     * Gets bid_amount
+     *
+     * @return float|null
+     */
+    public function getBidAmount()
+    {
+        return $this->container['bid_amount'];
+    }
+
+    /**
+     * Sets bid_amount
+     *
+     * @param float|null $bid_amount **Google only.** Whole currency units (USD: 12 = $12.00). Max CPC for LOWEST_COST_WITH_BID_CAP, CPA target for COST_CAP; required for both.
+     *
+     * @return self
+     */
+    public function setBidAmount($bid_amount)
+    {
+        if (is_null($bid_amount)) {
+            throw new \InvalidArgumentException('non-nullable bid_amount cannot be null');
+        }
+        $this->container['bid_amount'] = $bid_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets roas_average_floor
+     *
+     * @return float|null
+     */
+    public function getRoasAverageFloor()
+    {
+        return $this->container['roas_average_floor'];
+    }
+
+    /**
+     * Sets roas_average_floor
+     *
+     * @param float|null $roas_average_floor **Google only.** Decimal ROAS multiplier (2.0 = 2.0x), required for LOWEST_COST_WITH_MIN_ROAS.
+     *
+     * @return self
+     */
+    public function setRoasAverageFloor($roas_average_floor)
+    {
+        if (is_null($roas_average_floor)) {
+            throw new \InvalidArgumentException('non-nullable roas_average_floor cannot be null');
+        }
+        $this->container['roas_average_floor'] = $roas_average_floor;
 
         return $this;
     }
@@ -448,33 +545,6 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
     }
 
     /**
-     * Gets bid_strategy
-     *
-     * @return \Zernio\Model\BidStrategy|null
-     */
-    public function getBidStrategy()
-    {
-        return $this->container['bid_strategy'];
-    }
-
-    /**
-     * Sets bid_strategy
-     *
-     * @param \Zernio\Model\BidStrategy|null $bid_strategy Campaign-level default. Ad sets inherit this unless they override.
-     *
-     * @return self
-     */
-    public function setBidStrategy($bid_strategy)
-    {
-        if (is_null($bid_strategy)) {
-            throw new \InvalidArgumentException('non-nullable bid_strategy cannot be null');
-        }
-        $this->container['bid_strategy'] = $bid_strategy;
-
-        return $this;
-    }
-
-    /**
      * Gets name
      *
      * @return string|null
@@ -487,7 +557,7 @@ class UpdateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets name
      *
-     * @param string|null $name Rename the campaign (Meta only; other platforms return 501). At least one of budget/bidStrategy/name/platformSpecificData is required.
+     * @param string|null $name **Meta only.** Rename the campaign.
      *
      * @return self
      */
