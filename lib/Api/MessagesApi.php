@@ -3525,7 +3525,7 @@ class MessagesApi
      *
      * Send message
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  \Zernio\Model\SendInboxMessageRequest $send_inbox_message_request send_inbox_message_request (required)
      * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendInboxMessage'] to see the possible values for this operation
@@ -3545,7 +3545,7 @@ class MessagesApi
      *
      * Send message
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  \Zernio\Model\SendInboxMessageRequest $send_inbox_message_request (required)
      * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendInboxMessage'] to see the possible values for this operation
@@ -3660,7 +3660,7 @@ class MessagesApi
      *
      * Send message
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  \Zernio\Model\SendInboxMessageRequest $send_inbox_message_request (required)
      * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendInboxMessage'] to see the possible values for this operation
@@ -3683,7 +3683,7 @@ class MessagesApi
      *
      * Send message
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  \Zernio\Model\SendInboxMessageRequest $send_inbox_message_request (required)
      * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendInboxMessage'] to see the possible values for this operation
@@ -3735,7 +3735,7 @@ class MessagesApi
     /**
      * Create request for operation 'sendInboxMessage'
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  \Zernio\Model\SendInboxMessageRequest $send_inbox_message_request (required)
      * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendInboxMessage'] to see the possible values for this operation

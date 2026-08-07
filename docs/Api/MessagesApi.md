@@ -701,7 +701,7 @@ $apiInstance = new Zernio\Api\MessagesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$conversation_id = 'conversation_id_example'; // string | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
+$conversation_id = 'conversation_id_example'; // string | Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed.
 $send_inbox_message_request = new \Zernio\Model\SendInboxMessageRequest(); // \Zernio\Model\SendInboxMessageRequest
 $idempotency_key = 'idempotency_key_example'; // string | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
 
@@ -717,7 +717,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **conversation_id** | **string**| The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. | |
+| **conversation_id** | **string**| Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. | |
 | **send_inbox_message_request** | [**\Zernio\Model\SendInboxMessageRequest**](../Model/SendInboxMessageRequest.md)|  | |
 | **idempotency_key** | **string**| Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
