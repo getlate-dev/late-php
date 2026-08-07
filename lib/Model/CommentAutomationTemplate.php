@@ -1,6 +1,6 @@
 <?php
 /**
- * SendInboxMessageRequestTemplate
+ * CommentAutomationTemplate
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * SendInboxMessageRequestTemplate Class Doc Comment
+ * CommentAutomationTemplate Class Doc Comment
  *
  * @category Class
- * @description Platform-dependent template payload. Ignored on Telegram.  Instagram / Facebook: a generic template (carousel). Set &#x60;type: generic&#x60; and provide up to 10 &#x60;elements&#x60;, each with a &#x60;title&#x60; (required) and optional &#x60;subtitle&#x60;, &#x60;imageUrl&#x60;, and &#x60;buttons&#x60;. Mutually exclusive with the top-level &#x60;buttons&#x60; field (sending both is a 400); put the card&#39;s buttons on its &#x60;elements&#x60; instead.  WhatsApp: sends an approved WhatsApp template message, the only message type WhatsApp accepts when the 24-hour customer-service window is closed. Provide exactly one element carrying the template reference: &#x60;{ \&quot;elements\&quot;: [{ \&quot;name\&quot;: \&quot;order_update\&quot;, \&quot;language\&quot;: \&quot;en_US\&quot;, \&quot;components\&quot;: [...] }] }&#x60; (&#x60;type&#x60; is ignored on WhatsApp). &#x60;components&#x60; is optional and is forwarded unchanged as the &#x60;template.components&#x60; array of Meta&#39;s Cloud API send payload; use it to fill body/header variables and button parameters, e.g. &#x60;[{ \&quot;type\&quot;: \&quot;body\&quot;, \&quot;parameters\&quot;: [{ \&quot;type\&quot;: \&quot;text\&quot;, \&quot;text\&quot;: \&quot;John\&quot; }] }]&#x60;. Templates with media headers (image, video, document) must include the header component with its media link here at send time. To send a template to a phone number with no existing conversation, or to have media headers filled in automatically from the template definition, use the create-conversation endpoint (POST /v1/inbox/conversations) instead.
+ * @description A Meta generic template (product card) sent as the automation&#39;s first DM. It REPLACES the plain &#x60;dmMessage&#x60; bubble: a Meta message carries one body shape, and a comment gets exactly one private reply, so the card and the text cannot both be delivered. Put your selling copy in &#x60;subtitle&#x60;. Mutually exclusive with &#x60;buttons&#x60; (sending both is a 400). Works on both the &#x60;comment&#x60; and &#x60;story_reply&#x60; triggers. Up to 10 elements, rendered as a horizontally swipeable carousel. Rendering confirmed on the Instagram and Messenger mobile apps.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \JsonSerializable
+class CommentAutomationTemplate implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'sendInboxMessage_request_template';
+    protected static $openAPIModelName = 'CommentAutomationTemplate';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,7 +60,7 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
       */
     protected static $openAPITypes = [
         'type' => 'string',
-        'elements' => '\Zernio\Model\SendInboxMessageRequestTemplateElementsInner[]'
+        'elements' => '\Zernio\Model\CommentAutomationTemplateElement[]'
     ];
 
     /**
@@ -296,6 +296,9 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
     {
         $invalidProperties = [];
 
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
         $allowedValues = $this->getTypeAllowableValues();
         if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -305,8 +308,15 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
             );
         }
 
-        if (!is_null($this->container['elements']) && (count($this->container['elements']) > 10)) {
+        if ($this->container['elements'] === null) {
+            $invalidProperties[] = "'elements' can't be null";
+        }
+        if ((count($this->container['elements']) > 10)) {
             $invalidProperties[] = "invalid value for 'elements', number of items must be less than or equal to 10.";
+        }
+
+        if ((count($this->container['elements']) < 1)) {
+            $invalidProperties[] = "invalid value for 'elements', number of items must be greater than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -327,7 +337,7 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
     /**
      * Gets type
      *
-     * @return string|null
+     * @return string
      */
     public function getType()
     {
@@ -337,7 +347,7 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
     /**
      * Sets type
      *
-     * @param string|null $type Template type. Required for Instagram/Facebook generic templates; ignored on WhatsApp.
+     * @param string $type type
      *
      * @return self
      */
@@ -364,7 +374,7 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
     /**
      * Gets elements
      *
-     * @return \Zernio\Model\SendInboxMessageRequestTemplateElementsInner[]|null
+     * @return \Zernio\Model\CommentAutomationTemplateElement[]
      */
     public function getElements()
     {
@@ -374,7 +384,7 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
     /**
      * Sets elements
      *
-     * @param \Zernio\Model\SendInboxMessageRequestTemplateElementsInner[]|null $elements elements
+     * @param \Zernio\Model\CommentAutomationTemplateElement[] $elements elements
      *
      * @return self
      */
@@ -385,7 +395,10 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
         }
 
         if ((count($elements) > 10)) {
-            throw new \InvalidArgumentException('invalid value for $elements when calling SendInboxMessageRequestTemplate., number of items must be less than or equal to 10.');
+            throw new \InvalidArgumentException('invalid value for $elements when calling CommentAutomationTemplate., number of items must be less than or equal to 10.');
+        }
+        if ((count($elements) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $elements when calling CommentAutomationTemplate., number of items must be greater than or equal to 1.');
         }
         $this->container['elements'] = $elements;
 

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **typo_tolerance** | **bool** | Only with matchMode&#x3D;word: also fire on close misspellings of a keyword (one edit for 4-7 character keywords, two from 8 up). Keywords shorter than 4 characters are never fuzzy-matched. | [optional]
 **dm_message** | **string** |  | [optional]
 **buttons** | [**\Zernio\Model\DmButton[]**](DmButton.md) | Inline DM buttons (up to 3). Omitted when none are set. | [optional]
+**template** | [**\Zernio\Model\CommentAutomationTemplate**](CommentAutomationTemplate.md) |  | [optional]
 **comment_reply** | **string** |  | [optional]
 **dm_message_variations** | **string[]** | Alternate DM texts rotated at random with dmMessage. Omitted when none. | [optional]
 **comment_reply_variations** | **string[]** | Alternate public replies rotated at random with commentReply. Omitted when none. | [optional]

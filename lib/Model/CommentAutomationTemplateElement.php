@@ -1,6 +1,6 @@
 <?php
 /**
- * SendInboxMessageRequestTemplate
+ * CommentAutomationTemplateElement
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * SendInboxMessageRequestTemplate Class Doc Comment
+ * CommentAutomationTemplateElement Class Doc Comment
  *
  * @category Class
- * @description Platform-dependent template payload. Ignored on Telegram.  Instagram / Facebook: a generic template (carousel). Set &#x60;type: generic&#x60; and provide up to 10 &#x60;elements&#x60;, each with a &#x60;title&#x60; (required) and optional &#x60;subtitle&#x60;, &#x60;imageUrl&#x60;, and &#x60;buttons&#x60;. Mutually exclusive with the top-level &#x60;buttons&#x60; field (sending both is a 400); put the card&#39;s buttons on its &#x60;elements&#x60; instead.  WhatsApp: sends an approved WhatsApp template message, the only message type WhatsApp accepts when the 24-hour customer-service window is closed. Provide exactly one element carrying the template reference: &#x60;{ \&quot;elements\&quot;: [{ \&quot;name\&quot;: \&quot;order_update\&quot;, \&quot;language\&quot;: \&quot;en_US\&quot;, \&quot;components\&quot;: [...] }] }&#x60; (&#x60;type&#x60; is ignored on WhatsApp). &#x60;components&#x60; is optional and is forwarded unchanged as the &#x60;template.components&#x60; array of Meta&#39;s Cloud API send payload; use it to fill body/header variables and button parameters, e.g. &#x60;[{ \&quot;type\&quot;: \&quot;body\&quot;, \&quot;parameters\&quot;: [{ \&quot;type\&quot;: \&quot;text\&quot;, \&quot;text\&quot;: \&quot;John\&quot; }] }]&#x60;. Templates with media headers (image, video, document) must include the header component with its media link here at send time. To send a template to a phone number with no existing conversation, or to have media headers filled in automatically from the template definition, use the create-conversation endpoint (POST /v1/inbox/conversations) instead.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \JsonSerializable
+class CommentAutomationTemplateElement implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'sendInboxMessage_request_template';
+    protected static $openAPIModelName = 'CommentAutomationTemplateElement';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +58,10 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
       * @var string[]
       */
     protected static $openAPITypes = [
-        'type' => 'string',
-        'elements' => '\Zernio\Model\SendInboxMessageRequestTemplateElementsInner[]'
+        'title' => 'string',
+        'subtitle' => 'string',
+        'image_url' => 'string',
+        'buttons' => '\Zernio\Model\CommentAutomationTemplateElementButtonsInner[]'
     ];
 
     /**
@@ -71,8 +72,10 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'type' => null,
-        'elements' => null
+        'title' => null,
+        'subtitle' => null,
+        'image_url' => 'uri',
+        'buttons' => null
     ];
 
     /**
@@ -81,8 +84,10 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'type' => false,
-        'elements' => false
+        'title' => false,
+        'subtitle' => false,
+        'image_url' => false,
+        'buttons' => false
     ];
 
     /**
@@ -171,8 +176,10 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $attributeMap = [
-        'type' => 'type',
-        'elements' => 'elements'
+        'title' => 'title',
+        'subtitle' => 'subtitle',
+        'image_url' => 'imageUrl',
+        'buttons' => 'buttons'
     ];
 
     /**
@@ -181,8 +188,10 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $setters = [
-        'type' => 'setType',
-        'elements' => 'setElements'
+        'title' => 'setTitle',
+        'subtitle' => 'setSubtitle',
+        'image_url' => 'setImageUrl',
+        'buttons' => 'setButtons'
     ];
 
     /**
@@ -191,8 +200,10 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $getters = [
-        'type' => 'getType',
-        'elements' => 'getElements'
+        'title' => 'getTitle',
+        'subtitle' => 'getSubtitle',
+        'image_url' => 'getImageUrl',
+        'buttons' => 'getButtons'
     ];
 
     /**
@@ -236,19 +247,6 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
         return self::$openAPIModelName;
     }
 
-    public const TYPE_GENERIC = 'generic';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues()
-    {
-        return [
-            self::TYPE_GENERIC,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -265,8 +263,10 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('elements', $data ?? [], null);
+        $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('subtitle', $data ?? [], null);
+        $this->setIfExists('image_url', $data ?? [], null);
+        $this->setIfExists('buttons', $data ?? [], null);
     }
 
     /**
@@ -296,17 +296,19 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'type', must be one of '%s'",
-                $this->container['type'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['title'] === null) {
+            $invalidProperties[] = "'title' can't be null";
+        }
+        if ((mb_strlen($this->container['title']) > 80)) {
+            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 80.";
         }
 
-        if (!is_null($this->container['elements']) && (count($this->container['elements']) > 10)) {
-            $invalidProperties[] = "invalid value for 'elements', number of items must be less than or equal to 10.";
+        if (!is_null($this->container['subtitle']) && (mb_strlen($this->container['subtitle']) > 80)) {
+            $invalidProperties[] = "invalid value for 'subtitle', the character length must be smaller than or equal to 80.";
+        }
+
+        if (!is_null($this->container['buttons']) && (count($this->container['buttons']) > 3)) {
+            $invalidProperties[] = "invalid value for 'buttons', number of items must be less than or equal to 3.";
         }
 
         return $invalidProperties;
@@ -325,69 +327,121 @@ class SendInboxMessageRequestTemplate implements ModelInterface, ArrayAccess, \J
 
 
     /**
-     * Gets type
+     * Gets title
      *
-     * @return string|null
+     * @return string
      */
-    public function getType()
+    public function getTitle()
     {
-        return $this->container['type'];
+        return $this->container['title'];
     }
 
     /**
-     * Sets type
+     * Sets title
      *
-     * @param string|null $type Template type. Required for Instagram/Facebook generic templates; ignored on WhatsApp.
+     * @param string $title Card headline (80 chars max). Also used as the Inbox preview for the sent DM.
      *
      * @return self
      */
-    public function setType($type)
+    public function setTitle($title)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($title)) {
+            throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'type', must be one of '%s'",
-                    $type,
-                    implode("', '", $allowedValues)
-                )
-            );
+        if ((mb_strlen($title) > 80)) {
+            throw new \InvalidArgumentException('invalid length for $title when calling CommentAutomationTemplateElement., must be smaller than or equal to 80.');
         }
-        $this->container['type'] = $type;
+
+        $this->container['title'] = $title;
 
         return $this;
     }
 
     /**
-     * Gets elements
+     * Gets subtitle
      *
-     * @return \Zernio\Model\SendInboxMessageRequestTemplateElementsInner[]|null
+     * @return string|null
      */
-    public function getElements()
+    public function getSubtitle()
     {
-        return $this->container['elements'];
+        return $this->container['subtitle'];
     }
 
     /**
-     * Sets elements
+     * Sets subtitle
      *
-     * @param \Zernio\Model\SendInboxMessageRequestTemplateElementsInner[]|null $elements elements
+     * @param string|null $subtitle Card description, e.g. the price or a short pitch (80 chars max).
      *
      * @return self
      */
-    public function setElements($elements)
+    public function setSubtitle($subtitle)
     {
-        if (is_null($elements)) {
-            throw new \InvalidArgumentException('non-nullable elements cannot be null');
+        if (is_null($subtitle)) {
+            throw new \InvalidArgumentException('non-nullable subtitle cannot be null');
+        }
+        if ((mb_strlen($subtitle) > 80)) {
+            throw new \InvalidArgumentException('invalid length for $subtitle when calling CommentAutomationTemplateElement., must be smaller than or equal to 80.');
         }
 
-        if ((count($elements) > 10)) {
-            throw new \InvalidArgumentException('invalid value for $elements when calling SendInboxMessageRequestTemplate., number of items must be less than or equal to 10.');
+        $this->container['subtitle'] = $subtitle;
+
+        return $this;
+    }
+
+    /**
+     * Gets image_url
+     *
+     * @return string|null
+     */
+    public function getImageUrl()
+    {
+        return $this->container['image_url'];
+    }
+
+    /**
+     * Sets image_url
+     *
+     * @param string|null $image_url Publicly reachable http(s) image rendered large above the card.
+     *
+     * @return self
+     */
+    public function setImageUrl($image_url)
+    {
+        if (is_null($image_url)) {
+            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
         }
-        $this->container['elements'] = $elements;
+        $this->container['image_url'] = $image_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets buttons
+     *
+     * @return \Zernio\Model\CommentAutomationTemplateElementButtonsInner[]|null
+     */
+    public function getButtons()
+    {
+        return $this->container['buttons'];
+    }
+
+    /**
+     * Sets buttons
+     *
+     * @param \Zernio\Model\CommentAutomationTemplateElementButtonsInner[]|null $buttons Up to 3 card buttons. A generic template has NO phone button, on either platform. `url` buttons are click-tracked when linkTracking is on.
+     *
+     * @return self
+     */
+    public function setButtons($buttons)
+    {
+        if (is_null($buttons)) {
+            throw new \InvalidArgumentException('non-nullable buttons cannot be null');
+        }
+
+        if ((count($buttons) > 3)) {
+            throw new \InvalidArgumentException('invalid value for $buttons when calling CommentAutomationTemplateElement., number of items must be less than or equal to 3.');
+        }
+        $this->container['buttons'] = $buttons;
 
         return $this;
     }

@@ -71,6 +71,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'typo_tolerance' => 'bool',
         'dm_message' => 'string',
         'buttons' => '\Zernio\Model\DmButton[]',
+        'template' => '\ZernioModelCommentAutomationTemplate',
         'comment_reply' => 'string',
         'dm_message_variations' => 'string[]',
         'comment_reply_variations' => 'string[]',
@@ -103,6 +104,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'typo_tolerance' => null,
         'dm_message' => null,
         'buttons' => null,
+        'template' => null,
         'comment_reply' => null,
         'dm_message_variations' => null,
         'comment_reply_variations' => null,
@@ -133,6 +135,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'typo_tolerance' => false,
         'dm_message' => false,
         'buttons' => false,
+        'template' => true,
         'comment_reply' => false,
         'dm_message_variations' => false,
         'comment_reply_variations' => false,
@@ -243,6 +246,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'typo_tolerance' => 'typoTolerance',
         'dm_message' => 'dmMessage',
         'buttons' => 'buttons',
+        'template' => 'template',
         'comment_reply' => 'commentReply',
         'dm_message_variations' => 'dmMessageVariations',
         'comment_reply_variations' => 'commentReplyVariations',
@@ -273,6 +277,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'typo_tolerance' => 'setTypoTolerance',
         'dm_message' => 'setDmMessage',
         'buttons' => 'setButtons',
+        'template' => 'setTemplate',
         'comment_reply' => 'setCommentReply',
         'dm_message_variations' => 'setDmMessageVariations',
         'comment_reply_variations' => 'setCommentReplyVariations',
@@ -303,6 +308,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'typo_tolerance' => 'getTypoTolerance',
         'dm_message' => 'getDmMessage',
         'buttons' => 'getButtons',
+        'template' => 'getTemplate',
         'comment_reply' => 'getCommentReply',
         'dm_message_variations' => 'getDmMessageVariations',
         'comment_reply_variations' => 'getCommentReplyVariations',
@@ -416,6 +422,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('typo_tolerance', $data ?? [], null);
         $this->setIfExists('dm_message', $data ?? [], null);
         $this->setIfExists('buttons', $data ?? [], null);
+        $this->setIfExists('template', $data ?? [], null);
         $this->setIfExists('comment_reply', $data ?? [], null);
         $this->setIfExists('dm_message_variations', $data ?? [], null);
         $this->setIfExists('comment_reply_variations', $data ?? [], null);
@@ -898,6 +905,40 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('invalid value for $buttons when calling CreateCommentAutomationRequest., number of items must be less than or equal to 3.');
         }
         $this->container['buttons'] = $buttons;
+
+        return $this;
+    }
+
+    /**
+     * Gets template
+     *
+     * @return \ZernioModelCommentAutomationTemplate|null
+     */
+    public function getTemplate()
+    {
+        return $this->container['template'];
+    }
+
+    /**
+     * Sets template
+     *
+     * @param \ZernioModelCommentAutomationTemplate|null $template Optional product card sent INSTEAD of the plain dmMessage bubble. Mutually exclusive with buttons. dmMessage stays required: it is what gets sent the moment the card is cleared.
+     *
+     * @return self
+     */
+    public function setTemplate($template)
+    {
+        if (is_null($template)) {
+            array_push($this->openAPINullablesSetToNull, 'template');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('template', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['template'] = $template;
 
         return $this;
     }

@@ -770,7 +770,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets buttons
      *
-     * @param \Zernio\Model\SendInboxMessageRequestButtonsInner[]|null $buttons Action buttons. Mutually exclusive with quickReplies. Max 3 items.  WhatsApp: buttons always render as interactive reply buttons. Only `title` and `payload` are used — `type`, `url`, and `phone` are ignored (WhatsApp has no URL/phone button in this field; use the `interactive` field with `type: cta_url` for a link button). `payload` becomes the button reply ID delivered on the `message.received` webhook when the user taps. To send a simple reply-button message, provide `title` + `payload` and set `type: postback`, e.g. `{ \"type\": \"postback\", \"title\": \"Yes\", \"payload\": \"yes\" }`.
+     * @param \Zernio\Model\SendInboxMessageRequestButtonsInner[]|null $buttons Action buttons. Mutually exclusive with quickReplies. Max 3 items.  Instagram / Facebook: also mutually exclusive with `template`. A Meta message carries one body shape, so sending both is a 400 rather than a silent drop of the buttons.  WhatsApp: buttons always render as interactive reply buttons. Only `title` and `payload` are used — `type`, `url`, and `phone` are ignored (WhatsApp has no URL/phone button in this field; use the `interactive` field with `type: cta_url` for a link button). `payload` becomes the button reply ID delivered on the `message.received` webhook when the user taps. To send a simple reply-button message, provide `title` + `payload` and set `type: postback`, e.g. `{ \"type\": \"postback\", \"title\": \"Yes\", \"payload\": \"yes\" }`.
      *
      * @return self
      */

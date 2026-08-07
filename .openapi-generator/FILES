@@ -184,6 +184,9 @@ docs/Model/CheckVerification200Response.md
 docs/Model/CheckVerificationRequest.md
 docs/Model/CommentAutomationAudience.md
 docs/Model/CommentAutomationFollowGate.md
+docs/Model/CommentAutomationTemplate.md
+docs/Model/CommentAutomationTemplateElement.md
+docs/Model/CommentAutomationTemplateElementButtonsInner.md
 docs/Model/CompleteGoogleBusinessVerificationRequest.md
 docs/Model/CompleteTelegramConnect200Response.md
 docs/Model/CompleteWhatsAppPhoneSelection200Response.md
@@ -1834,6 +1837,9 @@ lib/Model/CheckVerification200Response.php
 lib/Model/CheckVerificationRequest.php
 lib/Model/CommentAutomationAudience.php
 lib/Model/CommentAutomationFollowGate.php
+lib/Model/CommentAutomationTemplate.php
+lib/Model/CommentAutomationTemplateElement.php
+lib/Model/CommentAutomationTemplateElementButtonsInner.php
 lib/Model/CompleteGoogleBusinessVerificationRequest.php
 lib/Model/CompleteTelegramConnect200Response.php
 lib/Model/CompleteWhatsAppPhoneSelection200Response.php
@@ -3301,3 +3307,6 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/CommentAutomationTemplateElementButtonsInnerTest.php
+test/Model/CommentAutomationTemplateElementTest.php
+test/Model/CommentAutomationTemplateTest.php
