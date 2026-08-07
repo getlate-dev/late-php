@@ -14,6 +14,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**getWhatsAppPhoneNumber()**](WhatsAppPhoneNumbersApi.md#getWhatsAppPhoneNumber) | **GET** /v1/whatsapp/phone-numbers/{phoneNumberId} | Get phone number |
 | [**getWhatsAppPhoneNumbers()**](WhatsAppPhoneNumbersApi.md#getWhatsAppPhoneNumbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers |
 | [**listWhatsAppNumberCountries()**](WhatsAppPhoneNumbersApi.md#listWhatsAppNumberCountries) | **GET** /v1/whatsapp/phone-numbers/countries | List offerable number countries |
+| [**moveWhatsAppNumberToProfile()**](WhatsAppPhoneNumbersApi.md#moveWhatsAppNumberToProfile) | **PATCH** /v1/whatsapp/phone-numbers/{id}/profile | Move a number to another profile |
 | [**purchaseWhatsAppPhoneNumber()**](WhatsAppPhoneNumbersApi.md#purchaseWhatsAppPhoneNumber) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number |
 | [**releaseWhatsAppPhoneNumber()**](WhatsAppPhoneNumbersApi.md#releaseWhatsAppPhoneNumber) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number |
 | [**remediateWhatsAppNumber()**](WhatsAppPhoneNumbersApi.md#remediateWhatsAppNumber) | **POST** /v1/whatsapp/phone-numbers/{id}/remediate | Resubmit a declined number |
@@ -502,6 +503,68 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `moveWhatsAppNumberToProfile()`
+
+```php
+moveWhatsAppNumberToProfile($id, $move_whats_app_number_to_profile_request): \Zernio\Model\MoveWhatsAppNumberToProfile200Response
+```
+
+Move a number to another profile
+
+Move a provisioned number to a different profile.  A number is not a single record. Alongside the number itself there are hidden telephony owner accounts (platform `phone`, plus `sms` when SMS is enabled) and, once WhatsApp is connected, the `whatsapp` account. They all carry a profileId and this endpoint moves them together.  Use this instead of `PATCH /v1/accounts/{accountId}`: that one moves the social account only and leaves the number itself pinned to its original profile, which splits the number across two profiles. Connecting a provisioned number always places it on the profile the NUMBER is on, so a `profileId` passed to `GET /v1/connect/whatsapp` cannot re-home it and a later reconnect pulls the account back. This endpoint is how you re-home it.  `id` is the number record id from `GET /v1/phone-numbers`, not an account id.  A profile holds at most one account per platform, so the destination must be free of every platform this number occupies.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\WhatsAppPhoneNumbersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string | WhatsAppPhoneNumber id.
+$move_whats_app_number_to_profile_request = new \Zernio\Model\MoveWhatsAppNumberToProfileRequest(); // \Zernio\Model\MoveWhatsAppNumberToProfileRequest
+
+try {
+    $result = $apiInstance->moveWhatsAppNumberToProfile($id, $move_whats_app_number_to_profile_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WhatsAppPhoneNumbersApi->moveWhatsAppNumberToProfile: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| WhatsAppPhoneNumber id. | |
+| **move_whats_app_number_to_profile_request** | [**\Zernio\Model\MoveWhatsAppNumberToProfileRequest**](../Model/MoveWhatsAppNumberToProfileRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\MoveWhatsAppNumberToProfile200Response**](../Model/MoveWhatsAppNumberToProfile200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

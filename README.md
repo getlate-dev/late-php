@@ -575,6 +575,7 @@ Class | Method | HTTP request | Description
 *WhatsAppPhoneNumbersApi* | [**getWhatsAppPhoneNumber**](docs/Api/WhatsAppPhoneNumbersApi.md#getwhatsappphonenumber) | **GET** /v1/whatsapp/phone-numbers/{phoneNumberId} | Get phone number
 *WhatsAppPhoneNumbersApi* | [**getWhatsAppPhoneNumbers**](docs/Api/WhatsAppPhoneNumbersApi.md#getwhatsappphonenumbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers
 *WhatsAppPhoneNumbersApi* | [**listWhatsAppNumberCountries**](docs/Api/WhatsAppPhoneNumbersApi.md#listwhatsappnumbercountries) | **GET** /v1/whatsapp/phone-numbers/countries | List offerable number countries
+*WhatsAppPhoneNumbersApi* | [**moveWhatsAppNumberToProfile**](docs/Api/WhatsAppPhoneNumbersApi.md#movewhatsappnumbertoprofile) | **PATCH** /v1/whatsapp/phone-numbers/{id}/profile | Move a number to another profile
 *WhatsAppPhoneNumbersApi* | [**purchaseWhatsAppPhoneNumber**](docs/Api/WhatsAppPhoneNumbersApi.md#purchasewhatsappphonenumber) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number
 *WhatsAppPhoneNumbersApi* | [**releaseWhatsAppPhoneNumber**](docs/Api/WhatsAppPhoneNumbersApi.md#releasewhatsappphonenumber) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number
 *WhatsAppPhoneNumbersApi* | [**remediateWhatsAppNumber**](docs/Api/WhatsAppPhoneNumbersApi.md#remediatewhatsappnumber) | **POST** /v1/whatsapp/phone-numbers/{id}/remediate | Resubmit a declined number
@@ -1577,6 +1578,8 @@ Class | Method | HTTP request | Description
 - [MoneyAmount](docs/Model/MoneyAmount.md)
 - [MoveAccountToProfile200Response](docs/Model/MoveAccountToProfile200Response.md)
 - [MoveAccountToProfileRequest](docs/Model/MoveAccountToProfileRequest.md)
+- [MoveWhatsAppNumberToProfile200Response](docs/Model/MoveWhatsAppNumberToProfile200Response.md)
+- [MoveWhatsAppNumberToProfileRequest](docs/Model/MoveWhatsAppNumberToProfileRequest.md)
 - [OnVerificationApprovedRequest](docs/Model/OnVerificationApprovedRequest.md)
 - [OnVerificationApprovedRequestVerification](docs/Model/OnVerificationApprovedRequestVerification.md)
 - [OnVerificationFailedRequest](docs/Model/OnVerificationFailedRequest.md)

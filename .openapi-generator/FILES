@@ -1042,6 +1042,8 @@ docs/Model/Money.md
 docs/Model/MoneyAmount.md
 docs/Model/MoveAccountToProfile200Response.md
 docs/Model/MoveAccountToProfileRequest.md
+docs/Model/MoveWhatsAppNumberToProfile200Response.md
+docs/Model/MoveWhatsAppNumberToProfileRequest.md
 docs/Model/OnVerificationApprovedRequest.md
 docs/Model/OnVerificationApprovedRequestVerification.md
 docs/Model/OnVerificationFailedRequest.md
@@ -2696,6 +2698,8 @@ lib/Model/Money.php
 lib/Model/MoneyAmount.php
 lib/Model/MoveAccountToProfile200Response.php
 lib/Model/MoveAccountToProfileRequest.php
+lib/Model/MoveWhatsAppNumberToProfile200Response.php
+lib/Model/MoveWhatsAppNumberToProfileRequest.php
 lib/Model/OnVerificationApprovedRequest.php
 lib/Model/OnVerificationApprovedRequestVerification.php
 lib/Model/OnVerificationFailedRequest.php
@@ -3307,3 +3311,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/MoveWhatsAppNumberToProfile200ResponseTest.php
+test/Model/MoveWhatsAppNumberToProfileRequestTest.php
