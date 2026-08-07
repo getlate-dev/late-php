@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **reply_markup** | [**\Zernio\Model\SendInboxMessageRequestReplyMarkup**](SendInboxMessageRequestReplyMarkup.md) |  | [optional]
 **messaging_type** | **string** | Facebook messaging type. Required when using messageTag. | [optional]
 **message_tag** | **string** | Facebook message tag for messaging outside 24h window. Requires messagingType MESSAGE_TAG. Instagram only supports HUMAN_AGENT. | [optional]
-**reply_to** | **string** | Platform message ID to quote-reply to. For WhatsApp, pass the wamid; for Telegram, the Telegram message ID; for Instagram, the Meta mid (all available in message.platformMessageId from webhooks or the list-messages endpoint). On Slack it threads the reply (thread_ts) instead of quoting. Silently ignored on platforms without reply support, including Facebook Messenger (Meta&#39;s Messenger Send API has no reply_to). | [optional]
+**reply_to** | **string** | Platform message ID to quote-reply to. For WhatsApp, pass the wamid; for Telegram, the Telegram message ID (both available in message.platformMessageId from webhooks or the list-messages endpoint). On Slack it threads the reply (thread_ts) instead of quoting. Silently ignored on platforms without send-side reply support, including Instagram and Facebook Messenger (Meta&#39;s Send API rejects reply_to on Instagram and does not expose it on Messenger). | [optional]
 **location** | [**\Zernio\Model\SendInboxMessageRequestLocation**](SendInboxMessageRequestLocation.md) |  | [optional]
 **contacts** | [**\Zernio\Model\SendInboxMessageRequestContactsInner[]**](SendInboxMessageRequestContactsInner.md) | WhatsApp-only. Send one or more contact cards. | [optional]
 
