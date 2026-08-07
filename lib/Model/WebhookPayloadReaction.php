@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * WebhookPayloadReaction Class Doc Comment
  *
  * @category Class
- * @description Webhook payload for reaction received events (WhatsApp, Telegram)
+ * @description Webhook payload for reaction received events (WhatsApp, Telegram, Slack, Instagram, Facebook Messenger)
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

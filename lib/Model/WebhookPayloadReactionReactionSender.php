@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * WebhookPayloadReactionReactionSender Class Doc Comment
  *
  * @category Class
- * @description The participant who added or removed the reaction.
+ * @description Whoever added or removed the reaction. Usually the participant, but on Slack, Instagram and Facebook Messenger it is the business own platform id when the reaction was made from the native app: compare it with conversation.participantId.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
