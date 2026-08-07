@@ -66,6 +66,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'image_url' => 'string',
         'video' => '\Zernio\Model\CtwaAdRequestBodyVideo',
         'creatives' => '\Zernio\Model\CtwaAdRequestBodyCreativesInner[]',
+        'ad_set_id' => 'string',
         'budget_amount' => 'float',
         'budget_type' => 'string',
         'currency' => 'string',
@@ -107,6 +108,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'image_url' => 'uri',
         'video' => null,
         'creatives' => null,
+        'ad_set_id' => null,
         'budget_amount' => null,
         'budget_type' => null,
         'currency' => null,
@@ -146,6 +148,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'image_url' => false,
         'video' => false,
         'creatives' => false,
+        'ad_set_id' => false,
         'budget_amount' => false,
         'budget_type' => false,
         'currency' => false,
@@ -265,6 +268,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'image_url' => 'imageUrl',
         'video' => 'video',
         'creatives' => 'creatives',
+        'ad_set_id' => 'adSetId',
         'budget_amount' => 'budgetAmount',
         'budget_type' => 'budgetType',
         'currency' => 'currency',
@@ -304,6 +308,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'image_url' => 'setImageUrl',
         'video' => 'setVideo',
         'creatives' => 'setCreatives',
+        'ad_set_id' => 'setAdSetId',
         'budget_amount' => 'setBudgetAmount',
         'budget_type' => 'setBudgetType',
         'currency' => 'setCurrency',
@@ -343,6 +348,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'image_url' => 'getImageUrl',
         'video' => 'getVideo',
         'creatives' => 'getCreatives',
+        'ad_set_id' => 'getAdSetId',
         'budget_amount' => 'getBudgetAmount',
         'budget_type' => 'getBudgetType',
         'currency' => 'getCurrency',
@@ -516,6 +522,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         $this->setIfExists('image_url', $data ?? [], null);
         $this->setIfExists('video', $data ?? [], null);
         $this->setIfExists('creatives', $data ?? [], null);
+        $this->setIfExists('ad_set_id', $data ?? [], null);
         $this->setIfExists('budget_amount', $data ?? [], null);
         $this->setIfExists('budget_type', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
@@ -605,12 +612,6 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
             $invalidProperties[] = "invalid value for 'creatives', number of items must be greater than or equal to 1.";
         }
 
-        if ($this->container['budget_amount'] === null) {
-            $invalidProperties[] = "'budget_amount' can't be null";
-        }
-        if ($this->container['budget_type'] === null) {
-            $invalidProperties[] = "'budget_type' can't be null";
-        }
         $allowedValues = $this->getBudgetTypeAllowableValues();
         if (!is_null($this->container['budget_type']) && !in_array($this->container['budget_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -955,9 +956,36 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
     }
 
     /**
+     * Gets ad_set_id
+     *
+     * @return string|null
+     */
+    public function getAdSetId()
+    {
+        return $this->container['ad_set_id'];
+    }
+
+    /**
+     * Sets ad_set_id
+     *
+     * @param string|null $ad_set_id Attach the creatives to this EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase. It then owns budget, targeting and schedule, so `budgetAmount`, `budgetType`, `endDate`, `objective`, `countries`, `interests` and `audienceId` are rejected with a 400 alongside it. Its `destination_type` must match the ad's destination.
+     *
+     * @return self
+     */
+    public function setAdSetId($ad_set_id)
+    {
+        if (is_null($ad_set_id)) {
+            throw new \InvalidArgumentException('non-nullable ad_set_id cannot be null');
+        }
+        $this->container['ad_set_id'] = $ad_set_id;
+
+        return $this;
+    }
+
+    /**
      * Gets budget_amount
      *
-     * @return float
+     * @return float|null
      */
     public function getBudgetAmount()
     {
@@ -967,7 +995,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets budget_amount
      *
-     * @param float $budget_amount Budget amount in the ad account's currency major units (e.g. dollars for USD, not cents). Must be > 0.
+     * @param float|null $budget_amount Budget amount in the ad account's currency major units (e.g. dollars for USD, not cents). Must be > 0. Required unless `adSetId` is set, where the ad set owns it.
      *
      * @return self
      */
@@ -984,7 +1012,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets budget_type
      *
-     * @return string
+     * @return string|null
      */
     public function getBudgetType()
     {
@@ -994,7 +1022,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets budget_type
      *
-     * @param string $budget_type budget_type
+     * @param string|null $budget_type Required unless `adSetId` is set.
      *
      * @return self
      */

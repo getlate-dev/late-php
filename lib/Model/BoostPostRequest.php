@@ -64,7 +64,10 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_account_id' => 'string',
         'name' => 'string',
         'goal' => 'string',
+        'ad_set_id' => 'string',
         'budget' => '\Zernio\Model\BoostPostRequestBudget',
+        'instagram_account_id' => 'string',
+        'destination_type' => 'string',
         'currency' => 'string',
         'schedule' => '\Zernio\Model\BoostPostRequestSchedule',
         'targeting' => '\Zernio\Model\BoostPostRequestTargeting',
@@ -98,7 +101,10 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_account_id' => null,
         'name' => null,
         'goal' => null,
+        'ad_set_id' => null,
         'budget' => null,
+        'instagram_account_id' => null,
+        'destination_type' => null,
         'currency' => null,
         'schedule' => null,
         'targeting' => null,
@@ -130,7 +136,10 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_account_id' => false,
         'name' => false,
         'goal' => false,
+        'ad_set_id' => false,
         'budget' => false,
+        'instagram_account_id' => false,
+        'destination_type' => false,
         'currency' => false,
         'schedule' => false,
         'targeting' => false,
@@ -242,7 +251,10 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_account_id' => 'adAccountId',
         'name' => 'name',
         'goal' => 'goal',
+        'ad_set_id' => 'adSetId',
         'budget' => 'budget',
+        'instagram_account_id' => 'instagramAccountId',
+        'destination_type' => 'destinationType',
         'currency' => 'currency',
         'schedule' => 'schedule',
         'targeting' => 'targeting',
@@ -274,7 +286,10 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_account_id' => 'setAdAccountId',
         'name' => 'setName',
         'goal' => 'setGoal',
+        'ad_set_id' => 'setAdSetId',
         'budget' => 'setBudget',
+        'instagram_account_id' => 'setInstagramAccountId',
+        'destination_type' => 'setDestinationType',
         'currency' => 'setCurrency',
         'schedule' => 'setSchedule',
         'targeting' => 'setTargeting',
@@ -306,7 +321,10 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'ad_account_id' => 'getAdAccountId',
         'name' => 'getName',
         'goal' => 'getGoal',
+        'ad_set_id' => 'getAdSetId',
         'budget' => 'getBudget',
+        'instagram_account_id' => 'getInstagramAccountId',
+        'destination_type' => 'getDestinationType',
         'currency' => 'getCurrency',
         'schedule' => 'getSchedule',
         'targeting' => 'getTargeting',
@@ -374,6 +392,11 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     public const GOAL_LEAD_GENERATION = 'lead_generation';
     public const GOAL_CONVERSIONS = 'conversions';
     public const GOAL_APP_PROMOTION = 'app_promotion';
+    public const DESTINATION_TYPE_INSTAGRAM_PROFILE = 'INSTAGRAM_PROFILE';
+    public const DESTINATION_TYPE_WEBSITE = 'WEBSITE';
+    public const DESTINATION_TYPE_ON_AD = 'ON_AD';
+    public const DESTINATION_TYPE_MESSENGER = 'MESSENGER';
+    public const DESTINATION_TYPE_WHATSAPP = 'WHATSAPP';
     public const SPECIAL_AD_CATEGORIES_HOUSING = 'HOUSING';
     public const SPECIAL_AD_CATEGORIES_EMPLOYMENT = 'EMPLOYMENT';
     public const SPECIAL_AD_CATEGORIES_CREDIT = 'CREDIT';
@@ -396,6 +419,22 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
             self::GOAL_LEAD_GENERATION,
             self::GOAL_CONVERSIONS,
             self::GOAL_APP_PROMOTION,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getDestinationTypeAllowableValues()
+    {
+        return [
+            self::DESTINATION_TYPE_INSTAGRAM_PROFILE,
+            self::DESTINATION_TYPE_WEBSITE,
+            self::DESTINATION_TYPE_ON_AD,
+            self::DESTINATION_TYPE_MESSENGER,
+            self::DESTINATION_TYPE_WHATSAPP,
         ];
     }
 
@@ -437,7 +476,10 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('ad_account_id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('goal', $data ?? [], null);
+        $this->setIfExists('ad_set_id', $data ?? [], null);
         $this->setIfExists('budget', $data ?? [], null);
+        $this->setIfExists('instagram_account_id', $data ?? [], null);
+        $this->setIfExists('destination_type', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('schedule', $data ?? [], null);
         $this->setIfExists('targeting', $data ?? [], null);
@@ -509,9 +551,15 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
             );
         }
 
-        if ($this->container['budget'] === null) {
-            $invalidProperties[] = "'budget' can't be null";
+        $allowedValues = $this->getDestinationTypeAllowableValues();
+        if (!is_null($this->container['destination_type']) && !in_array($this->container['destination_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'destination_type', must be one of '%s'",
+                $this->container['destination_type'],
+                implode("', '", $allowedValues)
+            );
         }
+
         if (!is_null($this->container['dsa_beneficiary']) && (mb_strlen($this->container['dsa_beneficiary']) > 100)) {
             $invalidProperties[] = "invalid value for 'dsa_beneficiary', the character length must be smaller than or equal to 100.";
         }
@@ -712,9 +760,36 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets ad_set_id
+     *
+     * @return string|null
+     */
+    public function getAdSetId()
+    {
+        return $this->container['ad_set_id'];
+    }
+
+    /**
+     * Sets ad_set_id
+     *
+     * @param string|null $ad_set_id Meta only. Attach the boosted post to this existing ad set instead of creating a campaign. The ad set then owns budget, schedule and targeting; sending those too is a 400.
+     *
+     * @return self
+     */
+    public function setAdSetId($ad_set_id)
+    {
+        if (is_null($ad_set_id)) {
+            throw new \InvalidArgumentException('non-nullable ad_set_id cannot be null');
+        }
+        $this->container['ad_set_id'] = $ad_set_id;
+
+        return $this;
+    }
+
+    /**
      * Gets budget
      *
-     * @return \Zernio\Model\BoostPostRequestBudget
+     * @return \Zernio\Model\BoostPostRequestBudget|null
      */
     public function getBudget()
     {
@@ -724,7 +799,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets budget
      *
-     * @param \Zernio\Model\BoostPostRequestBudget $budget budget
+     * @param \Zernio\Model\BoostPostRequestBudget|null $budget budget
      *
      * @return self
      */
@@ -734,6 +809,70 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable budget cannot be null');
         }
         $this->container['budget'] = $budget;
+
+        return $this;
+    }
+
+    /**
+     * Gets instagram_account_id
+     *
+     * @return string|null
+     */
+    public function getInstagramAccountId()
+    {
+        return $this->container['instagram_account_id'];
+    }
+
+    /**
+     * Sets instagram_account_id
+     *
+     * @param string|null $instagram_account_id Meta only. Instagram identity the ad runs AS (creative.instagram_user_id), overriding the account linked to the Page. Live-verified against a Page-post creative.
+     *
+     * @return self
+     */
+    public function setInstagramAccountId($instagram_account_id)
+    {
+        if (is_null($instagram_account_id)) {
+            throw new \InvalidArgumentException('non-nullable instagram_account_id cannot be null');
+        }
+        $this->container['instagram_account_id'] = $instagram_account_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets destination_type
+     *
+     * @return string|null
+     */
+    public function getDestinationType()
+    {
+        return $this->container['destination_type'];
+    }
+
+    /**
+     * Sets destination_type
+     *
+     * @param string|null $destination_type Meta only. Ad-set destination_type — where the click LANDS, as opposed to instagramAccountId which is who the ad runs as. Lead ads force ON_AD and ignore this.
+     *
+     * @return self
+     */
+    public function setDestinationType($destination_type)
+    {
+        if (is_null($destination_type)) {
+            throw new \InvalidArgumentException('non-nullable destination_type cannot be null');
+        }
+        $allowedValues = $this->getDestinationTypeAllowableValues();
+        if (!in_array($destination_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'destination_type', must be one of '%s'",
+                    $destination_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['destination_type'] = $destination_type;
 
         return $this;
     }
@@ -1057,7 +1196,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets link_url
      *
-     * @param string|null $link_url TikTok-only. Custom destination URL for the Spark Ad. Without this, TikTok Spark Ads have no clickable destination — required for traffic / conversion objectives. Maps to `landing_page_url` on the creative entry of /v2/ad/create/ (TikTok SDK `AdcreateCreatives.landing_page_url`). Ignored on Meta / LinkedIn / Pinterest / X / Google (those infer the destination from the boosted post).
+     * @param string|null $link_url Destination URL for the CTA button. Send it together with `callToAction`.  **Meta**: adds a top-level `call_to_action` to the post-reference creative. This is what gives a `traffic` boost a clickable destination without replacing the creative and losing the post's social proof. Ignored when `leadGenFormId` is set, which supplies its own destination. Live-verified against a Page-post creative.  **TikTok**: maps to `landing_page_url` on the Spark Ad creative (`AdcreateCreatives.landing_page_url`); Spark Ads have no clickable destination without it.  Ignored on LinkedIn / Pinterest / X / Google, which infer the destination from the boosted post.
      *
      * @return self
      */
@@ -1084,7 +1223,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets call_to_action
      *
-     * @param string|null $call_to_action TikTok-only. Call-to-action button label on the Spark Ad creative (e.g. `LEARN_MORE`, `SHOP_NOW`, `DOWNLOAD_NOW`, `SIGN_UP`, `WATCH_NOW`). Maps to `call_to_action` on the creative entry of /v2/ad/create/. Pass-through — the platform validates the value. See TikTok's \"Enumeration - Call-to-Action\" reference for the full list.
+     * @param string|null $call_to_action CTA button label. Send it together with `linkUrl` — a CTA without a destination produces a button that goes nowhere, so sending one alone is a 400.  **Meta**: validated against the Meta CTA enum (same values as POST /v1/ads/create), e.g. `LEARN_MORE`, `SHOP_NOW`, `SIGN_UP`.  **TikTok**: pass-through to `call_to_action` on the Spark Ad creative; the platform validates the value. See TikTok's \"Enumeration - Call-to-Action\".
      *
      * @return self
      */

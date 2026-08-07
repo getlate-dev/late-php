@@ -36,6 +36,7 @@ use \Zernio\ObjectSerializer;
  * BoostPostRequestBudget Class Doc Comment
  *
  * @category Class
+ * @description Required unless adSetId is set.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
