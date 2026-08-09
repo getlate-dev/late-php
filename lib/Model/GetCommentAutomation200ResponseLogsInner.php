@@ -63,6 +63,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_id' => 'string',
         'commenter_name' => 'string',
         'comment_text' => 'string',
+        'source' => 'string',
         'status' => 'string',
         'audience_outcome' => 'string',
         'commenter_is_follower' => 'bool',
@@ -87,6 +88,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_id' => null,
         'commenter_name' => null,
         'comment_text' => null,
+        'source' => null,
         'status' => null,
         'audience_outcome' => null,
         'commenter_is_follower' => null,
@@ -109,6 +111,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_id' => false,
         'commenter_name' => false,
         'comment_text' => false,
+        'source' => false,
         'status' => false,
         'audience_outcome' => false,
         'commenter_is_follower' => false,
@@ -211,6 +214,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_id' => 'commenterId',
         'commenter_name' => 'commenterName',
         'comment_text' => 'commentText',
+        'source' => 'source',
         'status' => 'status',
         'audience_outcome' => 'audienceOutcome',
         'commenter_is_follower' => 'commenterIsFollower',
@@ -233,6 +237,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_id' => 'setCommenterId',
         'commenter_name' => 'setCommenterName',
         'comment_text' => 'setCommentText',
+        'source' => 'setSource',
         'status' => 'setStatus',
         'audience_outcome' => 'setAudienceOutcome',
         'commenter_is_follower' => 'setCommenterIsFollower',
@@ -255,6 +260,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         'commenter_id' => 'getCommenterId',
         'commenter_name' => 'getCommenterName',
         'comment_text' => 'getCommentText',
+        'source' => 'getSource',
         'status' => 'getStatus',
         'audience_outcome' => 'getAudienceOutcome',
         'commenter_is_follower' => 'getCommenterIsFollower',
@@ -307,6 +313,9 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         return self::$openAPIModelName;
     }
 
+    public const SOURCE_COMMENT = 'comment';
+    public const SOURCE_STORY_REPLY = 'story_reply';
+    public const SOURCE_DM = 'dm';
     public const STATUS_PENDING = 'pending';
     public const STATUS_SENT = 'sent';
     public const STATUS_FAILED = 'failed';
@@ -320,6 +329,20 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
     public const COMMENT_REPLY_STATUS_SENT = 'sent';
     public const COMMENT_REPLY_STATUS_FAILED = 'failed';
     public const COMMENT_REPLY_STATUS_SKIPPED = 'skipped';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSourceAllowableValues()
+    {
+        return [
+            self::SOURCE_COMMENT,
+            self::SOURCE_STORY_REPLY,
+            self::SOURCE_DM,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -387,6 +410,7 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
         $this->setIfExists('commenter_id', $data ?? [], null);
         $this->setIfExists('commenter_name', $data ?? [], null);
         $this->setIfExists('comment_text', $data ?? [], null);
+        $this->setIfExists('source', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('audience_outcome', $data ?? [], null);
         $this->setIfExists('commenter_is_follower', $data ?? [], null);
@@ -424,6 +448,15 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getSourceAllowableValues();
+        if (!is_null($this->container['source']) && !in_array($this->container['source'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'source', must be one of '%s'",
+                $this->container['source'],
+                implode("', '", $allowedValues)
+            );
+        }
 
         $allowedValues = $this->getStatusAllowableValues();
         if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
@@ -598,6 +631,43 @@ class GetCommentAutomation200ResponseLogsInner implements ModelInterface, ArrayA
             throw new \InvalidArgumentException('non-nullable comment_text cannot be null');
         }
         $this->container['comment_text'] = $comment_text;
+
+        return $this;
+    }
+
+    /**
+     * Gets source
+     *
+     * @return string|null
+     */
+    public function getSource()
+    {
+        return $this->container['source'];
+    }
+
+    /**
+     * Sets source
+     *
+     * @param string|null $source Which door triggered this send. Absent on rows written before this field existed (all of those are comment-triggered).
+     *
+     * @return self
+     */
+    public function setSource($source)
+    {
+        if (is_null($source)) {
+            throw new \InvalidArgumentException('non-nullable source cannot be null');
+        }
+        $allowedValues = $this->getSourceAllowableValues();
+        if (!in_array($source, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'source', must be one of '%s'",
+                    $source,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['source'] = $source;
 
         return $this;
     }

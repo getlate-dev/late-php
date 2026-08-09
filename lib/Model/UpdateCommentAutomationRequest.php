@@ -72,6 +72,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => 'string[]',
         'link_tracking' => 'bool',
         'click_tag' => 'string',
+        'also_match_in_dms' => 'bool',
         'dm_delay_seconds' => 'int',
         'comment_reply_delay_seconds' => 'int',
         'audience' => '\Zernio\Model\CommentAutomationAudience',
@@ -101,6 +102,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => null,
         'link_tracking' => null,
         'click_tag' => null,
+        'also_match_in_dms' => null,
         'dm_delay_seconds' => null,
         'comment_reply_delay_seconds' => null,
         'audience' => null,
@@ -128,6 +130,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => false,
         'link_tracking' => false,
         'click_tag' => false,
+        'also_match_in_dms' => false,
         'dm_delay_seconds' => false,
         'comment_reply_delay_seconds' => false,
         'audience' => false,
@@ -235,6 +238,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => 'commentReplyVariations',
         'link_tracking' => 'linkTracking',
         'click_tag' => 'clickTag',
+        'also_match_in_dms' => 'alsoMatchInDms',
         'dm_delay_seconds' => 'dmDelaySeconds',
         'comment_reply_delay_seconds' => 'commentReplyDelaySeconds',
         'audience' => 'audience',
@@ -262,6 +266,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => 'setCommentReplyVariations',
         'link_tracking' => 'setLinkTracking',
         'click_tag' => 'setClickTag',
+        'also_match_in_dms' => 'setAlsoMatchInDms',
         'dm_delay_seconds' => 'setDmDelaySeconds',
         'comment_reply_delay_seconds' => 'setCommentReplyDelaySeconds',
         'audience' => 'setAudience',
@@ -289,6 +294,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'comment_reply_variations' => 'getCommentReplyVariations',
         'link_tracking' => 'getLinkTracking',
         'click_tag' => 'getClickTag',
+        'also_match_in_dms' => 'getAlsoMatchInDms',
         'dm_delay_seconds' => 'getDmDelaySeconds',
         'comment_reply_delay_seconds' => 'getCommentReplyDelaySeconds',
         'audience' => 'getAudience',
@@ -399,6 +405,7 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('comment_reply_variations', $data ?? [], null);
         $this->setIfExists('link_tracking', $data ?? [], null);
         $this->setIfExists('click_tag', $data ?? [], null);
+        $this->setIfExists('also_match_in_dms', $data ?? [], null);
         $this->setIfExists('dm_delay_seconds', $data ?? [], null);
         $this->setIfExists('comment_reply_delay_seconds', $data ?? [], null);
         $this->setIfExists('audience', $data ?? [], null);
@@ -907,6 +914,33 @@ class UpdateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable click_tag cannot be null');
         }
         $this->container['click_tag'] = $click_tag;
+
+        return $this;
+    }
+
+    /**
+     * Gets also_match_in_dms
+     *
+     * @return bool|null
+     */
+    public function getAlsoMatchInDms()
+    {
+        return $this->container['also_match_in_dms'];
+    }
+
+    /**
+     * Sets also_match_in_dms
+     *
+     * @param bool|null $also_match_in_dms Also fire these keywords on a plain inbound DM. Enabling it requires the automation to end up with at least one keyword (this request's keywords if you send them, otherwise the stored ones) and is rejected on story_reply automations.
+     *
+     * @return self
+     */
+    public function setAlsoMatchInDms($also_match_in_dms)
+    {
+        if (is_null($also_match_in_dms)) {
+            throw new \InvalidArgumentException('non-nullable also_match_in_dms cannot be null');
+        }
+        $this->container['also_match_in_dms'] = $also_match_in_dms;
 
         return $this;
     }

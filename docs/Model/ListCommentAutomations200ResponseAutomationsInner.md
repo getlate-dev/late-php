@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **click_tag** | **string** | Tag applied to a contact when they click a tracked link. | [optional]
 **dm_delay_seconds** | **int** | Seconds waited after the trigger before the DM is sent. Absent when the DM goes out immediately. | [optional]
 **comment_reply_delay_seconds** | **int** | Seconds waited before the public reply is posted. Absent when it follows the DM immediately. | [optional]
+**also_match_in_dms** | **bool** | Whether these keywords also fire on a plain inbound DM. | [optional]
 **is_active** | **bool** |  | [optional]
 **stats** | [**\Zernio\Model\ListCommentAutomations200ResponseAutomationsInnerStats**](ListCommentAutomations200ResponseAutomationsInnerStats.md) |  | [optional]
 **created_at** | **\DateTime** |  | [optional]

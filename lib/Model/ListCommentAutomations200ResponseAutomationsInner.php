@@ -79,6 +79,7 @@ class ListCommentAutomations200ResponseAutomationsInner implements ModelInterfac
         'click_tag' => 'string',
         'dm_delay_seconds' => 'int',
         'comment_reply_delay_seconds' => 'int',
+        'also_match_in_dms' => 'bool',
         'is_active' => 'bool',
         'stats' => '\Zernio\Model\ListCommentAutomations200ResponseAutomationsInnerStats',
         'created_at' => '\DateTime'
@@ -113,6 +114,7 @@ class ListCommentAutomations200ResponseAutomationsInner implements ModelInterfac
         'click_tag' => null,
         'dm_delay_seconds' => null,
         'comment_reply_delay_seconds' => null,
+        'also_match_in_dms' => null,
         'is_active' => null,
         'stats' => null,
         'created_at' => 'date-time'
@@ -145,6 +147,7 @@ class ListCommentAutomations200ResponseAutomationsInner implements ModelInterfac
         'click_tag' => false,
         'dm_delay_seconds' => false,
         'comment_reply_delay_seconds' => false,
+        'also_match_in_dms' => false,
         'is_active' => false,
         'stats' => false,
         'created_at' => false
@@ -257,6 +260,7 @@ class ListCommentAutomations200ResponseAutomationsInner implements ModelInterfac
         'click_tag' => 'clickTag',
         'dm_delay_seconds' => 'dmDelaySeconds',
         'comment_reply_delay_seconds' => 'commentReplyDelaySeconds',
+        'also_match_in_dms' => 'alsoMatchInDms',
         'is_active' => 'isActive',
         'stats' => 'stats',
         'created_at' => 'createdAt'
@@ -289,6 +293,7 @@ class ListCommentAutomations200ResponseAutomationsInner implements ModelInterfac
         'click_tag' => 'setClickTag',
         'dm_delay_seconds' => 'setDmDelaySeconds',
         'comment_reply_delay_seconds' => 'setCommentReplyDelaySeconds',
+        'also_match_in_dms' => 'setAlsoMatchInDms',
         'is_active' => 'setIsActive',
         'stats' => 'setStats',
         'created_at' => 'setCreatedAt'
@@ -321,6 +326,7 @@ class ListCommentAutomations200ResponseAutomationsInner implements ModelInterfac
         'click_tag' => 'getClickTag',
         'dm_delay_seconds' => 'getDmDelaySeconds',
         'comment_reply_delay_seconds' => 'getCommentReplyDelaySeconds',
+        'also_match_in_dms' => 'getAlsoMatchInDms',
         'is_active' => 'getIsActive',
         'stats' => 'getStats',
         'created_at' => 'getCreatedAt'
@@ -451,6 +457,7 @@ class ListCommentAutomations200ResponseAutomationsInner implements ModelInterfac
         $this->setIfExists('click_tag', $data ?? [], null);
         $this->setIfExists('dm_delay_seconds', $data ?? [], null);
         $this->setIfExists('comment_reply_delay_seconds', $data ?? [], null);
+        $this->setIfExists('also_match_in_dms', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('stats', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -1118,6 +1125,33 @@ class ListCommentAutomations200ResponseAutomationsInner implements ModelInterfac
             throw new \InvalidArgumentException('non-nullable comment_reply_delay_seconds cannot be null');
         }
         $this->container['comment_reply_delay_seconds'] = $comment_reply_delay_seconds;
+
+        return $this;
+    }
+
+    /**
+     * Gets also_match_in_dms
+     *
+     * @return bool|null
+     */
+    public function getAlsoMatchInDms()
+    {
+        return $this->container['also_match_in_dms'];
+    }
+
+    /**
+     * Sets also_match_in_dms
+     *
+     * @param bool|null $also_match_in_dms Whether these keywords also fire on a plain inbound DM.
+     *
+     * @return self
+     */
+    public function setAlsoMatchInDms($also_match_in_dms)
+    {
+        if (is_null($also_match_in_dms)) {
+            throw new \InvalidArgumentException('non-nullable also_match_in_dms cannot be null');
+        }
+        $this->container['also_match_in_dms'] = $also_match_in_dms;
 
         return $this;
     }

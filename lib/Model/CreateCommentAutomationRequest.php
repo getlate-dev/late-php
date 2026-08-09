@@ -79,6 +79,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'click_tag' => 'string',
         'dm_delay_seconds' => 'int',
         'comment_reply_delay_seconds' => 'int',
+        'also_match_in_dms' => 'bool',
         'audience' => '\Zernio\Model\CommentAutomationAudience',
         'follow_gate' => '\Zernio\Model\CommentAutomationFollowGate'
     ];
@@ -112,6 +113,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'click_tag' => null,
         'dm_delay_seconds' => null,
         'comment_reply_delay_seconds' => null,
+        'also_match_in_dms' => null,
         'audience' => null,
         'follow_gate' => null
     ];
@@ -143,6 +145,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'click_tag' => false,
         'dm_delay_seconds' => false,
         'comment_reply_delay_seconds' => false,
+        'also_match_in_dms' => false,
         'audience' => false,
         'follow_gate' => false
     ];
@@ -254,6 +257,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'click_tag' => 'clickTag',
         'dm_delay_seconds' => 'dmDelaySeconds',
         'comment_reply_delay_seconds' => 'commentReplyDelaySeconds',
+        'also_match_in_dms' => 'alsoMatchInDms',
         'audience' => 'audience',
         'follow_gate' => 'followGate'
     ];
@@ -285,6 +289,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'click_tag' => 'setClickTag',
         'dm_delay_seconds' => 'setDmDelaySeconds',
         'comment_reply_delay_seconds' => 'setCommentReplyDelaySeconds',
+        'also_match_in_dms' => 'setAlsoMatchInDms',
         'audience' => 'setAudience',
         'follow_gate' => 'setFollowGate'
     ];
@@ -316,6 +321,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         'click_tag' => 'getClickTag',
         'dm_delay_seconds' => 'getDmDelaySeconds',
         'comment_reply_delay_seconds' => 'getCommentReplyDelaySeconds',
+        'also_match_in_dms' => 'getAlsoMatchInDms',
         'audience' => 'getAudience',
         'follow_gate' => 'getFollowGate'
     ];
@@ -430,6 +436,7 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('click_tag', $data ?? [], null);
         $this->setIfExists('dm_delay_seconds', $data ?? [], null);
         $this->setIfExists('comment_reply_delay_seconds', $data ?? [], null);
+        $this->setIfExists('also_match_in_dms', $data ?? [], false);
         $this->setIfExists('audience', $data ?? [], null);
         $this->setIfExists('follow_gate', $data ?? [], null);
     }
@@ -1152,6 +1159,33 @@ class CreateCommentAutomationRequest implements ModelInterface, ArrayAccess, \Js
         }
 
         $this->container['comment_reply_delay_seconds'] = $comment_reply_delay_seconds;
+
+        return $this;
+    }
+
+    /**
+     * Gets also_match_in_dms
+     *
+     * @return bool|null
+     */
+    public function getAlsoMatchInDms()
+    {
+        return $this->container['also_match_in_dms'];
+    }
+
+    /**
+     * Sets also_match_in_dms
+     *
+     * @param bool|null $also_match_in_dms Also fire these keywords on a plain inbound DM, so the automation answers people who message the keyword instead of commenting it. Requires at least one keyword (an empty keyword list means 'match anything', which would answer every inbound message) and is rejected on story_reply automations, which already trigger on DMs. Dedup is per door: a contact who already received the DM from their comment can still receive it from a DM.
+     *
+     * @return self
+     */
+    public function setAlsoMatchInDms($also_match_in_dms)
+    {
+        if (is_null($also_match_in_dms)) {
+            throw new \InvalidArgumentException('non-nullable also_match_in_dms cannot be null');
+        }
+        $this->container['also_match_in_dms'] = $also_match_in_dms;
 
         return $this;
     }

@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **comment_reply_delay_seconds** | **int** | Seconds waited before the public reply is posted. Absent when it follows the DM immediately. | [optional]
 **audience** | [**\Zernio\Model\CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional]
 **follow_gate** | [**\Zernio\Model\CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional]
+**also_match_in_dms** | **bool** | Whether these keywords also fire on a plain inbound DM. | [optional]
 **is_active** | **bool** |  | [optional]
 **stats** | [**\Zernio\Model\CreateCommentAutomation200ResponseAutomationStats**](CreateCommentAutomation200ResponseAutomationStats.md) |  | [optional]
 **created_at** | **\DateTime** |  | [optional]

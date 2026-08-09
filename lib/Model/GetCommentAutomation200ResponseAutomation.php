@@ -82,6 +82,7 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_delay_seconds' => 'int',
         'audience' => '\Zernio\Model\CommentAutomationAudience',
         'follow_gate' => '\Zernio\Model\CommentAutomationFollowGate',
+        'also_match_in_dms' => 'bool',
         'is_active' => 'bool',
         'stats' => '\Zernio\Model\CreateCommentAutomation200ResponseAutomationStats',
         'created_at' => '\DateTime',
@@ -120,6 +121,7 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_delay_seconds' => null,
         'audience' => null,
         'follow_gate' => null,
+        'also_match_in_dms' => null,
         'is_active' => null,
         'stats' => null,
         'created_at' => 'date-time',
@@ -156,6 +158,7 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_delay_seconds' => false,
         'audience' => false,
         'follow_gate' => false,
+        'also_match_in_dms' => false,
         'is_active' => false,
         'stats' => false,
         'created_at' => false,
@@ -272,6 +275,7 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_delay_seconds' => 'commentReplyDelaySeconds',
         'audience' => 'audience',
         'follow_gate' => 'followGate',
+        'also_match_in_dms' => 'alsoMatchInDms',
         'is_active' => 'isActive',
         'stats' => 'stats',
         'created_at' => 'createdAt',
@@ -308,6 +312,7 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_delay_seconds' => 'setCommentReplyDelaySeconds',
         'audience' => 'setAudience',
         'follow_gate' => 'setFollowGate',
+        'also_match_in_dms' => 'setAlsoMatchInDms',
         'is_active' => 'setIsActive',
         'stats' => 'setStats',
         'created_at' => 'setCreatedAt',
@@ -344,6 +349,7 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         'comment_reply_delay_seconds' => 'getCommentReplyDelaySeconds',
         'audience' => 'getAudience',
         'follow_gate' => 'getFollowGate',
+        'also_match_in_dms' => 'getAlsoMatchInDms',
         'is_active' => 'getIsActive',
         'stats' => 'getStats',
         'created_at' => 'getCreatedAt',
@@ -463,6 +469,7 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
         $this->setIfExists('comment_reply_delay_seconds', $data ?? [], null);
         $this->setIfExists('audience', $data ?? [], null);
         $this->setIfExists('follow_gate', $data ?? [], null);
+        $this->setIfExists('also_match_in_dms', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('stats', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -1200,6 +1207,33 @@ class GetCommentAutomation200ResponseAutomation implements ModelInterface, Array
             throw new \InvalidArgumentException('non-nullable follow_gate cannot be null');
         }
         $this->container['follow_gate'] = $follow_gate;
+
+        return $this;
+    }
+
+    /**
+     * Gets also_match_in_dms
+     *
+     * @return bool|null
+     */
+    public function getAlsoMatchInDms()
+    {
+        return $this->container['also_match_in_dms'];
+    }
+
+    /**
+     * Sets also_match_in_dms
+     *
+     * @param bool|null $also_match_in_dms Whether these keywords also fire on a plain inbound DM.
+     *
+     * @return self
+     */
+    public function setAlsoMatchInDms($also_match_in_dms)
+    {
+        if (is_null($also_match_in_dms)) {
+            throw new \InvalidArgumentException('non-nullable also_match_in_dms cannot be null');
+        }
+        $this->container['also_match_in_dms'] = $also_match_in_dms;
 
         return $this;
     }

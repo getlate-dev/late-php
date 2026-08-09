@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **comment_reply_variations** | **string[]** | Alternate public replies rotated at random with commentReply. Omitted when none. | [optional]
 **audience** | [**\Zernio\Model\CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional]
 **follow_gate** | [**\Zernio\Model\CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional]
+**also_match_in_dms** | **bool** | Whether these keywords also fire on a plain inbound DM. | [optional]
 **is_active** | **bool** |  | [optional]
 **updated_at** | **\DateTime** |  | [optional]
 
