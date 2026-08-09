@@ -1,6 +1,6 @@
 <?php
 /**
- * LikeInboxCommentRequest
+ * LikePostRequest
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * LikeInboxCommentRequest Class Doc Comment
+ * LikePostRequest Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class LikePostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
       *
       * @var string
       */
-    protected static $openAPIModelName = 'likeInboxComment_request';
+    protected static $openAPIModelName = 'likePost_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -352,7 +352,7 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets account_id
      *
-     * @param string $account_id The social account ID
+     * @param string $account_id The social account acting as the liker
      *
      * @return self
      */
@@ -416,7 +416,7 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets cid
      *
-     * @param string|null $cid (Bluesky only) Content identifier for the comment
+     * @param string|null $cid (Bluesky only) Content identifier of the post
      *
      * @return self
      */

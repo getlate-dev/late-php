@@ -841,6 +841,8 @@ docs/Model/InstagramPlatformDataTrialParams.md
 docs/Model/InstagramPlatformDataUserTagsInner.md
 docs/Model/LikeInboxComment200Response.md
 docs/Model/LikeInboxCommentRequest.md
+docs/Model/LikePost200Response.md
+docs/Model/LikePostRequest.md
 docs/Model/LinkedInAdsPlatformData.md
 docs/Model/LinkedInAdsPlatformDataCarousel.md
 docs/Model/LinkedInAdsPlatformDataCarouselCardsInner.md
@@ -1353,6 +1355,7 @@ docs/Model/UnblockWhatsAppUsersRequest.md
 docs/Model/UndoRetweet200Response.md
 docs/Model/UnfollowUser200Response.md
 docs/Model/UnlikeInboxComment200Response.md
+docs/Model/UnlikePost200Response.md
 docs/Model/UnpinDiscordMessage200Response.md
 docs/Model/UnpublishPost200Response.md
 docs/Model/UnpublishPostRequest.md
@@ -2503,6 +2506,8 @@ lib/Model/InstagramPlatformDataTrialParams.php
 lib/Model/InstagramPlatformDataUserTagsInner.php
 lib/Model/LikeInboxComment200Response.php
 lib/Model/LikeInboxCommentRequest.php
+lib/Model/LikePost200Response.php
+lib/Model/LikePostRequest.php
 lib/Model/LinkedInAdsPlatformData.php
 lib/Model/LinkedInAdsPlatformDataCarousel.php
 lib/Model/LinkedInAdsPlatformDataCarouselCardsInner.php
@@ -3016,6 +3021,7 @@ lib/Model/UnblockWhatsAppUsersRequest.php
 lib/Model/UndoRetweet200Response.php
 lib/Model/UnfollowUser200Response.php
 lib/Model/UnlikeInboxComment200Response.php
+lib/Model/UnlikePost200Response.php
 lib/Model/UnpinDiscordMessage200Response.php
 lib/Model/UnpublishPost200Response.php
 lib/Model/UnpublishPostRequest.php
@@ -3325,3 +3331,6 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/LikePost200ResponseTest.php
+test/Model/LikePostRequestTest.php
+test/Model/UnlikePost200ResponseTest.php

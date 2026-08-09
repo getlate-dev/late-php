@@ -11,12 +11,14 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**getInboxPostComments()**](CommentsApi.md#getInboxPostComments) | **GET** /v1/inbox/comments/{postId} | Get post comments |
 | [**hideInboxComment()**](CommentsApi.md#hideInboxComment) | **POST** /v1/inbox/comments/{postId}/{commentId}/hide | Hide comment |
 | [**likeInboxComment()**](CommentsApi.md#likeInboxComment) | **POST** /v1/inbox/comments/{postId}/{commentId}/like | Like comment |
+| [**likePost()**](CommentsApi.md#likePost) | **POST** /v1/inbox/posts/{postId}/like | Like post |
 | [**listInboxComments()**](CommentsApi.md#listInboxComments) | **GET** /v1/inbox/comments | List commented posts |
 | [**replyToInboxPost()**](CommentsApi.md#replyToInboxPost) | **POST** /v1/inbox/comments/{postId} | Reply to comment |
 | [**sendPrivateReplyToComment()**](CommentsApi.md#sendPrivateReplyToComment) | **POST** /v1/inbox/comments/{postId}/{commentId}/private-reply | Send private reply |
 | [**setCommentModeration()**](CommentsApi.md#setCommentModeration) | **POST** /v1/inbox/comments/{postId}/{commentId}/moderation | Set comment moderation status |
 | [**unhideInboxComment()**](CommentsApi.md#unhideInboxComment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/hide | Unhide comment |
 | [**unlikeInboxComment()**](CommentsApi.md#unlikeInboxComment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment |
+| [**unlikePost()**](CommentsApi.md#unlikePost) | **DELETE** /v1/inbox/posts/{postId}/like | Unlike post |
 
 
 ## `deleteInboxComment()`
@@ -289,7 +291,7 @@ likeInboxComment($post_id, $comment_id, $like_inbox_comment_request): \Zernio\Mo
 
 Like comment
 
-Like or upvote a comment on a post. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit. For Bluesky, the cid (content identifier) is required in the request body.
+Like or upvote a comment on a post. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit, LinkedIn. For Bluesky, the cid (content identifier) is required in the request body. For LinkedIn, pass the composite comment URN returned by the comments endpoints as commentId; an optional reactionType picks the reaction (defaults to LIKE), and accounts connected before the social-feed scopes were requested get a 403 with code `linkedin_reconnect_required`.
 
 ### Example
 
@@ -331,6 +333,68 @@ try {
 ### Return type
 
 [**\Zernio\Model\LikeInboxComment200Response**](../Model/LikeInboxComment200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `likePost()`
+
+```php
+likePost($post_id, $like_post_request): \Zernio\Model\LikePost200Response
+```
+
+Like post
+
+Like (or react to) a post as a connected account. Supported platforms: LinkedIn, Twitter/X, Facebook, YouTube, Bluesky. Instagram, Threads, TikTok and Pinterest expose no like endpoint in their APIs and return 400. Reddit returns 400 too, pointing at `POST /v1/accounts/{accountId}/reddit-vote`, which covers upvote, downvote and clear on both posts and comments.  The account does not have to be the one that published the post, which is what makes executive engagement possible: pass an exec's `accountId` and the brand post's ID. `postId` accepts either a Zernio post ID or the platform's native post ID. A Zernio post ID resolves to the entry for `accountId`, falling back to the post's single entry on the same platform (two entries on that platform is a 400, so pass the native ID).  LinkedIn requires the `w_member_social_feed` / `w_organization_social_feed` scopes, which are not retroactive: accounts connected before those were requested get a 403 with code `linkedin_reconnect_required` until the user reconnects the account. YouTube spends 50 quota units per call.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\CommentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$post_id = 'post_id_example'; // string | Zernio post ID or the platform's native post ID
+$like_post_request = new \Zernio\Model\LikePostRequest(); // \Zernio\Model\LikePostRequest
+
+try {
+    $result = $apiInstance->likePost($post_id, $like_post_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling CommentsApi->likePost: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **post_id** | **string**| Zernio post ID or the platform&#39;s native post ID | |
+| **like_post_request** | [**\Zernio\Model\LikePostRequest**](../Model/LikePostRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\LikePost200Response**](../Model/LikePost200Response.md)
 
 ### Authorization
 
@@ -683,7 +747,7 @@ unlikeInboxComment($post_id, $comment_id, $account_id, $like_uri): \Zernio\Model
 
 Unlike comment
 
-Remove a like from a comment. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit. For Bluesky, the likeUri query parameter is required.
+Remove a like from a comment. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit, LinkedIn. For Bluesky, the likeUri query parameter is required.
 
 ### Example
 
@@ -727,6 +791,70 @@ try {
 ### Return type
 
 [**\Zernio\Model\UnlikeInboxComment200Response**](../Model/UnlikeInboxComment200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `unlikePost()`
+
+```php
+unlikePost($post_id, $account_id, $like_uri): \Zernio\Model\UnlikePost200Response
+```
+
+Unlike post
+
+Remove this account's like from a post. Supported platforms: LinkedIn, Twitter/X, Facebook, YouTube, Bluesky. On YouTube this clears the rating. For Bluesky, `likeUri` (returned when the post was liked) is required. Reddit uses `POST /v1/accounts/{accountId}/reddit-vote` with `direction: 0`.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\CommentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$post_id = 'post_id_example'; // string | Zernio post ID or the platform's native post ID
+$account_id = 'account_id_example'; // string
+$like_uri = 'like_uri_example'; // string | (Bluesky only) The like URI returned when liking
+
+try {
+    $result = $apiInstance->unlikePost($post_id, $account_id, $like_uri);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling CommentsApi->unlikePost: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **post_id** | **string**| Zernio post ID or the platform&#39;s native post ID | |
+| **account_id** | **string**|  | |
+| **like_uri** | **string**| (Bluesky only) The like URI returned when liking | [optional] |
+
+### Return type
+
+[**\Zernio\Model\UnlikePost200Response**](../Model/UnlikePost200Response.md)
 
 ### Authorization
 

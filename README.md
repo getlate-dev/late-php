@@ -203,12 +203,14 @@ Class | Method | HTTP request | Description
 *CommentsApi* | [**getInboxPostComments**](docs/Api/CommentsApi.md#getinboxpostcomments) | **GET** /v1/inbox/comments/{postId} | Get post comments
 *CommentsApi* | [**hideInboxComment**](docs/Api/CommentsApi.md#hideinboxcomment) | **POST** /v1/inbox/comments/{postId}/{commentId}/hide | Hide comment
 *CommentsApi* | [**likeInboxComment**](docs/Api/CommentsApi.md#likeinboxcomment) | **POST** /v1/inbox/comments/{postId}/{commentId}/like | Like comment
+*CommentsApi* | [**likePost**](docs/Api/CommentsApi.md#likepost) | **POST** /v1/inbox/posts/{postId}/like | Like post
 *CommentsApi* | [**listInboxComments**](docs/Api/CommentsApi.md#listinboxcomments) | **GET** /v1/inbox/comments | List commented posts
 *CommentsApi* | [**replyToInboxPost**](docs/Api/CommentsApi.md#replytoinboxpost) | **POST** /v1/inbox/comments/{postId} | Reply to comment
 *CommentsApi* | [**sendPrivateReplyToComment**](docs/Api/CommentsApi.md#sendprivatereplytocomment) | **POST** /v1/inbox/comments/{postId}/{commentId}/private-reply | Send private reply
 *CommentsApi* | [**setCommentModeration**](docs/Api/CommentsApi.md#setcommentmoderation) | **POST** /v1/inbox/comments/{postId}/{commentId}/moderation | Set comment moderation status
 *CommentsApi* | [**unhideInboxComment**](docs/Api/CommentsApi.md#unhideinboxcomment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/hide | Unhide comment
 *CommentsApi* | [**unlikeInboxComment**](docs/Api/CommentsApi.md#unlikeinboxcomment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment
+*CommentsApi* | [**unlikePost**](docs/Api/CommentsApi.md#unlikepost) | **DELETE** /v1/inbox/posts/{postId}/like | Unlike post
 *ConnectApi* | [**assignGoogleBusinessLocation**](docs/Api/ConnectApi.md#assigngooglebusinesslocation) | **POST** /v1/accounts/{accountId}/gmb-locations/assign | Assign GBP location to another profile
 *ConnectApi* | [**completeTelegramConnect**](docs/Api/ConnectApi.md#completetelegramconnect) | **PATCH** /v1/connect/telegram | Check Telegram status
 *ConnectApi* | [**completeWhatsAppPhoneSelection**](docs/Api/ConnectApi.md#completewhatsappphoneselection) | **POST** /v1/connect/whatsapp/select-phone-number | Complete number selection
@@ -1380,6 +1382,8 @@ Class | Method | HTTP request | Description
 - [InstagramPlatformDataUserTagsInner](docs/Model/InstagramPlatformDataUserTagsInner.md)
 - [LikeInboxComment200Response](docs/Model/LikeInboxComment200Response.md)
 - [LikeInboxCommentRequest](docs/Model/LikeInboxCommentRequest.md)
+- [LikePost200Response](docs/Model/LikePost200Response.md)
+- [LikePostRequest](docs/Model/LikePostRequest.md)
 - [LinkedInAdsPlatformData](docs/Model/LinkedInAdsPlatformData.md)
 - [LinkedInAdsPlatformDataCarousel](docs/Model/LinkedInAdsPlatformDataCarousel.md)
 - [LinkedInAdsPlatformDataCarouselCardsInner](docs/Model/LinkedInAdsPlatformDataCarouselCardsInner.md)
@@ -1892,6 +1896,7 @@ Class | Method | HTTP request | Description
 - [UndoRetweet200Response](docs/Model/UndoRetweet200Response.md)
 - [UnfollowUser200Response](docs/Model/UnfollowUser200Response.md)
 - [UnlikeInboxComment200Response](docs/Model/UnlikeInboxComment200Response.md)
+- [UnlikePost200Response](docs/Model/UnlikePost200Response.md)
 - [UnpinDiscordMessage200Response](docs/Model/UnpinDiscordMessage200Response.md)
 - [UnpublishPost200Response](docs/Model/UnpublishPost200Response.md)
 - [UnpublishPostRequest](docs/Model/UnpublishPostRequest.md)

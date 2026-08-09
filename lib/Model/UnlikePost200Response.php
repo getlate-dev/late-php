@@ -1,6 +1,6 @@
 <?php
 /**
- * LikeInboxCommentRequest
+ * UnlikePost200Response
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * LikeInboxCommentRequest Class Doc Comment
+ * UnlikePost200Response Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class UnlikePost200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
       *
       * @var string
       */
-    protected static $openAPIModelName = 'likeInboxComment_request';
+    protected static $openAPIModelName = 'unlikePost_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +58,10 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'account_id' => 'string',
-        'reaction_type' => 'string',
-        'cid' => 'string'
+        'status' => 'string',
+        'post_id' => 'string',
+        'platform' => 'string',
+        'liked' => 'bool'
     ];
 
     /**
@@ -71,9 +72,10 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'account_id' => null,
-        'reaction_type' => null,
-        'cid' => null
+        'status' => null,
+        'post_id' => null,
+        'platform' => null,
+        'liked' => null
     ];
 
     /**
@@ -82,9 +84,10 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'account_id' => false,
-        'reaction_type' => false,
-        'cid' => false
+        'status' => false,
+        'post_id' => false,
+        'platform' => false,
+        'liked' => false
     ];
 
     /**
@@ -173,9 +176,10 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'account_id' => 'accountId',
-        'reaction_type' => 'reactionType',
-        'cid' => 'cid'
+        'status' => 'status',
+        'post_id' => 'postId',
+        'platform' => 'platform',
+        'liked' => 'liked'
     ];
 
     /**
@@ -184,9 +188,10 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'account_id' => 'setAccountId',
-        'reaction_type' => 'setReactionType',
-        'cid' => 'setCid'
+        'status' => 'setStatus',
+        'post_id' => 'setPostId',
+        'platform' => 'setPlatform',
+        'liked' => 'setLiked'
     ];
 
     /**
@@ -195,9 +200,10 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'account_id' => 'getAccountId',
-        'reaction_type' => 'getReactionType',
-        'cid' => 'getCid'
+        'status' => 'getStatus',
+        'post_id' => 'getPostId',
+        'platform' => 'getPlatform',
+        'liked' => 'getLiked'
     ];
 
     /**
@@ -241,29 +247,6 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
         return self::$openAPIModelName;
     }
 
-    public const REACTION_TYPE_LIKE = 'LIKE';
-    public const REACTION_TYPE_PRAISE = 'PRAISE';
-    public const REACTION_TYPE_EMPATHY = 'EMPATHY';
-    public const REACTION_TYPE_INTEREST = 'INTEREST';
-    public const REACTION_TYPE_APPRECIATION = 'APPRECIATION';
-    public const REACTION_TYPE_ENTERTAINMENT = 'ENTERTAINMENT';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getReactionTypeAllowableValues()
-    {
-        return [
-            self::REACTION_TYPE_LIKE,
-            self::REACTION_TYPE_PRAISE,
-            self::REACTION_TYPE_EMPATHY,
-            self::REACTION_TYPE_INTEREST,
-            self::REACTION_TYPE_APPRECIATION,
-            self::REACTION_TYPE_ENTERTAINMENT,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -280,9 +263,10 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('account_id', $data ?? [], null);
-        $this->setIfExists('reaction_type', $data ?? [], null);
-        $this->setIfExists('cid', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('post_id', $data ?? [], null);
+        $this->setIfExists('platform', $data ?? [], null);
+        $this->setIfExists('liked', $data ?? [], null);
     }
 
     /**
@@ -312,18 +296,6 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['account_id'] === null) {
-            $invalidProperties[] = "'account_id' can't be null";
-        }
-        $allowedValues = $this->getReactionTypeAllowableValues();
-        if (!is_null($this->container['reaction_type']) && !in_array($this->container['reaction_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'reaction_type', must be one of '%s'",
-                $this->container['reaction_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -340,92 +312,109 @@ class LikeInboxCommentRequest implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets account_id
+     * Gets status
      *
-     * @return string
+     * @return string|null
      */
-    public function getAccountId()
+    public function getStatus()
     {
-        return $this->container['account_id'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets account_id
+     * Sets status
      *
-     * @param string $account_id The social account ID
+     * @param string|null $status status
      *
      * @return self
      */
-    public function setAccountId($account_id)
+    public function setStatus($status)
     {
-        if (is_null($account_id)) {
-            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['account_id'] = $account_id;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets reaction_type
+     * Gets post_id
      *
      * @return string|null
      */
-    public function getReactionType()
+    public function getPostId()
     {
-        return $this->container['reaction_type'];
+        return $this->container['post_id'];
     }
 
     /**
-     * Sets reaction_type
+     * Sets post_id
      *
-     * @param string|null $reaction_type (LinkedIn only) Reaction to create. Defaults to LIKE; ignored on other platforms.
+     * @param string|null $post_id The resolved native post ID
      *
      * @return self
      */
-    public function setReactionType($reaction_type)
+    public function setPostId($post_id)
     {
-        if (is_null($reaction_type)) {
-            throw new \InvalidArgumentException('non-nullable reaction_type cannot be null');
+        if (is_null($post_id)) {
+            throw new \InvalidArgumentException('non-nullable post_id cannot be null');
         }
-        $allowedValues = $this->getReactionTypeAllowableValues();
-        if (!in_array($reaction_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'reaction_type', must be one of '%s'",
-                    $reaction_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['reaction_type'] = $reaction_type;
+        $this->container['post_id'] = $post_id;
 
         return $this;
     }
 
     /**
-     * Gets cid
+     * Gets platform
      *
      * @return string|null
      */
-    public function getCid()
+    public function getPlatform()
     {
-        return $this->container['cid'];
+        return $this->container['platform'];
     }
 
     /**
-     * Sets cid
+     * Sets platform
      *
-     * @param string|null $cid (Bluesky only) Content identifier for the comment
+     * @param string|null $platform platform
      *
      * @return self
      */
-    public function setCid($cid)
+    public function setPlatform($platform)
     {
-        if (is_null($cid)) {
-            throw new \InvalidArgumentException('non-nullable cid cannot be null');
+        if (is_null($platform)) {
+            throw new \InvalidArgumentException('non-nullable platform cannot be null');
         }
-        $this->container['cid'] = $cid;
+        $this->container['platform'] = $platform;
+
+        return $this;
+    }
+
+    /**
+     * Gets liked
+     *
+     * @return bool|null
+     */
+    public function getLiked()
+    {
+        return $this->container['liked'];
+    }
+
+    /**
+     * Sets liked
+     *
+     * @param bool|null $liked liked
+     *
+     * @return self
+     */
+    public function setLiked($liked)
+    {
+        if (is_null($liked)) {
+            throw new \InvalidArgumentException('non-nullable liked cannot be null');
+        }
+        $this->container['liked'] = $liked;
 
         return $this;
     }
