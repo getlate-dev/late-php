@@ -12,6 +12,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**editInboxMessage()**](MessagesApi.md#editInboxMessage) | **PATCH** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Edit message |
 | [**getInboxConversation()**](MessagesApi.md#getInboxConversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation |
 | [**getInboxConversationMessages()**](MessagesApi.md#getInboxConversationMessages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages |
+| [**getMessageAttachment()**](MessagesApi.md#getMessageAttachment) | **GET** /v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index} | Resolve message attachment |
 | [**listInboxConversations()**](MessagesApi.md#listInboxConversations) | **GET** /v1/inbox/conversations | List conversations |
 | [**markConversationRead()**](MessagesApi.md#markConversationRead) | **POST** /v1/inbox/conversations/{conversationId}/read | Mark a conversation as read |
 | [**removeMessageReaction()**](MessagesApi.md#removeMessageReaction) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Remove reaction |
@@ -390,6 +391,74 @@ try {
 ### Return type
 
 [**\Zernio\Model\GetInboxConversationMessages200Response**](../Model/GetInboxConversationMessages200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getMessageAttachment()`
+
+```php
+getMessageAttachment($conversation_id, $message_id, $index, $account_id, $format): \Zernio\Model\GetMessageAttachment200Response
+```
+
+Resolve message attachment
+
+Resolve one attachment on a message to a media url that works right now.  Instagram and Facebook sign DM media urls per request and expire them, so the `url` on a message is a snapshot: it works when you read the message and stops working later. This endpoint checks the stored url and, when it has gone stale, re-mints the message's media from Meta and persists it before answering. The message id never expires, so this URL is the one to store — it is returned on each attachment as `refreshUrl`.  By default it responds `302` to the live media url, so it can be used directly as an `<img src>` on a browser session. API-key integrators should pass `?format=json` and read `url` off the body, since a browser cannot attach an Authorization header to an image request.  Only Instagram and Facebook media can be re-minted. On other platforms the stored url is returned as-is when it still resolves, and `404` otherwise.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\MessagesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$conversation_id = 'conversation_id_example'; // string | The conversation ID (Zernio id or platform conversation id)
+$message_id = 'message_id_example'; // string | The message id as returned by the list-messages endpoint (the platform message id)
+$index = 56; // int | Zero-based position of the attachment in the message's attachments array
+$account_id = 'account_id_example'; // string | Social account ID
+$format = 'redirect'; // string | `redirect` (default) answers 302 to the media; `json` returns the url in the body
+
+try {
+    $result = $apiInstance->getMessageAttachment($conversation_id, $message_id, $index, $account_id, $format);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MessagesApi->getMessageAttachment: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **conversation_id** | **string**| The conversation ID (Zernio id or platform conversation id) | |
+| **message_id** | **string**| The message id as returned by the list-messages endpoint (the platform message id) | |
+| **index** | **int**| Zero-based position of the attachment in the message&#39;s attachments array | |
+| **account_id** | **string**| Social account ID | |
+| **format** | **string**| &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body | [optional] [default to &#39;redirect&#39;] |
+
+### Return type
+
+[**\Zernio\Model\GetMessageAttachment200Response**](../Model/GetMessageAttachment200Response.md)
 
 ### Authorization
 

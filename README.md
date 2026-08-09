@@ -356,6 +356,7 @@ Class | Method | HTTP request | Description
 *MessagesApi* | [**editInboxMessage**](docs/Api/MessagesApi.md#editinboxmessage) | **PATCH** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Edit message
 *MessagesApi* | [**getInboxConversation**](docs/Api/MessagesApi.md#getinboxconversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation
 *MessagesApi* | [**getInboxConversationMessages**](docs/Api/MessagesApi.md#getinboxconversationmessages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages
+*MessagesApi* | [**getMessageAttachment**](docs/Api/MessagesApi.md#getmessageattachment) | **GET** /v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index} | Resolve message attachment
 *MessagesApi* | [**listInboxConversations**](docs/Api/MessagesApi.md#listinboxconversations) | **GET** /v1/inbox/conversations | List conversations
 *MessagesApi* | [**markConversationRead**](docs/Api/MessagesApi.md#markconversationread) | **POST** /v1/inbox/conversations/{conversationId}/read | Mark a conversation as read
 *MessagesApi* | [**removeMessageReaction**](docs/Api/MessagesApi.md#removemessagereaction) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Remove reaction
@@ -1216,6 +1217,7 @@ Class | Method | HTTP request | Description
 - [GetLinkedInSupplyForecastRequestCompetingBid](docs/Model/GetLinkedInSupplyForecastRequestCompetingBid.md)
 - [GetMediaPresignedUrl200Response](docs/Model/GetMediaPresignedUrl200Response.md)
 - [GetMediaPresignedUrlRequest](docs/Model/GetMediaPresignedUrlRequest.md)
+- [GetMessageAttachment200Response](docs/Model/GetMessageAttachment200Response.md)
 - [GetMessengerMenu200Response](docs/Model/GetMessengerMenu200Response.md)
 - [GetPendingOAuthData200Response](docs/Model/GetPendingOAuthData200Response.md)
 - [GetPendingOAuthData200ResponseOrganizationsInner](docs/Model/GetPendingOAuthData200ResponseOrganizationsInner.md)

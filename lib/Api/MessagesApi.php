@@ -94,6 +94,9 @@ class MessagesApi
         'getInboxConversationMessages' => [
             'application/json',
         ],
+        'getMessageAttachment' => [
+            'application/json',
+        ],
         'listInboxConversations' => [
             'application/json',
         ],
@@ -2060,6 +2063,385 @@ class MessagesApi
             $resourcePath = str_replace(
                 '{' . 'conversationId' . '}',
                 ObjectSerializer::toPathValue($conversation_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getMessageAttachment
+     *
+     * Resolve message attachment
+     *
+     * @param  string $conversation_id The conversation ID (Zernio id or platform conversation id) (required)
+     * @param  string $message_id The message id as returned by the list-messages endpoint (the platform message id) (required)
+     * @param  int $index Zero-based position of the attachment in the message&#39;s attachments array (required)
+     * @param  string $account_id Social account ID (required)
+     * @param  string|null $format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (optional, default to 'redirect')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMessageAttachment'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\GetMessageAttachment200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
+     */
+    public function getMessageAttachment($conversation_id, $message_id, $index, $account_id, $format = 'redirect', string $contentType = self::contentTypes['getMessageAttachment'][0])
+    {
+        list($response) = $this->getMessageAttachmentWithHttpInfo($conversation_id, $message_id, $index, $account_id, $format, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getMessageAttachmentWithHttpInfo
+     *
+     * Resolve message attachment
+     *
+     * @param  string $conversation_id The conversation ID (Zernio id or platform conversation id) (required)
+     * @param  string $message_id The message id as returned by the list-messages endpoint (the platform message id) (required)
+     * @param  int $index Zero-based position of the attachment in the message&#39;s attachments array (required)
+     * @param  string $account_id Social account ID (required)
+     * @param  string|null $format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (optional, default to 'redirect')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMessageAttachment'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\GetMessageAttachment200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getMessageAttachmentWithHttpInfo($conversation_id, $message_id, $index, $account_id, $format = 'redirect', string $contentType = self::contentTypes['getMessageAttachment'][0])
+    {
+        $request = $this->getMessageAttachmentRequest($conversation_id, $message_id, $index, $account_id, $format, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GetMessageAttachment200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\GetMessageAttachment200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GetMessageAttachment200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getMessageAttachmentAsync
+     *
+     * Resolve message attachment
+     *
+     * @param  string $conversation_id The conversation ID (Zernio id or platform conversation id) (required)
+     * @param  string $message_id The message id as returned by the list-messages endpoint (the platform message id) (required)
+     * @param  int $index Zero-based position of the attachment in the message&#39;s attachments array (required)
+     * @param  string $account_id Social account ID (required)
+     * @param  string|null $format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (optional, default to 'redirect')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMessageAttachment'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getMessageAttachmentAsync($conversation_id, $message_id, $index, $account_id, $format = 'redirect', string $contentType = self::contentTypes['getMessageAttachment'][0])
+    {
+        return $this->getMessageAttachmentAsyncWithHttpInfo($conversation_id, $message_id, $index, $account_id, $format, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getMessageAttachmentAsyncWithHttpInfo
+     *
+     * Resolve message attachment
+     *
+     * @param  string $conversation_id The conversation ID (Zernio id or platform conversation id) (required)
+     * @param  string $message_id The message id as returned by the list-messages endpoint (the platform message id) (required)
+     * @param  int $index Zero-based position of the attachment in the message&#39;s attachments array (required)
+     * @param  string $account_id Social account ID (required)
+     * @param  string|null $format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (optional, default to 'redirect')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMessageAttachment'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getMessageAttachmentAsyncWithHttpInfo($conversation_id, $message_id, $index, $account_id, $format = 'redirect', string $contentType = self::contentTypes['getMessageAttachment'][0])
+    {
+        $returnType = '\Zernio\Model\GetMessageAttachment200Response';
+        $request = $this->getMessageAttachmentRequest($conversation_id, $message_id, $index, $account_id, $format, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getMessageAttachment'
+     *
+     * @param  string $conversation_id The conversation ID (Zernio id or platform conversation id) (required)
+     * @param  string $message_id The message id as returned by the list-messages endpoint (the platform message id) (required)
+     * @param  int $index Zero-based position of the attachment in the message&#39;s attachments array (required)
+     * @param  string $account_id Social account ID (required)
+     * @param  string|null $format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (optional, default to 'redirect')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMessageAttachment'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getMessageAttachmentRequest($conversation_id, $message_id, $index, $account_id, $format = 'redirect', string $contentType = self::contentTypes['getMessageAttachment'][0])
+    {
+
+        // verify the required parameter 'conversation_id' is set
+        if ($conversation_id === null || (is_array($conversation_id) && count($conversation_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $conversation_id when calling getMessageAttachment'
+            );
+        }
+
+        // verify the required parameter 'message_id' is set
+        if ($message_id === null || (is_array($message_id) && count($message_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $message_id when calling getMessageAttachment'
+            );
+        }
+
+        // verify the required parameter 'index' is set
+        if ($index === null || (is_array($index) && count($index) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $index when calling getMessageAttachment'
+            );
+        }
+        if ($index < 0) {
+            throw new \InvalidArgumentException('invalid value for "$index" when calling MessagesApi.getMessageAttachment, must be bigger than or equal to 0.');
+        }
+        
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling getMessageAttachment'
+            );
+        }
+
+
+
+        $resourcePath = '/v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $account_id,
+            'accountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $format,
+            'format', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($conversation_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'conversationId' . '}',
+                ObjectSerializer::toPathValue($conversation_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($message_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'messageId' . '}',
+                ObjectSerializer::toPathValue($message_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($index !== null) {
+            $resourcePath = str_replace(
+                '{' . 'index' . '}',
+                ObjectSerializer::toPathValue($index),
                 $resourcePath
             );
         }

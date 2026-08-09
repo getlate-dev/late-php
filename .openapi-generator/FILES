@@ -678,6 +678,7 @@ docs/Model/GetLinkedInSupplyForecastRequest.md
 docs/Model/GetLinkedInSupplyForecastRequestCompetingBid.md
 docs/Model/GetMediaPresignedUrl200Response.md
 docs/Model/GetMediaPresignedUrlRequest.md
+docs/Model/GetMessageAttachment200Response.md
 docs/Model/GetMessengerMenu200Response.md
 docs/Model/GetPendingOAuthData200Response.md
 docs/Model/GetPendingOAuthData200ResponseOrganizationsInner.md
@@ -2339,6 +2340,7 @@ lib/Model/GetLinkedInSupplyForecastRequest.php
 lib/Model/GetLinkedInSupplyForecastRequestCompetingBid.php
 lib/Model/GetMediaPresignedUrl200Response.php
 lib/Model/GetMediaPresignedUrlRequest.php
+lib/Model/GetMessageAttachment200Response.php
 lib/Model/GetMessengerMenu200Response.php
 lib/Model/GetPendingOAuthData200Response.php
 lib/Model/GetPendingOAuthData200ResponseOrganizationsInner.php
@@ -3323,3 +3325,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/GetMessageAttachment200ResponseTest.php

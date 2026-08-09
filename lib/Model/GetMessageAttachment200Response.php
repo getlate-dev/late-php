@@ -1,6 +1,6 @@
 <?php
 /**
- * GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner
+ * GetMessageAttachment200Response
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner Class Doc Comment
+ * GetMessageAttachment200Response Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetMessageAttachment200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
       *
       * @var string
       */
-    protected static $openAPIModelName = 'getInboxConversationMessages_200_response_messages_inner_attachments_inner';
+    protected static $openAPIModelName = 'getMessageAttachment_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,12 +58,9 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'type' => 'string',
+        'status' => 'string',
         'url' => 'string',
-        'refresh_url' => 'string',
-        'filename' => 'string',
-        'preview_url' => 'string'
+        'refreshed' => 'bool'
     ];
 
     /**
@@ -74,12 +71,9 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'type' => null,
+        'status' => null,
         'url' => null,
-        'refresh_url' => null,
-        'filename' => null,
-        'preview_url' => null
+        'refreshed' => null
     ];
 
     /**
@@ -88,12 +82,9 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'type' => false,
+        'status' => false,
         'url' => false,
-        'refresh_url' => true,
-        'filename' => true,
-        'preview_url' => true
+        'refreshed' => false
     ];
 
     /**
@@ -182,12 +173,9 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'type' => 'type',
+        'status' => 'status',
         'url' => 'url',
-        'refresh_url' => 'refreshUrl',
-        'filename' => 'filename',
-        'preview_url' => 'previewUrl'
+        'refreshed' => 'refreshed'
     ];
 
     /**
@@ -196,12 +184,9 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'type' => 'setType',
+        'status' => 'setStatus',
         'url' => 'setUrl',
-        'refresh_url' => 'setRefreshUrl',
-        'filename' => 'setFilename',
-        'preview_url' => 'setPreviewUrl'
+        'refreshed' => 'setRefreshed'
     ];
 
     /**
@@ -210,12 +195,9 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'type' => 'getType',
+        'status' => 'getStatus',
         'url' => 'getUrl',
-        'refresh_url' => 'getRefreshUrl',
-        'filename' => 'getFilename',
-        'preview_url' => 'getPreviewUrl'
+        'refreshed' => 'getRefreshed'
     ];
 
     /**
@@ -259,29 +241,6 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
         return self::$openAPIModelName;
     }
 
-    public const TYPE_IMAGE = 'image';
-    public const TYPE_VIDEO = 'video';
-    public const TYPE_AUDIO = 'audio';
-    public const TYPE_FILE = 'file';
-    public const TYPE_STICKER = 'sticker';
-    public const TYPE_SHARE = 'share';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues()
-    {
-        return [
-            self::TYPE_IMAGE,
-            self::TYPE_VIDEO,
-            self::TYPE_AUDIO,
-            self::TYPE_FILE,
-            self::TYPE_STICKER,
-            self::TYPE_SHARE,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -298,12 +257,9 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
-        $this->setIfExists('refresh_url', $data ?? [], null);
-        $this->setIfExists('filename', $data ?? [], null);
-        $this->setIfExists('preview_url', $data ?? [], null);
+        $this->setIfExists('refreshed', $data ?? [], null);
     }
 
     /**
@@ -333,15 +289,6 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'type', must be one of '%s'",
-                $this->container['type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -358,65 +305,28 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
 
 
     /**
-     * Gets id
+     * Gets status
      *
      * @return string|null
      */
-    public function getId()
+    public function getStatus()
     {
-        return $this->container['id'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets id
+     * Sets status
      *
-     * @param string|null $id id
+     * @param string|null $status status
      *
      * @return self
      */
-    public function setId($id)
+    public function setStatus($status)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string|null
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string|null $type type
-     *
-     * @return self
-     */
-    public function setType($type)
-    {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
-        }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'type', must be one of '%s'",
-                    $type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['type'] = $type;
+        $this->container['status'] = $status;
 
         return $this;
     }
@@ -434,7 +344,7 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
     /**
      * Sets url
      *
-     * @param string|null $url Direct media link. On Instagram and Facebook this is a signed Meta CDN url that EXPIRES: use it now, do not store it. Persist `refreshUrl` instead.
+     * @param string|null $url Live media url. Short-lived; re-request this endpoint rather than storing it.
      *
      * @return self
      */
@@ -449,103 +359,28 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
     }
 
     /**
-     * Gets refresh_url
+     * Gets refreshed
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getRefreshUrl()
+    public function getRefreshed()
     {
-        return $this->container['refresh_url'];
+        return $this->container['refreshed'];
     }
 
     /**
-     * Sets refresh_url
+     * Sets refreshed
      *
-     * @param string|null $refresh_url Instagram and Facebook only. Endpoint that resolves this attachment to a working url every time, re-minting it from Meta when the stored one has expired. Safe to store and render indefinitely.
+     * @param bool|null $refreshed True when the stored url had expired and was re-minted from the platform.
      *
      * @return self
      */
-    public function setRefreshUrl($refresh_url)
+    public function setRefreshed($refreshed)
     {
-        if (is_null($refresh_url)) {
-            array_push($this->openAPINullablesSetToNull, 'refresh_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('refresh_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($refreshed)) {
+            throw new \InvalidArgumentException('non-nullable refreshed cannot be null');
         }
-        $this->container['refresh_url'] = $refresh_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets filename
-     *
-     * @return string|null
-     */
-    public function getFilename()
-    {
-        return $this->container['filename'];
-    }
-
-    /**
-     * Sets filename
-     *
-     * @param string|null $filename filename
-     *
-     * @return self
-     */
-    public function setFilename($filename)
-    {
-        if (is_null($filename)) {
-            array_push($this->openAPINullablesSetToNull, 'filename');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('filename', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['filename'] = $filename;
-
-        return $this;
-    }
-
-    /**
-     * Gets preview_url
-     *
-     * @return string|null
-     */
-    public function getPreviewUrl()
-    {
-        return $this->container['preview_url'];
-    }
-
-    /**
-     * Sets preview_url
-     *
-     * @param string|null $preview_url preview_url
-     *
-     * @return self
-     */
-    public function setPreviewUrl($preview_url)
-    {
-        if (is_null($preview_url)) {
-            array_push($this->openAPINullablesSetToNull, 'preview_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('preview_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['preview_url'] = $preview_url;
+        $this->container['refreshed'] = $refreshed;
 
         return $this;
     }
