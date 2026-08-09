@@ -3323,9 +3323,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/ListInstagramPages200ResponsePagesInnerInstagramBusinessAccountTest.php
-test/Model/ListInstagramPages200ResponsePagesInnerTest.php
-test/Model/ListInstagramPages200ResponseTest.php
-test/Model/SelectInstagramAccount200ResponseAccountTest.php
-test/Model/SelectInstagramAccount200ResponseTest.php
-test/Model/SelectInstagramAccountRequestTest.php
