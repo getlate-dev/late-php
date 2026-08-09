@@ -147,6 +147,9 @@ class ConnectApi
         'listGoogleBusinessLocations' => [
             'application/json',
         ],
+        'listInstagramPages' => [
+            'application/json',
+        ],
         'listLinkedInOrganizations' => [
             'application/json',
         ],
@@ -163,6 +166,9 @@ class ConnectApi
             'application/json',
         ],
         'selectGoogleBusinessLocation' => [
+            'application/json',
+        ],
+        'selectInstagramAccount' => [
             'application/json',
         ],
         'selectLinkedInOrganization' => [
@@ -3026,15 +3032,16 @@ class ConnectApi
      * @param  string $profile_id Your Zernio profile ID (get from /v1/profiles). For WhatsApp, a Zernio-provisioned number can only be connected on the profile it was provisioned to; connecting from any other profile is rejected with a 409. (required)
      * @param  string|null $redirect_url Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. Result params are appended with the URL API, so an existing query string is preserved. Standard mode appends connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId. (optional)
      * @param  bool|null $headless When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. (optional, default to false)
+     * @param  string|null $login_method Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; does not support &#x60;headless&#x3D;true&#x60;: its callback always redirects to Zernio&#39;s hosted account-selection page. Pass a &#x60;redirect_url&#x60; and let the standard flow return the user to you. (optional, default to 'instagram_login')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnectUrl'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\GetConnectUrl200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject3
      */
-    public function getConnectUrl($platform, $profile_id, $redirect_url = null, $headless = false, string $contentType = self::contentTypes['getConnectUrl'][0])
+    public function getConnectUrl($platform, $profile_id, $redirect_url = null, $headless = false, $login_method = 'instagram_login', string $contentType = self::contentTypes['getConnectUrl'][0])
     {
-        list($response) = $this->getConnectUrlWithHttpInfo($platform, $profile_id, $redirect_url, $headless, $contentType);
+        list($response) = $this->getConnectUrlWithHttpInfo($platform, $profile_id, $redirect_url, $headless, $login_method, $contentType);
         return $response;
     }
 
@@ -3047,15 +3054,16 @@ class ConnectApi
      * @param  string $profile_id Your Zernio profile ID (get from /v1/profiles). For WhatsApp, a Zernio-provisioned number can only be connected on the profile it was provisioned to; connecting from any other profile is rejected with a 409. (required)
      * @param  string|null $redirect_url Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. Result params are appended with the URL API, so an existing query string is preserved. Standard mode appends connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId. (optional)
      * @param  bool|null $headless When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. (optional, default to false)
+     * @param  string|null $login_method Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; does not support &#x60;headless&#x3D;true&#x60;: its callback always redirects to Zernio&#39;s hosted account-selection page. Pass a &#x60;redirect_url&#x60; and let the standard flow return the user to you. (optional, default to 'instagram_login')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnectUrl'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\GetConnectUrl200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject3, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getConnectUrlWithHttpInfo($platform, $profile_id, $redirect_url = null, $headless = false, string $contentType = self::contentTypes['getConnectUrl'][0])
+    public function getConnectUrlWithHttpInfo($platform, $profile_id, $redirect_url = null, $headless = false, $login_method = 'instagram_login', string $contentType = self::contentTypes['getConnectUrl'][0])
     {
-        $request = $this->getConnectUrlRequest($platform, $profile_id, $redirect_url, $headless, $contentType);
+        $request = $this->getConnectUrlRequest($platform, $profile_id, $redirect_url, $headless, $login_method, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3163,14 +3171,15 @@ class ConnectApi
      * @param  string $profile_id Your Zernio profile ID (get from /v1/profiles). For WhatsApp, a Zernio-provisioned number can only be connected on the profile it was provisioned to; connecting from any other profile is rejected with a 409. (required)
      * @param  string|null $redirect_url Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. Result params are appended with the URL API, so an existing query string is preserved. Standard mode appends connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId. (optional)
      * @param  bool|null $headless When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. (optional, default to false)
+     * @param  string|null $login_method Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; does not support &#x60;headless&#x3D;true&#x60;: its callback always redirects to Zernio&#39;s hosted account-selection page. Pass a &#x60;redirect_url&#x60; and let the standard flow return the user to you. (optional, default to 'instagram_login')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnectUrl'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getConnectUrlAsync($platform, $profile_id, $redirect_url = null, $headless = false, string $contentType = self::contentTypes['getConnectUrl'][0])
+    public function getConnectUrlAsync($platform, $profile_id, $redirect_url = null, $headless = false, $login_method = 'instagram_login', string $contentType = self::contentTypes['getConnectUrl'][0])
     {
-        return $this->getConnectUrlAsyncWithHttpInfo($platform, $profile_id, $redirect_url, $headless, $contentType)
+        return $this->getConnectUrlAsyncWithHttpInfo($platform, $profile_id, $redirect_url, $headless, $login_method, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3187,15 +3196,16 @@ class ConnectApi
      * @param  string $profile_id Your Zernio profile ID (get from /v1/profiles). For WhatsApp, a Zernio-provisioned number can only be connected on the profile it was provisioned to; connecting from any other profile is rejected with a 409. (required)
      * @param  string|null $redirect_url Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. Result params are appended with the URL API, so an existing query string is preserved. Standard mode appends connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId. (optional)
      * @param  bool|null $headless When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. (optional, default to false)
+     * @param  string|null $login_method Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; does not support &#x60;headless&#x3D;true&#x60;: its callback always redirects to Zernio&#39;s hosted account-selection page. Pass a &#x60;redirect_url&#x60; and let the standard flow return the user to you. (optional, default to 'instagram_login')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnectUrl'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getConnectUrlAsyncWithHttpInfo($platform, $profile_id, $redirect_url = null, $headless = false, string $contentType = self::contentTypes['getConnectUrl'][0])
+    public function getConnectUrlAsyncWithHttpInfo($platform, $profile_id, $redirect_url = null, $headless = false, $login_method = 'instagram_login', string $contentType = self::contentTypes['getConnectUrl'][0])
     {
         $returnType = '\Zernio\Model\GetConnectUrl200Response';
-        $request = $this->getConnectUrlRequest($platform, $profile_id, $redirect_url, $headless, $contentType);
+        $request = $this->getConnectUrlRequest($platform, $profile_id, $redirect_url, $headless, $login_method, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3240,12 +3250,13 @@ class ConnectApi
      * @param  string $profile_id Your Zernio profile ID (get from /v1/profiles). For WhatsApp, a Zernio-provisioned number can only be connected on the profile it was provisioned to; connecting from any other profile is rejected with a 409. (required)
      * @param  string|null $redirect_url Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. Result params are appended with the URL API, so an existing query string is preserved. Standard mode appends connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId. (optional)
      * @param  bool|null $headless When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. (optional, default to false)
+     * @param  string|null $login_method Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; does not support &#x60;headless&#x3D;true&#x60;: its callback always redirects to Zernio&#39;s hosted account-selection page. Pass a &#x60;redirect_url&#x60; and let the standard flow return the user to you. (optional, default to 'instagram_login')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getConnectUrl'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getConnectUrlRequest($platform, $profile_id, $redirect_url = null, $headless = false, string $contentType = self::contentTypes['getConnectUrl'][0])
+    public function getConnectUrlRequest($platform, $profile_id, $redirect_url = null, $headless = false, $login_method = 'instagram_login', string $contentType = self::contentTypes['getConnectUrl'][0])
     {
 
         // verify the required parameter 'platform' is set
@@ -3261,6 +3272,7 @@ class ConnectApi
                 'Missing the required parameter $profile_id when calling getConnectUrl'
             );
         }
+
 
 
 
@@ -3295,6 +3307,15 @@ class ConnectApi
             $headless,
             'headless', // param base name
             'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $login_method,
+            'loginMethod', // param base name
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -7576,6 +7597,319 @@ class ConnectApi
     }
 
     /**
+     * Operation listInstagramPages
+     *
+     * List Pages with a linked Instagram account
+     *
+     * @param  string $profile_id Profile ID from your connection flow (required)
+     * @param  string $temp_token Long-lived Facebook user access token from the OAuth callback redirect (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listInstagramPages'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\ListInstagramPages200Response|\Zernio\Model\InlineObject
+     */
+    public function listInstagramPages($profile_id, $temp_token, string $contentType = self::contentTypes['listInstagramPages'][0])
+    {
+        list($response) = $this->listInstagramPagesWithHttpInfo($profile_id, $temp_token, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listInstagramPagesWithHttpInfo
+     *
+     * List Pages with a linked Instagram account
+     *
+     * @param  string $profile_id Profile ID from your connection flow (required)
+     * @param  string $temp_token Long-lived Facebook user access token from the OAuth callback redirect (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listInstagramPages'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\ListInstagramPages200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listInstagramPagesWithHttpInfo($profile_id, $temp_token, string $contentType = self::contentTypes['listInstagramPages'][0])
+    {
+        $request = $this->listInstagramPagesRequest($profile_id, $temp_token, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ListInstagramPages200Response',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\ListInstagramPages200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ListInstagramPages200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listInstagramPagesAsync
+     *
+     * List Pages with a linked Instagram account
+     *
+     * @param  string $profile_id Profile ID from your connection flow (required)
+     * @param  string $temp_token Long-lived Facebook user access token from the OAuth callback redirect (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listInstagramPages'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listInstagramPagesAsync($profile_id, $temp_token, string $contentType = self::contentTypes['listInstagramPages'][0])
+    {
+        return $this->listInstagramPagesAsyncWithHttpInfo($profile_id, $temp_token, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listInstagramPagesAsyncWithHttpInfo
+     *
+     * List Pages with a linked Instagram account
+     *
+     * @param  string $profile_id Profile ID from your connection flow (required)
+     * @param  string $temp_token Long-lived Facebook user access token from the OAuth callback redirect (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listInstagramPages'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listInstagramPagesAsyncWithHttpInfo($profile_id, $temp_token, string $contentType = self::contentTypes['listInstagramPages'][0])
+    {
+        $returnType = '\Zernio\Model\ListInstagramPages200Response';
+        $request = $this->listInstagramPagesRequest($profile_id, $temp_token, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listInstagramPages'
+     *
+     * @param  string $profile_id Profile ID from your connection flow (required)
+     * @param  string $temp_token Long-lived Facebook user access token from the OAuth callback redirect (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listInstagramPages'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listInstagramPagesRequest($profile_id, $temp_token, string $contentType = self::contentTypes['listInstagramPages'][0])
+    {
+
+        // verify the required parameter 'profile_id' is set
+        if ($profile_id === null || (is_array($profile_id) && count($profile_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $profile_id when calling listInstagramPages'
+            );
+        }
+
+        // verify the required parameter 'temp_token' is set
+        if ($temp_token === null || (is_array($temp_token) && count($temp_token) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $temp_token when calling listInstagramPages'
+            );
+        }
+
+
+        $resourcePath = '/v1/connect/instagram/select-account';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $profile_id,
+            'profileId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $temp_token,
+            'tempToken', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-Connect-Token');
+        if ($apiKey !== null) {
+            $headers['X-Connect-Token'] = $apiKey;
+        }
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation listLinkedInOrganizations
      *
      * List LinkedIn orgs
@@ -9415,6 +9749,310 @@ class ConnectApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($select_google_business_location_request));
             } else {
                 $httpBody = $select_google_business_location_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-Connect-Token');
+        if ($apiKey !== null) {
+            $headers['X-Connect-Token'] = $apiKey;
+        }
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation selectInstagramAccount
+     *
+     * Select the Page whose Instagram account to connect
+     *
+     * @param  \Zernio\Model\SelectInstagramAccountRequest $select_instagram_account_request select_instagram_account_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['selectInstagramAccount'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\SelectInstagramAccount200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject3
+     */
+    public function selectInstagramAccount($select_instagram_account_request, string $contentType = self::contentTypes['selectInstagramAccount'][0])
+    {
+        list($response) = $this->selectInstagramAccountWithHttpInfo($select_instagram_account_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation selectInstagramAccountWithHttpInfo
+     *
+     * Select the Page whose Instagram account to connect
+     *
+     * @param  \Zernio\Model\SelectInstagramAccountRequest $select_instagram_account_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['selectInstagramAccount'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\SelectInstagramAccount200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject3, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function selectInstagramAccountWithHttpInfo($select_instagram_account_request, string $contentType = self::contentTypes['selectInstagramAccount'][0])
+    {
+        $request = $this->selectInstagramAccountRequest($select_instagram_account_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\SelectInstagramAccount200Response',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+                case 402:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject3',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\SelectInstagramAccount200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\SelectInstagramAccount200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject3',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation selectInstagramAccountAsync
+     *
+     * Select the Page whose Instagram account to connect
+     *
+     * @param  \Zernio\Model\SelectInstagramAccountRequest $select_instagram_account_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['selectInstagramAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function selectInstagramAccountAsync($select_instagram_account_request, string $contentType = self::contentTypes['selectInstagramAccount'][0])
+    {
+        return $this->selectInstagramAccountAsyncWithHttpInfo($select_instagram_account_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation selectInstagramAccountAsyncWithHttpInfo
+     *
+     * Select the Page whose Instagram account to connect
+     *
+     * @param  \Zernio\Model\SelectInstagramAccountRequest $select_instagram_account_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['selectInstagramAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function selectInstagramAccountAsyncWithHttpInfo($select_instagram_account_request, string $contentType = self::contentTypes['selectInstagramAccount'][0])
+    {
+        $returnType = '\Zernio\Model\SelectInstagramAccount200Response';
+        $request = $this->selectInstagramAccountRequest($select_instagram_account_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'selectInstagramAccount'
+     *
+     * @param  \Zernio\Model\SelectInstagramAccountRequest $select_instagram_account_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['selectInstagramAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function selectInstagramAccountRequest($select_instagram_account_request, string $contentType = self::contentTypes['selectInstagramAccount'][0])
+    {
+
+        // verify the required parameter 'select_instagram_account_request' is set
+        if ($select_instagram_account_request === null || (is_array($select_instagram_account_request) && count($select_instagram_account_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $select_instagram_account_request when calling selectInstagramAccount'
+            );
+        }
+
+
+        $resourcePath = '/v1/connect/instagram/select-account';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($select_instagram_account_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($select_instagram_account_request));
+            } else {
+                $httpBody = $select_instagram_account_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

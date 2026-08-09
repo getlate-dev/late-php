@@ -952,6 +952,9 @@ docs/Model/ListInboxReviews200ResponseDataInner.md
 docs/Model/ListInboxReviews200ResponseDataInnerReply.md
 docs/Model/ListInboxReviews200ResponseDataInnerReviewer.md
 docs/Model/ListInboxReviews200ResponseSummary.md
+docs/Model/ListInstagramPages200Response.md
+docs/Model/ListInstagramPages200ResponsePagesInner.md
+docs/Model/ListInstagramPages200ResponsePagesInnerInstagramBusinessAccount.md
 docs/Model/ListInstagramStories200Response.md
 docs/Model/ListInstagramStories200ResponseDataInner.md
 docs/Model/ListLeadForms200Response.md
@@ -1197,6 +1200,9 @@ docs/Model/SelectFacebookPageRequestUserProfile.md
 docs/Model/SelectGoogleBusinessLocation200Response.md
 docs/Model/SelectGoogleBusinessLocation200ResponseAccount.md
 docs/Model/SelectGoogleBusinessLocationRequest.md
+docs/Model/SelectInstagramAccount200Response.md
+docs/Model/SelectInstagramAccount200ResponseAccount.md
+docs/Model/SelectInstagramAccountRequest.md
 docs/Model/SelectLinkedInOrganization200Response.md
 docs/Model/SelectLinkedInOrganization200ResponseAccount.md
 docs/Model/SelectLinkedInOrganization200ResponseBulkRefresh.md
@@ -2607,6 +2613,9 @@ lib/Model/ListInboxReviews200ResponseDataInner.php
 lib/Model/ListInboxReviews200ResponseDataInnerReply.php
 lib/Model/ListInboxReviews200ResponseDataInnerReviewer.php
 lib/Model/ListInboxReviews200ResponseSummary.php
+lib/Model/ListInstagramPages200Response.php
+lib/Model/ListInstagramPages200ResponsePagesInner.php
+lib/Model/ListInstagramPages200ResponsePagesInnerInstagramBusinessAccount.php
 lib/Model/ListInstagramStories200Response.php
 lib/Model/ListInstagramStories200ResponseDataInner.php
 lib/Model/ListLeadForms200Response.php
@@ -2853,6 +2862,9 @@ lib/Model/SelectFacebookPageRequestUserProfile.php
 lib/Model/SelectGoogleBusinessLocation200Response.php
 lib/Model/SelectGoogleBusinessLocation200ResponseAccount.php
 lib/Model/SelectGoogleBusinessLocationRequest.php
+lib/Model/SelectInstagramAccount200Response.php
+lib/Model/SelectInstagramAccount200ResponseAccount.php
+lib/Model/SelectInstagramAccountRequest.php
 lib/Model/SelectLinkedInOrganization200Response.php
 lib/Model/SelectLinkedInOrganization200ResponseAccount.php
 lib/Model/SelectLinkedInOrganization200ResponseBulkRefresh.php
@@ -3311,3 +3323,9 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/ListInstagramPages200ResponsePagesInnerInstagramBusinessAccountTest.php
+test/Model/ListInstagramPages200ResponsePagesInnerTest.php
+test/Model/ListInstagramPages200ResponseTest.php
+test/Model/SelectInstagramAccount200ResponseAccountTest.php
+test/Model/SelectInstagramAccount200ResponseTest.php
+test/Model/SelectInstagramAccountRequestTest.php

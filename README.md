@@ -233,12 +233,14 @@ Class | Method | HTTP request | Description
 *ConnectApi* | [**initiateTelegramConnect**](docs/Api/ConnectApi.md#initiatetelegramconnect) | **POST** /v1/connect/telegram | Connect Telegram directly
 *ConnectApi* | [**listFacebookPages**](docs/Api/ConnectApi.md#listfacebookpages) | **GET** /v1/connect/facebook/select-page | List Facebook pages
 *ConnectApi* | [**listGoogleBusinessLocations**](docs/Api/ConnectApi.md#listgooglebusinesslocations) | **GET** /v1/connect/googlebusiness/locations | List GBP locations
+*ConnectApi* | [**listInstagramPages**](docs/Api/ConnectApi.md#listinstagrampages) | **GET** /v1/connect/instagram/select-account | List Pages with a linked Instagram account
 *ConnectApi* | [**listLinkedInOrganizations**](docs/Api/ConnectApi.md#listlinkedinorganizations) | **GET** /v1/connect/linkedin/organizations | List LinkedIn orgs
 *ConnectApi* | [**listPinterestBoardsForSelection**](docs/Api/ConnectApi.md#listpinterestboardsforselection) | **GET** /v1/connect/pinterest/select-board | List Pinterest boards
 *ConnectApi* | [**listSnapchatProfiles**](docs/Api/ConnectApi.md#listsnapchatprofiles) | **GET** /v1/connect/snapchat/select-profile | List Snapchat profiles
 *ConnectApi* | [**listWhatsAppPhoneNumbers**](docs/Api/ConnectApi.md#listwhatsappphonenumbers) | **GET** /v1/connect/whatsapp/select-phone-number | List numbers for selection
 *ConnectApi* | [**selectFacebookPage**](docs/Api/ConnectApi.md#selectfacebookpage) | **POST** /v1/connect/facebook/select-page | Select Facebook page
 *ConnectApi* | [**selectGoogleBusinessLocation**](docs/Api/ConnectApi.md#selectgooglebusinesslocation) | **POST** /v1/connect/googlebusiness/select-location | Select GBP location
+*ConnectApi* | [**selectInstagramAccount**](docs/Api/ConnectApi.md#selectinstagramaccount) | **POST** /v1/connect/instagram/select-account | Select the Page whose Instagram account to connect
 *ConnectApi* | [**selectLinkedInOrganization**](docs/Api/ConnectApi.md#selectlinkedinorganization) | **POST** /v1/connect/linkedin/select-organization | Select LinkedIn org
 *ConnectApi* | [**selectPinterestBoard**](docs/Api/ConnectApi.md#selectpinterestboard) | **POST** /v1/connect/pinterest/select-board | Select Pinterest board
 *ConnectApi* | [**selectSnapchatProfile**](docs/Api/ConnectApi.md#selectsnapchatprofile) | **POST** /v1/connect/snapchat/select-profile | Select Snapchat profile
@@ -1488,6 +1490,9 @@ Class | Method | HTTP request | Description
 - [ListInboxReviews200ResponseDataInnerReply](docs/Model/ListInboxReviews200ResponseDataInnerReply.md)
 - [ListInboxReviews200ResponseDataInnerReviewer](docs/Model/ListInboxReviews200ResponseDataInnerReviewer.md)
 - [ListInboxReviews200ResponseSummary](docs/Model/ListInboxReviews200ResponseSummary.md)
+- [ListInstagramPages200Response](docs/Model/ListInstagramPages200Response.md)
+- [ListInstagramPages200ResponsePagesInner](docs/Model/ListInstagramPages200ResponsePagesInner.md)
+- [ListInstagramPages200ResponsePagesInnerInstagramBusinessAccount](docs/Model/ListInstagramPages200ResponsePagesInnerInstagramBusinessAccount.md)
 - [ListInstagramStories200Response](docs/Model/ListInstagramStories200Response.md)
 - [ListInstagramStories200ResponseDataInner](docs/Model/ListInstagramStories200ResponseDataInner.md)
 - [ListLeadForms200Response](docs/Model/ListLeadForms200Response.md)
@@ -1733,6 +1738,9 @@ Class | Method | HTTP request | Description
 - [SelectGoogleBusinessLocation200Response](docs/Model/SelectGoogleBusinessLocation200Response.md)
 - [SelectGoogleBusinessLocation200ResponseAccount](docs/Model/SelectGoogleBusinessLocation200ResponseAccount.md)
 - [SelectGoogleBusinessLocationRequest](docs/Model/SelectGoogleBusinessLocationRequest.md)
+- [SelectInstagramAccount200Response](docs/Model/SelectInstagramAccount200Response.md)
+- [SelectInstagramAccount200ResponseAccount](docs/Model/SelectInstagramAccount200ResponseAccount.md)
+- [SelectInstagramAccountRequest](docs/Model/SelectInstagramAccountRequest.md)
 - [SelectLinkedInOrganization200Response](docs/Model/SelectLinkedInOrganization200Response.md)
 - [SelectLinkedInOrganization200ResponseAccount](docs/Model/SelectLinkedInOrganization200ResponseAccount.md)
 - [SelectLinkedInOrganization200ResponseBulkRefresh](docs/Model/SelectLinkedInOrganization200ResponseBulkRefresh.md)
