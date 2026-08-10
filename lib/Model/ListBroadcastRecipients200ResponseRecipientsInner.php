@@ -68,6 +68,7 @@ class ListBroadcastRecipients200ResponseRecipientsInner implements ModelInterfac
         'error' => 'string',
         'error_code' => 'int',
         'error_explanation' => 'string',
+        'error_trace_id' => 'string',
         'sent_at' => '\DateTime',
         'delivered_at' => '\DateTime',
         'read_at' => '\DateTime'
@@ -91,6 +92,7 @@ class ListBroadcastRecipients200ResponseRecipientsInner implements ModelInterfac
         'error' => null,
         'error_code' => null,
         'error_explanation' => null,
+        'error_trace_id' => null,
         'sent_at' => 'date-time',
         'delivered_at' => 'date-time',
         'read_at' => 'date-time'
@@ -112,6 +114,7 @@ class ListBroadcastRecipients200ResponseRecipientsInner implements ModelInterfac
         'error' => false,
         'error_code' => true,
         'error_explanation' => true,
+        'error_trace_id' => true,
         'sent_at' => false,
         'delivered_at' => false,
         'read_at' => false
@@ -213,6 +216,7 @@ class ListBroadcastRecipients200ResponseRecipientsInner implements ModelInterfac
         'error' => 'error',
         'error_code' => 'errorCode',
         'error_explanation' => 'errorExplanation',
+        'error_trace_id' => 'errorTraceId',
         'sent_at' => 'sentAt',
         'delivered_at' => 'deliveredAt',
         'read_at' => 'readAt'
@@ -234,6 +238,7 @@ class ListBroadcastRecipients200ResponseRecipientsInner implements ModelInterfac
         'error' => 'setError',
         'error_code' => 'setErrorCode',
         'error_explanation' => 'setErrorExplanation',
+        'error_trace_id' => 'setErrorTraceId',
         'sent_at' => 'setSentAt',
         'delivered_at' => 'setDeliveredAt',
         'read_at' => 'setReadAt'
@@ -255,6 +260,7 @@ class ListBroadcastRecipients200ResponseRecipientsInner implements ModelInterfac
         'error' => 'getError',
         'error_code' => 'getErrorCode',
         'error_explanation' => 'getErrorExplanation',
+        'error_trace_id' => 'getErrorTraceId',
         'sent_at' => 'getSentAt',
         'delivered_at' => 'getDeliveredAt',
         'read_at' => 'getReadAt'
@@ -348,6 +354,7 @@ class ListBroadcastRecipients200ResponseRecipientsInner implements ModelInterfac
         $this->setIfExists('error', $data ?? [], null);
         $this->setIfExists('error_code', $data ?? [], null);
         $this->setIfExists('error_explanation', $data ?? [], null);
+        $this->setIfExists('error_trace_id', $data ?? [], null);
         $this->setIfExists('sent_at', $data ?? [], null);
         $this->setIfExists('delivered_at', $data ?? [], null);
         $this->setIfExists('read_at', $data ?? [], null);
@@ -694,6 +701,40 @@ class ListBroadcastRecipients200ResponseRecipientsInner implements ModelInterfac
             }
         }
         $this->container['error_explanation'] = $error_explanation;
+
+        return $this;
+    }
+
+    /**
+     * Gets error_trace_id
+     *
+     * @return string|null
+     */
+    public function getErrorTraceId()
+    {
+        return $this->container['error_trace_id'];
+    }
+
+    /**
+     * Sets error_trace_id
+     *
+     * @param string|null $error_trace_id Meta trace id (fbtrace_id) for the failed send. Quote this when escalating to Meta Direct Support. Only populated for status=failed on Meta platforms.
+     *
+     * @return self
+     */
+    public function setErrorTraceId($error_trace_id)
+    {
+        if (is_null($error_trace_id)) {
+            array_push($this->openAPINullablesSetToNull, 'error_trace_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('error_trace_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['error_trace_id'] = $error_trace_id;
 
         return $this;
     }
