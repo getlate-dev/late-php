@@ -17,7 +17,7 @@ getMediaPresignedUrl($get_media_presigned_url_request): \Zernio\Model\GetMediaPr
 
 Get upload URL
 
-Get a presigned URL to upload files directly to cloud storage (up to 5GB). Returns an uploadUrl and publicUrl. PUT your file to the uploadUrl, then use the publicUrl in your posts.  By default the file is written to temporary storage and auto-deletes 7 days after upload, so the publicUrl stops resolving once that window passes. Send `permanent: true` to write straight to permanent storage, which has no expiry: use it for anything that must stay reachable for longer, in particular cover and thumbnail images on posts scheduled more than a week out.
+Get a presigned URL to upload files directly to cloud storage (up to 5GB). Returns an uploadUrl and publicUrl. PUT your file to the uploadUrl, then use the publicUrl in your posts.
 
 ### Example
 

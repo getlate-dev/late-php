@@ -351,7 +351,7 @@ class GetMediaPresignedUrl200Response implements ModelInterface, ArrayAccess, \J
     /**
      * Sets public_url
      *
-     * @param string|null $public_url Public URL where the file will be accessible after upload. Served from the temp/ prefix by default (expires 7 days after upload) or from media/ when permanent is true.
+     * @param string|null $public_url Public URL where the file will be accessible after upload
      *
      * @return self
      */
@@ -378,7 +378,7 @@ class GetMediaPresignedUrl200Response implements ModelInterface, ArrayAccess, \J
     /**
      * Sets key
      *
-     * @param string|null $key Storage key/path of the file. Prefixed temp/ by default, media/ when permanent is true.
+     * @param string|null $key Storage key/path of the file
      *
      * @return self
      */
