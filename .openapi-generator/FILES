@@ -3343,9 +3343,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/CreateCustomConversionRequestTest.php
-test/Model/CreateHighDemandPeriod201ResponseTest.php
-test/Model/CreateHighDemandPeriodRequestTest.php
-test/Model/CustomConversionResultTest.php
-test/Model/CustomConversionTest.php
-test/Model/ListCustomConversions200ResponseTest.php
