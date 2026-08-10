@@ -79,6 +79,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'trial_params' => '\Zernio\Model\InstagramPlatformDataTrialParams',
         'user_tags' => '\Zernio\Model\InstagramPlatformDataUserTagsInner[]',
         'audio_name' => 'string',
+        'audio_configuration' => '\Zernio\Model\InstagramPlatformDataAudioConfiguration',
         'thumb_offset' => 'int',
         'instagram_thumbnail' => 'string',
         'reel_cover' => 'string',
@@ -179,6 +180,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'trial_params' => null,
         'user_tags' => null,
         'audio_name' => null,
+        'audio_configuration' => null,
         'thumb_offset' => null,
         'instagram_thumbnail' => 'uri',
         'reel_cover' => 'uri',
@@ -277,6 +279,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'trial_params' => false,
         'user_tags' => false,
         'audio_name' => false,
+        'audio_configuration' => false,
         'thumb_offset' => false,
         'instagram_thumbnail' => false,
         'reel_cover' => false,
@@ -455,6 +458,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'trial_params' => 'trialParams',
         'user_tags' => 'userTags',
         'audio_name' => 'audioName',
+        'audio_configuration' => 'audioConfiguration',
         'thumb_offset' => 'thumbOffset',
         'instagram_thumbnail' => 'instagramThumbnail',
         'reel_cover' => 'reelCover',
@@ -553,6 +557,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'trial_params' => 'setTrialParams',
         'user_tags' => 'setUserTags',
         'audio_name' => 'setAudioName',
+        'audio_configuration' => 'setAudioConfiguration',
         'thumb_offset' => 'setThumbOffset',
         'instagram_thumbnail' => 'setInstagramThumbnail',
         'reel_cover' => 'setReelCover',
@@ -651,6 +656,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'trial_params' => 'getTrialParams',
         'user_tags' => 'getUserTags',
         'audio_name' => 'getAudioName',
+        'audio_configuration' => 'getAudioConfiguration',
         'thumb_offset' => 'getThumbOffset',
         'instagram_thumbnail' => 'getInstagramThumbnail',
         'reel_cover' => 'getReelCover',
@@ -919,6 +925,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         $this->setIfExists('trial_params', $data ?? [], null);
         $this->setIfExists('user_tags', $data ?? [], null);
         $this->setIfExists('audio_name', $data ?? [], null);
+        $this->setIfExists('audio_configuration', $data ?? [], null);
         $this->setIfExists('thumb_offset', $data ?? [], null);
         $this->setIfExists('instagram_thumbnail', $data ?? [], null);
         $this->setIfExists('reel_cover', $data ?? [], null);
@@ -1726,7 +1733,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
     /**
      * Sets audio_name
      *
-     * @param string|null $audio_name Custom name for original audio in Reels. Replaces the default \"Original Audio\" label. Can only be set once.
+     * @param string|null $audio_name Custom name for original audio in Reels. Replaces the default \"Original Audio\" label. Can only be set once. Unrelated to audioConfiguration, which attaches a catalog track.
      *
      * @return self
      */
@@ -1736,6 +1743,33 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
             throw new \InvalidArgumentException('non-nullable audio_name cannot be null');
         }
         $this->container['audio_name'] = $audio_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets audio_configuration
+     *
+     * @return \Zernio\Model\InstagramPlatformDataAudioConfiguration|null
+     */
+    public function getAudioConfiguration()
+    {
+        return $this->container['audio_configuration'];
+    }
+
+    /**
+     * Sets audio_configuration
+     *
+     * @param \Zernio\Model\InstagramPlatformDataAudioConfiguration|null $audio_configuration audio_configuration
+     *
+     * @return self
+     */
+    public function setAudioConfiguration($audio_configuration)
+    {
+        if (is_null($audio_configuration)) {
+            throw new \InvalidArgumentException('non-nullable audio_configuration cannot be null');
+        }
+        $this->container['audio_configuration'] = $audio_configuration;
 
         return $this;
     }

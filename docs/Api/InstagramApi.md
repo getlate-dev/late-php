@@ -6,10 +6,74 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**getInstagramAudio()**](InstagramApi.md#getInstagramAudio) | **GET** /v1/accounts/{accountId}/instagram/audio/{audioId} | Get Instagram audio metadata |
 | [**getInstagramPublishingLimit()**](InstagramApi.md#getInstagramPublishingLimit) | **GET** /v1/accounts/{accountId}/instagram/publishing-limit | Get Instagram publishing limit |
 | [**getInstagramStoryInsights()**](InstagramApi.md#getInstagramStoryInsights) | **GET** /v1/accounts/{accountId}/instagram/stories/{storyId}/insights | Get Instagram story insights |
 | [**listInstagramStories()**](InstagramApi.md#listInstagramStories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories |
+| [**searchInstagramAudio()**](InstagramApi.md#searchInstagramAudio) | **GET** /v1/accounts/{accountId}/instagram/audio | Search Instagram audio |
 
+
+## `getInstagramAudio()`
+
+```php
+getInstagramAudio($account_id, $audio_id): \Zernio\Model\GetInstagramAudio200Response
+```
+
+Get Instagram audio metadata
+
+Fetch one audio asset's metadata by ID. Use it to re-validate a stored `audioId` before a scheduled Reel publishes, or to refresh the preview `downloadUrl` (Meta expires preview URLs after roughly 1.5 days).  Same connection requirement as the search endpoint: Facebook-Login Instagram accounts only.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\InstagramApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The ID of the Instagram account
+$audio_id = 'audio_id_example'; // string | Instagram audio asset ID
+
+try {
+    $result = $apiInstance->getInstagramAudio($account_id, $audio_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling InstagramApi->getInstagramAudio: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The ID of the Instagram account | |
+| **audio_id** | **string**| Instagram audio asset ID | |
+
+### Return type
+
+[**\Zernio\Model\GetInstagramAudio200Response**](../Model/GetInstagramAudio200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `getInstagramPublishingLimit()`
 
@@ -179,6 +243,70 @@ try {
 ### Return type
 
 [**\Zernio\Model\ListInstagramStories200Response**](../Model/ListInstagramStories200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `searchInstagramAudio()`
+
+```php
+searchInstagramAudio($account_id, $audio_type, $q): \Zernio\Model\SearchInstagramAudio200Response
+```
+
+Search Instagram audio
+
+Search Instagram's audio catalog (licensed music or original sounds), or list what is currently trending by omitting `q`. Returns up to ~30 assets; Meta exposes no pagination on this edge.  Pass the returned `audioId` as `platformSpecificData.audioConfiguration.audioId` when creating a Reel to publish it with that track.  Requires an Instagram account connected via **Facebook Login**. Meta hosts this catalog on graph.facebook.com only, so accounts connected with classic Instagram Login receive a 400 (`instagram_audio_requires_facebook_login`) and must be reconnected choosing the Facebook option.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\InstagramApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The ID of the Instagram account
+$audio_type = 'audio_type_example'; // string | Catalog to search: licensed music or original sounds from Reels.
+$q = 'q_example'; // string | Search keywords. Omit to get the current trending list.
+
+try {
+    $result = $apiInstance->searchInstagramAudio($account_id, $audio_type, $q);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling InstagramApi->searchInstagramAudio: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The ID of the Instagram account | |
+| **audio_type** | **string**| Catalog to search: licensed music or original sounds from Reels. | |
+| **q** | **string**| Search keywords. Omit to get the current trending list. | [optional] |
+
+### Return type
+
+[**\Zernio\Model\SearchInstagramAudio200Response**](../Model/SearchInstagramAudio200Response.md)
 
 ### Authorization
 

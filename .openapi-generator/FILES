@@ -654,6 +654,7 @@ docs/Model/GetInboxVolume200ResponseSummary.md
 docs/Model/GetInboxVolume200ResponseTimeseriesInner.md
 docs/Model/GetInboxVolume400Response.md
 docs/Model/GetInstagramAccountInsights404Response.md
+docs/Model/GetInstagramAudio200Response.md
 docs/Model/GetInstagramFollowStatus200Response.md
 docs/Model/GetInstagramPublishingLimit200Response.md
 docs/Model/GetInstagramStoryInsights200Response.md
@@ -844,9 +845,11 @@ docs/Model/InstagramAccountInsightsResponseMetricsValue.md
 docs/Model/InstagramAccountInsightsResponseMetricsValueBreakdownsInner.md
 docs/Model/InstagramAccountInsightsResponseMetricsValueValuesInner.md
 docs/Model/InstagramAccountInsightsResponseUnavailableMetricsInner.md
+docs/Model/InstagramAudioAsset.md
 docs/Model/InstagramDemographicsResponse.md
 docs/Model/InstagramDemographicsResponseDemographicsValueInner.md
 docs/Model/InstagramPlatformData.md
+docs/Model/InstagramPlatformDataAudioConfiguration.md
 docs/Model/InstagramPlatformDataTrialParams.md
 docs/Model/InstagramPlatformDataUserTagsInner.md
 docs/Model/LikeInboxComment200Response.md
@@ -1201,6 +1204,7 @@ docs/Model/SearchInboxConversations200ResponseDataInnerMatchesInner.md
 docs/Model/SearchInboxConversations200ResponseMeta.md
 docs/Model/SearchInboxConversations200ResponseMetaAccountsSkippedInner.md
 docs/Model/SearchInboxConversations200ResponseMetaFailedAccountsInner.md
+docs/Model/SearchInstagramAudio200Response.md
 docs/Model/SearchReddit200Response.md
 docs/Model/SearchTweets200Response.md
 docs/Model/SearchTweets200ResponseMeta.md
@@ -2331,6 +2335,7 @@ lib/Model/GetInboxVolume200ResponseSummary.php
 lib/Model/GetInboxVolume200ResponseTimeseriesInner.php
 lib/Model/GetInboxVolume400Response.php
 lib/Model/GetInstagramAccountInsights404Response.php
+lib/Model/GetInstagramAudio200Response.php
 lib/Model/GetInstagramFollowStatus200Response.php
 lib/Model/GetInstagramPublishingLimit200Response.php
 lib/Model/GetInstagramStoryInsights200Response.php
@@ -2521,9 +2526,11 @@ lib/Model/InstagramAccountInsightsResponseMetricsValue.php
 lib/Model/InstagramAccountInsightsResponseMetricsValueBreakdownsInner.php
 lib/Model/InstagramAccountInsightsResponseMetricsValueValuesInner.php
 lib/Model/InstagramAccountInsightsResponseUnavailableMetricsInner.php
+lib/Model/InstagramAudioAsset.php
 lib/Model/InstagramDemographicsResponse.php
 lib/Model/InstagramDemographicsResponseDemographicsValueInner.php
 lib/Model/InstagramPlatformData.php
+lib/Model/InstagramPlatformDataAudioConfiguration.php
 lib/Model/InstagramPlatformDataTrialParams.php
 lib/Model/InstagramPlatformDataUserTagsInner.php
 lib/Model/LikeInboxComment200Response.php
@@ -2879,6 +2886,7 @@ lib/Model/SearchInboxConversations200ResponseDataInnerMatchesInner.php
 lib/Model/SearchInboxConversations200ResponseMeta.php
 lib/Model/SearchInboxConversations200ResponseMetaAccountsSkippedInner.php
 lib/Model/SearchInboxConversations200ResponseMetaFailedAccountsInner.php
+lib/Model/SearchInstagramAudio200Response.php
 lib/Model/SearchReddit200Response.php
 lib/Model/SearchTweets200Response.php
 lib/Model/SearchTweets200ResponseMeta.php
@@ -3355,3 +3363,7 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/GetInstagramAudio200ResponseTest.php
+test/Model/InstagramAudioAssetTest.php
+test/Model/InstagramPlatformDataAudioConfigurationTest.php
+test/Model/SearchInstagramAudio200ResponseTest.php
