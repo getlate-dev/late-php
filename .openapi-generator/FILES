@@ -3331,6 +3331,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/LikePost200ResponseTest.php
-test/Model/LikePostRequestTest.php
-test/Model/UnlikePost200ResponseTest.php

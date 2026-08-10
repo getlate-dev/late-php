@@ -60,7 +60,8 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
     protected static $openAPITypes = [
         'filename' => 'string',
         'content_type' => 'string',
-        'size' => 'int'
+        'size' => 'int',
+        'permanent' => 'bool'
     ];
 
     /**
@@ -73,7 +74,8 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
     protected static $openAPIFormats = [
         'filename' => null,
         'content_type' => null,
-        'size' => null
+        'size' => null,
+        'permanent' => null
     ];
 
     /**
@@ -84,7 +86,8 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
     protected static array $openAPINullables = [
         'filename' => false,
         'content_type' => false,
-        'size' => false
+        'size' => false,
+        'permanent' => false
     ];
 
     /**
@@ -175,7 +178,8 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
     protected static $attributeMap = [
         'filename' => 'filename',
         'content_type' => 'contentType',
-        'size' => 'size'
+        'size' => 'size',
+        'permanent' => 'permanent'
     ];
 
     /**
@@ -186,7 +190,8 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
     protected static $setters = [
         'filename' => 'setFilename',
         'content_type' => 'setContentType',
-        'size' => 'setSize'
+        'size' => 'setSize',
+        'permanent' => 'setPermanent'
     ];
 
     /**
@@ -197,7 +202,8 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
     protected static $getters = [
         'filename' => 'getFilename',
         'content_type' => 'getContentType',
-        'size' => 'getSize'
+        'size' => 'getSize',
+        'permanent' => 'getPermanent'
     ];
 
     /**
@@ -311,6 +317,7 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('filename', $data ?? [], null);
         $this->setIfExists('content_type', $data ?? [], null);
         $this->setIfExists('size', $data ?? [], null);
+        $this->setIfExists('permanent', $data ?? [], false);
     }
 
     /**
@@ -457,6 +464,33 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable size cannot be null');
         }
         $this->container['size'] = $size;
+
+        return $this;
+    }
+
+    /**
+     * Gets permanent
+     *
+     * @return bool|null
+     */
+    public function getPermanent()
+    {
+        return $this->container['permanent'];
+    }
+
+    /**
+     * Sets permanent
+     *
+     * @param bool|null $permanent Write the file to permanent storage instead of temporary storage. Temporary files auto-delete 7 days after upload; permanent files never expire.
+     *
+     * @return self
+     */
+    public function setPermanent($permanent)
+    {
+        if (is_null($permanent)) {
+            throw new \InvalidArgumentException('non-nullable permanent cannot be null');
+        }
+        $this->container['permanent'] = $permanent;
 
         return $this;
     }
