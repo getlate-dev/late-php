@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookPayloadCommentPost
+ * GetAdsSearchTerms200ResponsePaging
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * WebhookPayloadCommentPost Class Doc Comment
+ * GetAdsSearchTerms200ResponsePaging Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetAdsSearchTerms200ResponsePaging implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WebhookPayloadComment_post';
+    protected static $openAPIModelName = 'getAdsSearchTerms_200_response_paging';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,7 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'platform_post_id' => 'string',
-        'content' => 'string',
-        'image_url' => 'string',
-        'permalink' => 'string'
+        'next_page_token' => 'string'
     ];
 
     /**
@@ -73,11 +69,7 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'platform_post_id' => null,
-        'content' => null,
-        'image_url' => null,
-        'permalink' => null
+        'next_page_token' => null
     ];
 
     /**
@@ -86,11 +78,7 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => true,
-        'platform_post_id' => false,
-        'content' => true,
-        'image_url' => true,
-        'permalink' => true
+        'next_page_token' => true
     ];
 
     /**
@@ -179,11 +167,7 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'platform_post_id' => 'platformPostId',
-        'content' => 'content',
-        'image_url' => 'imageUrl',
-        'permalink' => 'permalink'
+        'next_page_token' => 'nextPageToken'
     ];
 
     /**
@@ -192,11 +176,7 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'platform_post_id' => 'setPlatformPostId',
-        'content' => 'setContent',
-        'image_url' => 'setImageUrl',
-        'permalink' => 'setPermalink'
+        'next_page_token' => 'setNextPageToken'
     ];
 
     /**
@@ -205,11 +185,7 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'platform_post_id' => 'getPlatformPostId',
-        'content' => 'getContent',
-        'image_url' => 'getImageUrl',
-        'permalink' => 'getPermalink'
+        'next_page_token' => 'getNextPageToken'
     ];
 
     /**
@@ -269,11 +245,7 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('platform_post_id', $data ?? [], null);
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('image_url', $data ?? [], null);
-        $this->setIfExists('permalink', $data ?? [], null);
+        $this->setIfExists('next_page_token', $data ?? [], null);
     }
 
     /**
@@ -303,21 +275,6 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null && !$this->isNullableSetToNull('id')) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['platform_post_id'] === null) {
-            $invalidProperties[] = "'platform_post_id' can't be null";
-        }
-        if ($this->container['content'] === null && !$this->isNullableSetToNull('content')) {
-            $invalidProperties[] = "'content' can't be null";
-        }
-        if ($this->container['image_url'] === null && !$this->isNullableSetToNull('image_url')) {
-            $invalidProperties[] = "'image_url' can't be null";
-        }
-        if ($this->container['permalink'] === null && !$this->isNullableSetToNull('permalink')) {
-            $invalidProperties[] = "'permalink' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -334,164 +291,35 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets id
+     * Gets next_page_token
      *
      * @return string|null
      */
-    public function getId()
+    public function getNextPageToken()
     {
-        return $this->container['id'];
+        return $this->container['next_page_token'];
     }
 
     /**
-     * Sets id
+     * Sets next_page_token
      *
-     * @param string|null $id Internal post ID (null for posts not published through Zernio)
+     * @param string|null $next_page_token Null when the last page was returned.
      *
      * @return self
      */
-    public function setId($id)
+    public function setNextPageToken($next_page_token)
     {
-        if (is_null($id)) {
-            array_push($this->openAPINullablesSetToNull, 'id');
+        if (is_null($next_page_token)) {
+            array_push($this->openAPINullablesSetToNull, 'next_page_token');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('id', $nullablesSetToNull);
+            $index = array_search('next_page_token', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets platform_post_id
-     *
-     * @return string
-     */
-    public function getPlatformPostId()
-    {
-        return $this->container['platform_post_id'];
-    }
-
-    /**
-     * Sets platform_post_id
-     *
-     * @param string $platform_post_id Platform's post ID
-     *
-     * @return self
-     */
-    public function setPlatformPostId($platform_post_id)
-    {
-        if (is_null($platform_post_id)) {
-            throw new \InvalidArgumentException('non-nullable platform_post_id cannot be null');
-        }
-        $this->container['platform_post_id'] = $platform_post_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets content
-     *
-     * @return string|null
-     */
-    public function getContent()
-    {
-        return $this->container['content'];
-    }
-
-    /**
-     * Sets content
-     *
-     * @param string|null $content Post text, from our synced copy — no platform call is made on the comment path, so null when the post was never synced.
-     *
-     * @return self
-     */
-    public function setContent($content)
-    {
-        if (is_null($content)) {
-            array_push($this->openAPINullablesSetToNull, 'content');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('content', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['content'] = $content;
-
-        return $this;
-    }
-
-    /**
-     * Gets image_url
-     *
-     * @return string|null
-     */
-    public function getImageUrl()
-    {
-        return $this->container['image_url'];
-    }
-
-    /**
-     * Sets image_url
-     *
-     * @param string|null $image_url Post thumbnail or first media item URL. Platform CDN URLs expire, fetch promptly.
-     *
-     * @return self
-     */
-    public function setImageUrl($image_url)
-    {
-        if (is_null($image_url)) {
-            array_push($this->openAPINullablesSetToNull, 'image_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('image_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['image_url'] = $image_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets permalink
-     *
-     * @return string|null
-     */
-    public function getPermalink()
-    {
-        return $this->container['permalink'];
-    }
-
-    /**
-     * Sets permalink
-     *
-     * @param string|null $permalink Public URL of the post. Null for posts published through Zernio that were never re-synced.
-     *
-     * @return self
-     */
-    public function setPermalink($permalink)
-    {
-        if (is_null($permalink)) {
-            array_push($this->openAPINullablesSetToNull, 'permalink');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('permalink', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['permalink'] = $permalink;
+        $this->container['next_page_token'] = $next_page_token;
 
         return $this;
     }

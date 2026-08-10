@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookPayloadCommentPost
+ * MetaAdsPlatformData
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * WebhookPayloadCommentPost Class Doc Comment
+ * MetaAdsPlatformData Class Doc Comment
  *
  * @category Class
+ * @description Meta (facebook/instagram) options for platformSpecificData on POST /v1/ads/boost and /v1/ads/create. Unknown keys are rejected, not dropped.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSerializable
+class MetaAdsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WebhookPayloadComment_post';
+    protected static $openAPIModelName = 'MetaAdsPlatformData';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +59,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'platform_post_id' => 'string',
-        'content' => 'string',
-        'image_url' => 'string',
-        'permalink' => 'string'
+        'bid_strategy' => '\Zernio\Model\BidStrategy',
+        'bid_amount' => 'float',
+        'roas_average_floor' => 'float'
     ];
 
     /**
@@ -73,11 +72,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'platform_post_id' => null,
-        'content' => null,
-        'image_url' => null,
-        'permalink' => null
+        'bid_strategy' => null,
+        'bid_amount' => null,
+        'roas_average_floor' => null
     ];
 
     /**
@@ -86,11 +83,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => true,
-        'platform_post_id' => false,
-        'content' => true,
-        'image_url' => true,
-        'permalink' => true
+        'bid_strategy' => false,
+        'bid_amount' => false,
+        'roas_average_floor' => false
     ];
 
     /**
@@ -179,11 +174,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'platform_post_id' => 'platformPostId',
-        'content' => 'content',
-        'image_url' => 'imageUrl',
-        'permalink' => 'permalink'
+        'bid_strategy' => 'bidStrategy',
+        'bid_amount' => 'bidAmount',
+        'roas_average_floor' => 'roasAverageFloor'
     ];
 
     /**
@@ -192,11 +185,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'platform_post_id' => 'setPlatformPostId',
-        'content' => 'setContent',
-        'image_url' => 'setImageUrl',
-        'permalink' => 'setPermalink'
+        'bid_strategy' => 'setBidStrategy',
+        'bid_amount' => 'setBidAmount',
+        'roas_average_floor' => 'setRoasAverageFloor'
     ];
 
     /**
@@ -205,11 +196,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'platform_post_id' => 'getPlatformPostId',
-        'content' => 'getContent',
-        'image_url' => 'getImageUrl',
-        'permalink' => 'getPermalink'
+        'bid_strategy' => 'getBidStrategy',
+        'bid_amount' => 'getBidAmount',
+        'roas_average_floor' => 'getRoasAverageFloor'
     ];
 
     /**
@@ -269,11 +258,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('platform_post_id', $data ?? [], null);
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('image_url', $data ?? [], null);
-        $this->setIfExists('permalink', $data ?? [], null);
+        $this->setIfExists('bid_strategy', $data ?? [], null);
+        $this->setIfExists('bid_amount', $data ?? [], null);
+        $this->setIfExists('roas_average_floor', $data ?? [], null);
     }
 
     /**
@@ -303,21 +290,6 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null && !$this->isNullableSetToNull('id')) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['platform_post_id'] === null) {
-            $invalidProperties[] = "'platform_post_id' can't be null";
-        }
-        if ($this->container['content'] === null && !$this->isNullableSetToNull('content')) {
-            $invalidProperties[] = "'content' can't be null";
-        }
-        if ($this->container['image_url'] === null && !$this->isNullableSetToNull('image_url')) {
-            $invalidProperties[] = "'image_url' can't be null";
-        }
-        if ($this->container['permalink'] === null && !$this->isNullableSetToNull('permalink')) {
-            $invalidProperties[] = "'permalink' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -334,164 +306,82 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets id
+     * Gets bid_strategy
      *
-     * @return string|null
+     * @return \Zernio\Model\BidStrategy|null
      */
-    public function getId()
+    public function getBidStrategy()
     {
-        return $this->container['id'];
+        return $this->container['bid_strategy'];
     }
 
     /**
-     * Sets id
+     * Sets bid_strategy
      *
-     * @param string|null $id Internal post ID (null for posts not published through Zernio)
+     * @param \Zernio\Model\BidStrategy|null $bid_strategy bid_strategy
      *
      * @return self
      */
-    public function setId($id)
+    public function setBidStrategy($bid_strategy)
     {
-        if (is_null($id)) {
-            array_push($this->openAPINullablesSetToNull, 'id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($bid_strategy)) {
+            throw new \InvalidArgumentException('non-nullable bid_strategy cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['bid_strategy'] = $bid_strategy;
 
         return $this;
     }
 
     /**
-     * Gets platform_post_id
+     * Gets bid_amount
      *
-     * @return string
+     * @return float|null
      */
-    public function getPlatformPostId()
+    public function getBidAmount()
     {
-        return $this->container['platform_post_id'];
+        return $this->container['bid_amount'];
     }
 
     /**
-     * Sets platform_post_id
+     * Sets bid_amount
      *
-     * @param string $platform_post_id Platform's post ID
+     * @param float|null $bid_amount Whole currency units (USD: 5 = $5.00). Required when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP.
      *
      * @return self
      */
-    public function setPlatformPostId($platform_post_id)
+    public function setBidAmount($bid_amount)
     {
-        if (is_null($platform_post_id)) {
-            throw new \InvalidArgumentException('non-nullable platform_post_id cannot be null');
+        if (is_null($bid_amount)) {
+            throw new \InvalidArgumentException('non-nullable bid_amount cannot be null');
         }
-        $this->container['platform_post_id'] = $platform_post_id;
+        $this->container['bid_amount'] = $bid_amount;
 
         return $this;
     }
 
     /**
-     * Gets content
+     * Gets roas_average_floor
      *
-     * @return string|null
+     * @return float|null
      */
-    public function getContent()
+    public function getRoasAverageFloor()
     {
-        return $this->container['content'];
+        return $this->container['roas_average_floor'];
     }
 
     /**
-     * Sets content
+     * Sets roas_average_floor
      *
-     * @param string|null $content Post text, from our synced copy — no platform call is made on the comment path, so null when the post was never synced.
+     * @param float|null $roas_average_floor Decimal ROAS multiplier (2.0 = 2.0x). Required when bidStrategy is LOWEST_COST_WITH_MIN_ROAS.
      *
      * @return self
      */
-    public function setContent($content)
+    public function setRoasAverageFloor($roas_average_floor)
     {
-        if (is_null($content)) {
-            array_push($this->openAPINullablesSetToNull, 'content');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('content', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($roas_average_floor)) {
+            throw new \InvalidArgumentException('non-nullable roas_average_floor cannot be null');
         }
-        $this->container['content'] = $content;
-
-        return $this;
-    }
-
-    /**
-     * Gets image_url
-     *
-     * @return string|null
-     */
-    public function getImageUrl()
-    {
-        return $this->container['image_url'];
-    }
-
-    /**
-     * Sets image_url
-     *
-     * @param string|null $image_url Post thumbnail or first media item URL. Platform CDN URLs expire, fetch promptly.
-     *
-     * @return self
-     */
-    public function setImageUrl($image_url)
-    {
-        if (is_null($image_url)) {
-            array_push($this->openAPINullablesSetToNull, 'image_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('image_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['image_url'] = $image_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets permalink
-     *
-     * @return string|null
-     */
-    public function getPermalink()
-    {
-        return $this->container['permalink'];
-    }
-
-    /**
-     * Sets permalink
-     *
-     * @param string|null $permalink Public URL of the post. Null for posts published through Zernio that were never re-synced.
-     *
-     * @return self
-     */
-    public function setPermalink($permalink)
-    {
-        if (is_null($permalink)) {
-            array_push($this->openAPINullablesSetToNull, 'permalink');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('permalink', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['permalink'] = $permalink;
+        $this->container['roas_average_floor'] = $roas_average_floor;
 
         return $this;
     }

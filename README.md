@@ -150,6 +150,7 @@ Class | Method | HTTP request | Description
 *AdInsightsApi* | [**generateKeywordIdeas**](docs/Api/AdInsightsApi.md#generatekeywordideas) | **POST** /v1/ads/keywords/ideas | Generate keyword ideas (Google Keyword Planner)
 *AdInsightsApi* | [**getAdAnalytics**](docs/Api/AdInsightsApi.md#getadanalytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *AdInsightsApi* | [**getAdInsightsReport**](docs/Api/AdInsightsApi.md#getadinsightsreport) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run
+*AdInsightsApi* | [**getAdsSearchTerms**](docs/Api/AdInsightsApi.md#getadssearchterms) | **GET** /v1/ads/search-terms | Google Ads search terms report
 *AdInsightsApi* | [**getCampaignAnalytics**](docs/Api/AdInsightsApi.md#getcampaignanalytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics
 *AdInsightsApi* | [**queryAdInsights**](docs/Api/AdInsightsApi.md#queryadinsights) | **GET** /v1/ads/insights | Flexible live insights query
 *AdTargetingApi* | [**estimateAdReach**](docs/Api/AdTargetingApi.md#estimateadreach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach
@@ -694,6 +695,7 @@ Class | Method | HTTP request | Description
 - [BookmarkPostRequest](docs/Model/BookmarkPostRequest.md)
 - [BoostPostRequest](docs/Model/BoostPostRequest.md)
 - [BoostPostRequestBudget](docs/Model/BoostPostRequestBudget.md)
+- [BoostPostRequestPlatformSpecificData](docs/Model/BoostPostRequestPlatformSpecificData.md)
 - [BoostPostRequestSchedule](docs/Model/BoostPostRequestSchedule.md)
 - [BoostPostRequestTargeting](docs/Model/BoostPostRequestTargeting.md)
 - [BoostPostRequestTargetingCitiesInner](docs/Model/BoostPostRequestTargetingCitiesInner.md)
@@ -1052,6 +1054,9 @@ Class | Method | HTTP request | Description
 - [GetAdTree200Response](docs/Model/GetAdTree200Response.md)
 - [GetAdsActivityLog200Response](docs/Model/GetAdsActivityLog200Response.md)
 - [GetAdsActivityLog200ResponsePaging](docs/Model/GetAdsActivityLog200ResponsePaging.md)
+- [GetAdsSearchTerms200Response](docs/Model/GetAdsSearchTerms200Response.md)
+- [GetAdsSearchTerms200ResponseDataInner](docs/Model/GetAdsSearchTerms200ResponseDataInner.md)
+- [GetAdsSearchTerms200ResponsePaging](docs/Model/GetAdsSearchTerms200ResponsePaging.md)
 - [GetAdsTimeline200Response](docs/Model/GetAdsTimeline200Response.md)
 - [GetAdsTimeline200ResponseRowsInner](docs/Model/GetAdsTimeline200ResponseRowsInner.md)
 - [GetAllAccountsHealth200Response](docs/Model/GetAllAccountsHealth200Response.md)
@@ -1592,6 +1597,7 @@ Class | Method | HTTP request | Description
 - [MarkConversationRead200Response](docs/Model/MarkConversationRead200Response.md)
 - [MediaItem](docs/Model/MediaItem.md)
 - [MediaUploadResponse](docs/Model/MediaUploadResponse.md)
+- [MetaAdsPlatformData](docs/Model/MetaAdsPlatformData.md)
 - [MetaLeadFormPlatformData](docs/Model/MetaLeadFormPlatformData.md)
 - [MetaLeadFormPlatformDataContextCard](docs/Model/MetaLeadFormPlatformDataContextCard.md)
 - [Money](docs/Model/Money.md)

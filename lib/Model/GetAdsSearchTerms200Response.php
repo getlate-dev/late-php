@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookPayloadCommentPost
+ * GetAdsSearchTerms200Response
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * WebhookPayloadCommentPost Class Doc Comment
+ * GetAdsSearchTerms200Response Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetAdsSearchTerms200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WebhookPayloadComment_post';
+    protected static $openAPIModelName = 'getAdsSearchTerms_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'platform_post_id' => 'string',
-        'content' => 'string',
-        'image_url' => 'string',
-        'permalink' => 'string'
+        'customer_id' => 'string',
+        'data' => '\Zernio\Model\GetAdsSearchTerms200ResponseDataInner[]',
+        'paging' => '\Zernio\Model\GetAdsSearchTerms200ResponsePaging'
     ];
 
     /**
@@ -73,11 +71,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'platform_post_id' => null,
-        'content' => null,
-        'image_url' => null,
-        'permalink' => null
+        'customer_id' => null,
+        'data' => null,
+        'paging' => null
     ];
 
     /**
@@ -86,11 +82,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => true,
-        'platform_post_id' => false,
-        'content' => true,
-        'image_url' => true,
-        'permalink' => true
+        'customer_id' => false,
+        'data' => false,
+        'paging' => false
     ];
 
     /**
@@ -179,11 +173,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'platform_post_id' => 'platformPostId',
-        'content' => 'content',
-        'image_url' => 'imageUrl',
-        'permalink' => 'permalink'
+        'customer_id' => 'customerId',
+        'data' => 'data',
+        'paging' => 'paging'
     ];
 
     /**
@@ -192,11 +184,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'platform_post_id' => 'setPlatformPostId',
-        'content' => 'setContent',
-        'image_url' => 'setImageUrl',
-        'permalink' => 'setPermalink'
+        'customer_id' => 'setCustomerId',
+        'data' => 'setData',
+        'paging' => 'setPaging'
     ];
 
     /**
@@ -205,11 +195,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'platform_post_id' => 'getPlatformPostId',
-        'content' => 'getContent',
-        'image_url' => 'getImageUrl',
-        'permalink' => 'getPermalink'
+        'customer_id' => 'getCustomerId',
+        'data' => 'getData',
+        'paging' => 'getPaging'
     ];
 
     /**
@@ -269,11 +257,9 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('platform_post_id', $data ?? [], null);
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('image_url', $data ?? [], null);
-        $this->setIfExists('permalink', $data ?? [], null);
+        $this->setIfExists('customer_id', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('paging', $data ?? [], null);
     }
 
     /**
@@ -303,21 +289,6 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null && !$this->isNullableSetToNull('id')) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['platform_post_id'] === null) {
-            $invalidProperties[] = "'platform_post_id' can't be null";
-        }
-        if ($this->container['content'] === null && !$this->isNullableSetToNull('content')) {
-            $invalidProperties[] = "'content' can't be null";
-        }
-        if ($this->container['image_url'] === null && !$this->isNullableSetToNull('image_url')) {
-            $invalidProperties[] = "'image_url' can't be null";
-        }
-        if ($this->container['permalink'] === null && !$this->isNullableSetToNull('permalink')) {
-            $invalidProperties[] = "'permalink' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -334,164 +305,82 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets id
+     * Gets customer_id
      *
      * @return string|null
      */
-    public function getId()
+    public function getCustomerId()
     {
-        return $this->container['id'];
+        return $this->container['customer_id'];
     }
 
     /**
-     * Sets id
+     * Sets customer_id
      *
-     * @param string|null $id Internal post ID (null for posts not published through Zernio)
+     * @param string|null $customer_id customer_id
      *
      * @return self
      */
-    public function setId($id)
+    public function setCustomerId($customer_id)
     {
-        if (is_null($id)) {
-            array_push($this->openAPINullablesSetToNull, 'id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($customer_id)) {
+            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['customer_id'] = $customer_id;
 
         return $this;
     }
 
     /**
-     * Gets platform_post_id
+     * Gets data
      *
-     * @return string
+     * @return \Zernio\Model\GetAdsSearchTerms200ResponseDataInner[]|null
      */
-    public function getPlatformPostId()
+    public function getData()
     {
-        return $this->container['platform_post_id'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets platform_post_id
+     * Sets data
      *
-     * @param string $platform_post_id Platform's post ID
+     * @param \Zernio\Model\GetAdsSearchTerms200ResponseDataInner[]|null $data data
      *
      * @return self
      */
-    public function setPlatformPostId($platform_post_id)
+    public function setData($data)
     {
-        if (is_null($platform_post_id)) {
-            throw new \InvalidArgumentException('non-nullable platform_post_id cannot be null');
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
-        $this->container['platform_post_id'] = $platform_post_id;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets content
+     * Gets paging
      *
-     * @return string|null
+     * @return \Zernio\Model\GetAdsSearchTerms200ResponsePaging|null
      */
-    public function getContent()
+    public function getPaging()
     {
-        return $this->container['content'];
+        return $this->container['paging'];
     }
 
     /**
-     * Sets content
+     * Sets paging
      *
-     * @param string|null $content Post text, from our synced copy — no platform call is made on the comment path, so null when the post was never synced.
+     * @param \Zernio\Model\GetAdsSearchTerms200ResponsePaging|null $paging paging
      *
      * @return self
      */
-    public function setContent($content)
+    public function setPaging($paging)
     {
-        if (is_null($content)) {
-            array_push($this->openAPINullablesSetToNull, 'content');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('content', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($paging)) {
+            throw new \InvalidArgumentException('non-nullable paging cannot be null');
         }
-        $this->container['content'] = $content;
-
-        return $this;
-    }
-
-    /**
-     * Gets image_url
-     *
-     * @return string|null
-     */
-    public function getImageUrl()
-    {
-        return $this->container['image_url'];
-    }
-
-    /**
-     * Sets image_url
-     *
-     * @param string|null $image_url Post thumbnail or first media item URL. Platform CDN URLs expire, fetch promptly.
-     *
-     * @return self
-     */
-    public function setImageUrl($image_url)
-    {
-        if (is_null($image_url)) {
-            array_push($this->openAPINullablesSetToNull, 'image_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('image_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['image_url'] = $image_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets permalink
-     *
-     * @return string|null
-     */
-    public function getPermalink()
-    {
-        return $this->container['permalink'];
-    }
-
-    /**
-     * Sets permalink
-     *
-     * @param string|null $permalink Public URL of the post. Null for posts published through Zernio that were never re-synced.
-     *
-     * @return self
-     */
-    public function setPermalink($permalink)
-    {
-        if (is_null($permalink)) {
-            array_push($this->openAPINullablesSetToNull, 'permalink');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('permalink', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['permalink'] = $permalink;
+        $this->container['paging'] = $paging;
 
         return $this;
     }

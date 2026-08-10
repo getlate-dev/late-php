@@ -150,6 +150,7 @@ docs/Model/BookmarkPost200Response.md
 docs/Model/BookmarkPostRequest.md
 docs/Model/BoostPostRequest.md
 docs/Model/BoostPostRequestBudget.md
+docs/Model/BoostPostRequestPlatformSpecificData.md
 docs/Model/BoostPostRequestSchedule.md
 docs/Model/BoostPostRequestTargeting.md
 docs/Model/BoostPostRequestTargetingCitiesInner.md
@@ -508,6 +509,9 @@ docs/Model/GetAdTrackingTags200Response.md
 docs/Model/GetAdTree200Response.md
 docs/Model/GetAdsActivityLog200Response.md
 docs/Model/GetAdsActivityLog200ResponsePaging.md
+docs/Model/GetAdsSearchTerms200Response.md
+docs/Model/GetAdsSearchTerms200ResponseDataInner.md
+docs/Model/GetAdsSearchTerms200ResponsePaging.md
 docs/Model/GetAdsTimeline200Response.md
 docs/Model/GetAdsTimeline200ResponseRowsInner.md
 docs/Model/GetAllAccountsHealth200Response.md
@@ -1048,6 +1052,7 @@ docs/Model/LookupSmsNumber200Response.md
 docs/Model/MarkConversationRead200Response.md
 docs/Model/MediaItem.md
 docs/Model/MediaUploadResponse.md
+docs/Model/MetaAdsPlatformData.md
 docs/Model/MetaLeadFormPlatformData.md
 docs/Model/MetaLeadFormPlatformDataContextCard.md
 docs/Model/Money.md
@@ -1821,6 +1826,7 @@ lib/Model/BookmarkPost200Response.php
 lib/Model/BookmarkPostRequest.php
 lib/Model/BoostPostRequest.php
 lib/Model/BoostPostRequestBudget.php
+lib/Model/BoostPostRequestPlatformSpecificData.php
 lib/Model/BoostPostRequestSchedule.php
 lib/Model/BoostPostRequestTargeting.php
 lib/Model/BoostPostRequestTargetingCitiesInner.php
@@ -2179,6 +2185,9 @@ lib/Model/GetAdTrackingTags200Response.php
 lib/Model/GetAdTree200Response.php
 lib/Model/GetAdsActivityLog200Response.php
 lib/Model/GetAdsActivityLog200ResponsePaging.php
+lib/Model/GetAdsSearchTerms200Response.php
+lib/Model/GetAdsSearchTerms200ResponseDataInner.php
+lib/Model/GetAdsSearchTerms200ResponsePaging.php
 lib/Model/GetAdsTimeline200Response.php
 lib/Model/GetAdsTimeline200ResponseRowsInner.php
 lib/Model/GetAllAccountsHealth200Response.php
@@ -2719,6 +2728,7 @@ lib/Model/LookupSmsNumber200Response.php
 lib/Model/MarkConversationRead200Response.php
 lib/Model/MediaItem.php
 lib/Model/MediaUploadResponse.php
+lib/Model/MetaAdsPlatformData.php
 lib/Model/MetaLeadFormPlatformData.php
 lib/Model/MetaLeadFormPlatformDataContextCard.php
 lib/Model/ModelInterface.php
@@ -3343,3 +3353,8 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/BoostPostRequestPlatformSpecificDataTest.php
+test/Model/GetAdsSearchTerms200ResponseDataInnerTest.php
+test/Model/GetAdsSearchTerms200ResponsePagingTest.php
+test/Model/GetAdsSearchTerms200ResponseTest.php
+test/Model/MetaAdsPlatformDataTest.php

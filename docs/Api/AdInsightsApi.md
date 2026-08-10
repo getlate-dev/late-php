@@ -11,6 +11,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**generateKeywordIdeas()**](AdInsightsApi.md#generateKeywordIdeas) | **POST** /v1/ads/keywords/ideas | Generate keyword ideas (Google Keyword Planner) |
 | [**getAdAnalytics()**](AdInsightsApi.md#getAdAnalytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
 | [**getAdInsightsReport()**](AdInsightsApi.md#getAdInsightsReport) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run |
+| [**getAdsSearchTerms()**](AdInsightsApi.md#getAdsSearchTerms) | **GET** /v1/ads/search-terms | Google Ads search terms report |
 | [**getCampaignAnalytics()**](AdInsightsApi.md#getCampaignAnalytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics |
 | [**queryAdInsights()**](AdInsightsApi.md#queryAdInsights) | **GET** /v1/ads/insights | Flexible live insights query |
 
@@ -313,6 +314,78 @@ try {
 ### Return type
 
 [**\Zernio\Model\GetAdInsightsReport200Response**](../Model/GetAdInsightsReport200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getAdsSearchTerms()`
+
+```php
+getAdsSearchTerms($account_id, $customer_id, $from_date, $to_date, $campaign_id, $ad_group_id, $page_token): \Zernio\Model\GetAdsSearchTerms200Response
+```
+
+Google Ads search terms report
+
+The actual search queries that triggered your ads, with matched-keyword status and spend metrics — the raw material for wasted-spend analysis and negative-keyword lists. Reads Google's `search_term_view` live; defaults to the last 30 days. Rows are ordered by cost, descending. Draws on the shared Google Ads operations budget.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AdInsightsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | Google ads SocialAccount id.
+$customer_id = 'customer_id_example'; // string | Numeric Google Ads customer id (no dashes). Defaults to the account's connected customer.
+$from_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Defaults to 30 days ago.
+$to_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Defaults to today.
+$campaign_id = 'campaign_id_example'; // string | Numeric Google campaign id filter.
+$ad_group_id = 'ad_group_id_example'; // string | Numeric Google ad group id filter.
+$page_token = 'page_token_example'; // string | Cursor from paging.nextPageToken of the previous page.
+
+try {
+    $result = $apiInstance->getAdsSearchTerms($account_id, $customer_id, $from_date, $to_date, $campaign_id, $ad_group_id, $page_token);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdInsightsApi->getAdsSearchTerms: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| Google ads SocialAccount id. | |
+| **customer_id** | **string**| Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. | [optional] |
+| **from_date** | **\DateTime**| Defaults to 30 days ago. | [optional] |
+| **to_date** | **\DateTime**| Defaults to today. | [optional] |
+| **campaign_id** | **string**| Numeric Google campaign id filter. | [optional] |
+| **ad_group_id** | **string**| Numeric Google ad group id filter. | [optional] |
+| **page_token** | **string**| Cursor from paging.nextPageToken of the previous page. | [optional] |
+
+### Return type
+
+[**\Zernio\Model\GetAdsSearchTerms200Response**](../Model/GetAdsSearchTerms200Response.md)
 
 ### Authorization
 

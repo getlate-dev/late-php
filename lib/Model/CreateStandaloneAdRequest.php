@@ -134,7 +134,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'roas_average_floor' => 'float',
         'value_rule_set_id' => 'string',
         'value_rules_applied' => 'bool',
-        'platform_specific_data' => '\Zernio\Model\LinkedInAdsPlatformData',
+        'platform_specific_data' => '\Zernio\Model\BoostPostRequestPlatformSpecificData',
         'dsa_beneficiary' => 'string',
         'dsa_payor' => 'string',
         'brand_identity' => '\Zernio\Model\CreateStandaloneAdRequestBrandIdentity',
@@ -3481,6 +3481,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
      * Gets bid_strategy
      *
      * @return \Zernio\Model\BidStrategy|null
+     * @deprecated
      */
     public function getBidStrategy()
     {
@@ -3490,9 +3491,10 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets bid_strategy
      *
-     * @param \Zernio\Model\BidStrategy|null $bid_strategy Meta bid strategy applied to the ad set.
+     * @param \Zernio\Model\BidStrategy|null $bid_strategy Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Meta bid strategy applied to the ad set.
      *
      * @return self
+     * @deprecated
      */
     public function setBidStrategy($bid_strategy)
     {
@@ -3508,6 +3510,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
      * Gets bid_amount
      *
      * @return float|null
+     * @deprecated
      */
     public function getBidAmount()
     {
@@ -3517,9 +3520,10 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets bid_amount
      *
-     * @param float|null $bid_amount Bid cap in WHOLE currency units (USD: 5 = $5.00; JPY: 100 = ¥100). Required when `bidStrategy` is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`.
+     * @param float|null $bid_amount Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Bid cap in WHOLE currency units (USD: 5 = $5.00; JPY: 100 = ¥100). Required when `bidStrategy` is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`.
      *
      * @return self
+     * @deprecated
      */
     public function setBidAmount($bid_amount)
     {
@@ -3535,6 +3539,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
      * Gets roas_average_floor
      *
      * @return float|null
+     * @deprecated
      */
     public function getRoasAverageFloor()
     {
@@ -3544,9 +3549,10 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets roas_average_floor
      *
-     * @param float|null $roas_average_floor Minimum ROAS as a decimal multiplier (e.g. 2.0 = 2.0x ROAS). Required when `bidStrategy` is `LOWEST_COST_WITH_MIN_ROAS`. Sent to Meta as `bid_constraints.roas_average_floor` × 10000.
+     * @param float|null $roas_average_floor Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Minimum ROAS as a decimal multiplier (e.g. 2.0 = 2.0x ROAS). Required when `bidStrategy` is `LOWEST_COST_WITH_MIN_ROAS`. Sent to Meta as `bid_constraints.roas_average_floor` × 10000.
      *
      * @return self
+     * @deprecated
      */
     public function setRoasAverageFloor($roas_average_floor)
     {
@@ -3620,7 +3626,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets platform_specific_data
      *
-     * @return \Zernio\Model\LinkedInAdsPlatformData|null
+     * @return \Zernio\Model\BoostPostRequestPlatformSpecificData|null
      */
     public function getPlatformSpecificData()
     {
@@ -3630,7 +3636,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets platform_specific_data
      *
-     * @param \Zernio\Model\LinkedInAdsPlatformData|null $platform_specific_data platform_specific_data
+     * @param \Zernio\Model\BoostPostRequestPlatformSpecificData|null $platform_specific_data platform_specific_data
      *
      * @return self
      */
