@@ -596,7 +596,7 @@ class UpdateAdSetRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets bid_amount
      *
-     * @param float|null $bid_amount Bid cap in WHOLE currency units (USD: 5 = $5.00; JPY: 100 = ¥100). Required when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP. Internally converted to Meta's smallest-denomination integer, or (on OpenAI) to micros (× 1,000,000).
+     * @param float|null $bid_amount Bid cap in WHOLE currency units (USD: 5 = $5.00; JPY: 100 = ¥100). Required when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP. Internally converted to Meta's smallest-denomination integer, or (on OpenAI) to micros (× 1,000,000). Meta only: may be sent alone, WITHOUT bidStrategy, to update the cap amount on an ad set whose parent campaign is COST_CAP or LOWEST_COST_WITH_BID_CAP (the strategy is inherited from the campaign and is left untouched).
      *
      * @return self
      */

@@ -134,7 +134,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'roas_average_floor' => 'float',
         'value_rule_set_id' => 'string',
         'value_rules_applied' => 'bool',
-        'platform_specific_data' => '\Zernio\Model\BoostPostRequestPlatformSpecificData',
+        'platform_specific_data' => '\Zernio\Model\CreateStandaloneAdRequestPlatformSpecificData',
         'dsa_beneficiary' => 'string',
         'dsa_payor' => 'string',
         'brand_identity' => '\Zernio\Model\CreateStandaloneAdRequestBrandIdentity',
@@ -3520,7 +3520,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets bid_amount
      *
-     * @param float|null $bid_amount Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Bid cap in WHOLE currency units (USD: 5 = $5.00; JPY: 100 = ¥100). Required when `bidStrategy` is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`.
+     * @param float|null $bid_amount Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Bid cap in WHOLE currency units (USD: 5 = $5.00; JPY: 100 = ¥100). Required when `bidStrategy` is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`. Meta only: sending `bidAmount` WITHOUT `bidStrategy` requires `existingCampaignId` (400 otherwise), and sets the new ad set's cap under the joined campaign's COST_CAP / LOWEST_COST_WITH_BID_CAP parent. The strategy itself is inherited from the campaign. Restating bidStrategy here is accepted but has no effect on the ad set.  Rejected with 400 in `adSetId` attach mode: that shape inherits its cap from the platform. Use `PUT /v1/ads/ad-sets/{adSetId}` there instead.
      *
      * @return self
      * @deprecated
@@ -3549,7 +3549,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets roas_average_floor
      *
-     * @param float|null $roas_average_floor Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Minimum ROAS as a decimal multiplier (e.g. 2.0 = 2.0x ROAS). Required when `bidStrategy` is `LOWEST_COST_WITH_MIN_ROAS`. Sent to Meta as `bid_constraints.roas_average_floor` × 10000.
+     * @param float|null $roas_average_floor Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Minimum ROAS as a decimal multiplier (e.g. 2.0 = 2.0x ROAS). Required when `bidStrategy` is `LOWEST_COST_WITH_MIN_ROAS`. Sending it without `bidStrategy` is a 400. Sent to Meta as `bid_constraints.roas_average_floor` × 10000. Known gap: a CBO campaign's ROAS floor lives on the campaign only (set via `POST /v1/ads/campaigns`); there is no supported way to set it while joining a CBO campaign here.
      *
      * @return self
      * @deprecated
@@ -3626,7 +3626,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets platform_specific_data
      *
-     * @return \Zernio\Model\BoostPostRequestPlatformSpecificData|null
+     * @return \Zernio\Model\CreateStandaloneAdRequestPlatformSpecificData|null
      */
     public function getPlatformSpecificData()
     {
@@ -3636,7 +3636,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets platform_specific_data
      *
-     * @param \Zernio\Model\BoostPostRequestPlatformSpecificData|null $platform_specific_data platform_specific_data
+     * @param \Zernio\Model\CreateStandaloneAdRequestPlatformSpecificData|null $platform_specific_data platform_specific_data
      *
      * @return self
      */

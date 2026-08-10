@@ -1,4 +1,4 @@
-# # BoostPostRequestPlatformSpecificData
+# # CreateStandaloneAdRequestPlatformSpecificData
 
 ## Properties
 

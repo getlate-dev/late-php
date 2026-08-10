@@ -1,6 +1,6 @@
 <?php
 /**
- * BoostPostRequestPlatformSpecificData
+ * CreateStandaloneAdRequestPlatformSpecificData
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * BoostPostRequestPlatformSpecificData Class Doc Comment
+ * CreateStandaloneAdRequestPlatformSpecificData Class Doc Comment
  *
  * @category Class
- * @description Platform-specific options. The platform is derived from &#x60;accountId&#x60;; sending options for a different platform returns a 400. LinkedIn (campaign bidding and delivery controls) and Meta (the bid trio) have options today.  **Meta**: &#x60;bidStrategy&#x60;, &#x60;bidAmount&#x60; and &#x60;roasAverageFloor&#x60; may be sent here instead of at the root — the preferred home going forward. Sending the bid fields in BOTH places returns a 400 (&#x60;mutually_exclusive_fields&#x60;).
+ * @description Platform-specific options. The platform is derived from &#x60;accountId&#x60;; sending options for a different platform returns a 400. LinkedIn (campaign bidding and delivery controls) and Meta (the bid trio) have options today.  **Meta**: &#x60;bidStrategy&#x60;, &#x60;bidAmount&#x60; and &#x60;roasAverageFloor&#x60; may be sent here instead of at the root — the preferred home going forward. Sending the bid fields in BOTH places returns a 400 (&#x60;mutually_exclusive_fields&#x60;), and sending any of them in &#x60;adSetId&#x60; attach mode is a 400 too (the ad set already has its bid).
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class BoostPostRequestPlatformSpecificData implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateStandaloneAdRequestPlatformSpecificData implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class BoostPostRequestPlatformSpecificData implements ModelInterface, ArrayAcces
       *
       * @var string
       */
-    protected static $openAPIModelName = 'boostPost_request_platformSpecificData';
+    protected static $openAPIModelName = 'createStandaloneAd_request_platformSpecificData';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

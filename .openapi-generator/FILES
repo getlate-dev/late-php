@@ -334,6 +334,7 @@ docs/Model/CreateStandaloneAdRequestPlacementAssets.md
 docs/Model/CreateStandaloneAdRequestPlacementAssetsRulesInner.md
 docs/Model/CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements.md
 docs/Model/CreateStandaloneAdRequestPlacements.md
+docs/Model/CreateStandaloneAdRequestPlatformSpecificData.md
 docs/Model/CreateStandaloneAdRequestPromotedObject.md
 docs/Model/CreateStandaloneAdRequestRegionsInner.md
 docs/Model/CreateStandaloneAdRequestTracking.md
@@ -2010,6 +2011,7 @@ lib/Model/CreateStandaloneAdRequestPlacementAssets.php
 lib/Model/CreateStandaloneAdRequestPlacementAssetsRulesInner.php
 lib/Model/CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements.php
 lib/Model/CreateStandaloneAdRequestPlacements.php
+lib/Model/CreateStandaloneAdRequestPlatformSpecificData.php
 lib/Model/CreateStandaloneAdRequestPromotedObject.php
 lib/Model/CreateStandaloneAdRequestRegionsInner.php
 lib/Model/CreateStandaloneAdRequestTracking.php
@@ -3353,8 +3355,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/BoostPostRequestPlatformSpecificDataTest.php
-test/Model/GetAdsSearchTerms200ResponseDataInnerTest.php
-test/Model/GetAdsSearchTerms200ResponsePagingTest.php
-test/Model/GetAdsSearchTerms200ResponseTest.php
-test/Model/MetaAdsPlatformDataTest.php
+test/Model/CreateStandaloneAdRequestPlatformSpecificDataTest.php

@@ -824,7 +824,7 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets bid_amount
      *
-     * @param float|null $bid_amount Whole currency units (USD: 5 = $5.00). Required for LOWEST_COST_WITH_BID_CAP and COST_CAP; ignored otherwise.
+     * @param float|null $bid_amount Whole currency units (USD: 5 = $5.00). Required for LOWEST_COST_WITH_BID_CAP and COST_CAP; ignored otherwise. Validated here but NOT stored by Meta: the campaign object has no bid_amount field, only bid_strategy lives on it. The amount takes effect once an ad set joins this campaign (existingCampaignId on POST /v1/ads/create) and supplies its own bidAmount there.
      *
      * @return self
      */
