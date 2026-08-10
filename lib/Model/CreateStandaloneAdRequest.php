@@ -71,6 +71,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'buying_type' => 'string',
         'rf_prediction_id' => 'string',
         'creative_features' => 'array<string,string>',
+        'multi_advertiser' => 'string',
         'validate_only' => 'bool',
         'budget_amount' => 'float',
         'budget_type' => 'string',
@@ -162,6 +163,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'buying_type' => null,
         'rf_prediction_id' => null,
         'creative_features' => null,
+        'multi_advertiser' => null,
         'validate_only' => null,
         'budget_amount' => null,
         'budget_type' => null,
@@ -251,6 +253,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'buying_type' => false,
         'rf_prediction_id' => false,
         'creative_features' => false,
+        'multi_advertiser' => false,
         'validate_only' => false,
         'budget_amount' => false,
         'budget_type' => false,
@@ -420,6 +423,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'buying_type' => 'buyingType',
         'rf_prediction_id' => 'rfPredictionId',
         'creative_features' => 'creativeFeatures',
+        'multi_advertiser' => 'multiAdvertiser',
         'validate_only' => 'validateOnly',
         'budget_amount' => 'budgetAmount',
         'budget_type' => 'budgetType',
@@ -509,6 +513,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'buying_type' => 'setBuyingType',
         'rf_prediction_id' => 'setRfPredictionId',
         'creative_features' => 'setCreativeFeatures',
+        'multi_advertiser' => 'setMultiAdvertiser',
         'validate_only' => 'setValidateOnly',
         'budget_amount' => 'setBudgetAmount',
         'budget_type' => 'setBudgetType',
@@ -598,6 +603,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'buying_type' => 'getBuyingType',
         'rf_prediction_id' => 'getRfPredictionId',
         'creative_features' => 'getCreativeFeatures',
+        'multi_advertiser' => 'getMultiAdvertiser',
         'validate_only' => 'getValidateOnly',
         'budget_amount' => 'getBudgetAmount',
         'budget_type' => 'getBudgetType',
@@ -723,6 +729,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     public const BUYING_TYPE_RESERVED = 'RESERVED';
     public const CREATIVE_FEATURES_OPT_IN = 'OPT_IN';
     public const CREATIVE_FEATURES_OPT_OUT = 'OPT_OUT';
+    public const MULTI_ADVERTISER_OPT_IN = 'OPT_IN';
+    public const MULTI_ADVERTISER_OPT_OUT = 'OPT_OUT';
     public const BUDGET_TYPE_DAILY = 'daily';
     public const BUDGET_TYPE_LIFETIME = 'lifetime';
     public const STATUS_ACTIVE = 'ACTIVE';
@@ -827,6 +835,19 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         return [
             self::CREATIVE_FEATURES_OPT_IN,
             self::CREATIVE_FEATURES_OPT_OUT,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getMultiAdvertiserAllowableValues()
+    {
+        return [
+            self::MULTI_ADVERTISER_OPT_IN,
+            self::MULTI_ADVERTISER_OPT_OUT,
         ];
     }
 
@@ -1027,6 +1048,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('buying_type', $data ?? [], null);
         $this->setIfExists('rf_prediction_id', $data ?? [], null);
         $this->setIfExists('creative_features', $data ?? [], null);
+        $this->setIfExists('multi_advertiser', $data ?? [], null);
         $this->setIfExists('validate_only', $data ?? [], null);
         $this->setIfExists('budget_amount', $data ?? [], null);
         $this->setIfExists('budget_type', $data ?? [], null);
@@ -1163,6 +1185,15 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'buying_type', must be one of '%s'",
                 $this->container['buying_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getMultiAdvertiserAllowableValues();
+        if (!is_null($this->container['multi_advertiser']) && !in_array($this->container['multi_advertiser'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'multi_advertiser', must be one of '%s'",
+                $this->container['multi_advertiser'],
                 implode("', '", $allowedValues)
             );
         }
@@ -1723,6 +1754,43 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             );
         }
         $this->container['creative_features'] = $creative_features;
+
+        return $this;
+    }
+
+    /**
+     * Gets multi_advertiser
+     *
+     * @return string|null
+     */
+    public function getMultiAdvertiser()
+    {
+        return $this->container['multi_advertiser'];
+    }
+
+    /**
+     * Sets multi_advertiser
+     *
+     * @param string|null $multi_advertiser Meta only. Multi-advertiser ads: whether Meta may show this ad alongside other advertisers' in one unit. Meta auto-enrols since Aug 2024, so send OPT_OUT to leave. It is a top-level creative field, NOT a `creativeFeatures` key — Meta rejects it there.
+     *
+     * @return self
+     */
+    public function setMultiAdvertiser($multi_advertiser)
+    {
+        if (is_null($multi_advertiser)) {
+            throw new \InvalidArgumentException('non-nullable multi_advertiser cannot be null');
+        }
+        $allowedValues = $this->getMultiAdvertiserAllowableValues();
+        if (!in_array($multi_advertiser, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'multi_advertiser', must be one of '%s'",
+                    $multi_advertiser,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['multi_advertiser'] = $multi_advertiser;
 
         return $this;
     }

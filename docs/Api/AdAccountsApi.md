@@ -6,6 +6,8 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**createCustomConversion()**](AdAccountsApi.md#createCustomConversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create or reuse a custom conversion |
+| [**createHighDemandPeriod()**](AdAccountsApi.md#createHighDemandPeriod) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase |
 | [**createValueRuleSet()**](AdAccountsApi.md#createValueRuleSet) | **POST** /v1/ads/value-rule-sets | Create a value rule set |
 | [**deleteValueRuleSet()**](AdAccountsApi.md#deleteValueRuleSet) | **DELETE** /v1/ads/value-rule-sets/{valueRuleSetId} | Delete a value rule set |
 | [**getAdAccountFinance()**](AdAccountsApi.md#getAdAccountFinance) | **GET** /v1/ads/accounts/finance | Ad account finances |
@@ -18,12 +20,135 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**listAdLabels()**](AdAccountsApi.md#listAdLabels) | **GET** /v1/ads/labels | Ad labels |
 | [**listAdStudies()**](AdAccountsApi.md#listAdStudies) | **GET** /v1/ads/studies | A/B tests and lift studies |
 | [**listAdsBusinessCenters()**](AdAccountsApi.md#listAdsBusinessCenters) | **GET** /v1/ads/business-centers | List TikTok Business Centers |
+| [**listCustomConversions()**](AdAccountsApi.md#listCustomConversions) | **GET** /v1/accounts/{accountId}/custom-conversions | List custom conversions |
 | [**listHighDemandPeriods()**](AdAccountsApi.md#listHighDemandPeriods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules |
 | [**listMetaBusinesses()**](AdAccountsApi.md#listMetaBusinesses) | **GET** /v1/ads/businesses | Businesses list |
 | [**listValueRuleSets()**](AdAccountsApi.md#listValueRuleSets) | **GET** /v1/ads/value-rule-sets | List value rule sets |
 | [**updateAdAccount()**](AdAccountsApi.md#updateAdAccount) | **PATCH** /v1/ads/accounts | Update ad account settings |
 | [**updateValueRuleSet()**](AdAccountsApi.md#updateValueRuleSet) | **PUT** /v1/ads/value-rule-sets/{valueRuleSetId} | Replace a value rule set |
 
+
+## `createCustomConversion()`
+
+```php
+createCustomConversion($account_id, $create_custom_conversion_request): \Zernio\Model\CustomConversionResult
+```
+
+Create or reuse a custom conversion
+
+Provision the Meta custom conversion an ads flow optimises toward, and hand back the `customConversionId` for `promotedObject.customConversionId` on POST /v1/ads/create. Removes the manual \"create it in Ads Manager first\" step.  **Reuse is ours, not Meta's.** Meta's create is not idempotent, so a retried request would otherwise mint a duplicate carrying none of the original's optimisation history. A non-archived conversion with the same `name` on the same `pixelId` is returned instead of created, with `reused: true` and a 200 rather than a 201.  `rule` is forwarded verbatim in Meta's own grammar (e.g. `{\"url\": {\"i_contains\": \"thank-you\"}}`); Meta validates it and rejects a malformed one with \"A conversion rule is required at creation time\".
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AdAccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | Meta ads SocialAccount id.
+$create_custom_conversion_request = new \Zernio\Model\CreateCustomConversionRequest(); // \Zernio\Model\CreateCustomConversionRequest
+
+try {
+    $result = $apiInstance->createCustomConversion($account_id, $create_custom_conversion_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdAccountsApi->createCustomConversion: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| Meta ads SocialAccount id. | |
+| **create_custom_conversion_request** | [**\Zernio\Model\CreateCustomConversionRequest**](../Model/CreateCustomConversionRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\CustomConversionResult**](../Model/CustomConversionResult.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createHighDemandPeriod()`
+
+```php
+createHighDemandPeriod($create_high_demand_period_request): \Zernio\Model\CreateHighDemandPeriod201Response
+```
+
+Schedule a budget increase
+
+Pre-schedule a temporary budget increase (Black Friday, a launch, a sale) instead of editing the budget by hand on the day. Same target rule as the GET: exactly one of `campaignId` / `adSetId`.  Two Meta constraints worth knowing before you call it. `timeStart` / `timeEnd` must fall on a 15-minute boundary, and a campaign cannot mix `ABSOLUTE` and `MULTIPLIER` across its schedules — the second type is rejected with \"Can't mix your budget scaling selection\". Window rules (must sit inside the campaign's run dates, minimum lead time, no overlap) are Meta's and its message is forwarded verbatim.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AdAccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$create_high_demand_period_request = new \Zernio\Model\CreateHighDemandPeriodRequest(); // \Zernio\Model\CreateHighDemandPeriodRequest
+
+try {
+    $result = $apiInstance->createHighDemandPeriod($create_high_demand_period_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdAccountsApi->createHighDemandPeriod: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **create_high_demand_period_request** | [**\Zernio\Model\CreateHighDemandPeriodRequest**](../Model/CreateHighDemandPeriodRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\CreateHighDemandPeriod201Response**](../Model/CreateHighDemandPeriod201Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createValueRuleSet()`
 
@@ -777,6 +902,68 @@ try {
 ### Return type
 
 [**\Zernio\Model\ListAdsBusinessCenters200Response**](../Model/ListAdsBusinessCenters200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listCustomConversions()`
+
+```php
+listCustomConversions($account_id, $ad_account_id): \Zernio\Model\ListCustomConversions200Response
+```
+
+List custom conversions
+
+The ad account's Meta custom conversions, including archived ones (`isArchived`).
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AdAccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | Meta ads SocialAccount id.
+$ad_account_id = 'ad_account_id_example'; // string | Meta ad account id (act_<n>).
+
+try {
+    $result = $apiInstance->listCustomConversions($account_id, $ad_account_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdAccountsApi->listCustomConversions: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| Meta ads SocialAccount id. | |
+| **ad_account_id** | **string**| Meta ad account id (act_&lt;n&gt;). | |
+
+### Return type
+
+[**\Zernio\Model\ListCustomConversions200Response**](../Model/ListCustomConversions200Response.md)
 
 ### Authorization
 

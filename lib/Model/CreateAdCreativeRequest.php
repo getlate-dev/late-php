@@ -69,7 +69,8 @@ class CreateAdCreativeRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'image_hash' => 'string',
         'carousel_cards' => '\Zernio\Model\CreateAdCreativeRequestCarouselCardsInner[]',
         'url_tags' => 'string',
-        'creative_features' => 'array<string,string>'
+        'creative_features' => 'array<string,string>',
+        'multi_advertiser' => 'string'
     ];
 
     /**
@@ -91,7 +92,8 @@ class CreateAdCreativeRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'image_hash' => null,
         'carousel_cards' => null,
         'url_tags' => null,
-        'creative_features' => null
+        'creative_features' => null,
+        'multi_advertiser' => null
     ];
 
     /**
@@ -111,7 +113,8 @@ class CreateAdCreativeRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'image_hash' => false,
         'carousel_cards' => false,
         'url_tags' => false,
-        'creative_features' => false
+        'creative_features' => false,
+        'multi_advertiser' => false
     ];
 
     /**
@@ -211,7 +214,8 @@ class CreateAdCreativeRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'image_hash' => 'imageHash',
         'carousel_cards' => 'carouselCards',
         'url_tags' => 'urlTags',
-        'creative_features' => 'creativeFeatures'
+        'creative_features' => 'creativeFeatures',
+        'multi_advertiser' => 'multiAdvertiser'
     ];
 
     /**
@@ -231,7 +235,8 @@ class CreateAdCreativeRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'image_hash' => 'setImageHash',
         'carousel_cards' => 'setCarouselCards',
         'url_tags' => 'setUrlTags',
-        'creative_features' => 'setCreativeFeatures'
+        'creative_features' => 'setCreativeFeatures',
+        'multi_advertiser' => 'setMultiAdvertiser'
     ];
 
     /**
@@ -251,7 +256,8 @@ class CreateAdCreativeRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'image_hash' => 'getImageHash',
         'carousel_cards' => 'getCarouselCards',
         'url_tags' => 'getUrlTags',
-        'creative_features' => 'getCreativeFeatures'
+        'creative_features' => 'getCreativeFeatures',
+        'multi_advertiser' => 'getMultiAdvertiser'
     ];
 
     /**
@@ -297,6 +303,8 @@ class CreateAdCreativeRequest implements ModelInterface, ArrayAccess, \JsonSeria
 
     public const CREATIVE_FEATURES_OPT_IN = 'OPT_IN';
     public const CREATIVE_FEATURES_OPT_OUT = 'OPT_OUT';
+    public const MULTI_ADVERTISER_OPT_IN = 'OPT_IN';
+    public const MULTI_ADVERTISER_OPT_OUT = 'OPT_OUT';
 
     /**
      * Gets allowable values of the enum
@@ -308,6 +316,19 @@ class CreateAdCreativeRequest implements ModelInterface, ArrayAccess, \JsonSeria
         return [
             self::CREATIVE_FEATURES_OPT_IN,
             self::CREATIVE_FEATURES_OPT_OUT,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getMultiAdvertiserAllowableValues()
+    {
+        return [
+            self::MULTI_ADVERTISER_OPT_IN,
+            self::MULTI_ADVERTISER_OPT_OUT,
         ];
     }
 
@@ -338,6 +359,7 @@ class CreateAdCreativeRequest implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('carousel_cards', $data ?? [], null);
         $this->setIfExists('url_tags', $data ?? [], null);
         $this->setIfExists('creative_features', $data ?? [], null);
+        $this->setIfExists('multi_advertiser', $data ?? [], null);
     }
 
     /**
@@ -396,6 +418,15 @@ class CreateAdCreativeRequest implements ModelInterface, ArrayAccess, \JsonSeria
 
         if (!is_null($this->container['carousel_cards']) && (count($this->container['carousel_cards']) < 2)) {
             $invalidProperties[] = "invalid value for 'carousel_cards', number of items must be greater than or equal to 2.";
+        }
+
+        $allowedValues = $this->getMultiAdvertiserAllowableValues();
+        if (!is_null($this->container['multi_advertiser']) && !in_array($this->container['multi_advertiser'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'multi_advertiser', must be one of '%s'",
+                $this->container['multi_advertiser'],
+                implode("', '", $allowedValues)
+            );
         }
 
         return $invalidProperties;
@@ -757,6 +788,43 @@ class CreateAdCreativeRequest implements ModelInterface, ArrayAccess, \JsonSeria
             );
         }
         $this->container['creative_features'] = $creative_features;
+
+        return $this;
+    }
+
+    /**
+     * Gets multi_advertiser
+     *
+     * @return string|null
+     */
+    public function getMultiAdvertiser()
+    {
+        return $this->container['multi_advertiser'];
+    }
+
+    /**
+     * Sets multi_advertiser
+     *
+     * @param string|null $multi_advertiser Meta only. Multi-advertiser ads: whether Meta may show this ad alongside other advertisers' in one unit. Meta auto-enrols since Aug 2024, so send OPT_OUT to leave. It is a top-level creative field, NOT a `creativeFeatures` key — Meta rejects it there.
+     *
+     * @return self
+     */
+    public function setMultiAdvertiser($multi_advertiser)
+    {
+        if (is_null($multi_advertiser)) {
+            throw new \InvalidArgumentException('non-nullable multi_advertiser cannot be null');
+        }
+        $allowedValues = $this->getMultiAdvertiserAllowableValues();
+        if (!in_array($multi_advertiser, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'multi_advertiser', must be one of '%s'",
+                    $multi_advertiser,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['multi_advertiser'] = $multi_advertiser;
 
         return $this;
     }

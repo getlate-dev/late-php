@@ -249,6 +249,7 @@ docs/Model/CreateConversionDestination201Response.md
 docs/Model/CreateConversionDestinationRequest.md
 docs/Model/CreateConversionDestinationRequestValue.md
 docs/Model/CreateCtwaAd201Response.md
+docs/Model/CreateCustomConversionRequest.md
 docs/Model/CreateCustomField200Response.md
 docs/Model/CreateCustomFieldRequest.md
 docs/Model/CreateDiscordGuildRole201Response.md
@@ -266,6 +267,8 @@ docs/Model/CreateGoogleBusinessMedia200Response.md
 docs/Model/CreateGoogleBusinessMediaRequest.md
 docs/Model/CreateGoogleBusinessPlaceAction200Response.md
 docs/Model/CreateGoogleBusinessPlaceActionRequest.md
+docs/Model/CreateHighDemandPeriod201Response.md
+docs/Model/CreateHighDemandPeriodRequest.md
 docs/Model/CreateInboxConversation201Response.md
 docs/Model/CreateInboxConversation201ResponseData.md
 docs/Model/CreateInboxConversation400Response.md
@@ -377,6 +380,8 @@ docs/Model/CtwaAdRequestBodyVideo.md
 docs/Model/CtwaAdRequestBodyZipsInner.md
 docs/Model/CtwaMultiResponse.md
 docs/Model/CtwaSingleResponse.md
+docs/Model/CustomConversion.md
+docs/Model/CustomConversionResult.md
 docs/Model/DeactivateSmsRegistration200Response.md
 docs/Model/DeleteAccountGroup200Response.md
 docs/Model/DeleteAdCampaign200Response.md
@@ -914,6 +919,7 @@ docs/Model/ListConversionAssociations200Response.md
 docs/Model/ListConversionAssociations200ResponseAssociationsInner.md
 docs/Model/ListConversionDestinations200Response.md
 docs/Model/ListConversionDestinations200ResponseDestinationsInner.md
+docs/Model/ListCustomConversions200Response.md
 docs/Model/ListCustomFields200Response.md
 docs/Model/ListCustomFields200ResponseFieldsInner.md
 docs/Model/ListDiscordGuildMembers200Response.md
@@ -1914,6 +1920,7 @@ lib/Model/CreateConversionDestination201Response.php
 lib/Model/CreateConversionDestinationRequest.php
 lib/Model/CreateConversionDestinationRequestValue.php
 lib/Model/CreateCtwaAd201Response.php
+lib/Model/CreateCustomConversionRequest.php
 lib/Model/CreateCustomField200Response.php
 lib/Model/CreateCustomFieldRequest.php
 lib/Model/CreateDiscordGuildRole201Response.php
@@ -1931,6 +1938,8 @@ lib/Model/CreateGoogleBusinessMedia200Response.php
 lib/Model/CreateGoogleBusinessMediaRequest.php
 lib/Model/CreateGoogleBusinessPlaceAction200Response.php
 lib/Model/CreateGoogleBusinessPlaceActionRequest.php
+lib/Model/CreateHighDemandPeriod201Response.php
+lib/Model/CreateHighDemandPeriodRequest.php
 lib/Model/CreateInboxConversation201Response.php
 lib/Model/CreateInboxConversation201ResponseData.php
 lib/Model/CreateInboxConversation400Response.php
@@ -2042,6 +2051,8 @@ lib/Model/CtwaAdRequestBodyVideo.php
 lib/Model/CtwaAdRequestBodyZipsInner.php
 lib/Model/CtwaMultiResponse.php
 lib/Model/CtwaSingleResponse.php
+lib/Model/CustomConversion.php
+lib/Model/CustomConversionResult.php
 lib/Model/DeactivateSmsRegistration200Response.php
 lib/Model/DeleteAccountGroup200Response.php
 lib/Model/DeleteAdCampaign200Response.php
@@ -2579,6 +2590,7 @@ lib/Model/ListConversionAssociations200Response.php
 lib/Model/ListConversionAssociations200ResponseAssociationsInner.php
 lib/Model/ListConversionDestinations200Response.php
 lib/Model/ListConversionDestinations200ResponseDestinationsInner.php
+lib/Model/ListCustomConversions200Response.php
 lib/Model/ListCustomFields200Response.php
 lib/Model/ListCustomFields200ResponseFieldsInner.php
 lib/Model/ListDiscordGuildMembers200Response.php
@@ -3331,3 +3343,9 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/CreateCustomConversionRequestTest.php
+test/Model/CreateHighDemandPeriod201ResponseTest.php
+test/Model/CreateHighDemandPeriodRequestTest.php
+test/Model/CustomConversionResultTest.php
+test/Model/CustomConversionTest.php
+test/Model/ListCustomConversions200ResponseTest.php
