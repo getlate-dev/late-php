@@ -124,6 +124,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'audience_id' => 'string',
         'campaign_type' => 'string',
         'keywords' => 'string[]',
+        'negative_keywords' => 'string[]',
         'additional_headlines' => 'string[]',
         'additional_descriptions' => 'string[]',
         'advantage_audience' => 'int',
@@ -216,6 +217,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'audience_id' => null,
         'campaign_type' => null,
         'keywords' => null,
+        'negative_keywords' => null,
         'additional_headlines' => null,
         'additional_descriptions' => null,
         'advantage_audience' => null,
@@ -306,6 +308,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'audience_id' => false,
         'campaign_type' => false,
         'keywords' => false,
+        'negative_keywords' => false,
         'additional_headlines' => false,
         'additional_descriptions' => false,
         'advantage_audience' => false,
@@ -476,6 +479,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'audience_id' => 'audienceId',
         'campaign_type' => 'campaignType',
         'keywords' => 'keywords',
+        'negative_keywords' => 'negativeKeywords',
         'additional_headlines' => 'additionalHeadlines',
         'additional_descriptions' => 'additionalDescriptions',
         'advantage_audience' => 'advantageAudience',
@@ -566,6 +570,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'audience_id' => 'setAudienceId',
         'campaign_type' => 'setCampaignType',
         'keywords' => 'setKeywords',
+        'negative_keywords' => 'setNegativeKeywords',
         'additional_headlines' => 'setAdditionalHeadlines',
         'additional_descriptions' => 'setAdditionalDescriptions',
         'advantage_audience' => 'setAdvantageAudience',
@@ -656,6 +661,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'audience_id' => 'getAudienceId',
         'campaign_type' => 'getCampaignType',
         'keywords' => 'getKeywords',
+        'negative_keywords' => 'getNegativeKeywords',
         'additional_headlines' => 'getAdditionalHeadlines',
         'additional_descriptions' => 'getAdditionalDescriptions',
         'advantage_audience' => 'getAdvantageAudience',
@@ -1101,6 +1107,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('audience_id', $data ?? [], null);
         $this->setIfExists('campaign_type', $data ?? [], 'display');
         $this->setIfExists('keywords', $data ?? [], null);
+        $this->setIfExists('negative_keywords', $data ?? [], null);
         $this->setIfExists('additional_headlines', $data ?? [], null);
         $this->setIfExists('additional_descriptions', $data ?? [], null);
         $this->setIfExists('advantage_audience', $data ?? [], null);
@@ -3301,7 +3308,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets keywords
      *
-     * @param string[]|null $keywords Google Search only
+     * @param string[]|null $keywords Google Search only. BROAD-match keywords on the new ad group (first 20).
      *
      * @return self
      */
@@ -3311,6 +3318,33 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable keywords cannot be null');
         }
         $this->container['keywords'] = $keywords;
+
+        return $this;
+    }
+
+    /**
+     * Gets negative_keywords
+     *
+     * @return string[]|null
+     */
+    public function getNegativeKeywords()
+    {
+        return $this->container['negative_keywords'];
+    }
+
+    /**
+     * Sets negative_keywords
+     *
+     * @param string[]|null $negative_keywords Google Search only; other platforms return 400. BROAD-match negative keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.negativeKeywords.
+     *
+     * @return self
+     */
+    public function setNegativeKeywords($negative_keywords)
+    {
+        if (is_null($negative_keywords)) {
+            throw new \InvalidArgumentException('non-nullable negative_keywords cannot be null');
+        }
+        $this->container['negative_keywords'] = $negative_keywords;
 
         return $this;
     }

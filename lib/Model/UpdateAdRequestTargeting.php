@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * UpdateAdRequestTargeting Class Doc Comment
  *
  * @category Class
- * @description Meta + TikTok only. Pinterest / X / LinkedIn / Google return 501.
+ * @description Meta + TikTok (demographics/interests) and Google (keyword edits only). Pinterest / X / LinkedIn return 501.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -59,6 +59,8 @@ class UpdateAdRequestTargeting implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
+        'keywords' => '\Zernio\Model\UpdateAdRequestTargetingKeywordsInner[]',
+        'negative_keywords' => '\Zernio\Model\UpdateAdRequestTargetingKeywordsInner[]',
         'age_min' => 'int',
         'age_max' => 'int',
         'countries' => 'string[]',
@@ -74,6 +76,8 @@ class UpdateAdRequestTargeting implements ModelInterface, ArrayAccess, \JsonSeri
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'keywords' => null,
+        'negative_keywords' => null,
         'age_min' => null,
         'age_max' => null,
         'countries' => null,
@@ -87,6 +91,8 @@ class UpdateAdRequestTargeting implements ModelInterface, ArrayAccess, \JsonSeri
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'keywords' => false,
+        'negative_keywords' => false,
         'age_min' => false,
         'age_max' => false,
         'countries' => false,
@@ -180,6 +186,8 @@ class UpdateAdRequestTargeting implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $attributeMap = [
+        'keywords' => 'keywords',
+        'negative_keywords' => 'negativeKeywords',
         'age_min' => 'ageMin',
         'age_max' => 'ageMax',
         'countries' => 'countries',
@@ -193,6 +201,8 @@ class UpdateAdRequestTargeting implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $setters = [
+        'keywords' => 'setKeywords',
+        'negative_keywords' => 'setNegativeKeywords',
         'age_min' => 'setAgeMin',
         'age_max' => 'setAgeMax',
         'countries' => 'setCountries',
@@ -206,6 +216,8 @@ class UpdateAdRequestTargeting implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $getters = [
+        'keywords' => 'getKeywords',
+        'negative_keywords' => 'getNegativeKeywords',
         'age_min' => 'getAgeMin',
         'age_max' => 'getAgeMax',
         'countries' => 'getCountries',
@@ -285,6 +297,8 @@ class UpdateAdRequestTargeting implements ModelInterface, ArrayAccess, \JsonSeri
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('keywords', $data ?? [], null);
+        $this->setIfExists('negative_keywords', $data ?? [], null);
         $this->setIfExists('age_min', $data ?? [], null);
         $this->setIfExists('age_max', $data ?? [], null);
         $this->setIfExists('countries', $data ?? [], null);
@@ -358,6 +372,60 @@ class UpdateAdRequestTargeting implements ModelInterface, ArrayAccess, \JsonSeri
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets keywords
+     *
+     * @return \Zernio\Model\UpdateAdRequestTargetingKeywordsInner[]|null
+     */
+    public function getKeywords()
+    {
+        return $this->container['keywords'];
+    }
+
+    /**
+     * Sets keywords
+     *
+     * @param \Zernio\Model\UpdateAdRequestTargetingKeywordsInner[]|null $keywords Google only. The FULL new set of positive keywords for the ad group; live keywords not listed are removed. Entries are strings (BROAD) or { text, matchType } with matchType exact | phrase | broad. Mirrored to GET /v1/ads/keywords immediately.
+     *
+     * @return self
+     */
+    public function setKeywords($keywords)
+    {
+        if (is_null($keywords)) {
+            throw new \InvalidArgumentException('non-nullable keywords cannot be null');
+        }
+        $this->container['keywords'] = $keywords;
+
+        return $this;
+    }
+
+    /**
+     * Gets negative_keywords
+     *
+     * @return \Zernio\Model\UpdateAdRequestTargetingKeywordsInner[]|null
+     */
+    public function getNegativeKeywords()
+    {
+        return $this->container['negative_keywords'];
+    }
+
+    /**
+     * Sets negative_keywords
+     *
+     * @param \Zernio\Model\UpdateAdRequestTargetingKeywordsInner[]|null $negative_keywords Google only. Same declarative contract as keywords, for the ad group's negative keywords.
+     *
+     * @return self
+     */
+    public function setNegativeKeywords($negative_keywords)
+    {
+        if (is_null($negative_keywords)) {
+            throw new \InvalidArgumentException('non-nullable negative_keywords cannot be null');
+        }
+        $this->container['negative_keywords'] = $negative_keywords;
+
+        return $this;
+    }
 
     /**
      * Gets age_min

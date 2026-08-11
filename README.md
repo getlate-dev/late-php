@@ -1946,6 +1946,8 @@ Class | Method | HTTP request | Description
 - [UpdateAdRequestCreative](docs/Model/UpdateAdRequestCreative.md)
 - [UpdateAdRequestTargeting](docs/Model/UpdateAdRequestTargeting.md)
 - [UpdateAdRequestTargetingInterestsInner](docs/Model/UpdateAdRequestTargetingInterestsInner.md)
+- [UpdateAdRequestTargetingKeywordsInner](docs/Model/UpdateAdRequestTargetingKeywordsInner.md)
+- [UpdateAdRequestTargetingKeywordsInnerOneOf](docs/Model/UpdateAdRequestTargetingKeywordsInnerOneOf.md)
 - [UpdateAdSet200Response](docs/Model/UpdateAdSet200Response.md)
 - [UpdateAdSetRequest](docs/Model/UpdateAdSetRequest.md)
 - [UpdateAdSetRequestBudget](docs/Model/UpdateAdSetRequestBudget.md)
