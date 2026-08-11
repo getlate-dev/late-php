@@ -871,7 +871,7 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets video_play_actions
      *
-     * @param int|null $video_play_actions Meta video ads only (0 for non-video ads and other platforms), like all video* fields below. Number of times the video started playing (Meta `video_play_actions`), summed over the date range and across children at ad-set/campaign level.
+     * @param int|null $video_play_actions Number of times the video started playing, summed over the date range and across children at ad-set/campaign level. 0 for non-video ads. Sources: Meta `video_play_actions`, TikTok `video_play_actions`.
      *
      * @return self
      */
@@ -898,7 +898,7 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets video30_sec_watched_actions
      *
-     * @param int|null $video30_sec_watched_actions Views of at least 30 seconds (or to the end, for shorter videos). Meta `video_30_sec_watched_actions`.
+     * @param int|null $video30_sec_watched_actions Views of at least 30 seconds (or to the end, for shorter videos). Sources: Meta `video_30_sec_watched_actions` (Meta only).
      *
      * @return self
      */
@@ -925,7 +925,7 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets video_thruplay_watched_actions
      *
-     * @param int|null $video_thruplay_watched_actions ThruPlays (watched to completion, or at least 15 seconds). Meta `video_thruplay_watched_actions`.
+     * @param int|null $video_thruplay_watched_actions ThruPlays (watched to completion, or at least 15 seconds). Sources: Meta `video_thruplay_watched_actions` (Meta only).
      *
      * @return self
      */
@@ -952,7 +952,7 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets video_p25_watched_actions
      *
-     * @param int|null $video_p25_watched_actions Views reaching 25% of the video's length. With the other percentile fields, powers hook/hold/drop-off analysis (e.g. hook rate = videoP25WatchedActions / videoPlayActions). Meta `video_p25_watched_actions`.
+     * @param int|null $video_p25_watched_actions Views reaching 25% of the video's length. With the other percentile fields, powers hook/hold/drop-off analysis (e.g. hook rate = videoP25WatchedActions / videoPlayActions). Sources: Meta `video_p25_watched_actions`, TikTok `video_views_p25`.
      *
      * @return self
      */
@@ -979,7 +979,7 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets video_p50_watched_actions
      *
-     * @param int|null $video_p50_watched_actions Views reaching 50% of the video's length. Meta `video_p50_watched_actions`.
+     * @param int|null $video_p50_watched_actions Views reaching 50% of the video's length. Sources: Meta `video_p50_watched_actions`, TikTok `video_views_p50`.
      *
      * @return self
      */
@@ -1006,7 +1006,7 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets video_p75_watched_actions
      *
-     * @param int|null $video_p75_watched_actions Views reaching 75% of the video's length. Meta `video_p75_watched_actions`.
+     * @param int|null $video_p75_watched_actions Views reaching 75% of the video's length. Sources: Meta `video_p75_watched_actions`, TikTok `video_views_p75`.
      *
      * @return self
      */
@@ -1033,7 +1033,7 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets video_p95_watched_actions
      *
-     * @param int|null $video_p95_watched_actions Views reaching 95% of the video's length. Meta `video_p95_watched_actions`.
+     * @param int|null $video_p95_watched_actions Views reaching 95% of the video's length. Sources: Meta `video_p95_watched_actions` (Meta only).
      *
      * @return self
      */
@@ -1060,7 +1060,7 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets video_p100_watched_actions
      *
-     * @param int|null $video_p100_watched_actions Views reaching 100% of the video's length. Meta `video_p100_watched_actions`.
+     * @param int|null $video_p100_watched_actions Views reaching 100% of the video's length. Sources: Meta `video_p100_watched_actions`, TikTok `video_views_p100`.
      *
      * @return self
      */
@@ -1087,7 +1087,7 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets video_avg_time_watched_actions
      *
-     * @param float|null $video_avg_time_watched_actions Average seconds watched per play (Meta `video_avg_time_watched_actions`). Aggregated over date ranges and across children as a play-weighted average (total watch time / total plays), never a plain average of averages.
+     * @param float|null $video_avg_time_watched_actions Average seconds watched per play. Aggregated over date ranges and across children as a play-weighted average (total watch time / total plays), never a plain average of averages. Sources: Meta `video_avg_time_watched_actions`, TikTok `average_video_play`.
      *
      * @return self
      */
@@ -1114,7 +1114,7 @@ class AdDailyMetrics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cost_per_thruplay
      *
-     * @param float|null $cost_per_thruplay Derived `spend / videoThruplayWatchedActions`, in ad-account native currency. Rounded to 4 decimals rather than the usual 2 because a ThruPlay routinely costs well under a cent. 0 when the ad has no ThruPlays.
+     * @param float|null $cost_per_thruplay Derived `spend / videoThruplayWatchedActions`, in ad-account native currency. Rounded to 4 decimals rather than the usual 2 because a ThruPlay routinely costs well under a cent. 0 when the ad has no ThruPlays (ThruPlay is Meta-only).
      *
      * @return self
      */
