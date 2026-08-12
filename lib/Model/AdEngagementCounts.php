@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * AdEngagementCounts Class Doc Comment
  *
  * @category Class
- * @description The single &#x60;engagement&#x60; total split into the interactions behind it.  Note that &#x60;engagement&#x60; is not the sum of these: Meta&#39;s own &#x60;post_engagement&#x60; and &#x60;page_engagement&#x60; totals already contain the individual interactions, and all of them are counted into &#x60;engagement&#x60;. Use these fields when you need a specific interaction, and &#x60;engagement&#x60; only as the coarse total it has always been.  Meta-only; other platforms leave these at 0.
+ * @description The single &#x60;engagement&#x60; total split into the interactions behind it.  Note that &#x60;engagement&#x60; is not the sum of these: Meta&#39;s own &#x60;post_engagement&#x60; and &#x60;page_engagement&#x60; totals already contain the individual interactions, and all of them are counted into &#x60;engagement&#x60;. Use these fields when you need a specific interaction, and &#x60;engagement&#x60; only as the coarse total it has always been.  Populated for Meta and, since 2026-08, TikTok (&#x60;reactions&#x60; &#x3D; paid likes, &#x60;comments&#x60;, &#x60;shares&#x60;; TikTok&#39;s &#x60;follow&#x60; count lives in &#x60;actions.follow&#x60;, not here). Other platforms leave these at 0. TikTok history note: paused TikTok ads are not re-synced, so campaigns that ended before the rollout keep 0s here.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -360,7 +360,7 @@ class AdEngagementCounts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets post_engagement
      *
-     * @param int|null $post_engagement Meta's own post-engagement total (`post_engagement`).
+     * @param int|null $post_engagement Meta's own post-engagement total (`post_engagement`). Meta-only.
      *
      * @return self
      */
@@ -387,7 +387,7 @@ class AdEngagementCounts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets page_engagement
      *
-     * @param int|null $page_engagement Meta's own page-engagement total (`page_engagement`).
+     * @param int|null $page_engagement Meta's own page-engagement total (`page_engagement`). Meta-only.
      *
      * @return self
      */
@@ -414,7 +414,7 @@ class AdEngagementCounts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets reactions
      *
-     * @param int|null $reactions Reactions on the ad's post (`post_reaction`).
+     * @param int|null $reactions Reactions on the ad's post (`post_reaction`). For TikTok these are its paid likes.
      *
      * @return self
      */
@@ -468,7 +468,7 @@ class AdEngagementCounts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets shares
      *
-     * @param int|null $shares Shares of the ad's post. Meta reports these under the action type literally named `post`.
+     * @param int|null $shares Shares of the ad's post. Meta reports these under the action type literally named `post`; TikTok under `share`.
      *
      * @return self
      */
