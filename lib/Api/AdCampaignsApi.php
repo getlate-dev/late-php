@@ -3568,7 +3568,7 @@ class AdCampaignsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\GetAdTree200Response|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\AdTreeResponse|\Zernio\Model\GetAdTree202Response|\Zernio\Model\InlineObject
      */
     public function getAdTree($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
@@ -3600,7 +3600,7 @@ class AdCampaignsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\GetAdTree200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\AdTreeResponse|\Zernio\Model\GetAdTree202Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAdTreeWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
@@ -3632,7 +3632,13 @@ class AdCampaignsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\GetAdTree200Response',
+                        '\Zernio\Model\AdTreeResponse',
+                        $request,
+                        $response,
+                    );
+                case 202:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GetAdTree202Response',
                         $request,
                         $response,
                     );
@@ -3660,7 +3666,7 @@ class AdCampaignsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Zernio\Model\GetAdTree200Response',
+                '\Zernio\Model\AdTreeResponse',
                 $request,
                 $response,
             );
@@ -3669,7 +3675,15 @@ class AdCampaignsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\GetAdTree200Response',
+                        '\Zernio\Model\AdTreeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 202:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GetAdTree202Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3751,7 +3765,7 @@ class AdCampaignsApi
      */
     public function getAdTreeAsyncWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
-        $returnType = '\Zernio\Model\GetAdTree200Response';
+        $returnType = '\Zernio\Model\AdTreeResponse';
         $request = $this->getAdTreeRequest($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType);
 
         return $this->client
@@ -4058,7 +4072,7 @@ class AdCampaignsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\GetAdsTimeline200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\AdsTimelineResponse|\Zernio\Model\GetAdsTimeline202Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
      */
     public function getAdsTimeline($account_id, $ad_account_id = null, $from_date = null, $to_date = null, $platform = null, string $contentType = self::contentTypes['getAdsTimeline'][0])
     {
@@ -4080,7 +4094,7 @@ class AdCampaignsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\GetAdsTimeline200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\AdsTimelineResponse|\Zernio\Model\GetAdsTimeline202Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAdsTimelineWithHttpInfo($account_id, $ad_account_id = null, $from_date = null, $to_date = null, $platform = null, string $contentType = self::contentTypes['getAdsTimeline'][0])
     {
@@ -4112,7 +4126,13 @@ class AdCampaignsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\GetAdsTimeline200Response',
+                        '\Zernio\Model\AdsTimelineResponse',
+                        $request,
+                        $response,
+                    );
+                case 202:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GetAdsTimeline202Response',
                         $request,
                         $response,
                     );
@@ -4146,7 +4166,7 @@ class AdCampaignsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Zernio\Model\GetAdsTimeline200Response',
+                '\Zernio\Model\AdsTimelineResponse',
                 $request,
                 $response,
             );
@@ -4155,7 +4175,15 @@ class AdCampaignsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\GetAdsTimeline200Response',
+                        '\Zernio\Model\AdsTimelineResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 202:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GetAdsTimeline202Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4225,7 +4253,7 @@ class AdCampaignsApi
      */
     public function getAdsTimelineAsyncWithHttpInfo($account_id, $ad_account_id = null, $from_date = null, $to_date = null, $platform = null, string $contentType = self::contentTypes['getAdsTimeline'][0])
     {
-        $returnType = '\Zernio\Model\GetAdsTimeline200Response';
+        $returnType = '\Zernio\Model\AdsTimelineResponse';
         $request = $this->getAdsTimelineRequest($account_id, $ad_account_id, $from_date, $to_date, $platform, $contentType);
 
         return $this->client
@@ -5355,7 +5383,7 @@ class AdCampaignsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\ListAds200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\AdsListResponse|\Zernio\Model\ListAds202Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
      */
     public function listAds($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $page_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
     {
@@ -5387,7 +5415,7 @@ class AdCampaignsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\ListAds200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\AdsListResponse|\Zernio\Model\ListAds202Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function listAdsWithHttpInfo($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $page_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
     {
@@ -5419,7 +5447,13 @@ class AdCampaignsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\ListAds200Response',
+                        '\Zernio\Model\AdsListResponse',
+                        $request,
+                        $response,
+                    );
+                case 202:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ListAds202Response',
                         $request,
                         $response,
                     );
@@ -5453,7 +5487,7 @@ class AdCampaignsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Zernio\Model\ListAds200Response',
+                '\Zernio\Model\AdsListResponse',
                 $request,
                 $response,
             );
@@ -5462,7 +5496,15 @@ class AdCampaignsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\ListAds200Response',
+                        '\Zernio\Model\AdsListResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 202:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ListAds202Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5552,7 +5594,7 @@ class AdCampaignsApi
      */
     public function listAdsAsyncWithHttpInfo($page = 1, $limit = 50, $source = 'all', $status = null, $platform = null, $account_id = null, $ad_account_id = null, $page_id = null, $profile_id = null, $campaign_id = null, $platform_ad_id = null, $effective_object_story_id = null, $effective_instagram_media_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAds'][0])
     {
-        $returnType = '\Zernio\Model\ListAds200Response';
+        $returnType = '\Zernio\Model\AdsListResponse';
         $request = $this->listAdsRequest($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $page_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date, $contentType);
 
         return $this->client

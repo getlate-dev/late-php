@@ -1015,7 +1015,7 @@ class AdInsightsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\GetAdAnalytics200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
+     * @return \Zernio\Model\AdAnalyticsResponse|\Zernio\Model\GetAdAnalytics202Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
      */
     public function getAdAnalytics($ad_id, $from_date = null, $to_date = null, $breakdowns = null, string $contentType = self::contentTypes['getAdAnalytics'][0])
     {
@@ -1036,7 +1036,7 @@ class AdInsightsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\GetAdAnalytics200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\AdAnalyticsResponse|\Zernio\Model\GetAdAnalytics202Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAdAnalyticsWithHttpInfo($ad_id, $from_date = null, $to_date = null, $breakdowns = null, string $contentType = self::contentTypes['getAdAnalytics'][0])
     {
@@ -1068,7 +1068,13 @@ class AdInsightsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\GetAdAnalytics200Response',
+                        '\Zernio\Model\AdAnalyticsResponse',
+                        $request,
+                        $response,
+                    );
+                case 202:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GetAdAnalytics202Response',
                         $request,
                         $response,
                     );
@@ -1108,7 +1114,7 @@ class AdInsightsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Zernio\Model\GetAdAnalytics200Response',
+                '\Zernio\Model\AdAnalyticsResponse',
                 $request,
                 $response,
             );
@@ -1117,7 +1123,15 @@ class AdInsightsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\GetAdAnalytics200Response',
+                        '\Zernio\Model\AdAnalyticsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 202:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GetAdAnalytics202Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1193,7 +1207,7 @@ class AdInsightsApi
      */
     public function getAdAnalyticsAsyncWithHttpInfo($ad_id, $from_date = null, $to_date = null, $breakdowns = null, string $contentType = self::contentTypes['getAdAnalytics'][0])
     {
-        $returnType = '\Zernio\Model\GetAdAnalytics200Response';
+        $returnType = '\Zernio\Model\AdAnalyticsResponse';
         $request = $this->getAdAnalyticsRequest($ad_id, $from_date, $to_date, $breakdowns, $contentType);
 
         return $this->client
@@ -2109,7 +2123,7 @@ class AdInsightsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\GetCampaignAnalytics200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
+     * @return \Zernio\Model\CampaignAnalyticsResponse|\Zernio\Model\GetCampaignAnalytics202Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
      */
     public function getCampaignAnalytics($campaign_id, $platform = null, $from_date = null, $to_date = null, $breakdowns = null, string $contentType = self::contentTypes['getCampaignAnalytics'][0])
     {
@@ -2131,7 +2145,7 @@ class AdInsightsApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\GetCampaignAnalytics200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\CampaignAnalyticsResponse|\Zernio\Model\GetCampaignAnalytics202Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
      */
     public function getCampaignAnalyticsWithHttpInfo($campaign_id, $platform = null, $from_date = null, $to_date = null, $breakdowns = null, string $contentType = self::contentTypes['getCampaignAnalytics'][0])
     {
@@ -2163,7 +2177,13 @@ class AdInsightsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\GetCampaignAnalytics200Response',
+                        '\Zernio\Model\CampaignAnalyticsResponse',
+                        $request,
+                        $response,
+                    );
+                case 202:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GetCampaignAnalytics202Response',
                         $request,
                         $response,
                     );
@@ -2203,7 +2223,7 @@ class AdInsightsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Zernio\Model\GetCampaignAnalytics200Response',
+                '\Zernio\Model\CampaignAnalyticsResponse',
                 $request,
                 $response,
             );
@@ -2212,7 +2232,15 @@ class AdInsightsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\GetCampaignAnalytics200Response',
+                        '\Zernio\Model\CampaignAnalyticsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 202:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GetCampaignAnalytics202Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2290,7 +2318,7 @@ class AdInsightsApi
      */
     public function getCampaignAnalyticsAsyncWithHttpInfo($campaign_id, $platform = null, $from_date = null, $to_date = null, $breakdowns = null, string $contentType = self::contentTypes['getCampaignAnalytics'][0])
     {
-        $returnType = '\Zernio\Model\GetCampaignAnalytics200Response';
+        $returnType = '\Zernio\Model\CampaignAnalyticsResponse';
         $request = $this->getCampaignAnalyticsRequest($campaign_id, $platform, $from_date, $to_date, $breakdowns, $contentType);
 
         return $this->client

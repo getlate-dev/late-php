@@ -715,7 +715,7 @@ try {
 ## `getAdTree()`
 
 ```php
-getAdTree($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level): \Zernio\Model\GetAdTree200Response
+getAdTree($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level): \Zernio\Model\AdTreeResponse
 ```
 
 Get campaign tree
@@ -785,7 +785,7 @@ try {
 
 ### Return type
 
-[**\Zernio\Model\GetAdTree200Response**](../Model/GetAdTree200Response.md)
+[**\Zernio\Model\AdTreeResponse**](../Model/AdTreeResponse.md)
 
 ### Authorization
 
@@ -803,7 +803,7 @@ try {
 ## `getAdsTimeline()`
 
 ```php
-getAdsTimeline($account_id, $ad_account_id, $from_date, $to_date, $platform): \Zernio\Model\GetAdsTimeline200Response
+getAdsTimeline($account_id, $ad_account_id, $from_date, $to_date, $platform): \Zernio\Model\AdsTimelineResponse
 ```
 
 Get daily account metrics
@@ -853,7 +853,7 @@ try {
 
 ### Return type
 
-[**\Zernio\Model\GetAdsTimeline200Response**](../Model/GetAdsTimeline200Response.md)
+[**\Zernio\Model\AdsTimelineResponse**](../Model/AdsTimelineResponse.md)
 
 ### Authorization
 
@@ -1033,7 +1033,7 @@ try {
 ## `listAds()`
 
 ```php
-listAds($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $page_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date): \Zernio\Model\ListAds200Response
+listAds($page, $limit, $source, $status, $platform, $account_id, $ad_account_id, $page_id, $profile_id, $campaign_id, $platform_ad_id, $effective_object_story_id, $effective_instagram_media_id, $from_date, $to_date): \Zernio\Model\AdsListResponse
 ```
 
 List ads
@@ -1103,7 +1103,7 @@ try {
 
 ### Return type
 
-[**\Zernio\Model\ListAds200Response**](../Model/ListAds200Response.md)
+[**\Zernio\Model\AdsListResponse**](../Model/AdsListResponse.md)
 
 ### Authorization
 

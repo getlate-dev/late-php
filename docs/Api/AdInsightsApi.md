@@ -199,7 +199,7 @@ try {
 ## `getAdAnalytics()`
 
 ```php
-getAdAnalytics($ad_id, $from_date, $to_date, $breakdowns): \Zernio\Model\GetAdAnalytics200Response
+getAdAnalytics($ad_id, $from_date, $to_date, $breakdowns): \Zernio\Model\AdAnalyticsResponse
 ```
 
 Get ad analytics
@@ -247,7 +247,7 @@ try {
 
 ### Return type
 
-[**\Zernio\Model\GetAdAnalytics200Response**](../Model/GetAdAnalytics200Response.md)
+[**\Zernio\Model\AdAnalyticsResponse**](../Model/AdAnalyticsResponse.md)
 
 ### Authorization
 
@@ -403,7 +403,7 @@ try {
 ## `getCampaignAnalytics()`
 
 ```php
-getCampaignAnalytics($campaign_id, $platform, $from_date, $to_date, $breakdowns): \Zernio\Model\GetCampaignAnalytics200Response
+getCampaignAnalytics($campaign_id, $platform, $from_date, $to_date, $breakdowns): \Zernio\Model\CampaignAnalyticsResponse
 ```
 
 Get campaign analytics
@@ -453,7 +453,7 @@ try {
 
 ### Return type
 
-[**\Zernio\Model\GetCampaignAnalytics200Response**](../Model/GetCampaignAnalytics200Response.md)
+[**\Zernio\Model\CampaignAnalyticsResponse**](../Model/CampaignAnalyticsResponse.md)
 
 ### Authorization
 
