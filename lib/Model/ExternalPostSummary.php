@@ -65,7 +65,6 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'content' => 'string',
         'published_at' => '\DateTime',
         'media_type' => 'string',
-        'media_url' => 'string',
         'thumbnail_url' => 'string',
         'media_items' => 'object[]',
         'analytics' => '\Zernio\Model\ExternalPostSummaryAnalytics'
@@ -85,7 +84,6 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'content' => null,
         'published_at' => 'date-time',
         'media_type' => null,
-        'media_url' => null,
         'thumbnail_url' => null,
         'media_items' => null,
         'analytics' => null
@@ -103,7 +101,6 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'content' => false,
         'published_at' => false,
         'media_type' => false,
-        'media_url' => false,
         'thumbnail_url' => false,
         'media_items' => false,
         'analytics' => false
@@ -201,7 +198,6 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'content' => 'content',
         'published_at' => 'publishedAt',
         'media_type' => 'mediaType',
-        'media_url' => 'mediaUrl',
         'thumbnail_url' => 'thumbnailUrl',
         'media_items' => 'mediaItems',
         'analytics' => 'analytics'
@@ -219,7 +215,6 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'content' => 'setContent',
         'published_at' => 'setPublishedAt',
         'media_type' => 'setMediaType',
-        'media_url' => 'setMediaUrl',
         'thumbnail_url' => 'setThumbnailUrl',
         'media_items' => 'setMediaItems',
         'analytics' => 'setAnalytics'
@@ -237,7 +232,6 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'content' => 'getContent',
         'published_at' => 'getPublishedAt',
         'media_type' => 'getMediaType',
-        'media_url' => 'getMediaUrl',
         'thumbnail_url' => 'getThumbnailUrl',
         'media_items' => 'getMediaItems',
         'analytics' => 'getAnalytics'
@@ -306,7 +300,6 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('content', $data ?? [], null);
         $this->setIfExists('published_at', $data ?? [], null);
         $this->setIfExists('media_type', $data ?? [], null);
-        $this->setIfExists('media_url', $data ?? [], null);
         $this->setIfExists('thumbnail_url', $data ?? [], null);
         $this->setIfExists('media_items', $data ?? [], null);
         $this->setIfExists('analytics', $data ?? [], null);
@@ -512,33 +505,6 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable media_type cannot be null');
         }
         $this->container['media_type'] = $media_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets media_url
-     *
-     * @return string|null
-     */
-    public function getMediaUrl()
-    {
-        return $this->container['media_url'];
-    }
-
-    /**
-     * Sets media_url
-     *
-     * @param string|null $media_url Primary media URL
-     *
-     * @return self
-     */
-    public function setMediaUrl($media_url)
-    {
-        if (is_null($media_url)) {
-            throw new \InvalidArgumentException('non-nullable media_url cannot be null');
-        }
-        $this->container['media_url'] = $media_url;
 
         return $this;
     }

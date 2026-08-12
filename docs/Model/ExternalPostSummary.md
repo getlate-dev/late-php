@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **content** | **string** | Post caption / text | [optional]
 **published_at** | **\DateTime** | When the post was published on the platform | [optional]
 **media_type** | **string** | Media type (e.g. image, video, carousel) | [optional]
-**media_url** | **string** | Primary media URL | [optional]
 **thumbnail_url** | **string** | Thumbnail URL | [optional]
 **media_items** | **object[]** | Per-item media (for carousels / multi-media posts) | [optional]
 **analytics** | [**\Zernio\Model\ExternalPostSummaryAnalytics**](ExternalPostSummaryAnalytics.md) |  | [optional]
