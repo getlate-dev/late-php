@@ -96,6 +96,12 @@ class AdInsightsApi
         'getCampaignAnalytics' => [
             'application/json',
         ],
+        'listLocalServicesLeadConversations' => [
+            'application/json',
+        ],
+        'listLocalServicesLeads' => [
+            'application/json',
+        ],
         'queryAdInsights' => [
             'application/json',
         ],
@@ -2438,6 +2444,763 @@ class AdInsightsApi
                 $resourcePath
             );
         }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listLocalServicesLeadConversations
+     *
+     * Conversations of a Local Services lead
+     *
+     * @param  string $lead_id Numeric lead id from /v1/ads/local-services/leads. (required)
+     * @param  string $account_id Google ads SocialAccount id. (required)
+     * @param  string|null $customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. (optional)
+     * @param  string|null $page_token Cursor from paging.nextPageToken of the previous page. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLocalServicesLeadConversations'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\ListLocalServicesLeadConversations200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
+     */
+    public function listLocalServicesLeadConversations($lead_id, $account_id, $customer_id = null, $page_token = null, string $contentType = self::contentTypes['listLocalServicesLeadConversations'][0])
+    {
+        list($response) = $this->listLocalServicesLeadConversationsWithHttpInfo($lead_id, $account_id, $customer_id, $page_token, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listLocalServicesLeadConversationsWithHttpInfo
+     *
+     * Conversations of a Local Services lead
+     *
+     * @param  string $lead_id Numeric lead id from /v1/ads/local-services/leads. (required)
+     * @param  string $account_id Google ads SocialAccount id. (required)
+     * @param  string|null $customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. (optional)
+     * @param  string|null $page_token Cursor from paging.nextPageToken of the previous page. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLocalServicesLeadConversations'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\ListLocalServicesLeadConversations200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listLocalServicesLeadConversationsWithHttpInfo($lead_id, $account_id, $customer_id = null, $page_token = null, string $contentType = self::contentTypes['listLocalServicesLeadConversations'][0])
+    {
+        $request = $this->listLocalServicesLeadConversationsRequest($lead_id, $account_id, $customer_id, $page_token, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ListLocalServicesLeadConversations200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\ListLocalServicesLeadConversations200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ListLocalServicesLeadConversations200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listLocalServicesLeadConversationsAsync
+     *
+     * Conversations of a Local Services lead
+     *
+     * @param  string $lead_id Numeric lead id from /v1/ads/local-services/leads. (required)
+     * @param  string $account_id Google ads SocialAccount id. (required)
+     * @param  string|null $customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. (optional)
+     * @param  string|null $page_token Cursor from paging.nextPageToken of the previous page. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLocalServicesLeadConversations'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listLocalServicesLeadConversationsAsync($lead_id, $account_id, $customer_id = null, $page_token = null, string $contentType = self::contentTypes['listLocalServicesLeadConversations'][0])
+    {
+        return $this->listLocalServicesLeadConversationsAsyncWithHttpInfo($lead_id, $account_id, $customer_id, $page_token, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listLocalServicesLeadConversationsAsyncWithHttpInfo
+     *
+     * Conversations of a Local Services lead
+     *
+     * @param  string $lead_id Numeric lead id from /v1/ads/local-services/leads. (required)
+     * @param  string $account_id Google ads SocialAccount id. (required)
+     * @param  string|null $customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. (optional)
+     * @param  string|null $page_token Cursor from paging.nextPageToken of the previous page. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLocalServicesLeadConversations'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listLocalServicesLeadConversationsAsyncWithHttpInfo($lead_id, $account_id, $customer_id = null, $page_token = null, string $contentType = self::contentTypes['listLocalServicesLeadConversations'][0])
+    {
+        $returnType = '\Zernio\Model\ListLocalServicesLeadConversations200Response';
+        $request = $this->listLocalServicesLeadConversationsRequest($lead_id, $account_id, $customer_id, $page_token, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listLocalServicesLeadConversations'
+     *
+     * @param  string $lead_id Numeric lead id from /v1/ads/local-services/leads. (required)
+     * @param  string $account_id Google ads SocialAccount id. (required)
+     * @param  string|null $customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. (optional)
+     * @param  string|null $page_token Cursor from paging.nextPageToken of the previous page. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLocalServicesLeadConversations'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listLocalServicesLeadConversationsRequest($lead_id, $account_id, $customer_id = null, $page_token = null, string $contentType = self::contentTypes['listLocalServicesLeadConversations'][0])
+    {
+
+        // verify the required parameter 'lead_id' is set
+        if ($lead_id === null || (is_array($lead_id) && count($lead_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $lead_id when calling listLocalServicesLeadConversations'
+            );
+        }
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling listLocalServicesLeadConversations'
+            );
+        }
+
+
+
+
+        $resourcePath = '/v1/ads/local-services/leads/{leadId}/conversations';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $account_id,
+            'accountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $customer_id,
+            'customerId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_token,
+            'pageToken', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($lead_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'leadId' . '}',
+                ObjectSerializer::toPathValue($lead_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listLocalServicesLeads
+     *
+     * Google Local Services Ads leads
+     *
+     * @param  string $account_id Google ads SocialAccount id. (required)
+     * @param  string|null $customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. (optional)
+     * @param  \DateTime|null $from_date Leads created at/after this day. (optional)
+     * @param  \DateTime|null $to_date Leads created at/before this day. (optional)
+     * @param  string|null $lead_type lead_type (optional)
+     * @param  string|null $lead_status Google LocalServicesLeadStatus enum value (e.g. NEW, BOOKED, WIPED_OUT). (optional)
+     * @param  bool|null $charged_only true &#x3D; only leads Google charged for. (optional)
+     * @param  string|null $page_token Cursor from paging.nextPageToken of the previous page. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLocalServicesLeads'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\ListLocalServicesLeads200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
+     */
+    public function listLocalServicesLeads($account_id, $customer_id = null, $from_date = null, $to_date = null, $lead_type = null, $lead_status = null, $charged_only = null, $page_token = null, string $contentType = self::contentTypes['listLocalServicesLeads'][0])
+    {
+        list($response) = $this->listLocalServicesLeadsWithHttpInfo($account_id, $customer_id, $from_date, $to_date, $lead_type, $lead_status, $charged_only, $page_token, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listLocalServicesLeadsWithHttpInfo
+     *
+     * Google Local Services Ads leads
+     *
+     * @param  string $account_id Google ads SocialAccount id. (required)
+     * @param  string|null $customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. (optional)
+     * @param  \DateTime|null $from_date Leads created at/after this day. (optional)
+     * @param  \DateTime|null $to_date Leads created at/before this day. (optional)
+     * @param  string|null $lead_type (optional)
+     * @param  string|null $lead_status Google LocalServicesLeadStatus enum value (e.g. NEW, BOOKED, WIPED_OUT). (optional)
+     * @param  bool|null $charged_only true &#x3D; only leads Google charged for. (optional)
+     * @param  string|null $page_token Cursor from paging.nextPageToken of the previous page. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLocalServicesLeads'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\ListLocalServicesLeads200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listLocalServicesLeadsWithHttpInfo($account_id, $customer_id = null, $from_date = null, $to_date = null, $lead_type = null, $lead_status = null, $charged_only = null, $page_token = null, string $contentType = self::contentTypes['listLocalServicesLeads'][0])
+    {
+        $request = $this->listLocalServicesLeadsRequest($account_id, $customer_id, $from_date, $to_date, $lead_type, $lead_status, $charged_only, $page_token, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ListLocalServicesLeads200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\ListLocalServicesLeads200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ListLocalServicesLeads200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listLocalServicesLeadsAsync
+     *
+     * Google Local Services Ads leads
+     *
+     * @param  string $account_id Google ads SocialAccount id. (required)
+     * @param  string|null $customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. (optional)
+     * @param  \DateTime|null $from_date Leads created at/after this day. (optional)
+     * @param  \DateTime|null $to_date Leads created at/before this day. (optional)
+     * @param  string|null $lead_type (optional)
+     * @param  string|null $lead_status Google LocalServicesLeadStatus enum value (e.g. NEW, BOOKED, WIPED_OUT). (optional)
+     * @param  bool|null $charged_only true &#x3D; only leads Google charged for. (optional)
+     * @param  string|null $page_token Cursor from paging.nextPageToken of the previous page. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLocalServicesLeads'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listLocalServicesLeadsAsync($account_id, $customer_id = null, $from_date = null, $to_date = null, $lead_type = null, $lead_status = null, $charged_only = null, $page_token = null, string $contentType = self::contentTypes['listLocalServicesLeads'][0])
+    {
+        return $this->listLocalServicesLeadsAsyncWithHttpInfo($account_id, $customer_id, $from_date, $to_date, $lead_type, $lead_status, $charged_only, $page_token, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listLocalServicesLeadsAsyncWithHttpInfo
+     *
+     * Google Local Services Ads leads
+     *
+     * @param  string $account_id Google ads SocialAccount id. (required)
+     * @param  string|null $customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. (optional)
+     * @param  \DateTime|null $from_date Leads created at/after this day. (optional)
+     * @param  \DateTime|null $to_date Leads created at/before this day. (optional)
+     * @param  string|null $lead_type (optional)
+     * @param  string|null $lead_status Google LocalServicesLeadStatus enum value (e.g. NEW, BOOKED, WIPED_OUT). (optional)
+     * @param  bool|null $charged_only true &#x3D; only leads Google charged for. (optional)
+     * @param  string|null $page_token Cursor from paging.nextPageToken of the previous page. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLocalServicesLeads'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listLocalServicesLeadsAsyncWithHttpInfo($account_id, $customer_id = null, $from_date = null, $to_date = null, $lead_type = null, $lead_status = null, $charged_only = null, $page_token = null, string $contentType = self::contentTypes['listLocalServicesLeads'][0])
+    {
+        $returnType = '\Zernio\Model\ListLocalServicesLeads200Response';
+        $request = $this->listLocalServicesLeadsRequest($account_id, $customer_id, $from_date, $to_date, $lead_type, $lead_status, $charged_only, $page_token, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listLocalServicesLeads'
+     *
+     * @param  string $account_id Google ads SocialAccount id. (required)
+     * @param  string|null $customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. (optional)
+     * @param  \DateTime|null $from_date Leads created at/after this day. (optional)
+     * @param  \DateTime|null $to_date Leads created at/before this day. (optional)
+     * @param  string|null $lead_type (optional)
+     * @param  string|null $lead_status Google LocalServicesLeadStatus enum value (e.g. NEW, BOOKED, WIPED_OUT). (optional)
+     * @param  bool|null $charged_only true &#x3D; only leads Google charged for. (optional)
+     * @param  string|null $page_token Cursor from paging.nextPageToken of the previous page. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLocalServicesLeads'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listLocalServicesLeadsRequest($account_id, $customer_id = null, $from_date = null, $to_date = null, $lead_type = null, $lead_status = null, $charged_only = null, $page_token = null, string $contentType = self::contentTypes['listLocalServicesLeads'][0])
+    {
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling listLocalServicesLeads'
+            );
+        }
+
+
+
+
+
+
+
+
+
+        $resourcePath = '/v1/ads/local-services/leads';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $account_id,
+            'accountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $customer_id,
+            'customerId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $from_date,
+            'fromDate', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $to_date,
+            'toDate', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $lead_type,
+            'leadType', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $lead_status,
+            'leadStatus', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $charged_only,
+            'chargedOnly', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_token,
+            'pageToken', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
 
 
         $headers = $this->headerSelector->selectHeaders(

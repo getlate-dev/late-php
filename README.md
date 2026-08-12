@@ -152,6 +152,8 @@ Class | Method | HTTP request | Description
 *AdInsightsApi* | [**getAdInsightsReport**](docs/Api/AdInsightsApi.md#getadinsightsreport) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run
 *AdInsightsApi* | [**getAdsSearchTerms**](docs/Api/AdInsightsApi.md#getadssearchterms) | **GET** /v1/ads/search-terms | Google Ads search terms report
 *AdInsightsApi* | [**getCampaignAnalytics**](docs/Api/AdInsightsApi.md#getcampaignanalytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics
+*AdInsightsApi* | [**listLocalServicesLeadConversations**](docs/Api/AdInsightsApi.md#listlocalservicesleadconversations) | **GET** /v1/ads/local-services/leads/{leadId}/conversations | Conversations of a Local Services lead
+*AdInsightsApi* | [**listLocalServicesLeads**](docs/Api/AdInsightsApi.md#listlocalservicesleads) | **GET** /v1/ads/local-services/leads | Google Local Services Ads leads
 *AdInsightsApi* | [**queryAdInsights**](docs/Api/AdInsightsApi.md#queryadinsights) | **GET** /v1/ads/insights | Flexible live insights query
 *AdTargetingApi* | [**estimateAdReach**](docs/Api/AdTargetingApi.md#estimateadreach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach
 *AdTargetingApi* | [**getLinkedInBidPricing**](docs/Api/AdTargetingApi.md#getlinkedinbidpricing) | **POST** /v1/ads/targeting/bid-pricing | Suggested bid and budget bounds
@@ -1532,6 +1534,13 @@ Class | Method | HTTP request | Description
 - [ListLeads200ResponseLeadsInner](docs/Model/ListLeads200ResponseLeadsInner.md)
 - [ListLinkedInOrganizations200Response](docs/Model/ListLinkedInOrganizations200Response.md)
 - [ListLinkedInOrganizations200ResponseOrganizationsInner](docs/Model/ListLinkedInOrganizations200ResponseOrganizationsInner.md)
+- [ListLocalServicesLeadConversations200Response](docs/Model/ListLocalServicesLeadConversations200Response.md)
+- [ListLocalServicesLeadConversations200ResponseDataInner](docs/Model/ListLocalServicesLeadConversations200ResponseDataInner.md)
+- [ListLocalServicesLeadConversations200ResponseDataInnerMessage](docs/Model/ListLocalServicesLeadConversations200ResponseDataInnerMessage.md)
+- [ListLocalServicesLeadConversations200ResponseDataInnerPhoneCall](docs/Model/ListLocalServicesLeadConversations200ResponseDataInnerPhoneCall.md)
+- [ListLocalServicesLeads200Response](docs/Model/ListLocalServicesLeads200Response.md)
+- [ListLocalServicesLeads200ResponseDataInner](docs/Model/ListLocalServicesLeads200ResponseDataInner.md)
+- [ListLocalServicesLeads200ResponseDataInnerContact](docs/Model/ListLocalServicesLeads200ResponseDataInnerContact.md)
 - [ListLogs200Response](docs/Model/ListLogs200Response.md)
 - [ListLogs200ResponseLogsInner](docs/Model/ListLogs200ResponseLogsInner.md)
 - [ListLogs200ResponsePagination](docs/Model/ListLogs200ResponsePagination.md)
