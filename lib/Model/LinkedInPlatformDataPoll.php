@@ -1,6 +1,6 @@
 <?php
 /**
- * LinkedInPlatformData
+ * LinkedInPlatformDataPoll
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * LinkedInPlatformData Class Doc Comment
+ * LinkedInPlatformDataPoll Class Doc Comment
  *
  * @category Class
- * @description Up to 20 images, no multi-video. Single PDF supported (max 100MB). Link previews auto-generated when no media attached. Use organizationUrn for multi-org posting. Geo-restriction only works for organization pages (not personal profiles) and requires the targeted audience to exceed 300 followers. Polls are supported via the poll object: 2-4 options, cannot be combined with media or reshareUrl, cannot be edited after publishing, and API-created polls are non-sponsored only.
+ * @description Create a LinkedIn poll with this post. Cannot be combined with media or reshareUrl. Polls cannot be edited after publishing on LinkedIn, and API-created polls are non-sponsored only (they cannot be promoted as ads).
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializable
+class LinkedInPlatformDataPoll implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LinkedInPlatformData';
+    protected static $openAPIModelName = 'LinkedInPlatformData_poll';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,13 +59,9 @@ class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'document_title' => 'string',
-        'organization_urn' => 'string',
-        'first_comment' => 'string',
-        'disable_link_preview' => 'bool',
-        'reshare_url' => 'string',
-        'geo_restriction' => '\Zernio\Model\GeoRestriction',
-        'poll' => '\Zernio\Model\LinkedInPlatformDataPoll'
+        'question' => 'string',
+        'options' => 'string[]',
+        'duration' => 'string'
     ];
 
     /**
@@ -76,13 +72,9 @@ class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'document_title' => null,
-        'organization_urn' => null,
-        'first_comment' => null,
-        'disable_link_preview' => null,
-        'reshare_url' => null,
-        'geo_restriction' => null,
-        'poll' => null
+        'question' => null,
+        'options' => null,
+        'duration' => null
     ];
 
     /**
@@ -91,13 +83,9 @@ class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'document_title' => false,
-        'organization_urn' => false,
-        'first_comment' => false,
-        'disable_link_preview' => false,
-        'reshare_url' => false,
-        'geo_restriction' => false,
-        'poll' => false
+        'question' => false,
+        'options' => false,
+        'duration' => false
     ];
 
     /**
@@ -186,13 +174,9 @@ class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'document_title' => 'documentTitle',
-        'organization_urn' => 'organizationUrn',
-        'first_comment' => 'firstComment',
-        'disable_link_preview' => 'disableLinkPreview',
-        'reshare_url' => 'reshareUrl',
-        'geo_restriction' => 'geoRestriction',
-        'poll' => 'poll'
+        'question' => 'question',
+        'options' => 'options',
+        'duration' => 'duration'
     ];
 
     /**
@@ -201,13 +185,9 @@ class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'document_title' => 'setDocumentTitle',
-        'organization_urn' => 'setOrganizationUrn',
-        'first_comment' => 'setFirstComment',
-        'disable_link_preview' => 'setDisableLinkPreview',
-        'reshare_url' => 'setReshareUrl',
-        'geo_restriction' => 'setGeoRestriction',
-        'poll' => 'setPoll'
+        'question' => 'setQuestion',
+        'options' => 'setOptions',
+        'duration' => 'setDuration'
     ];
 
     /**
@@ -216,13 +196,9 @@ class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'document_title' => 'getDocumentTitle',
-        'organization_urn' => 'getOrganizationUrn',
-        'first_comment' => 'getFirstComment',
-        'disable_link_preview' => 'getDisableLinkPreview',
-        'reshare_url' => 'getReshareUrl',
-        'geo_restriction' => 'getGeoRestriction',
-        'poll' => 'getPoll'
+        'question' => 'getQuestion',
+        'options' => 'getOptions',
+        'duration' => 'getDuration'
     ];
 
     /**
@@ -266,6 +242,25 @@ class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
         return self::$openAPIModelName;
     }
 
+    public const DURATION_ONE_DAY = 'ONE_DAY';
+    public const DURATION_THREE_DAYS = 'THREE_DAYS';
+    public const DURATION_SEVEN_DAYS = 'SEVEN_DAYS';
+    public const DURATION_FOURTEEN_DAYS = 'FOURTEEN_DAYS';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getDurationAllowableValues()
+    {
+        return [
+            self::DURATION_ONE_DAY,
+            self::DURATION_THREE_DAYS,
+            self::DURATION_SEVEN_DAYS,
+            self::DURATION_FOURTEEN_DAYS,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -282,13 +277,9 @@ class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('document_title', $data ?? [], null);
-        $this->setIfExists('organization_urn', $data ?? [], null);
-        $this->setIfExists('first_comment', $data ?? [], null);
-        $this->setIfExists('disable_link_preview', $data ?? [], null);
-        $this->setIfExists('reshare_url', $data ?? [], null);
-        $this->setIfExists('geo_restriction', $data ?? [], null);
-        $this->setIfExists('poll', $data ?? [], null);
+        $this->setIfExists('question', $data ?? [], null);
+        $this->setIfExists('options', $data ?? [], null);
+        $this->setIfExists('duration', $data ?? [], 'SEVEN_DAYS');
     }
 
     /**
@@ -318,6 +309,37 @@ class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
+        if ($this->container['question'] === null) {
+            $invalidProperties[] = "'question' can't be null";
+        }
+        if ((mb_strlen($this->container['question']) > 140)) {
+            $invalidProperties[] = "invalid value for 'question', the character length must be smaller than or equal to 140.";
+        }
+
+        if ((mb_strlen($this->container['question']) < 1)) {
+            $invalidProperties[] = "invalid value for 'question', the character length must be bigger than or equal to 1.";
+        }
+
+        if ($this->container['options'] === null) {
+            $invalidProperties[] = "'options' can't be null";
+        }
+        if ((count($this->container['options']) > 4)) {
+            $invalidProperties[] = "invalid value for 'options', number of items must be less than or equal to 4.";
+        }
+
+        if ((count($this->container['options']) < 2)) {
+            $invalidProperties[] = "invalid value for 'options', number of items must be greater than or equal to 2.";
+        }
+
+        $allowedValues = $this->getDurationAllowableValues();
+        if (!is_null($this->container['duration']) && !in_array($this->container['duration'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'duration', must be one of '%s'",
+                $this->container['duration'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -334,190 +356,106 @@ class LinkedInPlatformData implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets document_title
+     * Gets question
+     *
+     * @return string
+     */
+    public function getQuestion()
+    {
+        return $this->container['question'];
+    }
+
+    /**
+     * Sets question
+     *
+     * @param string $question Poll question (max 140 characters)
+     *
+     * @return self
+     */
+    public function setQuestion($question)
+    {
+        if (is_null($question)) {
+            throw new \InvalidArgumentException('non-nullable question cannot be null');
+        }
+        if ((mb_strlen($question) > 140)) {
+            throw new \InvalidArgumentException('invalid length for $question when calling LinkedInPlatformDataPoll., must be smaller than or equal to 140.');
+        }
+        if ((mb_strlen($question) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $question when calling LinkedInPlatformDataPoll., must be bigger than or equal to 1.');
+        }
+
+        $this->container['question'] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Gets options
+     *
+     * @return string[]
+     */
+    public function getOptions()
+    {
+        return $this->container['options'];
+    }
+
+    /**
+     * Sets options
+     *
+     * @param string[] $options Poll options (2-4 choices, max 30 characters each)
+     *
+     * @return self
+     */
+    public function setOptions($options)
+    {
+        if (is_null($options)) {
+            throw new \InvalidArgumentException('non-nullable options cannot be null');
+        }
+
+        if ((count($options) > 4)) {
+            throw new \InvalidArgumentException('invalid value for $options when calling LinkedInPlatformDataPoll., number of items must be less than or equal to 4.');
+        }
+        if ((count($options) < 2)) {
+            throw new \InvalidArgumentException('invalid length for $options when calling LinkedInPlatformDataPoll., number of items must be greater than or equal to 2.');
+        }
+        $this->container['options'] = $options;
+
+        return $this;
+    }
+
+    /**
+     * Gets duration
      *
      * @return string|null
      */
-    public function getDocumentTitle()
+    public function getDuration()
     {
-        return $this->container['document_title'];
+        return $this->container['duration'];
     }
 
     /**
-     * Sets document_title
+     * Sets duration
      *
-     * @param string|null $document_title Title displayed on LinkedIn document (PDF/carousel) posts. Required by LinkedIn for document posts. If omitted, falls back to the media item title, then the filename.
+     * @param string|null $duration How long the poll accepts votes. Defaults to SEVEN_DAYS.
      *
      * @return self
      */
-    public function setDocumentTitle($document_title)
+    public function setDuration($duration)
     {
-        if (is_null($document_title)) {
-            throw new \InvalidArgumentException('non-nullable document_title cannot be null');
+        if (is_null($duration)) {
+            throw new \InvalidArgumentException('non-nullable duration cannot be null');
         }
-        $this->container['document_title'] = $document_title;
-
-        return $this;
-    }
-
-    /**
-     * Gets organization_urn
-     *
-     * @return string|null
-     */
-    public function getOrganizationUrn()
-    {
-        return $this->container['organization_urn'];
-    }
-
-    /**
-     * Sets organization_urn
-     *
-     * @param string|null $organization_urn Target LinkedIn Organization URN (e.g. \"urn:li:organization:123456789\"). If omitted, uses the default org. Use GET /v1/accounts/{id}/linkedin-organizations to list orgs.
-     *
-     * @return self
-     */
-    public function setOrganizationUrn($organization_urn)
-    {
-        if (is_null($organization_urn)) {
-            throw new \InvalidArgumentException('non-nullable organization_urn cannot be null');
+        $allowedValues = $this->getDurationAllowableValues();
+        if (!in_array($duration, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'duration', must be one of '%s'",
+                    $duration,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
-        $this->container['organization_urn'] = $organization_urn;
-
-        return $this;
-    }
-
-    /**
-     * Gets first_comment
-     *
-     * @return string|null
-     */
-    public function getFirstComment()
-    {
-        return $this->container['first_comment'];
-    }
-
-    /**
-     * Sets first_comment
-     *
-     * @param string|null $first_comment Optional first comment to add after the post is created
-     *
-     * @return self
-     */
-    public function setFirstComment($first_comment)
-    {
-        if (is_null($first_comment)) {
-            throw new \InvalidArgumentException('non-nullable first_comment cannot be null');
-        }
-        $this->container['first_comment'] = $first_comment;
-
-        return $this;
-    }
-
-    /**
-     * Gets disable_link_preview
-     *
-     * @return bool|null
-     */
-    public function getDisableLinkPreview()
-    {
-        return $this->container['disable_link_preview'];
-    }
-
-    /**
-     * Sets disable_link_preview
-     *
-     * @param bool|null $disable_link_preview Set to true to disable automatic link previews for URLs in the post content (default is false)
-     *
-     * @return self
-     */
-    public function setDisableLinkPreview($disable_link_preview)
-    {
-        if (is_null($disable_link_preview)) {
-            throw new \InvalidArgumentException('non-nullable disable_link_preview cannot be null');
-        }
-        $this->container['disable_link_preview'] = $disable_link_preview;
-
-        return $this;
-    }
-
-    /**
-     * Gets reshare_url
-     *
-     * @return string|null
-     */
-    public function getReshareUrl()
-    {
-        return $this->container['reshare_url'];
-    }
-
-    /**
-     * Sets reshare_url
-     *
-     * @param string|null $reshare_url LinkedIn post link to repost (use the post's \"Copy link to post\" action), or a urn:li:share / urn:li:ugcPost / urn:li:groupPost URN. The published post becomes a quote-reshare: your content is shown as the commentary and the original post is embedded underneath (LinkedIn's \"repost with your thoughts\"). Mutually exclusive with media. Works on personal profiles and organization pages.
-     *
-     * @return self
-     */
-    public function setReshareUrl($reshare_url)
-    {
-        if (is_null($reshare_url)) {
-            throw new \InvalidArgumentException('non-nullable reshare_url cannot be null');
-        }
-        $this->container['reshare_url'] = $reshare_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets geo_restriction
-     *
-     * @return \Zernio\Model\GeoRestriction|null
-     */
-    public function getGeoRestriction()
-    {
-        return $this->container['geo_restriction'];
-    }
-
-    /**
-     * Sets geo_restriction
-     *
-     * @param \Zernio\Model\GeoRestriction|null $geo_restriction geo_restriction
-     *
-     * @return self
-     */
-    public function setGeoRestriction($geo_restriction)
-    {
-        if (is_null($geo_restriction)) {
-            throw new \InvalidArgumentException('non-nullable geo_restriction cannot be null');
-        }
-        $this->container['geo_restriction'] = $geo_restriction;
-
-        return $this;
-    }
-
-    /**
-     * Gets poll
-     *
-     * @return \Zernio\Model\LinkedInPlatformDataPoll|null
-     */
-    public function getPoll()
-    {
-        return $this->container['poll'];
-    }
-
-    /**
-     * Sets poll
-     *
-     * @param \Zernio\Model\LinkedInPlatformDataPoll|null $poll poll
-     *
-     * @return self
-     */
-    public function setPoll($poll)
-    {
-        if (is_null($poll)) {
-            throw new \InvalidArgumentException('non-nullable poll cannot be null');
-        }
-        $this->container['poll'] = $poll;
+        $this->container['duration'] = $duration;
 
         return $this;
     }

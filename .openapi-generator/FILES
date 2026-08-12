@@ -891,6 +891,7 @@ docs/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf.md
 docs/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1.md
 docs/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInner.md
 docs/Model/LinkedInPlatformData.md
+docs/Model/LinkedInPlatformDataPoll.md
 docs/Model/ListAccountGroups200Response.md
 docs/Model/ListAccountGroups200ResponseGroupsInner.md
 docs/Model/ListAdAccounts200Response.md
@@ -2579,6 +2580,7 @@ lib/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf.php
 lib/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1.php
 lib/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInner.php
 lib/Model/LinkedInPlatformData.php
+lib/Model/LinkedInPlatformDataPoll.php
 lib/Model/ListAccountGroups200Response.php
 lib/Model/ListAccountGroups200ResponseGroupsInner.php
 lib/Model/ListAdAccounts200Response.php
@@ -3377,18 +3379,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/AdAnalyticsResponseAdTest.php
-test/Model/AdAnalyticsResponseTest.php
-test/Model/AdTreeResponseTest.php
-test/Model/AdsListResponseTest.php
-test/Model/AdsTimelineResponseRowsInnerTest.php
-test/Model/AdsTimelineResponseTest.php
-test/Model/CampaignAnalyticsResponseAnalyticsDailyInnerTest.php
-test/Model/CampaignAnalyticsResponseAnalyticsTest.php
-test/Model/CampaignAnalyticsResponseCampaignTest.php
-test/Model/CampaignAnalyticsResponseTest.php
-test/Model/GetAdAnalytics202ResponseTest.php
-test/Model/GetAdTree202ResponseTest.php
-test/Model/GetAdsTimeline202ResponseTest.php
-test/Model/GetCampaignAnalytics202ResponseTest.php
-test/Model/ListAds202ResponseTest.php
+test/Model/LinkedInPlatformDataPollTest.php

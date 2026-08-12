@@ -1438,6 +1438,7 @@ Class | Method | HTTP request | Description
 - [LinkedInLeadFormPlatformDataQuestionsInnerOneOf1](docs/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1.md)
 - [LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInner](docs/Model/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInner.md)
 - [LinkedInPlatformData](docs/Model/LinkedInPlatformData.md)
+- [LinkedInPlatformDataPoll](docs/Model/LinkedInPlatformDataPoll.md)
 - [ListAccountGroups200Response](docs/Model/ListAccountGroups200Response.md)
 - [ListAccountGroups200ResponseGroupsInner](docs/Model/ListAccountGroups200ResponseGroupsInner.md)
 - [ListAdAccounts200Response](docs/Model/ListAdAccounts200Response.md)
