@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **is_liked** | **bool** | Whether the current user has liked this comment | [optional]
 **like_uri** | **string** | Bluesky like URI for unliking | [optional]
 **cid** | **string** | Bluesky content identifier | [optional]
-**parent_id** | **string** | Parent comment ID for nested replies | [optional]
+**parent_id** | **string** | ID of the parent comment. Present on entries inside replies[] for Facebook, Instagram and X/Twitter. On X/Twitter it is also present on top-level entries, where it holds the ID of the post replied to. Omitted entirely (key absent, not null) on top-level Facebook and Instagram entries and on every other platform, which express the parent relationship only through replies[] nesting. | [optional]
 **root_uri** | **string** | Bluesky root post URI | [optional]
 **root_cid** | **string** | Bluesky root post CID | [optional]
 

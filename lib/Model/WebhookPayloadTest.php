@@ -450,7 +450,7 @@ class WebhookPayloadTest implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets timestamp
      *
-     * @param \DateTime $timestamp timestamp
+     * @param \DateTime $timestamp UTC time at which Zernio generated this test event (set once when the payload is built). Test fires are sent synchronously as a single attempt; a later redelivery of this event keeps the original value.
      *
      * @return self
      */

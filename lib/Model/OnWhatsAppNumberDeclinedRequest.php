@@ -417,7 +417,7 @@ class OnWhatsAppNumberDeclinedRequest implements ModelInterface, ArrayAccess, \J
     /**
      * Sets timestamp
      *
-     * @param \DateTime|null $timestamp timestamp
+     * @param \DateTime|null $timestamp UTC time at which Zernio generated this event (set once when the event payload is built, before delivery is queued). Retries and redeliveries keep the original value, so it reflects the event, not the delivery attempt.
      *
      * @return self
      */
