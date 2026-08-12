@@ -361,7 +361,7 @@ class WebhookPayloadMessageSentMessageSender implements ModelInterface, ArrayAcc
     /**
      * Sets contact_id
      *
-     * @param string|null $contact_id Zernio CRM Contact id for this sender, when one exists.
+     * @param string|null $contact_id Always omitted on this event: the sender is the business, not a contact. Use conversation.contactId to join back to the CRM Contact.
      *
      * @return self
      */

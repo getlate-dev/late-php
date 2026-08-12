@@ -3367,5 +3367,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/UpdateAdRequestTargetingKeywordsInnerOneOfTest.php
-test/Model/UpdateAdRequestTargetingKeywordsInnerTest.php
