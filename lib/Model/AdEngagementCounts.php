@@ -576,7 +576,7 @@ class AdEngagementCounts implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets link_clicks
      *
-     * @param int|null $link_clicks Attributed link clicks (`link_click`). This is the attribution-window count, which differs from the in-session `inline_link_clicks` reported by `GET /v1/ads/{adId}/analytics`.
+     * @param int|null $link_clicks Attributed link clicks (`link_click`). This is the attribution-window count, which differs from the in-session count in the sibling `inlineLinkClicks` field.
      *
      * @return self
      */

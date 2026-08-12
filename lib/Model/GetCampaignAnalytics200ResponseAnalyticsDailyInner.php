@@ -72,6 +72,13 @@ class GetCampaignAnalytics200ResponseAnalyticsDailyInner implements ModelInterfa
         'action_values' => 'array<string,float>',
         'purchase_value' => 'float',
         'roas' => 'float',
+        'cost_per_action' => 'array<string,float>',
+        'outbound_clicks' => 'int',
+        'outbound_clicks_ctr' => 'float',
+        'inline_link_clicks' => 'int',
+        'inline_link_click_ctr' => 'float',
+        'unique_clicks' => 'int',
+        'unique_ctr' => 'float',
         'video_play_actions' => 'int',
         'video30_sec_watched_actions' => 'int',
         'video_thruplay_watched_actions' => 'int',
@@ -110,6 +117,13 @@ class GetCampaignAnalytics200ResponseAnalyticsDailyInner implements ModelInterfa
         'action_values' => null,
         'purchase_value' => null,
         'roas' => null,
+        'cost_per_action' => null,
+        'outbound_clicks' => null,
+        'outbound_clicks_ctr' => null,
+        'inline_link_clicks' => null,
+        'inline_link_click_ctr' => null,
+        'unique_clicks' => null,
+        'unique_ctr' => null,
         'video_play_actions' => null,
         'video30_sec_watched_actions' => null,
         'video_thruplay_watched_actions' => null,
@@ -146,6 +160,13 @@ class GetCampaignAnalytics200ResponseAnalyticsDailyInner implements ModelInterfa
         'action_values' => false,
         'purchase_value' => false,
         'roas' => false,
+        'cost_per_action' => false,
+        'outbound_clicks' => false,
+        'outbound_clicks_ctr' => false,
+        'inline_link_clicks' => false,
+        'inline_link_click_ctr' => false,
+        'unique_clicks' => false,
+        'unique_ctr' => false,
         'video_play_actions' => false,
         'video30_sec_watched_actions' => false,
         'video_thruplay_watched_actions' => false,
@@ -262,6 +283,13 @@ class GetCampaignAnalytics200ResponseAnalyticsDailyInner implements ModelInterfa
         'action_values' => 'actionValues',
         'purchase_value' => 'purchaseValue',
         'roas' => 'roas',
+        'cost_per_action' => 'costPerAction',
+        'outbound_clicks' => 'outboundClicks',
+        'outbound_clicks_ctr' => 'outboundClicksCtr',
+        'inline_link_clicks' => 'inlineLinkClicks',
+        'inline_link_click_ctr' => 'inlineLinkClickCtr',
+        'unique_clicks' => 'uniqueClicks',
+        'unique_ctr' => 'uniqueCtr',
         'video_play_actions' => 'videoPlayActions',
         'video30_sec_watched_actions' => 'video30SecWatchedActions',
         'video_thruplay_watched_actions' => 'videoThruplayWatchedActions',
@@ -298,6 +326,13 @@ class GetCampaignAnalytics200ResponseAnalyticsDailyInner implements ModelInterfa
         'action_values' => 'setActionValues',
         'purchase_value' => 'setPurchaseValue',
         'roas' => 'setRoas',
+        'cost_per_action' => 'setCostPerAction',
+        'outbound_clicks' => 'setOutboundClicks',
+        'outbound_clicks_ctr' => 'setOutboundClicksCtr',
+        'inline_link_clicks' => 'setInlineLinkClicks',
+        'inline_link_click_ctr' => 'setInlineLinkClickCtr',
+        'unique_clicks' => 'setUniqueClicks',
+        'unique_ctr' => 'setUniqueCtr',
         'video_play_actions' => 'setVideoPlayActions',
         'video30_sec_watched_actions' => 'setVideo30SecWatchedActions',
         'video_thruplay_watched_actions' => 'setVideoThruplayWatchedActions',
@@ -334,6 +369,13 @@ class GetCampaignAnalytics200ResponseAnalyticsDailyInner implements ModelInterfa
         'action_values' => 'getActionValues',
         'purchase_value' => 'getPurchaseValue',
         'roas' => 'getRoas',
+        'cost_per_action' => 'getCostPerAction',
+        'outbound_clicks' => 'getOutboundClicks',
+        'outbound_clicks_ctr' => 'getOutboundClicksCtr',
+        'inline_link_clicks' => 'getInlineLinkClicks',
+        'inline_link_click_ctr' => 'getInlineLinkClickCtr',
+        'unique_clicks' => 'getUniqueClicks',
+        'unique_ctr' => 'getUniqueCtr',
         'video_play_actions' => 'getVideoPlayActions',
         'video30_sec_watched_actions' => 'getVideo30SecWatchedActions',
         'video_thruplay_watched_actions' => 'getVideoThruplayWatchedActions',
@@ -421,6 +463,13 @@ class GetCampaignAnalytics200ResponseAnalyticsDailyInner implements ModelInterfa
         $this->setIfExists('action_values', $data ?? [], null);
         $this->setIfExists('purchase_value', $data ?? [], null);
         $this->setIfExists('roas', $data ?? [], null);
+        $this->setIfExists('cost_per_action', $data ?? [], null);
+        $this->setIfExists('outbound_clicks', $data ?? [], null);
+        $this->setIfExists('outbound_clicks_ctr', $data ?? [], null);
+        $this->setIfExists('inline_link_clicks', $data ?? [], null);
+        $this->setIfExists('inline_link_click_ctr', $data ?? [], null);
+        $this->setIfExists('unique_clicks', $data ?? [], null);
+        $this->setIfExists('unique_ctr', $data ?? [], null);
         $this->setIfExists('video_play_actions', $data ?? [], null);
         $this->setIfExists('video30_sec_watched_actions', $data ?? [], null);
         $this->setIfExists('video_thruplay_watched_actions', $data ?? [], null);
@@ -853,6 +902,195 @@ class GetCampaignAnalytics200ResponseAnalyticsDailyInner implements ModelInterfa
             throw new \InvalidArgumentException('non-nullable roas cannot be null');
         }
         $this->container['roas'] = $roas;
+
+        return $this;
+    }
+
+    /**
+     * Gets cost_per_action
+     *
+     * @return array<string,float>|null
+     */
+    public function getCostPerAction()
+    {
+        return $this->container['cost_per_action'];
+    }
+
+    /**
+     * Sets cost_per_action
+     *
+     * @param array<string,float>|null $cost_per_action Derived `spend / actions[type]` for every action type with a non-zero count, in ad-account native currency. Same keys as `actions`. Rounded to 4 decimals because cheap actions cost well under a cent. Recomputed from summed spend + counts at every rollup level. Empty object when spend is 0 or no actions are reported.
+     *
+     * @return self
+     */
+    public function setCostPerAction($cost_per_action)
+    {
+        if (is_null($cost_per_action)) {
+            throw new \InvalidArgumentException('non-nullable cost_per_action cannot be null');
+        }
+        $this->container['cost_per_action'] = $cost_per_action;
+
+        return $this;
+    }
+
+    /**
+     * Gets outbound_clicks
+     *
+     * @return int|null
+     */
+    public function getOutboundClicks()
+    {
+        return $this->container['outbound_clicks'];
+    }
+
+    /**
+     * Sets outbound_clicks
+     *
+     * @param int|null $outbound_clicks Clicks leading off Meta's surfaces to the advertiser's destination. Meta-only; other platforms report 0.
+     *
+     * @return self
+     */
+    public function setOutboundClicks($outbound_clicks)
+    {
+        if (is_null($outbound_clicks)) {
+            throw new \InvalidArgumentException('non-nullable outbound_clicks cannot be null');
+        }
+        $this->container['outbound_clicks'] = $outbound_clicks;
+
+        return $this;
+    }
+
+    /**
+     * Gets outbound_clicks_ctr
+     *
+     * @return float|null
+     */
+    public function getOutboundClicksCtr()
+    {
+        return $this->container['outbound_clicks_ctr'];
+    }
+
+    /**
+     * Sets outbound_clicks_ctr
+     *
+     * @param float|null $outbound_clicks_ctr Derived `outboundClicks / impressions * 100`, recomputed from sums at every rollup level.
+     *
+     * @return self
+     */
+    public function setOutboundClicksCtr($outbound_clicks_ctr)
+    {
+        if (is_null($outbound_clicks_ctr)) {
+            throw new \InvalidArgumentException('non-nullable outbound_clicks_ctr cannot be null');
+        }
+        $this->container['outbound_clicks_ctr'] = $outbound_clicks_ctr;
+
+        return $this;
+    }
+
+    /**
+     * Gets inline_link_clicks
+     *
+     * @return int|null
+     */
+    public function getInlineLinkClicks()
+    {
+        return $this->container['inline_link_clicks'];
+    }
+
+    /**
+     * Sets inline_link_clicks
+     *
+     * @param int|null $inline_link_clicks In-session link clicks. Differs from the attributed `link_click` count in `actions`/`engagementBreakdown.linkClicks`, which uses the attribution window. Meta-only.
+     *
+     * @return self
+     */
+    public function setInlineLinkClicks($inline_link_clicks)
+    {
+        if (is_null($inline_link_clicks)) {
+            throw new \InvalidArgumentException('non-nullable inline_link_clicks cannot be null');
+        }
+        $this->container['inline_link_clicks'] = $inline_link_clicks;
+
+        return $this;
+    }
+
+    /**
+     * Gets inline_link_click_ctr
+     *
+     * @return float|null
+     */
+    public function getInlineLinkClickCtr()
+    {
+        return $this->container['inline_link_click_ctr'];
+    }
+
+    /**
+     * Sets inline_link_click_ctr
+     *
+     * @param float|null $inline_link_click_ctr Derived `inlineLinkClicks / impressions * 100`, recomputed from sums at every rollup level.
+     *
+     * @return self
+     */
+    public function setInlineLinkClickCtr($inline_link_click_ctr)
+    {
+        if (is_null($inline_link_click_ctr)) {
+            throw new \InvalidArgumentException('non-nullable inline_link_click_ctr cannot be null');
+        }
+        $this->container['inline_link_click_ctr'] = $inline_link_click_ctr;
+
+        return $this;
+    }
+
+    /**
+     * Gets unique_clicks
+     *
+     * @return int|null
+     */
+    public function getUniqueClicks()
+    {
+        return $this->container['unique_clicks'];
+    }
+
+    /**
+     * Sets unique_clicks
+     *
+     * @param int|null $unique_clicks People who clicked at least once. NOT additive: summed across days/children it overcounts people who clicked on multiple days or ads, so treat rollups as an upper bound (same caveat as `reach`). Meta-only.
+     *
+     * @return self
+     */
+    public function setUniqueClicks($unique_clicks)
+    {
+        if (is_null($unique_clicks)) {
+            throw new \InvalidArgumentException('non-nullable unique_clicks cannot be null');
+        }
+        $this->container['unique_clicks'] = $unique_clicks;
+
+        return $this;
+    }
+
+    /**
+     * Gets unique_ctr
+     *
+     * @return float|null
+     */
+    public function getUniqueCtr()
+    {
+        return $this->container['unique_ctr'];
+    }
+
+    /**
+     * Sets unique_ctr
+     *
+     * @param float|null $unique_ctr Derived `uniqueClicks / impressions * 100` (NOT Meta's reach-based unique_ctr). Inherits the non-additivity caveat of `uniqueClicks`.
+     *
+     * @return self
+     */
+    public function setUniqueCtr($unique_ctr)
+    {
+        if (is_null($unique_ctr)) {
+            throw new \InvalidArgumentException('non-nullable unique_ctr cannot be null');
+        }
+        $this->container['unique_ctr'] = $unique_ctr;
 
         return $this;
     }
