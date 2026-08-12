@@ -3572,8 +3572,10 @@ class AdCampaignsApi
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads. (optional)
-     * @param  \DateTime|null $from_date Start of the METRICS date range (YYYY-MM-DD). Affects only the spend/impression numbers overlaid on each node, NOT which campaigns are returned. Defaults to 90 days ago. (optional)
+     * @param  \DateTime|null $from_date Start of the METRICS date range (YYYY-MM-DD). On its own it affects only the spend/impression numbers overlaid on each node, not which campaigns are returned — pass &#x60;hasDelivery&#x60; or &#x60;minSpend&#x60; to also filter the campaign set to this window. Defaults to 90 days ago. (optional)
      * @param  \DateTime|null $to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range. (optional)
+     * @param  bool|null $has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window, so a campaign that spent then and is paused today is still returned. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. (optional)
+     * @param  float|null $min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount. Expressed in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign node): spend is stored per ad account in its native currency and one response can span several. Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. (optional)
      * @param  string|null $sort Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end. (optional, default to 'newest')
      * @param  int|null $time_increment Set to &#x60;1&#x60; to also return a daily breakdown. Mirrors Meta Insights&#39; &#x60;time_increment&#x3D;1&#x60;: each node gains a &#x60;daily[]&#x60; array of per-day metrics (same fields as the aggregated &#x60;metrics&#x60;) alongside the range total, so you get per-entity daily trends in ONE call instead of calling the tree once per day. Only &#x60;1&#x60; (daily) is supported. The daily series covers the same date range and uses the same source data as &#x60;metrics&#x60;, except &#x60;reach&#x60; on Meta and TikTok: the range total is the platform&#39;s de-duplicated value, so daily reach does not sum to it. See &#x60;dailyLevel&#x60; to control which levels carry it. (optional)
      * @param  string|null $daily_level Which tree levels get the &#x60;daily[]&#x60; series when &#x60;timeIncrement&#x3D;1&#x60;. &#x60;campaign&#x60; (default) attaches it on campaign nodes only — the common per-campaign-trend case, and the smallest payload. &#x60;adset&#x60; adds it on ad sets too; &#x60;ad&#x60; adds it on every ad in &#x60;ads[]&#x60; as well (heaviest — a long range × up to 100 ads per ad set). Scope with &#x60;campaignId&#x60; to keep &#x60;ad&#x60;-level responses small. Ignored when &#x60;timeIncrement&#x60; is unset. (optional, default to 'campaign')
@@ -3583,9 +3585,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\AdTreeResponse|\Zernio\Model\GetAdTree202Response|\Zernio\Model\InlineObject
      */
-    public function getAdTree($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
+    public function getAdTree($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $has_delivery = null, $min_spend = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
-        list($response) = $this->getAdTreeWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType);
+        list($response) = $this->getAdTreeWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $has_delivery, $min_spend, $sort, $time_increment, $daily_level, $contentType);
         return $response;
     }
 
@@ -3604,8 +3606,10 @@ class AdCampaignsApi
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads. (optional)
-     * @param  \DateTime|null $from_date Start of the METRICS date range (YYYY-MM-DD). Affects only the spend/impression numbers overlaid on each node, NOT which campaigns are returned. Defaults to 90 days ago. (optional)
+     * @param  \DateTime|null $from_date Start of the METRICS date range (YYYY-MM-DD). On its own it affects only the spend/impression numbers overlaid on each node, not which campaigns are returned — pass &#x60;hasDelivery&#x60; or &#x60;minSpend&#x60; to also filter the campaign set to this window. Defaults to 90 days ago. (optional)
      * @param  \DateTime|null $to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range. (optional)
+     * @param  bool|null $has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window, so a campaign that spent then and is paused today is still returned. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. (optional)
+     * @param  float|null $min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount. Expressed in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign node): spend is stored per ad account in its native currency and one response can span several. Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. (optional)
      * @param  string|null $sort Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end. (optional, default to 'newest')
      * @param  int|null $time_increment Set to &#x60;1&#x60; to also return a daily breakdown. Mirrors Meta Insights&#39; &#x60;time_increment&#x3D;1&#x60;: each node gains a &#x60;daily[]&#x60; array of per-day metrics (same fields as the aggregated &#x60;metrics&#x60;) alongside the range total, so you get per-entity daily trends in ONE call instead of calling the tree once per day. Only &#x60;1&#x60; (daily) is supported. The daily series covers the same date range and uses the same source data as &#x60;metrics&#x60;, except &#x60;reach&#x60; on Meta and TikTok: the range total is the platform&#39;s de-duplicated value, so daily reach does not sum to it. See &#x60;dailyLevel&#x60; to control which levels carry it. (optional)
      * @param  string|null $daily_level Which tree levels get the &#x60;daily[]&#x60; series when &#x60;timeIncrement&#x3D;1&#x60;. &#x60;campaign&#x60; (default) attaches it on campaign nodes only — the common per-campaign-trend case, and the smallest payload. &#x60;adset&#x60; adds it on ad sets too; &#x60;ad&#x60; adds it on every ad in &#x60;ads[]&#x60; as well (heaviest — a long range × up to 100 ads per ad set). Scope with &#x60;campaignId&#x60; to keep &#x60;ad&#x60;-level responses small. Ignored when &#x60;timeIncrement&#x60; is unset. (optional, default to 'campaign')
@@ -3615,9 +3619,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\AdTreeResponse|\Zernio\Model\GetAdTree202Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAdTreeWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
+    public function getAdTreeWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $has_delivery = null, $min_spend = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
-        $request = $this->getAdTreeRequest($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType);
+        $request = $this->getAdTreeRequest($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $has_delivery, $min_spend, $sort, $time_increment, $daily_level, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3731,8 +3735,10 @@ class AdCampaignsApi
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads. (optional)
-     * @param  \DateTime|null $from_date Start of the METRICS date range (YYYY-MM-DD). Affects only the spend/impression numbers overlaid on each node, NOT which campaigns are returned. Defaults to 90 days ago. (optional)
+     * @param  \DateTime|null $from_date Start of the METRICS date range (YYYY-MM-DD). On its own it affects only the spend/impression numbers overlaid on each node, not which campaigns are returned — pass &#x60;hasDelivery&#x60; or &#x60;minSpend&#x60; to also filter the campaign set to this window. Defaults to 90 days ago. (optional)
      * @param  \DateTime|null $to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range. (optional)
+     * @param  bool|null $has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window, so a campaign that spent then and is paused today is still returned. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. (optional)
+     * @param  float|null $min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount. Expressed in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign node): spend is stored per ad account in its native currency and one response can span several. Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. (optional)
      * @param  string|null $sort Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end. (optional, default to 'newest')
      * @param  int|null $time_increment Set to &#x60;1&#x60; to also return a daily breakdown. Mirrors Meta Insights&#39; &#x60;time_increment&#x3D;1&#x60;: each node gains a &#x60;daily[]&#x60; array of per-day metrics (same fields as the aggregated &#x60;metrics&#x60;) alongside the range total, so you get per-entity daily trends in ONE call instead of calling the tree once per day. Only &#x60;1&#x60; (daily) is supported. The daily series covers the same date range and uses the same source data as &#x60;metrics&#x60;, except &#x60;reach&#x60; on Meta and TikTok: the range total is the platform&#39;s de-duplicated value, so daily reach does not sum to it. See &#x60;dailyLevel&#x60; to control which levels carry it. (optional)
      * @param  string|null $daily_level Which tree levels get the &#x60;daily[]&#x60; series when &#x60;timeIncrement&#x3D;1&#x60;. &#x60;campaign&#x60; (default) attaches it on campaign nodes only — the common per-campaign-trend case, and the smallest payload. &#x60;adset&#x60; adds it on ad sets too; &#x60;ad&#x60; adds it on every ad in &#x60;ads[]&#x60; as well (heaviest — a long range × up to 100 ads per ad set). Scope with &#x60;campaignId&#x60; to keep &#x60;ad&#x60;-level responses small. Ignored when &#x60;timeIncrement&#x60; is unset. (optional, default to 'campaign')
@@ -3741,9 +3747,9 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAdTreeAsync($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
+    public function getAdTreeAsync($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $has_delivery = null, $min_spend = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
-        return $this->getAdTreeAsyncWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType)
+        return $this->getAdTreeAsyncWithHttpInfo($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $has_delivery, $min_spend, $sort, $time_increment, $daily_level, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3766,8 +3772,10 @@ class AdCampaignsApi
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads. (optional)
-     * @param  \DateTime|null $from_date Start of the METRICS date range (YYYY-MM-DD). Affects only the spend/impression numbers overlaid on each node, NOT which campaigns are returned. Defaults to 90 days ago. (optional)
+     * @param  \DateTime|null $from_date Start of the METRICS date range (YYYY-MM-DD). On its own it affects only the spend/impression numbers overlaid on each node, not which campaigns are returned — pass &#x60;hasDelivery&#x60; or &#x60;minSpend&#x60; to also filter the campaign set to this window. Defaults to 90 days ago. (optional)
      * @param  \DateTime|null $to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range. (optional)
+     * @param  bool|null $has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window, so a campaign that spent then and is paused today is still returned. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. (optional)
+     * @param  float|null $min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount. Expressed in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign node): spend is stored per ad account in its native currency and one response can span several. Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. (optional)
      * @param  string|null $sort Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end. (optional, default to 'newest')
      * @param  int|null $time_increment Set to &#x60;1&#x60; to also return a daily breakdown. Mirrors Meta Insights&#39; &#x60;time_increment&#x3D;1&#x60;: each node gains a &#x60;daily[]&#x60; array of per-day metrics (same fields as the aggregated &#x60;metrics&#x60;) alongside the range total, so you get per-entity daily trends in ONE call instead of calling the tree once per day. Only &#x60;1&#x60; (daily) is supported. The daily series covers the same date range and uses the same source data as &#x60;metrics&#x60;, except &#x60;reach&#x60; on Meta and TikTok: the range total is the platform&#39;s de-duplicated value, so daily reach does not sum to it. See &#x60;dailyLevel&#x60; to control which levels carry it. (optional)
      * @param  string|null $daily_level Which tree levels get the &#x60;daily[]&#x60; series when &#x60;timeIncrement&#x3D;1&#x60;. &#x60;campaign&#x60; (default) attaches it on campaign nodes only — the common per-campaign-trend case, and the smallest payload. &#x60;adset&#x60; adds it on ad sets too; &#x60;ad&#x60; adds it on every ad in &#x60;ads[]&#x60; as well (heaviest — a long range × up to 100 ads per ad set). Scope with &#x60;campaignId&#x60; to keep &#x60;ad&#x60;-level responses small. Ignored when &#x60;timeIncrement&#x60; is unset. (optional, default to 'campaign')
@@ -3776,10 +3784,10 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAdTreeAsyncWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
+    public function getAdTreeAsyncWithHttpInfo($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $has_delivery = null, $min_spend = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
         $returnType = '\Zernio\Model\AdTreeResponse';
-        $request = $this->getAdTreeRequest($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $sort, $time_increment, $daily_level, $contentType);
+        $request = $this->getAdTreeRequest($page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $campaign_id, $from_date, $to_date, $has_delivery, $min_spend, $sort, $time_increment, $daily_level, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3830,8 +3838,10 @@ class AdCampaignsApi
      * @param  string|null $account_id Social account ID (optional)
      * @param  string|null $profile_id Profile ID (optional)
      * @param  string|null $campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads. (optional)
-     * @param  \DateTime|null $from_date Start of the METRICS date range (YYYY-MM-DD). Affects only the spend/impression numbers overlaid on each node, NOT which campaigns are returned. Defaults to 90 days ago. (optional)
+     * @param  \DateTime|null $from_date Start of the METRICS date range (YYYY-MM-DD). On its own it affects only the spend/impression numbers overlaid on each node, not which campaigns are returned — pass &#x60;hasDelivery&#x60; or &#x60;minSpend&#x60; to also filter the campaign set to this window. Defaults to 90 days ago. (optional)
      * @param  \DateTime|null $to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range. (optional)
+     * @param  bool|null $has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window, so a campaign that spent then and is paused today is still returned. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. (optional)
+     * @param  float|null $min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount. Expressed in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign node): spend is stored per ad account in its native currency and one response can span several. Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. (optional)
      * @param  string|null $sort Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end. (optional, default to 'newest')
      * @param  int|null $time_increment Set to &#x60;1&#x60; to also return a daily breakdown. Mirrors Meta Insights&#39; &#x60;time_increment&#x3D;1&#x60;: each node gains a &#x60;daily[]&#x60; array of per-day metrics (same fields as the aggregated &#x60;metrics&#x60;) alongside the range total, so you get per-entity daily trends in ONE call instead of calling the tree once per day. Only &#x60;1&#x60; (daily) is supported. The daily series covers the same date range and uses the same source data as &#x60;metrics&#x60;, except &#x60;reach&#x60; on Meta and TikTok: the range total is the platform&#39;s de-duplicated value, so daily reach does not sum to it. See &#x60;dailyLevel&#x60; to control which levels carry it. (optional)
      * @param  string|null $daily_level Which tree levels get the &#x60;daily[]&#x60; series when &#x60;timeIncrement&#x3D;1&#x60;. &#x60;campaign&#x60; (default) attaches it on campaign nodes only — the common per-campaign-trend case, and the smallest payload. &#x60;adset&#x60; adds it on ad sets too; &#x60;ad&#x60; adds it on every ad in &#x60;ads[]&#x60; as well (heaviest — a long range × up to 100 ads per ad set). Scope with &#x60;campaignId&#x60; to keep &#x60;ad&#x60;-level responses small. Ignored when &#x60;timeIncrement&#x60; is unset. (optional, default to 'campaign')
@@ -3840,7 +3850,7 @@ class AdCampaignsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAdTreeRequest($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
+    public function getAdTreeRequest($page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $campaign_id = null, $from_date = null, $to_date = null, $has_delivery = null, $min_spend = null, $sort = 'newest', $time_increment = null, $daily_level = 'campaign', string $contentType = self::contentTypes['getAdTree'][0])
     {
 
         if ($page !== null && $page < 1) {
@@ -3864,6 +3874,11 @@ class AdCampaignsApi
 
 
 
+
+        if ($min_spend !== null && $min_spend < 0) {
+            throw new \InvalidArgumentException('invalid value for "$min_spend" when calling AdCampaignsApi.getAdTree, must be bigger than or equal to 0.');
+        }
+        
 
 
 
@@ -3979,6 +3994,24 @@ class AdCampaignsApi
             $to_date,
             'toDate', // param base name
             'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $has_delivery,
+            'hasDelivery', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $min_spend,
+            'minSpend', // param base name
+            'number', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -4463,15 +4496,17 @@ class AdCampaignsApi
      * @param  string|null $profile_id Profile ID (optional)
      * @param  \DateTime|null $from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. (optional)
      * @param  \DateTime|null $to_date End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range. (optional)
+     * @param  bool|null $has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. Mirrors the same filter on /v1/ads/tree. (optional)
+     * @param  float|null $min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount, in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign). Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. Mirrors the same filter on /v1/ads/tree. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAdCampaigns'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\ListAdCampaigns200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
      */
-    public function listAdCampaigns($include_empty = null, $page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
+    public function listAdCampaigns($include_empty = null, $page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, $has_delivery = null, $min_spend = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
     {
-        list($response) = $this->listAdCampaignsWithHttpInfo($include_empty, $page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $contentType);
+        list($response) = $this->listAdCampaignsWithHttpInfo($include_empty, $page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $has_delivery, $min_spend, $contentType);
         return $response;
     }
 
@@ -4492,15 +4527,17 @@ class AdCampaignsApi
      * @param  string|null $profile_id Profile ID (optional)
      * @param  \DateTime|null $from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. (optional)
      * @param  \DateTime|null $to_date End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range. (optional)
+     * @param  bool|null $has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. Mirrors the same filter on /v1/ads/tree. (optional)
+     * @param  float|null $min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount, in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign). Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. Mirrors the same filter on /v1/ads/tree. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAdCampaigns'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\ListAdCampaigns200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listAdCampaignsWithHttpInfo($include_empty = null, $page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
+    public function listAdCampaignsWithHttpInfo($include_empty = null, $page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, $has_delivery = null, $min_spend = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
     {
-        $request = $this->listAdCampaignsRequest($include_empty, $page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $contentType);
+        $request = $this->listAdCampaignsRequest($include_empty, $page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $has_delivery, $min_spend, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4616,14 +4653,16 @@ class AdCampaignsApi
      * @param  string|null $profile_id Profile ID (optional)
      * @param  \DateTime|null $from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. (optional)
      * @param  \DateTime|null $to_date End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range. (optional)
+     * @param  bool|null $has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. Mirrors the same filter on /v1/ads/tree. (optional)
+     * @param  float|null $min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount, in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign). Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. Mirrors the same filter on /v1/ads/tree. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAdCampaigns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAdCampaignsAsync($include_empty = null, $page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
+    public function listAdCampaignsAsync($include_empty = null, $page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, $has_delivery = null, $min_spend = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
     {
-        return $this->listAdCampaignsAsyncWithHttpInfo($include_empty, $page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $contentType)
+        return $this->listAdCampaignsAsyncWithHttpInfo($include_empty, $page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $has_delivery, $min_spend, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4648,15 +4687,17 @@ class AdCampaignsApi
      * @param  string|null $profile_id Profile ID (optional)
      * @param  \DateTime|null $from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. (optional)
      * @param  \DateTime|null $to_date End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range. (optional)
+     * @param  bool|null $has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. Mirrors the same filter on /v1/ads/tree. (optional)
+     * @param  float|null $min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount, in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign). Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. Mirrors the same filter on /v1/ads/tree. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAdCampaigns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAdCampaignsAsyncWithHttpInfo($include_empty = null, $page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
+    public function listAdCampaignsAsyncWithHttpInfo($include_empty = null, $page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, $has_delivery = null, $min_spend = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
     {
         $returnType = '\Zernio\Model\ListAdCampaigns200Response';
-        $request = $this->listAdCampaignsRequest($include_empty, $page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $contentType);
+        $request = $this->listAdCampaignsRequest($include_empty, $page, $limit, $source, $platform, $status, $ad_account_id, $page_id, $account_id, $profile_id, $from_date, $to_date, $has_delivery, $min_spend, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4709,12 +4750,14 @@ class AdCampaignsApi
      * @param  string|null $profile_id Profile ID (optional)
      * @param  \DateTime|null $from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. (optional)
      * @param  \DateTime|null $to_date End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range. (optional)
+     * @param  bool|null $has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. Mirrors the same filter on /v1/ads/tree. (optional)
+     * @param  float|null $min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount, in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign). Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. Mirrors the same filter on /v1/ads/tree. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAdCampaigns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listAdCampaignsRequest($include_empty = null, $page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
+    public function listAdCampaignsRequest($include_empty = null, $page = 1, $limit = 20, $source = 'all', $platform = null, $status = null, $ad_account_id = null, $page_id = null, $account_id = null, $profile_id = null, $from_date = null, $to_date = null, $has_delivery = null, $min_spend = null, string $contentType = self::contentTypes['listAdCampaigns'][0])
     {
 
 
@@ -4738,6 +4781,11 @@ class AdCampaignsApi
 
 
 
+
+        if ($min_spend !== null && $min_spend < 0) {
+            throw new \InvalidArgumentException('invalid value for "$min_spend" when calling AdCampaignsApi.listAdCampaigns, must be bigger than or equal to 0.');
+        }
+        
 
         $resourcePath = '/v1/ads/campaigns';
         $formParams = [];
@@ -4850,6 +4898,24 @@ class AdCampaignsApi
             $to_date,
             'toDate', // param base name
             'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $has_delivery,
+            'hasDelivery', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $min_spend,
+            'minSpend', // param base name
+            'number', // openApiType
             'form', // style
             true, // explode
             false // required
