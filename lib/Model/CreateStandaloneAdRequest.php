@@ -140,6 +140,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'dsa_payor' => 'string',
         'brand_identity' => '\Zernio\Model\CreateStandaloneAdRequestBrandIdentity',
         'identity_type' => 'string',
+        'smart_plus' => 'bool',
         'promoted_object' => '\Zernio\Model\CreateStandaloneAdRequestPromotedObject'
     ];
 
@@ -233,6 +234,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'dsa_payor' => null,
         'brand_identity' => null,
         'identity_type' => null,
+        'smart_plus' => null,
         'promoted_object' => null
     ];
 
@@ -324,6 +326,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'dsa_payor' => false,
         'brand_identity' => false,
         'identity_type' => false,
+        'smart_plus' => false,
         'promoted_object' => false
     ];
 
@@ -495,6 +498,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'dsa_payor' => 'dsaPayor',
         'brand_identity' => 'brandIdentity',
         'identity_type' => 'identityType',
+        'smart_plus' => 'smartPlus',
         'promoted_object' => 'promotedObject'
     ];
 
@@ -586,6 +590,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'dsa_payor' => 'setDsaPayor',
         'brand_identity' => 'setBrandIdentity',
         'identity_type' => 'setIdentityType',
+        'smart_plus' => 'setSmartPlus',
         'promoted_object' => 'setPromotedObject'
     ];
 
@@ -677,6 +682,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'dsa_payor' => 'getDsaPayor',
         'brand_identity' => 'getBrandIdentity',
         'identity_type' => 'getIdentityType',
+        'smart_plus' => 'getSmartPlus',
         'promoted_object' => 'getPromotedObject'
     ];
 
@@ -1123,6 +1129,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('dsa_payor', $data ?? [], null);
         $this->setIfExists('brand_identity', $data ?? [], null);
         $this->setIfExists('identity_type', $data ?? [], null);
+        $this->setIfExists('smart_plus', $data ?? [], null);
         $this->setIfExists('promoted_object', $data ?? [], null);
     }
 
@@ -3806,6 +3813,33 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             );
         }
         $this->container['identity_type'] = $identity_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets smart_plus
+     *
+     * @return bool|null
+     */
+    public function getSmartPlus()
+    {
+        return $this->container['smart_plus'];
+    }
+
+    /**
+     * Sets smart_plus
+     *
+     * @param bool|null $smart_plus TikTok only. Creates the ad as a TikTok Upgraded Smart+ campaign: TikTok automates targeting, bidding and delivery. Supports goals `conversions` (Smart+ Web Conversions), `lead_generation` (Smart+ Lead Generation with a website form on `linkUrl`; TikTok Instant Forms not supported) and `app_promotion` (Smart+ App installs; the ad's destination is the app store, so `linkUrl` is not used). The web goals require `promotedObject.pixelId` AND `promotedObject.customEventType`; `app_promotion` requires `promotedObject.applicationId` instead. Targeting works like on any TikTok ad (defaults to `countries: [\"US\"]` when omitted); TikTok automates delivery within it. The budget lives on the Smart+ campaign (Campaign Budget Optimization); a `lifetime` budget additionally requires `endDate`. Cannot be combined with `adSetId`.
+     *
+     * @return self
+     */
+    public function setSmartPlus($smart_plus)
+    {
+        if (is_null($smart_plus)) {
+            throw new \InvalidArgumentException('non-nullable smart_plus cannot be null');
+        }
+        $this->container['smart_plus'] = $smart_plus;
 
         return $this;
     }
