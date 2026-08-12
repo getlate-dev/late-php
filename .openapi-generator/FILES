@@ -1637,6 +1637,7 @@ docs/Model/WebhookPayloadMessageMetadataReferral.md
 docs/Model/WebhookPayloadMessageMetadataReferralAdsContextData.md
 docs/Model/WebhookPayloadMessageMetadataReferredProduct.md
 docs/Model/WebhookPayloadMessageMetadataStoryReply.md
+docs/Model/WebhookPayloadMessageMetadataUnsupported.md
 docs/Model/WebhookPayloadMessageSent.md
 docs/Model/WebhookPayloadMessageSentMessage.md
 docs/Model/WebhookPayloadMessageSentMessageAttachmentsInner.md
@@ -3334,6 +3335,7 @@ lib/Model/WebhookPayloadMessageMetadataReferral.php
 lib/Model/WebhookPayloadMessageMetadataReferralAdsContextData.php
 lib/Model/WebhookPayloadMessageMetadataReferredProduct.php
 lib/Model/WebhookPayloadMessageMetadataStoryReply.php
+lib/Model/WebhookPayloadMessageMetadataUnsupported.php
 lib/Model/WebhookPayloadMessageSent.php
 lib/Model/WebhookPayloadMessageSentMessage.php
 lib/Model/WebhookPayloadMessageSentMessageAttachmentsInner.php
@@ -3393,3 +3395,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/WebhookPayloadMessageMetadataUnsupportedTest.php

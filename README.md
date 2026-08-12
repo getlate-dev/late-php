@@ -2186,6 +2186,7 @@ Class | Method | HTTP request | Description
 - [WebhookPayloadMessageMetadataReferralAdsContextData](docs/Model/WebhookPayloadMessageMetadataReferralAdsContextData.md)
 - [WebhookPayloadMessageMetadataReferredProduct](docs/Model/WebhookPayloadMessageMetadataReferredProduct.md)
 - [WebhookPayloadMessageMetadataStoryReply](docs/Model/WebhookPayloadMessageMetadataStoryReply.md)
+- [WebhookPayloadMessageMetadataUnsupported](docs/Model/WebhookPayloadMessageMetadataUnsupported.md)
 - [WebhookPayloadMessageSent](docs/Model/WebhookPayloadMessageSent.md)
 - [WebhookPayloadMessageSentMessage](docs/Model/WebhookPayloadMessageSentMessage.md)
 - [WebhookPayloadMessageSentMessageAttachmentsInner](docs/Model/WebhookPayloadMessageSentMessageAttachmentsInner.md)

@@ -75,7 +75,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'contacts_origin' => 'string',
         'story_reply' => '\Zernio\Model\WebhookPayloadMessageMetadataStoryReply',
         'is_story_mention' => 'bool',
-        'referral' => '\Zernio\Model\WebhookPayloadMessageMetadataReferral'
+        'referral' => '\Zernio\Model\WebhookPayloadMessageMetadataReferral',
+        'unsupported' => '\Zernio\Model\WebhookPayloadMessageMetadataUnsupported'
     ];
 
     /**
@@ -102,7 +103,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'contacts_origin' => null,
         'story_reply' => null,
         'is_story_mention' => null,
-        'referral' => null
+        'referral' => null,
+        'unsupported' => null
     ];
 
     /**
@@ -127,7 +129,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'contacts_origin' => false,
         'story_reply' => false,
         'is_story_mention' => false,
-        'referral' => false
+        'referral' => false,
+        'unsupported' => false
     ];
 
     /**
@@ -232,7 +235,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'contacts_origin' => 'contactsOrigin',
         'story_reply' => 'storyReply',
         'is_story_mention' => 'isStoryMention',
-        'referral' => 'referral'
+        'referral' => 'referral',
+        'unsupported' => 'unsupported'
     ];
 
     /**
@@ -257,7 +261,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'contacts_origin' => 'setContactsOrigin',
         'story_reply' => 'setStoryReply',
         'is_story_mention' => 'setIsStoryMention',
-        'referral' => 'setReferral'
+        'referral' => 'setReferral',
+        'unsupported' => 'setUnsupported'
     ];
 
     /**
@@ -282,7 +287,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'contacts_origin' => 'getContactsOrigin',
         'story_reply' => 'getStoryReply',
         'is_story_mention' => 'getIsStoryMention',
-        'referral' => 'getReferral'
+        'referral' => 'getReferral',
+        'unsupported' => 'getUnsupported'
     ];
 
     /**
@@ -391,6 +397,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('story_reply', $data ?? [], null);
         $this->setIfExists('is_story_mention', $data ?? [], null);
         $this->setIfExists('referral', $data ?? [], null);
+        $this->setIfExists('unsupported', $data ?? [], null);
     }
 
     /**
@@ -928,6 +935,33 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable referral cannot be null');
         }
         $this->container['referral'] = $referral;
+
+        return $this;
+    }
+
+    /**
+     * Gets unsupported
+     *
+     * @return \Zernio\Model\WebhookPayloadMessageMetadataUnsupported|null
+     */
+    public function getUnsupported()
+    {
+        return $this->container['unsupported'];
+    }
+
+    /**
+     * Sets unsupported
+     *
+     * @param \Zernio\Model\WebhookPayloadMessageMetadataUnsupported|null $unsupported unsupported
+     *
+     * @return self
+     */
+    public function setUnsupported($unsupported)
+    {
+        if (is_null($unsupported)) {
+            throw new \InvalidArgumentException('non-nullable unsupported cannot be null');
+        }
+        $this->container['unsupported'] = $unsupported;
 
         return $this;
     }
