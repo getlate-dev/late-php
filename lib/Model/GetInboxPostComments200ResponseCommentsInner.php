@@ -67,6 +67,7 @@ class GetInboxPostComments200ResponseCommentsInner implements ModelInterface, Ar
         'platform' => 'string',
         'url' => 'string',
         'replies' => 'object[]',
+        'replies_has_more' => 'bool',
         'can_reply' => 'bool',
         'can_delete' => 'bool',
         'can_hide' => 'bool',
@@ -97,6 +98,7 @@ class GetInboxPostComments200ResponseCommentsInner implements ModelInterface, Ar
         'platform' => null,
         'url' => null,
         'replies' => null,
+        'replies_has_more' => null,
         'can_reply' => null,
         'can_delete' => null,
         'can_hide' => null,
@@ -125,6 +127,7 @@ class GetInboxPostComments200ResponseCommentsInner implements ModelInterface, Ar
         'platform' => false,
         'url' => true,
         'replies' => false,
+        'replies_has_more' => false,
         'can_reply' => false,
         'can_delete' => false,
         'can_hide' => false,
@@ -233,6 +236,7 @@ class GetInboxPostComments200ResponseCommentsInner implements ModelInterface, Ar
         'platform' => 'platform',
         'url' => 'url',
         'replies' => 'replies',
+        'replies_has_more' => 'repliesHasMore',
         'can_reply' => 'canReply',
         'can_delete' => 'canDelete',
         'can_hide' => 'canHide',
@@ -261,6 +265,7 @@ class GetInboxPostComments200ResponseCommentsInner implements ModelInterface, Ar
         'platform' => 'setPlatform',
         'url' => 'setUrl',
         'replies' => 'setReplies',
+        'replies_has_more' => 'setRepliesHasMore',
         'can_reply' => 'setCanReply',
         'can_delete' => 'setCanDelete',
         'can_hide' => 'setCanHide',
@@ -289,6 +294,7 @@ class GetInboxPostComments200ResponseCommentsInner implements ModelInterface, Ar
         'platform' => 'getPlatform',
         'url' => 'getUrl',
         'replies' => 'getReplies',
+        'replies_has_more' => 'getRepliesHasMore',
         'can_reply' => 'getCanReply',
         'can_delete' => 'getCanDelete',
         'can_hide' => 'getCanHide',
@@ -368,6 +374,7 @@ class GetInboxPostComments200ResponseCommentsInner implements ModelInterface, Ar
         $this->setIfExists('platform', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('replies', $data ?? [], null);
+        $this->setIfExists('replies_has_more', $data ?? [], null);
         $this->setIfExists('can_reply', $data ?? [], null);
         $this->setIfExists('can_delete', $data ?? [], null);
         $this->setIfExists('can_hide', $data ?? [], null);
@@ -571,7 +578,7 @@ class GetInboxPostComments200ResponseCommentsInner implements ModelInterface, Ar
     /**
      * Sets reply_count
      *
-     * @param int|null $reply_count reply_count
+     * @param int|null $reply_count The platform's own reply count, which includes hidden and deleted replies. Can exceed replies[].length even when repliesHasMore is false or absent.
      *
      * @return self
      */
@@ -669,6 +676,33 @@ class GetInboxPostComments200ResponseCommentsInner implements ModelInterface, Ar
             throw new \InvalidArgumentException('non-nullable replies cannot be null');
         }
         $this->container['replies'] = $replies;
+
+        return $this;
+    }
+
+    /**
+     * Gets replies_has_more
+     *
+     * @return bool|null
+     */
+    public function getRepliesHasMore()
+    {
+        return $this->container['replies_has_more'];
+    }
+
+    /**
+     * Sets replies_has_more
+     *
+     * @param bool|null $replies_has_more Facebook only. True when replies[] (capped at 10) does not hold the comment's full reply thread; fetch the rest by passing the comment id as postId to GET /v1/inbox/comments/{postId}. Absent (not false) on every other platform, including Instagram, which has no equivalent signal.
+     *
+     * @return self
+     */
+    public function setRepliesHasMore($replies_has_more)
+    {
+        if (is_null($replies_has_more)) {
+            throw new \InvalidArgumentException('non-nullable replies_has_more cannot be null');
+        }
+        $this->container['replies_has_more'] = $replies_has_more;
 
         return $this;
     }

@@ -848,11 +848,11 @@ class CommentsApi
      *
      * Get post comments
      *
-     * @param  string $post_id Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
+     * @param  string $post_id Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. On Facebook and Instagram, a comment ID is also accepted here and returns that comment&#39;s replies. (required)
      * @param  string $account_id account_id (required)
      * @param  string|null $subreddit (Reddit only) Subreddit name (optional)
      * @param  int|null $limit Maximum number of comments to return (optional, default to 25)
-     * @param  string|null $cursor Pagination cursor (optional)
+     * @param  string|null $cursor Pagination cursor, returned by a previous call as &#x60;pagination.cursor&#x60;. This is the platform&#39;s own opaque paging value passed through verbatim: never construct, decode or validate it client-side. (optional)
      * @param  string|null $comment_id (Reddit only) Get replies to a specific comment (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxPostComments'] to see the possible values for this operation
      *
@@ -871,11 +871,11 @@ class CommentsApi
      *
      * Get post comments
      *
-     * @param  string $post_id Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
+     * @param  string $post_id Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. On Facebook and Instagram, a comment ID is also accepted here and returns that comment&#39;s replies. (required)
      * @param  string $account_id (required)
      * @param  string|null $subreddit (Reddit only) Subreddit name (optional)
      * @param  int|null $limit Maximum number of comments to return (optional, default to 25)
-     * @param  string|null $cursor Pagination cursor (optional)
+     * @param  string|null $cursor Pagination cursor, returned by a previous call as &#x60;pagination.cursor&#x60;. This is the platform&#39;s own opaque paging value passed through verbatim: never construct, decode or validate it client-side. (optional)
      * @param  string|null $comment_id (Reddit only) Get replies to a specific comment (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxPostComments'] to see the possible values for this operation
      *
@@ -989,11 +989,11 @@ class CommentsApi
      *
      * Get post comments
      *
-     * @param  string $post_id Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
+     * @param  string $post_id Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. On Facebook and Instagram, a comment ID is also accepted here and returns that comment&#39;s replies. (required)
      * @param  string $account_id (required)
      * @param  string|null $subreddit (Reddit only) Subreddit name (optional)
      * @param  int|null $limit Maximum number of comments to return (optional, default to 25)
-     * @param  string|null $cursor Pagination cursor (optional)
+     * @param  string|null $cursor Pagination cursor, returned by a previous call as &#x60;pagination.cursor&#x60;. This is the platform&#39;s own opaque paging value passed through verbatim: never construct, decode or validate it client-side. (optional)
      * @param  string|null $comment_id (Reddit only) Get replies to a specific comment (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxPostComments'] to see the possible values for this operation
      *
@@ -1015,11 +1015,11 @@ class CommentsApi
      *
      * Get post comments
      *
-     * @param  string $post_id Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
+     * @param  string $post_id Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. On Facebook and Instagram, a comment ID is also accepted here and returns that comment&#39;s replies. (required)
      * @param  string $account_id (required)
      * @param  string|null $subreddit (Reddit only) Subreddit name (optional)
      * @param  int|null $limit Maximum number of comments to return (optional, default to 25)
-     * @param  string|null $cursor Pagination cursor (optional)
+     * @param  string|null $cursor Pagination cursor, returned by a previous call as &#x60;pagination.cursor&#x60;. This is the platform&#39;s own opaque paging value passed through verbatim: never construct, decode or validate it client-side. (optional)
      * @param  string|null $comment_id (Reddit only) Get replies to a specific comment (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxPostComments'] to see the possible values for this operation
      *
@@ -1070,11 +1070,11 @@ class CommentsApi
     /**
      * Create request for operation 'getInboxPostComments'
      *
-     * @param  string $post_id Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
+     * @param  string $post_id Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. On Facebook and Instagram, a comment ID is also accepted here and returns that comment&#39;s replies. (required)
      * @param  string $account_id (required)
      * @param  string|null $subreddit (Reddit only) Subreddit name (optional)
      * @param  int|null $limit Maximum number of comments to return (optional, default to 25)
-     * @param  string|null $cursor Pagination cursor (optional)
+     * @param  string|null $cursor Pagination cursor, returned by a previous call as &#x60;pagination.cursor&#x60;. This is the platform&#39;s own opaque paging value passed through verbatim: never construct, decode or validate it client-side. (optional)
      * @param  string|null $comment_id (Reddit only) Get replies to a specific comment (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxPostComments'] to see the possible values for this operation
      *
