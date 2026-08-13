@@ -3423,17 +3423,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Api/BlogsApiTest.php
-test/Model/BlogArticleImageTest.php
-test/Model/BlogArticleTest.php
-test/Model/BlogTest.php
-test/Model/CreateBlog201ResponseTest.php
-test/Model/CreateBlogArticle201ResponseTest.php
-test/Model/CreateBlogArticleRequestImageTest.php
-test/Model/CreateBlogArticleRequestSeoTest.php
-test/Model/CreateBlogArticleRequestTest.php
-test/Model/CreateBlogRequestTest.php
-test/Model/ListBlogArticles200ResponseTest.php
-test/Model/ListBlogs200ResponseTest.php
-test/Model/UpdateBlogArticleRequestTest.php
-test/Model/UpdateBlogRequestTest.php
