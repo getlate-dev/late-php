@@ -1,0 +1,18 @@
+# # UpdateBlogArticleRequest
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**title** | **string** |  | [optional]
+**body_html** | **string** | Article body as HTML. | [optional]
+**handle** | **string** | URL slug of the article. | [optional]
+**tags** | **string[]** | Replaces the full tag list. | [optional]
+**author** | **string** | Display name of the article author. | [optional]
+**excerpt** | **string** | Short summary shown in blog listings. | [optional]
+**image** | [**\Zernio\Model\CreateBlogArticleRequestImage**](CreateBlogArticleRequestImage.md) |  | [optional]
+**seo** | [**\Zernio\Model\CreateBlogArticleRequestSeo**](CreateBlogArticleRequestSeo.md) |  | [optional]
+**is_published** | **bool** | Set false to unpublish the article back to a draft. | [optional]
+**publish_date** | **\DateTime** | ISO 8601 datetime with offset (or Z). A future date schedules publication natively on the platform. | [optional]
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -14,6 +14,7 @@ docs/Api/AdCreativesApi.md
 docs/Api/AdInsightsApi.md
 docs/Api/AdTargetingApi.md
 docs/Api/AnalyticsApi.md
+docs/Api/BlogsApi.md
 docs/Api/BroadcastsApi.md
 docs/Api/CallsApi.md
 docs/Api/CommentAutomationsApi.md
@@ -151,6 +152,9 @@ docs/Model/BlockWhatsAppUsers200Response.md
 docs/Model/BlockWhatsAppUsers200ResponseBlockedInner.md
 docs/Model/BlockWhatsAppUsers200ResponseFailedInner.md
 docs/Model/BlockWhatsAppUsersRequest.md
+docs/Model/Blog.md
+docs/Model/BlogArticle.md
+docs/Model/BlogArticleImage.md
 docs/Model/BlueskyPlatformData.md
 docs/Model/BookmarkPost200Response.md
 docs/Model/BookmarkPostRequest.md
@@ -239,6 +243,12 @@ docs/Model/CreateAdInsightsReportRequestFilteringInner.md
 docs/Model/CreateAdInsightsReportRequestTimeIncrement.md
 docs/Model/CreateApiKey201Response.md
 docs/Model/CreateApiKeyRequest.md
+docs/Model/CreateBlog201Response.md
+docs/Model/CreateBlogArticle201Response.md
+docs/Model/CreateBlogArticleRequest.md
+docs/Model/CreateBlogArticleRequestImage.md
+docs/Model/CreateBlogArticleRequestSeo.md
+docs/Model/CreateBlogRequest.md
 docs/Model/CreateBroadcast200Response.md
 docs/Model/CreateBroadcast200ResponseBroadcast.md
 docs/Model/CreateBroadcastRequest.md
@@ -912,6 +922,8 @@ docs/Model/ListAdStudies200Response.md
 docs/Model/ListAds202Response.md
 docs/Model/ListAdsBusinessCenters200Response.md
 docs/Model/ListApiKeys200Response.md
+docs/Model/ListBlogArticles200Response.md
+docs/Model/ListBlogs200Response.md
 docs/Model/ListBroadcastRecipients200Response.md
 docs/Model/ListBroadcastRecipients200ResponseRecipientsInner.md
 docs/Model/ListBroadcasts200Response.md
@@ -1425,6 +1437,8 @@ docs/Model/UpdateAdStatusRequest.md
 docs/Model/UpdateAdTrackingTagsRequest.md
 docs/Model/UpdateAdTrackingTagsRequestCreative.md
 docs/Model/UpdateAdTrackingTagsRequestUrlTagsInner.md
+docs/Model/UpdateBlogArticleRequest.md
+docs/Model/UpdateBlogRequest.md
 docs/Model/UpdateBroadcast200Response.md
 docs/Model/UpdateBroadcast200ResponseBroadcast.md
 docs/Model/UpdateBroadcastRequest.md
@@ -1707,6 +1721,7 @@ lib/Api/AdCreativesApi.php
 lib/Api/AdInsightsApi.php
 lib/Api/AdTargetingApi.php
 lib/Api/AnalyticsApi.php
+lib/Api/BlogsApi.php
 lib/Api/BroadcastsApi.php
 lib/Api/CallsApi.php
 lib/Api/CommentAutomationsApi.php
@@ -1848,6 +1863,9 @@ lib/Model/BlockWhatsAppUsers200Response.php
 lib/Model/BlockWhatsAppUsers200ResponseBlockedInner.php
 lib/Model/BlockWhatsAppUsers200ResponseFailedInner.php
 lib/Model/BlockWhatsAppUsersRequest.php
+lib/Model/Blog.php
+lib/Model/BlogArticle.php
+lib/Model/BlogArticleImage.php
 lib/Model/BlueskyPlatformData.php
 lib/Model/BookmarkPost200Response.php
 lib/Model/BookmarkPostRequest.php
@@ -1936,6 +1954,12 @@ lib/Model/CreateAdInsightsReportRequestFilteringInner.php
 lib/Model/CreateAdInsightsReportRequestTimeIncrement.php
 lib/Model/CreateApiKey201Response.php
 lib/Model/CreateApiKeyRequest.php
+lib/Model/CreateBlog201Response.php
+lib/Model/CreateBlogArticle201Response.php
+lib/Model/CreateBlogArticleRequest.php
+lib/Model/CreateBlogArticleRequestImage.php
+lib/Model/CreateBlogArticleRequestSeo.php
+lib/Model/CreateBlogRequest.php
 lib/Model/CreateBroadcast200Response.php
 lib/Model/CreateBroadcast200ResponseBroadcast.php
 lib/Model/CreateBroadcastRequest.php
@@ -2609,6 +2633,8 @@ lib/Model/ListAdStudies200Response.php
 lib/Model/ListAds202Response.php
 lib/Model/ListAdsBusinessCenters200Response.php
 lib/Model/ListApiKeys200Response.php
+lib/Model/ListBlogArticles200Response.php
+lib/Model/ListBlogs200Response.php
 lib/Model/ListBroadcastRecipients200Response.php
 lib/Model/ListBroadcastRecipients200ResponseRecipientsInner.php
 lib/Model/ListBroadcasts200Response.php
@@ -3123,6 +3149,8 @@ lib/Model/UpdateAdStatusRequest.php
 lib/Model/UpdateAdTrackingTagsRequest.php
 lib/Model/UpdateAdTrackingTagsRequestCreative.php
 lib/Model/UpdateAdTrackingTagsRequestUrlTagsInner.php
+lib/Model/UpdateBlogArticleRequest.php
+lib/Model/UpdateBlogRequest.php
 lib/Model/UpdateBroadcast200Response.php
 lib/Model/UpdateBroadcast200ResponseBroadcast.php
 lib/Model/UpdateBroadcastRequest.php
@@ -3395,3 +3423,17 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Api/BlogsApiTest.php
+test/Model/BlogArticleImageTest.php
+test/Model/BlogArticleTest.php
+test/Model/BlogTest.php
+test/Model/CreateBlog201ResponseTest.php
+test/Model/CreateBlogArticle201ResponseTest.php
+test/Model/CreateBlogArticleRequestImageTest.php
+test/Model/CreateBlogArticleRequestSeoTest.php
+test/Model/CreateBlogArticleRequestTest.php
+test/Model/CreateBlogRequestTest.php
+test/Model/ListBlogArticles200ResponseTest.php
+test/Model/ListBlogs200ResponseTest.php
+test/Model/UpdateBlogArticleRequestTest.php
+test/Model/UpdateBlogRequestTest.php
