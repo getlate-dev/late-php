@@ -62,7 +62,8 @@ class WorkflowNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'string',
         'type' => 'string',
         'config' => 'array<string,mixed>',
-        'position' => '\Zernio\Model\WorkflowNodePosition'
+        'position' => '\Zernio\Model\WorkflowNodePosition',
+        'label' => 'string'
     ];
 
     /**
@@ -76,7 +77,8 @@ class WorkflowNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => null,
         'type' => null,
         'config' => null,
-        'position' => null
+        'position' => null,
+        'label' => null
     ];
 
     /**
@@ -88,7 +90,8 @@ class WorkflowNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
         'type' => false,
         'config' => false,
-        'position' => false
+        'position' => false,
+        'label' => false
     ];
 
     /**
@@ -180,7 +183,8 @@ class WorkflowNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'type' => 'type',
         'config' => 'config',
-        'position' => 'position'
+        'position' => 'position',
+        'label' => 'label'
     ];
 
     /**
@@ -192,7 +196,8 @@ class WorkflowNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'type' => 'setType',
         'config' => 'setConfig',
-        'position' => 'setPosition'
+        'position' => 'setPosition',
+        'label' => 'setLabel'
     ];
 
     /**
@@ -204,7 +209,8 @@ class WorkflowNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'type' => 'getType',
         'config' => 'getConfig',
-        'position' => 'getPosition'
+        'position' => 'getPosition',
+        'label' => 'getLabel'
     ];
 
     /**
@@ -311,6 +317,7 @@ class WorkflowNode implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('config', $data ?? [], null);
         $this->setIfExists('position', $data ?? [], null);
+        $this->setIfExists('label', $data ?? [], null);
     }
 
     /**
@@ -353,6 +360,14 @@ class WorkflowNode implements ModelInterface, ArrayAccess, \JsonSerializable
                 $this->container['type'],
                 implode("', '", $allowedValues)
             );
+        }
+
+        if (!is_null($this->container['label']) && (mb_strlen($this->container['label']) > 80)) {
+            $invalidProperties[] = "invalid value for 'label', the character length must be smaller than or equal to 80.";
+        }
+
+        if (!is_null($this->container['label']) && (mb_strlen($this->container['label']) < 1)) {
+            $invalidProperties[] = "invalid value for 'label', the character length must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -484,6 +499,40 @@ class WorkflowNode implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable position cannot be null');
         }
         $this->container['position'] = $position;
+
+        return $this;
+    }
+
+    /**
+     * Gets label
+     *
+     * @return string|null
+     */
+    public function getLabel()
+    {
+        return $this->container['label'];
+    }
+
+    /**
+     * Sets label
+     *
+     * @param string|null $label Optional display name shown on the builder canvas and inspector, falling back to the node type when absent. The nodes array is replaced wholesale on update, so it must be resent to be kept.
+     *
+     * @return self
+     */
+    public function setLabel($label)
+    {
+        if (is_null($label)) {
+            throw new \InvalidArgumentException('non-nullable label cannot be null');
+        }
+        if ((mb_strlen($label) > 80)) {
+            throw new \InvalidArgumentException('invalid length for $label when calling WorkflowNode., must be smaller than or equal to 80.');
+        }
+        if ((mb_strlen($label) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $label when calling WorkflowNode., must be bigger than or equal to 1.');
+        }
+
+        $this->container['label'] = $label;
 
         return $this;
     }
