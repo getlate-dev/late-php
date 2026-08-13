@@ -1356,7 +1356,7 @@ class AdTargetingApi
      * @param  string $account_id Social account ID (a connected account on the target ad platform). (required)
      * @param  string $q Search query. For geo, the locality name only (no region/country suffix). (required)
      * @param  string|null $dimension What to search. &#x60;geo&#x60; resolves locations (scope further with &#x60;geoType&#x60;), &#x60;interest&#x60;/&#x60;behavior&#x60; resolve audience entities, &#x60;income&#x60; resolves income-tier options. Defaults to &#x60;interest&#x60; for backward compatibility with the deprecated /v1/ads/interests alias. (optional, default to 'interest')
-     * @param  string|null $geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. Defaults to &#x60;city&#x60;. (optional, default to 'city')
+     * @param  string|null $geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. &#x60;all&#x60; searches every type in one relevance-ranked call. Defaults to &#x60;city&#x60;. (optional, default to 'city')
      * @param  string|null $country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope a geo search. (optional)
      * @param  int|null $limit Maximum results to return. (optional, default to 25)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchAdTargeting'] to see the possible values for this operation
@@ -1379,7 +1379,7 @@ class AdTargetingApi
      * @param  string $account_id Social account ID (a connected account on the target ad platform). (required)
      * @param  string $q Search query. For geo, the locality name only (no region/country suffix). (required)
      * @param  string|null $dimension What to search. &#x60;geo&#x60; resolves locations (scope further with &#x60;geoType&#x60;), &#x60;interest&#x60;/&#x60;behavior&#x60; resolve audience entities, &#x60;income&#x60; resolves income-tier options. Defaults to &#x60;interest&#x60; for backward compatibility with the deprecated /v1/ads/interests alias. (optional, default to 'interest')
-     * @param  string|null $geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. Defaults to &#x60;city&#x60;. (optional, default to 'city')
+     * @param  string|null $geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. &#x60;all&#x60; searches every type in one relevance-ranked call. Defaults to &#x60;city&#x60;. (optional, default to 'city')
      * @param  string|null $country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope a geo search. (optional)
      * @param  int|null $limit Maximum results to return. (optional, default to 25)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchAdTargeting'] to see the possible values for this operation
@@ -1483,7 +1483,7 @@ class AdTargetingApi
      * @param  string $account_id Social account ID (a connected account on the target ad platform). (required)
      * @param  string $q Search query. For geo, the locality name only (no region/country suffix). (required)
      * @param  string|null $dimension What to search. &#x60;geo&#x60; resolves locations (scope further with &#x60;geoType&#x60;), &#x60;interest&#x60;/&#x60;behavior&#x60; resolve audience entities, &#x60;income&#x60; resolves income-tier options. Defaults to &#x60;interest&#x60; for backward compatibility with the deprecated /v1/ads/interests alias. (optional, default to 'interest')
-     * @param  string|null $geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. Defaults to &#x60;city&#x60;. (optional, default to 'city')
+     * @param  string|null $geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. &#x60;all&#x60; searches every type in one relevance-ranked call. Defaults to &#x60;city&#x60;. (optional, default to 'city')
      * @param  string|null $country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope a geo search. (optional)
      * @param  int|null $limit Maximum results to return. (optional, default to 25)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchAdTargeting'] to see the possible values for this operation
@@ -1509,7 +1509,7 @@ class AdTargetingApi
      * @param  string $account_id Social account ID (a connected account on the target ad platform). (required)
      * @param  string $q Search query. For geo, the locality name only (no region/country suffix). (required)
      * @param  string|null $dimension What to search. &#x60;geo&#x60; resolves locations (scope further with &#x60;geoType&#x60;), &#x60;interest&#x60;/&#x60;behavior&#x60; resolve audience entities, &#x60;income&#x60; resolves income-tier options. Defaults to &#x60;interest&#x60; for backward compatibility with the deprecated /v1/ads/interests alias. (optional, default to 'interest')
-     * @param  string|null $geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. Defaults to &#x60;city&#x60;. (optional, default to 'city')
+     * @param  string|null $geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. &#x60;all&#x60; searches every type in one relevance-ranked call. Defaults to &#x60;city&#x60;. (optional, default to 'city')
      * @param  string|null $country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope a geo search. (optional)
      * @param  int|null $limit Maximum results to return. (optional, default to 25)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchAdTargeting'] to see the possible values for this operation
@@ -1564,7 +1564,7 @@ class AdTargetingApi
      * @param  string $account_id Social account ID (a connected account on the target ad platform). (required)
      * @param  string $q Search query. For geo, the locality name only (no region/country suffix). (required)
      * @param  string|null $dimension What to search. &#x60;geo&#x60; resolves locations (scope further with &#x60;geoType&#x60;), &#x60;interest&#x60;/&#x60;behavior&#x60; resolve audience entities, &#x60;income&#x60; resolves income-tier options. Defaults to &#x60;interest&#x60; for backward compatibility with the deprecated /v1/ads/interests alias. (optional, default to 'interest')
-     * @param  string|null $geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. Defaults to &#x60;city&#x60;. (optional, default to 'city')
+     * @param  string|null $geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. &#x60;all&#x60; searches every type in one relevance-ranked call. Defaults to &#x60;city&#x60;. (optional, default to 'city')
      * @param  string|null $country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope a geo search. (optional)
      * @param  int|null $limit Maximum results to return. (optional, default to 25)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchAdTargeting'] to see the possible values for this operation
