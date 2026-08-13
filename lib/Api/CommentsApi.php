@@ -169,7 +169,7 @@ class CommentsApi
      *
      * @param  string $post_id Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
      * @param  string $account_id account_id (required)
-     * @param  string $comment_id comment_id (required)
+     * @param  string $comment_id For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id)) (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInboxComment'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -189,7 +189,7 @@ class CommentsApi
      *
      * @param  string $post_id Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
      * @param  string $account_id (required)
-     * @param  string $comment_id (required)
+     * @param  string $comment_id For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id)) (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInboxComment'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -318,7 +318,7 @@ class CommentsApi
      *
      * @param  string $post_id Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
      * @param  string $account_id (required)
-     * @param  string $comment_id (required)
+     * @param  string $comment_id For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id)) (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInboxComment'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -341,7 +341,7 @@ class CommentsApi
      *
      * @param  string $post_id Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
      * @param  string $account_id (required)
-     * @param  string $comment_id (required)
+     * @param  string $comment_id For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id)) (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInboxComment'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -393,7 +393,7 @@ class CommentsApi
      *
      * @param  string $post_id Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
      * @param  string $account_id (required)
-     * @param  string $comment_id (required)
+     * @param  string $comment_id For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id)) (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInboxComment'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

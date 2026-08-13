@@ -50,7 +50,7 @@ $apiInstance = new Zernio\Api\CommentsApi(
 );
 $post_id = 'post_id_example'; // string | Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID.
 $account_id = 'account_id_example'; // string
-$comment_id = 'comment_id_example'; // string
+$comment_id = 'comment_id_example'; // string | For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id))
 
 try {
     $result = $apiInstance->deleteInboxComment($post_id, $account_id, $comment_id);
@@ -66,7 +66,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **post_id** | **string**| Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. | |
 | **account_id** | **string**|  | |
-| **comment_id** | **string**|  | |
+| **comment_id** | **string**| For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id)) | |
 
 ### Return type
 
