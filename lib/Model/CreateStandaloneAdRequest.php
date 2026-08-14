@@ -3075,7 +3075,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets instagram_account_id
      *
-     * @param string|null $instagram_account_id Meta only. Override the Instagram account the ad is delivered as — pass an Instagram Business Account ID (e.g. 17841...), mapped to the creative's `instagram_user_id`. When omitted we auto-resolve the IG account linked to the connected Facebook Page (the existing default). Useful when a Page has more than one eligible IG account.
+     * @param string|null $instagram_account_id Meta only. Override the Instagram account the ad is delivered as — pass an Instagram Business Account ID (e.g. 17841...), mapped to the creative's `instagram_user_id`. When omitted we use the Instagram actor Meta already runs the Page's other ads as, falling back to the Page's page-backed Instagram account. Useful when a Page has more than one eligible IG account.
      *
      * @return self
      */
