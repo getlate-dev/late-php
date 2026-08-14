@@ -64,6 +64,7 @@ class SubmitPhoneNumberKycRequestAddress implements ModelInterface, ArrayAccess,
         'first_name' => 'string',
         'last_name' => 'string',
         'street_address' => 'string',
+        'extended_address' => 'string',
         'locality' => 'string',
         'administrative_area' => 'string',
         'postal_code' => 'string'
@@ -83,6 +84,7 @@ class SubmitPhoneNumberKycRequestAddress implements ModelInterface, ArrayAccess,
         'first_name' => null,
         'last_name' => null,
         'street_address' => null,
+        'extended_address' => null,
         'locality' => null,
         'administrative_area' => null,
         'postal_code' => null
@@ -100,6 +102,7 @@ class SubmitPhoneNumberKycRequestAddress implements ModelInterface, ArrayAccess,
         'first_name' => false,
         'last_name' => false,
         'street_address' => false,
+        'extended_address' => false,
         'locality' => false,
         'administrative_area' => false,
         'postal_code' => false
@@ -197,6 +200,7 @@ class SubmitPhoneNumberKycRequestAddress implements ModelInterface, ArrayAccess,
         'first_name' => 'first_name',
         'last_name' => 'last_name',
         'street_address' => 'street_address',
+        'extended_address' => 'extended_address',
         'locality' => 'locality',
         'administrative_area' => 'administrative_area',
         'postal_code' => 'postal_code'
@@ -214,6 +218,7 @@ class SubmitPhoneNumberKycRequestAddress implements ModelInterface, ArrayAccess,
         'first_name' => 'setFirstName',
         'last_name' => 'setLastName',
         'street_address' => 'setStreetAddress',
+        'extended_address' => 'setExtendedAddress',
         'locality' => 'setLocality',
         'administrative_area' => 'setAdministrativeArea',
         'postal_code' => 'setPostalCode'
@@ -231,6 +236,7 @@ class SubmitPhoneNumberKycRequestAddress implements ModelInterface, ArrayAccess,
         'first_name' => 'getFirstName',
         'last_name' => 'getLastName',
         'street_address' => 'getStreetAddress',
+        'extended_address' => 'getExtendedAddress',
         'locality' => 'getLocality',
         'administrative_area' => 'getAdministrativeArea',
         'postal_code' => 'getPostalCode'
@@ -299,6 +305,7 @@ class SubmitPhoneNumberKycRequestAddress implements ModelInterface, ArrayAccess,
         $this->setIfExists('first_name', $data ?? [], null);
         $this->setIfExists('last_name', $data ?? [], null);
         $this->setIfExists('street_address', $data ?? [], null);
+        $this->setIfExists('extended_address', $data ?? [], null);
         $this->setIfExists('locality', $data ?? [], null);
         $this->setIfExists('administrative_area', $data ?? [], null);
         $this->setIfExists('postal_code', $data ?? [], null);
@@ -504,6 +511,33 @@ class SubmitPhoneNumberKycRequestAddress implements ModelInterface, ArrayAccess,
             throw new \InvalidArgumentException('non-nullable street_address cannot be null');
         }
         $this->container['street_address'] = $street_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets extended_address
+     *
+     * @return string|null
+     */
+    public function getExtendedAddress()
+    {
+        return $this->container['extended_address'];
+    }
+
+    /**
+     * Sets extended_address
+     *
+     * @param string|null $extended_address Address complement: apartment, suite, unit, or the quadra/lote used in some countries. Optional. Does not substitute for a building number on street_address.
+     *
+     * @return self
+     */
+    public function setExtendedAddress($extended_address)
+    {
+        if (is_null($extended_address)) {
+            throw new \InvalidArgumentException('non-nullable extended_address cannot be null');
+        }
+        $this->container['extended_address'] = $extended_address;
 
         return $this;
     }

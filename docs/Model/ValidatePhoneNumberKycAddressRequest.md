@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **country** | **string** | ISO 3166-1 alpha-2 country code. |
 **street_address** | **string** |  |
+**extended_address** | **string** | Address complement: apartment, suite, unit, or the quadra/lote used in some countries. Optional. Does not substitute for a building number on street_address. | [optional]
 **locality** | **string** | City / town. |
 **administrative_area** | **string** | State / province / region. When omitted, the pre-check is skipped (the final submit still validates). | [optional]
 **postal_code** | **string** |  |
