@@ -997,7 +997,7 @@ sendSms($send_sms_request, $idempotency_key): \Zernio\Model\SendSms200Response
 
 Send an SMS/MMS
 
-Sends an SMS (or MMS when `mediaUrls` is set) from one of your SMS-enabled numbers. At least one of `text` / `mediaUrls` is required. Both numbers are normalized to E.164, so `from` matches regardless of formatting and replies thread into the same inbox conversation.  US numbers must have an approved carrier registration (`/v1/sms/registrations`) before messages deliver.  **Idempotency:** send an `Idempotency-Key` header to make retries safe: same key + same body replays the original response instead of sending a second message; same key + different body returns 422; a key still in flight returns 409.
+Sends an SMS (or MMS when `mediaUrls` is set) from one of your SMS-enabled numbers. At least one of `text` / `mediaUrls` is required. Both numbers are normalized to E.164, so `from` matches regardless of formatting and replies thread into the same inbox conversation.  US numbers must have an approved carrier registration (`/v1/sms/registrations`) before messages deliver.  **Replies and delivery status arrive as webhooks**, not by polling: an inbound reply fires `message.received` with `platform: \"sms\"`, the first message of a new thread also fires `conversation.started`, and this message's own outcome fires `message.delivered` or `message.failed` (the latter carrying the carrier's error code).  **Opted-out recipients:** a send to a number that replied STOP is refused with `409`, never silently dropped.  **Idempotency:** send an `Idempotency-Key` header to make retries safe: same key + same body replays the original response instead of sending a second message; same key + different body returns 422; a key still in flight returns 409.
 
 ### Example
 

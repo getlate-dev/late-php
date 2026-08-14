@@ -287,6 +287,7 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
     public const PLATFORM_FACEBOOK = 'facebook';
     public const PLATFORM_TELEGRAM = 'telegram';
     public const PLATFORM_WHATSAPP = 'whatsapp';
+    public const PLATFORM_SMS = 'sms';
     public const DIRECTION_INCOMING = 'incoming';
     public const DIRECTION_OUTGOING = 'outgoing';
 
@@ -302,6 +303,7 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
             self::PLATFORM_FACEBOOK,
             self::PLATFORM_TELEGRAM,
             self::PLATFORM_WHATSAPP,
+            self::PLATFORM_SMS,
         ];
     }
 
