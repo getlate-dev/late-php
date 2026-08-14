@@ -18,6 +18,6 @@ Name | Type | Description | Notes
 **profile_id** | **string** |  | [optional]
 **thumbnail_url** | **string** |  | [optional]
 **media_type** | **string** |  | [optional]
-**media_items** | [**\Zernio\Model\AnalyticsSinglePostResponseMediaItemsInner[]**](AnalyticsSinglePostResponseMediaItemsInner.md) | All media items for this post. Carousel posts contain one entry per slide. | [optional]
+**media_items** | [**\Zernio\Model\AnalyticsListResponsePostsInnerMediaItemsInner[]**](AnalyticsListResponsePostsInnerMediaItemsInner.md) | All media items for this post. Carousel posts contain one entry per slide. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

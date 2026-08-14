@@ -5,7 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **string** |  |
-**url** | **string** |  |
-**thumbnail** | **string** |  | [optional]
+**url** | **string** | &#39;Direct URL to the media file. Null when the platform withholds it: check mediaStatus before downloading. Instagram omits the video file for Reels it flags as containing copyrighted material (its docs name audio as the usual cause), so type stays \&quot;video\&quot; while the file is permanently unreachable.&#39; |
+**thumbnail** | **string** | Cover image. Still present when url is null. | [optional]
+**media_status** | **string** | Present only when the media file could not be retrieved. Absent means the file is available at url. | [optional]
+**unavailable_reason** | **string** | Why the file is missing. platform_withheld means the platform declined to return it and retrying will not help. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

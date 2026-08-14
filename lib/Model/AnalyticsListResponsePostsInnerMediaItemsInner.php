@@ -1,6 +1,6 @@
 <?php
 /**
- * AnalyticsSinglePostResponseMediaItemsInner
+ * AnalyticsListResponsePostsInnerMediaItemsInner
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * AnalyticsSinglePostResponseMediaItemsInner Class Doc Comment
+ * AnalyticsListResponsePostsInnerMediaItemsInner Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class AnalyticsListResponsePostsInnerMediaItemsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AnalyticsSinglePostResponse_mediaItems_inner';
+    protected static $openAPIModelName = 'AnalyticsListResponse_posts_inner_mediaItems_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -61,9 +61,7 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
         'type' => 'string',
         'url' => 'string',
         'thumbnail' => 'string',
-        'alt_text' => 'string',
-        'media_status' => 'string',
-        'unavailable_reason' => 'string'
+        'alt_text' => 'string'
     ];
 
     /**
@@ -77,9 +75,7 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
         'type' => null,
         'url' => 'uri',
         'thumbnail' => 'uri',
-        'alt_text' => null,
-        'media_status' => null,
-        'unavailable_reason' => null
+        'alt_text' => null
     ];
 
     /**
@@ -89,11 +85,9 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
       */
     protected static array $openAPINullables = [
         'type' => false,
-        'url' => true,
-        'thumbnail' => true,
-        'alt_text' => false,
-        'media_status' => false,
-        'unavailable_reason' => false
+        'url' => false,
+        'thumbnail' => false,
+        'alt_text' => false
     ];
 
     /**
@@ -185,9 +179,7 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
         'type' => 'type',
         'url' => 'url',
         'thumbnail' => 'thumbnail',
-        'alt_text' => 'altText',
-        'media_status' => 'mediaStatus',
-        'unavailable_reason' => 'unavailableReason'
+        'alt_text' => 'altText'
     ];
 
     /**
@@ -199,9 +191,7 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
         'type' => 'setType',
         'url' => 'setUrl',
         'thumbnail' => 'setThumbnail',
-        'alt_text' => 'setAltText',
-        'media_status' => 'setMediaStatus',
-        'unavailable_reason' => 'setUnavailableReason'
+        'alt_text' => 'setAltText'
     ];
 
     /**
@@ -213,9 +203,7 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
         'type' => 'getType',
         'url' => 'getUrl',
         'thumbnail' => 'getThumbnail',
-        'alt_text' => 'getAltText',
-        'media_status' => 'getMediaStatus',
-        'unavailable_reason' => 'getUnavailableReason'
+        'alt_text' => 'getAltText'
     ];
 
     /**
@@ -261,8 +249,6 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
 
     public const TYPE_IMAGE = 'image';
     public const TYPE_VIDEO = 'video';
-    public const MEDIA_STATUS_UNAVAILABLE = 'unavailable';
-    public const UNAVAILABLE_REASON_PLATFORM_WITHHELD = 'platform_withheld';
 
     /**
      * Gets allowable values of the enum
@@ -274,30 +260,6 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
         return [
             self::TYPE_IMAGE,
             self::TYPE_VIDEO,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getMediaStatusAllowableValues()
-    {
-        return [
-            self::MEDIA_STATUS_UNAVAILABLE,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getUnavailableReasonAllowableValues()
-    {
-        return [
-            self::UNAVAILABLE_REASON_PLATFORM_WITHHELD,
         ];
     }
 
@@ -320,8 +282,6 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('thumbnail', $data ?? [], null);
         $this->setIfExists('alt_text', $data ?? [], null);
-        $this->setIfExists('media_status', $data ?? [], null);
-        $this->setIfExists('unavailable_reason', $data ?? [], null);
     }
 
     /**
@@ -356,24 +316,6 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'type', must be one of '%s'",
                 $this->container['type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        $allowedValues = $this->getMediaStatusAllowableValues();
-        if (!is_null($this->container['media_status']) && !in_array($this->container['media_status'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'media_status', must be one of '%s'",
-                $this->container['media_status'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        $allowedValues = $this->getUnavailableReasonAllowableValues();
-        if (!is_null($this->container['unavailable_reason']) && !in_array($this->container['unavailable_reason'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'unavailable_reason', must be one of '%s'",
-                $this->container['unavailable_reason'],
                 implode("', '", $allowedValues)
             );
         }
@@ -443,21 +385,14 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
     /**
      * Sets url
      *
-     * @param string|null $url 'Direct URL to the media file. Null when the platform withholds it: check mediaStatus before downloading. Instagram omits the video file for Reels it flags as containing copyrighted material (its docs name audio as the usual cause), so type stays \"video\" while the file is permanently unreachable.'
+     * @param string|null $url Direct URL to the media
      *
      * @return self
      */
     public function setUrl($url)
     {
         if (is_null($url)) {
-            array_push($this->openAPINullablesSetToNull, 'url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable url cannot be null');
         }
         $this->container['url'] = $url;
 
@@ -477,21 +412,14 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
     /**
      * Sets thumbnail
      *
-     * @param string|null $thumbnail Thumbnail URL (same as url for images). Still present when url is null.
+     * @param string|null $thumbnail Thumbnail URL (same as url for images)
      *
      * @return self
      */
     public function setThumbnail($thumbnail)
     {
         if (is_null($thumbnail)) {
-            array_push($this->openAPINullablesSetToNull, 'thumbnail');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('thumbnail', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable thumbnail cannot be null');
         }
         $this->container['thumbnail'] = $thumbnail;
 
@@ -521,80 +449,6 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
             throw new \InvalidArgumentException('non-nullable alt_text cannot be null');
         }
         $this->container['alt_text'] = $alt_text;
-
-        return $this;
-    }
-
-    /**
-     * Gets media_status
-     *
-     * @return string|null
-     */
-    public function getMediaStatus()
-    {
-        return $this->container['media_status'];
-    }
-
-    /**
-     * Sets media_status
-     *
-     * @param string|null $media_status Present only when the media file could not be retrieved. Absent means the file is available at url.
-     *
-     * @return self
-     */
-    public function setMediaStatus($media_status)
-    {
-        if (is_null($media_status)) {
-            throw new \InvalidArgumentException('non-nullable media_status cannot be null');
-        }
-        $allowedValues = $this->getMediaStatusAllowableValues();
-        if (!in_array($media_status, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'media_status', must be one of '%s'",
-                    $media_status,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['media_status'] = $media_status;
-
-        return $this;
-    }
-
-    /**
-     * Gets unavailable_reason
-     *
-     * @return string|null
-     */
-    public function getUnavailableReason()
-    {
-        return $this->container['unavailable_reason'];
-    }
-
-    /**
-     * Sets unavailable_reason
-     *
-     * @param string|null $unavailable_reason Why the file is missing. platform_withheld means the platform declined to return it and retrying will not help.
-     *
-     * @return self
-     */
-    public function setUnavailableReason($unavailable_reason)
-    {
-        if (is_null($unavailable_reason)) {
-            throw new \InvalidArgumentException('non-nullable unavailable_reason cannot be null');
-        }
-        $allowedValues = $this->getUnavailableReasonAllowableValues();
-        if (!in_array($unavailable_reason, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'unavailable_reason', must be one of '%s'",
-                    $unavailable_reason,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['unavailable_reason'] = $unavailable_reason;
 
         return $this;
     }

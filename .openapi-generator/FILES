@@ -123,6 +123,7 @@ docs/Model/AdsTimelineResponse.md
 docs/Model/AdsTimelineResponseRowsInner.md
 docs/Model/AnalyticsListResponse.md
 docs/Model/AnalyticsListResponsePostsInner.md
+docs/Model/AnalyticsListResponsePostsInnerMediaItemsInner.md
 docs/Model/AnalyticsOverview.md
 docs/Model/AnalyticsOverviewDataStaleness.md
 docs/Model/AnalyticsSinglePostResponse.md
@@ -1838,6 +1839,7 @@ lib/Model/AdsTimelineResponse.php
 lib/Model/AdsTimelineResponseRowsInner.php
 lib/Model/AnalyticsListResponse.php
 lib/Model/AnalyticsListResponsePostsInner.php
+lib/Model/AnalyticsListResponsePostsInnerMediaItemsInner.php
 lib/Model/AnalyticsOverview.php
 lib/Model/AnalyticsOverviewDataStaleness.php
 lib/Model/AnalyticsSinglePostResponse.php
@@ -3431,7 +3433,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/WebhookPayloadReferralReferralAdsContextDataTest.php
-test/Model/WebhookPayloadReferralReferralTest.php
-test/Model/WebhookPayloadReferralSenderTest.php
-test/Model/WebhookPayloadReferralTest.php
+test/Model/AnalyticsListResponsePostsInnerMediaItemsInnerTest.php

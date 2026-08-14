@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * ExternalPostMediaItem Class Doc Comment
  *
  * @category Class
- * @description A media item on a native (external/synced) post, as carried by post.external.* webhook payloads. Distinct from the richer MediaItem used for Zernio-authored posts: external items are always already-published (url required) and limited to image or video. Kept as a separate schema so the generated SDK model does not collide with MediaItem.
+ * @description A media item on a native (external/synced) post, as carried by post.external.* webhook payloads. Distinct from the richer MediaItem used for Zernio-authored posts: external items are always already-published and limited to image or video. Kept as a separate schema so the generated SDK model does not collide with MediaItem.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -61,7 +61,9 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPITypes = [
         'type' => 'string',
         'url' => 'string',
-        'thumbnail' => 'string'
+        'thumbnail' => 'string',
+        'media_status' => 'string',
+        'unavailable_reason' => 'string'
     ];
 
     /**
@@ -74,7 +76,9 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPIFormats = [
         'type' => null,
         'url' => null,
-        'thumbnail' => null
+        'thumbnail' => null,
+        'media_status' => null,
+        'unavailable_reason' => null
     ];
 
     /**
@@ -84,8 +88,10 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static array $openAPINullables = [
         'type' => false,
-        'url' => false,
-        'thumbnail' => false
+        'url' => true,
+        'thumbnail' => false,
+        'media_status' => false,
+        'unavailable_reason' => false
     ];
 
     /**
@@ -176,7 +182,9 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $attributeMap = [
         'type' => 'type',
         'url' => 'url',
-        'thumbnail' => 'thumbnail'
+        'thumbnail' => 'thumbnail',
+        'media_status' => 'mediaStatus',
+        'unavailable_reason' => 'unavailableReason'
     ];
 
     /**
@@ -187,7 +195,9 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $setters = [
         'type' => 'setType',
         'url' => 'setUrl',
-        'thumbnail' => 'setThumbnail'
+        'thumbnail' => 'setThumbnail',
+        'media_status' => 'setMediaStatus',
+        'unavailable_reason' => 'setUnavailableReason'
     ];
 
     /**
@@ -198,7 +208,9 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $getters = [
         'type' => 'getType',
         'url' => 'getUrl',
-        'thumbnail' => 'getThumbnail'
+        'thumbnail' => 'getThumbnail',
+        'media_status' => 'getMediaStatus',
+        'unavailable_reason' => 'getUnavailableReason'
     ];
 
     /**
@@ -244,6 +256,8 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
 
     public const TYPE_IMAGE = 'image';
     public const TYPE_VIDEO = 'video';
+    public const MEDIA_STATUS_UNAVAILABLE = 'unavailable';
+    public const UNAVAILABLE_REASON_PLATFORM_WITHHELD = 'platform_withheld';
 
     /**
      * Gets allowable values of the enum
@@ -255,6 +269,30 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
         return [
             self::TYPE_IMAGE,
             self::TYPE_VIDEO,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getMediaStatusAllowableValues()
+    {
+        return [
+            self::MEDIA_STATUS_UNAVAILABLE,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getUnavailableReasonAllowableValues()
+    {
+        return [
+            self::UNAVAILABLE_REASON_PLATFORM_WITHHELD,
         ];
     }
 
@@ -276,6 +314,8 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('thumbnail', $data ?? [], null);
+        $this->setIfExists('media_status', $data ?? [], null);
+        $this->setIfExists('unavailable_reason', $data ?? [], null);
     }
 
     /**
@@ -317,9 +357,27 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
             );
         }
 
-        if ($this->container['url'] === null) {
+        if ($this->container['url'] === null && !$this->isNullableSetToNull('url')) {
             $invalidProperties[] = "'url' can't be null";
         }
+        $allowedValues = $this->getMediaStatusAllowableValues();
+        if (!is_null($this->container['media_status']) && !in_array($this->container['media_status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'media_status', must be one of '%s'",
+                $this->container['media_status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getUnavailableReasonAllowableValues();
+        if (!is_null($this->container['unavailable_reason']) && !in_array($this->container['unavailable_reason'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'unavailable_reason', must be one of '%s'",
+                $this->container['unavailable_reason'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -375,7 +433,7 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets url
      *
-     * @return string
+     * @return string|null
      */
     public function getUrl()
     {
@@ -385,14 +443,21 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets url
      *
-     * @param string $url url
+     * @param string|null $url 'Direct URL to the media file. Null when the platform withholds it: check mediaStatus before downloading. Instagram omits the video file for Reels it flags as containing copyrighted material (its docs name audio as the usual cause), so type stays \"video\" while the file is permanently unreachable.'
      *
      * @return self
      */
     public function setUrl($url)
     {
         if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['url'] = $url;
 
@@ -412,7 +477,7 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets thumbnail
      *
-     * @param string|null $thumbnail thumbnail
+     * @param string|null $thumbnail Cover image. Still present when url is null.
      *
      * @return self
      */
@@ -422,6 +487,80 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable thumbnail cannot be null');
         }
         $this->container['thumbnail'] = $thumbnail;
+
+        return $this;
+    }
+
+    /**
+     * Gets media_status
+     *
+     * @return string|null
+     */
+    public function getMediaStatus()
+    {
+        return $this->container['media_status'];
+    }
+
+    /**
+     * Sets media_status
+     *
+     * @param string|null $media_status Present only when the media file could not be retrieved. Absent means the file is available at url.
+     *
+     * @return self
+     */
+    public function setMediaStatus($media_status)
+    {
+        if (is_null($media_status)) {
+            throw new \InvalidArgumentException('non-nullable media_status cannot be null');
+        }
+        $allowedValues = $this->getMediaStatusAllowableValues();
+        if (!in_array($media_status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'media_status', must be one of '%s'",
+                    $media_status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['media_status'] = $media_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets unavailable_reason
+     *
+     * @return string|null
+     */
+    public function getUnavailableReason()
+    {
+        return $this->container['unavailable_reason'];
+    }
+
+    /**
+     * Sets unavailable_reason
+     *
+     * @param string|null $unavailable_reason Why the file is missing. platform_withheld means the platform declined to return it and retrying will not help.
+     *
+     * @return self
+     */
+    public function setUnavailableReason($unavailable_reason)
+    {
+        if (is_null($unavailable_reason)) {
+            throw new \InvalidArgumentException('non-nullable unavailable_reason cannot be null');
+        }
+        $allowedValues = $this->getUnavailableReasonAllowableValues();
+        if (!in_array($unavailable_reason, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'unavailable_reason', must be one of '%s'",
+                    $unavailable_reason,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['unavailable_reason'] = $unavailable_reason;
 
         return $this;
     }

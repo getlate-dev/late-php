@@ -72,7 +72,7 @@ class AnalyticsListResponsePostsInner implements ModelInterface, ArrayAccess, \J
         'profile_id' => 'string',
         'thumbnail_url' => 'string',
         'media_type' => 'string',
-        'media_items' => '\Zernio\Model\AnalyticsSinglePostResponseMediaItemsInner[]'
+        'media_items' => '\Zernio\Model\AnalyticsListResponsePostsInnerMediaItemsInner[]'
     ];
 
     /**
@@ -825,7 +825,7 @@ class AnalyticsListResponsePostsInner implements ModelInterface, ArrayAccess, \J
     /**
      * Gets media_items
      *
-     * @return \Zernio\Model\AnalyticsSinglePostResponseMediaItemsInner[]|null
+     * @return \Zernio\Model\AnalyticsListResponsePostsInnerMediaItemsInner[]|null
      */
     public function getMediaItems()
     {
@@ -835,7 +835,7 @@ class AnalyticsListResponsePostsInner implements ModelInterface, ArrayAccess, \J
     /**
      * Sets media_items
      *
-     * @param \Zernio\Model\AnalyticsSinglePostResponseMediaItemsInner[]|null $media_items All media items for this post. Carousel posts contain one entry per slide.
+     * @param \Zernio\Model\AnalyticsListResponsePostsInnerMediaItemsInner[]|null $media_items All media items for this post. Carousel posts contain one entry per slide.
      *
      * @return self
      */
