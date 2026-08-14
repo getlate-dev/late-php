@@ -374,7 +374,7 @@ class CreateStandaloneAdRequestPromotedObject implements ModelInterface, ArrayAc
     /**
      * Sets pixel_id
      *
-     * @param string|null $pixel_id Pixel ID. **Meta:** Facebook Pixel ID, required for `goal: conversions`. **TikTok:** TikTok Pixel ID, required for `goal: conversions`. To discover the pixels an ad account can use, call `GET /v1/accounts/{accountId}/tracking-tags?adAccountId=act_...` (each entry carries `kind` and `ownerAdAccountId`), or `GET /v1/accounts/{accountId}/conversion-destinations`. Note this is a different resource from `GET /v1/ads/{adId}/tracking-tags`, which reads an ad's click-URL params (`url_tags`), not pixels.
+     * @param string|null $pixel_id Pixel ID. **Meta:** Facebook Pixel ID, required for `goal: conversions`. Requires `customEventType` alongside it; Meta rejects any promoted_object carrying `pixel_id` without `custom_event_type` (error_subcode 1885014), even when `customConversionId` is also present. **TikTok:** TikTok Pixel ID, required for `goal: conversions`. To discover the pixels an ad account can use, call `GET /v1/accounts/{accountId}/tracking-tags?adAccountId=act_...` (each entry carries `kind` and `ownerAdAccountId`), or `GET /v1/accounts/{accountId}/conversion-destinations`. Note this is a different resource from `GET /v1/ads/{adId}/tracking-tags`, which reads an ad's click-URL params (`url_tags`), not pixels.
      *
      * @return self
      */
@@ -536,7 +536,7 @@ class CreateStandaloneAdRequestPromotedObject implements ModelInterface, ArrayAc
     /**
      * Sets custom_conversion_id
      *
-     * @param string|null $custom_conversion_id Custom Conversion ID, when optimising against one instead of a standard event.
+     * @param string|null $custom_conversion_id Custom Conversion ID, when optimising against one instead of a standard event. Accepted alone by this API, without `pixelId` or `customEventType`. If `pixelId` is also sent, `customEventType` is still required on the promoted_object (Meta rejects `pixel_id` without `custom_event_type`, error_subcode 1885014).
      *
      * @return self
      */
