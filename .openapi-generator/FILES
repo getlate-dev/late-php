@@ -1667,6 +1667,10 @@ docs/Model/WebhookPayloadPostPostPlatformsInner.md
 docs/Model/WebhookPayloadReaction.md
 docs/Model/WebhookPayloadReactionReaction.md
 docs/Model/WebhookPayloadReactionReactionSender.md
+docs/Model/WebhookPayloadReferral.md
+docs/Model/WebhookPayloadReferralReferral.md
+docs/Model/WebhookPayloadReferralReferralAdsContextData.md
+docs/Model/WebhookPayloadReferralSender.md
 docs/Model/WebhookPayloadReviewNew.md
 docs/Model/WebhookPayloadReviewNewAccount.md
 docs/Model/WebhookPayloadReviewUpdated.md
@@ -3379,6 +3383,10 @@ lib/Model/WebhookPayloadPostPostPlatformsInner.php
 lib/Model/WebhookPayloadReaction.php
 lib/Model/WebhookPayloadReactionReaction.php
 lib/Model/WebhookPayloadReactionReactionSender.php
+lib/Model/WebhookPayloadReferral.php
+lib/Model/WebhookPayloadReferralReferral.php
+lib/Model/WebhookPayloadReferralReferralAdsContextData.php
+lib/Model/WebhookPayloadReferralSender.php
 lib/Model/WebhookPayloadReviewNew.php
 lib/Model/WebhookPayloadReviewNewAccount.php
 lib/Model/WebhookPayloadReviewUpdated.php
@@ -3423,3 +3431,7 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/WebhookPayloadReferralReferralAdsContextDataTest.php
+test/Model/WebhookPayloadReferralReferralTest.php
+test/Model/WebhookPayloadReferralSenderTest.php
+test/Model/WebhookPayloadReferralTest.php

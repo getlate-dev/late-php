@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookPayloadMessageMetadataReferral
+ * WebhookPayloadReferralReferral
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * WebhookPayloadMessageMetadataReferral Class Doc Comment
+ * WebhookPayloadReferralReferral Class Doc Comment
  *
  * @category Class
- * @description Click attribution forwarded verbatim from Meta. Populated only on the FIRST inbound message after the click; absent on subsequent messages of the same conversation. On Instagram and Messenger a RETURNING click also attaches it to the first message that follows, so read it on every &#x60;message.received&#x60; for per-click attribution; a click that opens an existing thread WITHOUT a message arrives as the separate &#x60;referral.received&#x60; event.  The populated subset identifies the source:   - &#x60;ctwa_clid&#x60; and &#x60;source_*&#x60; fields: WhatsApp CTWA     (Click-to-WhatsApp). Attribution window is 7 days from click.     Forward to Meta Conversions API for Business Messaging replay.   - &#x60;ad_id&#x60; and &#x60;ads_context_data&#x60;: Facebook Messenger CTM     (Click-to-Message) or Instagram CTD (Click-to-Direct). Use     &#x60;ad_id&#x60; to attribute the conversation to a specific ad.   - &#x60;ref&#x60; without &#x60;ad_id&#x60;: an ig.me / m.me link carrying a     &#x60;?ref&#x3D;&#x60; parameter (&#x60;source&#x60; is &#x60;SHORTLINK&#x60;, &#x60;SHORTLINKS&#x60; or     &#x60;IGME-SOURCE-LINK&#x60; depending on surface - treat it as     opaque). Instagram delivers ig.me refs on new threads only     when the account has at least one Ice Breaker configured     (&#x60;PUT /v1/accounts/{accountId}/instagram-ice-breakers&#x60;).
+ * @description Meta&#39;s referral object, forwarded verbatim. Same shape as &#x60;metadata.referral&#x60; on &#x60;message.received&#x60;: &#x60;ref&#x60; + &#x60;source&#x60; for ig.me / m.me links, &#x60;ad_id&#x60; + &#x60;ads_context_data&#x60; for returning Messenger ad clicks.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAccess, \JsonSerializable
+class WebhookPayloadReferralReferral implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WebhookPayloadMessage_metadata_referral';
+    protected static $openAPIModelName = 'WebhookPayloadReferral_referral';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,22 +59,12 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
       * @var string[]
       */
     protected static $openAPITypes = [
-        'ctwa_clid' => 'string',
-        'source_id' => 'string',
-        'source_type' => 'string',
-        'source_url' => 'string',
-        'headline' => 'string',
-        'body' => 'string',
-        'media_type' => 'string',
-        'image_url' => 'string',
-        'video_url' => 'string',
-        'thumbnail_url' => 'string',
-        'ad_id' => 'string',
         'ref' => 'string',
         'source' => 'string',
         'type' => 'string',
         'referer_uri' => 'string',
-        'ads_context_data' => '\Zernio\Model\WebhookPayloadMessageMetadataReferralAdsContextData'
+        'ad_id' => 'string',
+        'ads_context_data' => '\Zernio\Model\WebhookPayloadReferralReferralAdsContextData'
     ];
 
     /**
@@ -85,21 +75,11 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'ctwa_clid' => null,
-        'source_id' => null,
-        'source_type' => null,
-        'source_url' => null,
-        'headline' => null,
-        'body' => null,
-        'media_type' => null,
-        'image_url' => null,
-        'video_url' => null,
-        'thumbnail_url' => null,
-        'ad_id' => null,
         'ref' => null,
         'source' => null,
         'type' => null,
         'referer_uri' => null,
+        'ad_id' => null,
         'ads_context_data' => null
     ];
 
@@ -109,21 +89,11 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'ctwa_clid' => false,
-        'source_id' => false,
-        'source_type' => false,
-        'source_url' => false,
-        'headline' => false,
-        'body' => false,
-        'media_type' => false,
-        'image_url' => false,
-        'video_url' => false,
-        'thumbnail_url' => false,
-        'ad_id' => false,
         'ref' => false,
         'source' => false,
         'type' => false,
         'referer_uri' => false,
+        'ad_id' => false,
         'ads_context_data' => false
     ];
 
@@ -213,21 +183,11 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $attributeMap = [
-        'ctwa_clid' => 'ctwa_clid',
-        'source_id' => 'source_id',
-        'source_type' => 'source_type',
-        'source_url' => 'source_url',
-        'headline' => 'headline',
-        'body' => 'body',
-        'media_type' => 'media_type',
-        'image_url' => 'image_url',
-        'video_url' => 'video_url',
-        'thumbnail_url' => 'thumbnail_url',
-        'ad_id' => 'ad_id',
         'ref' => 'ref',
         'source' => 'source',
         'type' => 'type',
         'referer_uri' => 'referer_uri',
+        'ad_id' => 'ad_id',
         'ads_context_data' => 'ads_context_data'
     ];
 
@@ -237,21 +197,11 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $setters = [
-        'ctwa_clid' => 'setCtwaClid',
-        'source_id' => 'setSourceId',
-        'source_type' => 'setSourceType',
-        'source_url' => 'setSourceUrl',
-        'headline' => 'setHeadline',
-        'body' => 'setBody',
-        'media_type' => 'setMediaType',
-        'image_url' => 'setImageUrl',
-        'video_url' => 'setVideoUrl',
-        'thumbnail_url' => 'setThumbnailUrl',
-        'ad_id' => 'setAdId',
         'ref' => 'setRef',
         'source' => 'setSource',
         'type' => 'setType',
         'referer_uri' => 'setRefererUri',
+        'ad_id' => 'setAdId',
         'ads_context_data' => 'setAdsContextData'
     ];
 
@@ -261,21 +211,11 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $getters = [
-        'ctwa_clid' => 'getCtwaClid',
-        'source_id' => 'getSourceId',
-        'source_type' => 'getSourceType',
-        'source_url' => 'getSourceUrl',
-        'headline' => 'getHeadline',
-        'body' => 'getBody',
-        'media_type' => 'getMediaType',
-        'image_url' => 'getImageUrl',
-        'video_url' => 'getVideoUrl',
-        'thumbnail_url' => 'getThumbnailUrl',
-        'ad_id' => 'getAdId',
         'ref' => 'getRef',
         'source' => 'getSource',
         'type' => 'getType',
         'referer_uri' => 'getRefererUri',
+        'ad_id' => 'getAdId',
         'ads_context_data' => 'getAdsContextData'
     ];
 
@@ -336,21 +276,11 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('ctwa_clid', $data ?? [], null);
-        $this->setIfExists('source_id', $data ?? [], null);
-        $this->setIfExists('source_type', $data ?? [], null);
-        $this->setIfExists('source_url', $data ?? [], null);
-        $this->setIfExists('headline', $data ?? [], null);
-        $this->setIfExists('body', $data ?? [], null);
-        $this->setIfExists('media_type', $data ?? [], null);
-        $this->setIfExists('image_url', $data ?? [], null);
-        $this->setIfExists('video_url', $data ?? [], null);
-        $this->setIfExists('thumbnail_url', $data ?? [], null);
-        $this->setIfExists('ad_id', $data ?? [], null);
         $this->setIfExists('ref', $data ?? [], null);
         $this->setIfExists('source', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('referer_uri', $data ?? [], null);
+        $this->setIfExists('ad_id', $data ?? [], null);
         $this->setIfExists('ads_context_data', $data ?? [], null);
     }
 
@@ -397,303 +327,6 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
 
 
     /**
-     * Gets ctwa_clid
-     *
-     * @return string|null
-     */
-    public function getCtwaClid()
-    {
-        return $this->container['ctwa_clid'];
-    }
-
-    /**
-     * Sets ctwa_clid
-     *
-     * @param string|null $ctwa_clid Meta's GCLID-equivalent click identifier.
-     *
-     * @return self
-     */
-    public function setCtwaClid($ctwa_clid)
-    {
-        if (is_null($ctwa_clid)) {
-            throw new \InvalidArgumentException('non-nullable ctwa_clid cannot be null');
-        }
-        $this->container['ctwa_clid'] = $ctwa_clid;
-
-        return $this;
-    }
-
-    /**
-     * Gets source_id
-     *
-     * @return string|null
-     */
-    public function getSourceId()
-    {
-        return $this->container['source_id'];
-    }
-
-    /**
-     * Sets source_id
-     *
-     * @param string|null $source_id source_id
-     *
-     * @return self
-     */
-    public function setSourceId($source_id)
-    {
-        if (is_null($source_id)) {
-            throw new \InvalidArgumentException('non-nullable source_id cannot be null');
-        }
-        $this->container['source_id'] = $source_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets source_type
-     *
-     * @return string|null
-     */
-    public function getSourceType()
-    {
-        return $this->container['source_type'];
-    }
-
-    /**
-     * Sets source_type
-     *
-     * @param string|null $source_type source_type
-     *
-     * @return self
-     */
-    public function setSourceType($source_type)
-    {
-        if (is_null($source_type)) {
-            throw new \InvalidArgumentException('non-nullable source_type cannot be null');
-        }
-        $this->container['source_type'] = $source_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets source_url
-     *
-     * @return string|null
-     */
-    public function getSourceUrl()
-    {
-        return $this->container['source_url'];
-    }
-
-    /**
-     * Sets source_url
-     *
-     * @param string|null $source_url source_url
-     *
-     * @return self
-     */
-    public function setSourceUrl($source_url)
-    {
-        if (is_null($source_url)) {
-            throw new \InvalidArgumentException('non-nullable source_url cannot be null');
-        }
-        $this->container['source_url'] = $source_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets headline
-     *
-     * @return string|null
-     */
-    public function getHeadline()
-    {
-        return $this->container['headline'];
-    }
-
-    /**
-     * Sets headline
-     *
-     * @param string|null $headline headline
-     *
-     * @return self
-     */
-    public function setHeadline($headline)
-    {
-        if (is_null($headline)) {
-            throw new \InvalidArgumentException('non-nullable headline cannot be null');
-        }
-        $this->container['headline'] = $headline;
-
-        return $this;
-    }
-
-    /**
-     * Gets body
-     *
-     * @return string|null
-     */
-    public function getBody()
-    {
-        return $this->container['body'];
-    }
-
-    /**
-     * Sets body
-     *
-     * @param string|null $body body
-     *
-     * @return self
-     */
-    public function setBody($body)
-    {
-        if (is_null($body)) {
-            throw new \InvalidArgumentException('non-nullable body cannot be null');
-        }
-        $this->container['body'] = $body;
-
-        return $this;
-    }
-
-    /**
-     * Gets media_type
-     *
-     * @return string|null
-     */
-    public function getMediaType()
-    {
-        return $this->container['media_type'];
-    }
-
-    /**
-     * Sets media_type
-     *
-     * @param string|null $media_type media_type
-     *
-     * @return self
-     */
-    public function setMediaType($media_type)
-    {
-        if (is_null($media_type)) {
-            throw new \InvalidArgumentException('non-nullable media_type cannot be null');
-        }
-        $this->container['media_type'] = $media_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets image_url
-     *
-     * @return string|null
-     */
-    public function getImageUrl()
-    {
-        return $this->container['image_url'];
-    }
-
-    /**
-     * Sets image_url
-     *
-     * @param string|null $image_url image_url
-     *
-     * @return self
-     */
-    public function setImageUrl($image_url)
-    {
-        if (is_null($image_url)) {
-            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
-        }
-        $this->container['image_url'] = $image_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets video_url
-     *
-     * @return string|null
-     */
-    public function getVideoUrl()
-    {
-        return $this->container['video_url'];
-    }
-
-    /**
-     * Sets video_url
-     *
-     * @param string|null $video_url video_url
-     *
-     * @return self
-     */
-    public function setVideoUrl($video_url)
-    {
-        if (is_null($video_url)) {
-            throw new \InvalidArgumentException('non-nullable video_url cannot be null');
-        }
-        $this->container['video_url'] = $video_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets thumbnail_url
-     *
-     * @return string|null
-     */
-    public function getThumbnailUrl()
-    {
-        return $this->container['thumbnail_url'];
-    }
-
-    /**
-     * Sets thumbnail_url
-     *
-     * @param string|null $thumbnail_url thumbnail_url
-     *
-     * @return self
-     */
-    public function setThumbnailUrl($thumbnail_url)
-    {
-        if (is_null($thumbnail_url)) {
-            throw new \InvalidArgumentException('non-nullable thumbnail_url cannot be null');
-        }
-        $this->container['thumbnail_url'] = $thumbnail_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets ad_id
-     *
-     * @return string|null
-     */
-    public function getAdId()
-    {
-        return $this->container['ad_id'];
-    }
-
-    /**
-     * Sets ad_id
-     *
-     * @param string|null $ad_id Facebook Messenger CTM / Instagram CTD only. The Meta ad ID the user clicked to start the conversation.
-     *
-     * @return self
-     */
-    public function setAdId($ad_id)
-    {
-        if (is_null($ad_id)) {
-            throw new \InvalidArgumentException('non-nullable ad_id cannot be null');
-        }
-        $this->container['ad_id'] = $ad_id;
-
-        return $this;
-    }
-
-    /**
      * Gets ref
      *
      * @return string|null
@@ -706,7 +339,7 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
     /**
      * Sets ref
      *
-     * @param string|null $ref The `ref` parameter passed through from the Meta ad creative or from an ig.me / m.me link. Instagram / Facebook Messenger only.
+     * @param string|null $ref The `ref` parameter of the clicked ig.me / m.me link or ad.
      *
      * @return self
      */
@@ -733,7 +366,7 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
     /**
      * Sets source
      *
-     * @param string|null $source Meta-supplied source identifier (`ADS` for ad clicks; `SHORTLINK`, `SHORTLINKS` or `IGME-SOURCE-LINK` for ref links). Instagram / Facebook Messenger only.
+     * @param string|null $source Meta-supplied source (`SHORTLINK`, `SHORTLINKS`, `IGME-SOURCE-LINK`, `ADS` - treat as opaque).
      *
      * @return self
      */
@@ -760,7 +393,7 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
     /**
      * Sets type
      *
-     * @param string|null $type Meta-supplied referral type (e.g. `OPEN_THREAD`). Instagram / Facebook Messenger only.
+     * @param string|null $type Meta-supplied referral type (e.g. `OPEN_THREAD`).
      *
      * @return self
      */
@@ -787,7 +420,7 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
     /**
      * Sets referer_uri
      *
-     * @param string|null $referer_uri URI of the originating site, when Meta supplies one (m.me links opened from the web). Facebook Messenger only.
+     * @param string|null $referer_uri URI of the originating site, when Meta supplies one. Facebook Messenger only.
      *
      * @return self
      */
@@ -802,9 +435,36 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
     }
 
     /**
+     * Gets ad_id
+     *
+     * @return string|null
+     */
+    public function getAdId()
+    {
+        return $this->container['ad_id'];
+    }
+
+    /**
+     * Sets ad_id
+     *
+     * @param string|null $ad_id The Meta ad ID, on returning ad clicks. Facebook Messenger only.
+     *
+     * @return self
+     */
+    public function setAdId($ad_id)
+    {
+        if (is_null($ad_id)) {
+            throw new \InvalidArgumentException('non-nullable ad_id cannot be null');
+        }
+        $this->container['ad_id'] = $ad_id;
+
+        return $this;
+    }
+
+    /**
      * Gets ads_context_data
      *
-     * @return \Zernio\Model\WebhookPayloadMessageMetadataReferralAdsContextData|null
+     * @return \Zernio\Model\WebhookPayloadReferralReferralAdsContextData|null
      */
     public function getAdsContextData()
     {
@@ -814,7 +474,7 @@ class WebhookPayloadMessageMetadataReferral implements ModelInterface, ArrayAcce
     /**
      * Sets ads_context_data
      *
-     * @param \Zernio\Model\WebhookPayloadMessageMetadataReferralAdsContextData|null $ads_context_data ads_context_data
+     * @param \Zernio\Model\WebhookPayloadReferralReferralAdsContextData|null $ads_context_data ads_context_data
      *
      * @return self
      */

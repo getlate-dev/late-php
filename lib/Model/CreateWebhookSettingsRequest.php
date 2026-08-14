@@ -294,6 +294,7 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
     public const EVENTS_MESSAGE_READ = 'message.read';
     public const EVENTS_MESSAGE_FAILED = 'message.failed';
     public const EVENTS_REACTION_RECEIVED = 'reaction.received';
+    public const EVENTS_REFERRAL_RECEIVED = 'referral.received';
     public const EVENTS_COMMENT_RECEIVED = 'comment.received';
     public const EVENTS_REVIEW_NEW = 'review.new';
     public const EVENTS_REVIEW_UPDATED = 'review.updated';
@@ -359,6 +360,7 @@ class CreateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
             self::EVENTS_MESSAGE_READ,
             self::EVENTS_MESSAGE_FAILED,
             self::EVENTS_REACTION_RECEIVED,
+            self::EVENTS_REFERRAL_RECEIVED,
             self::EVENTS_COMMENT_RECEIVED,
             self::EVENTS_REVIEW_NEW,
             self::EVENTS_REVIEW_UPDATED,
