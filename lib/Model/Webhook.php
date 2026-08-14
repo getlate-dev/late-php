@@ -320,6 +320,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
     public const EVENTS_LEAD_RECEIVED = 'lead.received';
     public const EVENTS_AD_STATUS_CHANGED = 'ad.status_changed';
     public const EVENTS_WHATSAPP_TEMPLATE_STATUS_UPDATED = 'whatsapp.template.status_updated';
+    public const EVENTS_WHATSAPP_TEMPLATE_CATEGORY_UPDATED = 'whatsapp.template.category_updated';
     public const EVENTS_WHATSAPP_AUTOMATIC_EVENT = 'whatsapp.automatic_event';
     public const EVENTS_WHATSAPP_NUMBER_ACTIVATED = 'whatsapp.number.activated';
     public const EVENTS_WHATSAPP_NUMBER_DECLINED = 'whatsapp.number.declined';
@@ -386,6 +387,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
             self::EVENTS_LEAD_RECEIVED,
             self::EVENTS_AD_STATUS_CHANGED,
             self::EVENTS_WHATSAPP_TEMPLATE_STATUS_UPDATED,
+            self::EVENTS_WHATSAPP_TEMPLATE_CATEGORY_UPDATED,
             self::EVENTS_WHATSAPP_AUTOMATIC_EVENT,
             self::EVENTS_WHATSAPP_NUMBER_ACTIVATED,
             self::EVENTS_WHATSAPP_NUMBER_DECLINED,

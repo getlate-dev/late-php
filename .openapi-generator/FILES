@@ -1676,6 +1676,8 @@ docs/Model/WebhookPayloadReviewNew.md
 docs/Model/WebhookPayloadReviewNewAccount.md
 docs/Model/WebhookPayloadReviewUpdated.md
 docs/Model/WebhookPayloadTest.md
+docs/Model/WebhookPayloadWhatsAppTemplateCategoryUpdated.md
+docs/Model/WebhookPayloadWhatsAppTemplateCategoryUpdatedTemplate.md
 docs/Model/WebhookPayloadWhatsAppTemplateStatusUpdated.md
 docs/Model/WebhookPayloadWhatsAppTemplateStatusUpdatedAccount.md
 docs/Model/WebhookPayloadWhatsAppTemplateStatusUpdatedTemplate.md
@@ -3393,6 +3395,8 @@ lib/Model/WebhookPayloadReviewNew.php
 lib/Model/WebhookPayloadReviewNewAccount.php
 lib/Model/WebhookPayloadReviewUpdated.php
 lib/Model/WebhookPayloadTest.php
+lib/Model/WebhookPayloadWhatsAppTemplateCategoryUpdated.php
+lib/Model/WebhookPayloadWhatsAppTemplateCategoryUpdatedTemplate.php
 lib/Model/WebhookPayloadWhatsAppTemplateStatusUpdated.php
 lib/Model/WebhookPayloadWhatsAppTemplateStatusUpdatedAccount.php
 lib/Model/WebhookPayloadWhatsAppTemplateStatusUpdatedTemplate.php
@@ -3433,3 +3437,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/WebhookPayloadWhatsAppTemplateCategoryUpdatedTemplateTest.php
+test/Model/WebhookPayloadWhatsAppTemplateCategoryUpdatedTest.php

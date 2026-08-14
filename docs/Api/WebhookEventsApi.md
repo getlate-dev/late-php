@@ -53,6 +53,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**onWhatsAppNumberReleased()**](WebhookEventsApi.md#onWhatsAppNumberReleased) | **POST** /whatsapp.number.released | WhatsApp number released event |
 | [**onWhatsAppNumberSuspended()**](WebhookEventsApi.md#onWhatsAppNumberSuspended) | **POST** /whatsapp.number.suspended | WhatsApp number suspended event |
 | [**onWhatsAppNumberVerificationRequired()**](WebhookEventsApi.md#onWhatsAppNumberVerificationRequired) | **POST** /whatsapp.number.verification_required | WhatsApp number verification-required event |
+| [**onWhatsAppTemplateCategoryUpdated()**](WebhookEventsApi.md#onWhatsAppTemplateCategoryUpdated) | **POST** /whatsapp.template.category_updated | WhatsApp template category updated event |
 | [**onWhatsAppTemplateStatusUpdated()**](WebhookEventsApi.md#onWhatsAppTemplateStatusUpdated) | **POST** /whatsapp.template.status_updated | WhatsApp template status updated event |
 
 
@@ -2811,6 +2812,65 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **on_whats_app_number_verification_required_request** | [**\Zernio\Model\OnWhatsAppNumberVerificationRequiredRequest**](../Model/OnWhatsAppNumberVerificationRequiredRequest.md)|  | |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `onWhatsAppTemplateCategoryUpdated()`
+
+```php
+onWhatsAppTemplateCategoryUpdated($webhook_payload_whats_app_template_category_updated)
+```
+
+WhatsApp template category updated event
+
+Fired when Meta reclassifies a WhatsApp Business template's category after approval. Forwarded from Meta's `template_category_update` webhook field on the WhatsApp Business Account. Category drives Meta's per-conversation tariff and whether the template is subject to the recipient's marketing opt-out. `template.changeType` is `scheduled` (24h advance notice) or `applied`; `template.category` is always the category right now.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\WebhookEventsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$webhook_payload_whats_app_template_category_updated = new \Zernio\Model\WebhookPayloadWhatsAppTemplateCategoryUpdated(); // \Zernio\Model\WebhookPayloadWhatsAppTemplateCategoryUpdated
+
+try {
+    $apiInstance->onWhatsAppTemplateCategoryUpdated($webhook_payload_whats_app_template_category_updated);
+} catch (Exception $e) {
+    echo 'Exception when calling WebhookEventsApi->onWhatsAppTemplateCategoryUpdated: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **webhook_payload_whats_app_template_category_updated** | [**\Zernio\Model\WebhookPayloadWhatsAppTemplateCategoryUpdated**](../Model/WebhookPayloadWhatsAppTemplateCategoryUpdated.md)|  | |
 
 ### Return type
 
