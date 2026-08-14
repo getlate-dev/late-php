@@ -1239,6 +1239,14 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             );
         }
 
+        if (!is_null($this->container['currency']) && (mb_strlen($this->container['currency']) > 3)) {
+            $invalidProperties[] = "invalid value for 'currency', the character length must be smaller than or equal to 3.";
+        }
+
+        if (!is_null($this->container['currency']) && (mb_strlen($this->container['currency']) < 3)) {
+            $invalidProperties[] = "invalid value for 'currency', the character length must be bigger than or equal to 3.";
+        }
+
         if (!is_null($this->container['long_headline']) && (mb_strlen($this->container['long_headline']) > 90)) {
             $invalidProperties[] = "invalid value for 'long_headline', the character length must be smaller than or equal to 90.";
         }
@@ -1987,7 +1995,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets currency
      *
-     * @param string|null $currency currency
+     * @param string|null $currency ISO 4217 currency code matching the ad account's currency (e.g. `USD`). Meta only. Optional: Zernio resolves it from the ad account when omitted. The value selects the minor-unit exponent Zernio converts budget/bid amounts by before calling Meta (most currencies are cents; zero-decimal currencies like JPY/KRW are sent as-is).
      *
      * @return self
      */
@@ -1996,6 +2004,13 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         if (is_null($currency)) {
             throw new \InvalidArgumentException('non-nullable currency cannot be null');
         }
+        if ((mb_strlen($currency) > 3)) {
+            throw new \InvalidArgumentException('invalid length for $currency when calling CreateStandaloneAdRequest., must be smaller than or equal to 3.');
+        }
+        if ((mb_strlen($currency) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $currency when calling CreateStandaloneAdRequest., must be bigger than or equal to 3.');
+        }
+
         $this->container['currency'] = $currency;
 
         return $this;

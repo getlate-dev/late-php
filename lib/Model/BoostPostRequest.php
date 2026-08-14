@@ -560,6 +560,14 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
             );
         }
 
+        if (!is_null($this->container['currency']) && (mb_strlen($this->container['currency']) > 3)) {
+            $invalidProperties[] = "invalid value for 'currency', the character length must be smaller than or equal to 3.";
+        }
+
+        if (!is_null($this->container['currency']) && (mb_strlen($this->container['currency']) < 3)) {
+            $invalidProperties[] = "invalid value for 'currency', the character length must be bigger than or equal to 3.";
+        }
+
         if (!is_null($this->container['dsa_beneficiary']) && (mb_strlen($this->container['dsa_beneficiary']) > 100)) {
             $invalidProperties[] = "invalid value for 'dsa_beneficiary', the character length must be smaller than or equal to 100.";
         }
@@ -890,7 +898,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param string|null $currency currency
+     * @param string|null $currency ISO 4217 currency code matching the ad account's currency. Meta only. Optional: Zernio resolves it from the ad account when omitted. The value selects the minor-unit exponent Zernio converts budget/bid amounts by before calling Meta (most currencies are cents; zero-decimal currencies like JPY/KRW are sent as-is).
      *
      * @return self
      */
@@ -899,6 +907,13 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         if (is_null($currency)) {
             throw new \InvalidArgumentException('non-nullable currency cannot be null');
         }
+        if ((mb_strlen($currency) > 3)) {
+            throw new \InvalidArgumentException('invalid length for $currency when calling BoostPostRequest., must be smaller than or equal to 3.');
+        }
+        if ((mb_strlen($currency) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $currency when calling BoostPostRequest., must be bigger than or equal to 3.');
+        }
+
         $this->container['currency'] = $currency;
 
         return $this;

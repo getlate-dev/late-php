@@ -1059,7 +1059,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets currency
      *
-     * @param string|null $currency ISO 4217 currency code matching the ad account's currency (e.g. `USD`). Optional; Meta infers from the ad account when omitted.
+     * @param string|null $currency ISO 4217 currency code matching the ad account's currency (e.g. `USD`). Optional: Zernio resolves it from the ad account when omitted. The value selects the minor-unit exponent Zernio converts budget/bid amounts by before calling Meta (most currencies are cents; zero-decimal currencies like JPY/KRW are sent as-is).
      *
      * @return self
      */
