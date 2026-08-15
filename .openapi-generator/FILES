@@ -512,6 +512,8 @@ docs/Model/GeoRestriction.md
 docs/Model/GetAccountHealth200Response.md
 docs/Model/GetAccountHealth200ResponsePermissions.md
 docs/Model/GetAccountHealth200ResponsePermissionsPostingInner.md
+docs/Model/GetAccountHealth200ResponsePlatformConnection.md
+docs/Model/GetAccountHealth200ResponsePlatformConnectionMetaError.md
 docs/Model/GetAccountHealth200ResponseTokenStatus.md
 docs/Model/GetAd200Response.md
 docs/Model/GetAdAccountFinance200Response.md
@@ -2230,6 +2232,8 @@ lib/Model/GeoRestriction.php
 lib/Model/GetAccountHealth200Response.php
 lib/Model/GetAccountHealth200ResponsePermissions.php
 lib/Model/GetAccountHealth200ResponsePermissionsPostingInner.php
+lib/Model/GetAccountHealth200ResponsePlatformConnection.php
+lib/Model/GetAccountHealth200ResponsePlatformConnectionMetaError.php
 lib/Model/GetAccountHealth200ResponseTokenStatus.php
 lib/Model/GetAd200Response.php
 lib/Model/GetAdAccountFinance200Response.php
@@ -3437,3 +3441,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/GetAccountHealth200ResponsePlatformConnectionMetaErrorTest.php
+test/Model/GetAccountHealth200ResponsePlatformConnectionTest.php

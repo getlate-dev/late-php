@@ -1071,6 +1071,8 @@ Class | Method | HTTP request | Description
 - [GetAccountHealth200Response](docs/Model/GetAccountHealth200Response.md)
 - [GetAccountHealth200ResponsePermissions](docs/Model/GetAccountHealth200ResponsePermissions.md)
 - [GetAccountHealth200ResponsePermissionsPostingInner](docs/Model/GetAccountHealth200ResponsePermissionsPostingInner.md)
+- [GetAccountHealth200ResponsePlatformConnection](docs/Model/GetAccountHealth200ResponsePlatformConnection.md)
+- [GetAccountHealth200ResponsePlatformConnectionMetaError](docs/Model/GetAccountHealth200ResponsePlatformConnectionMetaError.md)
 - [GetAccountHealth200ResponseTokenStatus](docs/Model/GetAccountHealth200ResponseTokenStatus.md)
 - [GetAd200Response](docs/Model/GetAd200Response.md)
 - [GetAdAccountFinance200Response](docs/Model/GetAdAccountFinance200Response.md)

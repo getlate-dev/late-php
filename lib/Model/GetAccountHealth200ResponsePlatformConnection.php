@@ -1,6 +1,6 @@
 <?php
 /**
- * GetAccountHealth200Response
+ * GetAccountHealth200ResponsePlatformConnection
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * GetAccountHealth200Response Class Doc Comment
+ * GetAccountHealth200ResponsePlatformConnection Class Doc Comment
  *
  * @category Class
+ * @description WhatsApp accounts only. Live probe of the Meta link behind the channel, performed at request time (the same read as GET /v1/whatsapp/number-info).
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetAccountHealth200ResponsePlatformConnection implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'getAccountHealth_200_response';
+    protected static $openAPIModelName = 'getAccountHealth_200_response_platformConnection';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,16 +59,10 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'account_id' => 'string',
-        'platform' => 'string',
-        'username' => 'string',
-        'display_name' => 'string',
         'status' => 'string',
-        'token_status' => '\Zernio\Model\GetAccountHealth200ResponseTokenStatus',
-        'permissions' => '\Zernio\Model\GetAccountHealth200ResponsePermissions',
-        'issues' => 'string[]',
-        'recommendations' => 'string[]',
-        'platform_connection' => '\Zernio\Model\GetAccountHealth200ResponsePlatformConnection'
+        'checked_at' => '\DateTime',
+        'phone_status' => 'string',
+        'meta_error' => '\Zernio\Model\GetAccountHealth200ResponsePlatformConnectionMetaError'
     ];
 
     /**
@@ -78,16 +73,10 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'account_id' => null,
-        'platform' => null,
-        'username' => null,
-        'display_name' => null,
         'status' => null,
-        'token_status' => null,
-        'permissions' => null,
-        'issues' => null,
-        'recommendations' => null,
-        'platform_connection' => null
+        'checked_at' => 'date-time',
+        'phone_status' => null,
+        'meta_error' => null
     ];
 
     /**
@@ -96,16 +85,10 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'account_id' => false,
-        'platform' => false,
-        'username' => false,
-        'display_name' => false,
         'status' => false,
-        'token_status' => false,
-        'permissions' => false,
-        'issues' => false,
-        'recommendations' => false,
-        'platform_connection' => false
+        'checked_at' => false,
+        'phone_status' => true,
+        'meta_error' => false
     ];
 
     /**
@@ -194,16 +177,10 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'account_id' => 'accountId',
-        'platform' => 'platform',
-        'username' => 'username',
-        'display_name' => 'displayName',
         'status' => 'status',
-        'token_status' => 'tokenStatus',
-        'permissions' => 'permissions',
-        'issues' => 'issues',
-        'recommendations' => 'recommendations',
-        'platform_connection' => 'platformConnection'
+        'checked_at' => 'checkedAt',
+        'phone_status' => 'phoneStatus',
+        'meta_error' => 'metaError'
     ];
 
     /**
@@ -212,16 +189,10 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'account_id' => 'setAccountId',
-        'platform' => 'setPlatform',
-        'username' => 'setUsername',
-        'display_name' => 'setDisplayName',
         'status' => 'setStatus',
-        'token_status' => 'setTokenStatus',
-        'permissions' => 'setPermissions',
-        'issues' => 'setIssues',
-        'recommendations' => 'setRecommendations',
-        'platform_connection' => 'setPlatformConnection'
+        'checked_at' => 'setCheckedAt',
+        'phone_status' => 'setPhoneStatus',
+        'meta_error' => 'setMetaError'
     ];
 
     /**
@@ -230,16 +201,10 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'account_id' => 'getAccountId',
-        'platform' => 'getPlatform',
-        'username' => 'getUsername',
-        'display_name' => 'getDisplayName',
         'status' => 'getStatus',
-        'token_status' => 'getTokenStatus',
-        'permissions' => 'getPermissions',
-        'issues' => 'getIssues',
-        'recommendations' => 'getRecommendations',
-        'platform_connection' => 'getPlatformConnection'
+        'checked_at' => 'getCheckedAt',
+        'phone_status' => 'getPhoneStatus',
+        'meta_error' => 'getMetaError'
     ];
 
     /**
@@ -283,9 +248,9 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
         return self::$openAPIModelName;
     }
 
-    public const STATUS_HEALTHY = 'healthy';
-    public const STATUS_WARNING = 'warning';
-    public const STATUS_ERROR = 'error';
+    public const STATUS_CONNECTED = 'connected';
+    public const STATUS_DISCONNECTED = 'disconnected';
+    public const STATUS_UNKNOWN = 'unknown';
 
     /**
      * Gets allowable values of the enum
@@ -295,9 +260,9 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
     public function getStatusAllowableValues()
     {
         return [
-            self::STATUS_HEALTHY,
-            self::STATUS_WARNING,
-            self::STATUS_ERROR,
+            self::STATUS_CONNECTED,
+            self::STATUS_DISCONNECTED,
+            self::STATUS_UNKNOWN,
         ];
     }
 
@@ -316,16 +281,10 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('account_id', $data ?? [], null);
-        $this->setIfExists('platform', $data ?? [], null);
-        $this->setIfExists('username', $data ?? [], null);
-        $this->setIfExists('display_name', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('token_status', $data ?? [], null);
-        $this->setIfExists('permissions', $data ?? [], null);
-        $this->setIfExists('issues', $data ?? [], null);
-        $this->setIfExists('recommendations', $data ?? [], null);
-        $this->setIfExists('platform_connection', $data ?? [], null);
+        $this->setIfExists('checked_at', $data ?? [], null);
+        $this->setIfExists('phone_status', $data ?? [], null);
+        $this->setIfExists('meta_error', $data ?? [], null);
     }
 
     /**
@@ -380,114 +339,6 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets account_id
-     *
-     * @return string|null
-     */
-    public function getAccountId()
-    {
-        return $this->container['account_id'];
-    }
-
-    /**
-     * Sets account_id
-     *
-     * @param string|null $account_id account_id
-     *
-     * @return self
-     */
-    public function setAccountId($account_id)
-    {
-        if (is_null($account_id)) {
-            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
-        }
-        $this->container['account_id'] = $account_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets platform
-     *
-     * @return string|null
-     */
-    public function getPlatform()
-    {
-        return $this->container['platform'];
-    }
-
-    /**
-     * Sets platform
-     *
-     * @param string|null $platform platform
-     *
-     * @return self
-     */
-    public function setPlatform($platform)
-    {
-        if (is_null($platform)) {
-            throw new \InvalidArgumentException('non-nullable platform cannot be null');
-        }
-        $this->container['platform'] = $platform;
-
-        return $this;
-    }
-
-    /**
-     * Gets username
-     *
-     * @return string|null
-     */
-    public function getUsername()
-    {
-        return $this->container['username'];
-    }
-
-    /**
-     * Sets username
-     *
-     * @param string|null $username username
-     *
-     * @return self
-     */
-    public function setUsername($username)
-    {
-        if (is_null($username)) {
-            throw new \InvalidArgumentException('non-nullable username cannot be null');
-        }
-        $this->container['username'] = $username;
-
-        return $this;
-    }
-
-    /**
-     * Gets display_name
-     *
-     * @return string|null
-     */
-    public function getDisplayName()
-    {
-        return $this->container['display_name'];
-    }
-
-    /**
-     * Sets display_name
-     *
-     * @param string|null $display_name display_name
-     *
-     * @return self
-     */
-    public function setDisplayName($display_name)
-    {
-        if (is_null($display_name)) {
-            throw new \InvalidArgumentException('non-nullable display_name cannot be null');
-        }
-        $this->container['display_name'] = $display_name;
-
-        return $this;
-    }
-
-    /**
      * Gets status
      *
      * @return string|null
@@ -500,7 +351,7 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets status
      *
-     * @param string|null $status Overall health status
+     * @param string|null $status `connected` = Meta served the channel object. `disconnected` = Meta refused to serve it (Graph error 100, subcode 33), which is how a phone-side coexistence disconnect surfaces. `unknown` = the live read failed for another reason (timeout, transient Meta error), not evidence either way.
      *
      * @return self
      */
@@ -525,136 +376,89 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
     }
 
     /**
-     * Gets token_status
+     * Gets checked_at
      *
-     * @return \Zernio\Model\GetAccountHealth200ResponseTokenStatus|null
+     * @return \DateTime|null
      */
-    public function getTokenStatus()
+    public function getCheckedAt()
     {
-        return $this->container['token_status'];
+        return $this->container['checked_at'];
     }
 
     /**
-     * Sets token_status
+     * Sets checked_at
      *
-     * @param \Zernio\Model\GetAccountHealth200ResponseTokenStatus|null $token_status token_status
+     * @param \DateTime|null $checked_at When this live probe ran (always the current request; never cached)
      *
      * @return self
      */
-    public function setTokenStatus($token_status)
+    public function setCheckedAt($checked_at)
     {
-        if (is_null($token_status)) {
-            throw new \InvalidArgumentException('non-nullable token_status cannot be null');
+        if (is_null($checked_at)) {
+            throw new \InvalidArgumentException('non-nullable checked_at cannot be null');
         }
-        $this->container['token_status'] = $token_status;
+        $this->container['checked_at'] = $checked_at;
 
         return $this;
     }
 
     /**
-     * Gets permissions
+     * Gets phone_status
      *
-     * @return \Zernio\Model\GetAccountHealth200ResponsePermissions|null
+     * @return string|null
      */
-    public function getPermissions()
+    public function getPhoneStatus()
     {
-        return $this->container['permissions'];
+        return $this->container['phone_status'];
     }
 
     /**
-     * Sets permissions
+     * Sets phone_status
      *
-     * @param \Zernio\Model\GetAccountHealth200ResponsePermissions|null $permissions permissions
+     * @param string|null $phone_status Meta's own `status` field from the phone-number node (for example CONNECTED), when the object was readable
      *
      * @return self
      */
-    public function setPermissions($permissions)
+    public function setPhoneStatus($phone_status)
     {
-        if (is_null($permissions)) {
-            throw new \InvalidArgumentException('non-nullable permissions cannot be null');
+        if (is_null($phone_status)) {
+            array_push($this->openAPINullablesSetToNull, 'phone_status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('phone_status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['permissions'] = $permissions;
+        $this->container['phone_status'] = $phone_status;
 
         return $this;
     }
 
     /**
-     * Gets issues
+     * Gets meta_error
      *
-     * @return string[]|null
+     * @return \Zernio\Model\GetAccountHealth200ResponsePlatformConnectionMetaError|null
      */
-    public function getIssues()
+    public function getMetaError()
     {
-        return $this->container['issues'];
+        return $this->container['meta_error'];
     }
 
     /**
-     * Sets issues
+     * Sets meta_error
      *
-     * @param string[]|null $issues List of issues found
+     * @param \Zernio\Model\GetAccountHealth200ResponsePlatformConnectionMetaError|null $meta_error meta_error
      *
      * @return self
      */
-    public function setIssues($issues)
+    public function setMetaError($meta_error)
     {
-        if (is_null($issues)) {
-            throw new \InvalidArgumentException('non-nullable issues cannot be null');
+        if (is_null($meta_error)) {
+            throw new \InvalidArgumentException('non-nullable meta_error cannot be null');
         }
-        $this->container['issues'] = $issues;
-
-        return $this;
-    }
-
-    /**
-     * Gets recommendations
-     *
-     * @return string[]|null
-     */
-    public function getRecommendations()
-    {
-        return $this->container['recommendations'];
-    }
-
-    /**
-     * Sets recommendations
-     *
-     * @param string[]|null $recommendations Actionable recommendations to fix issues
-     *
-     * @return self
-     */
-    public function setRecommendations($recommendations)
-    {
-        if (is_null($recommendations)) {
-            throw new \InvalidArgumentException('non-nullable recommendations cannot be null');
-        }
-        $this->container['recommendations'] = $recommendations;
-
-        return $this;
-    }
-
-    /**
-     * Gets platform_connection
-     *
-     * @return \Zernio\Model\GetAccountHealth200ResponsePlatformConnection|null
-     */
-    public function getPlatformConnection()
-    {
-        return $this->container['platform_connection'];
-    }
-
-    /**
-     * Sets platform_connection
-     *
-     * @param \Zernio\Model\GetAccountHealth200ResponsePlatformConnection|null $platform_connection platform_connection
-     *
-     * @return self
-     */
-    public function setPlatformConnection($platform_connection)
-    {
-        if (is_null($platform_connection)) {
-            throw new \InvalidArgumentException('non-nullable platform_connection cannot be null');
-        }
-        $this->container['platform_connection'] = $platform_connection;
+        $this->container['meta_error'] = $meta_error;
 
         return $this;
     }
