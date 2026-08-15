@@ -330,6 +330,9 @@ class SocialAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     public const PLATFORM_XADS = 'xads';
     public const PLATFORM_GOOGLEADS = 'googleads';
     public const PLATFORM_OPENAIADS = 'openaiads';
+    public const PLATFORM_SMS = 'sms';
+    public const PLATFORM_PHONE = 'phone';
+    public const PLATFORM_RCS = 'rcs';
 
     /**
      * Gets allowable values of the enum
@@ -362,6 +365,9 @@ class SocialAccount implements ModelInterface, ArrayAccess, \JsonSerializable
             self::PLATFORM_XADS,
             self::PLATFORM_GOOGLEADS,
             self::PLATFORM_OPENAIADS,
+            self::PLATFORM_SMS,
+            self::PLATFORM_PHONE,
+            self::PLATFORM_RCS,
         ];
     }
 
