@@ -529,7 +529,7 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets saves
      *
-     * @param int|null $saves Number of saves/bookmarks (Instagram, Pinterest)
+     * @param int|null $saves Number of saves/bookmarks (Instagram, Pinterest, X/Twitter)
      *
      * @return self
      */
