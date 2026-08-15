@@ -3524,7 +3524,7 @@ class MessagesApi
      * @param  string|null $platform Filter by platform (searchable platforms only) (optional)
      * @param  string|null $account_id Filter by specific social account ID (optional)
      * @param  int|null $limit Maximum number of conversations to return (optional, default to 20)
-     * @param  string|null $cursor Pagination cursor for next page (optional)
+     * @param  string|null $cursor Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchInboxConversations'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3548,7 +3548,7 @@ class MessagesApi
      * @param  string|null $platform Filter by platform (searchable platforms only) (optional)
      * @param  string|null $account_id Filter by specific social account ID (optional)
      * @param  int|null $limit Maximum number of conversations to return (optional, default to 20)
-     * @param  string|null $cursor Pagination cursor for next page (optional)
+     * @param  string|null $cursor Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchInboxConversations'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3653,7 +3653,7 @@ class MessagesApi
      * @param  string|null $platform Filter by platform (searchable platforms only) (optional)
      * @param  string|null $account_id Filter by specific social account ID (optional)
      * @param  int|null $limit Maximum number of conversations to return (optional, default to 20)
-     * @param  string|null $cursor Pagination cursor for next page (optional)
+     * @param  string|null $cursor Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchInboxConversations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3680,7 +3680,7 @@ class MessagesApi
      * @param  string|null $platform Filter by platform (searchable platforms only) (optional)
      * @param  string|null $account_id Filter by specific social account ID (optional)
      * @param  int|null $limit Maximum number of conversations to return (optional, default to 20)
-     * @param  string|null $cursor Pagination cursor for next page (optional)
+     * @param  string|null $cursor Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchInboxConversations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3736,7 +3736,7 @@ class MessagesApi
      * @param  string|null $platform Filter by platform (searchable platforms only) (optional)
      * @param  string|null $account_id Filter by specific social account ID (optional)
      * @param  int|null $limit Maximum number of conversations to return (optional, default to 20)
-     * @param  string|null $cursor Pagination cursor for next page (optional)
+     * @param  string|null $cursor Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchInboxConversations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

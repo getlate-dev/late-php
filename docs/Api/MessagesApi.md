@@ -704,7 +704,7 @@ $profile_id = 'profile_id_example'; // string | Filter by profile ID
 $platform = 'platform_example'; // string | Filter by platform (searchable platforms only)
 $account_id = 'account_id_example'; // string | Filter by specific social account ID
 $limit = 20; // int | Maximum number of conversations to return
-$cursor = 'cursor_example'; // string | Pagination cursor for next page
+$cursor = 'cursor_example'; // string | Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one.
 
 try {
     $result = $apiInstance->searchInboxConversations($query, $direction, $profile_id, $platform, $account_id, $limit, $cursor);
@@ -724,7 +724,7 @@ try {
 | **platform** | **string**| Filter by platform (searchable platforms only) | [optional] |
 | **account_id** | **string**| Filter by specific social account ID | [optional] |
 | **limit** | **int**| Maximum number of conversations to return | [optional] [default to 20] |
-| **cursor** | **string**| Pagination cursor for next page | [optional] |
+| **cursor** | **string**| Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one. | [optional] |
 
 ### Return type
 
