@@ -78,6 +78,7 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**deleteAccount**](docs/Api/AccountsApi.md#deleteaccount) | **DELETE** /v1/accounts/{accountId} | Disconnect account
 *AccountsApi* | [**getAccountHealth**](docs/Api/AccountsApi.md#getaccounthealth) | **GET** /v1/accounts/{accountId}/health | Check account health
 *AccountsApi* | [**getAllAccountsHealth**](docs/Api/AccountsApi.md#getallaccountshealth) | **GET** /v1/accounts/health | Check accounts health
+*AccountsApi* | [**getBlueskySettings**](docs/Api/AccountsApi.md#getblueskysettings) | **GET** /v1/accounts/{accountId}/bluesky-settings | Get Bluesky account settings
 *AccountsApi* | [**getFollowerStats**](docs/Api/AccountsApi.md#getfollowerstats) | **GET** /v1/accounts/follower-stats | Get follower stats
 *AccountsApi* | [**getInstagramFollowStatus**](docs/Api/AccountsApi.md#getinstagramfollowstatus) | **GET** /v1/accounts/{accountId}/follow-status/{userId} | Check whether an Instagram user follows the account
 *AccountsApi* | [**getSlackSettings**](docs/Api/AccountsApi.md#getslacksettings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings
@@ -85,6 +86,7 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**listAccounts**](docs/Api/AccountsApi.md#listaccounts) | **GET** /v1/accounts | List accounts
 *AccountsApi* | [**moveAccountToProfile**](docs/Api/AccountsApi.md#moveaccounttoprofile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile
 *AccountsApi* | [**updateAccount**](docs/Api/AccountsApi.md#updateaccount) | **PUT** /v1/accounts/{accountId} | Update account
+*AccountsApi* | [**updateBlueskySettings**](docs/Api/AccountsApi.md#updateblueskysettings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings
 *AccountsApi* | [**updateSlackSettings**](docs/Api/AccountsApi.md#updateslacksettings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings
 *AdAccountsApi* | [**createCustomConversion**](docs/Api/AdAccountsApi.md#createcustomconversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create or reuse a custom conversion
 *AdAccountsApi* | [**createHighDemandPeriod**](docs/Api/AdAccountsApi.md#createhighdemandperiod) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase
@@ -1104,6 +1106,7 @@ Class | Method | HTTP request | Description
 - [GetBestTimeToPost200Response](docs/Model/GetBestTimeToPost200Response.md)
 - [GetBestTimeToPost200ResponseSlotsInner](docs/Model/GetBestTimeToPost200ResponseSlotsInner.md)
 - [GetBestTimeToPost403Response](docs/Model/GetBestTimeToPost403Response.md)
+- [GetBlueskySettings200Response](docs/Model/GetBlueskySettings200Response.md)
 - [GetBroadcast200Response](docs/Model/GetBroadcast200Response.md)
 - [GetBroadcast200ResponseBroadcast](docs/Model/GetBroadcast200ResponseBroadcast.md)
 - [GetBroadcast200ResponseBroadcastMessage](docs/Model/GetBroadcast200ResponseBroadcastMessage.md)
@@ -2001,6 +2004,7 @@ Class | Method | HTTP request | Description
 - [UpdateAdTrackingTagsRequestUrlTagsInner](docs/Model/UpdateAdTrackingTagsRequestUrlTagsInner.md)
 - [UpdateBlogArticleRequest](docs/Model/UpdateBlogArticleRequest.md)
 - [UpdateBlogRequest](docs/Model/UpdateBlogRequest.md)
+- [UpdateBlueskySettingsRequest](docs/Model/UpdateBlueskySettingsRequest.md)
 - [UpdateBroadcast200Response](docs/Model/UpdateBroadcast200Response.md)
 - [UpdateBroadcast200ResponseBroadcast](docs/Model/UpdateBroadcast200ResponseBroadcast.md)
 - [UpdateBroadcastRequest](docs/Model/UpdateBroadcastRequest.md)

@@ -61,7 +61,8 @@ class GetPhoneNumberKycForm200Response implements ModelInterface, ArrayAccess, \
         'country' => 'string',
         'number_type' => 'string',
         'fields' => '\Zernio\Model\GetPhoneNumberKycForm200ResponseFieldsInner[]',
-        'reusable' => '\Zernio\Model\GetPhoneNumberKycForm200ResponseReusable'
+        'reusable' => '\Zernio\Model\GetPhoneNumberKycForm200ResponseReusable',
+        'pending_review' => 'bool'
     ];
 
     /**
@@ -75,7 +76,8 @@ class GetPhoneNumberKycForm200Response implements ModelInterface, ArrayAccess, \
         'country' => null,
         'number_type' => null,
         'fields' => null,
-        'reusable' => null
+        'reusable' => null,
+        'pending_review' => null
     ];
 
     /**
@@ -87,7 +89,8 @@ class GetPhoneNumberKycForm200Response implements ModelInterface, ArrayAccess, \
         'country' => false,
         'number_type' => false,
         'fields' => false,
-        'reusable' => false
+        'reusable' => false,
+        'pending_review' => false
     ];
 
     /**
@@ -179,7 +182,8 @@ class GetPhoneNumberKycForm200Response implements ModelInterface, ArrayAccess, \
         'country' => 'country',
         'number_type' => 'numberType',
         'fields' => 'fields',
-        'reusable' => 'reusable'
+        'reusable' => 'reusable',
+        'pending_review' => 'pendingReview'
     ];
 
     /**
@@ -191,7 +195,8 @@ class GetPhoneNumberKycForm200Response implements ModelInterface, ArrayAccess, \
         'country' => 'setCountry',
         'number_type' => 'setNumberType',
         'fields' => 'setFields',
-        'reusable' => 'setReusable'
+        'reusable' => 'setReusable',
+        'pending_review' => 'setPendingReview'
     ];
 
     /**
@@ -203,7 +208,8 @@ class GetPhoneNumberKycForm200Response implements ModelInterface, ArrayAccess, \
         'country' => 'getCountry',
         'number_type' => 'getNumberType',
         'fields' => 'getFields',
-        'reusable' => 'getReusable'
+        'reusable' => 'getReusable',
+        'pending_review' => 'getPendingReview'
     ];
 
     /**
@@ -267,6 +273,7 @@ class GetPhoneNumberKycForm200Response implements ModelInterface, ArrayAccess, \
         $this->setIfExists('number_type', $data ?? [], null);
         $this->setIfExists('fields', $data ?? [], null);
         $this->setIfExists('reusable', $data ?? [], null);
+        $this->setIfExists('pending_review', $data ?? [], null);
     }
 
     /**
@@ -415,6 +422,33 @@ class GetPhoneNumberKycForm200Response implements ModelInterface, ArrayAccess, \
             throw new \InvalidArgumentException('non-nullable reusable cannot be null');
         }
         $this->container['reusable'] = $reusable;
+
+        return $this;
+    }
+
+    /**
+     * Gets pending_review
+     *
+     * @return bool|null
+     */
+    public function getPendingReview()
+    {
+        return $this->container['pending_review'];
+    }
+
+    /**
+     * Sets pending_review
+     *
+     * @param bool|null $pending_review true when this account already has a number for this country in regulatory review (status pending_regulatory). Scope is the whole account across all profiles, and the country only (any number type), so it is not a per-end-client signal on a multi-tenant setup. Informational only: it never blocks a submission, and several same-country numbers may sit in review at once. For a per-end-client view, call GET /v1/phone-numbers with `profileId` and `status=pending_regulatory`; that view also lists numbers declined in the last 30 days.
+     *
+     * @return self
+     */
+    public function setPendingReview($pending_review)
+    {
+        if (is_null($pending_review)) {
+            throw new \InvalidArgumentException('non-nullable pending_review cannot be null');
+        }
+        $this->container['pending_review'] = $pending_review;
 
         return $this;
     }

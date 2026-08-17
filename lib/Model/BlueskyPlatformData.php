@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * BlueskyPlatformData Class Doc Comment
  *
  * @category Class
- * @description Bluesky post settings. Supports text posts with up to 4 images or a single video. threadItems creates a reply chain (Bluesky thread). Images exceeding 1MB are automatically compressed. Alt text supported via mediaItem properties.
+ * @description Bluesky post settings. Supports text posts with up to 4 images or a single video. threadItems creates a reply chain (Bluesky thread). Images exceeding 1MB are automatically compressed. Alt text supported via mediaItem properties. Use langs to tag post language for feed-generator filtering.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -59,6 +59,7 @@ class BlueskyPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
+        'langs' => 'string[]',
         'thread_items' => '\Zernio\Model\TwitterPlatformDataThreadItemsInner[]'
     ];
 
@@ -70,6 +71,7 @@ class BlueskyPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'langs' => null,
         'thread_items' => null
     ];
 
@@ -79,6 +81,7 @@ class BlueskyPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'langs' => false,
         'thread_items' => false
     ];
 
@@ -168,6 +171,7 @@ class BlueskyPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
+        'langs' => 'langs',
         'thread_items' => 'threadItems'
     ];
 
@@ -177,6 +181,7 @@ class BlueskyPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
+        'langs' => 'setLangs',
         'thread_items' => 'setThreadItems'
     ];
 
@@ -186,6 +191,7 @@ class BlueskyPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
+        'langs' => 'getLangs',
         'thread_items' => 'getThreadItems'
     ];
 
@@ -246,6 +252,7 @@ class BlueskyPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('langs', $data ?? [], null);
         $this->setIfExists('thread_items', $data ?? [], null);
     }
 
@@ -276,6 +283,14 @@ class BlueskyPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['langs']) && (count($this->container['langs']) > 3)) {
+            $invalidProperties[] = "invalid value for 'langs', number of items must be less than or equal to 3.";
+        }
+
+        if (!is_null($this->container['langs']) && (count($this->container['langs']) < 1)) {
+            $invalidProperties[] = "invalid value for 'langs', number of items must be greater than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -290,6 +305,40 @@ class BlueskyPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets langs
+     *
+     * @return string[]|null
+     */
+    public function getLangs()
+    {
+        return $this->container['langs'];
+    }
+
+    /**
+     * Sets langs
+     *
+     * @param string[]|null $langs Language(s) of the post text as 1-3 BCP-47 codes (e.g. \"pt\", \"en-US\"), written to the post record's langs field. Bluesky feed generators filter on this field, so posts without it never appear in language-scoped feeds. Can only be set at creation (Bluesky has no post editing). When threadItems is used, every item in the thread carries the same langs. When omitted, the account's default (set via PATCH /v1/accounts/{accountId}/bluesky-settings) applies; with no default either, the field is absent from the record.
+     *
+     * @return self
+     */
+    public function setLangs($langs)
+    {
+        if (is_null($langs)) {
+            throw new \InvalidArgumentException('non-nullable langs cannot be null');
+        }
+
+        if ((count($langs) > 3)) {
+            throw new \InvalidArgumentException('invalid value for $langs when calling BlueskyPlatformData., number of items must be less than or equal to 3.');
+        }
+        if ((count($langs) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $langs when calling BlueskyPlatformData., number of items must be greater than or equal to 1.');
+        }
+        $this->container['langs'] = $langs;
+
+        return $this;
+    }
 
     /**
      * Gets thread_items

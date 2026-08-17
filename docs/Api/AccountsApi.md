@@ -9,6 +9,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**deleteAccount()**](AccountsApi.md#deleteAccount) | **DELETE** /v1/accounts/{accountId} | Disconnect account |
 | [**getAccountHealth()**](AccountsApi.md#getAccountHealth) | **GET** /v1/accounts/{accountId}/health | Check account health |
 | [**getAllAccountsHealth()**](AccountsApi.md#getAllAccountsHealth) | **GET** /v1/accounts/health | Check accounts health |
+| [**getBlueskySettings()**](AccountsApi.md#getBlueskySettings) | **GET** /v1/accounts/{accountId}/bluesky-settings | Get Bluesky account settings |
 | [**getFollowerStats()**](AccountsApi.md#getFollowerStats) | **GET** /v1/accounts/follower-stats | Get follower stats |
 | [**getInstagramFollowStatus()**](AccountsApi.md#getInstagramFollowStatus) | **GET** /v1/accounts/{accountId}/follow-status/{userId} | Check whether an Instagram user follows the account |
 | [**getSlackSettings()**](AccountsApi.md#getSlackSettings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings |
@@ -16,6 +17,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**listAccounts()**](AccountsApi.md#listAccounts) | **GET** /v1/accounts | List accounts |
 | [**moveAccountToProfile()**](AccountsApi.md#moveAccountToProfile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile |
 | [**updateAccount()**](AccountsApi.md#updateAccount) | **PUT** /v1/accounts/{accountId} | Update account |
+| [**updateBlueskySettings()**](AccountsApi.md#updateBlueskySettings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings |
 | [**updateSlackSettings()**](AccountsApi.md#updateSlackSettings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings |
 
 
@@ -189,6 +191,66 @@ try {
 ### Return type
 
 [**\Zernio\Model\GetAllAccountsHealth200Response**](../Model/GetAllAccountsHealth200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getBlueskySettings()`
+
+```php
+getBlueskySettings($account_id): \Zernio\Model\GetBlueskySettings200Response
+```
+
+Get Bluesky account settings
+
+Returns the account's default post languages (defaultLangs), applied at publish time whenever a post's platformSpecificData.langs is absent. Null when no default is set.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string
+
+try {
+    $result = $apiInstance->getBlueskySettings($account_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->getBlueskySettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**|  | |
+
+### Return type
+
+[**\Zernio\Model\GetBlueskySettings200Response**](../Model/GetBlueskySettings200Response.md)
 
 ### Authorization
 
@@ -637,6 +699,67 @@ try {
 ### Return type
 
 [**\Zernio\Model\UpdateAccount200Response**](../Model/UpdateAccount200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateBlueskySettings()`
+
+```php
+updateBlueskySettings($account_id, $update_bluesky_settings_request)
+```
+
+Update Bluesky account settings
+
+Set or clear the account's default post languages. 1-3 BCP-47 codes (e.g. \"pt\", \"en-US\"), the same validation as per-post langs; explicit null clears the default. Per-post platformSpecificData.langs always overrides this default. Applies to posts published after the change; already-published posts cannot be retagged (Bluesky has no post edit).
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string
+$update_bluesky_settings_request = new \Zernio\Model\UpdateBlueskySettingsRequest(); // \Zernio\Model\UpdateBlueskySettingsRequest
+
+try {
+    $apiInstance->updateBlueskySettings($account_id, $update_bluesky_settings_request);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->updateBlueskySettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**|  | |
+| **update_bluesky_settings_request** | [**\Zernio\Model\UpdateBlueskySettingsRequest**](../Model/UpdateBlueskySettingsRequest.md)|  | |
+
+### Return type
+
+void (empty response body)
 
 ### Authorization
 

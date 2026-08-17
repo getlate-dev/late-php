@@ -69,6 +69,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'ended_at' => '\DateTime',
         'duration_seconds' => 'int',
         'end_reason' => 'string',
+        'hangup_cause' => 'string',
+        'sip_hangup_cause' => 'string',
         'recording_url' => 'string',
         'recording_expires_at' => '\DateTime',
         'billing' => '\Zernio\Model\WebhookPayloadCallEndedCallBilling'
@@ -93,6 +95,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'ended_at' => 'date-time',
         'duration_seconds' => null,
         'end_reason' => null,
+        'hangup_cause' => null,
+        'sip_hangup_cause' => null,
         'recording_url' => null,
         'recording_expires_at' => 'date-time',
         'billing' => null
@@ -115,6 +119,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'ended_at' => false,
         'duration_seconds' => false,
         'end_reason' => false,
+        'hangup_cause' => true,
+        'sip_hangup_cause' => true,
         'recording_url' => false,
         'recording_expires_at' => false,
         'billing' => false
@@ -217,6 +223,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'ended_at' => 'endedAt',
         'duration_seconds' => 'durationSeconds',
         'end_reason' => 'endReason',
+        'hangup_cause' => 'hangupCause',
+        'sip_hangup_cause' => 'sipHangupCause',
         'recording_url' => 'recordingUrl',
         'recording_expires_at' => 'recordingExpiresAt',
         'billing' => 'billing'
@@ -239,6 +247,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'ended_at' => 'setEndedAt',
         'duration_seconds' => 'setDurationSeconds',
         'end_reason' => 'setEndReason',
+        'hangup_cause' => 'setHangupCause',
+        'sip_hangup_cause' => 'setSipHangupCause',
         'recording_url' => 'setRecordingUrl',
         'recording_expires_at' => 'setRecordingExpiresAt',
         'billing' => 'setBilling'
@@ -261,6 +271,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'ended_at' => 'getEndedAt',
         'duration_seconds' => 'getDurationSeconds',
         'end_reason' => 'getEndReason',
+        'hangup_cause' => 'getHangupCause',
+        'sip_hangup_cause' => 'getSipHangupCause',
         'recording_url' => 'getRecordingUrl',
         'recording_expires_at' => 'getRecordingExpiresAt',
         'billing' => 'getBilling'
@@ -368,6 +380,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('ended_at', $data ?? [], null);
         $this->setIfExists('duration_seconds', $data ?? [], null);
         $this->setIfExists('end_reason', $data ?? [], null);
+        $this->setIfExists('hangup_cause', $data ?? [], null);
+        $this->setIfExists('sip_hangup_cause', $data ?? [], null);
         $this->setIfExists('recording_url', $data ?? [], null);
         $this->setIfExists('recording_expires_at', $data ?? [], null);
         $this->setIfExists('billing', $data ?? [], null);
@@ -753,6 +767,74 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
             );
         }
         $this->container['end_reason'] = $end_reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets hangup_cause
+     *
+     * @return string|null
+     */
+    public function getHangupCause()
+    {
+        return $this->container['hangup_cause'];
+    }
+
+    /**
+     * Sets hangup_cause
+     *
+     * @param string|null $hangup_cause Raw carrier hangup cause behind endReason (e.g. normal_clearing, call_rejected, not_found). Null when the carrier reported none.
+     *
+     * @return self
+     */
+    public function setHangupCause($hangup_cause)
+    {
+        if (is_null($hangup_cause)) {
+            array_push($this->openAPINullablesSetToNull, 'hangup_cause');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hangup_cause', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['hangup_cause'] = $hangup_cause;
+
+        return $this;
+    }
+
+    /**
+     * Gets sip_hangup_cause
+     *
+     * @return string|null
+     */
+    public function getSipHangupCause()
+    {
+        return $this->container['sip_hangup_cause'];
+    }
+
+    /**
+     * Sets sip_hangup_cause
+     *
+     * @param string|null $sip_hangup_cause SIP response code that ended the call when SIP-signalled (e.g. '403', '486', '603'). endReason collapses all three to 'rejected', so this is what separates a refused destination from a busy line. Null on non-SIP legs.
+     *
+     * @return self
+     */
+    public function setSipHangupCause($sip_hangup_cause)
+    {
+        if (is_null($sip_hangup_cause)) {
+            array_push($this->openAPINullablesSetToNull, 'sip_hangup_cause');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sip_hangup_cause', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['sip_hangup_cause'] = $sip_hangup_cause;
 
         return $this;
     }

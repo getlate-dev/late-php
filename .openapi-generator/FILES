@@ -545,6 +545,7 @@ docs/Model/GetAnalytics402Response.md
 docs/Model/GetBestTimeToPost200Response.md
 docs/Model/GetBestTimeToPost200ResponseSlotsInner.md
 docs/Model/GetBestTimeToPost403Response.md
+docs/Model/GetBlueskySettings200Response.md
 docs/Model/GetBroadcast200Response.md
 docs/Model/GetBroadcast200ResponseBroadcast.md
 docs/Model/GetBroadcast200ResponseBroadcastMessage.md
@@ -1442,6 +1443,7 @@ docs/Model/UpdateAdTrackingTagsRequestCreative.md
 docs/Model/UpdateAdTrackingTagsRequestUrlTagsInner.md
 docs/Model/UpdateBlogArticleRequest.md
 docs/Model/UpdateBlogRequest.md
+docs/Model/UpdateBlueskySettingsRequest.md
 docs/Model/UpdateBroadcast200Response.md
 docs/Model/UpdateBroadcast200ResponseBroadcast.md
 docs/Model/UpdateBroadcastRequest.md
@@ -2265,6 +2267,7 @@ lib/Model/GetAnalytics402Response.php
 lib/Model/GetBestTimeToPost200Response.php
 lib/Model/GetBestTimeToPost200ResponseSlotsInner.php
 lib/Model/GetBestTimeToPost403Response.php
+lib/Model/GetBlueskySettings200Response.php
 lib/Model/GetBroadcast200Response.php
 lib/Model/GetBroadcast200ResponseBroadcast.php
 lib/Model/GetBroadcast200ResponseBroadcastMessage.php
@@ -3163,6 +3166,7 @@ lib/Model/UpdateAdTrackingTagsRequestCreative.php
 lib/Model/UpdateAdTrackingTagsRequestUrlTagsInner.php
 lib/Model/UpdateBlogArticleRequest.php
 lib/Model/UpdateBlogRequest.php
+lib/Model/UpdateBlueskySettingsRequest.php
 lib/Model/UpdateBroadcast200Response.php
 lib/Model/UpdateBroadcast200ResponseBroadcast.php
 lib/Model/UpdateBroadcastRequest.php
@@ -3441,3 +3445,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/GetBlueskySettings200ResponseTest.php
+test/Model/UpdateBlueskySettingsRequestTest.php

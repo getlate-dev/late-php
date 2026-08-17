@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **ended_at** | **\DateTime** |  | [optional]
 **duration_seconds** | **int** |  | [optional]
 **end_reason** | **string** |  | [optional]
+**hangup_cause** | **string** | Raw carrier hangup cause behind endReason (e.g. normal_clearing, call_rejected, not_found). Null when the carrier reported none. | [optional]
+**sip_hangup_cause** | **string** | SIP response code that ended the call when SIP-signalled (e.g. &#39;403&#39;, &#39;486&#39;, &#39;603&#39;). endReason collapses all three to &#39;rejected&#39;, so this is what separates a refused destination from a busy line. Null on non-SIP legs. | [optional]
 **recording_url** | **string** |  | [optional]
 **recording_expires_at** | **\DateTime** |  | [optional]
 **billing** | [**\Zernio\Model\WebhookPayloadCallEndedCallBilling**](WebhookPayloadCallEndedCallBilling.md) |  | [optional]

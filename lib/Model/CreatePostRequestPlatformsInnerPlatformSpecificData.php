@@ -135,6 +135,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'native_video' => 'bool',
         'videogif' => 'bool',
         'video_poster_url' => 'string',
+        'langs' => 'string[]',
         'channel_id' => 'string',
         'embeds' => '\Zernio\Model\DiscordPlatformDataEmbedsInner[]',
         'crosspost' => 'bool',
@@ -236,6 +237,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'native_video' => null,
         'videogif' => null,
         'video_poster_url' => 'uri',
+        'langs' => null,
         'channel_id' => null,
         'embeds' => null,
         'crosspost' => null,
@@ -335,6 +337,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'native_video' => false,
         'videogif' => false,
         'video_poster_url' => false,
+        'langs' => false,
         'channel_id' => false,
         'embeds' => false,
         'crosspost' => false,
@@ -514,6 +517,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'native_video' => 'nativeVideo',
         'videogif' => 'videogif',
         'video_poster_url' => 'videoPosterUrl',
+        'langs' => 'langs',
         'channel_id' => 'channelId',
         'embeds' => 'embeds',
         'crosspost' => 'crosspost',
@@ -613,6 +617,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'native_video' => 'setNativeVideo',
         'videogif' => 'setVideogif',
         'video_poster_url' => 'setVideoPosterUrl',
+        'langs' => 'setLangs',
         'channel_id' => 'setChannelId',
         'embeds' => 'setEmbeds',
         'crosspost' => 'setCrosspost',
@@ -712,6 +717,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'native_video' => 'getNativeVideo',
         'videogif' => 'getVideogif',
         'video_poster_url' => 'getVideoPosterUrl',
+        'langs' => 'getLangs',
         'channel_id' => 'getChannelId',
         'embeds' => 'getEmbeds',
         'crosspost' => 'getCrosspost',
@@ -981,6 +987,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         $this->setIfExists('native_video', $data ?? [], true);
         $this->setIfExists('videogif', $data ?? [], null);
         $this->setIfExists('video_poster_url', $data ?? [], null);
+        $this->setIfExists('langs', $data ?? [], null);
         $this->setIfExists('channel_id', $data ?? [], null);
         $this->setIfExists('embeds', $data ?? [], null);
         $this->setIfExists('crosspost', $data ?? [], null);
@@ -1117,6 +1124,14 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
                 $this->container['parse_mode'],
                 implode("', '", $allowedValues)
             );
+        }
+
+        if (!is_null($this->container['langs']) && (count($this->container['langs']) > 3)) {
+            $invalidProperties[] = "invalid value for 'langs', number of items must be less than or equal to 3.";
+        }
+
+        if (!is_null($this->container['langs']) && (count($this->container['langs']) < 1)) {
+            $invalidProperties[] = "invalid value for 'langs', number of items must be greater than or equal to 1.";
         }
 
         if ($this->container['channel_id'] === null) {
@@ -3324,6 +3339,40 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
             throw new \InvalidArgumentException('non-nullable video_poster_url cannot be null');
         }
         $this->container['video_poster_url'] = $video_poster_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets langs
+     *
+     * @return string[]|null
+     */
+    public function getLangs()
+    {
+        return $this->container['langs'];
+    }
+
+    /**
+     * Sets langs
+     *
+     * @param string[]|null $langs Language(s) of the post text as 1-3 BCP-47 codes (e.g. \"pt\", \"en-US\"), written to the post record's langs field. Bluesky feed generators filter on this field, so posts without it never appear in language-scoped feeds. Can only be set at creation (Bluesky has no post editing). When threadItems is used, every item in the thread carries the same langs. When omitted, the account's default (set via PATCH /v1/accounts/{accountId}/bluesky-settings) applies; with no default either, the field is absent from the record.
+     *
+     * @return self
+     */
+    public function setLangs($langs)
+    {
+        if (is_null($langs)) {
+            throw new \InvalidArgumentException('non-nullable langs cannot be null');
+        }
+
+        if ((count($langs) > 3)) {
+            throw new \InvalidArgumentException('invalid value for $langs when calling CreatePostRequestPlatformsInnerPlatformSpecificData., number of items must be less than or equal to 3.');
+        }
+        if ((count($langs) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $langs when calling CreatePostRequestPlatformsInnerPlatformSpecificData., number of items must be greater than or equal to 1.');
+        }
+        $this->container['langs'] = $langs;
 
         return $this;
     }

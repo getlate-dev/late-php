@@ -1,6 +1,6 @@
 <?php
 /**
- * GetWhatsAppNumberKycForm200Response
+ * UpdateBlueskySettingsRequest
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * GetWhatsAppNumberKycForm200Response Class Doc Comment
+ * UpdateBlueskySettingsRequest Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class GetWhatsAppNumberKycForm200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateBlueskySettingsRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class GetWhatsAppNumberKycForm200Response implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'getWhatsAppNumberKycForm_200_response';
+    protected static $openAPIModelName = 'updateBlueskySettings_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,7 @@ class GetWhatsAppNumberKycForm200Response implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'country' => 'string',
-        'number_type' => 'string',
-        'fields' => '\Zernio\Model\GetWhatsAppNumberKycForm200ResponseFieldsInner[]',
-        'reusable' => '\Zernio\Model\GetPhoneNumberKycForm200ResponseReusable',
-        'pending_review' => 'bool'
+        'default_langs' => 'string[]'
     ];
 
     /**
@@ -73,11 +69,7 @@ class GetWhatsAppNumberKycForm200Response implements ModelInterface, ArrayAccess
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'country' => null,
-        'number_type' => null,
-        'fields' => null,
-        'reusable' => null,
-        'pending_review' => null
+        'default_langs' => null
     ];
 
     /**
@@ -86,11 +78,7 @@ class GetWhatsAppNumberKycForm200Response implements ModelInterface, ArrayAccess
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'country' => false,
-        'number_type' => false,
-        'fields' => false,
-        'reusable' => false,
-        'pending_review' => false
+        'default_langs' => true
     ];
 
     /**
@@ -179,11 +167,7 @@ class GetWhatsAppNumberKycForm200Response implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'country' => 'country',
-        'number_type' => 'numberType',
-        'fields' => 'fields',
-        'reusable' => 'reusable',
-        'pending_review' => 'pendingReview'
+        'default_langs' => 'defaultLangs'
     ];
 
     /**
@@ -192,11 +176,7 @@ class GetWhatsAppNumberKycForm200Response implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'country' => 'setCountry',
-        'number_type' => 'setNumberType',
-        'fields' => 'setFields',
-        'reusable' => 'setReusable',
-        'pending_review' => 'setPendingReview'
+        'default_langs' => 'setDefaultLangs'
     ];
 
     /**
@@ -205,11 +185,7 @@ class GetWhatsAppNumberKycForm200Response implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'country' => 'getCountry',
-        'number_type' => 'getNumberType',
-        'fields' => 'getFields',
-        'reusable' => 'getReusable',
-        'pending_review' => 'getPendingReview'
+        'default_langs' => 'getDefaultLangs'
     ];
 
     /**
@@ -269,11 +245,7 @@ class GetWhatsAppNumberKycForm200Response implements ModelInterface, ArrayAccess
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('country', $data ?? [], null);
-        $this->setIfExists('number_type', $data ?? [], null);
-        $this->setIfExists('fields', $data ?? [], null);
-        $this->setIfExists('reusable', $data ?? [], null);
-        $this->setIfExists('pending_review', $data ?? [], null);
+        $this->setIfExists('default_langs', $data ?? [], null);
     }
 
     /**
@@ -303,6 +275,17 @@ class GetWhatsAppNumberKycForm200Response implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['default_langs'] === null && !$this->isNullableSetToNull('default_langs')) {
+            $invalidProperties[] = "'default_langs' can't be null";
+        }
+        if ((count($this->container['default_langs']) > 3)) {
+            $invalidProperties[] = "invalid value for 'default_langs', number of items must be less than or equal to 3.";
+        }
+
+        if ((count($this->container['default_langs']) < 1)) {
+            $invalidProperties[] = "invalid value for 'default_langs', number of items must be greater than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -319,136 +302,42 @@ class GetWhatsAppNumberKycForm200Response implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets country
+     * Gets default_langs
      *
-     * @return string|null
+     * @return string[]|null
      */
-    public function getCountry()
+    public function getDefaultLangs()
     {
-        return $this->container['country'];
+        return $this->container['default_langs'];
     }
 
     /**
-     * Sets country
+     * Sets default_langs
      *
-     * @param string|null $country country
+     * @param string[]|null $default_langs default_langs
      *
      * @return self
      */
-    public function setCountry($country)
+    public function setDefaultLangs($default_langs)
     {
-        if (is_null($country)) {
-            throw new \InvalidArgumentException('non-nullable country cannot be null');
+        if (is_null($default_langs)) {
+            array_push($this->openAPINullablesSetToNull, 'default_langs');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('default_langs', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['country'] = $country;
 
-        return $this;
-    }
-
-    /**
-     * Gets number_type
-     *
-     * @return string|null
-     */
-    public function getNumberType()
-    {
-        return $this->container['number_type'];
-    }
-
-    /**
-     * Sets number_type
-     *
-     * @param string|null $number_type number_type
-     *
-     * @return self
-     */
-    public function setNumberType($number_type)
-    {
-        if (is_null($number_type)) {
-            throw new \InvalidArgumentException('non-nullable number_type cannot be null');
+        if (!is_null($default_langs) && (count($default_langs) > 3)) {
+            throw new \InvalidArgumentException('invalid value for $default_langs when calling UpdateBlueskySettingsRequest., number of items must be less than or equal to 3.');
         }
-        $this->container['number_type'] = $number_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets fields
-     *
-     * @return \Zernio\Model\GetWhatsAppNumberKycForm200ResponseFieldsInner[]|null
-     */
-    public function getFields()
-    {
-        return $this->container['fields'];
-    }
-
-    /**
-     * Sets fields
-     *
-     * @param \Zernio\Model\GetWhatsAppNumberKycForm200ResponseFieldsInner[]|null $fields fields
-     *
-     * @return self
-     */
-    public function setFields($fields)
-    {
-        if (is_null($fields)) {
-            throw new \InvalidArgumentException('non-nullable fields cannot be null');
+        if (!is_null($default_langs) && (count($default_langs) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $default_langs when calling UpdateBlueskySettingsRequest., number of items must be greater than or equal to 1.');
         }
-        $this->container['fields'] = $fields;
-
-        return $this;
-    }
-
-    /**
-     * Gets reusable
-     *
-     * @return \Zernio\Model\GetPhoneNumberKycForm200ResponseReusable|null
-     */
-    public function getReusable()
-    {
-        return $this->container['reusable'];
-    }
-
-    /**
-     * Sets reusable
-     *
-     * @param \Zernio\Model\GetPhoneNumberKycForm200ResponseReusable|null $reusable reusable
-     *
-     * @return self
-     */
-    public function setReusable($reusable)
-    {
-        if (is_null($reusable)) {
-            throw new \InvalidArgumentException('non-nullable reusable cannot be null');
-        }
-        $this->container['reusable'] = $reusable;
-
-        return $this;
-    }
-
-    /**
-     * Gets pending_review
-     *
-     * @return bool|null
-     */
-    public function getPendingReview()
-    {
-        return $this->container['pending_review'];
-    }
-
-    /**
-     * Sets pending_review
-     *
-     * @param bool|null $pending_review true when this account already has a number for this country in regulatory review (status pending_regulatory). Scope is the whole account across all profiles, and the country only (any number type), so it is not a per-end-client signal on a multi-tenant setup. Informational only: it never blocks a submission, and several same-country numbers may sit in review at once. For a per-end-client view, call GET /v1/phone-numbers with `profileId` and `status=pending_regulatory`; that view also lists numbers declined in the last 30 days.
-     *
-     * @return self
-     */
-    public function setPendingReview($pending_review)
-    {
-        if (is_null($pending_review)) {
-            throw new \InvalidArgumentException('non-nullable pending_review cannot be null');
-        }
-        $this->container['pending_review'] = $pending_review;
+        $this->container['default_langs'] = $default_langs;
 
         return $this;
     }

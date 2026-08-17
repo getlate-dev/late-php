@@ -297,8 +297,8 @@ class FacebookSettings implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['carousel_cards']) && (count($this->container['carousel_cards']) > 5)) {
-            $invalidProperties[] = "invalid value for 'carousel_cards', number of items must be less than or equal to 5.";
+        if (!is_null($this->container['carousel_cards']) && (count($this->container['carousel_cards']) > 10)) {
+            $invalidProperties[] = "invalid value for 'carousel_cards', number of items must be less than or equal to 10.";
         }
 
         if (!is_null($this->container['carousel_cards']) && (count($this->container['carousel_cards']) < 2)) {
@@ -374,8 +374,8 @@ class FacebookSettings implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable carousel_cards cannot be null');
         }
 
-        if ((count($carousel_cards) > 5)) {
-            throw new \InvalidArgumentException('invalid value for $carousel_cards when calling FacebookSettings., number of items must be less than or equal to 5.');
+        if ((count($carousel_cards) > 10)) {
+            throw new \InvalidArgumentException('invalid value for $carousel_cards when calling FacebookSettings., number of items must be less than or equal to 10.');
         }
         if ((count($carousel_cards) < 2)) {
             throw new \InvalidArgumentException('invalid length for $carousel_cards when calling FacebookSettings., number of items must be greater than or equal to 2.');

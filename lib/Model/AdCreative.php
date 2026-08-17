@@ -63,6 +63,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_url' => 'string',
         'video_id' => 'string',
         'video_url' => 'string',
+        'creative_id' => 'string',
         'object_type' => 'string',
         'object_story_id' => 'string',
         'effective_object_story_id' => 'string',
@@ -94,6 +95,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_url' => null,
         'video_id' => null,
         'video_url' => null,
+        'creative_id' => null,
         'object_type' => null,
         'object_story_id' => null,
         'effective_object_story_id' => null,
@@ -123,6 +125,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_url' => false,
         'video_id' => true,
         'video_url' => true,
+        'creative_id' => true,
         'object_type' => false,
         'object_story_id' => true,
         'effective_object_story_id' => true,
@@ -232,6 +235,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_url' => 'imageUrl',
         'video_id' => 'videoId',
         'video_url' => 'videoUrl',
+        'creative_id' => 'creativeId',
         'object_type' => 'objectType',
         'object_story_id' => 'objectStoryId',
         'effective_object_story_id' => 'effectiveObjectStoryId',
@@ -261,6 +265,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_url' => 'setImageUrl',
         'video_id' => 'setVideoId',
         'video_url' => 'setVideoUrl',
+        'creative_id' => 'setCreativeId',
         'object_type' => 'setObjectType',
         'object_story_id' => 'setObjectStoryId',
         'effective_object_story_id' => 'setEffectiveObjectStoryId',
@@ -290,6 +295,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_url' => 'getImageUrl',
         'video_id' => 'getVideoId',
         'video_url' => 'getVideoUrl',
+        'creative_id' => 'getCreativeId',
         'object_type' => 'getObjectType',
         'object_story_id' => 'getObjectStoryId',
         'effective_object_story_id' => 'getEffectiveObjectStoryId',
@@ -370,6 +376,7 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('image_url', $data ?? [], null);
         $this->setIfExists('video_id', $data ?? [], null);
         $this->setIfExists('video_url', $data ?? [], null);
+        $this->setIfExists('creative_id', $data ?? [], null);
         $this->setIfExists('object_type', $data ?? [], null);
         $this->setIfExists('object_story_id', $data ?? [], null);
         $this->setIfExists('effective_object_story_id', $data ?? [], null);
@@ -556,6 +563,40 @@ class AdCreative implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['video_url'] = $video_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets creative_id
+     *
+     * @return string|null
+     */
+    public function getCreativeId()
+    {
+        return $this->container['creative_id'];
+    }
+
+    /**
+     * Sets creative_id
+     *
+     * @param string|null $creative_id Meta ad creative id backing this ad. Reusable via existingCreativeId on POST /v1/ads/create.
+     *
+     * @return self
+     */
+    public function setCreativeId($creative_id)
+    {
+        if (is_null($creative_id)) {
+            array_push($this->openAPINullablesSetToNull, 'creative_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('creative_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['creative_id'] = $creative_id;
 
         return $this;
     }
