@@ -1775,13 +1775,13 @@ class MessagesApi
      * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
      * @param  string $account_id Social account ID (required)
      * @param  int|null $limit Number of messages to return per page. Default 100, max 100. (optional, default to 100)
-     * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response. (optional)
+     * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page. (optional)
      * @param  string|null $sort_order Order of returned messages. Default &#x60;asc&#x60; (oldest first, chat style). Twitter, Instagram, Telegram, WhatsApp and Reddit honor this order across cursor pages. For Facebook and Bluesky, only intra-page ordering is affected — pages always walk newest→oldest. See &#x60;sortOrderApplied&#x60; in the response. (optional, default to 'asc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxConversationMessages'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\GetInboxConversationMessages200Response|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\GetInboxConversationMessages200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
      */
     public function getInboxConversationMessages($conversation_id, $account_id, $limit = 100, $cursor = null, $sort_order = 'asc', string $contentType = self::contentTypes['getInboxConversationMessages'][0])
     {
@@ -1797,13 +1797,13 @@ class MessagesApi
      * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
      * @param  string $account_id Social account ID (required)
      * @param  int|null $limit Number of messages to return per page. Default 100, max 100. (optional, default to 100)
-     * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response. (optional)
+     * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page. (optional)
      * @param  string|null $sort_order Order of returned messages. Default &#x60;asc&#x60; (oldest first, chat style). Twitter, Instagram, Telegram, WhatsApp and Reddit honor this order across cursor pages. For Facebook and Bluesky, only intra-page ordering is affected — pages always walk newest→oldest. See &#x60;sortOrderApplied&#x60; in the response. (optional, default to 'asc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxConversationMessages'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\GetInboxConversationMessages200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\GetInboxConversationMessages200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function getInboxConversationMessagesWithHttpInfo($conversation_id, $account_id, $limit = 100, $cursor = null, $sort_order = 'asc', string $contentType = self::contentTypes['getInboxConversationMessages'][0])
     {
@@ -1836,6 +1836,12 @@ class MessagesApi
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\GetInboxConversationMessages200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -1877,6 +1883,14 @@ class MessagesApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1900,7 +1914,7 @@ class MessagesApi
      * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
      * @param  string $account_id Social account ID (required)
      * @param  int|null $limit Number of messages to return per page. Default 100, max 100. (optional, default to 100)
-     * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response. (optional)
+     * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page. (optional)
      * @param  string|null $sort_order Order of returned messages. Default &#x60;asc&#x60; (oldest first, chat style). Twitter, Instagram, Telegram, WhatsApp and Reddit honor this order across cursor pages. For Facebook and Bluesky, only intra-page ordering is affected — pages always walk newest→oldest. See &#x60;sortOrderApplied&#x60; in the response. (optional, default to 'asc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxConversationMessages'] to see the possible values for this operation
      *
@@ -1925,7 +1939,7 @@ class MessagesApi
      * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
      * @param  string $account_id Social account ID (required)
      * @param  int|null $limit Number of messages to return per page. Default 100, max 100. (optional, default to 100)
-     * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response. (optional)
+     * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page. (optional)
      * @param  string|null $sort_order Order of returned messages. Default &#x60;asc&#x60; (oldest first, chat style). Twitter, Instagram, Telegram, WhatsApp and Reddit honor this order across cursor pages. For Facebook and Bluesky, only intra-page ordering is affected — pages always walk newest→oldest. See &#x60;sortOrderApplied&#x60; in the response. (optional, default to 'asc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxConversationMessages'] to see the possible values for this operation
      *
@@ -1979,7 +1993,7 @@ class MessagesApi
      * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
      * @param  string $account_id Social account ID (required)
      * @param  int|null $limit Number of messages to return per page. Default 100, max 100. (optional, default to 100)
-     * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response. (optional)
+     * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page. (optional)
      * @param  string|null $sort_order Order of returned messages. Default &#x60;asc&#x60; (oldest first, chat style). Twitter, Instagram, Telegram, WhatsApp and Reddit honor this order across cursor pages. For Facebook and Bluesky, only intra-page ordering is affected — pages always walk newest→oldest. See &#x60;sortOrderApplied&#x60; in the response. (optional, default to 'asc')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxConversationMessages'] to see the possible values for this operation
      *
