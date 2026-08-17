@@ -501,7 +501,7 @@ class UpdateAdSetRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets status
      *
-     * @param string|null $status Omit if not toggling delivery state
+     * @param string|null $status Writes the ad set's own on/off switch (Meta: `configured_status`) on Meta and LinkedIn, whatever delivery status its ads report. Omit if not toggling delivery state.
      *
      * @return self
      */

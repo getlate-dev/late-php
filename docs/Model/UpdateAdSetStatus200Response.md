@@ -4,7 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**updated** | **int** |  | [optional]
-**skipped** | **int** |  | [optional]
+**status** | **string** | The status written to the ad set. Absent when nothing was written (see message). | [optional]
+**updated** | **int** | Number of ads whose own stored status changed too. 0 is normal on a resume whose ads are all awaiting the platform. | [optional]
+**skipped** | **int** | Number of ads whose own status was left as it was | [optional]
+**skipped_reasons** | **string[]** | Why each group of ads was skipped | [optional]
+**message** | **string** | Present only where the platform has no ad-set switch and no child ad was actionable | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

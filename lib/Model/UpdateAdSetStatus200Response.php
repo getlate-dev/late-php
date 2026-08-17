@@ -58,8 +58,11 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
+        'status' => 'string',
         'updated' => 'int',
-        'skipped' => 'int'
+        'skipped' => 'int',
+        'skipped_reasons' => 'string[]',
+        'message' => 'string'
     ];
 
     /**
@@ -70,8 +73,11 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'status' => null,
         'updated' => null,
-        'skipped' => null
+        'skipped' => null,
+        'skipped_reasons' => null,
+        'message' => null
     ];
 
     /**
@@ -80,8 +86,11 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'status' => false,
         'updated' => false,
-        'skipped' => false
+        'skipped' => false,
+        'skipped_reasons' => false,
+        'message' => false
     ];
 
     /**
@@ -170,8 +179,11 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
+        'status' => 'status',
         'updated' => 'updated',
-        'skipped' => 'skipped'
+        'skipped' => 'skipped',
+        'skipped_reasons' => 'skippedReasons',
+        'message' => 'message'
     ];
 
     /**
@@ -180,8 +192,11 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
+        'status' => 'setStatus',
         'updated' => 'setUpdated',
-        'skipped' => 'setSkipped'
+        'skipped' => 'setSkipped',
+        'skipped_reasons' => 'setSkippedReasons',
+        'message' => 'setMessage'
     ];
 
     /**
@@ -190,8 +205,11 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
+        'status' => 'getStatus',
         'updated' => 'getUpdated',
-        'skipped' => 'getSkipped'
+        'skipped' => 'getSkipped',
+        'skipped_reasons' => 'getSkippedReasons',
+        'message' => 'getMessage'
     ];
 
     /**
@@ -235,6 +253,21 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
         return self::$openAPIModelName;
     }
 
+    public const STATUS_ACTIVE = 'active';
+    public const STATUS_PAUSED = 'paused';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_ACTIVE,
+            self::STATUS_PAUSED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -251,8 +284,11 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('updated', $data ?? [], null);
         $this->setIfExists('skipped', $data ?? [], null);
+        $this->setIfExists('skipped_reasons', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
     }
 
     /**
@@ -282,6 +318,15 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -298,6 +343,43 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
 
 
     /**
+     * Gets status
+     *
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string|null $status The status written to the ad set. Absent when nothing was written (see message).
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'status', must be one of '%s'",
+                    $status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
      * Gets updated
      *
      * @return int|null
@@ -310,7 +392,7 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets updated
      *
-     * @param int|null $updated updated
+     * @param int|null $updated Number of ads whose own stored status changed too. 0 is normal on a resume whose ads are all awaiting the platform.
      *
      * @return self
      */
@@ -337,7 +419,7 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets skipped
      *
-     * @param int|null $skipped skipped
+     * @param int|null $skipped Number of ads whose own status was left as it was
      *
      * @return self
      */
@@ -347,6 +429,60 @@ class UpdateAdSetStatus200Response implements ModelInterface, ArrayAccess, \Json
             throw new \InvalidArgumentException('non-nullable skipped cannot be null');
         }
         $this->container['skipped'] = $skipped;
+
+        return $this;
+    }
+
+    /**
+     * Gets skipped_reasons
+     *
+     * @return string[]|null
+     */
+    public function getSkippedReasons()
+    {
+        return $this->container['skipped_reasons'];
+    }
+
+    /**
+     * Sets skipped_reasons
+     *
+     * @param string[]|null $skipped_reasons Why each group of ads was skipped
+     *
+     * @return self
+     */
+    public function setSkippedReasons($skipped_reasons)
+    {
+        if (is_null($skipped_reasons)) {
+            throw new \InvalidArgumentException('non-nullable skipped_reasons cannot be null');
+        }
+        $this->container['skipped_reasons'] = $skipped_reasons;
+
+        return $this;
+    }
+
+    /**
+     * Gets message
+     *
+     * @return string|null
+     */
+    public function getMessage()
+    {
+        return $this->container['message'];
+    }
+
+    /**
+     * Sets message
+     *
+     * @param string|null $message Present only where the platform has no ad-set switch and no child ad was actionable
+     *
+     * @return self
+     */
+    public function setMessage($message)
+    {
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        }
+        $this->container['message'] = $message;
 
         return $this;
     }

@@ -63,6 +63,8 @@ class UpdateAdSet200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'string',
         'status_updated' => 'int',
         'status_skipped' => 'int',
+        'status_skipped_reasons' => 'string[]',
+        'status_message' => 'string',
         'bid_strategy' => '\Zernio\Model\BidStrategy',
         'bid_amount' => 'float',
         'roas_average_floor' => 'float',
@@ -82,6 +84,8 @@ class UpdateAdSet200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => null,
         'status_updated' => null,
         'status_skipped' => null,
+        'status_skipped_reasons' => null,
+        'status_message' => null,
         'bid_strategy' => null,
         'bid_amount' => null,
         'roas_average_floor' => null,
@@ -99,6 +103,8 @@ class UpdateAdSet200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => false,
         'status_updated' => false,
         'status_skipped' => false,
+        'status_skipped_reasons' => false,
+        'status_message' => false,
         'bid_strategy' => false,
         'bid_amount' => true,
         'roas_average_floor' => true,
@@ -196,6 +202,8 @@ class UpdateAdSet200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'status',
         'status_updated' => 'statusUpdated',
         'status_skipped' => 'statusSkipped',
+        'status_skipped_reasons' => 'statusSkippedReasons',
+        'status_message' => 'statusMessage',
         'bid_strategy' => 'bidStrategy',
         'bid_amount' => 'bidAmount',
         'roas_average_floor' => 'roasAverageFloor',
@@ -213,6 +221,8 @@ class UpdateAdSet200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'setStatus',
         'status_updated' => 'setStatusUpdated',
         'status_skipped' => 'setStatusSkipped',
+        'status_skipped_reasons' => 'setStatusSkippedReasons',
+        'status_message' => 'setStatusMessage',
         'bid_strategy' => 'setBidStrategy',
         'bid_amount' => 'setBidAmount',
         'roas_average_floor' => 'setRoasAverageFloor',
@@ -230,6 +240,8 @@ class UpdateAdSet200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'getStatus',
         'status_updated' => 'getStatusUpdated',
         'status_skipped' => 'getStatusSkipped',
+        'status_skipped_reasons' => 'getStatusSkippedReasons',
+        'status_message' => 'getStatusMessage',
         'bid_strategy' => 'getBidStrategy',
         'bid_amount' => 'getBidAmount',
         'roas_average_floor' => 'getRoasAverageFloor',
@@ -326,6 +338,8 @@ class UpdateAdSet200Response implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('status_updated', $data ?? [], null);
         $this->setIfExists('status_skipped', $data ?? [], null);
+        $this->setIfExists('status_skipped_reasons', $data ?? [], null);
+        $this->setIfExists('status_message', $data ?? [], null);
         $this->setIfExists('bid_strategy', $data ?? [], null);
         $this->setIfExists('bid_amount', $data ?? [], null);
         $this->setIfExists('roas_average_floor', $data ?? [], null);
@@ -469,7 +483,7 @@ class UpdateAdSet200Response implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status The status written to the ad set. Absent when nothing was written (see statusMessage).
      *
      * @return self
      */
@@ -506,7 +520,7 @@ class UpdateAdSet200Response implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets status_updated
      *
-     * @param int|null $status_updated status_updated
+     * @param int|null $status_updated Number of ads whose own stored status changed alongside the ad set switch
      *
      * @return self
      */
@@ -533,7 +547,7 @@ class UpdateAdSet200Response implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets status_skipped
      *
-     * @param int|null $status_skipped status_skipped
+     * @param int|null $status_skipped Number of ads whose own status was left as it was
      *
      * @return self
      */
@@ -543,6 +557,60 @@ class UpdateAdSet200Response implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable status_skipped cannot be null');
         }
         $this->container['status_skipped'] = $status_skipped;
+
+        return $this;
+    }
+
+    /**
+     * Gets status_skipped_reasons
+     *
+     * @return string[]|null
+     */
+    public function getStatusSkippedReasons()
+    {
+        return $this->container['status_skipped_reasons'];
+    }
+
+    /**
+     * Sets status_skipped_reasons
+     *
+     * @param string[]|null $status_skipped_reasons Why each group of ads was skipped
+     *
+     * @return self
+     */
+    public function setStatusSkippedReasons($status_skipped_reasons)
+    {
+        if (is_null($status_skipped_reasons)) {
+            throw new \InvalidArgumentException('non-nullable status_skipped_reasons cannot be null');
+        }
+        $this->container['status_skipped_reasons'] = $status_skipped_reasons;
+
+        return $this;
+    }
+
+    /**
+     * Gets status_message
+     *
+     * @return string|null
+     */
+    public function getStatusMessage()
+    {
+        return $this->container['status_message'];
+    }
+
+    /**
+     * Sets status_message
+     *
+     * @param string|null $status_message Present only where the platform has no ad-set switch and no child ad was actionable; `status` is then absent because nothing was written
+     *
+     * @return self
+     */
+    public function setStatusMessage($status_message)
+    {
+        if (is_null($status_message)) {
+            throw new \InvalidArgumentException('non-nullable status_message cannot be null');
+        }
+        $this->container['status_message'] = $status_message;
 
         return $this;
     }

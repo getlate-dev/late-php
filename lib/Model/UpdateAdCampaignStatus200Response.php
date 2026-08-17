@@ -58,10 +58,10 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
       * @var string[]
       */
     protected static $openAPITypes = [
+        'status' => 'string',
         'updated' => 'int',
         'skipped' => 'int',
-        'skipped_reasons' => 'string[]',
-        'message' => 'string'
+        'skipped_reasons' => 'string[]'
     ];
 
     /**
@@ -72,10 +72,10 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'status' => null,
         'updated' => null,
         'skipped' => null,
-        'skipped_reasons' => null,
-        'message' => null
+        'skipped_reasons' => null
     ];
 
     /**
@@ -84,10 +84,10 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'status' => false,
         'updated' => false,
         'skipped' => false,
-        'skipped_reasons' => false,
-        'message' => false
+        'skipped_reasons' => false
     ];
 
     /**
@@ -176,10 +176,10 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $attributeMap = [
+        'status' => 'status',
         'updated' => 'updated',
         'skipped' => 'skipped',
-        'skipped_reasons' => 'skippedReasons',
-        'message' => 'message'
+        'skipped_reasons' => 'skippedReasons'
     ];
 
     /**
@@ -188,10 +188,10 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $setters = [
+        'status' => 'setStatus',
         'updated' => 'setUpdated',
         'skipped' => 'setSkipped',
-        'skipped_reasons' => 'setSkippedReasons',
-        'message' => 'setMessage'
+        'skipped_reasons' => 'setSkippedReasons'
     ];
 
     /**
@@ -200,10 +200,10 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $getters = [
+        'status' => 'getStatus',
         'updated' => 'getUpdated',
         'skipped' => 'getSkipped',
-        'skipped_reasons' => 'getSkippedReasons',
-        'message' => 'getMessage'
+        'skipped_reasons' => 'getSkippedReasons'
     ];
 
     /**
@@ -247,6 +247,21 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
         return self::$openAPIModelName;
     }
 
+    public const STATUS_ACTIVE = 'active';
+    public const STATUS_PAUSED = 'paused';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_ACTIVE,
+            self::STATUS_PAUSED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -263,10 +278,10 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('updated', $data ?? [], null);
         $this->setIfExists('skipped', $data ?? [], null);
         $this->setIfExists('skipped_reasons', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
     }
 
     /**
@@ -296,6 +311,15 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -312,6 +336,43 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
 
 
     /**
+     * Gets status
+     *
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string|null $status The status written to the campaign
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'status', must be one of '%s'",
+                    $status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
      * Gets updated
      *
      * @return int|null
@@ -324,7 +385,7 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
     /**
      * Sets updated
      *
-     * @param int|null $updated Number of ads updated
+     * @param int|null $updated Number of ads whose own stored status changed too. 0 is normal on a resume whose ads are all awaiting the platform.
      *
      * @return self
      */
@@ -351,7 +412,7 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
     /**
      * Sets skipped
      *
-     * @param int|null $skipped Number of ads skipped
+     * @param int|null $skipped Number of ads whose own status was left as it was
      *
      * @return self
      */
@@ -378,7 +439,7 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
     /**
      * Sets skipped_reasons
      *
-     * @param string[]|null $skipped_reasons skipped_reasons
+     * @param string[]|null $skipped_reasons Why each group of ads was skipped
      *
      * @return self
      */
@@ -388,33 +449,6 @@ class UpdateAdCampaignStatus200Response implements ModelInterface, ArrayAccess, 
             throw new \InvalidArgumentException('non-nullable skipped_reasons cannot be null');
         }
         $this->container['skipped_reasons'] = $skipped_reasons;
-
-        return $this;
-    }
-
-    /**
-     * Gets message
-     *
-     * @return string|null
-     */
-    public function getMessage()
-    {
-        return $this->container['message'];
-    }
-
-    /**
-     * Sets message
-     *
-     * @param string|null $message Human-readable summary (present when no ads were actionable)
-     *
-     * @return self
-     */
-    public function setMessage($message)
-    {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
-        }
-        $this->container['message'] = $message;
 
         return $this;
     }
