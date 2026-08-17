@@ -541,7 +541,7 @@ class LinkedInAggregateAnalyticsTotalResponseAnalytics implements ModelInterface
     /**
      * Sets engagement_rate
      *
-     * @param float|null $engagement_rate Overall engagement rate as percentage
+     * @param float|null $engagement_rate Overall engagement rate, as a percentage rounded to 2 decimals: (reactions + comments + shares + saves + sends) / impressions * 100. Clicks are not counted, and there is no fallback denominator, so this is 0 whenever impressions is 0. This is NOT the same formula as PostAnalytics.engagementRate on GET /v1/analytics.
      *
      * @return self
      */

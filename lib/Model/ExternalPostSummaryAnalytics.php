@@ -617,7 +617,7 @@ class ExternalPostSummaryAnalytics implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets engagement_rate
      *
-     * @param float|null $engagement_rate engagement_rate
+     * @param float|null $engagement_rate Percentage, rounded to 2 decimals. Same definition as PostAnalytics.engagementRate: (likes + comments + shares + saves) / (impressions or reach or views) * 100, where the denominator is the first of the three that is non-zero. Clicks and follows are never counted.
      *
      * @return self
      */
