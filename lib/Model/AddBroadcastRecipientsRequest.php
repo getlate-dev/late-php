@@ -321,7 +321,7 @@ class AddBroadcastRecipientsRequest implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets contact_ids
      *
-     * @param string[]|null $contact_ids Specific contact IDs to add
+     * @param string[]|null $contact_ids Specific contact IDs to add. Zernio contact ids (24-character hex), as returned by the list-contacts endpoint. A platform identifier such as a WhatsApp wa_id is rejected with 400; use phones for raw numbers.
      *
      * @return self
      */
