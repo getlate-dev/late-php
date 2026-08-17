@@ -107,10 +107,10 @@ class ListSequenceEnrollments200ResponseEnrollmentsInner implements ModelInterfa
         'contact_name' => false,
         'current_step_index' => false,
         'status' => false,
-        'exit_reason' => false,
-        'next_step_at' => false,
+        'exit_reason' => true,
+        'next_step_at' => true,
         'steps_sent' => false,
-        'last_step_sent_at' => false,
+        'last_step_sent_at' => true,
         'created_at' => false
     ];
 
@@ -614,7 +614,14 @@ class ListSequenceEnrollments200ResponseEnrollmentsInner implements ModelInterfa
     public function setExitReason($exit_reason)
     {
         if (is_null($exit_reason)) {
-            throw new \InvalidArgumentException('non-nullable exit_reason cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'exit_reason');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('exit_reason', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['exit_reason'] = $exit_reason;
 
@@ -641,7 +648,14 @@ class ListSequenceEnrollments200ResponseEnrollmentsInner implements ModelInterfa
     public function setNextStepAt($next_step_at)
     {
         if (is_null($next_step_at)) {
-            throw new \InvalidArgumentException('non-nullable next_step_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'next_step_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('next_step_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['next_step_at'] = $next_step_at;
 
@@ -695,7 +709,14 @@ class ListSequenceEnrollments200ResponseEnrollmentsInner implements ModelInterfa
     public function setLastStepSentAt($last_step_sent_at)
     {
         if (is_null($last_step_sent_at)) {
-            throw new \InvalidArgumentException('non-nullable last_step_sent_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'last_step_sent_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_step_sent_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['last_step_sent_at'] = $last_step_sent_at;
 

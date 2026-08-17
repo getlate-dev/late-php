@@ -108,7 +108,7 @@ class ListBroadcastRecipients200ResponseRecipientsInner implements ModelInterfac
         'contact_id' => false,
         'channel_id' => false,
         'platform_identifier' => false,
-        'contact_name' => false,
+        'contact_name' => true,
         'status' => false,
         'message_id' => false,
         'error' => false,
@@ -539,7 +539,14 @@ class ListBroadcastRecipients200ResponseRecipientsInner implements ModelInterfac
     public function setContactName($contact_name)
     {
         if (is_null($contact_name)) {
-            throw new \InvalidArgumentException('non-nullable contact_name cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'contact_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('contact_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['contact_name'] = $contact_name;
 
