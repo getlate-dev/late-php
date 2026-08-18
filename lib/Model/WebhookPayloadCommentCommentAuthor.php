@@ -62,6 +62,7 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
         'username' => 'string',
         'name' => 'string',
         'picture' => 'string',
+        'is_own_account' => 'bool',
         'instagram_profile' => '\Zernio\Model\WebhookPayloadCommentCommentAuthorInstagramProfile'
     ];
 
@@ -77,6 +78,7 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
         'username' => null,
         'name' => null,
         'picture' => null,
+        'is_own_account' => null,
         'instagram_profile' => null
     ];
 
@@ -90,6 +92,7 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
         'username' => false,
         'name' => false,
         'picture' => true,
+        'is_own_account' => false,
         'instagram_profile' => false
     ];
 
@@ -183,6 +186,7 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
         'username' => 'username',
         'name' => 'name',
         'picture' => 'picture',
+        'is_own_account' => 'isOwnAccount',
         'instagram_profile' => 'instagramProfile'
     ];
 
@@ -196,6 +200,7 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
         'username' => 'setUsername',
         'name' => 'setName',
         'picture' => 'setPicture',
+        'is_own_account' => 'setIsOwnAccount',
         'instagram_profile' => 'setInstagramProfile'
     ];
 
@@ -209,6 +214,7 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
         'username' => 'getUsername',
         'name' => 'getName',
         'picture' => 'getPicture',
+        'is_own_account' => 'getIsOwnAccount',
         'instagram_profile' => 'getInstagramProfile'
     ];
 
@@ -273,6 +279,7 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
         $this->setIfExists('username', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('picture', $data ?? [], null);
+        $this->setIfExists('is_own_account', $data ?? [], null);
         $this->setIfExists('instagram_profile', $data ?? [], null);
     }
 
@@ -432,6 +439,33 @@ class WebhookPayloadCommentCommentAuthor implements ModelInterface, ArrayAccess,
             }
         }
         $this->container['picture'] = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_own_account
+     *
+     * @return bool|null
+     */
+    public function getIsOwnAccount()
+    {
+        return $this->container['is_own_account'];
+    }
+
+    /**
+     * Sets is_own_account
+     *
+     * @param bool|null $is_own_account True when this comment was authored by the connected account itself (Meta re-delivers the account's own replies as comments events). Populated on the Instagram and Facebook realtime webhooks only; absent means not evaluated, never \"not the account\".
+     *
+     * @return self
+     */
+    public function setIsOwnAccount($is_own_account)
+    {
+        if (is_null($is_own_account)) {
+            throw new \InvalidArgumentException('non-nullable is_own_account cannot be null');
+        }
+        $this->container['is_own_account'] = $is_own_account;
 
         return $this;
     }
