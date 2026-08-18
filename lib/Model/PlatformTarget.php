@@ -327,6 +327,8 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
     public const ERROR_CATEGORY_ACCOUNT_ISSUE = 'account_issue';
     public const ERROR_CATEGORY_PLATFORM_REJECTED = 'platform_rejected';
     public const ERROR_CATEGORY_PLATFORM_ERROR = 'platform_error';
+    public const ERROR_CATEGORY_PLATFORM_RATE_LIMIT = 'platform_rate_limit';
+    public const ERROR_CATEGORY_QUOTA_EXHAUSTED = 'quota_exhausted';
     public const ERROR_CATEGORY_SYSTEM_ERROR = 'system_error';
     public const ERROR_CATEGORY_UNKNOWN = 'unknown';
     public const ERROR_SOURCE_USER = 'user';
@@ -360,6 +362,8 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
             self::ERROR_CATEGORY_ACCOUNT_ISSUE,
             self::ERROR_CATEGORY_PLATFORM_REJECTED,
             self::ERROR_CATEGORY_PLATFORM_ERROR,
+            self::ERROR_CATEGORY_PLATFORM_RATE_LIMIT,
+            self::ERROR_CATEGORY_QUOTA_EXHAUSTED,
             self::ERROR_CATEGORY_SYSTEM_ERROR,
             self::ERROR_CATEGORY_UNKNOWN,
         ];
@@ -889,7 +893,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets error_category
      *
-     * @param string|null $error_category Error category for programmatic handling: auth_expired (token expired/revoked), user_content (wrong format/too long), user_abuse (rate limits/spam), account_issue (config problems), platform_rejected (policy violation), platform_error (5xx/maintenance), system_error (Zernio infra), unknown
+     * @param string|null $error_category Error category for programmatic handling: auth_expired (token expired/revoked), user_content (wrong format/too long), user_abuse (rate limits/spam), account_issue (config problems), platform_rejected (policy violation), platform_error (5xx/maintenance), platform_rate_limit (platform throttling, retried automatically), quota_exhausted (shared daily API quota empty, resumes at the platform's reset), system_error (Zernio infra), unknown
      *
      * @return self
      */
