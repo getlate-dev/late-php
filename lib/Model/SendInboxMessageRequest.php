@@ -62,6 +62,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'message' => 'string',
         'attachment_url' => 'string',
         'category' => 'string',
+        'link_preview' => 'bool',
         'attachment_type' => 'string',
         'attachment_name' => 'string',
         'voice_note' => 'bool',
@@ -89,6 +90,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'message' => null,
         'attachment_url' => null,
         'category' => null,
+        'link_preview' => null,
         'attachment_type' => null,
         'attachment_name' => null,
         'voice_note' => null,
@@ -114,6 +116,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'message' => false,
         'attachment_url' => false,
         'category' => false,
+        'link_preview' => false,
         'attachment_type' => false,
         'attachment_name' => false,
         'voice_note' => false,
@@ -219,6 +222,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'message' => 'message',
         'attachment_url' => 'attachmentUrl',
         'category' => 'category',
+        'link_preview' => 'linkPreview',
         'attachment_type' => 'attachmentType',
         'attachment_name' => 'attachmentName',
         'voice_note' => 'voiceNote',
@@ -244,6 +248,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'message' => 'setMessage',
         'attachment_url' => 'setAttachmentUrl',
         'category' => 'setCategory',
+        'link_preview' => 'setLinkPreview',
         'attachment_type' => 'setAttachmentType',
         'attachment_name' => 'setAttachmentName',
         'voice_note' => 'setVoiceNote',
@@ -269,6 +274,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'message' => 'getMessage',
         'attachment_url' => 'getAttachmentUrl',
         'category' => 'getCategory',
+        'link_preview' => 'getLinkPreview',
         'attachment_type' => 'getAttachmentType',
         'attachment_name' => 'getAttachmentName',
         'voice_note' => 'getVoiceNote',
@@ -413,6 +419,7 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('message', $data ?? [], null);
         $this->setIfExists('attachment_url', $data ?? [], null);
         $this->setIfExists('category', $data ?? [], null);
+        $this->setIfExists('link_preview', $data ?? [], true);
         $this->setIfExists('attachment_type', $data ?? [], null);
         $this->setIfExists('attachment_name', $data ?? [], null);
         $this->setIfExists('voice_note', $data ?? [], null);
@@ -631,6 +638,33 @@ class SendInboxMessageRequest implements ModelInterface, ArrayAccess, \JsonSeria
             );
         }
         $this->container['category'] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Gets link_preview
+     *
+     * @return bool|null
+     */
+    public function getLinkPreview()
+    {
+        return $this->container['link_preview'];
+    }
+
+    /**
+     * Sets link_preview
+     *
+     * @param bool|null $link_preview WhatsApp only. Set false to send the message without a link-preview thumbnail for the first URL in the text. Defaults to true, which is how every WhatsApp text has been sent to date. Ignored on other platforms. Accepted on the JSON body only, not on multipart requests.
+     *
+     * @return self
+     */
+    public function setLinkPreview($link_preview)
+    {
+        if (is_null($link_preview)) {
+            throw new \InvalidArgumentException('non-nullable link_preview cannot be null');
+        }
+        $this->container['link_preview'] = $link_preview;
 
         return $this;
     }

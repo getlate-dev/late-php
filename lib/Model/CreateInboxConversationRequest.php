@@ -65,6 +65,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'skip_dm_check' => 'bool',
         'template_name' => 'string',
         'category' => 'string',
+        'link_preview' => 'bool',
         'template_language' => 'string',
         'template_params' => 'string[]',
         'header_media' => '\Zernio\Model\CreateInboxConversationRequestHeaderMedia'
@@ -85,6 +86,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'skip_dm_check' => null,
         'template_name' => null,
         'category' => null,
+        'link_preview' => null,
         'template_language' => null,
         'template_params' => null,
         'header_media' => null
@@ -103,6 +105,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'skip_dm_check' => false,
         'template_name' => false,
         'category' => false,
+        'link_preview' => false,
         'template_language' => false,
         'template_params' => false,
         'header_media' => false
@@ -201,6 +204,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'skip_dm_check' => 'skipDmCheck',
         'template_name' => 'templateName',
         'category' => 'category',
+        'link_preview' => 'linkPreview',
         'template_language' => 'templateLanguage',
         'template_params' => 'templateParams',
         'header_media' => 'headerMedia'
@@ -219,6 +223,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'skip_dm_check' => 'setSkipDmCheck',
         'template_name' => 'setTemplateName',
         'category' => 'setCategory',
+        'link_preview' => 'setLinkPreview',
         'template_language' => 'setTemplateLanguage',
         'template_params' => 'setTemplateParams',
         'header_media' => 'setHeaderMedia'
@@ -237,6 +242,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'skip_dm_check' => 'getSkipDmCheck',
         'template_name' => 'getTemplateName',
         'category' => 'getCategory',
+        'link_preview' => 'getLinkPreview',
         'template_language' => 'getTemplateLanguage',
         'template_params' => 'getTemplateParams',
         'header_media' => 'getHeaderMedia'
@@ -319,6 +325,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('skip_dm_check', $data ?? [], false);
         $this->setIfExists('template_name', $data ?? [], null);
         $this->setIfExists('category', $data ?? [], null);
+        $this->setIfExists('link_preview', $data ?? [], true);
         $this->setIfExists('template_language', $data ?? [], null);
         $this->setIfExists('template_params', $data ?? [], null);
         $this->setIfExists('header_media', $data ?? [], null);
@@ -573,6 +580,33 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
             );
         }
         $this->container['category'] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Gets link_preview
+     *
+     * @return bool|null
+     */
+    public function getLinkPreview()
+    {
+        return $this->container['link_preview'];
+    }
+
+    /**
+     * Sets link_preview
+     *
+     * @param bool|null $link_preview WhatsApp only. Set false to send the Direct Send (category: 'utility') text message without a link-preview thumbnail for the first URL in the text. Defaults to true, which is how every WhatsApp text has been sent to date. Does not apply to template sends. Accepted on the JSON body only, not on multipart requests.
+     *
+     * @return self
+     */
+    public function setLinkPreview($link_preview)
+    {
+        if (is_null($link_preview)) {
+            throw new \InvalidArgumentException('non-nullable link_preview cannot be null');
+        }
+        $this->container['link_preview'] = $link_preview;
 
         return $this;
     }
