@@ -76,7 +76,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'story_reply' => '\Zernio\Model\WebhookPayloadMessageMetadataStoryReply',
         'is_story_mention' => 'bool',
         'referral' => '\Zernio\Model\WebhookPayloadMessageMetadataReferral',
-        'unsupported' => '\Zernio\Model\WebhookPayloadMessageMetadataUnsupported'
+        'unsupported' => '\Zernio\Model\WebhookPayloadMessageMetadataUnsupported',
+        'no_renderable_content' => 'bool'
     ];
 
     /**
@@ -104,7 +105,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'story_reply' => null,
         'is_story_mention' => null,
         'referral' => null,
-        'unsupported' => null
+        'unsupported' => null,
+        'no_renderable_content' => null
     ];
 
     /**
@@ -130,7 +132,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'story_reply' => false,
         'is_story_mention' => false,
         'referral' => false,
-        'unsupported' => false
+        'unsupported' => false,
+        'no_renderable_content' => false
     ];
 
     /**
@@ -236,7 +239,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'story_reply' => 'storyReply',
         'is_story_mention' => 'isStoryMention',
         'referral' => 'referral',
-        'unsupported' => 'unsupported'
+        'unsupported' => 'unsupported',
+        'no_renderable_content' => 'noRenderableContent'
     ];
 
     /**
@@ -262,7 +266,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'story_reply' => 'setStoryReply',
         'is_story_mention' => 'setIsStoryMention',
         'referral' => 'setReferral',
-        'unsupported' => 'setUnsupported'
+        'unsupported' => 'setUnsupported',
+        'no_renderable_content' => 'setNoRenderableContent'
     ];
 
     /**
@@ -288,7 +293,8 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'story_reply' => 'getStoryReply',
         'is_story_mention' => 'getIsStoryMention',
         'referral' => 'getReferral',
-        'unsupported' => 'getUnsupported'
+        'unsupported' => 'getUnsupported',
+        'no_renderable_content' => 'getNoRenderableContent'
     ];
 
     /**
@@ -398,6 +404,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('is_story_mention', $data ?? [], null);
         $this->setIfExists('referral', $data ?? [], null);
         $this->setIfExists('unsupported', $data ?? [], null);
+        $this->setIfExists('no_renderable_content', $data ?? [], null);
     }
 
     /**
@@ -962,6 +969,33 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable unsupported cannot be null');
         }
         $this->container['unsupported'] = $unsupported;
+
+        return $this;
+    }
+
+    /**
+     * Gets no_renderable_content
+     *
+     * @return bool|null
+     */
+    public function getNoRenderableContent()
+    {
+        return $this->container['no_renderable_content'];
+    }
+
+    /**
+     * Sets no_renderable_content
+     *
+     * @param bool|null $no_renderable_content Instagram / Facebook Messenger only. Set when the message carries nothing an integrator can render (a `template` attachment with no text and no parseable content, or Meta's own `is_unsupported` flag). Sibling of `unsupported` above (WhatsApp only, carries Meta's error code/title/details): this field has no error envelope, just the boolean. Absence means \"not flagged\", never \"checked and renderable\".
+     *
+     * @return self
+     */
+    public function setNoRenderableContent($no_renderable_content)
+    {
+        if (is_null($no_renderable_content)) {
+            throw new \InvalidArgumentException('non-nullable no_renderable_content cannot be null');
+        }
+        $this->container['no_renderable_content'] = $no_renderable_content;
 
         return $this;
     }
