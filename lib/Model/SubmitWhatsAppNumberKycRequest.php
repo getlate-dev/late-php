@@ -459,7 +459,7 @@ class SubmitWhatsAppNumberKycRequest implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets submission_id
      *
-     * @param string|null $submission_id Idempotency token for this submission attempt. A retry/double-submit with the same token returns the same number; omit and each call creates a new number.
+     * @param string|null $submission_id Idempotency token for this submission attempt. Once the number has been ordered, a retry with the same token returns that same number instead of ordering another. A submission that fails before the number is ordered releases the token, so you can correct your details and re-submit with it. Omit it and every call provisions a new number.
      *
      * @return self
      */
