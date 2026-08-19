@@ -419,7 +419,7 @@ class YouTubeVideoRetentionResponseRetentionCurveInner implements ModelInterface
     /**
      * Sets started_watching
      *
-     * @param int|null $started_watching Viewers who started watching in this segment
+     * @param int|null $started_watching Viewers who started watching in this segment. 0 when YouTube has no segment-level data for the video.
      *
      * @return self
      */
@@ -446,7 +446,7 @@ class YouTubeVideoRetentionResponseRetentionCurveInner implements ModelInterface
     /**
      * Sets stopped_watching
      *
-     * @param int|null $stopped_watching Viewers who stopped watching in this segment
+     * @param int|null $stopped_watching Viewers who stopped watching in this segment. 0 when YouTube has no segment-level data for the video.
      *
      * @return self
      */

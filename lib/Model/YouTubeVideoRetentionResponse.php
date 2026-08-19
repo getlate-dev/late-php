@@ -610,7 +610,7 @@ class YouTubeVideoRetentionResponse implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets retention_curve
      *
-     * @param \Zernio\Model\YouTubeVideoRetentionResponseRetentionCurveInner[]|null $retention_curve Up to 100 points covering the video timeline, aggregated over the date range. Empty for videos with very few views.
+     * @param \Zernio\Model\YouTubeVideoRetentionResponseRetentionCurveInner[]|null $retention_curve Up to 100 points covering the video timeline, aggregated over the date range. Can be empty when YouTube has no retention data for the video in the given range.
      *
      * @return self
      */
