@@ -92,7 +92,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_specific_data' => null,
         'status' => null,
         'platform_post_id' => null,
-        'platform_post_url' => 'uri',
+        'platform_post_url' => null,
         'published_at' => 'date-time',
         'removed_from_platform_at' => 'date-time',
         'is_trial_reel' => null,
@@ -116,7 +116,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_specific_data' => false,
         'status' => false,
         'platform_post_id' => false,
-        'platform_post_url' => false,
+        'platform_post_url' => true,
         'published_at' => false,
         'removed_from_platform_at' => true,
         'is_trial_reel' => false,
@@ -714,14 +714,21 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets platform_post_url
      *
-     * @param string|null $platform_post_url Public URL of the published post. Included in the response for immediate posts; for scheduled posts, fetch via GET /v1/posts/{postId} after publish time.
+     * @param string|null $platform_post_url Public URL of the published post. Included in the response for immediate posts; for scheduled posts, fetch via GET /v1/posts/{postId} after publish time. Empty when the platform confirmed the publish without returning an id a permalink can be built from (TikTok returns a publish id for some uploads); the TikTok reconcile cron backfills it later.
      *
      * @return self
      */
     public function setPlatformPostUrl($platform_post_url)
     {
         if (is_null($platform_post_url)) {
-            throw new \InvalidArgumentException('non-nullable platform_post_url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'platform_post_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('platform_post_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['platform_post_url'] = $platform_post_url;
 

@@ -3615,7 +3615,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets bid_strategy
      *
-     * @param \Zernio\Model\BidStrategy|null $bid_strategy Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Meta bid strategy applied to the ad set.
+     * @param \Zernio\Model\BidStrategy|null $bid_strategy Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Meta bid strategy applied to the ad set.  OpenAI Ads: required on every ad group via this flat field, the only channel it supports (`platformSpecificData` is Meta/LinkedIn-only and returns 400 for OpenAI). No auto-bid option exists; send `LOWEST_COST_WITH_BID_CAP` or `COST_CAP` together with `bidAmount`, omitting it returns 400.
      *
      * @return self
      * @deprecated
