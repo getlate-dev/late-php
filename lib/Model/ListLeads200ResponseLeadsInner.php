@@ -407,7 +407,7 @@ class ListLeads200ResponseLeadsInner implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets leadgen_id
      *
-     * @param string|null $leadgen_id Meta lead id.
+     * @param string|null $leadgen_id Meta lead id. On LinkedIn, the leadFormResponse id.
      *
      * @return self
      */
@@ -590,7 +590,7 @@ class ListLeads200ResponseLeadsInner implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets campaign_id
      *
-     * @param string|null $campaign_id campaign_id
+     * @param string|null $campaign_id On LinkedIn, this is the LinkedIn Campaign id, which corresponds to platformAdSetId on GET /v1/ads (LinkedIn's Campaign Group is Zernio's campaign).
      *
      * @return self
      */
@@ -685,7 +685,7 @@ class ListLeads200ResponseLeadsInner implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets fields
      *
-     * @param array<string,string>|null $fields Question key → answer.
+     * @param array<string,string>|null $fields Question key → answer. On LinkedIn, the key is the lowercased predefinedField, else the question name, else the numeric questionId; multiple-choice values are option labels (unlike Meta, which returns the option key).
      *
      * @return self
      */
