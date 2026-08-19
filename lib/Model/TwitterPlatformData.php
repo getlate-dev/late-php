@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * TwitterPlatformData Class Doc Comment
  *
  * @category Class
- * @description X (Twitter) geo-restriction applies at the media level. Media in geo-restricted tweets will be hidden for users outside the specified countries; the tweet text itself remains visible globally. Requires media to be attached (ignored for text-only tweets).
+ * @description X-specific post options. The article field creates a long-form X Article and is mutually exclusive with tweet media and tweet-only options. Geo-restriction applies at the media level: media is hidden outside the specified countries while tweet text remains visible.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -59,6 +59,7 @@ class TwitterPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
+        'article' => '\Zernio\Model\XArticle',
         'reply_to_tweet_id' => 'string',
         'quote_tweet_id' => 'string',
         'reply_settings' => 'string',
@@ -79,6 +80,7 @@ class TwitterPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'article' => null,
         'reply_to_tweet_id' => null,
         'quote_tweet_id' => null,
         'reply_settings' => null,
@@ -97,6 +99,7 @@ class TwitterPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'article' => false,
         'reply_to_tweet_id' => false,
         'quote_tweet_id' => false,
         'reply_settings' => false,
@@ -195,6 +198,7 @@ class TwitterPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
+        'article' => 'article',
         'reply_to_tweet_id' => 'replyToTweetId',
         'quote_tweet_id' => 'quoteTweetId',
         'reply_settings' => 'replySettings',
@@ -213,6 +217,7 @@ class TwitterPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
+        'article' => 'setArticle',
         'reply_to_tweet_id' => 'setReplyToTweetId',
         'quote_tweet_id' => 'setQuoteTweetId',
         'reply_settings' => 'setReplySettings',
@@ -231,6 +236,7 @@ class TwitterPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
+        'article' => 'getArticle',
         'reply_to_tweet_id' => 'getReplyToTweetId',
         'quote_tweet_id' => 'getQuoteTweetId',
         'reply_settings' => 'getReplySettings',
@@ -319,6 +325,7 @@ class TwitterPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('article', $data ?? [], null);
         $this->setIfExists('reply_to_tweet_id', $data ?? [], null);
         $this->setIfExists('quote_tweet_id', $data ?? [], null);
         $this->setIfExists('reply_settings', $data ?? [], null);
@@ -381,6 +388,33 @@ class TwitterPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets article
+     *
+     * @return \Zernio\Model\XArticle|null
+     */
+    public function getArticle()
+    {
+        return $this->container['article'];
+    }
+
+    /**
+     * Sets article
+     *
+     * @param \Zernio\Model\XArticle|null $article article
+     *
+     * @return self
+     */
+    public function setArticle($article)
+    {
+        if (is_null($article)) {
+            throw new \InvalidArgumentException('non-nullable article cannot be null');
+        }
+        $this->container['article'] = $article;
+
+        return $this;
+    }
 
     /**
      * Gets reply_to_tweet_id

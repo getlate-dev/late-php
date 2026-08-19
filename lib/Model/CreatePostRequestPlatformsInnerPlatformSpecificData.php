@@ -58,6 +58,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
       * @var string[]
       */
     protected static $openAPITypes = [
+        'article' => '\Zernio\Model\XArticle',
         'reply_to_tweet_id' => 'string',
         'quote_tweet_id' => 'string',
         'reply_settings' => 'string',
@@ -160,6 +161,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'article' => null,
         'reply_to_tweet_id' => null,
         'quote_tweet_id' => null,
         'reply_settings' => null,
@@ -260,6 +262,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'article' => false,
         'reply_to_tweet_id' => false,
         'quote_tweet_id' => false,
         'reply_settings' => false,
@@ -440,6 +443,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
      * @var string[]
      */
     protected static $attributeMap = [
+        'article' => 'article',
         'reply_to_tweet_id' => 'replyToTweetId',
         'quote_tweet_id' => 'quoteTweetId',
         'reply_settings' => 'replySettings',
@@ -540,6 +544,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
      * @var string[]
      */
     protected static $setters = [
+        'article' => 'setArticle',
         'reply_to_tweet_id' => 'setReplyToTweetId',
         'quote_tweet_id' => 'setQuoteTweetId',
         'reply_settings' => 'setReplySettings',
@@ -640,6 +645,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
      * @var string[]
      */
     protected static $getters = [
+        'article' => 'getArticle',
         'reply_to_tweet_id' => 'getReplyToTweetId',
         'quote_tweet_id' => 'getQuoteTweetId',
         'reply_settings' => 'getReplySettings',
@@ -910,6 +916,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('article', $data ?? [], null);
         $this->setIfExists('reply_to_tweet_id', $data ?? [], null);
         $this->setIfExists('quote_tweet_id', $data ?? [], null);
         $this->setIfExists('reply_settings', $data ?? [], null);
@@ -1159,6 +1166,33 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets article
+     *
+     * @return \Zernio\Model\XArticle|null
+     */
+    public function getArticle()
+    {
+        return $this->container['article'];
+    }
+
+    /**
+     * Sets article
+     *
+     * @param \Zernio\Model\XArticle|null $article article
+     *
+     * @return self
+     */
+    public function setArticle($article)
+    {
+        if (is_null($article)) {
+            throw new \InvalidArgumentException('non-nullable article cannot be null');
+        }
+        $this->container['article'] = $article;
+
+        return $this;
+    }
 
     /**
      * Gets reply_to_tweet_id
