@@ -261,6 +261,7 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
 
     public const TYPE_IMAGE = 'image';
     public const TYPE_VIDEO = 'video';
+    public const MEDIA_STATUS_AVAILABLE = 'available';
     public const MEDIA_STATUS_UNAVAILABLE = 'unavailable';
     public const UNAVAILABLE_REASON_PLATFORM_WITHHELD = 'platform_withheld';
 
@@ -285,6 +286,7 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
     public function getMediaStatusAllowableValues()
     {
         return [
+            self::MEDIA_STATUS_AVAILABLE,
             self::MEDIA_STATUS_UNAVAILABLE,
         ];
     }
@@ -538,7 +540,7 @@ class AnalyticsSinglePostResponseMediaItemsInner implements ModelInterface, Arra
     /**
      * Sets media_status
      *
-     * @param string|null $media_status Present only when the media file could not be retrieved. Absent means the file is available at url.
+     * @param string|null $media_status unavailable means the media file could not be retrieved (url is null or, for LinkedIn videos, a cover image standing in for the file). available or absent means the file is available at url (older synced items omit the field).
      *
      * @return self
      */
