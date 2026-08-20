@@ -443,7 +443,7 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets url
      *
-     * @param string|null $url 'Direct URL to the media file. Null when the platform withholds it: check mediaStatus before downloading. Instagram omits the video file for Reels it flags as containing copyrighted material (its docs name audio as the usual cause), so type stays \"video\" while the file is permanently unreachable.'
+     * @param string|null $url 'Direct URL to the media file. Null when the platform withholds it: check mediaStatus before downloading. Instagram omits the video file for Reels it flags as containing copyrighted material (its docs name audio as the usual cause), so type stays \"video\" while the file is permanently unreachable. For LinkedIn videos where the platform returns no file, url falls back to the cover image and the item carries mediaStatus: unavailable.'
      *
      * @return self
      */
@@ -504,7 +504,7 @@ class ExternalPostMediaItem implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets media_status
      *
-     * @param string|null $media_status Present only when the media file could not be retrieved. Absent means the file is available at url.
+     * @param string|null $media_status 'Present only when the media file could not be retrieved (url is null or, for LinkedIn videos, a cover image standing in for the file). Absent means the file is available at url.'
      *
      * @return self
      */
