@@ -62,7 +62,8 @@ class ListPhoneNumbers200ResponseConnectedInner implements ModelInterface, Array
         'phone_number' => 'string',
         'display_name' => 'string',
         'profile_id' => 'string',
-        'connected_at' => '\DateTime'
+        'connected_at' => '\DateTime',
+        'calling_enabled' => 'bool'
     ];
 
     /**
@@ -77,7 +78,8 @@ class ListPhoneNumbers200ResponseConnectedInner implements ModelInterface, Array
         'phone_number' => null,
         'display_name' => null,
         'profile_id' => null,
-        'connected_at' => 'date-time'
+        'connected_at' => 'date-time',
+        'calling_enabled' => null
     ];
 
     /**
@@ -90,7 +92,8 @@ class ListPhoneNumbers200ResponseConnectedInner implements ModelInterface, Array
         'phone_number' => true,
         'display_name' => true,
         'profile_id' => true,
-        'connected_at' => true
+        'connected_at' => true,
+        'calling_enabled' => false
     ];
 
     /**
@@ -183,7 +186,8 @@ class ListPhoneNumbers200ResponseConnectedInner implements ModelInterface, Array
         'phone_number' => 'phoneNumber',
         'display_name' => 'displayName',
         'profile_id' => 'profileId',
-        'connected_at' => 'connectedAt'
+        'connected_at' => 'connectedAt',
+        'calling_enabled' => 'callingEnabled'
     ];
 
     /**
@@ -196,7 +200,8 @@ class ListPhoneNumbers200ResponseConnectedInner implements ModelInterface, Array
         'phone_number' => 'setPhoneNumber',
         'display_name' => 'setDisplayName',
         'profile_id' => 'setProfileId',
-        'connected_at' => 'setConnectedAt'
+        'connected_at' => 'setConnectedAt',
+        'calling_enabled' => 'setCallingEnabled'
     ];
 
     /**
@@ -209,7 +214,8 @@ class ListPhoneNumbers200ResponseConnectedInner implements ModelInterface, Array
         'phone_number' => 'getPhoneNumber',
         'display_name' => 'getDisplayName',
         'profile_id' => 'getProfileId',
-        'connected_at' => 'getConnectedAt'
+        'connected_at' => 'getConnectedAt',
+        'calling_enabled' => 'getCallingEnabled'
     ];
 
     /**
@@ -274,6 +280,7 @@ class ListPhoneNumbers200ResponseConnectedInner implements ModelInterface, Array
         $this->setIfExists('display_name', $data ?? [], null);
         $this->setIfExists('profile_id', $data ?? [], null);
         $this->setIfExists('connected_at', $data ?? [], null);
+        $this->setIfExists('calling_enabled', $data ?? [], null);
     }
 
     /**
@@ -477,6 +484,33 @@ class ListPhoneNumbers200ResponseConnectedInner implements ModelInterface, Array
             }
         }
         $this->container['connected_at'] = $connected_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets calling_enabled
+     *
+     * @return bool|null
+     */
+    public function getCallingEnabled()
+    {
+        return $this->container['calling_enabled'];
+    }
+
+    /**
+     * Sets calling_enabled
+     *
+     * @param bool|null $calling_enabled Whether WhatsApp Business Calling is enabled on this number.
+     *
+     * @return self
+     */
+    public function setCallingEnabled($calling_enabled)
+    {
+        if (is_null($calling_enabled)) {
+            throw new \InvalidArgumentException('non-nullable calling_enabled cannot be null');
+        }
+        $this->container['calling_enabled'] = $calling_enabled;
 
         return $this;
     }

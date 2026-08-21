@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **end_user_first_name** | **string** |  | [optional]
 **end_user_last_name** | **string** |  | [optional]
 **regulatory_decline_reason** | **string** | Reviewer rejection reason when status is regulatory_declined. | [optional]
+**calling_enabled** | **bool** | Whether WhatsApp Business Calling is enabled on this number (manage via /v1/whatsapp/phone-numbers/{id}/calling). | [optional]
 **created_at** | **\DateTime** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

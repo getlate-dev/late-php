@@ -74,6 +74,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'end_user_first_name' => 'string',
         'end_user_last_name' => 'string',
         'regulatory_decline_reason' => 'string',
+        'calling_enabled' => 'bool',
         'created_at' => '\DateTime'
     ];
 
@@ -101,6 +102,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'end_user_first_name' => null,
         'end_user_last_name' => null,
         'regulatory_decline_reason' => null,
+        'calling_enabled' => null,
         'created_at' => 'date-time'
     ];
 
@@ -126,6 +128,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'end_user_first_name' => true,
         'end_user_last_name' => true,
         'regulatory_decline_reason' => true,
+        'calling_enabled' => false,
         'created_at' => false
     ];
 
@@ -231,6 +234,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'end_user_first_name' => 'endUserFirstName',
         'end_user_last_name' => 'endUserLastName',
         'regulatory_decline_reason' => 'regulatoryDeclineReason',
+        'calling_enabled' => 'callingEnabled',
         'created_at' => 'createdAt'
     ];
 
@@ -256,6 +260,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'end_user_first_name' => 'setEndUserFirstName',
         'end_user_last_name' => 'setEndUserLastName',
         'regulatory_decline_reason' => 'setRegulatoryDeclineReason',
+        'calling_enabled' => 'setCallingEnabled',
         'created_at' => 'setCreatedAt'
     ];
 
@@ -281,6 +286,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'end_user_first_name' => 'getEndUserFirstName',
         'end_user_last_name' => 'getEndUserLastName',
         'regulatory_decline_reason' => 'getRegulatoryDeclineReason',
+        'calling_enabled' => 'getCallingEnabled',
         'created_at' => 'getCreatedAt'
     ];
 
@@ -386,6 +392,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         $this->setIfExists('end_user_first_name', $data ?? [], null);
         $this->setIfExists('end_user_last_name', $data ?? [], null);
         $this->setIfExists('regulatory_decline_reason', $data ?? [], null);
+        $this->setIfExists('calling_enabled', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
     }
 
@@ -920,6 +927,33 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
             }
         }
         $this->container['regulatory_decline_reason'] = $regulatory_decline_reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets calling_enabled
+     *
+     * @return bool|null
+     */
+    public function getCallingEnabled()
+    {
+        return $this->container['calling_enabled'];
+    }
+
+    /**
+     * Sets calling_enabled
+     *
+     * @param bool|null $calling_enabled Whether WhatsApp Business Calling is enabled on this number (manage via /v1/whatsapp/phone-numbers/{id}/calling).
+     *
+     * @return self
+     */
+    public function setCallingEnabled($calling_enabled)
+    {
+        if (is_null($calling_enabled)) {
+            throw new \InvalidArgumentException('non-nullable calling_enabled cannot be null');
+        }
+        $this->container['calling_enabled'] = $calling_enabled;
 
         return $this;
     }

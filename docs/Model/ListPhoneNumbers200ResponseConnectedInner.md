@@ -9,5 +9,6 @@ Name | Type | Description | Notes
 **display_name** | **string** |  | [optional]
 **profile_id** | **string** |  | [optional]
 **connected_at** | **\DateTime** |  | [optional]
+**calling_enabled** | **bool** | Whether WhatsApp Business Calling is enabled on this number. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
