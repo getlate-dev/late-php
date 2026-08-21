@@ -61,6 +61,7 @@ class BillingSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'billing_system' => 'string',
         'plan' => '\Zernio\Model\BillingSnapshotPlan',
+        'shopify_shop_domain' => 'string',
         'period' => '\Zernio\Model\BillingSnapshotPeriod',
         'balance' => '\Zernio\Model\BillingSnapshotBalance',
         'caps' => '\Zernio\Model\BillingSnapshotCaps',
@@ -78,6 +79,7 @@ class BillingSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'billing_system' => null,
         'plan' => null,
+        'shopify_shop_domain' => null,
         'period' => null,
         'balance' => null,
         'caps' => null,
@@ -93,6 +95,7 @@ class BillingSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'billing_system' => false,
         'plan' => false,
+        'shopify_shop_domain' => true,
         'period' => false,
         'balance' => false,
         'caps' => false,
@@ -188,6 +191,7 @@ class BillingSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'billing_system' => 'billingSystem',
         'plan' => 'plan',
+        'shopify_shop_domain' => 'shopifyShopDomain',
         'period' => 'period',
         'balance' => 'balance',
         'caps' => 'caps',
@@ -203,6 +207,7 @@ class BillingSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'billing_system' => 'setBillingSystem',
         'plan' => 'setPlan',
+        'shopify_shop_domain' => 'setShopifyShopDomain',
         'period' => 'setPeriod',
         'balance' => 'setBalance',
         'caps' => 'setCaps',
@@ -218,6 +223,7 @@ class BillingSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'billing_system' => 'getBillingSystem',
         'plan' => 'getPlan',
+        'shopify_shop_domain' => 'getShopifyShopDomain',
         'period' => 'getPeriod',
         'balance' => 'getBalance',
         'caps' => 'getCaps',
@@ -268,6 +274,7 @@ class BillingSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
 
     public const BILLING_SYSTEM_METRONOME = 'metronome';
     public const BILLING_SYSTEM_STRIPE = 'stripe';
+    public const BILLING_SYSTEM_SHOPIFY = 'shopify';
 
     /**
      * Gets allowable values of the enum
@@ -279,6 +286,7 @@ class BillingSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
         return [
             self::BILLING_SYSTEM_METRONOME,
             self::BILLING_SYSTEM_STRIPE,
+            self::BILLING_SYSTEM_SHOPIFY,
         ];
     }
 
@@ -299,6 +307,7 @@ class BillingSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('billing_system', $data ?? [], null);
         $this->setIfExists('plan', $data ?? [], null);
+        $this->setIfExists('shopify_shop_domain', $data ?? [], null);
         $this->setIfExists('period', $data ?? [], null);
         $this->setIfExists('balance', $data ?? [], null);
         $this->setIfExists('caps', $data ?? [], null);
@@ -417,6 +426,40 @@ class BillingSnapshot implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable plan cannot be null');
         }
         $this->container['plan'] = $plan;
+
+        return $this;
+    }
+
+    /**
+     * Gets shopify_shop_domain
+     *
+     * @return string|null
+     */
+    public function getShopifyShopDomain()
+    {
+        return $this->container['shopify_shop_domain'];
+    }
+
+    /**
+     * Sets shopify_shop_domain
+     *
+     * @param string|null $shopify_shop_domain myshopify.com domain owning the subscription; present only when billingSystem is shopify.
+     *
+     * @return self
+     */
+    public function setShopifyShopDomain($shopify_shop_domain)
+    {
+        if (is_null($shopify_shop_domain)) {
+            array_push($this->openAPINullablesSetToNull, 'shopify_shop_domain');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('shopify_shop_domain', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['shopify_shop_domain'] = $shopify_shop_domain;
 
         return $this;
     }

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **billing_system** | **string** |  | [optional]
 **plan** | [**\Zernio\Model\BillingSnapshotPlan**](BillingSnapshotPlan.md) |  | [optional]
+**shopify_shop_domain** | **string** | myshopify.com domain owning the subscription; present only when billingSystem is shopify. | [optional]
 **period** | [**\Zernio\Model\BillingSnapshotPeriod**](BillingSnapshotPeriod.md) |  | [optional]
 **balance** | [**\Zernio\Model\BillingSnapshotBalance**](BillingSnapshotBalance.md) |  | [optional]
 **caps** | [**\Zernio\Model\BillingSnapshotCaps**](BillingSnapshotCaps.md) |  | [optional]

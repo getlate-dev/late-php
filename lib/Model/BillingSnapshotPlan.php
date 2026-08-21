@@ -59,7 +59,8 @@ class BillingSnapshotPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static $openAPITypes = [
         'name' => 'string',
-        'is_usage_based' => 'bool'
+        'is_usage_based' => 'bool',
+        'is_paid' => 'bool'
     ];
 
     /**
@@ -71,7 +72,8 @@ class BillingSnapshotPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static $openAPIFormats = [
         'name' => null,
-        'is_usage_based' => null
+        'is_usage_based' => null,
+        'is_paid' => null
     ];
 
     /**
@@ -81,7 +83,8 @@ class BillingSnapshotPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'is_usage_based' => false
+        'is_usage_based' => false,
+        'is_paid' => false
     ];
 
     /**
@@ -171,7 +174,8 @@ class BillingSnapshotPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $attributeMap = [
         'name' => 'name',
-        'is_usage_based' => 'isUsageBased'
+        'is_usage_based' => 'isUsageBased',
+        'is_paid' => 'isPaid'
     ];
 
     /**
@@ -181,7 +185,8 @@ class BillingSnapshotPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $setters = [
         'name' => 'setName',
-        'is_usage_based' => 'setIsUsageBased'
+        'is_usage_based' => 'setIsUsageBased',
+        'is_paid' => 'setIsPaid'
     ];
 
     /**
@@ -191,7 +196,8 @@ class BillingSnapshotPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $getters = [
         'name' => 'getName',
-        'is_usage_based' => 'getIsUsageBased'
+        'is_usage_based' => 'getIsUsageBased',
+        'is_paid' => 'getIsPaid'
     ];
 
     /**
@@ -253,6 +259,7 @@ class BillingSnapshotPlan implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('is_usage_based', $data ?? [], null);
+        $this->setIfExists('is_paid', $data ?? [], null);
     }
 
     /**
@@ -347,6 +354,33 @@ class BillingSnapshotPlan implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable is_usage_based cannot be null');
         }
         $this->container['is_usage_based'] = $is_usage_based;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_paid
+     *
+     * @return bool|null
+     */
+    public function getIsPaid()
+    {
+        return $this->container['is_paid'];
+    }
+
+    /**
+     * Sets is_paid
+     *
+     * @param bool|null $is_paid True when the key belongs to an account with an active paid billing relationship (Stripe subscription, Metronome enrollment, or Shopify-managed billing).
+     *
+     * @return self
+     */
+    public function setIsPaid($is_paid)
+    {
+        if (is_null($is_paid)) {
+            throw new \InvalidArgumentException('non-nullable is_paid cannot be null');
+        }
+        $this->container['is_paid'] = $is_paid;
 
         return $this;
     }
