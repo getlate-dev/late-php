@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * CreateStandaloneAdRequestCreativesInnerVideo Class Doc Comment
  *
  * @category Class
- * @description Video creative for this entry. Mutually exclusive with &#x60;imageUrl&#x60;. thumbnailUrl is optional — when omitted, the poster is auto-generated from Meta&#39;s preferred video thumbnail.
+ * @description Video creative for this entry. Mutually exclusive with &#x60;imageUrl&#x60;. thumbnailUrl is optional: when omitted, the poster is auto-generated from Meta&#39;s preferred video thumbnail, and the request fails with a 502 platform_error (reason: video_thumbnail_unavailable) if Meta produces no candidate.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
