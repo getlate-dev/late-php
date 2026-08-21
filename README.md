@@ -236,6 +236,7 @@ Class | Method | HTTP request | Description
 *ConnectApi* | [**connectAds**](docs/Api/ConnectApi.md#connectads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform
 *ConnectApi* | [**connectBlueskyCredentials**](docs/Api/ConnectApi.md#connectblueskycredentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account
 *ConnectApi* | [**connectOpenAIAdsCredentials**](docs/Api/ConnectApi.md#connectopenaiadscredentials) | **POST** /v1/connect/openai-ads/credentials | Connect an OpenAI Ads account
+*ConnectApi* | [**connectShopifyWithToken**](docs/Api/ConnectApi.md#connectshopifywithtoken) | **POST** /v1/connect/shopify/token | Connect a Shopify store with a custom-app Admin token
 *ConnectApi* | [**connectWhatsAppCredentials**](docs/Api/ConnectApi.md#connectwhatsappcredentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials
 *ConnectApi* | [**createPinterestBoard**](docs/Api/ConnectApi.md#createpinterestboard) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board
 *ConnectApi* | [**getConnectUrl**](docs/Api/ConnectApi.md#getconnecturl) | **GET** /v1/connect/{platform} | Get OAuth connect URL
@@ -778,6 +779,9 @@ Class | Method | HTTP request | Description
 - [ConnectBlueskyCredentialsRequest](docs/Model/ConnectBlueskyCredentialsRequest.md)
 - [ConnectOpenAIAdsCredentials200Response](docs/Model/ConnectOpenAIAdsCredentials200Response.md)
 - [ConnectOpenAIAdsCredentialsRequest](docs/Model/ConnectOpenAIAdsCredentialsRequest.md)
+- [ConnectShopifyWithToken200Response](docs/Model/ConnectShopifyWithToken200Response.md)
+- [ConnectShopifyWithToken200ResponseAccount](docs/Model/ConnectShopifyWithToken200ResponseAccount.md)
+- [ConnectShopifyWithTokenRequest](docs/Model/ConnectShopifyWithTokenRequest.md)
 - [ConnectWhatsAppCredentials200Response](docs/Model/ConnectWhatsAppCredentials200Response.md)
 - [ConnectWhatsAppCredentials200ResponseAccount](docs/Model/ConnectWhatsAppCredentials200ResponseAccount.md)
 - [ConnectWhatsAppCredentialsRequest](docs/Model/ConnectWhatsAppCredentialsRequest.md)

@@ -217,6 +217,9 @@ docs/Model/ConnectBlueskyCredentials200Response.md
 docs/Model/ConnectBlueskyCredentialsRequest.md
 docs/Model/ConnectOpenAIAdsCredentials200Response.md
 docs/Model/ConnectOpenAIAdsCredentialsRequest.md
+docs/Model/ConnectShopifyWithToken200Response.md
+docs/Model/ConnectShopifyWithToken200ResponseAccount.md
+docs/Model/ConnectShopifyWithTokenRequest.md
 docs/Model/ConnectWhatsAppCredentials200Response.md
 docs/Model/ConnectWhatsAppCredentials200ResponseAccount.md
 docs/Model/ConnectWhatsAppCredentialsRequest.md
@@ -1965,6 +1968,9 @@ lib/Model/ConnectBlueskyCredentials200Response.php
 lib/Model/ConnectBlueskyCredentialsRequest.php
 lib/Model/ConnectOpenAIAdsCredentials200Response.php
 lib/Model/ConnectOpenAIAdsCredentialsRequest.php
+lib/Model/ConnectShopifyWithToken200Response.php
+lib/Model/ConnectShopifyWithToken200ResponseAccount.php
+lib/Model/ConnectShopifyWithTokenRequest.php
 lib/Model/ConnectWhatsAppCredentials200Response.php
 lib/Model/ConnectWhatsAppCredentials200ResponseAccount.php
 lib/Model/ConnectWhatsAppCredentialsRequest.php
@@ -3497,3 +3503,6 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/ConnectShopifyWithToken200ResponseAccountTest.php
+test/Model/ConnectShopifyWithToken200ResponseTest.php
+test/Model/ConnectShopifyWithTokenRequestTest.php
