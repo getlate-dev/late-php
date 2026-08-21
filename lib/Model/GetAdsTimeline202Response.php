@@ -235,19 +235,6 @@ class GetAdsTimeline202Response implements ModelInterface, ArrayAccess, \JsonSer
         return self::$openAPIModelName;
     }
 
-    public const BACKFILL_PENDING_TRUE = 'true';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getBackfillPendingAllowableValues()
-    {
-        return [
-            self::BACKFILL_PENDING_TRUE,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -298,15 +285,6 @@ class GetAdsTimeline202Response implements ModelInterface, ArrayAccess, \JsonSer
         if ($this->container['backfill_pending'] === null) {
             $invalidProperties[] = "'backfill_pending' can't be null";
         }
-        $allowedValues = $this->getBackfillPendingAllowableValues();
-        if (!is_null($this->container['backfill_pending']) && !in_array($this->container['backfill_pending'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'backfill_pending', must be one of '%s'",
-                $this->container['backfill_pending'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -335,7 +313,7 @@ class GetAdsTimeline202Response implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets backfill_pending
      *
-     * @param bool $backfill_pending backfill_pending
+     * @param bool $backfill_pending Always true on this response. Part of the requested range is still being backfilled; retry until the request returns 200.
      *
      * @return self
      */
@@ -343,16 +321,6 @@ class GetAdsTimeline202Response implements ModelInterface, ArrayAccess, \JsonSer
     {
         if (is_null($backfill_pending)) {
             throw new \InvalidArgumentException('non-nullable backfill_pending cannot be null');
-        }
-        $allowedValues = $this->getBackfillPendingAllowableValues();
-        if (!in_array($backfill_pending, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'backfill_pending', must be one of '%s'",
-                    $backfill_pending,
-                    implode("', '", $allowedValues)
-                )
-            );
         }
         $this->container['backfill_pending'] = $backfill_pending;
 
