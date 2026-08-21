@@ -662,7 +662,10 @@ class WebhooksApi
                 'Missing the required parameter $id when calling deleteWebhookSettings'
             );
         }
-
+        if (!preg_match("/^[a-fA-F0-9]{24}$/", $id)) {
+            throw new \InvalidArgumentException("invalid value for \"id\" when calling WebhooksApi.deleteWebhookSettings, must conform to the pattern /^[a-fA-F0-9]{24}$/.");
+        }
+        
 
         $resourcePath = '/v1/webhooks/settings';
         $formParams = [];
