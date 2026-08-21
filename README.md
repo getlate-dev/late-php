@@ -551,6 +551,7 @@ Class | Method | HTTP request | Description
 *WhatsAppApi* | [**getWhatsAppTemplates**](docs/Api/WhatsAppApi.md#getwhatsapptemplates) | **GET** /v1/whatsapp/templates | List templates
 *WhatsAppApi* | [**getWhatsappBusinessUsername**](docs/Api/WhatsAppApi.md#getwhatsappbusinessusername) | **GET** /v1/whatsapp/business-profile/username | Get business username
 *WhatsAppApi* | [**getWhatsappBusinessUsernameSuggestions**](docs/Api/WhatsAppApi.md#getwhatsappbusinessusernamesuggestions) | **GET** /v1/whatsapp/business-profile/username/suggestions | Get username suggestions
+*WhatsAppApi* | [**listWhatsAppAccountEvents**](docs/Api/WhatsAppApi.md#listwhatsappaccountevents) | **GET** /v1/whatsapp/account-events | List account notifications
 *WhatsAppApi* | [**listWhatsAppConversions**](docs/Api/WhatsAppApi.md#listwhatsappconversions) | **GET** /v1/whatsapp/conversions | List conversion events
 *WhatsAppApi* | [**listWhatsAppGroupChats**](docs/Api/WhatsAppApi.md#listwhatsappgroupchats) | **GET** /v1/whatsapp/wa-groups | List active groups
 *WhatsAppApi* | [**listWhatsAppGroupJoinRequests**](docs/Api/WhatsAppApi.md#listwhatsappgroupjoinrequests) | **GET** /v1/whatsapp/wa-groups/{groupId}/join-requests | List join requests
@@ -1615,6 +1616,8 @@ Class | Method | HTTP request | Description
 - [ListValueRuleSets200Response](docs/Model/ListValueRuleSets200Response.md)
 - [ListValueRuleSets200ResponsePaging](docs/Model/ListValueRuleSets200ResponsePaging.md)
 - [ListVoiceCalls200Response](docs/Model/ListVoiceCalls200Response.md)
+- [ListWhatsAppAccountEvents200Response](docs/Model/ListWhatsAppAccountEvents200Response.md)
+- [ListWhatsAppAccountEvents200ResponseEventsInner](docs/Model/ListWhatsAppAccountEvents200ResponseEventsInner.md)
 - [ListWhatsAppCalls200Response](docs/Model/ListWhatsAppCalls200Response.md)
 - [ListWhatsAppCalls200ResponseCallsInner](docs/Model/ListWhatsAppCalls200ResponseCallsInner.md)
 - [ListWhatsAppCalls200ResponseCallsInnerBilling](docs/Model/ListWhatsAppCalls200ResponseCallsInnerBilling.md)

@@ -1053,6 +1053,8 @@ docs/Model/ListUsers200ResponseUsersInner.md
 docs/Model/ListValueRuleSets200Response.md
 docs/Model/ListValueRuleSets200ResponsePaging.md
 docs/Model/ListVoiceCalls200Response.md
+docs/Model/ListWhatsAppAccountEvents200Response.md
+docs/Model/ListWhatsAppAccountEvents200ResponseEventsInner.md
 docs/Model/ListWhatsAppCalls200Response.md
 docs/Model/ListWhatsAppCalls200ResponseCallsInner.md
 docs/Model/ListWhatsAppCalls200ResponseCallsInnerBilling.md
@@ -2804,6 +2806,8 @@ lib/Model/ListUsers200ResponseUsersInner.php
 lib/Model/ListValueRuleSets200Response.php
 lib/Model/ListValueRuleSets200ResponsePaging.php
 lib/Model/ListVoiceCalls200Response.php
+lib/Model/ListWhatsAppAccountEvents200Response.php
+lib/Model/ListWhatsAppAccountEvents200ResponseEventsInner.php
 lib/Model/ListWhatsAppCalls200Response.php
 lib/Model/ListWhatsAppCalls200ResponseCallsInner.php
 lib/Model/ListWhatsAppCalls200ResponseCallsInnerBilling.php
@@ -3503,3 +3507,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/ListWhatsAppAccountEvents200ResponseEventsInnerTest.php
+test/Model/ListWhatsAppAccountEvents200ResponseTest.php
