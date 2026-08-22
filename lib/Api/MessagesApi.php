@@ -505,7 +505,7 @@ class MessagesApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\CreateInboxConversation201Response|\Zernio\Model\CreateInboxConversation400Response|\Zernio\Model\InlineObject|\Zernio\Model\CreateInboxConversation422Response
+     * @return \Zernio\Model\CreateInboxConversation201Response|\Zernio\Model\CreateInboxConversation400Response|\Zernio\Model\InlineObject|\Zernio\Model\CreateInboxConversation404Response|\Zernio\Model\CreateInboxConversation422Response|\Zernio\Model\CreateInboxConversation429Response
      */
     public function createInboxConversation($create_inbox_conversation_request, string $contentType = self::contentTypes['createInboxConversation'][0])
     {
@@ -523,7 +523,7 @@ class MessagesApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\CreateInboxConversation201Response|\Zernio\Model\CreateInboxConversation400Response|\Zernio\Model\InlineObject|\Zernio\Model\CreateInboxConversation422Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\CreateInboxConversation201Response|\Zernio\Model\CreateInboxConversation400Response|\Zernio\Model\InlineObject|\Zernio\Model\CreateInboxConversation404Response|\Zernio\Model\CreateInboxConversation422Response|\Zernio\Model\CreateInboxConversation429Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function createInboxConversationWithHttpInfo($create_inbox_conversation_request, string $contentType = self::contentTypes['createInboxConversation'][0])
     {
@@ -571,9 +571,21 @@ class MessagesApi
                         $request,
                         $response,
                     );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\CreateInboxConversation404Response',
+                        $request,
+                        $response,
+                    );
                 case 422:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\CreateInboxConversation422Response',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\CreateInboxConversation429Response',
                         $request,
                         $response,
                     );
@@ -625,10 +637,26 @@ class MessagesApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\CreateInboxConversation404Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\CreateInboxConversation422Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\CreateInboxConversation429Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
