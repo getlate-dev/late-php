@@ -945,7 +945,7 @@ class UploadedOrDerivedAudience implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets companies
      *
-     * @param \Zernio\Model\UploadedOrDerivedAudienceCompaniesInner[]|null $companies Required for company_list audiences (LinkedIn only): plain-text company rows for account targeting. Each row needs at least one identifier. LinkedIn recommends 1,000+ companies for a usable match rate and takes up to 48h to process the list.
+     * @param \Zernio\Model\UploadedOrDerivedAudienceCompaniesInner[]|null $companies Required for company_list audiences (LinkedIn only): plain-text company rows for account targeting. Each row needs at least one identifier. Not hashed, LinkedIn matches these against its own company graph. LinkedIn recommends 1,000+ companies for a usable match rate and takes up to 48h to process the list. Replace the list later with POST /v1/ads/audiences/{audienceId}/companies.
      *
      * @return self
      */

@@ -1186,6 +1186,9 @@ docs/Model/RemoveBookmark200Response.md
 docs/Model/RemoveConversionAssociations200Response.md
 docs/Model/RemoveDiscordMemberRole200Response.md
 docs/Model/RemoveWhatsAppGroupParticipantsRequest.md
+docs/Model/ReplaceAdAudienceCompanies200Response.md
+docs/Model/ReplaceAdAudienceCompaniesRequest.md
+docs/Model/ReplaceAdAudienceCompaniesRequestCompaniesInner.md
 docs/Model/ReplyToGoogleBusinessReview200Response.md
 docs/Model/ReplyToGoogleBusinessReviewRequest.md
 docs/Model/ReplyToInboxPost200Response.md
@@ -2943,6 +2946,9 @@ lib/Model/RemoveBookmark200Response.php
 lib/Model/RemoveConversionAssociations200Response.php
 lib/Model/RemoveDiscordMemberRole200Response.php
 lib/Model/RemoveWhatsAppGroupParticipantsRequest.php
+lib/Model/ReplaceAdAudienceCompanies200Response.php
+lib/Model/ReplaceAdAudienceCompaniesRequest.php
+lib/Model/ReplaceAdAudienceCompaniesRequestCompaniesInner.php
 lib/Model/ReplyToGoogleBusinessReview200Response.php
 lib/Model/ReplyToGoogleBusinessReviewRequest.php
 lib/Model/ReplyToInboxPost200Response.php
@@ -3513,4 +3519,6 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/ListAdVideos200ResponseTest.php
+test/Model/ReplaceAdAudienceCompanies200ResponseTest.php
+test/Model/ReplaceAdAudienceCompaniesRequestCompaniesInnerTest.php
+test/Model/ReplaceAdAudienceCompaniesRequestTest.php

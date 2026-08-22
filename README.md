@@ -113,6 +113,7 @@ Class | Method | HTTP request | Description
 *AdAudiencesApi* | [**deleteAdAudience**](docs/Api/AdAudiencesApi.md#deleteadaudience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete custom audience
 *AdAudiencesApi* | [**getAdAudience**](docs/Api/AdAudiencesApi.md#getadaudience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details
 *AdAudiencesApi* | [**listAdAudiences**](docs/Api/AdAudiencesApi.md#listadaudiences) | **GET** /v1/ads/audiences | List custom audiences
+*AdAudiencesApi* | [**replaceAdAudienceCompanies**](docs/Api/AdAudiencesApi.md#replaceadaudiencecompanies) | **POST** /v1/ads/audiences/{audienceId}/companies | Replace audience companies
 *AdAudiencesApi* | [**updateAdAudience**](docs/Api/AdAudiencesApi.md#updateadaudience) | **PUT** /v1/ads/audiences/{audienceId} | Update an audience
 *AdCampaignsApi* | [**boostPost**](docs/Api/AdCampaignsApi.md#boostpost) | **POST** /v1/ads/boost | Boost post as ad
 *AdCampaignsApi* | [**bulkUpdateAdCampaignStatus**](docs/Api/AdCampaignsApi.md#bulkupdateadcampaignstatus) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns
@@ -1750,6 +1751,9 @@ Class | Method | HTTP request | Description
 - [RemoveConversionAssociations200Response](docs/Model/RemoveConversionAssociations200Response.md)
 - [RemoveDiscordMemberRole200Response](docs/Model/RemoveDiscordMemberRole200Response.md)
 - [RemoveWhatsAppGroupParticipantsRequest](docs/Model/RemoveWhatsAppGroupParticipantsRequest.md)
+- [ReplaceAdAudienceCompanies200Response](docs/Model/ReplaceAdAudienceCompanies200Response.md)
+- [ReplaceAdAudienceCompaniesRequest](docs/Model/ReplaceAdAudienceCompaniesRequest.md)
+- [ReplaceAdAudienceCompaniesRequestCompaniesInner](docs/Model/ReplaceAdAudienceCompaniesRequestCompaniesInner.md)
 - [ReplyToGoogleBusinessReview200Response](docs/Model/ReplyToGoogleBusinessReview200Response.md)
 - [ReplyToGoogleBusinessReviewRequest](docs/Model/ReplyToGoogleBusinessReviewRequest.md)
 - [ReplyToInboxPost200Response](docs/Model/ReplyToInboxPost200Response.md)
