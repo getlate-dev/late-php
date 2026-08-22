@@ -1287,6 +1287,7 @@ docs/Model/SendDiscordDirectMessageRequest.md
 docs/Model/SendDiscordDirectMessageRequestAttachmentsInner.md
 docs/Model/SendInboxMessage200Response.md
 docs/Model/SendInboxMessage200ResponseData.md
+docs/Model/SendInboxMessage200ResponseDataAttachmentsInner.md
 docs/Model/SendInboxMessage400Response.md
 docs/Model/SendInboxMessage400ResponsePlatformError.md
 docs/Model/SendInboxMessageRequest.md
@@ -3047,6 +3048,7 @@ lib/Model/SendDiscordDirectMessageRequest.php
 lib/Model/SendDiscordDirectMessageRequestAttachmentsInner.php
 lib/Model/SendInboxMessage200Response.php
 lib/Model/SendInboxMessage200ResponseData.php
+lib/Model/SendInboxMessage200ResponseDataAttachmentsInner.php
 lib/Model/SendInboxMessage400Response.php
 lib/Model/SendInboxMessage400ResponsePlatformError.php
 lib/Model/SendInboxMessageRequest.php
@@ -3519,6 +3521,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/ReplaceAdAudienceCompanies200ResponseTest.php
-test/Model/ReplaceAdAudienceCompaniesRequestCompaniesInnerTest.php
-test/Model/ReplaceAdAudienceCompaniesRequestTest.php
+test/Model/SendInboxMessage200ResponseDataAttachmentsInnerTest.php
