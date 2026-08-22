@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateStandaloneAdRequestVideo
+ * ListAdVideos200Response
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * CreateStandaloneAdRequestVideo Class Doc Comment
+ * ListAdVideos200Response Class Doc Comment
  *
  * @category Class
- * @description Meta (facebook, instagram) and LinkedIn. Creates a single VIDEO ad. Mutually exclusive with &#x60;imageUrl&#x60;. Supply &#x60;url&#x60; to upload a file, or &#x60;id&#x60; to reuse a video already on the ad account (list them with GET /v1/ads/videos). Works on the single-ad and attach (&#x60;adSetId&#x60;) shapes; for Meta multi-creative, set &#x60;video&#x60; per entry inside &#x60;creatives[]&#x60; instead. For LinkedIn the video is uploaded to LinkedIn under the authoring Company Page (see &#x60;organizationId&#x60;) and the campaign format is set to SINGLE_VIDEO; LinkedIn ignores &#x60;thumbnailUrl&#x60; (it auto-generates the poster frame) — supply MP4 H.264/AAC, 3s-30min, 75KB-500MB.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListAdVideos200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
       *
       * @var string
       */
-    protected static $openAPIModelName = 'createStandaloneAd_request_video';
+    protected static $openAPIModelName = 'listAdVideos_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +58,9 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
-        'url' => 'string',
-        'id' => 'string',
-        'thumbnail_url' => 'string'
+        'ad_account_id' => 'string',
+        'data' => 'object[]',
+        'paging' => '\Zernio\Model\GetAdsActivityLog200ResponsePaging'
     ];
 
     /**
@@ -72,9 +71,9 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'url' => 'uri',
-        'id' => null,
-        'thumbnail_url' => 'uri'
+        'ad_account_id' => null,
+        'data' => null,
+        'paging' => null
     ];
 
     /**
@@ -83,9 +82,9 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'url' => false,
-        'id' => false,
-        'thumbnail_url' => false
+        'ad_account_id' => false,
+        'data' => false,
+        'paging' => false
     ];
 
     /**
@@ -174,9 +173,9 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
-        'url' => 'url',
-        'id' => 'id',
-        'thumbnail_url' => 'thumbnailUrl'
+        'ad_account_id' => 'adAccountId',
+        'data' => 'data',
+        'paging' => 'paging'
     ];
 
     /**
@@ -185,9 +184,9 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
-        'url' => 'setUrl',
-        'id' => 'setId',
-        'thumbnail_url' => 'setThumbnailUrl'
+        'ad_account_id' => 'setAdAccountId',
+        'data' => 'setData',
+        'paging' => 'setPaging'
     ];
 
     /**
@@ -196,9 +195,9 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
-        'url' => 'getUrl',
-        'id' => 'getId',
-        'thumbnail_url' => 'getThumbnailUrl'
+        'ad_account_id' => 'getAdAccountId',
+        'data' => 'getData',
+        'paging' => 'getPaging'
     ];
 
     /**
@@ -258,9 +257,9 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('url', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('thumbnail_url', $data ?? [], null);
+        $this->setIfExists('ad_account_id', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('paging', $data ?? [], null);
     }
 
     /**
@@ -306,82 +305,82 @@ class CreateStandaloneAdRequestVideo implements ModelInterface, ArrayAccess, \Js
 
 
     /**
-     * Gets url
+     * Gets ad_account_id
      *
      * @return string|null
      */
-    public function getUrl()
+    public function getAdAccountId()
     {
-        return $this->container['url'];
+        return $this->container['ad_account_id'];
     }
 
     /**
-     * Sets url
+     * Sets ad_account_id
      *
-     * @param string|null $url Public URL of the video. Meta: uploaded via chunked transfer on /act_X/advideos, then the request blocks on Meta's transcoding until status.video_status === 'ready'. LinkedIn: uploaded via the Videos API (multipart), then the request blocks until LinkedIn finishes transcoding (status AVAILABLE) — short clips take ~10-30s. Provide either `url` or `id`.
+     * @param string|null $ad_account_id ad_account_id
      *
      * @return self
      */
-    public function setUrl($url)
+    public function setAdAccountId($ad_account_id)
     {
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        if (is_null($ad_account_id)) {
+            throw new \InvalidArgumentException('non-nullable ad_account_id cannot be null');
         }
-        $this->container['url'] = $url;
+        $this->container['ad_account_id'] = $ad_account_id;
 
         return $this;
     }
 
     /**
-     * Gets id
+     * Gets data
      *
-     * @return string|null
+     * @return object[]|null
      */
-    public function getId()
+    public function getData()
     {
-        return $this->container['id'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets id
+     * Sets data
      *
-     * @param string|null $id Meta only. Reuse a video ALREADY uploaded to this ad account instead of re-uploading the file: pass the `videoId` returned by a previous create. Wins over `url`, so N ads that differ only in copy share one upload (`existingCreativeId` only covers the identical-copy case). Provide either `url` or `id`.
+     * @param object[]|null $data data
      *
      * @return self
      */
-    public function setId($id)
+    public function setData($data)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets thumbnail_url
+     * Gets paging
      *
-     * @return string|null
+     * @return \Zernio\Model\GetAdsActivityLog200ResponsePaging|null
      */
-    public function getThumbnailUrl()
+    public function getPaging()
     {
-        return $this->container['thumbnail_url'];
+        return $this->container['paging'];
     }
 
     /**
-     * Sets thumbnail_url
+     * Sets paging
      *
-     * @param string|null $thumbnail_url Public URL of a still-image thumbnail for the video. OPTIONAL: when omitted on Meta, the poster is auto-generated from Meta's own preferred video thumbnail (the same candidates Ads Manager shows), so video ads usually publish without supplying one. When Meta produces no candidate the request fails with a 502 platform_error (reason: video_thumbnail_unavailable) — retry, or supply this field. Provide it to control the poster frame exactly (uploaded as an ad image and referenced in object_story_spec.video_data). Ignored by LinkedIn (auto-generated poster frame).
+     * @param \Zernio\Model\GetAdsActivityLog200ResponsePaging|null $paging paging
      *
      * @return self
      */
-    public function setThumbnailUrl($thumbnail_url)
+    public function setPaging($paging)
     {
-        if (is_null($thumbnail_url)) {
-            throw new \InvalidArgumentException('non-nullable thumbnail_url cannot be null');
+        if (is_null($paging)) {
+            throw new \InvalidArgumentException('non-nullable paging cannot be null');
         }
-        $this->container['thumbnail_url'] = $thumbnail_url;
+        $this->container['paging'] = $paging;
 
         return $this;
     }

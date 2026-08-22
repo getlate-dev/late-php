@@ -15,6 +15,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**listAdCatalogs()**](AdCreativesApi.md#listAdCatalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs |
 | [**listAdCreatives()**](AdCreativesApi.md#listAdCreatives) | **GET** /v1/ads/creatives | Creative library |
 | [**listAdImages()**](AdCreativesApi.md#listAdImages) | **GET** /v1/ads/images | Ad image library |
+| [**listAdVideos()**](AdCreativesApi.md#listAdVideos) | **GET** /v1/ads/videos | Ad video library |
 | [**updateAdCreative()**](AdCreativesApi.md#updateAdCreative) | **PUT** /v1/ads/creatives/{creativeId} | Rename a creative |
 | [**uploadAdImage()**](AdCreativesApi.md#uploadAdImage) | **POST** /v1/ads/images | Upload an ad image from base64 |
 
@@ -573,6 +574,74 @@ try {
 ### Return type
 
 [**\Zernio\Model\ListAdImages200Response**](../Model/ListAdImages200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAdVideos()`
+
+```php
+listAdVideos($account_id, $ad_account_id, $fields, $limit, $after): \Zernio\Model\ListAdVideos200Response
+```
+
+Ad video library
+
+Lists the ad account's video library (Meta's `/act_X/advideos`), rows returned verbatim. The default projection covers id, title, status, poster frames and length; `fields` is a raw-passthrough override. Any `id` here is reusable as `video.id` on the create endpoints, so N ads that differ only in copy share one upload.  This is the only way to reach a video uploaded OUTSIDE Zernio (Ads Manager, another tool); videos we uploaded also come back as `creative.videoId` on GET /v1/ads.  Meta transcodes asynchronously, so a row is only usable once `status.video_status` reads `ready`. There is no upload operation here: upload by URL inline via `video.url` on POST /v1/ads/create.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AdCreativesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+$ad_account_id = 'ad_account_id_example'; // string | Meta ad account id (act_<n>).
+$fields = 'fields_example'; // string | Comma-separated Graph field override (supports nested {} projections).
+$limit = 25; // int | Rows per page
+$after = 'after_example'; // string | Cursor from paging.after of the previous page.
+
+try {
+    $result = $apiInstance->listAdVideos($account_id, $ad_account_id, $fields, $limit, $after);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdCreativesApi->listAdVideos: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. | |
+| **ad_account_id** | **string**| Meta ad account id (act_&lt;n&gt;). | |
+| **fields** | **string**| Comma-separated Graph field override (supports nested {} projections). | [optional] |
+| **limit** | **int**| Rows per page | [optional] [default to 25] |
+| **after** | **string**| Cursor from paging.after of the previous page. | [optional] |
+
+### Return type
+
+[**\Zernio\Model\ListAdVideos200Response**](../Model/ListAdVideos200Response.md)
 
 ### Authorization
 

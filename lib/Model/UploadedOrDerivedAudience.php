@@ -78,6 +78,7 @@ class UploadedOrDerivedAudience implements ModelInterface, ArrayAccess, \JsonSer
         'source_audience_id' => 'string',
         'country' => 'string',
         'ratio' => 'float',
+        'url_contains' => 'string',
         'rule' => 'object',
         'customer_file_source' => 'string'
     ];
@@ -109,6 +110,7 @@ class UploadedOrDerivedAudience implements ModelInterface, ArrayAccess, \JsonSer
         'source_audience_id' => null,
         'country' => null,
         'ratio' => null,
+        'url_contains' => null,
         'rule' => null,
         'customer_file_source' => null
     ];
@@ -138,6 +140,7 @@ class UploadedOrDerivedAudience implements ModelInterface, ArrayAccess, \JsonSer
         'source_audience_id' => false,
         'country' => false,
         'ratio' => false,
+        'url_contains' => false,
         'rule' => false,
         'customer_file_source' => false
     ];
@@ -247,6 +250,7 @@ class UploadedOrDerivedAudience implements ModelInterface, ArrayAccess, \JsonSer
         'source_audience_id' => 'sourceAudienceId',
         'country' => 'country',
         'ratio' => 'ratio',
+        'url_contains' => 'urlContains',
         'rule' => 'rule',
         'customer_file_source' => 'customerFileSource'
     ];
@@ -276,6 +280,7 @@ class UploadedOrDerivedAudience implements ModelInterface, ArrayAccess, \JsonSer
         'source_audience_id' => 'setSourceAudienceId',
         'country' => 'setCountry',
         'ratio' => 'setRatio',
+        'url_contains' => 'setUrlContains',
         'rule' => 'setRule',
         'customer_file_source' => 'setCustomerFileSource'
     ];
@@ -305,6 +310,7 @@ class UploadedOrDerivedAudience implements ModelInterface, ArrayAccess, \JsonSer
         'source_audience_id' => 'getSourceAudienceId',
         'country' => 'getCountry',
         'ratio' => 'getRatio',
+        'url_contains' => 'getUrlContains',
         'rule' => 'getRule',
         'customer_file_source' => 'getCustomerFileSource'
     ];
@@ -469,6 +475,7 @@ class UploadedOrDerivedAudience implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('source_audience_id', $data ?? [], null);
         $this->setIfExists('country', $data ?? [], null);
         $this->setIfExists('ratio', $data ?? [], null);
+        $this->setIfExists('url_contains', $data ?? [], null);
         $this->setIfExists('rule', $data ?? [], null);
         $this->setIfExists('customer_file_source', $data ?? [], null);
     }
@@ -1202,6 +1209,33 @@ class UploadedOrDerivedAudience implements ModelInterface, ArrayAccess, \JsonSer
     }
 
     /**
+     * Gets url_contains
+     *
+     * @return string|null
+     */
+    public function getUrlContains()
+    {
+        return $this->container['url_contains'];
+    }
+
+    /**
+     * Sets url_contains
+     *
+     * @param string|null $url_contains website only. Narrows the audience from all visitors to visitors of URLs containing this substring. Ignored when `rule` is supplied.
+     *
+     * @return self
+     */
+    public function setUrlContains($url_contains)
+    {
+        if (is_null($url_contains)) {
+            throw new \InvalidArgumentException('non-nullable url_contains cannot be null');
+        }
+        $this->container['url_contains'] = $url_contains;
+
+        return $this;
+    }
+
+    /**
      * Gets rule
      *
      * @return object|null
@@ -1214,7 +1248,7 @@ class UploadedOrDerivedAudience implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets rule
      *
-     * @param object|null $rule Optional raw Meta rule, forwarded verbatim: pixel event rule for website audiences, or the engagement rule for meta_engagement (overrides the built rule, e.g. for event/canvas/lead-form sources).
+     * @param object|null $rule Optional raw Meta rule, replacing the one we build. Omit it for all visitors of `pixelId`, or use `urlContains` for the common page-match case.  For `website` this is Meta's Flexible Audience Rule and is VALIDATED before we call Meta: every entry in `inclusions.rules` (and `exclusions.rules`) must carry `event_sources`, `retention_seconds` AND `filter`. Meta rejects a rule missing any of the three with code 100 / subcode 1713098 (\"Invalid rule JSON format\"), so a bad shape is a 400 here instead. The pre-2018 flat shapes (`{url: ...}`, `{event: ...}`) are not accepted by Meta at all (subcode 1870029).  Example, visitors of /checkout in the last 30 days: `{\"inclusions\":{\"operator\":\"or\",\"rules\":[{\"event_sources\":[{\"id\":\"<pixelId>\",\"type\":\"pixel\"}],\"retention_seconds\":2592000,\"filter\":{\"operator\":\"and\",\"filters\":[{\"field\":\"url\",\"operator\":\"i_contains\",\"value\":\"/checkout\"}]}}]}}`  Note Meta DERIVES `retention_days` from `retention_seconds` and stores `event_sources[].id` as a number, so a rule read back will not be byte-identical to the one you sent.  For `meta_engagement` the rule is forwarded verbatim and NOT validated: that type has two dialects (the `video` source uses a legacy flat array), so no single schema covers both.
      *
      * @return self
      */

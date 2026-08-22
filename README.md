@@ -145,6 +145,7 @@ Class | Method | HTTP request | Description
 *AdCreativesApi* | [**listAdCatalogs**](docs/Api/AdCreativesApi.md#listadcatalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs
 *AdCreativesApi* | [**listAdCreatives**](docs/Api/AdCreativesApi.md#listadcreatives) | **GET** /v1/ads/creatives | Creative library
 *AdCreativesApi* | [**listAdImages**](docs/Api/AdCreativesApi.md#listadimages) | **GET** /v1/ads/images | Ad image library
+*AdCreativesApi* | [**listAdVideos**](docs/Api/AdCreativesApi.md#listadvideos) | **GET** /v1/ads/videos | Ad video library
 *AdCreativesApi* | [**updateAdCreative**](docs/Api/AdCreativesApi.md#updateadcreative) | **PUT** /v1/ads/creatives/{creativeId} | Rename a creative
 *AdCreativesApi* | [**uploadAdImage**](docs/Api/AdCreativesApi.md#uploadadimage) | **POST** /v1/ads/images | Upload an ad image from base64
 *AdInsightsApi* | [**createAdInsightsReport**](docs/Api/AdInsightsApi.md#createadinsightsreport) | **POST** /v1/ads/insights/reports | Submit an async insights report run
@@ -1491,6 +1492,7 @@ Class | Method | HTTP request | Description
 - [ListAdKeywords200ResponseKeywordsInner](docs/Model/ListAdKeywords200ResponseKeywordsInner.md)
 - [ListAdLabels200Response](docs/Model/ListAdLabels200Response.md)
 - [ListAdStudies200Response](docs/Model/ListAdStudies200Response.md)
+- [ListAdVideos200Response](docs/Model/ListAdVideos200Response.md)
 - [ListAds202Response](docs/Model/ListAds202Response.md)
 - [ListAdsBusinessCenters200Response](docs/Model/ListAdsBusinessCenters200Response.md)
 - [ListApiKeys200Response](docs/Model/ListApiKeys200Response.md)

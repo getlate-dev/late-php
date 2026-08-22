@@ -928,6 +928,7 @@ docs/Model/ListAdKeywords200Response.md
 docs/Model/ListAdKeywords200ResponseKeywordsInner.md
 docs/Model/ListAdLabels200Response.md
 docs/Model/ListAdStudies200Response.md
+docs/Model/ListAdVideos200Response.md
 docs/Model/ListAds202Response.md
 docs/Model/ListAdsBusinessCenters200Response.md
 docs/Model/ListApiKeys200Response.md
@@ -2683,6 +2684,7 @@ lib/Model/ListAdKeywords200Response.php
 lib/Model/ListAdKeywords200ResponseKeywordsInner.php
 lib/Model/ListAdLabels200Response.php
 lib/Model/ListAdStudies200Response.php
+lib/Model/ListAdVideos200Response.php
 lib/Model/ListAds202Response.php
 lib/Model/ListAdsBusinessCenters200Response.php
 lib/Model/ListApiKeys200Response.php
@@ -3511,5 +3513,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/CreateInboxConversation404ResponseTest.php
-test/Model/CreateInboxConversation429ResponseTest.php
+test/Model/ListAdVideos200ResponseTest.php
