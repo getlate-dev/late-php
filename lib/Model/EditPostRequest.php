@@ -59,7 +59,8 @@ class EditPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'platform' => 'string',
-        'content' => 'string'
+        'content' => 'string',
+        'account_id' => 'string'
     ];
 
     /**
@@ -71,7 +72,8 @@ class EditPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'platform' => null,
-        'content' => null
+        'content' => null,
+        'account_id' => null
     ];
 
     /**
@@ -81,7 +83,8 @@ class EditPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'platform' => false,
-        'content' => false
+        'content' => false,
+        'account_id' => false
     ];
 
     /**
@@ -171,7 +174,8 @@ class EditPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'platform' => 'platform',
-        'content' => 'content'
+        'content' => 'content',
+        'account_id' => 'accountId'
     ];
 
     /**
@@ -181,7 +185,8 @@ class EditPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'platform' => 'setPlatform',
-        'content' => 'setContent'
+        'content' => 'setContent',
+        'account_id' => 'setAccountId'
     ];
 
     /**
@@ -191,7 +196,8 @@ class EditPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'platform' => 'getPlatform',
-        'content' => 'getContent'
+        'content' => 'getContent',
+        'account_id' => 'getAccountId'
     ];
 
     /**
@@ -239,6 +245,12 @@ class EditPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     public const PLATFORM_DISCORD = 'discord';
     public const PLATFORM_FACEBOOK = 'facebook';
     public const PLATFORM_REDDIT = 'reddit';
+    public const PLATFORM_LINKEDIN = 'linkedin';
+    public const PLATFORM_TELEGRAM = 'telegram';
+    public const PLATFORM_PINTEREST = 'pinterest';
+    public const PLATFORM_GOOGLEBUSINESS = 'googlebusiness';
+    public const PLATFORM_YOUTUBE = 'youtube';
+    public const PLATFORM_SLACK = 'slack';
 
     /**
      * Gets allowable values of the enum
@@ -252,6 +264,12 @@ class EditPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
             self::PLATFORM_DISCORD,
             self::PLATFORM_FACEBOOK,
             self::PLATFORM_REDDIT,
+            self::PLATFORM_LINKEDIN,
+            self::PLATFORM_TELEGRAM,
+            self::PLATFORM_PINTEREST,
+            self::PLATFORM_GOOGLEBUSINESS,
+            self::PLATFORM_YOUTUBE,
+            self::PLATFORM_SLACK,
         ];
     }
 
@@ -272,6 +290,7 @@ class EditPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('platform', $data ?? [], null);
         $this->setIfExists('content', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
     }
 
     /**
@@ -391,6 +410,33 @@ class EditPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable content cannot be null');
         }
         $this->container['content'] = $content;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_id
+     *
+     * @return string|null
+     */
+    public function getAccountId()
+    {
+        return $this->container['account_id'];
+    }
+
+    /**
+     * Sets account_id
+     *
+     * @param string|null $account_id Which account's copy of the post to edit when the post was published to several accounts on the same platform; defaults to the first.
+     *
+     * @return self
+     */
+    public function setAccountId($account_id)
+    {
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
+        }
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }

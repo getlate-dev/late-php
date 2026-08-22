@@ -351,7 +351,7 @@ class EditPost200Response implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets id
      *
-     * @param string|null $id The platform post ID after the edit. X assigns a new ID; Discord, Facebook, and Reddit return the original ID unchanged.
+     * @param string|null $id The platform post ID after the edit. X assigns a new ID; every other platform returns the original ID unchanged.
      *
      * @return self
      */
