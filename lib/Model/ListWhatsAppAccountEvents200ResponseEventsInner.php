@@ -59,6 +59,7 @@ class ListWhatsAppAccountEvents200ResponseEventsInner implements ModelInterface,
       */
     protected static $openAPITypes = [
         'id' => 'string',
+        'account_id' => 'string',
         'type' => 'string',
         'severity' => 'string',
         'title' => 'string',
@@ -75,6 +76,7 @@ class ListWhatsAppAccountEvents200ResponseEventsInner implements ModelInterface,
       */
     protected static $openAPIFormats = [
         'id' => null,
+        'account_id' => null,
         'type' => null,
         'severity' => null,
         'title' => null,
@@ -89,6 +91,7 @@ class ListWhatsAppAccountEvents200ResponseEventsInner implements ModelInterface,
       */
     protected static array $openAPINullables = [
         'id' => false,
+        'account_id' => false,
         'type' => false,
         'severity' => false,
         'title' => false,
@@ -183,6 +186,7 @@ class ListWhatsAppAccountEvents200ResponseEventsInner implements ModelInterface,
      */
     protected static $attributeMap = [
         'id' => 'id',
+        'account_id' => 'accountId',
         'type' => 'type',
         'severity' => 'severity',
         'title' => 'title',
@@ -197,6 +201,7 @@ class ListWhatsAppAccountEvents200ResponseEventsInner implements ModelInterface,
      */
     protected static $setters = [
         'id' => 'setId',
+        'account_id' => 'setAccountId',
         'type' => 'setType',
         'severity' => 'setSeverity',
         'title' => 'setTitle',
@@ -211,6 +216,7 @@ class ListWhatsAppAccountEvents200ResponseEventsInner implements ModelInterface,
      */
     protected static $getters = [
         'id' => 'getId',
+        'account_id' => 'getAccountId',
         'type' => 'getType',
         'severity' => 'getSeverity',
         'title' => 'getTitle',
@@ -295,6 +301,7 @@ class ListWhatsAppAccountEvents200ResponseEventsInner implements ModelInterface,
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('severity', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
@@ -376,6 +383,33 @@ class ListWhatsAppAccountEvents200ResponseEventsInner implements ModelInterface,
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_id
+     *
+     * @return string|null
+     */
+    public function getAccountId()
+    {
+        return $this->container['account_id'];
+    }
+
+    /**
+     * Sets account_id
+     *
+     * @param string|null $account_id WhatsApp social account the event belongs to
+     *
+     * @return self
+     */
+    public function setAccountId($account_id)
+    {
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
+        }
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }

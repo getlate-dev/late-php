@@ -67,6 +67,10 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'media_type' => 'string',
         'thumbnail_url' => 'string',
         'media_items' => 'object[]',
+        'media_product_type' => 'string',
+        'is_ai_generated' => 'bool',
+        'is_shared_to_feed' => 'bool',
+        'media_audio_type' => 'string',
         'analytics' => '\Zernio\Model\ExternalPostSummaryAnalytics'
     ];
 
@@ -86,6 +90,10 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'media_type' => null,
         'thumbnail_url' => null,
         'media_items' => null,
+        'media_product_type' => null,
+        'is_ai_generated' => null,
+        'is_shared_to_feed' => null,
+        'media_audio_type' => null,
         'analytics' => null
     ];
 
@@ -103,6 +111,10 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'media_type' => false,
         'thumbnail_url' => false,
         'media_items' => false,
+        'media_product_type' => false,
+        'is_ai_generated' => false,
+        'is_shared_to_feed' => false,
+        'media_audio_type' => false,
         'analytics' => false
     ];
 
@@ -200,6 +212,10 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'media_type' => 'mediaType',
         'thumbnail_url' => 'thumbnailUrl',
         'media_items' => 'mediaItems',
+        'media_product_type' => 'mediaProductType',
+        'is_ai_generated' => 'isAiGenerated',
+        'is_shared_to_feed' => 'isSharedToFeed',
+        'media_audio_type' => 'mediaAudioType',
         'analytics' => 'analytics'
     ];
 
@@ -217,6 +233,10 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'media_type' => 'setMediaType',
         'thumbnail_url' => 'setThumbnailUrl',
         'media_items' => 'setMediaItems',
+        'media_product_type' => 'setMediaProductType',
+        'is_ai_generated' => 'setIsAiGenerated',
+        'is_shared_to_feed' => 'setIsSharedToFeed',
+        'media_audio_type' => 'setMediaAudioType',
         'analytics' => 'setAnalytics'
     ];
 
@@ -234,6 +254,10 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         'media_type' => 'getMediaType',
         'thumbnail_url' => 'getThumbnailUrl',
         'media_items' => 'getMediaItems',
+        'media_product_type' => 'getMediaProductType',
+        'is_ai_generated' => 'getIsAiGenerated',
+        'is_shared_to_feed' => 'getIsSharedToFeed',
+        'media_audio_type' => 'getMediaAudioType',
         'analytics' => 'getAnalytics'
     ];
 
@@ -302,6 +326,10 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('media_type', $data ?? [], null);
         $this->setIfExists('thumbnail_url', $data ?? [], null);
         $this->setIfExists('media_items', $data ?? [], null);
+        $this->setIfExists('media_product_type', $data ?? [], null);
+        $this->setIfExists('is_ai_generated', $data ?? [], null);
+        $this->setIfExists('is_shared_to_feed', $data ?? [], null);
+        $this->setIfExists('media_audio_type', $data ?? [], null);
         $this->setIfExists('analytics', $data ?? [], null);
     }
 
@@ -559,6 +587,114 @@ class ExternalPostSummary implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable media_items cannot be null');
         }
         $this->container['media_items'] = $media_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets media_product_type
+     *
+     * @return string|null
+     */
+    public function getMediaProductType()
+    {
+        return $this->container['media_product_type'];
+    }
+
+    /**
+     * Sets media_product_type
+     *
+     * @param string|null $media_product_type Instagram only: the platform media product type (e.g. FEED, REELS, STORY, AD). Absent when the platform did not report it.
+     *
+     * @return self
+     */
+    public function setMediaProductType($media_product_type)
+    {
+        if (is_null($media_product_type)) {
+            throw new \InvalidArgumentException('non-nullable media_product_type cannot be null');
+        }
+        $this->container['media_product_type'] = $media_product_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_ai_generated
+     *
+     * @return bool|null
+     */
+    public function getIsAiGenerated()
+    {
+        return $this->container['is_ai_generated'];
+    }
+
+    /**
+     * Sets is_ai_generated
+     *
+     * @param bool|null $is_ai_generated Instagram only: whether Instagram labeled the media as AI-generated. Absent when the platform did not report it.
+     *
+     * @return self
+     */
+    public function setIsAiGenerated($is_ai_generated)
+    {
+        if (is_null($is_ai_generated)) {
+            throw new \InvalidArgumentException('non-nullable is_ai_generated cannot be null');
+        }
+        $this->container['is_ai_generated'] = $is_ai_generated;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_shared_to_feed
+     *
+     * @return bool|null
+     */
+    public function getIsSharedToFeed()
+    {
+        return $this->container['is_shared_to_feed'];
+    }
+
+    /**
+     * Sets is_shared_to_feed
+     *
+     * @param bool|null $is_shared_to_feed Instagram reels only: whether the reel is also shared to the main feed. Absent when the platform did not report it.
+     *
+     * @return self
+     */
+    public function setIsSharedToFeed($is_shared_to_feed)
+    {
+        if (is_null($is_shared_to_feed)) {
+            throw new \InvalidArgumentException('non-nullable is_shared_to_feed cannot be null');
+        }
+        $this->container['is_shared_to_feed'] = $is_shared_to_feed;
+
+        return $this;
+    }
+
+    /**
+     * Gets media_audio_type
+     *
+     * @return string|null
+     */
+    public function getMediaAudioType()
+    {
+        return $this->container['media_audio_type'];
+    }
+
+    /**
+     * Sets media_audio_type
+     *
+     * @param string|null $media_audio_type Instagram only: audio type of the media (MUSIC or ORIGINAL_SOUND). Absent when the platform did not report it.
+     *
+     * @return self
+     */
+    public function setMediaAudioType($media_audio_type)
+    {
+        if (is_null($media_audio_type)) {
+            throw new \InvalidArgumentException('non-nullable media_audio_type cannot be null');
+        }
+        $this->container['media_audio_type'] = $media_audio_type;
 
         return $this;
     }

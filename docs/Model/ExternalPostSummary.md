@@ -12,6 +12,10 @@ Name | Type | Description | Notes
 **media_type** | **string** | Media type (e.g. image, video, carousel) | [optional]
 **thumbnail_url** | **string** | Thumbnail URL | [optional]
 **media_items** | **object[]** | Per-item media (for carousels / multi-media posts) | [optional]
+**media_product_type** | **string** | Instagram only: the platform media product type (e.g. FEED, REELS, STORY, AD). Absent when the platform did not report it. | [optional]
+**is_ai_generated** | **bool** | Instagram only: whether Instagram labeled the media as AI-generated. Absent when the platform did not report it. | [optional]
+**is_shared_to_feed** | **bool** | Instagram reels only: whether the reel is also shared to the main feed. Absent when the platform did not report it. | [optional]
+**media_audio_type** | **string** | Instagram only: audio type of the media (MUSIC or ORIGINAL_SOUND). Absent when the platform did not report it. | [optional]
 **analytics** | [**\Zernio\Model\ExternalPostSummaryAnalytics**](ExternalPostSummaryAnalytics.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

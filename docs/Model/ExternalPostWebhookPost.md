@@ -13,6 +13,10 @@ Name | Type | Description | Notes
 **media_items** | [**\Zernio\Model\ExternalPostMediaItem[]**](ExternalPostMediaItem.md) |  |
 **thumbnail_url** | **string** |  |
 **published_at** | **\DateTime** |  |
+**media_product_type** | **string** | Instagram only: the platform media product type (e.g. FEED, REELS, STORY, AD). Absent when the platform did not report it. | [optional]
+**is_ai_generated** | **bool** | Instagram only: whether Instagram labeled the media as AI-generated. Absent when the platform did not report it. | [optional]
+**is_shared_to_feed** | **bool** | Instagram reels only: whether the reel is also shared to the main feed. Absent when the platform did not report it. | [optional]
+**media_audio_type** | **string** | Instagram only: audio type of the media (MUSIC or ORIGINAL_SOUND). Absent when the platform did not report it. | [optional]
 **source** | **string** | Always \&quot;external\&quot; — distinguishes these from Zernio-originated post.* events. |
 **deleted_at** | **\DateTime** | Detection time of deletion. Present on post.external.deleted; null/absent otherwise. | [optional]
 
