@@ -670,6 +670,7 @@ Class | Method | HTTP request | Description
 - [AdTreeCampaign](docs/Model/AdTreeCampaign.md)
 - [AdTreeCampaignBudget](docs/Model/AdTreeCampaignBudget.md)
 - [AdTreeCampaignCampaignBudget](docs/Model/AdTreeCampaignCampaignBudget.md)
+- [AdTreeCampaignOptimizationGoal](docs/Model/AdTreeCampaignOptimizationGoal.md)
 - [AdTreeCampaignPromotedObject](docs/Model/AdTreeCampaignPromotedObject.md)
 - [AdTreeResponse](docs/Model/AdTreeResponse.md)
 - [AddBroadcastRecipients200Response](docs/Model/AddBroadcastRecipients200Response.md)

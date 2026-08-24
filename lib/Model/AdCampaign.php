@@ -78,7 +78,7 @@ class AdCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
         'profile_id' => 'string',
         'advertising_channel_type' => 'string',
         'platform_objective' => 'string',
-        'optimization_goal' => 'string',
+        'optimization_goal' => '\Zernio\Model\AdTreeCampaignOptimizationGoal',
         'bid_strategy' => '\Zernio\Model\BidStrategy',
         'bid_amount' => 'float',
         'roas_average_floor' => 'float',
@@ -150,7 +150,7 @@ class AdCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
         'profile_id' => false,
         'advertising_channel_type' => true,
         'platform_objective' => true,
-        'optimization_goal' => true,
+        'optimization_goal' => false,
         'bid_strategy' => true,
         'bid_amount' => true,
         'roas_average_floor' => true,
@@ -1151,7 +1151,7 @@ class AdCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets optimization_goal
      *
-     * @return string|null
+     * @return \Zernio\Model\AdTreeCampaignOptimizationGoal|null
      */
     public function getOptimizationGoal()
     {
@@ -1161,21 +1161,14 @@ class AdCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets optimization_goal
      *
-     * @param string|null $optimization_goal Optimization goal shared across ad sets, or comma-separated values when ad sets differ. Meta: e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION. LinkedIn: the campaign optimizationTargetType (e.g. MAX_CLICK, MAX_IMPRESSION, NONE); `NONE` with a manual costType is a campaign LinkedIn will not deliver.
+     * @param \Zernio\Model\AdTreeCampaignOptimizationGoal|null $optimization_goal optimization_goal
      *
      * @return self
      */
     public function setOptimizationGoal($optimization_goal)
     {
         if (is_null($optimization_goal)) {
-            array_push($this->openAPINullablesSetToNull, 'optimization_goal');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('optimization_goal', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable optimization_goal cannot be null');
         }
         $this->container['optimization_goal'] = $optimization_goal;
 

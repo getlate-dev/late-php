@@ -98,6 +98,7 @@ docs/Model/AdTreeAdSetPromotedObject.md
 docs/Model/AdTreeCampaign.md
 docs/Model/AdTreeCampaignBudget.md
 docs/Model/AdTreeCampaignCampaignBudget.md
+docs/Model/AdTreeCampaignOptimizationGoal.md
 docs/Model/AdTreeCampaignPromotedObject.md
 docs/Model/AdTreeResponse.md
 docs/Model/AddBroadcastRecipients200Response.md
@@ -1870,6 +1871,7 @@ lib/Model/AdTreeAdSetPromotedObject.php
 lib/Model/AdTreeCampaign.php
 lib/Model/AdTreeCampaignBudget.php
 lib/Model/AdTreeCampaignCampaignBudget.php
+lib/Model/AdTreeCampaignOptimizationGoal.php
 lib/Model/AdTreeCampaignPromotedObject.php
 lib/Model/AdTreeResponse.php
 lib/Model/AddBroadcastRecipients200Response.php
