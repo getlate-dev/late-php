@@ -93,7 +93,7 @@ class UploadTokenStatusResponse implements ModelInterface, ArrayAccess, \JsonSer
         'files' => false,
         'created_at' => false,
         'expires_at' => false,
-        'completed_at' => false
+        'completed_at' => true
     ];
 
     /**
@@ -516,7 +516,14 @@ class UploadTokenStatusResponse implements ModelInterface, ArrayAccess, \JsonSer
     public function setCompletedAt($completed_at)
     {
         if (is_null($completed_at)) {
-            throw new \InvalidArgumentException('non-nullable completed_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'completed_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('completed_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['completed_at'] = $completed_at;
 
