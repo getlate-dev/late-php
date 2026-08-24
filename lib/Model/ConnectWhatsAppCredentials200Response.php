@@ -60,6 +60,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
     protected static $openAPITypes = [
         'message' => 'string',
         'registration_warning' => 'string',
+        'webhook_notice' => 'string',
         'account' => '\Zernio\Model\ConnectWhatsAppCredentials200ResponseAccount'
     ];
 
@@ -73,6 +74,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
     protected static $openAPIFormats = [
         'message' => null,
         'registration_warning' => null,
+        'webhook_notice' => null,
         'account' => null
     ];
 
@@ -84,6 +86,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
     protected static array $openAPINullables = [
         'message' => false,
         'registration_warning' => false,
+        'webhook_notice' => false,
         'account' => false
     ];
 
@@ -175,6 +178,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
     protected static $attributeMap = [
         'message' => 'message',
         'registration_warning' => 'registrationWarning',
+        'webhook_notice' => 'webhookNotice',
         'account' => 'account'
     ];
 
@@ -186,6 +190,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
     protected static $setters = [
         'message' => 'setMessage',
         'registration_warning' => 'setRegistrationWarning',
+        'webhook_notice' => 'setWebhookNotice',
         'account' => 'setAccount'
     ];
 
@@ -197,6 +202,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
     protected static $getters = [
         'message' => 'getMessage',
         'registration_warning' => 'getRegistrationWarning',
+        'webhook_notice' => 'getWebhookNotice',
         'account' => 'getAccount'
     ];
 
@@ -259,6 +265,7 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
     {
         $this->setIfExists('message', $data ?? [], null);
         $this->setIfExists('registration_warning', $data ?? [], null);
+        $this->setIfExists('webhook_notice', $data ?? [], null);
         $this->setIfExists('account', $data ?? [], null);
     }
 
@@ -354,6 +361,33 @@ class ConnectWhatsAppCredentials200Response implements ModelInterface, ArrayAcce
             throw new \InvalidArgumentException('non-nullable registration_warning cannot be null');
         }
         $this->container['registration_warning'] = $registration_warning;
+
+        return $this;
+    }
+
+    /**
+     * Gets webhook_notice
+     *
+     * @return string|null
+     */
+    public function getWebhookNotice()
+    {
+        return $this->container['webhook_notice'];
+    }
+
+    /**
+     * Sets webhook_notice
+     *
+     * @param string|null $webhook_notice Present when the WABA webhook subscription (with the Zernio override callback) succeeded. Explains the delivery cutover and warns against unsubscribing the app from the WABA afterward.
+     *
+     * @return self
+     */
+    public function setWebhookNotice($webhook_notice)
+    {
+        if (is_null($webhook_notice)) {
+            throw new \InvalidArgumentException('non-nullable webhook_notice cannot be null');
+        }
+        $this->container['webhook_notice'] = $webhook_notice;
 
         return $this;
     }
