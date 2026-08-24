@@ -1526,6 +1526,7 @@ Class | Method | HTTP request | Description
 - [ListBlogs200Response](docs/Model/ListBlogs200Response.md)
 - [ListBroadcastRecipients200Response](docs/Model/ListBroadcastRecipients200Response.md)
 - [ListBroadcastRecipients200ResponseRecipientsInner](docs/Model/ListBroadcastRecipients200ResponseRecipientsInner.md)
+- [ListBroadcastRecipients200ResponseSummary](docs/Model/ListBroadcastRecipients200ResponseSummary.md)
 - [ListBroadcasts200Response](docs/Model/ListBroadcasts200Response.md)
 - [ListBroadcasts200ResponseBroadcastsInner](docs/Model/ListBroadcasts200ResponseBroadcastsInner.md)
 - [ListCalls200Response](docs/Model/ListCalls200Response.md)

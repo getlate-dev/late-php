@@ -1,6 +1,6 @@
 <?php
 /**
- * ListBroadcastRecipients200Response
+ * ListBroadcastRecipients200ResponseSummary
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListBroadcastRecipients200Response Class Doc Comment
+ * ListBroadcastRecipients200ResponseSummary Class Doc Comment
  *
  * @category Class
+ * @description Delivery totals across all recipients in the broadcast, independent of pagination and status filtering.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListBroadcastRecipients200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListBroadcastRecipients200ResponseSummary implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class ListBroadcastRecipients200Response implements ModelInterface, ArrayAccess,
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listBroadcastRecipients_200_response';
+    protected static $openAPIModelName = 'listBroadcastRecipients_200_response_summary';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +59,12 @@ class ListBroadcastRecipients200Response implements ModelInterface, ArrayAccess,
       * @var string[]
       */
     protected static $openAPITypes = [
-        'success' => 'bool',
-        'recipients' => '\Zernio\Model\ListBroadcastRecipients200ResponseRecipientsInner[]',
-        'pagination' => '\Zernio\Model\ListContacts200ResponsePagination',
-        'summary' => '\Zernio\Model\ListBroadcastRecipients200ResponseSummary'
+        'total' => 'int',
+        'pending' => 'int',
+        'sent' => 'int',
+        'delivered' => 'int',
+        'read' => 'int',
+        'failed' => 'int'
     ];
 
     /**
@@ -72,10 +75,12 @@ class ListBroadcastRecipients200Response implements ModelInterface, ArrayAccess,
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'success' => null,
-        'recipients' => null,
-        'pagination' => null,
-        'summary' => null
+        'total' => null,
+        'pending' => null,
+        'sent' => null,
+        'delivered' => null,
+        'read' => null,
+        'failed' => null
     ];
 
     /**
@@ -84,10 +89,12 @@ class ListBroadcastRecipients200Response implements ModelInterface, ArrayAccess,
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'success' => false,
-        'recipients' => false,
-        'pagination' => false,
-        'summary' => false
+        'total' => false,
+        'pending' => false,
+        'sent' => false,
+        'delivered' => false,
+        'read' => false,
+        'failed' => false
     ];
 
     /**
@@ -176,10 +183,12 @@ class ListBroadcastRecipients200Response implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $attributeMap = [
-        'success' => 'success',
-        'recipients' => 'recipients',
-        'pagination' => 'pagination',
-        'summary' => 'summary'
+        'total' => 'total',
+        'pending' => 'pending',
+        'sent' => 'sent',
+        'delivered' => 'delivered',
+        'read' => 'read',
+        'failed' => 'failed'
     ];
 
     /**
@@ -188,10 +197,12 @@ class ListBroadcastRecipients200Response implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $setters = [
-        'success' => 'setSuccess',
-        'recipients' => 'setRecipients',
-        'pagination' => 'setPagination',
-        'summary' => 'setSummary'
+        'total' => 'setTotal',
+        'pending' => 'setPending',
+        'sent' => 'setSent',
+        'delivered' => 'setDelivered',
+        'read' => 'setRead',
+        'failed' => 'setFailed'
     ];
 
     /**
@@ -200,10 +211,12 @@ class ListBroadcastRecipients200Response implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $getters = [
-        'success' => 'getSuccess',
-        'recipients' => 'getRecipients',
-        'pagination' => 'getPagination',
-        'summary' => 'getSummary'
+        'total' => 'getTotal',
+        'pending' => 'getPending',
+        'sent' => 'getSent',
+        'delivered' => 'getDelivered',
+        'read' => 'getRead',
+        'failed' => 'getFailed'
     ];
 
     /**
@@ -263,10 +276,12 @@ class ListBroadcastRecipients200Response implements ModelInterface, ArrayAccess,
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('success', $data ?? [], null);
-        $this->setIfExists('recipients', $data ?? [], null);
-        $this->setIfExists('pagination', $data ?? [], null);
-        $this->setIfExists('summary', $data ?? [], null);
+        $this->setIfExists('total', $data ?? [], null);
+        $this->setIfExists('pending', $data ?? [], null);
+        $this->setIfExists('sent', $data ?? [], null);
+        $this->setIfExists('delivered', $data ?? [], null);
+        $this->setIfExists('read', $data ?? [], null);
+        $this->setIfExists('failed', $data ?? [], null);
     }
 
     /**
@@ -312,109 +327,163 @@ class ListBroadcastRecipients200Response implements ModelInterface, ArrayAccess,
 
 
     /**
-     * Gets success
+     * Gets total
      *
-     * @return bool|null
+     * @return int|null
      */
-    public function getSuccess()
+    public function getTotal()
     {
-        return $this->container['success'];
+        return $this->container['total'];
     }
 
     /**
-     * Sets success
+     * Sets total
      *
-     * @param bool|null $success success
+     * @param int|null $total total
      *
      * @return self
      */
-    public function setSuccess($success)
+    public function setTotal($total)
     {
-        if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
+        if (is_null($total)) {
+            throw new \InvalidArgumentException('non-nullable total cannot be null');
         }
-        $this->container['success'] = $success;
+        $this->container['total'] = $total;
 
         return $this;
     }
 
     /**
-     * Gets recipients
+     * Gets pending
      *
-     * @return \Zernio\Model\ListBroadcastRecipients200ResponseRecipientsInner[]|null
+     * @return int|null
      */
-    public function getRecipients()
+    public function getPending()
     {
-        return $this->container['recipients'];
+        return $this->container['pending'];
     }
 
     /**
-     * Sets recipients
+     * Sets pending
      *
-     * @param \Zernio\Model\ListBroadcastRecipients200ResponseRecipientsInner[]|null $recipients recipients
+     * @param int|null $pending pending
      *
      * @return self
      */
-    public function setRecipients($recipients)
+    public function setPending($pending)
     {
-        if (is_null($recipients)) {
-            throw new \InvalidArgumentException('non-nullable recipients cannot be null');
+        if (is_null($pending)) {
+            throw new \InvalidArgumentException('non-nullable pending cannot be null');
         }
-        $this->container['recipients'] = $recipients;
+        $this->container['pending'] = $pending;
 
         return $this;
     }
 
     /**
-     * Gets pagination
+     * Gets sent
      *
-     * @return \Zernio\Model\ListContacts200ResponsePagination|null
+     * @return int|null
      */
-    public function getPagination()
+    public function getSent()
     {
-        return $this->container['pagination'];
+        return $this->container['sent'];
     }
 
     /**
-     * Sets pagination
+     * Sets sent
      *
-     * @param \Zernio\Model\ListContacts200ResponsePagination|null $pagination pagination
+     * @param int|null $sent sent
      *
      * @return self
      */
-    public function setPagination($pagination)
+    public function setSent($sent)
     {
-        if (is_null($pagination)) {
-            throw new \InvalidArgumentException('non-nullable pagination cannot be null');
+        if (is_null($sent)) {
+            throw new \InvalidArgumentException('non-nullable sent cannot be null');
         }
-        $this->container['pagination'] = $pagination;
+        $this->container['sent'] = $sent;
 
         return $this;
     }
 
     /**
-     * Gets summary
+     * Gets delivered
      *
-     * @return \Zernio\Model\ListBroadcastRecipients200ResponseSummary|null
+     * @return int|null
      */
-    public function getSummary()
+    public function getDelivered()
     {
-        return $this->container['summary'];
+        return $this->container['delivered'];
     }
 
     /**
-     * Sets summary
+     * Sets delivered
      *
-     * @param \Zernio\Model\ListBroadcastRecipients200ResponseSummary|null $summary summary
+     * @param int|null $delivered delivered
      *
      * @return self
      */
-    public function setSummary($summary)
+    public function setDelivered($delivered)
     {
-        if (is_null($summary)) {
-            throw new \InvalidArgumentException('non-nullable summary cannot be null');
+        if (is_null($delivered)) {
+            throw new \InvalidArgumentException('non-nullable delivered cannot be null');
         }
-        $this->container['summary'] = $summary;
+        $this->container['delivered'] = $delivered;
+
+        return $this;
+    }
+
+    /**
+     * Gets read
+     *
+     * @return int|null
+     */
+    public function getRead()
+    {
+        return $this->container['read'];
+    }
+
+    /**
+     * Sets read
+     *
+     * @param int|null $read read
+     *
+     * @return self
+     */
+    public function setRead($read)
+    {
+        if (is_null($read)) {
+            throw new \InvalidArgumentException('non-nullable read cannot be null');
+        }
+        $this->container['read'] = $read;
+
+        return $this;
+    }
+
+    /**
+     * Gets failed
+     *
+     * @return int|null
+     */
+    public function getFailed()
+    {
+        return $this->container['failed'];
+    }
+
+    /**
+     * Sets failed
+     *
+     * @param int|null $failed failed
+     *
+     * @return self
+     */
+    public function setFailed($failed)
+    {
+        if (is_null($failed)) {
+            throw new \InvalidArgumentException('non-nullable failed cannot be null');
+        }
+        $this->container['failed'] = $failed;
 
         return $this;
     }

@@ -945,6 +945,7 @@ docs/Model/ListBlogArticles200Response.md
 docs/Model/ListBlogs200Response.md
 docs/Model/ListBroadcastRecipients200Response.md
 docs/Model/ListBroadcastRecipients200ResponseRecipientsInner.md
+docs/Model/ListBroadcastRecipients200ResponseSummary.md
 docs/Model/ListBroadcasts200Response.md
 docs/Model/ListBroadcasts200ResponseBroadcastsInner.md
 docs/Model/ListCalls200Response.md
@@ -2718,6 +2719,7 @@ lib/Model/ListBlogArticles200Response.php
 lib/Model/ListBlogs200Response.php
 lib/Model/ListBroadcastRecipients200Response.php
 lib/Model/ListBroadcastRecipients200ResponseRecipientsInner.php
+lib/Model/ListBroadcastRecipients200ResponseSummary.php
 lib/Model/ListBroadcasts200Response.php
 lib/Model/ListBroadcasts200ResponseBroadcastsInner.php
 lib/Model/ListCalls200Response.php
@@ -3547,3 +3549,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/ListBroadcastRecipients200ResponseSummaryTest.php
