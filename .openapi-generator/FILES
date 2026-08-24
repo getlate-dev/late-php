@@ -3545,15 +3545,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/AttachNumberToSipTrunk200ResponseTest.php
-test/Model/AttachNumberToSipTrunkRequestTest.php
-test/Model/CreateSipTrunk201ResponseTerminationTest.php
-test/Model/CreateSipTrunk201ResponseTest.php
-test/Model/CreateSipTrunkRequestTest.php
-test/Model/DetachNumberFromSipTrunk200ResponseTest.php
-test/Model/GetSipTrunk200ResponseNumbersInnerTest.php
-test/Model/GetSipTrunk200ResponseTest.php
-test/Model/ListSipTrunks200ResponseTest.php
-test/Model/ListSipTrunks200ResponseTrunksInnerTerminationTest.php
-test/Model/ListSipTrunks200ResponseTrunksInnerTest.php
-test/Model/RotateSipTrunkCredentials200ResponseTest.php

@@ -449,7 +449,7 @@ class CreatePostRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets content
      *
-     * @param string|null $content Post caption/text. Optional when media is attached, all platforms have customContent, every platform entry is an X Article (platformSpecificData.article), or every platform entry is a LinkedIn plain repost (platformSpecificData.reshareUrl with no text). Required for other text-only posts.
+     * @param string|null $content Post caption/text. Optional when media is attached, all platforms have customContent, every platform entry is an X Article (platformSpecificData.article), or every platform entry is a LinkedIn text-free reshare (platformSpecificData.reshareUrl with no text). Required for other text-only posts.
      *
      * @return self
      */
