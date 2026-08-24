@@ -421,6 +421,7 @@ docs/Model/DeleteAccountGroup200Response.md
 docs/Model/DeleteAdCampaign200Response.md
 docs/Model/DeleteAdCampaignRequest.md
 docs/Model/DeleteAdCreative200Response.md
+docs/Model/DeleteAdVideo200Response.md
 docs/Model/DeleteDiscordScheduledEvent200Response.md
 docs/Model/DeleteGoogleBusinessMedia200Response.md
 docs/Model/DeleteGoogleBusinessPlaceAction200Response.md
@@ -1566,6 +1567,9 @@ docs/Model/UpdateYoutubeDefaultPlaylistRequest.md
 docs/Model/UploadAdImage201Response.md
 docs/Model/UploadAdImage201ResponseImage.md
 docs/Model/UploadAdImageRequest.md
+docs/Model/UploadAdVideo201Response.md
+docs/Model/UploadAdVideo201ResponseVideo.md
+docs/Model/UploadAdVideoRequest.md
 docs/Model/UploadMediaDirect200Response.md
 docs/Model/UploadPhoneNumberKycDocument200Response.md
 docs/Model/UploadPhoneNumberPortInDocument200Response.md
@@ -2195,6 +2199,7 @@ lib/Model/DeleteAccountGroup200Response.php
 lib/Model/DeleteAdCampaign200Response.php
 lib/Model/DeleteAdCampaignRequest.php
 lib/Model/DeleteAdCreative200Response.php
+lib/Model/DeleteAdVideo200Response.php
 lib/Model/DeleteDiscordScheduledEvent200Response.php
 lib/Model/DeleteGoogleBusinessMedia200Response.php
 lib/Model/DeleteGoogleBusinessPlaceAction200Response.php
@@ -3341,6 +3346,9 @@ lib/Model/UpdateYoutubeDefaultPlaylistRequest.php
 lib/Model/UploadAdImage201Response.php
 lib/Model/UploadAdImage201ResponseImage.php
 lib/Model/UploadAdImageRequest.php
+lib/Model/UploadAdVideo201Response.php
+lib/Model/UploadAdVideo201ResponseVideo.php
+lib/Model/UploadAdVideoRequest.php
 lib/Model/UploadMediaDirect200Response.php
 lib/Model/UploadPhoneNumberKycDocument200Response.php
 lib/Model/UploadPhoneNumberPortInDocument200Response.php
@@ -3549,3 +3557,7 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/DeleteAdVideo200ResponseTest.php
+test/Model/UploadAdVideo201ResponseTest.php
+test/Model/UploadAdVideo201ResponseVideoTest.php
+test/Model/UploadAdVideoRequestTest.php
