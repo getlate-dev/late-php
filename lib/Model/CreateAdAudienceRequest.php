@@ -1052,7 +1052,7 @@ class CreateAdAudienceRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets engagement_source
      *
-     * @param string|null $engagement_source Required for meta_engagement audiences (Meta only): what people engaged with. `page` = a Facebook Page, `instagram` = an IG professional account, `video` = a video. The source object must be eligible for engagement audiences or Meta rejects with subcode 1713151 (\"Invalid Event Name\"), surfaced verbatim.
+     * @param string|null $engagement_source Required for meta_engagement audiences (Meta only): what people engaged with. `page` = a Facebook Page, `instagram` = an IG professional account, `video` = a video.
      *
      * @return self
      */

@@ -85,7 +85,7 @@ class UpdateProfileRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'description' => false,
+        'description' => true,
         'color' => false,
         'is_default' => false
     ];
@@ -296,6 +296,10 @@ class UpdateProfileRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 1)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -333,6 +337,11 @@ class UpdateProfileRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         if (is_null($name)) {
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
+
+        if ((mb_strlen($name) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling UpdateProfileRequest., must be bigger than or equal to 1.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;
@@ -351,14 +360,21 @@ class UpdateProfileRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description Set to null to clear the description.
      *
      * @return self
      */
     public function setDescription($description)
     {
         if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['description'] = $description;
 
