@@ -60,7 +60,8 @@ class UpdateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
     protected static $openAPITypes = [
         'account_id' => 'string',
         'name' => 'string',
-        'categories' => 'string[]'
+        'categories' => 'string[]',
+        'endpoint_uri' => 'string'
     ];
 
     /**
@@ -73,7 +74,8 @@ class UpdateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
     protected static $openAPIFormats = [
         'account_id' => null,
         'name' => null,
-        'categories' => null
+        'categories' => null,
+        'endpoint_uri' => 'uri'
     ];
 
     /**
@@ -84,7 +86,8 @@ class UpdateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
     protected static array $openAPINullables = [
         'account_id' => false,
         'name' => false,
-        'categories' => false
+        'categories' => false,
+        'endpoint_uri' => false
     ];
 
     /**
@@ -175,7 +178,8 @@ class UpdateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
     protected static $attributeMap = [
         'account_id' => 'accountId',
         'name' => 'name',
-        'categories' => 'categories'
+        'categories' => 'categories',
+        'endpoint_uri' => 'endpointUri'
     ];
 
     /**
@@ -186,7 +190,8 @@ class UpdateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
     protected static $setters = [
         'account_id' => 'setAccountId',
         'name' => 'setName',
-        'categories' => 'setCategories'
+        'categories' => 'setCategories',
+        'endpoint_uri' => 'setEndpointUri'
     ];
 
     /**
@@ -197,7 +202,8 @@ class UpdateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
     protected static $getters = [
         'account_id' => 'getAccountId',
         'name' => 'getName',
-        'categories' => 'getCategories'
+        'categories' => 'getCategories',
+        'endpoint_uri' => 'getEndpointUri'
     ];
 
     /**
@@ -287,6 +293,7 @@ class UpdateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('categories', $data ?? [], null);
+        $this->setIfExists('endpoint_uri', $data ?? [], null);
     }
 
     /**
@@ -437,6 +444,33 @@ class UpdateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('invalid length for $categories when calling UpdateWhatsAppFlowRequest., number of items must be greater than or equal to 1.');
         }
         $this->container['categories'] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Gets endpoint_uri
+     *
+     * @return string|null
+     */
+    public function getEndpointUri()
+    {
+        return $this->container['endpoint_uri'];
+    }
+
+    /**
+     * Sets endpoint_uri
+     *
+     * @param string|null $endpoint_uri HTTPS-only data exchange endpoint for the flow. Settable only while the flow is in DRAFT, and the flow's uploaded Flow JSON must declare data_api_version \"3.0\" for the endpoint to be used.
+     *
+     * @return self
+     */
+    public function setEndpointUri($endpoint_uri)
+    {
+        if (is_null($endpoint_uri)) {
+            throw new \InvalidArgumentException('non-nullable endpoint_uri cannot be null');
+        }
+        $this->container['endpoint_uri'] = $endpoint_uri;
 
         return $this;
     }

@@ -62,7 +62,8 @@ class CreateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
         'name' => 'string',
         'categories' => 'string[]',
         'clone_flow_id' => 'string',
-        'as_version' => 'bool'
+        'as_version' => 'bool',
+        'endpoint_uri' => 'string'
     ];
 
     /**
@@ -77,7 +78,8 @@ class CreateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
         'name' => null,
         'categories' => null,
         'clone_flow_id' => null,
-        'as_version' => null
+        'as_version' => null,
+        'endpoint_uri' => 'uri'
     ];
 
     /**
@@ -90,7 +92,8 @@ class CreateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
         'name' => false,
         'categories' => false,
         'clone_flow_id' => false,
-        'as_version' => false
+        'as_version' => false,
+        'endpoint_uri' => false
     ];
 
     /**
@@ -183,7 +186,8 @@ class CreateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
         'name' => 'name',
         'categories' => 'categories',
         'clone_flow_id' => 'cloneFlowId',
-        'as_version' => 'asVersion'
+        'as_version' => 'asVersion',
+        'endpoint_uri' => 'endpointUri'
     ];
 
     /**
@@ -196,7 +200,8 @@ class CreateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
         'name' => 'setName',
         'categories' => 'setCategories',
         'clone_flow_id' => 'setCloneFlowId',
-        'as_version' => 'setAsVersion'
+        'as_version' => 'setAsVersion',
+        'endpoint_uri' => 'setEndpointUri'
     ];
 
     /**
@@ -209,7 +214,8 @@ class CreateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
         'name' => 'getName',
         'categories' => 'getCategories',
         'clone_flow_id' => 'getCloneFlowId',
-        'as_version' => 'getAsVersion'
+        'as_version' => 'getAsVersion',
+        'endpoint_uri' => 'getEndpointUri'
     ];
 
     /**
@@ -301,6 +307,7 @@ class CreateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('categories', $data ?? [], null);
         $this->setIfExists('clone_flow_id', $data ?? [], null);
         $this->setIfExists('as_version', $data ?? [], null);
+        $this->setIfExists('endpoint_uri', $data ?? [], null);
     }
 
     /**
@@ -511,6 +518,33 @@ class CreateWhatsAppFlowRequest implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable as_version cannot be null');
         }
         $this->container['as_version'] = $as_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets endpoint_uri
+     *
+     * @return string|null
+     */
+    public function getEndpointUri()
+    {
+        return $this->container['endpoint_uri'];
+    }
+
+    /**
+     * Sets endpoint_uri
+     *
+     * @param string|null $endpoint_uri HTTPS-only data exchange endpoint for the flow. Settable only while the flow is in DRAFT, and the flow's uploaded Flow JSON must declare data_api_version \"3.0\" for the endpoint to be used.
+     *
+     * @return self
+     */
+    public function setEndpointUri($endpoint_uri)
+    {
+        if (is_null($endpoint_uri)) {
+            throw new \InvalidArgumentException('non-nullable endpoint_uri cannot be null');
+        }
+        $this->container['endpoint_uri'] = $endpoint_uri;
 
         return $this;
     }
