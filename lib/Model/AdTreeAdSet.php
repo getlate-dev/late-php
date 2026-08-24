@@ -62,6 +62,7 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_ad_set_id' => 'string',
         'ad_set_name' => 'string',
         'status' => '\Zernio\Model\AdStatus',
+        'created_time' => '\DateTime',
         'ad_count' => 'int',
         'budget' => '\Zernio\Model\AdTreeAdSetBudget',
         'ad_set_budget' => '\Zernio\Model\AdTreeAdSetAdSetBudget',
@@ -88,6 +89,7 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_ad_set_id' => null,
         'ad_set_name' => null,
         'status' => null,
+        'created_time' => 'date-time',
         'ad_count' => null,
         'budget' => null,
         'ad_set_budget' => null,
@@ -112,6 +114,7 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_ad_set_id' => false,
         'ad_set_name' => false,
         'status' => false,
+        'created_time' => true,
         'ad_count' => false,
         'budget' => false,
         'ad_set_budget' => false,
@@ -216,6 +219,7 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_ad_set_id' => 'platformAdSetId',
         'ad_set_name' => 'adSetName',
         'status' => 'status',
+        'created_time' => 'createdTime',
         'ad_count' => 'adCount',
         'budget' => 'budget',
         'ad_set_budget' => 'adSetBudget',
@@ -240,6 +244,7 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_ad_set_id' => 'setPlatformAdSetId',
         'ad_set_name' => 'setAdSetName',
         'status' => 'setStatus',
+        'created_time' => 'setCreatedTime',
         'ad_count' => 'setAdCount',
         'budget' => 'setBudget',
         'ad_set_budget' => 'setAdSetBudget',
@@ -264,6 +269,7 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_ad_set_id' => 'getPlatformAdSetId',
         'ad_set_name' => 'getAdSetName',
         'status' => 'getStatus',
+        'created_time' => 'getCreatedTime',
         'ad_count' => 'getAdCount',
         'budget' => 'getBudget',
         'ad_set_budget' => 'getAdSetBudget',
@@ -339,6 +345,7 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('platform_ad_set_id', $data ?? [], null);
         $this->setIfExists('ad_set_name', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('created_time', $data ?? [], null);
         $this->setIfExists('ad_count', $data ?? [], null);
         $this->setIfExists('budget', $data ?? [], null);
         $this->setIfExists('ad_set_budget', $data ?? [], null);
@@ -473,6 +480,40 @@ class AdTreeAdSet implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_time
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedTime()
+    {
+        return $this->container['created_time'];
+    }
+
+    /**
+     * Sets created_time
+     *
+     * @param \DateTime|null $created_time Earliest `platformCreatedAt` (platform ad creation time; falls back to `createdAt`, Zernio's sync time, for ads synced before that field existed) across this ad set's ads. Not the ad set's own creation time on the platform — a proxy usable for sorting.
+     *
+     * @return self
+     */
+    public function setCreatedTime($created_time)
+    {
+        if (is_null($created_time)) {
+            array_push($this->openAPINullablesSetToNull, 'created_time');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('created_time', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['created_time'] = $created_time;
 
         return $this;
     }

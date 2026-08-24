@@ -62,6 +62,7 @@ class AdTreeCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_campaign_id' => 'string',
         'platform' => 'string',
         'campaign_name' => 'string',
+        'created_time' => '\DateTime',
         'status' => '\Zernio\Model\AdStatus',
         'review_status' => '\Zernio\Model\AdReviewStatus',
         'platform_campaign_status' => 'string',
@@ -100,6 +101,7 @@ class AdTreeCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_campaign_id' => null,
         'platform' => null,
         'campaign_name' => null,
+        'created_time' => 'date-time',
         'status' => null,
         'review_status' => null,
         'platform_campaign_status' => null,
@@ -136,6 +138,7 @@ class AdTreeCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_campaign_id' => false,
         'platform' => false,
         'campaign_name' => false,
+        'created_time' => true,
         'status' => false,
         'review_status' => true,
         'platform_campaign_status' => true,
@@ -252,6 +255,7 @@ class AdTreeCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_campaign_id' => 'platformCampaignId',
         'platform' => 'platform',
         'campaign_name' => 'campaignName',
+        'created_time' => 'createdTime',
         'status' => 'status',
         'review_status' => 'reviewStatus',
         'platform_campaign_status' => 'platformCampaignStatus',
@@ -288,6 +292,7 @@ class AdTreeCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_campaign_id' => 'setPlatformCampaignId',
         'platform' => 'setPlatform',
         'campaign_name' => 'setCampaignName',
+        'created_time' => 'setCreatedTime',
         'status' => 'setStatus',
         'review_status' => 'setReviewStatus',
         'platform_campaign_status' => 'setPlatformCampaignStatus',
@@ -324,6 +329,7 @@ class AdTreeCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
         'platform_campaign_id' => 'getPlatformCampaignId',
         'platform' => 'getPlatform',
         'campaign_name' => 'getCampaignName',
+        'created_time' => 'getCreatedTime',
         'status' => 'getStatus',
         'review_status' => 'getReviewStatus',
         'platform_campaign_status' => 'getPlatformCampaignStatus',
@@ -453,6 +459,7 @@ class AdTreeCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('platform_campaign_id', $data ?? [], null);
         $this->setIfExists('platform', $data ?? [], null);
         $this->setIfExists('campaign_name', $data ?? [], null);
+        $this->setIfExists('created_time', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('review_status', $data ?? [], null);
         $this->setIfExists('platform_campaign_status', $data ?? [], null);
@@ -627,6 +634,40 @@ class AdTreeCampaign implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable campaign_name cannot be null');
         }
         $this->container['campaign_name'] = $campaign_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_time
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedTime()
+    {
+        return $this->container['created_time'];
+    }
+
+    /**
+     * Sets created_time
+     *
+     * @param \DateTime|null $created_time Earliest `platformCreatedAt` (platform ad creation time; falls back to `createdAt`, Zernio's sync time, for ads synced before that field existed) across every ad in the campaign. Not the platform campaign's own creation time (Meta's `Campaign.created_time` etc. is not synced) — a campaign created empty and populated later will show its first ad's time, not the campaign's. Usable for sorting \"most recently created\" without the numeric-campaign-id heuristic. Same source as `AdTreeAdSet.createdTime` and `Ad.platformCreatedAt`; mirrors `AdCampaign.earliestAd`.
+     *
+     * @return self
+     */
+    public function setCreatedTime($created_time)
+    {
+        if (is_null($created_time)) {
+            array_push($this->openAPINullablesSetToNull, 'created_time');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('created_time', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['created_time'] = $created_time;
 
         return $this;
     }

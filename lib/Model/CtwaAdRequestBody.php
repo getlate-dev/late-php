@@ -963,7 +963,7 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets creatives
      *
-     * @param \Zernio\Model\CtwaAdRequestBodyCreativesInner[]|null $creatives Multi-creative shape: N CTWA ads under one campaign + one ad set, sharing budget and targeting. Mutually exclusive with the top-level single-creative fields (`headline` / `body` / `imageUrl` / `video`). Each entry must supply its own headline, body, and exactly one of `imageUrl` / `video`.
+     * @param \Zernio\Model\CtwaAdRequestBodyCreativesInner[]|null $creatives Multi-creative shape: N CTWA ads under one campaign + one ad set, sharing budget and targeting. Mutually exclusive with the top-level single-creative fields (`headline` / `body` / `imageUrl` / `video`): setting both is a 400, unlike `POST /v1/ads/create` where the top-level fields are silently ignored in multi-creative mode. Each entry must supply its own headline, body, and exactly one of `imageUrl` / `video`.
      *
      * @return self
      */
