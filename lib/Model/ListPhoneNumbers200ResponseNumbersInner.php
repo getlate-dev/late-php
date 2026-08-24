@@ -66,6 +66,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'telnyx_order_id' => 'string',
         'monthly_cents' => 'int',
         'hosted_by_zernio' => 'bool',
+        'sip_trunk_id' => 'string',
         'profile_id' => 'object',
         'provisioned_at' => '\DateTime',
         'meta_preverified_id' => 'string',
@@ -94,6 +95,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'telnyx_order_id' => null,
         'monthly_cents' => null,
         'hosted_by_zernio' => null,
+        'sip_trunk_id' => null,
         'profile_id' => null,
         'provisioned_at' => 'date-time',
         'meta_preverified_id' => null,
@@ -120,6 +122,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'telnyx_order_id' => true,
         'monthly_cents' => false,
         'hosted_by_zernio' => false,
+        'sip_trunk_id' => true,
         'profile_id' => false,
         'provisioned_at' => false,
         'meta_preverified_id' => false,
@@ -226,6 +229,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'telnyx_order_id' => 'telnyxOrderId',
         'monthly_cents' => 'monthlyCents',
         'hosted_by_zernio' => 'hostedByZernio',
+        'sip_trunk_id' => 'sipTrunkId',
         'profile_id' => 'profileId',
         'provisioned_at' => 'provisionedAt',
         'meta_preverified_id' => 'metaPreverifiedId',
@@ -252,6 +256,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'telnyx_order_id' => 'setTelnyxOrderId',
         'monthly_cents' => 'setMonthlyCents',
         'hosted_by_zernio' => 'setHostedByZernio',
+        'sip_trunk_id' => 'setSipTrunkId',
         'profile_id' => 'setProfileId',
         'provisioned_at' => 'setProvisionedAt',
         'meta_preverified_id' => 'setMetaPreverifiedId',
@@ -278,6 +283,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         'telnyx_order_id' => 'getTelnyxOrderId',
         'monthly_cents' => 'getMonthlyCents',
         'hosted_by_zernio' => 'getHostedByZernio',
+        'sip_trunk_id' => 'getSipTrunkId',
         'profile_id' => 'getProfileId',
         'provisioned_at' => 'getProvisionedAt',
         'meta_preverified_id' => 'getMetaPreverifiedId',
@@ -384,6 +390,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
         $this->setIfExists('telnyx_order_id', $data ?? [], null);
         $this->setIfExists('monthly_cents', $data ?? [], null);
         $this->setIfExists('hosted_by_zernio', $data ?? [], null);
+        $this->setIfExists('sip_trunk_id', $data ?? [], null);
         $this->setIfExists('profile_id', $data ?? [], null);
         $this->setIfExists('provisioned_at', $data ?? [], null);
         $this->setIfExists('meta_preverified_id', $data ?? [], null);
@@ -683,6 +690,40 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
             throw new \InvalidArgumentException('non-nullable hosted_by_zernio cannot be null');
         }
         $this->container['hosted_by_zernio'] = $hosted_by_zernio;
+
+        return $this;
+    }
+
+    /**
+     * Gets sip_trunk_id
+     *
+     * @return string|null
+     */
+    public function getSipTrunkId()
+    {
+        return $this->container['sip_trunk_id'];
+    }
+
+    /**
+     * Sets sip_trunk_id
+     *
+     * @param string|null $sip_trunk_id SIP trunk the number is attached to; null when not trunked. While attached, enabling Calls or WhatsApp calling, requesting WhatsApp verification, and releasing the number all return 409.
+     *
+     * @return self
+     */
+    public function setSipTrunkId($sip_trunk_id)
+    {
+        if (is_null($sip_trunk_id)) {
+            array_push($this->openAPINullablesSetToNull, 'sip_trunk_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sip_trunk_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['sip_trunk_id'] = $sip_trunk_id;
 
         return $this;
     }

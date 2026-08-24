@@ -137,6 +137,8 @@ docs/Model/ArchiveLeadForm200Response.md
 docs/Model/AssignGoogleBusinessLocation200Response.md
 docs/Model/AssignGoogleBusinessLocation200ResponseAccount.md
 docs/Model/AssignGoogleBusinessLocationRequest.md
+docs/Model/AttachNumberToSipTrunk200Response.md
+docs/Model/AttachNumberToSipTrunkRequest.md
 docs/Model/BatchGetGoogleBusinessReviews200Response.md
 docs/Model/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md
 docs/Model/BatchGetGoogleBusinessReviewsRequest.md
@@ -338,6 +340,9 @@ docs/Model/CreateSequenceRequest.md
 docs/Model/CreateSequenceRequestStepsInner.md
 docs/Model/CreateSequenceRequestStepsInnerTemplate.md
 docs/Model/CreateSequenceRequestStepsInnerTemplateVariableMappingValue.md
+docs/Model/CreateSipTrunk201Response.md
+docs/Model/CreateSipTrunk201ResponseTermination.md
+docs/Model/CreateSipTrunkRequest.md
 docs/Model/CreateSmsSenderId200Response.md
 docs/Model/CreateSmsSenderIdRequest.md
 docs/Model/CreateStandaloneAd200Response.md
@@ -425,6 +430,7 @@ docs/Model/DeleteInboxReviewReplyRequest.md
 docs/Model/DeleteSmsSenderId200Response.md
 docs/Model/DeleteValueRuleSet200Response.md
 docs/Model/DeleteWhatsappBusinessUsernameRequest.md
+docs/Model/DetachNumberFromSipTrunk200Response.md
 docs/Model/DialVoiceWebCall200Response.md
 docs/Model/DialVoiceWebCallRequest.md
 docs/Model/DisableSmsOnNumber200Response.md
@@ -747,6 +753,8 @@ docs/Model/GetSequence200Response.md
 docs/Model/GetSequence200ResponseSequence.md
 docs/Model/GetSequence200ResponseSequenceStepsInner.md
 docs/Model/GetSequence200ResponseSequenceStepsInnerTemplate.md
+docs/Model/GetSipTrunk200Response.md
+docs/Model/GetSipTrunk200ResponseNumbersInner.md
 docs/Model/GetSlackSettings200Response.md
 docs/Model/GetSlackSettings200ResponseAccount.md
 docs/Model/GetSmsRegistration200Response.md
@@ -1036,6 +1044,9 @@ docs/Model/ListSequenceEnrollments200Response.md
 docs/Model/ListSequenceEnrollments200ResponseEnrollmentsInner.md
 docs/Model/ListSequences200Response.md
 docs/Model/ListSequences200ResponseSequencesInner.md
+docs/Model/ListSipTrunks200Response.md
+docs/Model/ListSipTrunks200ResponseTrunksInner.md
+docs/Model/ListSipTrunks200ResponseTrunksInnerTermination.md
 docs/Model/ListSlackMembers200Response.md
 docs/Model/ListSlackMembers200ResponseMembersInner.md
 docs/Model/ListSmsOptOuts200Response.md
@@ -1224,6 +1235,7 @@ docs/Model/ReviewWebhookReviewReply.md
 docs/Model/ReviewWebhookReviewReviewer.md
 docs/Model/RevokeConnectedApp200Response.md
 docs/Model/RfPrediction.md
+docs/Model/RotateSipTrunkCredentials200Response.md
 docs/Model/SavedTargetingAudience.md
 docs/Model/ScheduleBroadcast200Response.md
 docs/Model/ScheduleBroadcast200ResponseBroadcast.md
@@ -1897,6 +1909,8 @@ lib/Model/ArchiveLeadForm200Response.php
 lib/Model/AssignGoogleBusinessLocation200Response.php
 lib/Model/AssignGoogleBusinessLocation200ResponseAccount.php
 lib/Model/AssignGoogleBusinessLocationRequest.php
+lib/Model/AttachNumberToSipTrunk200Response.php
+lib/Model/AttachNumberToSipTrunkRequest.php
 lib/Model/BatchGetGoogleBusinessReviews200Response.php
 lib/Model/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.php
 lib/Model/BatchGetGoogleBusinessReviewsRequest.php
@@ -2098,6 +2112,9 @@ lib/Model/CreateSequenceRequest.php
 lib/Model/CreateSequenceRequestStepsInner.php
 lib/Model/CreateSequenceRequestStepsInnerTemplate.php
 lib/Model/CreateSequenceRequestStepsInnerTemplateVariableMappingValue.php
+lib/Model/CreateSipTrunk201Response.php
+lib/Model/CreateSipTrunk201ResponseTermination.php
+lib/Model/CreateSipTrunkRequest.php
 lib/Model/CreateSmsSenderId200Response.php
 lib/Model/CreateSmsSenderIdRequest.php
 lib/Model/CreateStandaloneAd200Response.php
@@ -2185,6 +2202,7 @@ lib/Model/DeleteInboxReviewReplyRequest.php
 lib/Model/DeleteSmsSenderId200Response.php
 lib/Model/DeleteValueRuleSet200Response.php
 lib/Model/DeleteWhatsappBusinessUsernameRequest.php
+lib/Model/DetachNumberFromSipTrunk200Response.php
 lib/Model/DialVoiceWebCall200Response.php
 lib/Model/DialVoiceWebCallRequest.php
 lib/Model/DisableSmsOnNumber200Response.php
@@ -2507,6 +2525,8 @@ lib/Model/GetSequence200Response.php
 lib/Model/GetSequence200ResponseSequence.php
 lib/Model/GetSequence200ResponseSequenceStepsInner.php
 lib/Model/GetSequence200ResponseSequenceStepsInnerTemplate.php
+lib/Model/GetSipTrunk200Response.php
+lib/Model/GetSipTrunk200ResponseNumbersInner.php
 lib/Model/GetSlackSettings200Response.php
 lib/Model/GetSlackSettings200ResponseAccount.php
 lib/Model/GetSmsRegistration200Response.php
@@ -2796,6 +2816,9 @@ lib/Model/ListSequenceEnrollments200Response.php
 lib/Model/ListSequenceEnrollments200ResponseEnrollmentsInner.php
 lib/Model/ListSequences200Response.php
 lib/Model/ListSequences200ResponseSequencesInner.php
+lib/Model/ListSipTrunks200Response.php
+lib/Model/ListSipTrunks200ResponseTrunksInner.php
+lib/Model/ListSipTrunks200ResponseTrunksInnerTermination.php
 lib/Model/ListSlackMembers200Response.php
 lib/Model/ListSlackMembers200ResponseMembersInner.php
 lib/Model/ListSmsOptOuts200Response.php
@@ -2985,6 +3008,7 @@ lib/Model/ReviewWebhookReviewReply.php
 lib/Model/ReviewWebhookReviewReviewer.php
 lib/Model/RevokeConnectedApp200Response.php
 lib/Model/RfPrediction.php
+lib/Model/RotateSipTrunkCredentials200Response.php
 lib/Model/SavedTargetingAudience.php
 lib/Model/ScheduleBroadcast200Response.php
 lib/Model/ScheduleBroadcast200ResponseBroadcast.php
@@ -3521,4 +3545,15 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/SendInboxMessage200ResponseDataAttachmentsInnerTest.php
+test/Model/AttachNumberToSipTrunk200ResponseTest.php
+test/Model/AttachNumberToSipTrunkRequestTest.php
+test/Model/CreateSipTrunk201ResponseTerminationTest.php
+test/Model/CreateSipTrunk201ResponseTest.php
+test/Model/CreateSipTrunkRequestTest.php
+test/Model/DetachNumberFromSipTrunk200ResponseTest.php
+test/Model/GetSipTrunk200ResponseNumbersInnerTest.php
+test/Model/GetSipTrunk200ResponseTest.php
+test/Model/ListSipTrunks200ResponseTest.php
+test/Model/ListSipTrunks200ResponseTrunksInnerTerminationTest.php
+test/Model/ListSipTrunks200ResponseTrunksInnerTest.php
+test/Model/RotateSipTrunkCredentials200ResponseTest.php

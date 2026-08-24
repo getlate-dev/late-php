@@ -68,7 +68,8 @@ class GetPhoneNumber200ResponsePhoneNumber implements ModelInterface, ArrayAcces
         'end_user_first_name' => 'string',
         'end_user_last_name' => 'string',
         'regulatory_decline_reason' => 'string',
-        'provisioned_at' => '\DateTime'
+        'provisioned_at' => '\DateTime',
+        'sip_trunk_id' => 'string'
     ];
 
     /**
@@ -89,7 +90,8 @@ class GetPhoneNumber200ResponsePhoneNumber implements ModelInterface, ArrayAcces
         'end_user_first_name' => null,
         'end_user_last_name' => null,
         'regulatory_decline_reason' => null,
-        'provisioned_at' => 'date-time'
+        'provisioned_at' => 'date-time',
+        'sip_trunk_id' => null
     ];
 
     /**
@@ -108,7 +110,8 @@ class GetPhoneNumber200ResponsePhoneNumber implements ModelInterface, ArrayAcces
         'end_user_first_name' => true,
         'end_user_last_name' => true,
         'regulatory_decline_reason' => true,
-        'provisioned_at' => false
+        'provisioned_at' => false,
+        'sip_trunk_id' => true
     ];
 
     /**
@@ -207,7 +210,8 @@ class GetPhoneNumber200ResponsePhoneNumber implements ModelInterface, ArrayAcces
         'end_user_first_name' => 'endUserFirstName',
         'end_user_last_name' => 'endUserLastName',
         'regulatory_decline_reason' => 'regulatoryDeclineReason',
-        'provisioned_at' => 'provisionedAt'
+        'provisioned_at' => 'provisionedAt',
+        'sip_trunk_id' => 'sipTrunkId'
     ];
 
     /**
@@ -226,7 +230,8 @@ class GetPhoneNumber200ResponsePhoneNumber implements ModelInterface, ArrayAcces
         'end_user_first_name' => 'setEndUserFirstName',
         'end_user_last_name' => 'setEndUserLastName',
         'regulatory_decline_reason' => 'setRegulatoryDeclineReason',
-        'provisioned_at' => 'setProvisionedAt'
+        'provisioned_at' => 'setProvisionedAt',
+        'sip_trunk_id' => 'setSipTrunkId'
     ];
 
     /**
@@ -245,7 +250,8 @@ class GetPhoneNumber200ResponsePhoneNumber implements ModelInterface, ArrayAcces
         'end_user_first_name' => 'getEndUserFirstName',
         'end_user_last_name' => 'getEndUserLastName',
         'regulatory_decline_reason' => 'getRegulatoryDeclineReason',
-        'provisioned_at' => 'getProvisionedAt'
+        'provisioned_at' => 'getProvisionedAt',
+        'sip_trunk_id' => 'getSipTrunkId'
     ];
 
     /**
@@ -345,6 +351,7 @@ class GetPhoneNumber200ResponsePhoneNumber implements ModelInterface, ArrayAcces
         $this->setIfExists('end_user_last_name', $data ?? [], null);
         $this->setIfExists('regulatory_decline_reason', $data ?? [], null);
         $this->setIfExists('provisioned_at', $data ?? [], null);
+        $this->setIfExists('sip_trunk_id', $data ?? [], null);
     }
 
     /**
@@ -729,6 +736,40 @@ class GetPhoneNumber200ResponsePhoneNumber implements ModelInterface, ArrayAcces
             throw new \InvalidArgumentException('non-nullable provisioned_at cannot be null');
         }
         $this->container['provisioned_at'] = $provisioned_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets sip_trunk_id
+     *
+     * @return string|null
+     */
+    public function getSipTrunkId()
+    {
+        return $this->container['sip_trunk_id'];
+    }
+
+    /**
+     * Sets sip_trunk_id
+     *
+     * @param string|null $sip_trunk_id SIP trunk the number is attached to; null when not trunked. While attached, enabling Calls or WhatsApp calling, requesting WhatsApp verification, and releasing the number all return 409.
+     *
+     * @return self
+     */
+    public function setSipTrunkId($sip_trunk_id)
+    {
+        if (is_null($sip_trunk_id)) {
+            array_push($this->openAPINullablesSetToNull, 'sip_trunk_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sip_trunk_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['sip_trunk_id'] = $sip_trunk_id;
 
         return $this;
     }

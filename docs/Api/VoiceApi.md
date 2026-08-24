@@ -6,18 +6,147 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**attachNumberToSipTrunk()**](VoiceApi.md#attachNumberToSipTrunk) | **POST** /v1/phone-numbers/{id}/sip-trunk | Attach a number to a SIP trunk |
+| [**createSipTrunk()**](VoiceApi.md#createSipTrunk) | **POST** /v1/phone-numbers/sip-trunks | Create a SIP trunk |
 | [**createVoiceCall()**](VoiceApi.md#createVoiceCall) | **POST** /v1/voice/calls | Place an outbound phone call |
 | [**createVoiceWebSession()**](VoiceApi.md#createVoiceWebSession) | **POST** /v1/voice/calls/web | Mint a browser softphone session |
+| [**deleteSipTrunk()**](VoiceApi.md#deleteSipTrunk) | **DELETE** /v1/phone-numbers/sip-trunks/{id} | Delete a SIP trunk |
+| [**detachNumberFromSipTrunk()**](VoiceApi.md#detachNumberFromSipTrunk) | **DELETE** /v1/phone-numbers/{id}/sip-trunk | Detach a number from its SIP trunk |
 | [**dialVoiceWebCall()**](VoiceApi.md#dialVoiceWebCall) | **POST** /v1/voice/calls/web/dial | Dial from the browser softphone |
 | [**disableVoiceOnNumber()**](VoiceApi.md#disableVoiceOnNumber) | **DELETE** /v1/phone-numbers/{id}/voice | Disable phone calling on a number |
 | [**enableVoiceOnNumber()**](VoiceApi.md#enableVoiceOnNumber) | **POST** /v1/phone-numbers/{id}/voice | Enable phone calling on a number |
 | [**endVoiceCall()**](VoiceApi.md#endVoiceCall) | **POST** /v1/voice/calls/{id}/end | Hang up a live call |
+| [**getSipTrunk()**](VoiceApi.md#getSipTrunk) | **GET** /v1/phone-numbers/sip-trunks/{id} | Get a SIP trunk |
 | [**getVoiceCall()**](VoiceApi.md#getVoiceCall) | **GET** /v1/voice/calls/{id} | Get a phone call |
 | [**getVoiceCallEstimate()**](VoiceApi.md#getVoiceCallEstimate) | **GET** /v1/voice/calls/estimate | Estimate call cost |
 | [**getVoiceCallRecording()**](VoiceApi.md#getVoiceCallRecording) | **GET** /v1/voice/calls/{id}/recording | Get a call recording |
+| [**listSipTrunks()**](VoiceApi.md#listSipTrunks) | **GET** /v1/phone-numbers/sip-trunks | List SIP trunks |
 | [**listVoiceCalls()**](VoiceApi.md#listVoiceCalls) | **GET** /v1/voice/calls | List phone calls |
+| [**rotateSipTrunkCredentials()**](VoiceApi.md#rotateSipTrunkCredentials) | **POST** /v1/phone-numbers/sip-trunks/{id}/rotate-credentials | Rotate a SIP trunk&#39;s password |
 | [**transferVoiceCall()**](VoiceApi.md#transferVoiceCall) | **POST** /v1/voice/calls/{id}/transfer | Blind-transfer a live call |
 
+
+## `attachNumberToSipTrunk()`
+
+```php
+attachNumberToSipTrunk($id, $attach_number_to_sip_trunk_request): \Zernio\Model\AttachNumberToSipTrunk200Response
+```
+
+Attach a number to a SIP trunk
+
+Routes the number's calls to the trunk: the external platform receives its inbound directly and can present it as outbound caller ID. While attached, Zernio-side voice features are off for this number (call forwarding, IVR, voicemail, recording, the softphone, and WhatsApp calling), so the number must have Calls and WhatsApp calling disabled before attaching. SMS and WhatsApp messaging are unaffected.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\VoiceApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string | Phone number record ID (from GET /v1/phone-numbers).
+$attach_number_to_sip_trunk_request = new \Zernio\Model\AttachNumberToSipTrunkRequest(); // \Zernio\Model\AttachNumberToSipTrunkRequest
+
+try {
+    $result = $apiInstance->attachNumberToSipTrunk($id, $attach_number_to_sip_trunk_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling VoiceApi->attachNumberToSipTrunk: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| Phone number record ID (from GET /v1/phone-numbers). | |
+| **attach_number_to_sip_trunk_request** | [**\Zernio\Model\AttachNumberToSipTrunkRequest**](../Model/AttachNumberToSipTrunkRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\AttachNumberToSipTrunk200Response**](../Model/AttachNumberToSipTrunk200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createSipTrunk()`
+
+```php
+createSipTrunk($create_sip_trunk_request): \Zernio\Model\CreateSipTrunk201Response
+```
+
+Create a SIP trunk
+
+Creates a SIP trunk an external voice platform (Retell, ElevenLabs, Vapi, or any SIP endpoint) can import your Zernio numbers into. The trunk carries both directions: inbound calls on attached numbers are delivered to `sipHost`, and the platform originates outbound calls through `termination.uri` with the digest credentials.  The `digestPassword` is returned only by this call (and by rotate-credentials); store it immediately. Attach any number of numbers to a trunk. Several trunks may point at the same host — each carries its own credentials and spend cap, so separate destination workspaces (e.g. an agency's clients) stay isolated.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\VoiceApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$create_sip_trunk_request = new \Zernio\Model\CreateSipTrunkRequest(); // \Zernio\Model\CreateSipTrunkRequest
+
+try {
+    $result = $apiInstance->createSipTrunk($create_sip_trunk_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling VoiceApi->createSipTrunk: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **create_sip_trunk_request** | [**\Zernio\Model\CreateSipTrunkRequest**](../Model/CreateSipTrunkRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\CreateSipTrunk201Response**](../Model/CreateSipTrunk201Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createVoiceCall()`
 
@@ -124,6 +253,126 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**\Zernio\Model\CreateVoiceWebSession200Response**](../Model/CreateVoiceWebSession200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteSipTrunk()`
+
+```php
+deleteSipTrunk($id): \Zernio\Model\DeleteSmsSenderId200Response
+```
+
+Delete a SIP trunk
+
+Tears down the trunk and its carrier-side objects. Refused while any number is still attached: detach them first.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\VoiceApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string
+
+try {
+    $result = $apiInstance->deleteSipTrunk($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling VoiceApi->deleteSipTrunk: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**|  | |
+
+### Return type
+
+[**\Zernio\Model\DeleteSmsSenderId200Response**](../Model/DeleteSmsSenderId200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `detachNumberFromSipTrunk()`
+
+```php
+detachNumberFromSipTrunk($id): \Zernio\Model\DetachNumberFromSipTrunk200Response
+```
+
+Detach a number from its SIP trunk
+
+Returns the number's calls to Zernio routing. Idempotent when the number is not attached to any trunk.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\VoiceApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string
+
+try {
+    $result = $apiInstance->detachNumberFromSipTrunk($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling VoiceApi->detachNumberFromSipTrunk: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**|  | |
+
+### Return type
+
+[**\Zernio\Model\DetachNumberFromSipTrunk200Response**](../Model/DetachNumberFromSipTrunk200Response.md)
 
 ### Authorization
 
@@ -380,6 +629,64 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getSipTrunk()`
+
+```php
+getSipTrunk($id): \Zernio\Model\GetSipTrunk200Response
+```
+
+Get a SIP trunk
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\VoiceApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string
+
+try {
+    $result = $apiInstance->getSipTrunk($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling VoiceApi->getSipTrunk: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**|  | |
+
+### Return type
+
+[**\Zernio\Model\GetSipTrunk200Response**](../Model/GetSipTrunk200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getVoiceCall()`
 
 ```php
@@ -568,6 +875,61 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listSipTrunks()`
+
+```php
+listSipTrunks(): \Zernio\Model\ListSipTrunks200Response
+```
+
+List SIP trunks
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\VoiceApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+
+try {
+    $result = $apiInstance->listSipTrunks();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling VoiceApi->listSipTrunks: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**\Zernio\Model\ListSipTrunks200Response**](../Model/ListSipTrunks200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listVoiceCalls()`
 
 ```php
@@ -622,6 +984,66 @@ try {
 ### Return type
 
 [**\Zernio\Model\ListVoiceCalls200Response**](../Model/ListVoiceCalls200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `rotateSipTrunkCredentials()`
+
+```php
+rotateSipTrunkCredentials($id): \Zernio\Model\RotateSipTrunkCredentials200Response
+```
+
+Rotate a SIP trunk's password
+
+Mints a new digest password on the trunk. The old password stops working immediately, so update the destination platform right away.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\VoiceApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string
+
+try {
+    $result = $apiInstance->rotateSipTrunkCredentials($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling VoiceApi->rotateSipTrunkCredentials: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**|  | |
+
+### Return type
+
+[**\Zernio\Model\RotateSipTrunkCredentials200Response**](../Model/RotateSipTrunkCredentials200Response.md)
 
 ### Authorization
 

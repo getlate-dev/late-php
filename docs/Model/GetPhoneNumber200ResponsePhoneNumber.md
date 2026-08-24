@@ -15,5 +15,6 @@ Name | Type | Description | Notes
 **end_user_last_name** | **string** |  | [optional]
 **regulatory_decline_reason** | **string** | Reviewer rejection reason when status is regulatory_declined. | [optional]
 **provisioned_at** | **\DateTime** |  | [optional]
+**sip_trunk_id** | **string** | SIP trunk the number is attached to; null when not trunked. While attached, enabling Calls or WhatsApp calling, requesting WhatsApp verification, and releasing the number all return 409. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
