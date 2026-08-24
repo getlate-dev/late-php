@@ -60,6 +60,7 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPITypes = [
         'url' => 'string',
+        'id' => 'string',
         'thumbnail_url' => 'string'
     ];
 
@@ -72,6 +73,7 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPIFormats = [
         'url' => 'uri',
+        'id' => null,
         'thumbnail_url' => 'uri'
     ];
 
@@ -82,6 +84,7 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static array $openAPINullables = [
         'url' => false,
+        'id' => false,
         'thumbnail_url' => false
     ];
 
@@ -172,6 +175,7 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $attributeMap = [
         'url' => 'url',
+        'id' => 'id',
         'thumbnail_url' => 'thumbnailUrl'
     ];
 
@@ -182,6 +186,7 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $setters = [
         'url' => 'setUrl',
+        'id' => 'setId',
         'thumbnail_url' => 'setThumbnailUrl'
     ];
 
@@ -192,6 +197,7 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $getters = [
         'url' => 'getUrl',
+        'id' => 'getId',
         'thumbnail_url' => 'getThumbnailUrl'
     ];
 
@@ -253,6 +259,7 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
     public function __construct(?array $data = null)
     {
         $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('thumbnail_url', $data ?? [], null);
     }
 
@@ -283,12 +290,6 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['url'] === null) {
-            $invalidProperties[] = "'url' can't be null";
-        }
-        if ($this->container['thumbnail_url'] === null) {
-            $invalidProperties[] = "'thumbnail_url' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -307,7 +308,7 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets url
      *
-     * @return string
+     * @return string|null
      */
     public function getUrl()
     {
@@ -317,7 +318,7 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets url
      *
-     * @param string $url url
+     * @param string|null $url Public URL of the video to upload. Provide either `url` or `id`.
      *
      * @return self
      */
@@ -332,9 +333,36 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
     }
 
     /**
+     * Gets id
+     *
+     * @return string|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param string|null $id Reuse a video already uploaded to this ad account (list them with GET /v1/ads/videos) instead of re-uploading. Wins over `url`. Provide either `url` or `id`.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
      * Gets thumbnail_url
      *
-     * @return string
+     * @return string|null
      */
     public function getThumbnailUrl()
     {
@@ -344,7 +372,7 @@ class CtwaAdRequestBodyVideo implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets thumbnail_url
      *
-     * @param string $thumbnail_url Required by Meta for every video creative. Used as the ad thumbnail.
+     * @param string|null $thumbnail_url OPTIONAL: when omitted, the poster is auto-generated from Meta's own preferred video thumbnail. When Meta produces no candidate the request fails with a 502 platform_error (reason: video_thumbnail_unavailable) — retry, or supply this field to control the poster frame exactly.
      *
      * @return self
      */

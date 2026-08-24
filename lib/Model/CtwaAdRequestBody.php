@@ -85,6 +85,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'placements' => '\Zernio\Model\CtwaAdRequestBodyPlacements',
         'advantage_audience' => 'int',
         'objective' => 'string',
+        'status' => 'string',
+        'campaign_status' => 'string',
         'bid_strategy' => 'string',
         'bid_amount' => 'float',
         'roas_average_floor' => 'float',
@@ -126,6 +128,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'placements' => null,
         'advantage_audience' => null,
         'objective' => null,
+        'status' => null,
+        'campaign_status' => null,
         'bid_strategy' => null,
         'bid_amount' => null,
         'roas_average_floor' => null,
@@ -165,6 +169,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'placements' => false,
         'advantage_audience' => false,
         'objective' => false,
+        'status' => false,
+        'campaign_status' => false,
         'bid_strategy' => false,
         'bid_amount' => false,
         'roas_average_floor' => false,
@@ -284,6 +290,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'placements' => 'placements',
         'advantage_audience' => 'advantageAudience',
         'objective' => 'objective',
+        'status' => 'status',
+        'campaign_status' => 'campaignStatus',
         'bid_strategy' => 'bidStrategy',
         'bid_amount' => 'bidAmount',
         'roas_average_floor' => 'roasAverageFloor',
@@ -323,6 +331,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'placements' => 'setPlacements',
         'advantage_audience' => 'setAdvantageAudience',
         'objective' => 'setObjective',
+        'status' => 'setStatus',
+        'campaign_status' => 'setCampaignStatus',
         'bid_strategy' => 'setBidStrategy',
         'bid_amount' => 'setBidAmount',
         'roas_average_floor' => 'setRoasAverageFloor',
@@ -362,6 +372,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'placements' => 'getPlacements',
         'advantage_audience' => 'getAdvantageAudience',
         'objective' => 'getObjective',
+        'status' => 'getStatus',
+        'campaign_status' => 'getCampaignStatus',
         'bid_strategy' => 'getBidStrategy',
         'bid_amount' => 'getBidAmount',
         'roas_average_floor' => 'getRoasAverageFloor',
@@ -417,6 +429,10 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
     public const OBJECTIVE_OUTCOME_ENGAGEMENT = 'OUTCOME_ENGAGEMENT';
     public const OBJECTIVE_OUTCOME_SALES = 'OUTCOME_SALES';
     public const OBJECTIVE_OUTCOME_LEADS = 'OUTCOME_LEADS';
+    public const STATUS_ACTIVE = 'ACTIVE';
+    public const STATUS_PAUSED = 'PAUSED';
+    public const CAMPAIGN_STATUS_ACTIVE = 'ACTIVE';
+    public const CAMPAIGN_STATUS_PAUSED = 'PAUSED';
     public const BID_STRATEGY_LOWEST_COST_WITHOUT_CAP = 'LOWEST_COST_WITHOUT_CAP';
     public const BID_STRATEGY_LOWEST_COST_WITH_BID_CAP = 'LOWEST_COST_WITH_BID_CAP';
     public const BID_STRATEGY_COST_CAP = 'COST_CAP';
@@ -459,6 +475,32 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
             self::OBJECTIVE_OUTCOME_ENGAGEMENT,
             self::OBJECTIVE_OUTCOME_SALES,
             self::OBJECTIVE_OUTCOME_LEADS,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_ACTIVE,
+            self::STATUS_PAUSED,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCampaignStatusAllowableValues()
+    {
+        return [
+            self::CAMPAIGN_STATUS_ACTIVE,
+            self::CAMPAIGN_STATUS_PAUSED,
         ];
     }
 
@@ -518,6 +560,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('placements', $data ?? [], null);
         $this->setIfExists('advantage_audience', $data ?? [], null);
         $this->setIfExists('objective', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('campaign_status', $data ?? [], null);
         $this->setIfExists('bid_strategy', $data ?? [], null);
         $this->setIfExists('bid_amount', $data ?? [], null);
         $this->setIfExists('roas_average_floor', $data ?? [], null);
@@ -636,6 +680,24 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'objective', must be one of '%s'",
                 $this->container['objective'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getCampaignStatusAllowableValues();
+        if (!is_null($this->container['campaign_status']) && !in_array($this->container['campaign_status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'campaign_status', must be one of '%s'",
+                $this->container['campaign_status'],
                 implode("', '", $allowedValues)
             );
         }
@@ -933,7 +995,7 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets ad_set_id
      *
-     * @param string|null $ad_set_id Attach the creatives to this EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase. It then owns budget, targeting and schedule, so `budgetAmount`, `budgetType`, `endDate`, `objective`, `countries`, `interests` and `audienceId` are rejected with a 400 alongside it. Its `destination_type` must match the ad's destination.
+     * @param string|null $ad_set_id Attach the creatives to this EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase. It then owns budget, targeting and schedule, so `budgetAmount`, `budgetType`, `endDate`, `objective`, `countries`, `interests`, `audienceId` and `campaignStatus` are rejected with a 400 alongside it. Its `destination_type` must match the ad's destination.
      *
      * @return self
      */
@@ -1455,6 +1517,80 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
             );
         }
         $this->container['objective'] = $objective;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string|null $status Ad-level status. Defaults to `ACTIVE`. `PAUSED` skips activating the newly created ad(s) after Meta accepts them.
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'status', must be one of '%s'",
+                    $status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets campaign_status
+     *
+     * @return string|null
+     */
+    public function getCampaignStatus()
+    {
+        return $this->container['campaign_status'];
+    }
+
+    /**
+     * Sets campaign_status
+     *
+     * @param string|null $campaign_status Campaign-level status, same semantics as `POST /v1/ads/create`. Defaults to `ACTIVE`. `PAUSED` holds activation at the campaign so it never spends before the advertiser reviews it, while the ad set and ad still switch on (one resume call brings the whole hierarchy live). Only meaningful when a new campaign is being created; rejected with a 400 alongside `adSetId` (the attach shape reuses an existing campaign).
+     *
+     * @return self
+     */
+    public function setCampaignStatus($campaign_status)
+    {
+        if (is_null($campaign_status)) {
+            throw new \InvalidArgumentException('non-nullable campaign_status cannot be null');
+        }
+        $allowedValues = $this->getCampaignStatusAllowableValues();
+        if (!in_array($campaign_status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'campaign_status', must be one of '%s'",
+                    $campaign_status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['campaign_status'] = $campaign_status;
 
         return $this;
     }
