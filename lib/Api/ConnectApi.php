@@ -93,13 +93,22 @@ class ConnectApi
         'connectBlueskyCredentials' => [
             'application/json',
         ],
+        'connectDiscordChannel' => [
+            'application/json',
+        ],
         'connectOpenAIAdsCredentials' => [
             'application/json',
         ],
         'connectShopifyWithToken' => [
             'application/json',
         ],
+        'connectSlackChannel' => [
+            'application/json',
+        ],
         'connectWhatsAppCredentials' => [
+            'application/json',
+        ],
+        'connectWhatsAppEmbeddedSignup' => [
             'application/json',
         ],
         'createPinterestBoard' => [
@@ -2169,6 +2178,251 @@ class ConnectApi
     }
 
     /**
+     * Operation connectDiscordChannel
+     *
+     * Connect a Discord channel
+     *
+     * @param  \Zernio\Model\ConnectDiscordChannelRequest $connect_discord_channel_request connect_discord_channel_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectDiscordChannel'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function connectDiscordChannel($connect_discord_channel_request, string $contentType = self::contentTypes['connectDiscordChannel'][0])
+    {
+        $this->connectDiscordChannelWithHttpInfo($connect_discord_channel_request, $contentType);
+    }
+
+    /**
+     * Operation connectDiscordChannelWithHttpInfo
+     *
+     * Connect a Discord channel
+     *
+     * @param  \Zernio\Model\ConnectDiscordChannelRequest $connect_discord_channel_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectDiscordChannel'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function connectDiscordChannelWithHttpInfo($connect_discord_channel_request, string $contentType = self::contentTypes['connectDiscordChannel'][0])
+    {
+        $request = $this->connectDiscordChannelRequest($connect_discord_channel_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject3',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation connectDiscordChannelAsync
+     *
+     * Connect a Discord channel
+     *
+     * @param  \Zernio\Model\ConnectDiscordChannelRequest $connect_discord_channel_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectDiscordChannel'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectDiscordChannelAsync($connect_discord_channel_request, string $contentType = self::contentTypes['connectDiscordChannel'][0])
+    {
+        return $this->connectDiscordChannelAsyncWithHttpInfo($connect_discord_channel_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation connectDiscordChannelAsyncWithHttpInfo
+     *
+     * Connect a Discord channel
+     *
+     * @param  \Zernio\Model\ConnectDiscordChannelRequest $connect_discord_channel_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectDiscordChannel'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectDiscordChannelAsyncWithHttpInfo($connect_discord_channel_request, string $contentType = self::contentTypes['connectDiscordChannel'][0])
+    {
+        $returnType = '';
+        $request = $this->connectDiscordChannelRequest($connect_discord_channel_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'connectDiscordChannel'
+     *
+     * @param  \Zernio\Model\ConnectDiscordChannelRequest $connect_discord_channel_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectDiscordChannel'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function connectDiscordChannelRequest($connect_discord_channel_request, string $contentType = self::contentTypes['connectDiscordChannel'][0])
+    {
+
+        // verify the required parameter 'connect_discord_channel_request' is set
+        if ($connect_discord_channel_request === null || (is_array($connect_discord_channel_request) && count($connect_discord_channel_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $connect_discord_channel_request when calling connectDiscordChannel'
+            );
+        }
+
+
+        $resourcePath = '/v1/connect/discord';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($connect_discord_channel_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($connect_discord_channel_request));
+            } else {
+                $httpBody = $connect_discord_channel_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation connectOpenAIAdsCredentials
      *
      * Connect an OpenAI Ads account
@@ -2753,6 +3007,251 @@ class ConnectApi
     }
 
     /**
+     * Operation connectSlackChannel
+     *
+     * Connect a Slack channel
+     *
+     * @param  \Zernio\Model\ConnectSlackChannelRequest $connect_slack_channel_request connect_slack_channel_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectSlackChannel'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function connectSlackChannel($connect_slack_channel_request, string $contentType = self::contentTypes['connectSlackChannel'][0])
+    {
+        $this->connectSlackChannelWithHttpInfo($connect_slack_channel_request, $contentType);
+    }
+
+    /**
+     * Operation connectSlackChannelWithHttpInfo
+     *
+     * Connect a Slack channel
+     *
+     * @param  \Zernio\Model\ConnectSlackChannelRequest $connect_slack_channel_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectSlackChannel'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function connectSlackChannelWithHttpInfo($connect_slack_channel_request, string $contentType = self::contentTypes['connectSlackChannel'][0])
+    {
+        $request = $this->connectSlackChannelRequest($connect_slack_channel_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject3',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation connectSlackChannelAsync
+     *
+     * Connect a Slack channel
+     *
+     * @param  \Zernio\Model\ConnectSlackChannelRequest $connect_slack_channel_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectSlackChannel'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectSlackChannelAsync($connect_slack_channel_request, string $contentType = self::contentTypes['connectSlackChannel'][0])
+    {
+        return $this->connectSlackChannelAsyncWithHttpInfo($connect_slack_channel_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation connectSlackChannelAsyncWithHttpInfo
+     *
+     * Connect a Slack channel
+     *
+     * @param  \Zernio\Model\ConnectSlackChannelRequest $connect_slack_channel_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectSlackChannel'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectSlackChannelAsyncWithHttpInfo($connect_slack_channel_request, string $contentType = self::contentTypes['connectSlackChannel'][0])
+    {
+        $returnType = '';
+        $request = $this->connectSlackChannelRequest($connect_slack_channel_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'connectSlackChannel'
+     *
+     * @param  \Zernio\Model\ConnectSlackChannelRequest $connect_slack_channel_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectSlackChannel'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function connectSlackChannelRequest($connect_slack_channel_request, string $contentType = self::contentTypes['connectSlackChannel'][0])
+    {
+
+        // verify the required parameter 'connect_slack_channel_request' is set
+        if ($connect_slack_channel_request === null || (is_array($connect_slack_channel_request) && count($connect_slack_channel_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $connect_slack_channel_request when calling connectSlackChannel'
+            );
+        }
+
+
+        $resourcePath = '/v1/connect/slack';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($connect_slack_channel_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($connect_slack_channel_request));
+            } else {
+                $httpBody = $connect_slack_channel_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation connectWhatsAppCredentials
      *
      * Connect WhatsApp via credentials
@@ -2972,6 +3471,251 @@ class ConnectApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($connect_whats_app_credentials_request));
             } else {
                 $httpBody = $connect_whats_app_credentials_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation connectWhatsAppEmbeddedSignup
+     *
+     * Connect WhatsApp from Embedded Signup
+     *
+     * @param  \Zernio\Model\ConnectWhatsAppEmbeddedSignupRequest $connect_whats_app_embedded_signup_request connect_whats_app_embedded_signup_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectWhatsAppEmbeddedSignup'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function connectWhatsAppEmbeddedSignup($connect_whats_app_embedded_signup_request, string $contentType = self::contentTypes['connectWhatsAppEmbeddedSignup'][0])
+    {
+        $this->connectWhatsAppEmbeddedSignupWithHttpInfo($connect_whats_app_embedded_signup_request, $contentType);
+    }
+
+    /**
+     * Operation connectWhatsAppEmbeddedSignupWithHttpInfo
+     *
+     * Connect WhatsApp from Embedded Signup
+     *
+     * @param  \Zernio\Model\ConnectWhatsAppEmbeddedSignupRequest $connect_whats_app_embedded_signup_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectWhatsAppEmbeddedSignup'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function connectWhatsAppEmbeddedSignupWithHttpInfo($connect_whats_app_embedded_signup_request, string $contentType = self::contentTypes['connectWhatsAppEmbeddedSignup'][0])
+    {
+        $request = $this->connectWhatsAppEmbeddedSignupRequest($connect_whats_app_embedded_signup_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject3',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation connectWhatsAppEmbeddedSignupAsync
+     *
+     * Connect WhatsApp from Embedded Signup
+     *
+     * @param  \Zernio\Model\ConnectWhatsAppEmbeddedSignupRequest $connect_whats_app_embedded_signup_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectWhatsAppEmbeddedSignup'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectWhatsAppEmbeddedSignupAsync($connect_whats_app_embedded_signup_request, string $contentType = self::contentTypes['connectWhatsAppEmbeddedSignup'][0])
+    {
+        return $this->connectWhatsAppEmbeddedSignupAsyncWithHttpInfo($connect_whats_app_embedded_signup_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation connectWhatsAppEmbeddedSignupAsyncWithHttpInfo
+     *
+     * Connect WhatsApp from Embedded Signup
+     *
+     * @param  \Zernio\Model\ConnectWhatsAppEmbeddedSignupRequest $connect_whats_app_embedded_signup_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectWhatsAppEmbeddedSignup'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectWhatsAppEmbeddedSignupAsyncWithHttpInfo($connect_whats_app_embedded_signup_request, string $contentType = self::contentTypes['connectWhatsAppEmbeddedSignup'][0])
+    {
+        $returnType = '';
+        $request = $this->connectWhatsAppEmbeddedSignupRequest($connect_whats_app_embedded_signup_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'connectWhatsAppEmbeddedSignup'
+     *
+     * @param  \Zernio\Model\ConnectWhatsAppEmbeddedSignupRequest $connect_whats_app_embedded_signup_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectWhatsAppEmbeddedSignup'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function connectWhatsAppEmbeddedSignupRequest($connect_whats_app_embedded_signup_request, string $contentType = self::contentTypes['connectWhatsAppEmbeddedSignup'][0])
+    {
+
+        // verify the required parameter 'connect_whats_app_embedded_signup_request' is set
+        if ($connect_whats_app_embedded_signup_request === null || (is_array($connect_whats_app_embedded_signup_request) && count($connect_whats_app_embedded_signup_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $connect_whats_app_embedded_signup_request when calling connectWhatsAppEmbeddedSignup'
+            );
+        }
+
+
+        $resourcePath = '/v1/connect/whatsapp/embedded-signup';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($connect_whats_app_embedded_signup_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($connect_whats_app_embedded_signup_request));
+            } else {
+                $httpBody = $connect_whats_app_embedded_signup_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -7037,7 +7781,7 @@ class ConnectApi
      *
      * Complete OAuth callback
      *
-     * @param  string $platform platform (required)
+     * @param  string $platform Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately. (required)
      * @param  \Zernio\Model\HandleOAuthCallbackRequest $handle_o_auth_callback_request handle_o_auth_callback_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['handleOAuthCallback'] to see the possible values for this operation
      *
@@ -7055,7 +7799,7 @@ class ConnectApi
      *
      * Complete OAuth callback
      *
-     * @param  string $platform (required)
+     * @param  string $platform Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately. (required)
      * @param  \Zernio\Model\HandleOAuthCallbackRequest $handle_o_auth_callback_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['handleOAuthCallback'] to see the possible values for this operation
      *
@@ -7101,6 +7845,14 @@ class ConnectApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject3',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
             }
         
 
@@ -7113,7 +7865,7 @@ class ConnectApi
      *
      * Complete OAuth callback
      *
-     * @param  string $platform (required)
+     * @param  string $platform Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately. (required)
      * @param  \Zernio\Model\HandleOAuthCallbackRequest $handle_o_auth_callback_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['handleOAuthCallback'] to see the possible values for this operation
      *
@@ -7135,7 +7887,7 @@ class ConnectApi
      *
      * Complete OAuth callback
      *
-     * @param  string $platform (required)
+     * @param  string $platform Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately. (required)
      * @param  \Zernio\Model\HandleOAuthCallbackRequest $handle_o_auth_callback_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['handleOAuthCallback'] to see the possible values for this operation
      *
@@ -7173,7 +7925,7 @@ class ConnectApi
     /**
      * Create request for operation 'handleOAuthCallback'
      *
-     * @param  string $platform (required)
+     * @param  string $platform Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately. (required)
      * @param  \Zernio\Model\HandleOAuthCallbackRequest $handle_o_auth_callback_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['handleOAuthCallback'] to see the possible values for this operation
      *

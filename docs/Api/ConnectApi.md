@@ -12,9 +12,12 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**configureTikTokAdsBrandIdentity()**](ConnectApi.md#configureTikTokAdsBrandIdentity) | **PATCH** /v1/connect/tiktok-ads | Set TikTok brand identity |
 | [**connectAds()**](ConnectApi.md#connectAds) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform |
 | [**connectBlueskyCredentials()**](ConnectApi.md#connectBlueskyCredentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account |
+| [**connectDiscordChannel()**](ConnectApi.md#connectDiscordChannel) | **POST** /v1/connect/discord | Connect a Discord channel |
 | [**connectOpenAIAdsCredentials()**](ConnectApi.md#connectOpenAIAdsCredentials) | **POST** /v1/connect/openai-ads/credentials | Connect an OpenAI Ads account |
 | [**connectShopifyWithToken()**](ConnectApi.md#connectShopifyWithToken) | **POST** /v1/connect/shopify/token | Connect a Shopify store with a custom-app Admin token |
+| [**connectSlackChannel()**](ConnectApi.md#connectSlackChannel) | **POST** /v1/connect/slack | Connect a Slack channel |
 | [**connectWhatsAppCredentials()**](ConnectApi.md#connectWhatsAppCredentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials |
+| [**connectWhatsAppEmbeddedSignup()**](ConnectApi.md#connectWhatsAppEmbeddedSignup) | **POST** /v1/connect/whatsapp/embedded-signup | Connect WhatsApp from Embedded Signup |
 | [**createPinterestBoard()**](ConnectApi.md#createPinterestBoard) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board |
 | [**getConnectUrl()**](ConnectApi.md#getConnectUrl) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
 | [**getFacebookPages()**](ConnectApi.md#getFacebookPages) | **GET** /v1/accounts/{accountId}/facebook-page | List Facebook pages |
@@ -431,6 +434,65 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `connectDiscordChannel()`
+
+```php
+connectDiscordChannel($connect_discord_channel_request)
+```
+
+Connect a Discord channel
+
+Finalize a Discord connect by binding one channel to a profile. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. One connected account per channel: repeat the call with a different channelId to add another.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\ConnectApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$connect_discord_channel_request = new \Zernio\Model\ConnectDiscordChannelRequest(); // \Zernio\Model\ConnectDiscordChannelRequest
+
+try {
+    $apiInstance->connectDiscordChannel($connect_discord_channel_request);
+} catch (Exception $e) {
+    echo 'Exception when calling ConnectApi->connectDiscordChannel: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **connect_discord_channel_request** | [**\Zernio\Model\ConnectDiscordChannelRequest**](../Model/ConnectDiscordChannelRequest.md)|  | |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `connectOpenAIAdsCredentials()`
 
 ```php
@@ -551,6 +613,65 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `connectSlackChannel()`
+
+```php
+connectSlackChannel($connect_slack_channel_request)
+```
+
+Connect a Slack channel
+
+Finalize a Slack connect by creating the per-channel account. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. Send pendingDataToken for a first connect (the nonce from the OAuth redirect) or accountId to add another channel to a workspace already connected.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\ConnectApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$connect_slack_channel_request = new \Zernio\Model\ConnectSlackChannelRequest(); // \Zernio\Model\ConnectSlackChannelRequest
+
+try {
+    $apiInstance->connectSlackChannel($connect_slack_channel_request);
+} catch (Exception $e) {
+    echo 'Exception when calling ConnectApi->connectSlackChannel: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **connect_slack_channel_request** | [**\Zernio\Model\ConnectSlackChannelRequest**](../Model/ConnectSlackChannelRequest.md)|  | |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `connectWhatsAppCredentials()`
 
 ```php
@@ -597,6 +718,65 @@ try {
 ### Return type
 
 [**\Zernio\Model\ConnectWhatsAppCredentials200Response**](../Model/ConnectWhatsAppCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `connectWhatsAppEmbeddedSignup()`
+
+```php
+connectWhatsAppEmbeddedSignup($connect_whats_app_embedded_signup_request)
+```
+
+Connect WhatsApp from Embedded Signup
+
+Exchange the authorization code Meta Embedded Signup returns to your browser SDK. This is the headless completion path for WhatsApp: the code never passes through a redirect_uri, so POST /v1/connect/{platform} cannot accept it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\ConnectApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$connect_whats_app_embedded_signup_request = new \Zernio\Model\ConnectWhatsAppEmbeddedSignupRequest(); // \Zernio\Model\ConnectWhatsAppEmbeddedSignupRequest
+
+try {
+    $apiInstance->connectWhatsAppEmbeddedSignup($connect_whats_app_embedded_signup_request);
+} catch (Exception $e) {
+    echo 'Exception when calling ConnectApi->connectWhatsAppEmbeddedSignup: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **connect_whats_app_embedded_signup_request** | [**\Zernio\Model\ConnectWhatsAppEmbeddedSignupRequest**](../Model/ConnectWhatsAppEmbeddedSignupRequest.md)|  | |
+
+### Return type
+
+void (empty response body)
 
 ### Authorization
 
@@ -1427,7 +1607,7 @@ handleOAuthCallback($platform, $handle_o_auth_callback_request)
 
 Complete OAuth callback
 
-Exchange the OAuth authorization code for tokens and connect the account to the specified profile.
+Exchange the OAuth authorization code for tokens and connect the account to the specified profile.  Facebook, Google Business, Snapchat and WhatsApp are not accepted here: their account identity is a destination chosen after OAuth, which this single-shot exchange cannot do. Connect them through the redirect flow from `GET /v1/connect/{platform}`, or, for WhatsApp Embedded Signup, through `POST /v1/connect/whatsapp/embedded-signup`.
 
 ### Example
 
@@ -1446,7 +1626,7 @@ $apiInstance = new Zernio\Api\ConnectApi(
     new GuzzleHttp\Client(),
     $config
 );
-$platform = 'platform_example'; // string
+$platform = 'platform_example'; // string | Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately.
 $handle_o_auth_callback_request = new \Zernio\Model\HandleOAuthCallbackRequest(); // \Zernio\Model\HandleOAuthCallbackRequest
 
 try {
@@ -1460,7 +1640,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **platform** | **string**|  | |
+| **platform** | **string**| Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately. | |
 | **handle_o_auth_callback_request** | [**\Zernio\Model\HandleOAuthCallbackRequest**](../Model/HandleOAuthCallbackRequest.md)|  | |
 
 ### Return type
