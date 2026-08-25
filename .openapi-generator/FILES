@@ -408,9 +408,11 @@ docs/Model/CtwaAdRequestBody.md
 docs/Model/CtwaAdRequestBodyCitiesInner.md
 docs/Model/CtwaAdRequestBodyCreativesInner.md
 docs/Model/CtwaAdRequestBodyCreativesInnerVideo.md
+docs/Model/CtwaAdRequestBodyCreativesInnerWelcomeMessage.md
 docs/Model/CtwaAdRequestBodyPlacements.md
 docs/Model/CtwaAdRequestBodyRegionsInner.md
 docs/Model/CtwaAdRequestBodyVideo.md
+docs/Model/CtwaAdRequestBodyWelcomeMessage.md
 docs/Model/CtwaAdRequestBodyZipsInner.md
 docs/Model/CtwaMultiResponse.md
 docs/Model/CtwaSingleResponse.md
@@ -2186,9 +2188,11 @@ lib/Model/CtwaAdRequestBody.php
 lib/Model/CtwaAdRequestBodyCitiesInner.php
 lib/Model/CtwaAdRequestBodyCreativesInner.php
 lib/Model/CtwaAdRequestBodyCreativesInnerVideo.php
+lib/Model/CtwaAdRequestBodyCreativesInnerWelcomeMessage.php
 lib/Model/CtwaAdRequestBodyPlacements.php
 lib/Model/CtwaAdRequestBodyRegionsInner.php
 lib/Model/CtwaAdRequestBodyVideo.php
+lib/Model/CtwaAdRequestBodyWelcomeMessage.php
 lib/Model/CtwaAdRequestBodyZipsInner.php
 lib/Model/CtwaMultiResponse.php
 lib/Model/CtwaSingleResponse.php
@@ -3557,3 +3561,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/CtwaAdRequestBodyCreativesInnerWelcomeMessageTest.php
+test/Model/CtwaAdRequestBodyWelcomeMessageTest.php

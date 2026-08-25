@@ -65,6 +65,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'body' => 'string',
         'image_url' => 'string',
         'video' => '\Zernio\Model\CtwaAdRequestBodyVideo',
+        'welcome_message' => '\Zernio\Model\CtwaAdRequestBodyWelcomeMessage',
         'creatives' => '\Zernio\Model\CtwaAdRequestBodyCreativesInner[]',
         'ad_set_id' => 'string',
         'budget_amount' => 'float',
@@ -110,6 +111,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'body' => null,
         'image_url' => 'uri',
         'video' => null,
+        'welcome_message' => null,
         'creatives' => null,
         'ad_set_id' => null,
         'budget_amount' => null,
@@ -153,6 +155,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'body' => false,
         'image_url' => false,
         'video' => false,
+        'welcome_message' => false,
         'creatives' => false,
         'ad_set_id' => false,
         'budget_amount' => false,
@@ -276,6 +279,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'body' => 'body',
         'image_url' => 'imageUrl',
         'video' => 'video',
+        'welcome_message' => 'welcomeMessage',
         'creatives' => 'creatives',
         'ad_set_id' => 'adSetId',
         'budget_amount' => 'budgetAmount',
@@ -319,6 +323,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'body' => 'setBody',
         'image_url' => 'setImageUrl',
         'video' => 'setVideo',
+        'welcome_message' => 'setWelcomeMessage',
         'creatives' => 'setCreatives',
         'ad_set_id' => 'setAdSetId',
         'budget_amount' => 'setBudgetAmount',
@@ -362,6 +367,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'body' => 'getBody',
         'image_url' => 'getImageUrl',
         'video' => 'getVideo',
+        'welcome_message' => 'getWelcomeMessage',
         'creatives' => 'getCreatives',
         'ad_set_id' => 'getAdSetId',
         'budget_amount' => 'getBudgetAmount',
@@ -552,6 +558,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('body', $data ?? [], null);
         $this->setIfExists('image_url', $data ?? [], null);
         $this->setIfExists('video', $data ?? [], null);
+        $this->setIfExists('welcome_message', $data ?? [], null);
         $this->setIfExists('creatives', $data ?? [], null);
         $this->setIfExists('ad_set_id', $data ?? [], null);
         $this->setIfExists('budget_amount', $data ?? [], null);
@@ -965,6 +972,33 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable video cannot be null');
         }
         $this->container['video'] = $video;
+
+        return $this;
+    }
+
+    /**
+     * Gets welcome_message
+     *
+     * @return \Zernio\Model\CtwaAdRequestBodyWelcomeMessage|null
+     */
+    public function getWelcomeMessage()
+    {
+        return $this->container['welcome_message'];
+    }
+
+    /**
+     * Sets welcome_message
+     *
+     * @param \Zernio\Model\CtwaAdRequestBodyWelcomeMessage|null $welcome_message welcome_message
+     *
+     * @return self
+     */
+    public function setWelcomeMessage($welcome_message)
+    {
+        if (is_null($welcome_message)) {
+            throw new \InvalidArgumentException('non-nullable welcome_message cannot be null');
+        }
+        $this->container['welcome_message'] = $welcome_message;
 
         return $this;
     }

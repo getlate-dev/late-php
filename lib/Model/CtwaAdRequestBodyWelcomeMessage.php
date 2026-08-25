@@ -1,6 +1,6 @@
 <?php
 /**
- * CtwaAdRequestBodyCreativesInner
+ * CtwaAdRequestBodyWelcomeMessage
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * CtwaAdRequestBodyCreativesInner Class Doc Comment
+ * CtwaAdRequestBodyWelcomeMessage Class Doc Comment
  *
  * @category Class
- * @description Each entry must also include exactly one of &#x60;imageUrl&#x60; or &#x60;video&#x60;.
+ * @description Custom chat welcome message (Meta&#39;s &#x60;page_welcome_message&#x60;, \&quot;Mensaje de bienvenida\&quot; / \&quot;Mensaje predefinido\&quot; in Ads Manager). Single-creative shape only; for &#x60;creatives[]&#x60; set it per entry.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CtwaAdRequestBodyCreativesInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class CtwaAdRequestBodyWelcomeMessage implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class CtwaAdRequestBodyCreativesInner implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CtwaAdRequestBody_creatives_inner';
+    protected static $openAPIModelName = 'CtwaAdRequestBody_welcomeMessage';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,8 @@ class CtwaAdRequestBodyCreativesInner implements ModelInterface, ArrayAccess, \J
       * @var string[]
       */
     protected static $openAPITypes = [
-        'headline' => 'string',
-        'body' => 'string',
-        'image_url' => 'string',
-        'video' => '\Zernio\Model\CtwaAdRequestBodyCreativesInnerVideo',
-        'welcome_message' => '\Zernio\Model\CtwaAdRequestBodyCreativesInnerWelcomeMessage'
+        'text' => 'string',
+        'prefill_text' => 'string'
     ];
 
     /**
@@ -74,11 +71,8 @@ class CtwaAdRequestBodyCreativesInner implements ModelInterface, ArrayAccess, \J
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'headline' => null,
-        'body' => null,
-        'image_url' => 'uri',
-        'video' => null,
-        'welcome_message' => null
+        'text' => null,
+        'prefill_text' => null
     ];
 
     /**
@@ -87,11 +81,8 @@ class CtwaAdRequestBodyCreativesInner implements ModelInterface, ArrayAccess, \J
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'headline' => false,
-        'body' => false,
-        'image_url' => false,
-        'video' => false,
-        'welcome_message' => false
+        'text' => false,
+        'prefill_text' => false
     ];
 
     /**
@@ -180,11 +171,8 @@ class CtwaAdRequestBodyCreativesInner implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $attributeMap = [
-        'headline' => 'headline',
-        'body' => 'body',
-        'image_url' => 'imageUrl',
-        'video' => 'video',
-        'welcome_message' => 'welcomeMessage'
+        'text' => 'text',
+        'prefill_text' => 'prefillText'
     ];
 
     /**
@@ -193,11 +181,8 @@ class CtwaAdRequestBodyCreativesInner implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $setters = [
-        'headline' => 'setHeadline',
-        'body' => 'setBody',
-        'image_url' => 'setImageUrl',
-        'video' => 'setVideo',
-        'welcome_message' => 'setWelcomeMessage'
+        'text' => 'setText',
+        'prefill_text' => 'setPrefillText'
     ];
 
     /**
@@ -206,11 +191,8 @@ class CtwaAdRequestBodyCreativesInner implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $getters = [
-        'headline' => 'getHeadline',
-        'body' => 'getBody',
-        'image_url' => 'getImageUrl',
-        'video' => 'getVideo',
-        'welcome_message' => 'getWelcomeMessage'
+        'text' => 'getText',
+        'prefill_text' => 'getPrefillText'
     ];
 
     /**
@@ -270,11 +252,8 @@ class CtwaAdRequestBodyCreativesInner implements ModelInterface, ArrayAccess, \J
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('headline', $data ?? [], null);
-        $this->setIfExists('body', $data ?? [], null);
-        $this->setIfExists('image_url', $data ?? [], null);
-        $this->setIfExists('video', $data ?? [], null);
-        $this->setIfExists('welcome_message', $data ?? [], null);
+        $this->setIfExists('text', $data ?? [], null);
+        $this->setIfExists('prefill_text', $data ?? [], null);
     }
 
     /**
@@ -304,22 +283,18 @@ class CtwaAdRequestBodyCreativesInner implements ModelInterface, ArrayAccess, \J
     {
         $invalidProperties = [];
 
-        if ($this->container['headline'] === null) {
-            $invalidProperties[] = "'headline' can't be null";
+        if ($this->container['text'] === null) {
+            $invalidProperties[] = "'text' can't be null";
         }
-        if ((mb_strlen($this->container['headline']) > 255)) {
-            $invalidProperties[] = "invalid value for 'headline', the character length must be smaller than or equal to 255.";
-        }
-
-        if ((mb_strlen($this->container['headline']) < 1)) {
-            $invalidProperties[] = "invalid value for 'headline', the character length must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['text']) < 1)) {
+            $invalidProperties[] = "invalid value for 'text', the character length must be bigger than or equal to 1.";
         }
 
-        if ($this->container['body'] === null) {
-            $invalidProperties[] = "'body' can't be null";
+        if ($this->container['prefill_text'] === null) {
+            $invalidProperties[] = "'prefill_text' can't be null";
         }
-        if ((mb_strlen($this->container['body']) < 1)) {
-            $invalidProperties[] = "invalid value for 'body', the character length must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['prefill_text']) < 1)) {
+            $invalidProperties[] = "invalid value for 'prefill_text', the character length must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -338,148 +313,65 @@ class CtwaAdRequestBodyCreativesInner implements ModelInterface, ArrayAccess, \J
 
 
     /**
-     * Gets headline
+     * Gets text
      *
      * @return string
      */
-    public function getHeadline()
+    public function getText()
     {
-        return $this->container['headline'];
+        return $this->container['text'];
     }
 
     /**
-     * Sets headline
+     * Sets text
      *
-     * @param string $headline headline
+     * @param string $text Greeting shown when the chat opens. Replaces Meta's default (\"Hi! Can we help you?\").
      *
      * @return self
      */
-    public function setHeadline($headline)
+    public function setText($text)
     {
-        if (is_null($headline)) {
-            throw new \InvalidArgumentException('non-nullable headline cannot be null');
-        }
-        if ((mb_strlen($headline) > 255)) {
-            throw new \InvalidArgumentException('invalid length for $headline when calling CtwaAdRequestBodyCreativesInner., must be smaller than or equal to 255.');
-        }
-        if ((mb_strlen($headline) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $headline when calling CtwaAdRequestBodyCreativesInner., must be bigger than or equal to 1.');
+        if (is_null($text)) {
+            throw new \InvalidArgumentException('non-nullable text cannot be null');
         }
 
-        $this->container['headline'] = $headline;
+        if ((mb_strlen($text) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $text when calling CtwaAdRequestBodyWelcomeMessage., must be bigger than or equal to 1.');
+        }
+
+        $this->container['text'] = $text;
 
         return $this;
     }
 
     /**
-     * Gets body
+     * Gets prefill_text
      *
      * @return string
      */
-    public function getBody()
+    public function getPrefillText()
     {
-        return $this->container['body'];
+        return $this->container['prefill_text'];
     }
 
     /**
-     * Sets body
+     * Sets prefill_text
      *
-     * @param string $body Primary text shown above the image / video.
+     * @param string $prefill_text Message put into the user's text input, ready to send. Replaces Meta's default (\"Hi! I want more info.\"). Lets one ad steer the opening message toward what it promotes (e.g. a specific product).
      *
      * @return self
      */
-    public function setBody($body)
+    public function setPrefillText($prefill_text)
     {
-        if (is_null($body)) {
-            throw new \InvalidArgumentException('non-nullable body cannot be null');
+        if (is_null($prefill_text)) {
+            throw new \InvalidArgumentException('non-nullable prefill_text cannot be null');
         }
 
-        if ((mb_strlen($body) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $body when calling CtwaAdRequestBodyCreativesInner., must be bigger than or equal to 1.');
+        if ((mb_strlen($prefill_text) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $prefill_text when calling CtwaAdRequestBodyWelcomeMessage., must be bigger than or equal to 1.');
         }
 
-        $this->container['body'] = $body;
-
-        return $this;
-    }
-
-    /**
-     * Gets image_url
-     *
-     * @return string|null
-     */
-    public function getImageUrl()
-    {
-        return $this->container['image_url'];
-    }
-
-    /**
-     * Sets image_url
-     *
-     * @param string|null $image_url Image asset. Mutually exclusive with this entry's `video`. Required if `video` is not supplied.
-     *
-     * @return self
-     */
-    public function setImageUrl($image_url)
-    {
-        if (is_null($image_url)) {
-            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
-        }
-        $this->container['image_url'] = $image_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets video
-     *
-     * @return \Zernio\Model\CtwaAdRequestBodyCreativesInnerVideo|null
-     */
-    public function getVideo()
-    {
-        return $this->container['video'];
-    }
-
-    /**
-     * Sets video
-     *
-     * @param \Zernio\Model\CtwaAdRequestBodyCreativesInnerVideo|null $video video
-     *
-     * @return self
-     */
-    public function setVideo($video)
-    {
-        if (is_null($video)) {
-            throw new \InvalidArgumentException('non-nullable video cannot be null');
-        }
-        $this->container['video'] = $video;
-
-        return $this;
-    }
-
-    /**
-     * Gets welcome_message
-     *
-     * @return \Zernio\Model\CtwaAdRequestBodyCreativesInnerWelcomeMessage|null
-     */
-    public function getWelcomeMessage()
-    {
-        return $this->container['welcome_message'];
-    }
-
-    /**
-     * Sets welcome_message
-     *
-     * @param \Zernio\Model\CtwaAdRequestBodyCreativesInnerWelcomeMessage|null $welcome_message welcome_message
-     *
-     * @return self
-     */
-    public function setWelcomeMessage($welcome_message)
-    {
-        if (is_null($welcome_message)) {
-            throw new \InvalidArgumentException('non-nullable welcome_message cannot be null');
-        }
-        $this->container['welcome_message'] = $welcome_message;
+        $this->container['prefill_text'] = $prefill_text;
 
         return $this;
     }
