@@ -1,6 +1,6 @@
 <?php
 /**
- * ListInboxConversations200ResponseMeta
+ * ListInboxConversations200ResponseMetaAccountsSkippedInner
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListInboxConversations200ResponseMeta Class Doc Comment
+ * ListInboxConversations200ResponseMetaAccountsSkippedInner Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListInboxConversations200ResponseMeta implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListInboxConversations200ResponseMetaAccountsSkippedInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ListInboxConversations200ResponseMeta implements ModelInterface, ArrayAcce
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listInboxConversations_200_response_meta';
+    protected static $openAPIModelName = 'listInboxConversations_200_response_meta_accountsSkipped_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,8 @@ class ListInboxConversations200ResponseMeta implements ModelInterface, ArrayAcce
       * @var string[]
       */
     protected static $openAPITypes = [
-        'accounts_queried' => 'int',
-        'accounts_failed' => 'int',
-        'failed_accounts' => '\Zernio\Model\ListInboxConversations200ResponseMetaFailedAccountsInner[]',
-        'last_updated' => '\DateTime',
-        'accounts_skipped' => '\Zernio\Model\ListInboxConversations200ResponseMetaAccountsSkippedInner[]'
+        'account_id' => 'string',
+        'platform' => 'string'
     ];
 
     /**
@@ -73,11 +70,8 @@ class ListInboxConversations200ResponseMeta implements ModelInterface, ArrayAcce
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'accounts_queried' => null,
-        'accounts_failed' => null,
-        'failed_accounts' => null,
-        'last_updated' => 'date-time',
-        'accounts_skipped' => null
+        'account_id' => null,
+        'platform' => null
     ];
 
     /**
@@ -86,11 +80,8 @@ class ListInboxConversations200ResponseMeta implements ModelInterface, ArrayAcce
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'accounts_queried' => false,
-        'accounts_failed' => false,
-        'failed_accounts' => false,
-        'last_updated' => false,
-        'accounts_skipped' => false
+        'account_id' => false,
+        'platform' => false
     ];
 
     /**
@@ -179,11 +170,8 @@ class ListInboxConversations200ResponseMeta implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $attributeMap = [
-        'accounts_queried' => 'accountsQueried',
-        'accounts_failed' => 'accountsFailed',
-        'failed_accounts' => 'failedAccounts',
-        'last_updated' => 'lastUpdated',
-        'accounts_skipped' => 'accountsSkipped'
+        'account_id' => 'accountId',
+        'platform' => 'platform'
     ];
 
     /**
@@ -192,11 +180,8 @@ class ListInboxConversations200ResponseMeta implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $setters = [
-        'accounts_queried' => 'setAccountsQueried',
-        'accounts_failed' => 'setAccountsFailed',
-        'failed_accounts' => 'setFailedAccounts',
-        'last_updated' => 'setLastUpdated',
-        'accounts_skipped' => 'setAccountsSkipped'
+        'account_id' => 'setAccountId',
+        'platform' => 'setPlatform'
     ];
 
     /**
@@ -205,11 +190,8 @@ class ListInboxConversations200ResponseMeta implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $getters = [
-        'accounts_queried' => 'getAccountsQueried',
-        'accounts_failed' => 'getAccountsFailed',
-        'failed_accounts' => 'getFailedAccounts',
-        'last_updated' => 'getLastUpdated',
-        'accounts_skipped' => 'getAccountsSkipped'
+        'account_id' => 'getAccountId',
+        'platform' => 'getPlatform'
     ];
 
     /**
@@ -269,11 +251,8 @@ class ListInboxConversations200ResponseMeta implements ModelInterface, ArrayAcce
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('accounts_queried', $data ?? [], null);
-        $this->setIfExists('accounts_failed', $data ?? [], null);
-        $this->setIfExists('failed_accounts', $data ?? [], null);
-        $this->setIfExists('last_updated', $data ?? [], null);
-        $this->setIfExists('accounts_skipped', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
+        $this->setIfExists('platform', $data ?? [], null);
     }
 
     /**
@@ -319,136 +298,55 @@ class ListInboxConversations200ResponseMeta implements ModelInterface, ArrayAcce
 
 
     /**
-     * Gets accounts_queried
+     * Gets account_id
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getAccountsQueried()
+    public function getAccountId()
     {
-        return $this->container['accounts_queried'];
+        return $this->container['account_id'];
     }
 
     /**
-     * Sets accounts_queried
+     * Sets account_id
      *
-     * @param int|null $accounts_queried accounts_queried
+     * @param string|null $account_id account_id
      *
      * @return self
      */
-    public function setAccountsQueried($accounts_queried)
+    public function setAccountId($account_id)
     {
-        if (is_null($accounts_queried)) {
-            throw new \InvalidArgumentException('non-nullable accounts_queried cannot be null');
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
         }
-        $this->container['accounts_queried'] = $accounts_queried;
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }
 
     /**
-     * Gets accounts_failed
+     * Gets platform
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getAccountsFailed()
+    public function getPlatform()
     {
-        return $this->container['accounts_failed'];
+        return $this->container['platform'];
     }
 
     /**
-     * Sets accounts_failed
+     * Sets platform
      *
-     * @param int|null $accounts_failed accounts_failed
+     * @param string|null $platform platform
      *
      * @return self
      */
-    public function setAccountsFailed($accounts_failed)
+    public function setPlatform($platform)
     {
-        if (is_null($accounts_failed)) {
-            throw new \InvalidArgumentException('non-nullable accounts_failed cannot be null');
+        if (is_null($platform)) {
+            throw new \InvalidArgumentException('non-nullable platform cannot be null');
         }
-        $this->container['accounts_failed'] = $accounts_failed;
-
-        return $this;
-    }
-
-    /**
-     * Gets failed_accounts
-     *
-     * @return \Zernio\Model\ListInboxConversations200ResponseMetaFailedAccountsInner[]|null
-     */
-    public function getFailedAccounts()
-    {
-        return $this->container['failed_accounts'];
-    }
-
-    /**
-     * Sets failed_accounts
-     *
-     * @param \Zernio\Model\ListInboxConversations200ResponseMetaFailedAccountsInner[]|null $failed_accounts failed_accounts
-     *
-     * @return self
-     */
-    public function setFailedAccounts($failed_accounts)
-    {
-        if (is_null($failed_accounts)) {
-            throw new \InvalidArgumentException('non-nullable failed_accounts cannot be null');
-        }
-        $this->container['failed_accounts'] = $failed_accounts;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_updated
-     *
-     * @return \DateTime|null
-     */
-    public function getLastUpdated()
-    {
-        return $this->container['last_updated'];
-    }
-
-    /**
-     * Sets last_updated
-     *
-     * @param \DateTime|null $last_updated last_updated
-     *
-     * @return self
-     */
-    public function setLastUpdated($last_updated)
-    {
-        if (is_null($last_updated)) {
-            throw new \InvalidArgumentException('non-nullable last_updated cannot be null');
-        }
-        $this->container['last_updated'] = $last_updated;
-
-        return $this;
-    }
-
-    /**
-     * Gets accounts_skipped
-     *
-     * @return \Zernio\Model\ListInboxConversations200ResponseMetaAccountsSkippedInner[]|null
-     */
-    public function getAccountsSkipped()
-    {
-        return $this->container['accounts_skipped'];
-    }
-
-    /**
-     * Sets accounts_skipped
-     *
-     * @param \Zernio\Model\ListInboxConversations200ResponseMetaAccountsSkippedInner[]|null $accounts_skipped Connected accounts that were not queried: their platform does not support this feature, or the account is not enabled for it
-     *
-     * @return self
-     */
-    public function setAccountsSkipped($accounts_skipped)
-    {
-        if (is_null($accounts_skipped)) {
-            throw new \InvalidArgumentException('non-nullable accounts_skipped cannot be null');
-        }
-        $this->container['accounts_skipped'] = $accounts_skipped;
+        $this->container['platform'] = $platform;
 
         return $this;
     }

@@ -1002,6 +1002,7 @@ docs/Model/ListInboxConversations200ResponseDataInner.md
 docs/Model/ListInboxConversations200ResponseDataInnerInstagramProfile.md
 docs/Model/ListInboxConversations200ResponseDataInnerMetadata.md
 docs/Model/ListInboxConversations200ResponseMeta.md
+docs/Model/ListInboxConversations200ResponseMetaAccountsSkippedInner.md
 docs/Model/ListInboxConversations200ResponseMetaFailedAccountsInner.md
 docs/Model/ListInboxConversations200ResponsePagination.md
 docs/Model/ListInboxMentions200Response.md
@@ -1261,7 +1262,6 @@ docs/Model/SearchInboxConversations200ResponseDataInner.md
 docs/Model/SearchInboxConversations200ResponseDataInnerConversation.md
 docs/Model/SearchInboxConversations200ResponseDataInnerMatchesInner.md
 docs/Model/SearchInboxConversations200ResponseMeta.md
-docs/Model/SearchInboxConversations200ResponseMetaAccountsSkippedInner.md
 docs/Model/SearchInboxConversations200ResponseMetaFailedAccountsInner.md
 docs/Model/SearchInstagramAudio200Response.md
 docs/Model/SearchReddit200Response.md
@@ -2788,6 +2788,7 @@ lib/Model/ListInboxConversations200ResponseDataInner.php
 lib/Model/ListInboxConversations200ResponseDataInnerInstagramProfile.php
 lib/Model/ListInboxConversations200ResponseDataInnerMetadata.php
 lib/Model/ListInboxConversations200ResponseMeta.php
+lib/Model/ListInboxConversations200ResponseMetaAccountsSkippedInner.php
 lib/Model/ListInboxConversations200ResponseMetaFailedAccountsInner.php
 lib/Model/ListInboxConversations200ResponsePagination.php
 lib/Model/ListInboxMentions200Response.php
@@ -3048,7 +3049,6 @@ lib/Model/SearchInboxConversations200ResponseDataInner.php
 lib/Model/SearchInboxConversations200ResponseDataInnerConversation.php
 lib/Model/SearchInboxConversations200ResponseDataInnerMatchesInner.php
 lib/Model/SearchInboxConversations200ResponseMeta.php
-lib/Model/SearchInboxConversations200ResponseMetaAccountsSkippedInner.php
 lib/Model/SearchInboxConversations200ResponseMetaFailedAccountsInner.php
 lib/Model/SearchInstagramAudio200Response.php
 lib/Model/SearchReddit200Response.php
@@ -3573,3 +3573,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/ListInboxConversations200ResponseMetaAccountsSkippedInnerTest.php

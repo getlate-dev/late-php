@@ -62,7 +62,7 @@ class SearchInboxConversations200ResponseMeta implements ModelInterface, ArrayAc
         'accounts_failed' => 'int',
         'failed_accounts' => '\Zernio\Model\SearchInboxConversations200ResponseMetaFailedAccountsInner[]',
         'last_updated' => '\DateTime',
-        'accounts_skipped' => '\Zernio\Model\SearchInboxConversations200ResponseMetaAccountsSkippedInner[]'
+        'accounts_skipped' => '\Zernio\Model\ListInboxConversations200ResponseMetaAccountsSkippedInner[]'
     ];
 
     /**
@@ -429,7 +429,7 @@ class SearchInboxConversations200ResponseMeta implements ModelInterface, ArrayAc
     /**
      * Gets accounts_skipped
      *
-     * @return \Zernio\Model\SearchInboxConversations200ResponseMetaAccountsSkippedInner[]|null
+     * @return \Zernio\Model\ListInboxConversations200ResponseMetaAccountsSkippedInner[]|null
      */
     public function getAccountsSkipped()
     {
@@ -439,7 +439,7 @@ class SearchInboxConversations200ResponseMeta implements ModelInterface, ArrayAc
     /**
      * Sets accounts_skipped
      *
-     * @param \Zernio\Model\SearchInboxConversations200ResponseMetaAccountsSkippedInner[]|null $accounts_skipped Connected messaging accounts that cannot be searched (live-fetched platforms)
+     * @param \Zernio\Model\ListInboxConversations200ResponseMetaAccountsSkippedInner[]|null $accounts_skipped Connected messaging accounts that cannot be searched (live-fetched platforms)
      *
      * @return self
      */
