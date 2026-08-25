@@ -128,6 +128,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'negative_keywords' => 'string[]',
         'additional_headlines' => 'string[]',
         'additional_descriptions' => 'string[]',
+        'sitelinks' => '\Zernio\Model\CreateStandaloneAdRequestSitelinksInner[]',
         'advantage_audience' => 'int',
         'attribution_spec' => '\Zernio\Model\CreateStandaloneAdRequestAttributionSpecInner[]',
         'gender' => 'string',
@@ -223,6 +224,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'negative_keywords' => null,
         'additional_headlines' => null,
         'additional_descriptions' => null,
+        'sitelinks' => null,
         'advantage_audience' => null,
         'attribution_spec' => null,
         'gender' => null,
@@ -316,6 +318,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'negative_keywords' => false,
         'additional_headlines' => false,
         'additional_descriptions' => false,
+        'sitelinks' => false,
         'advantage_audience' => false,
         'attribution_spec' => false,
         'gender' => false,
@@ -489,6 +492,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'negative_keywords' => 'negativeKeywords',
         'additional_headlines' => 'additionalHeadlines',
         'additional_descriptions' => 'additionalDescriptions',
+        'sitelinks' => 'sitelinks',
         'advantage_audience' => 'advantageAudience',
         'attribution_spec' => 'attributionSpec',
         'gender' => 'gender',
@@ -582,6 +586,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'negative_keywords' => 'setNegativeKeywords',
         'additional_headlines' => 'setAdditionalHeadlines',
         'additional_descriptions' => 'setAdditionalDescriptions',
+        'sitelinks' => 'setSitelinks',
         'advantage_audience' => 'setAdvantageAudience',
         'attribution_spec' => 'setAttributionSpec',
         'gender' => 'setGender',
@@ -675,6 +680,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'negative_keywords' => 'getNegativeKeywords',
         'additional_headlines' => 'getAdditionalHeadlines',
         'additional_descriptions' => 'getAdditionalDescriptions',
+        'sitelinks' => 'getSitelinks',
         'advantage_audience' => 'getAdvantageAudience',
         'attribution_spec' => 'getAttributionSpec',
         'gender' => 'getGender',
@@ -1140,6 +1146,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('negative_keywords', $data ?? [], null);
         $this->setIfExists('additional_headlines', $data ?? [], null);
         $this->setIfExists('additional_descriptions', $data ?? [], null);
+        $this->setIfExists('sitelinks', $data ?? [], null);
         $this->setIfExists('advantage_audience', $data ?? [], null);
         $this->setIfExists('attribution_spec', $data ?? [], null);
         $this->setIfExists('gender', $data ?? [], 'all');
@@ -1353,6 +1360,14 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
                 $this->container['campaign_type'],
                 implode("', '", $allowedValues)
             );
+        }
+
+        if (!is_null($this->container['sitelinks']) && (count($this->container['sitelinks']) > 20)) {
+            $invalidProperties[] = "invalid value for 'sitelinks', number of items must be less than or equal to 20.";
+        }
+
+        if (!is_null($this->container['sitelinks']) && (count($this->container['sitelinks']) < 2)) {
+            $invalidProperties[] = "invalid value for 'sitelinks', number of items must be greater than or equal to 2.";
         }
 
         $allowedValues = $this->getAdvantageAudienceAllowableValues();
@@ -3491,6 +3506,40 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable additional_descriptions cannot be null');
         }
         $this->container['additional_descriptions'] = $additional_descriptions;
+
+        return $this;
+    }
+
+    /**
+     * Gets sitelinks
+     *
+     * @return \Zernio\Model\CreateStandaloneAdRequestSitelinksInner[]|null
+     */
+    public function getSitelinks()
+    {
+        return $this->container['sitelinks'];
+    }
+
+    /**
+     * Sets sitelinks
+     *
+     * @param \Zernio\Model\CreateStandaloneAdRequestSitelinksInner[]|null $sitelinks Google Search only. Sitelink assets to create and attach at the campaign level. Each entry becomes an Asset (with sitelink_asset + Asset.final_urls) plus a CampaignAsset link (field_type SITELINK). Approval is async — Google reviews assets after creation; poll asset.policy_summary later to read the verdict. Google requires at least two sitelinks to surface them on an ad; four or more is Google's own recommendation for maximum visibility. The response's creative.sitelinks[] echoes each input plus its Google resourceName.
+     *
+     * @return self
+     */
+    public function setSitelinks($sitelinks)
+    {
+        if (is_null($sitelinks)) {
+            throw new \InvalidArgumentException('non-nullable sitelinks cannot be null');
+        }
+
+        if ((count($sitelinks) > 20)) {
+            throw new \InvalidArgumentException('invalid value for $sitelinks when calling CreateStandaloneAdRequest., number of items must be less than or equal to 20.');
+        }
+        if ((count($sitelinks) < 2)) {
+            throw new \InvalidArgumentException('invalid length for $sitelinks when calling CreateStandaloneAdRequest., number of items must be greater than or equal to 2.');
+        }
+        $this->container['sitelinks'] = $sitelinks;
 
         return $this;
     }

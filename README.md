@@ -959,6 +959,7 @@ Class | Method | HTTP request | Description
 - [CreateStandaloneAdRequestPlatformSpecificData](docs/Model/CreateStandaloneAdRequestPlatformSpecificData.md)
 - [CreateStandaloneAdRequestPromotedObject](docs/Model/CreateStandaloneAdRequestPromotedObject.md)
 - [CreateStandaloneAdRequestRegionsInner](docs/Model/CreateStandaloneAdRequestRegionsInner.md)
+- [CreateStandaloneAdRequestSitelinksInner](docs/Model/CreateStandaloneAdRequestSitelinksInner.md)
 - [CreateStandaloneAdRequestTracking](docs/Model/CreateStandaloneAdRequestTracking.md)
 - [CreateStandaloneAdRequestTranslationsInner](docs/Model/CreateStandaloneAdRequestTranslationsInner.md)
 - [CreateStandaloneAdRequestVideo](docs/Model/CreateStandaloneAdRequestVideo.md)

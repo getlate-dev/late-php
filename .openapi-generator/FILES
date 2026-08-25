@@ -372,6 +372,7 @@ docs/Model/CreateStandaloneAdRequestPlacements.md
 docs/Model/CreateStandaloneAdRequestPlatformSpecificData.md
 docs/Model/CreateStandaloneAdRequestPromotedObject.md
 docs/Model/CreateStandaloneAdRequestRegionsInner.md
+docs/Model/CreateStandaloneAdRequestSitelinksInner.md
 docs/Model/CreateStandaloneAdRequestTracking.md
 docs/Model/CreateStandaloneAdRequestTranslationsInner.md
 docs/Model/CreateStandaloneAdRequestVideo.md
@@ -2161,6 +2162,7 @@ lib/Model/CreateStandaloneAdRequestPlacements.php
 lib/Model/CreateStandaloneAdRequestPlatformSpecificData.php
 lib/Model/CreateStandaloneAdRequestPromotedObject.php
 lib/Model/CreateStandaloneAdRequestRegionsInner.php
+lib/Model/CreateStandaloneAdRequestSitelinksInner.php
 lib/Model/CreateStandaloneAdRequestTracking.php
 lib/Model/CreateStandaloneAdRequestTranslationsInner.php
 lib/Model/CreateStandaloneAdRequestVideo.php
@@ -3579,6 +3581,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/ConnectDiscordChannelRequestTest.php
-test/Model/ConnectSlackChannelRequestTest.php
-test/Model/ConnectWhatsAppEmbeddedSignupRequestTest.php
+test/Model/CreateStandaloneAdRequestSitelinksInnerTest.php
