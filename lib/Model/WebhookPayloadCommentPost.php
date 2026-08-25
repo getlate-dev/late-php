@@ -475,7 +475,7 @@ class WebhookPayloadCommentPost implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets permalink
      *
-     * @param string|null $permalink Public URL of the post. Null for posts published through Zernio that were never re-synced.
+     * @param string|null $permalink Public URL of the post. Null when no URL was ever stored for it, for example a platform draft or a post recovered without one.
      *
      * @return self
      */
