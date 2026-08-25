@@ -541,6 +541,8 @@ docs/Model/GetAdComments200ResponsePagination.md
 docs/Model/GetAdCreative200Response.md
 docs/Model/GetAdInsightsReport200Response.md
 docs/Model/GetAdInsightsReport200ResponsePaging.md
+docs/Model/GetAdMedia200Response.md
+docs/Model/GetAdMedia200ResponseMediaInner.md
 docs/Model/GetAdPreviews200Response.md
 docs/Model/GetAdSetDetails200Response.md
 docs/Model/GetAdTrackingTags200Response.md
@@ -2321,6 +2323,8 @@ lib/Model/GetAdComments200ResponsePagination.php
 lib/Model/GetAdCreative200Response.php
 lib/Model/GetAdInsightsReport200Response.php
 lib/Model/GetAdInsightsReport200ResponsePaging.php
+lib/Model/GetAdMedia200Response.php
+lib/Model/GetAdMedia200ResponseMediaInner.php
 lib/Model/GetAdPreviews200Response.php
 lib/Model/GetAdSetDetails200Response.php
 lib/Model/GetAdTrackingTags200Response.php
@@ -3561,5 +3565,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/CtwaAdRequestBodyCreativesInnerWelcomeMessageTest.php
-test/Model/CtwaAdRequestBodyWelcomeMessageTest.php
+test/Model/GetAdMedia200ResponseMediaInnerTest.php
+test/Model/GetAdMedia200ResponseTest.php

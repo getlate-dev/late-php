@@ -11,6 +11,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**deleteAdVideo()**](AdCreativesApi.md#deleteAdVideo) | **DELETE** /v1/ads/videos/{videoId} | Delete an ad video |
 | [**generateAdPreviews()**](AdCreativesApi.md#generateAdPreviews) | **POST** /v1/ads/preview | Render pre-create ad previews |
 | [**getAdCreative()**](AdCreativesApi.md#getAdCreative) | **GET** /v1/ads/creatives/{creativeId} | Creative details |
+| [**getAdMedia()**](AdCreativesApi.md#getAdMedia) | **GET** /v1/ads/{adId}/media | Direct video and image URLs for an ad |
 | [**getAdPreviews()**](AdCreativesApi.md#getAdPreviews) | **GET** /v1/ads/{adId}/preview | Render previews of an existing ad |
 | [**listAdCatalogProductSets()**](AdCreativesApi.md#listAdCatalogProductSets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog&#39;s product sets |
 | [**listAdCatalogs()**](AdCreativesApi.md#listAdCatalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs |
@@ -318,6 +319,66 @@ try {
 ### Return type
 
 [**\Zernio\Model\GetAdCreative200Response**](../Model/GetAdCreative200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getAdMedia()`
+
+```php
+getAdMedia($ad_id): \Zernio\Model\GetAdMedia200Response
+```
+
+Direct video and image URLs for an ad
+
+Returns the direct signed URLs for every video and image asset used by an ad's live creative, normalised across shapes: single image/video, carousel, Reels/Story (`object_story_spec.video_data`) and dynamic creative (`asset_feed_spec`). Video items include Meta's poster thumbnail and the video's Meta id when available.  Reads Meta live rather than the stored creative blob because Meta's signed fbcdn URLs carry an `oe=<hex>` expiration (image_url ~24 h, video source ~12 d). Treat URLs as short-lived — re-fetch this endpoint before serving or downloading assets instead of caching URLs beyond that window.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\AdCreativesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$ad_id = 'ad_id_example'; // string | Zernio ad id (24-char hex) or platform ad id.
+
+try {
+    $result = $apiInstance->getAdMedia($ad_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdCreativesApi->getAdMedia: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **ad_id** | **string**| Zernio ad id (24-char hex) or platform ad id. | |
+
+### Return type
+
+[**\Zernio\Model\GetAdMedia200Response**](../Model/GetAdMedia200Response.md)
 
 ### Authorization
 
