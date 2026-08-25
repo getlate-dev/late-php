@@ -299,6 +299,7 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
     public const GOAL_CONVERSIONS = 'conversions';
     public const GOAL_APP_PROMOTION = 'app_promotion';
     public const GOAL_CATALOG_SALES = 'catalog_sales';
+    public const GOAL_PAGE_LIKES = 'page_likes';
     public const SPECIAL_AD_CATEGORIES_HOUSING = 'HOUSING';
     public const SPECIAL_AD_CATEGORIES_EMPLOYMENT = 'EMPLOYMENT';
     public const SPECIAL_AD_CATEGORIES_CREDIT = 'CREDIT';
@@ -332,6 +333,7 @@ class CreateAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
             self::GOAL_CONVERSIONS,
             self::GOAL_APP_PROMOTION,
             self::GOAL_CATALOG_SALES,
+            self::GOAL_PAGE_LIKES,
         ];
     }
 
