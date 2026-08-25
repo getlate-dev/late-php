@@ -308,6 +308,7 @@ class UpdateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
     public const EVENTS_AD_STATUS_CHANGED = 'ad.status_changed';
     public const EVENTS_WHATSAPP_TEMPLATE_STATUS_UPDATED = 'whatsapp.template.status_updated';
     public const EVENTS_WHATSAPP_TEMPLATE_CATEGORY_UPDATED = 'whatsapp.template.category_updated';
+    public const EVENTS_WHATSAPP_ACCOUNT_NAME_STATUS_UPDATED = 'whatsapp.account.name_status_updated';
     public const EVENTS_WHATSAPP_AUTOMATIC_EVENT = 'whatsapp.automatic_event';
     public const EVENTS_WHATSAPP_NUMBER_ACTIVATED = 'whatsapp.number.activated';
     public const EVENTS_WHATSAPP_NUMBER_DECLINED = 'whatsapp.number.declined';
@@ -375,6 +376,7 @@ class UpdateWebhookSettingsRequest implements ModelInterface, ArrayAccess, \Json
             self::EVENTS_AD_STATUS_CHANGED,
             self::EVENTS_WHATSAPP_TEMPLATE_STATUS_UPDATED,
             self::EVENTS_WHATSAPP_TEMPLATE_CATEGORY_UPDATED,
+            self::EVENTS_WHATSAPP_ACCOUNT_NAME_STATUS_UPDATED,
             self::EVENTS_WHATSAPP_AUTOMATIC_EVENT,
             self::EVENTS_WHATSAPP_NUMBER_ACTIVATED,
             self::EVENTS_WHATSAPP_NUMBER_DECLINED,
