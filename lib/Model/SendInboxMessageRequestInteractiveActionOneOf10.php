@@ -1,6 +1,6 @@
 <?php
 /**
- * SendInboxMessageRequestInteractiveAction
+ * SendInboxMessageRequestInteractiveActionOneOf10
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * SendInboxMessageRequestInteractiveAction Class Doc Comment
+ * SendInboxMessageRequestInteractiveActionOneOf10 Class Doc Comment
  *
  * @category Class
+ * @description Address-request action. &#x60;type&#x60; on the parent must be &#x60;address_message&#x60;. Renders Meta&#39;s native structured address form in-chat (generally available in India as of 2026-08; check Meta&#39;s documentation for current country availability).
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayAccess, \JsonSerializable
+class SendInboxMessageRequestInteractiveActionOneOf10 implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
       *
       * @var string
       */
-    protected static $openAPIModelName = 'sendInboxMessage_request_interactive_action';
+    protected static $openAPIModelName = 'sendInboxMessage_request_interactive_action_oneOf_10';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,13 +59,8 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
       * @var string[]
       */
     protected static $openAPITypes = [
-        'button' => 'string',
-        'sections' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7SectionsInner[]',
         'name' => 'string',
-        'parameters' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf10Parameters',
-        'catalog_id' => 'string',
-        'product_retailer_id' => 'string',
-        'cards' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf9CardsInner[]'
+        'parameters' => '\Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf10Parameters'
     ];
 
     /**
@@ -75,13 +71,8 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'button' => null,
-        'sections' => null,
         'name' => null,
-        'parameters' => null,
-        'catalog_id' => null,
-        'product_retailer_id' => null,
-        'cards' => null
+        'parameters' => null
     ];
 
     /**
@@ -90,13 +81,8 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'button' => false,
-        'sections' => false,
         'name' => false,
-        'parameters' => false,
-        'catalog_id' => false,
-        'product_retailer_id' => false,
-        'cards' => false
+        'parameters' => false
     ];
 
     /**
@@ -185,13 +171,8 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
      * @var string[]
      */
     protected static $attributeMap = [
-        'button' => 'button',
-        'sections' => 'sections',
         'name' => 'name',
-        'parameters' => 'parameters',
-        'catalog_id' => 'catalog_id',
-        'product_retailer_id' => 'product_retailer_id',
-        'cards' => 'cards'
+        'parameters' => 'parameters'
     ];
 
     /**
@@ -200,13 +181,8 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
      * @var string[]
      */
     protected static $setters = [
-        'button' => 'setButton',
-        'sections' => 'setSections',
         'name' => 'setName',
-        'parameters' => 'setParameters',
-        'catalog_id' => 'setCatalogId',
-        'product_retailer_id' => 'setProductRetailerId',
-        'cards' => 'setCards'
+        'parameters' => 'setParameters'
     ];
 
     /**
@@ -215,13 +191,8 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
      * @var string[]
      */
     protected static $getters = [
-        'button' => 'getButton',
-        'sections' => 'getSections',
         'name' => 'getName',
-        'parameters' => 'getParameters',
-        'catalog_id' => 'getCatalogId',
-        'product_retailer_id' => 'getProductRetailerId',
-        'cards' => 'getCards'
+        'parameters' => 'getParameters'
     ];
 
     /**
@@ -294,13 +265,8 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('button', $data ?? [], null);
-        $this->setIfExists('sections', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('parameters', $data ?? [], null);
-        $this->setIfExists('catalog_id', $data ?? [], null);
-        $this->setIfExists('product_retailer_id', $data ?? [], null);
-        $this->setIfExists('cards', $data ?? [], null);
     }
 
     /**
@@ -330,20 +296,6 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
     {
         $invalidProperties = [];
 
-        if ($this->container['button'] === null) {
-            $invalidProperties[] = "'button' can't be null";
-        }
-        if ($this->container['sections'] === null) {
-            $invalidProperties[] = "'sections' can't be null";
-        }
-        if ((count($this->container['sections']) > 10)) {
-            $invalidProperties[] = "invalid value for 'sections', number of items must be less than or equal to 10.";
-        }
-
-        if ((count($this->container['sections']) < 1)) {
-            $invalidProperties[] = "invalid value for 'sections', number of items must be greater than or equal to 1.";
-        }
-
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
@@ -359,23 +311,6 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
         if ($this->container['parameters'] === null) {
             $invalidProperties[] = "'parameters' can't be null";
         }
-        if ($this->container['catalog_id'] === null) {
-            $invalidProperties[] = "'catalog_id' can't be null";
-        }
-        if ($this->container['product_retailer_id'] === null) {
-            $invalidProperties[] = "'product_retailer_id' can't be null";
-        }
-        if ($this->container['cards'] === null) {
-            $invalidProperties[] = "'cards' can't be null";
-        }
-        if ((count($this->container['cards']) > 10)) {
-            $invalidProperties[] = "invalid value for 'cards', number of items must be less than or equal to 10.";
-        }
-
-        if ((count($this->container['cards']) < 2)) {
-            $invalidProperties[] = "invalid value for 'cards', number of items must be greater than or equal to 2.";
-        }
-
         return $invalidProperties;
     }
 
@@ -390,67 +325,6 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets button
-     *
-     * @return string
-     */
-    public function getButton()
-    {
-        return $this->container['button'];
-    }
-
-    /**
-     * Sets button
-     *
-     * @param string $button CTA label that opens the list (max ~20 chars).
-     *
-     * @return self
-     */
-    public function setButton($button)
-    {
-        if (is_null($button)) {
-            throw new \InvalidArgumentException('non-nullable button cannot be null');
-        }
-        $this->container['button'] = $button;
-
-        return $this;
-    }
-
-    /**
-     * Gets sections
-     *
-     * @return \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7SectionsInner[]
-     */
-    public function getSections()
-    {
-        return $this->container['sections'];
-    }
-
-    /**
-     * Sets sections
-     *
-     * @param \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf7SectionsInner[] $sections 1-10 sections. Total products across all sections cannot exceed 30.
-     *
-     * @return self
-     */
-    public function setSections($sections)
-    {
-        if (is_null($sections)) {
-            throw new \InvalidArgumentException('non-nullable sections cannot be null');
-        }
-
-        if ((count($sections) > 10)) {
-            throw new \InvalidArgumentException('invalid value for $sections when calling SendInboxMessageRequestInteractiveAction., number of items must be less than or equal to 10.');
-        }
-        if ((count($sections) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $sections when calling SendInboxMessageRequestInteractiveAction., number of items must be greater than or equal to 1.');
-        }
-        $this->container['sections'] = $sections;
-
-        return $this;
-    }
 
     /**
      * Gets name
@@ -512,94 +386,6 @@ class SendInboxMessageRequestInteractiveAction implements ModelInterface, ArrayA
             throw new \InvalidArgumentException('non-nullable parameters cannot be null');
         }
         $this->container['parameters'] = $parameters;
-
-        return $this;
-    }
-
-    /**
-     * Gets catalog_id
-     *
-     * @return string
-     */
-    public function getCatalogId()
-    {
-        return $this->container['catalog_id'];
-    }
-
-    /**
-     * Sets catalog_id
-     *
-     * @param string $catalog_id Meta catalog ID connected to the WhatsApp Business Account.
-     *
-     * @return self
-     */
-    public function setCatalogId($catalog_id)
-    {
-        if (is_null($catalog_id)) {
-            throw new \InvalidArgumentException('non-nullable catalog_id cannot be null');
-        }
-        $this->container['catalog_id'] = $catalog_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets product_retailer_id
-     *
-     * @return string
-     */
-    public function getProductRetailerId()
-    {
-        return $this->container['product_retailer_id'];
-    }
-
-    /**
-     * Sets product_retailer_id
-     *
-     * @param string $product_retailer_id Retailer ID (SKU) of the product inside the catalog.
-     *
-     * @return self
-     */
-    public function setProductRetailerId($product_retailer_id)
-    {
-        if (is_null($product_retailer_id)) {
-            throw new \InvalidArgumentException('non-nullable product_retailer_id cannot be null');
-        }
-        $this->container['product_retailer_id'] = $product_retailer_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets cards
-     *
-     * @return \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf9CardsInner[]
-     */
-    public function getCards()
-    {
-        return $this->container['cards'];
-    }
-
-    /**
-     * Sets cards
-     *
-     * @param \Zernio\Model\SendInboxMessageRequestInteractiveActionOneOf9CardsInner[] $cards cards
-     *
-     * @return self
-     */
-    public function setCards($cards)
-    {
-        if (is_null($cards)) {
-            throw new \InvalidArgumentException('non-nullable cards cannot be null');
-        }
-
-        if ((count($cards) > 10)) {
-            throw new \InvalidArgumentException('invalid value for $cards when calling SendInboxMessageRequestInteractiveAction., number of items must be less than or equal to 10.');
-        }
-        if ((count($cards) < 2)) {
-            throw new \InvalidArgumentException('invalid length for $cards when calling SendInboxMessageRequestInteractiveAction., number of items must be greater than or equal to 2.');
-        }
-        $this->container['cards'] = $cards;
 
         return $this;
     }

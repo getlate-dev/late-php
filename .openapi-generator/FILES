@@ -1319,6 +1319,8 @@ docs/Model/SendInboxMessageRequestInteractive.md
 docs/Model/SendInboxMessageRequestInteractiveAction.md
 docs/Model/SendInboxMessageRequestInteractiveActionOneOf.md
 docs/Model/SendInboxMessageRequestInteractiveActionOneOf1.md
+docs/Model/SendInboxMessageRequestInteractiveActionOneOf10.md
+docs/Model/SendInboxMessageRequestInteractiveActionOneOf10Parameters.md
 docs/Model/SendInboxMessageRequestInteractiveActionOneOf1Parameters.md
 docs/Model/SendInboxMessageRequestInteractiveActionOneOf2.md
 docs/Model/SendInboxMessageRequestInteractiveActionOneOf2Parameters.md
@@ -3102,6 +3104,8 @@ lib/Model/SendInboxMessageRequestInteractive.php
 lib/Model/SendInboxMessageRequestInteractiveAction.php
 lib/Model/SendInboxMessageRequestInteractiveActionOneOf.php
 lib/Model/SendInboxMessageRequestInteractiveActionOneOf1.php
+lib/Model/SendInboxMessageRequestInteractiveActionOneOf10.php
+lib/Model/SendInboxMessageRequestInteractiveActionOneOf10Parameters.php
 lib/Model/SendInboxMessageRequestInteractiveActionOneOf1Parameters.php
 lib/Model/SendInboxMessageRequestInteractiveActionOneOf2.php
 lib/Model/SendInboxMessageRequestInteractiveActionOneOf2Parameters.php
@@ -3565,3 +3569,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/SendInboxMessageRequestInteractiveActionOneOf10ParametersTest.php
+test/Model/SendInboxMessageRequestInteractiveActionOneOf10Test.php

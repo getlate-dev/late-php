@@ -69,6 +69,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'button_payload' => 'string',
         'flow_response_json' => 'string',
         'flow_response_data' => 'array<string,mixed>',
+        'nfm_reply_name' => 'string',
         'order' => '\Zernio\Model\WebhookPayloadMessageMetadataOrder',
         'referred_product' => '\Zernio\Model\WebhookPayloadMessageMetadataReferredProduct',
         'contacts' => 'array<string,mixed>[]',
@@ -98,6 +99,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'button_payload' => null,
         'flow_response_json' => null,
         'flow_response_data' => null,
+        'nfm_reply_name' => null,
         'order' => null,
         'referred_product' => null,
         'contacts' => null,
@@ -125,6 +127,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'button_payload' => false,
         'flow_response_json' => false,
         'flow_response_data' => false,
+        'nfm_reply_name' => false,
         'order' => false,
         'referred_product' => false,
         'contacts' => false,
@@ -232,6 +235,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'button_payload' => 'buttonPayload',
         'flow_response_json' => 'flowResponseJson',
         'flow_response_data' => 'flowResponseData',
+        'nfm_reply_name' => 'nfmReplyName',
         'order' => 'order',
         'referred_product' => 'referredProduct',
         'contacts' => 'contacts',
@@ -259,6 +263,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'button_payload' => 'setButtonPayload',
         'flow_response_json' => 'setFlowResponseJson',
         'flow_response_data' => 'setFlowResponseData',
+        'nfm_reply_name' => 'setNfmReplyName',
         'order' => 'setOrder',
         'referred_product' => 'setReferredProduct',
         'contacts' => 'setContacts',
@@ -286,6 +291,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         'button_payload' => 'getButtonPayload',
         'flow_response_json' => 'getFlowResponseJson',
         'flow_response_data' => 'getFlowResponseData',
+        'nfm_reply_name' => 'getNfmReplyName',
         'order' => 'getOrder',
         'referred_product' => 'getReferredProduct',
         'contacts' => 'getContacts',
@@ -396,6 +402,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('button_payload', $data ?? [], null);
         $this->setIfExists('flow_response_json', $data ?? [], null);
         $this->setIfExists('flow_response_data', $data ?? [], null);
+        $this->setIfExists('nfm_reply_name', $data ?? [], null);
         $this->setIfExists('order', $data ?? [], null);
         $this->setIfExists('referred_product', $data ?? [], null);
         $this->setIfExists('contacts', $data ?? [], null);
@@ -615,7 +622,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets interactive_type
      *
-     * @param string|null $interactive_type WhatsApp only. Which kind of interactive reply the user sent: `button_reply` (tap on an interactive button), `list_reply` (tap on a list row), or `nfm_reply` (a WhatsApp Flow submission).
+     * @param string|null $interactive_type WhatsApp only. Which kind of interactive reply the user sent: `button_reply` (tap on an interactive button), `list_reply` (tap on a list row), or `nfm_reply` (a WhatsApp Flow submission or an `address_message` submission, see `nfmReplyName`).
      *
      * @return self
      */
@@ -733,7 +740,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets flow_response_data
      *
-     * @param array<string,mixed>|null $flow_response_data WhatsApp only. Parsed Flow response JSON. Populated when `flowResponseJson` is valid JSON; otherwise omitted. Keys and value types depend on the specific Flow that was submitted.
+     * @param array<string,mixed>|null $flow_response_data WhatsApp only. Parsed Flow response JSON. Populated when `flowResponseJson` is valid JSON; otherwise omitted. Keys and value types depend on the specific Flow that was submitted. An `address_message` submission (`nfmReplyName: address_message`) carries the address fields (`name`, `address`, `city`, `state`, `in_pin_code`, ...), either at the top level or nested under `values`; read both.
      *
      * @return self
      */
@@ -743,6 +750,33 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable flow_response_data cannot be null');
         }
         $this->container['flow_response_data'] = $flow_response_data;
+
+        return $this;
+    }
+
+    /**
+     * Gets nfm_reply_name
+     *
+     * @return string|null
+     */
+    public function getNfmReplyName()
+    {
+        return $this->container['nfm_reply_name'];
+    }
+
+    /**
+     * Sets nfm_reply_name
+     *
+     * @param string|null $nfm_reply_name WhatsApp only. `nfm_reply.name` as Meta sent it, e.g. `flow` or `address_message`. Address submissions share the `nfm_reply` envelope with Flow submissions and are otherwise indistinguishable in `flowResponseData`; use this field to tell them apart.
+     *
+     * @return self
+     */
+    public function setNfmReplyName($nfm_reply_name)
+    {
+        if (is_null($nfm_reply_name)) {
+            throw new \InvalidArgumentException('non-nullable nfm_reply_name cannot be null');
+        }
+        $this->container['nfm_reply_name'] = $nfm_reply_name;
 
         return $this;
     }

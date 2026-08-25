@@ -1903,6 +1903,8 @@ Class | Method | HTTP request | Description
 - [SendInboxMessageRequestInteractiveAction](docs/Model/SendInboxMessageRequestInteractiveAction.md)
 - [SendInboxMessageRequestInteractiveActionOneOf](docs/Model/SendInboxMessageRequestInteractiveActionOneOf.md)
 - [SendInboxMessageRequestInteractiveActionOneOf1](docs/Model/SendInboxMessageRequestInteractiveActionOneOf1.md)
+- [SendInboxMessageRequestInteractiveActionOneOf10](docs/Model/SendInboxMessageRequestInteractiveActionOneOf10.md)
+- [SendInboxMessageRequestInteractiveActionOneOf10Parameters](docs/Model/SendInboxMessageRequestInteractiveActionOneOf10Parameters.md)
 - [SendInboxMessageRequestInteractiveActionOneOf1Parameters](docs/Model/SendInboxMessageRequestInteractiveActionOneOf1Parameters.md)
 - [SendInboxMessageRequestInteractiveActionOneOf2](docs/Model/SendInboxMessageRequestInteractiveActionOneOf2.md)
 - [SendInboxMessageRequestInteractiveActionOneOf2Parameters](docs/Model/SendInboxMessageRequestInteractiveActionOneOf2Parameters.md)
