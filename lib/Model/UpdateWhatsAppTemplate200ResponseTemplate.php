@@ -371,7 +371,7 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
     /**
      * Sets status
      *
-     * @param string|null $status status
+     * @param string|null $status Approval state read back from Meta after the update, normally PENDING. If the state cannot be read back, the last known status is returned instead.
      *
      * @return self
      */
