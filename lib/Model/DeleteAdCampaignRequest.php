@@ -237,6 +237,7 @@ class DeleteAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
 
     public const PLATFORM_FACEBOOK = 'facebook';
     public const PLATFORM_INSTAGRAM = 'instagram';
+    public const PLATFORM_GOOGLE = 'google';
 
     /**
      * Gets allowable values of the enum
@@ -248,6 +249,7 @@ class DeleteAdCampaignRequest implements ModelInterface, ArrayAccess, \JsonSeria
         return [
             self::PLATFORM_FACEBOOK,
             self::PLATFORM_INSTAGRAM,
+            self::PLATFORM_GOOGLE,
         ];
     }
 
