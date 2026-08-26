@@ -3583,8 +3583,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/GetGoogleBusinessReview200ResponseTest.php
-test/Model/GoogleBusinessReviewReviewReplyTest.php
-test/Model/GoogleBusinessReviewReviewerTest.php
-test/Model/GoogleBusinessReviewTest.php
-test/Model/ListInboxReviews200ResponseDataInnerPhotosInnerTest.php
