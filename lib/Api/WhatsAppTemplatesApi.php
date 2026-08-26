@@ -133,15 +133,16 @@ class WhatsAppTemplatesApi
      *
      * @param  string $account_id WhatsApp social account ID (required)
      * @param  string $name Exact library template name (required)
+     * @param  string|null $language Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppLibraryTemplate'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\GetWhatsAppLibraryTemplate200Response|\Zernio\Model\InlineObject
      */
-    public function getWhatsAppLibraryTemplate($account_id, $name, string $contentType = self::contentTypes['getWhatsAppLibraryTemplate'][0])
+    public function getWhatsAppLibraryTemplate($account_id, $name, $language = null, string $contentType = self::contentTypes['getWhatsAppLibraryTemplate'][0])
     {
-        list($response) = $this->getWhatsAppLibraryTemplateWithHttpInfo($account_id, $name, $contentType);
+        list($response) = $this->getWhatsAppLibraryTemplateWithHttpInfo($account_id, $name, $language, $contentType);
         return $response;
     }
 
@@ -152,15 +153,16 @@ class WhatsAppTemplatesApi
      *
      * @param  string $account_id WhatsApp social account ID (required)
      * @param  string $name Exact library template name (required)
+     * @param  string|null $language Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppLibraryTemplate'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\GetWhatsAppLibraryTemplate200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getWhatsAppLibraryTemplateWithHttpInfo($account_id, $name, string $contentType = self::contentTypes['getWhatsAppLibraryTemplate'][0])
+    public function getWhatsAppLibraryTemplateWithHttpInfo($account_id, $name, $language = null, string $contentType = self::contentTypes['getWhatsAppLibraryTemplate'][0])
     {
-        $request = $this->getWhatsAppLibraryTemplateRequest($account_id, $name, $contentType);
+        $request = $this->getWhatsAppLibraryTemplateRequest($account_id, $name, $language, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -252,14 +254,15 @@ class WhatsAppTemplatesApi
      *
      * @param  string $account_id WhatsApp social account ID (required)
      * @param  string $name Exact library template name (required)
+     * @param  string|null $language Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppLibraryTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getWhatsAppLibraryTemplateAsync($account_id, $name, string $contentType = self::contentTypes['getWhatsAppLibraryTemplate'][0])
+    public function getWhatsAppLibraryTemplateAsync($account_id, $name, $language = null, string $contentType = self::contentTypes['getWhatsAppLibraryTemplate'][0])
     {
-        return $this->getWhatsAppLibraryTemplateAsyncWithHttpInfo($account_id, $name, $contentType)
+        return $this->getWhatsAppLibraryTemplateAsyncWithHttpInfo($account_id, $name, $language, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -274,15 +277,16 @@ class WhatsAppTemplatesApi
      *
      * @param  string $account_id WhatsApp social account ID (required)
      * @param  string $name Exact library template name (required)
+     * @param  string|null $language Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppLibraryTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getWhatsAppLibraryTemplateAsyncWithHttpInfo($account_id, $name, string $contentType = self::contentTypes['getWhatsAppLibraryTemplate'][0])
+    public function getWhatsAppLibraryTemplateAsyncWithHttpInfo($account_id, $name, $language = null, string $contentType = self::contentTypes['getWhatsAppLibraryTemplate'][0])
     {
         $returnType = '\Zernio\Model\GetWhatsAppLibraryTemplate200Response';
-        $request = $this->getWhatsAppLibraryTemplateRequest($account_id, $name, $contentType);
+        $request = $this->getWhatsAppLibraryTemplateRequest($account_id, $name, $language, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -325,12 +329,13 @@ class WhatsAppTemplatesApi
      *
      * @param  string $account_id WhatsApp social account ID (required)
      * @param  string $name Exact library template name (required)
+     * @param  string|null $language Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppLibraryTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getWhatsAppLibraryTemplateRequest($account_id, $name, string $contentType = self::contentTypes['getWhatsAppLibraryTemplate'][0])
+    public function getWhatsAppLibraryTemplateRequest($account_id, $name, $language = null, string $contentType = self::contentTypes['getWhatsAppLibraryTemplate'][0])
     {
 
         // verify the required parameter 'account_id' is set
@@ -346,6 +351,7 @@ class WhatsAppTemplatesApi
                 'Missing the required parameter $name when calling getWhatsAppLibraryTemplate'
             );
         }
+
 
 
         $resourcePath = '/v1/whatsapp/template-library';
@@ -372,6 +378,15 @@ class WhatsAppTemplatesApi
             'form', // style
             true, // explode
             true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $language,
+            'language', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
         ) ?? []);
 
 

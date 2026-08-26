@@ -12,7 +12,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 ## `getWhatsAppLibraryTemplate()`
 
 ```php
-getWhatsAppLibraryTemplate($account_id, $name): \Zernio\Model\GetWhatsAppLibraryTemplate200Response
+getWhatsAppLibraryTemplate($account_id, $name, $language): \Zernio\Model\GetWhatsAppLibraryTemplate200Response
 ```
 
 Look up a library template
@@ -38,9 +38,10 @@ $apiInstance = new Zernio\Api\WhatsAppTemplatesApi(
 );
 $account_id = 'account_id_example'; // string | WhatsApp social account ID
 $name = 'name_example'; // string | Exact library template name
+$language = 'language_example'; // string | Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field.
 
 try {
-    $result = $apiInstance->getWhatsAppLibraryTemplate($account_id, $name);
+    $result = $apiInstance->getWhatsAppLibraryTemplate($account_id, $name, $language);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling WhatsAppTemplatesApi->getWhatsAppLibraryTemplate: ', $e->getMessage(), PHP_EOL;
@@ -53,6 +54,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **account_id** | **string**| WhatsApp social account ID | |
 | **name** | **string**| Exact library template name | |
+| **language** | **string**| Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field. | [optional] |
 
 ### Return type
 

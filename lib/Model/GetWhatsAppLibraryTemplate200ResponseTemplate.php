@@ -63,6 +63,7 @@ class GetWhatsAppLibraryTemplate200ResponseTemplate implements ModelInterface, A
         'category' => 'string',
         'body' => 'string',
         'body_params' => 'string[]',
+        'available_languages' => 'string[]',
         'buttons' => '\Zernio\Model\GetWhatsAppLibraryTemplate200ResponseTemplateButtonsInner[]'
     ];
 
@@ -79,6 +80,7 @@ class GetWhatsAppLibraryTemplate200ResponseTemplate implements ModelInterface, A
         'category' => null,
         'body' => null,
         'body_params' => null,
+        'available_languages' => null,
         'buttons' => null
     ];
 
@@ -93,6 +95,7 @@ class GetWhatsAppLibraryTemplate200ResponseTemplate implements ModelInterface, A
         'category' => false,
         'body' => false,
         'body_params' => false,
+        'available_languages' => false,
         'buttons' => false
     ];
 
@@ -187,6 +190,7 @@ class GetWhatsAppLibraryTemplate200ResponseTemplate implements ModelInterface, A
         'category' => 'category',
         'body' => 'body',
         'body_params' => 'body_params',
+        'available_languages' => 'availableLanguages',
         'buttons' => 'buttons'
     ];
 
@@ -201,6 +205,7 @@ class GetWhatsAppLibraryTemplate200ResponseTemplate implements ModelInterface, A
         'category' => 'setCategory',
         'body' => 'setBody',
         'body_params' => 'setBodyParams',
+        'available_languages' => 'setAvailableLanguages',
         'buttons' => 'setButtons'
     ];
 
@@ -215,6 +220,7 @@ class GetWhatsAppLibraryTemplate200ResponseTemplate implements ModelInterface, A
         'category' => 'getCategory',
         'body' => 'getBody',
         'body_params' => 'getBodyParams',
+        'available_languages' => 'getAvailableLanguages',
         'buttons' => 'getButtons'
     ];
 
@@ -280,6 +286,7 @@ class GetWhatsAppLibraryTemplate200ResponseTemplate implements ModelInterface, A
         $this->setIfExists('category', $data ?? [], null);
         $this->setIfExists('body', $data ?? [], null);
         $this->setIfExists('body_params', $data ?? [], null);
+        $this->setIfExists('available_languages', $data ?? [], null);
         $this->setIfExists('buttons', $data ?? [], null);
     }
 
@@ -456,6 +463,33 @@ class GetWhatsAppLibraryTemplate200ResponseTemplate implements ModelInterface, A
             throw new \InvalidArgumentException('non-nullable body_params cannot be null');
         }
         $this->container['body_params'] = $body_params;
+
+        return $this;
+    }
+
+    /**
+     * Gets available_languages
+     *
+     * @return string[]|null
+     */
+    public function getAvailableLanguages()
+    {
+        return $this->container['available_languages'];
+    }
+
+    /**
+     * Sets available_languages
+     *
+     * @param string[]|null $available_languages available_languages
+     *
+     * @return self
+     */
+    public function setAvailableLanguages($available_languages)
+    {
+        if (is_null($available_languages)) {
+            throw new \InvalidArgumentException('non-nullable available_languages cannot be null');
+        }
+        $this->container['available_languages'] = $available_languages;
 
         return $this;
     }
