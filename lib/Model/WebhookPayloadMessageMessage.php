@@ -67,7 +67,8 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
         'attachments' => '\Zernio\Model\WebhookPayloadMessageMessageAttachmentsInner[]',
         'sender' => '\Zernio\Model\WebhookPayloadMessageMessageSender',
         'sent_at' => '\DateTime',
-        'is_read' => 'bool'
+        'is_read' => 'bool',
+        'sent_via' => 'string'
     ];
 
     /**
@@ -87,7 +88,8 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
         'attachments' => null,
         'sender' => null,
         'sent_at' => 'date-time',
-        'is_read' => null
+        'is_read' => null,
+        'sent_via' => null
     ];
 
     /**
@@ -105,7 +107,8 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
         'attachments' => false,
         'sender' => false,
         'sent_at' => false,
-        'is_read' => false
+        'is_read' => false,
+        'sent_via' => true
     ];
 
     /**
@@ -203,7 +206,8 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
         'attachments' => 'attachments',
         'sender' => 'sender',
         'sent_at' => 'sentAt',
-        'is_read' => 'isRead'
+        'is_read' => 'isRead',
+        'sent_via' => 'sentVia'
     ];
 
     /**
@@ -221,7 +225,8 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
         'attachments' => 'setAttachments',
         'sender' => 'setSender',
         'sent_at' => 'setSentAt',
-        'is_read' => 'setIsRead'
+        'is_read' => 'setIsRead',
+        'sent_via' => 'setSentVia'
     ];
 
     /**
@@ -239,7 +244,8 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
         'attachments' => 'getAttachments',
         'sender' => 'getSender',
         'sent_at' => 'getSentAt',
-        'is_read' => 'getIsRead'
+        'is_read' => 'getIsRead',
+        'sent_via' => 'getSentVia'
     ];
 
     /**
@@ -290,6 +296,13 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
     public const PLATFORM_SMS = 'sms';
     public const DIRECTION_INCOMING = 'incoming';
     public const DIRECTION_OUTGOING = 'outgoing';
+    public const SENT_VIA_HUMAN = 'human';
+    public const SENT_VIA_API = 'api';
+    public const SENT_VIA_BROADCAST = 'broadcast';
+    public const SENT_VIA_SEQUENCE = 'sequence';
+    public const SENT_VIA_WORKFLOW = 'workflow';
+    public const SENT_VIA_COMMENT_AUTOMATION = 'comment_automation';
+    public const SENT_VIA_BULK_API = 'bulk-api';
 
     /**
      * Gets allowable values of the enum
@@ -321,6 +334,24 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSentViaAllowableValues()
+    {
+        return [
+            self::SENT_VIA_HUMAN,
+            self::SENT_VIA_API,
+            self::SENT_VIA_BROADCAST,
+            self::SENT_VIA_SEQUENCE,
+            self::SENT_VIA_WORKFLOW,
+            self::SENT_VIA_COMMENT_AUTOMATION,
+            self::SENT_VIA_BULK_API,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -345,6 +376,7 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
         $this->setIfExists('sender', $data ?? [], null);
         $this->setIfExists('sent_at', $data ?? [], null);
         $this->setIfExists('is_read', $data ?? [], null);
+        $this->setIfExists('sent_via', $data ?? [], null);
     }
 
     /**
@@ -422,6 +454,15 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
         if ($this->container['is_read'] === null) {
             $invalidProperties[] = "'is_read' can't be null";
         }
+        $allowedValues = $this->getSentViaAllowableValues();
+        if (!is_null($this->container['sent_via']) && !in_array($this->container['sent_via'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'sent_via', must be one of '%s'",
+                $this->container['sent_via'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -730,6 +771,50 @@ class WebhookPayloadMessageMessage implements ModelInterface, ArrayAccess, \Json
             throw new \InvalidArgumentException('non-nullable is_read cannot be null');
         }
         $this->container['is_read'] = $is_read;
+
+        return $this;
+    }
+
+    /**
+     * Gets sent_via
+     *
+     * @return string|null
+     */
+    public function getSentVia()
+    {
+        return $this->container['sent_via'];
+    }
+
+    /**
+     * Sets sent_via
+     *
+     * @param string|null $sent_via Which Zernio surface produced the message. Always present and always `null` on this event, since nobody on our side produced an inbound message; it is only informative on `message.sent`, which documents the vocabulary.
+     *
+     * @return self
+     */
+    public function setSentVia($sent_via)
+    {
+        if (is_null($sent_via)) {
+            array_push($this->openAPINullablesSetToNull, 'sent_via');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sent_via', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getSentViaAllowableValues();
+        if (!is_null($sent_via) && !in_array($sent_via, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'sent_via', must be one of '%s'",
+                    $sent_via,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['sent_via'] = $sent_via;
 
         return $this;
     }

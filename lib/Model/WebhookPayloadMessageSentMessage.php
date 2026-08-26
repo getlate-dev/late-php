@@ -68,7 +68,8 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
         'sender' => '\Zernio\Model\WebhookPayloadMessageSentMessageSender',
         'sent_at' => '\DateTime',
         'is_read' => 'bool',
-        'source' => 'string'
+        'source' => 'string',
+        'sent_via' => 'string'
     ];
 
     /**
@@ -89,7 +90,8 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
         'sender' => null,
         'sent_at' => 'date-time',
         'is_read' => null,
-        'source' => null
+        'source' => null,
+        'sent_via' => null
     ];
 
     /**
@@ -108,7 +110,8 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
         'sender' => false,
         'sent_at' => false,
         'is_read' => false,
-        'source' => false
+        'source' => false,
+        'sent_via' => true
     ];
 
     /**
@@ -207,7 +210,8 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
         'sender' => 'sender',
         'sent_at' => 'sentAt',
         'is_read' => 'isRead',
-        'source' => 'source'
+        'source' => 'source',
+        'sent_via' => 'sentVia'
     ];
 
     /**
@@ -226,7 +230,8 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
         'sender' => 'setSender',
         'sent_at' => 'setSentAt',
         'is_read' => 'setIsRead',
-        'source' => 'setSource'
+        'source' => 'setSource',
+        'sent_via' => 'setSentVia'
     ];
 
     /**
@@ -245,7 +250,8 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
         'sender' => 'getSender',
         'sent_at' => 'getSentAt',
         'is_read' => 'getIsRead',
-        'source' => 'getSource'
+        'source' => 'getSource',
+        'sent_via' => 'getSentVia'
     ];
 
     /**
@@ -301,6 +307,13 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
     public const DIRECTION_OUTGOING = 'outgoing';
     public const SOURCE_WHATSAPP_BUSINESS_APP = 'whatsapp_business_app';
     public const SOURCE_CLOUD_API = 'cloud_api';
+    public const SENT_VIA_HUMAN = 'human';
+    public const SENT_VIA_API = 'api';
+    public const SENT_VIA_BROADCAST = 'broadcast';
+    public const SENT_VIA_SEQUENCE = 'sequence';
+    public const SENT_VIA_WORKFLOW = 'workflow';
+    public const SENT_VIA_COMMENT_AUTOMATION = 'comment_automation';
+    public const SENT_VIA_BULK_API = 'bulk-api';
 
     /**
      * Gets allowable values of the enum
@@ -348,6 +361,24 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSentViaAllowableValues()
+    {
+        return [
+            self::SENT_VIA_HUMAN,
+            self::SENT_VIA_API,
+            self::SENT_VIA_BROADCAST,
+            self::SENT_VIA_SEQUENCE,
+            self::SENT_VIA_WORKFLOW,
+            self::SENT_VIA_COMMENT_AUTOMATION,
+            self::SENT_VIA_BULK_API,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -373,6 +404,7 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
         $this->setIfExists('sent_at', $data ?? [], null);
         $this->setIfExists('is_read', $data ?? [], null);
         $this->setIfExists('source', $data ?? [], null);
+        $this->setIfExists('sent_via', $data ?? [], null);
     }
 
     /**
@@ -455,6 +487,15 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'source', must be one of '%s'",
                 $this->container['source'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getSentViaAllowableValues();
+        if (!is_null($this->container['sent_via']) && !in_array($this->container['sent_via'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'sent_via', must be one of '%s'",
+                $this->container['sent_via'],
                 implode("', '", $allowedValues)
             );
         }
@@ -784,7 +825,7 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
     /**
      * Sets source
      *
-     * @param string|null $source WhatsApp send origin. whatsapp_business_app when sent from the WhatsApp Business phone app on a Coexistence number; cloud_api when sent through Zernio (dashboard, API, or broadcasts). Absent on non-WhatsApp platforms. This is not the inbox metadata.source lineage field.
+     * @param string|null $source WhatsApp send origin. whatsapp_business_app when sent from the WhatsApp Business phone app on a Coexistence number; cloud_api when sent through Zernio (dashboard, API, or broadcasts). Absent on non-WhatsApp platforms. Says where WhatsApp saw the send come from, not which Zernio surface produced it: read sentVia for that.
      *
      * @return self
      */
@@ -804,6 +845,50 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
             );
         }
         $this->container['source'] = $source;
+
+        return $this;
+    }
+
+    /**
+     * Gets sent_via
+     *
+     * @return string|null
+     */
+    public function getSentVia()
+    {
+        return $this->container['sent_via'];
+    }
+
+    /**
+     * Sets sent_via
+     *
+     * @param string|null $sent_via Which Zernio surface produced this message: `human` (an operator in the Zernio inbox), `api` (a call to this API), `broadcast`, `sequence`, `workflow`, `comment_automation`, or `bulk-api` (POST /v1/whatsapp/bulk). Same vocabulary as the `source` filter on the inbox analytics endpoints, and the same value a later GET on this message returns.  Always present, and `null` whenever the lineage is unknown: a message sent from the platform's own app, and every message stored before this field shipped (2026-08). Existing messages are NOT backfilled, so treat `null` as \"unknown\", never as \"sent by a human\".
+     *
+     * @return self
+     */
+    public function setSentVia($sent_via)
+    {
+        if (is_null($sent_via)) {
+            array_push($this->openAPINullablesSetToNull, 'sent_via');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sent_via', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getSentViaAllowableValues();
+        if (!is_null($sent_via) && !in_array($sent_via, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'sent_via', must be one of '%s'",
+                    $sent_via,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['sent_via'] = $sent_via;
 
         return $this;
     }

@@ -69,7 +69,7 @@ $from_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Inclusiv
 $to_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted.
 $limit = 50; // int | Page size (default 50)
 $page = 1; // int | Page number (default 1)
-$sort_by = 'date'; // string | Sort by date, engagement, or a specific metric
+$sort_by = 'date'; // string | Sort by date, engagement, or a specific metric. Instagram-only metrics (follows, reposts, reels_skip_rate, ig_reels_*) sort posts with no value as 0.
 $order = 'desc'; // string | Sort order
 
 try {
@@ -93,7 +93,7 @@ try {
 | **to_date** | **\DateTime**| Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted. | [optional] |
 | **limit** | **int**| Page size (default 50) | [optional] [default to 50] |
 | **page** | **int**| Page number (default 1) | [optional] [default to 1] |
-| **sort_by** | **string**| Sort by date, engagement, or a specific metric | [optional] [default to &#39;date&#39;] |
+| **sort_by** | **string**| Sort by date, engagement, or a specific metric. Instagram-only metrics (follows, reposts, reels_skip_rate, ig_reels_*) sort posts with no value as 0. | [optional] [default to &#39;date&#39;] |
 | **order** | **string**| Sort order | [optional] [default to &#39;desc&#39;] |
 
 ### Return type

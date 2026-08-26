@@ -902,6 +902,7 @@ Class | Method | HTTP request | Description
 - [CreateInboxConversation429Response](docs/Model/CreateInboxConversation429Response.md)
 - [CreateInboxConversationRequest](docs/Model/CreateInboxConversationRequest.md)
 - [CreateInboxConversationRequestHeaderMedia](docs/Model/CreateInboxConversationRequestHeaderMedia.md)
+- [CreateInboxConversationRequestTemplateButtonParamsInner](docs/Model/CreateInboxConversationRequestTemplateButtonParamsInner.md)
 - [CreateInviteToken201Response](docs/Model/CreateInviteToken201Response.md)
 - [CreateInviteTokenRequest](docs/Model/CreateInviteTokenRequest.md)
 - [CreateLeadForm200Response](docs/Model/CreateLeadForm200Response.md)

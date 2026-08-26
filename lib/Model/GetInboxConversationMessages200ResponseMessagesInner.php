@@ -84,7 +84,8 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
         'sent_at' => '\DateTime',
         'delivery_error' => '\Zernio\Model\GetInboxConversationMessages200ResponseMessagesInnerDeliveryError',
         'reactions' => '\Zernio\Model\GetInboxConversationMessages200ResponseMessagesInnerReactionsInner[]',
-        'metadata' => 'array<string,mixed>'
+        'metadata' => 'array<string,mixed>',
+        'sent_via' => 'string'
     ];
 
     /**
@@ -121,7 +122,8 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
         'sent_at' => 'date-time',
         'delivery_error' => null,
         'reactions' => null,
-        'metadata' => null
+        'metadata' => null,
+        'sent_via' => null
     ];
 
     /**
@@ -156,7 +158,8 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
         'sent_at' => true,
         'delivery_error' => false,
         'reactions' => false,
-        'metadata' => false
+        'metadata' => false,
+        'sent_via' => true
     ];
 
     /**
@@ -271,7 +274,8 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
         'sent_at' => 'sentAt',
         'delivery_error' => 'deliveryError',
         'reactions' => 'reactions',
-        'metadata' => 'metadata'
+        'metadata' => 'metadata',
+        'sent_via' => 'sentVia'
     ];
 
     /**
@@ -306,7 +310,8 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
         'sent_at' => 'setSentAt',
         'delivery_error' => 'setDeliveryError',
         'reactions' => 'setReactions',
-        'metadata' => 'setMetadata'
+        'metadata' => 'setMetadata',
+        'sent_via' => 'setSentVia'
     ];
 
     /**
@@ -341,7 +346,8 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
         'sent_at' => 'getSentAt',
         'delivery_error' => 'getDeliveryError',
         'reactions' => 'getReactions',
-        'metadata' => 'getMetadata'
+        'metadata' => 'getMetadata',
+        'sent_via' => 'getSentVia'
     ];
 
     /**
@@ -396,6 +402,13 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
     public const DELIVERY_STATUS_READ = 'read';
     public const DELIVERY_STATUS_FAILED = 'failed';
     public const DELIVERY_STATUS_DELETED = 'deleted';
+    public const SENT_VIA_HUMAN = 'human';
+    public const SENT_VIA_API = 'api';
+    public const SENT_VIA_BROADCAST = 'broadcast';
+    public const SENT_VIA_SEQUENCE = 'sequence';
+    public const SENT_VIA_WORKFLOW = 'workflow';
+    public const SENT_VIA_COMMENT_AUTOMATION = 'comment_automation';
+    public const SENT_VIA_BULK_API = 'bulk-api';
 
     /**
      * Gets allowable values of the enum
@@ -442,6 +455,24 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSentViaAllowableValues()
+    {
+        return [
+            self::SENT_VIA_HUMAN,
+            self::SENT_VIA_API,
+            self::SENT_VIA_BROADCAST,
+            self::SENT_VIA_SEQUENCE,
+            self::SENT_VIA_WORKFLOW,
+            self::SENT_VIA_COMMENT_AUTOMATION,
+            self::SENT_VIA_BULK_API,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -483,6 +514,7 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
         $this->setIfExists('delivery_error', $data ?? [], null);
         $this->setIfExists('reactions', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
+        $this->setIfExists('sent_via', $data ?? [], null);
     }
 
     /**
@@ -535,6 +567,15 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'delivery_status', must be one of '%s'",
                 $this->container['delivery_status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getSentViaAllowableValues();
+        if (!is_null($this->container['sent_via']) && !in_array($this->container['sent_via'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'sent_via', must be one of '%s'",
+                $this->container['sent_via'],
                 implode("', '", $allowedValues)
             );
         }
@@ -1376,7 +1417,7 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
     /**
      * Sets metadata
      *
-     * @param array<string,mixed>|null $metadata Platform-specific extras. Free-form, but commonly includes: `quotedMessageId` (platformMessageId this message replies to), `waInteractive` (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow / location_request), and for inbound interactive taps `interactiveType` / `interactiveId`.
+     * @param array<string,mixed>|null $metadata Platform-specific extras. Free-form, but commonly includes: `quotedMessageId` (platformMessageId this message replies to), `waInteractive` (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow / location_request), and for inbound interactive taps `interactiveType` / `interactiveId`. It can also carry `source` (`whatsapp_business_app` / `coexistence_history` on a WhatsApp Coexistence number, `bulk-api` on a POST /v1/whatsapp/bulk send), which is where the message reached us from rather than who produced it: read `sentVia` for that.
      *
      * @return self
      */
@@ -1386,6 +1427,50 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
             throw new \InvalidArgumentException('non-nullable metadata cannot be null');
         }
         $this->container['metadata'] = $metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets sent_via
+     *
+     * @return string|null
+     */
+    public function getSentVia()
+    {
+        return $this->container['sent_via'];
+    }
+
+    /**
+     * Sets sent_via
+     *
+     * @param string|null $sent_via Which Zernio surface produced this outgoing message: `human` (an operator in the Zernio inbox), `api` (a call to this API), `broadcast`, `sequence`, `workflow`, `comment_automation`, or `bulk-api` (POST /v1/whatsapp/bulk). Same vocabulary as the `source` filter on the inbox analytics endpoints.  Always present, and `null` whenever the lineage is unknown: every incoming message, any outgoing message sent from the platform's own app, and every message stored before this field shipped (2026-08). Existing messages are NOT backfilled, so treat `null` as \"unknown\", never as \"sent by a human\".
+     *
+     * @return self
+     */
+    public function setSentVia($sent_via)
+    {
+        if (is_null($sent_via)) {
+            array_push($this->openAPINullablesSetToNull, 'sent_via');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sent_via', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getSentViaAllowableValues();
+        if (!is_null($sent_via) && !in_array($sent_via, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'sent_via', must be one of '%s'",
+                    $sent_via,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['sent_via'] = $sent_via;
 
         return $this;
     }

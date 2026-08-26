@@ -69,6 +69,8 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => 'int',
         'ig_reels_avg_watch_time' => 'int',
         'ig_reels_video_view_total_time' => 'int',
+        'reels_skip_rate' => 'float',
+        'reposts' => 'int',
         'video_duration_seconds' => 'int',
         'engagement_rate' => 'float',
         'last_updated' => '\DateTime'
@@ -93,6 +95,8 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => null,
         'ig_reels_avg_watch_time' => null,
         'ig_reels_video_view_total_time' => null,
+        'reels_skip_rate' => null,
+        'reposts' => null,
         'video_duration_seconds' => null,
         'engagement_rate' => null,
         'last_updated' => 'date-time'
@@ -115,6 +119,8 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => false,
         'ig_reels_avg_watch_time' => false,
         'ig_reels_video_view_total_time' => false,
+        'reels_skip_rate' => false,
+        'reposts' => false,
         'video_duration_seconds' => true,
         'engagement_rate' => false,
         'last_updated' => false
@@ -217,6 +223,8 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => 'follows',
         'ig_reels_avg_watch_time' => 'igReelsAvgWatchTime',
         'ig_reels_video_view_total_time' => 'igReelsVideoViewTotalTime',
+        'reels_skip_rate' => 'reelsSkipRate',
+        'reposts' => 'reposts',
         'video_duration_seconds' => 'videoDurationSeconds',
         'engagement_rate' => 'engagementRate',
         'last_updated' => 'lastUpdated'
@@ -239,6 +247,8 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => 'setFollows',
         'ig_reels_avg_watch_time' => 'setIgReelsAvgWatchTime',
         'ig_reels_video_view_total_time' => 'setIgReelsVideoViewTotalTime',
+        'reels_skip_rate' => 'setReelsSkipRate',
+        'reposts' => 'setReposts',
         'video_duration_seconds' => 'setVideoDurationSeconds',
         'engagement_rate' => 'setEngagementRate',
         'last_updated' => 'setLastUpdated'
@@ -261,6 +271,8 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'follows' => 'getFollows',
         'ig_reels_avg_watch_time' => 'getIgReelsAvgWatchTime',
         'ig_reels_video_view_total_time' => 'getIgReelsVideoViewTotalTime',
+        'reels_skip_rate' => 'getReelsSkipRate',
+        'reposts' => 'getReposts',
         'video_duration_seconds' => 'getVideoDurationSeconds',
         'engagement_rate' => 'getEngagementRate',
         'last_updated' => 'getLastUpdated'
@@ -334,6 +346,8 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('follows', $data ?? [], null);
         $this->setIfExists('ig_reels_avg_watch_time', $data ?? [], null);
         $this->setIfExists('ig_reels_video_view_total_time', $data ?? [], null);
+        $this->setIfExists('reels_skip_rate', $data ?? [], null);
+        $this->setIfExists('reposts', $data ?? [], null);
         $this->setIfExists('video_duration_seconds', $data ?? [], null);
         $this->setIfExists('engagement_rate', $data ?? [], null);
         $this->setIfExists('last_updated', $data ?? [], null);
@@ -674,6 +688,60 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable ig_reels_video_view_total_time cannot be null');
         }
         $this->container['ig_reels_video_view_total_time'] = $ig_reels_video_view_total_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets reels_skip_rate
+     *
+     * @return float|null
+     */
+    public function getReelsSkipRate()
+    {
+        return $this->container['reels_skip_rate'];
+    }
+
+    /**
+     * Sets reels_skip_rate
+     *
+     * @param float|null $reels_skip_rate Instagram Reels only: the rate of initial views that skipped the reel within its first 3 seconds, as reported by Meta. Passed through exactly as Meta reports it, with no rescaling, so do not assume a 0-1 share. Meta labels the metric estimated and in development, so it can move between syncs. 0 for non-Reels media and other platforms. When a post is published to several accounts, the aggregate is weighted by views.
+     *
+     * @return self
+     */
+    public function setReelsSkipRate($reels_skip_rate)
+    {
+        if (is_null($reels_skip_rate)) {
+            throw new \InvalidArgumentException('non-nullable reels_skip_rate cannot be null');
+        }
+        $this->container['reels_skip_rate'] = $reels_skip_rate;
+
+        return $this;
+    }
+
+    /**
+     * Gets reposts
+     *
+     * @return int|null
+     */
+    public function getReposts()
+    {
+        return $this->container['reposts'];
+    }
+
+    /**
+     * Sets reposts
+     *
+     * @param int|null $reposts Instagram only: reposts of the media by other users, minus deleted reposts. Available on feed posts, reels and stories. 0 for other platforms, including Threads, where reposts are counted in shares instead.
+     *
+     * @return self
+     */
+    public function setReposts($reposts)
+    {
+        if (is_null($reposts)) {
+            throw new \InvalidArgumentException('non-nullable reposts cannot be null');
+        }
+        $this->container['reposts'] = $reposts;
 
         return $this;
     }

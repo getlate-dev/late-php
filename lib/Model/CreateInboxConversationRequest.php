@@ -68,6 +68,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'link_preview' => 'bool',
         'template_language' => 'string',
         'template_params' => 'string[]',
+        'template_button_params' => '\Zernio\Model\CreateInboxConversationRequestTemplateButtonParamsInner[]',
         'header_media' => '\Zernio\Model\CreateInboxConversationRequestHeaderMedia'
     ];
 
@@ -89,6 +90,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'link_preview' => null,
         'template_language' => null,
         'template_params' => null,
+        'template_button_params' => null,
         'header_media' => null
     ];
 
@@ -108,6 +110,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'link_preview' => false,
         'template_language' => false,
         'template_params' => false,
+        'template_button_params' => false,
         'header_media' => false
     ];
 
@@ -207,6 +210,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'link_preview' => 'linkPreview',
         'template_language' => 'templateLanguage',
         'template_params' => 'templateParams',
+        'template_button_params' => 'templateButtonParams',
         'header_media' => 'headerMedia'
     ];
 
@@ -226,6 +230,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'link_preview' => 'setLinkPreview',
         'template_language' => 'setTemplateLanguage',
         'template_params' => 'setTemplateParams',
+        'template_button_params' => 'setTemplateButtonParams',
         'header_media' => 'setHeaderMedia'
     ];
 
@@ -245,6 +250,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'link_preview' => 'getLinkPreview',
         'template_language' => 'getTemplateLanguage',
         'template_params' => 'getTemplateParams',
+        'template_button_params' => 'getTemplateButtonParams',
         'header_media' => 'getHeaderMedia'
     ];
 
@@ -328,6 +334,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('link_preview', $data ?? [], true);
         $this->setIfExists('template_language', $data ?? [], null);
         $this->setIfExists('template_params', $data ?? [], null);
+        $this->setIfExists('template_button_params', $data ?? [], null);
         $this->setIfExists('header_media', $data ?? [], null);
     }
 
@@ -368,6 +375,10 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
                 $this->container['category'],
                 implode("', '", $allowedValues)
             );
+        }
+
+        if (!is_null($this->container['template_button_params']) && (count($this->container['template_button_params']) > 10)) {
+            $invalidProperties[] = "invalid value for 'template_button_params', number of items must be less than or equal to 10.";
         }
 
         return $invalidProperties;
@@ -651,7 +662,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets template_params
      *
-     * @param string[]|null $template_params WhatsApp only. Template variable values as one flat array, in the order the variables appear across the whole template: text-header variables first, then body variables, then one value per dynamic URL button (in button order). Works with positional placeholders ({{1}}, {{2}}, ...) and with named placeholders ({{name}}, {{company}} - how Meta Business Manager creates templates), where values fill the named slots in order of appearance. Example - a body with {{1}}, {{2}} plus a URL button https://example.com/{{1}} takes three values: [body1, body2, buttonSuffix]. Media headers (image, video, document) are filled automatically from the approved template and take no value here (use headerMedia to override the header asset per send).
+     * @param string[]|null $template_params WhatsApp only. Template variable values as one flat array, in the order the variables appear across the whole template: text-header variables first, then body variables, then one value per dynamic URL button (in button order). Works with positional placeholders ({{1}}, {{2}}, ...) and with named placeholders ({{name}}, {{company}} - how Meta Business Manager creates templates), where values fill the named slots in order of appearance. Example - a body with {{1}}, {{2}} plus a URL button https://example.com/{{1}} takes three values: [body1, body2, buttonSuffix]. Media headers (image, video, document) are filled automatically from the approved template and take no value here (use headerMedia to override the header asset per send). Buttons that are not dynamic-URL buttons (copy-code, flow) take no value here either; use templateButtonParams.
      *
      * @return self
      */
@@ -661,6 +672,37 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable template_params cannot be null');
         }
         $this->container['template_params'] = $template_params;
+
+        return $this;
+    }
+
+    /**
+     * Gets template_button_params
+     *
+     * @return \Zernio\Model\CreateInboxConversationRequestTemplateButtonParamsInner[]|null
+     */
+    public function getTemplateButtonParams()
+    {
+        return $this->container['template_button_params'];
+    }
+
+    /**
+     * Sets template_button_params
+     *
+     * @param \Zernio\Model\CreateInboxConversationRequestTemplateButtonParamsInner[]|null $template_button_params WhatsApp only. Values for template buttons that carry one at send time, each addressed by the button's position in the approved template. This is the only way to send a copy-code button's payload (a Pix payment code, a coupon) or a flow token, because templateParams is a flat array of text variables and covers dynamic URL buttons only. Supplying a button here overrides whatever templateParams would have derived for that same index, so the send never carries one button twice; repeating an index within this array is rejected with 400. Each index must name a button of the matching kind on the approved template, which is also checked before the send and returns 400 (INVALID_TEMPLATE_BUTTON_PARAM) rather than a Meta rejection.
+     *
+     * @return self
+     */
+    public function setTemplateButtonParams($template_button_params)
+    {
+        if (is_null($template_button_params)) {
+            throw new \InvalidArgumentException('non-nullable template_button_params cannot be null');
+        }
+
+        if ((count($template_button_params) > 10)) {
+            throw new \InvalidArgumentException('invalid value for $template_button_params when calling CreateInboxConversationRequest., number of items must be less than or equal to 10.');
+        }
+        $this->container['template_button_params'] = $template_button_params;
 
         return $this;
     }
