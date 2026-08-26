@@ -696,7 +696,7 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets age_min
      *
-     * @param int|null $age_min age_min
+     * @param int|null $age_min Minimum age. Applied on Meta, TikTok and Pinterest; ignored on Google, LinkedIn and X. Each platform clamps to its own range: Meta and Pinterest effectively cap at 65 (65 = 65+), TikTok maps up to 100. Pinterest has no under-18 bucket, so an ageMin below 18 starts at 18 there.
      *
      * @return self
      */
@@ -731,7 +731,7 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets age_max
      *
-     * @param int|null $age_max age_max
+     * @param int|null $age_max Maximum age. Same per-platform application and clamping as ageMin.
      *
      * @return self
      */

@@ -139,6 +139,10 @@ docs/Model/ArchiveLeadForm200Response.md
 docs/Model/AssignGoogleBusinessLocation200Response.md
 docs/Model/AssignGoogleBusinessLocation200ResponseAccount.md
 docs/Model/AssignGoogleBusinessLocationRequest.md
+docs/Model/AttachCampaignAssets201Response.md
+docs/Model/AttachCampaignAssetsRequest.md
+docs/Model/AttachCampaignAssetsRequestSitelinksInner.md
+docs/Model/AttachCampaignAssetsRequestStructuredSnippetsInner.md
 docs/Model/AttachNumberToSipTrunk200Response.md
 docs/Model/AttachNumberToSipTrunkRequest.md
 docs/Model/BatchGetGoogleBusinessReviews200Response.md
@@ -374,6 +378,7 @@ docs/Model/CreateStandaloneAdRequestPlatformSpecificData.md
 docs/Model/CreateStandaloneAdRequestPromotedObject.md
 docs/Model/CreateStandaloneAdRequestRegionsInner.md
 docs/Model/CreateStandaloneAdRequestSitelinksInner.md
+docs/Model/CreateStandaloneAdRequestStructuredSnippetsInner.md
 docs/Model/CreateStandaloneAdRequestTracking.md
 docs/Model/CreateStandaloneAdRequestTranslationsInner.md
 docs/Model/CreateStandaloneAdRequestVideo.md
@@ -1933,6 +1938,10 @@ lib/Model/ArchiveLeadForm200Response.php
 lib/Model/AssignGoogleBusinessLocation200Response.php
 lib/Model/AssignGoogleBusinessLocation200ResponseAccount.php
 lib/Model/AssignGoogleBusinessLocationRequest.php
+lib/Model/AttachCampaignAssets201Response.php
+lib/Model/AttachCampaignAssetsRequest.php
+lib/Model/AttachCampaignAssetsRequestSitelinksInner.php
+lib/Model/AttachCampaignAssetsRequestStructuredSnippetsInner.php
 lib/Model/AttachNumberToSipTrunk200Response.php
 lib/Model/AttachNumberToSipTrunkRequest.php
 lib/Model/BatchGetGoogleBusinessReviews200Response.php
@@ -2168,6 +2177,7 @@ lib/Model/CreateStandaloneAdRequestPlatformSpecificData.php
 lib/Model/CreateStandaloneAdRequestPromotedObject.php
 lib/Model/CreateStandaloneAdRequestRegionsInner.php
 lib/Model/CreateStandaloneAdRequestSitelinksInner.php
+lib/Model/CreateStandaloneAdRequestStructuredSnippetsInner.php
 lib/Model/CreateStandaloneAdRequestTracking.php
 lib/Model/CreateStandaloneAdRequestTranslationsInner.php
 lib/Model/CreateStandaloneAdRequestVideo.php
@@ -3589,3 +3599,8 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/AttachCampaignAssets201ResponseTest.php
+test/Model/AttachCampaignAssetsRequestSitelinksInnerTest.php
+test/Model/AttachCampaignAssetsRequestStructuredSnippetsInnerTest.php
+test/Model/AttachCampaignAssetsRequestTest.php
+test/Model/CreateStandaloneAdRequestStructuredSnippetsInnerTest.php

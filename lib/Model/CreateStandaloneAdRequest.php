@@ -129,6 +129,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'additional_headlines' => 'string[]',
         'additional_descriptions' => 'string[]',
         'sitelinks' => '\Zernio\Model\CreateStandaloneAdRequestSitelinksInner[]',
+        'callouts' => 'string[]',
+        'structured_snippets' => '\Zernio\Model\CreateStandaloneAdRequestStructuredSnippetsInner[]',
         'advantage_audience' => 'int',
         'attribution_spec' => '\Zernio\Model\CreateStandaloneAdRequestAttributionSpecInner[]',
         'gender' => 'string',
@@ -225,6 +227,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'additional_headlines' => null,
         'additional_descriptions' => null,
         'sitelinks' => null,
+        'callouts' => null,
+        'structured_snippets' => null,
         'advantage_audience' => null,
         'attribution_spec' => null,
         'gender' => null,
@@ -319,6 +323,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'additional_headlines' => false,
         'additional_descriptions' => false,
         'sitelinks' => false,
+        'callouts' => false,
+        'structured_snippets' => false,
         'advantage_audience' => false,
         'attribution_spec' => false,
         'gender' => false,
@@ -493,6 +499,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'additional_headlines' => 'additionalHeadlines',
         'additional_descriptions' => 'additionalDescriptions',
         'sitelinks' => 'sitelinks',
+        'callouts' => 'callouts',
+        'structured_snippets' => 'structuredSnippets',
         'advantage_audience' => 'advantageAudience',
         'attribution_spec' => 'attributionSpec',
         'gender' => 'gender',
@@ -587,6 +595,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'additional_headlines' => 'setAdditionalHeadlines',
         'additional_descriptions' => 'setAdditionalDescriptions',
         'sitelinks' => 'setSitelinks',
+        'callouts' => 'setCallouts',
+        'structured_snippets' => 'setStructuredSnippets',
         'advantage_audience' => 'setAdvantageAudience',
         'attribution_spec' => 'setAttributionSpec',
         'gender' => 'setGender',
@@ -681,6 +691,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'additional_headlines' => 'getAdditionalHeadlines',
         'additional_descriptions' => 'getAdditionalDescriptions',
         'sitelinks' => 'getSitelinks',
+        'callouts' => 'getCallouts',
+        'structured_snippets' => 'getStructuredSnippets',
         'advantage_audience' => 'getAdvantageAudience',
         'attribution_spec' => 'getAttributionSpec',
         'gender' => 'getGender',
@@ -1147,6 +1159,8 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('additional_headlines', $data ?? [], null);
         $this->setIfExists('additional_descriptions', $data ?? [], null);
         $this->setIfExists('sitelinks', $data ?? [], null);
+        $this->setIfExists('callouts', $data ?? [], null);
+        $this->setIfExists('structured_snippets', $data ?? [], null);
         $this->setIfExists('advantage_audience', $data ?? [], null);
         $this->setIfExists('attribution_spec', $data ?? [], null);
         $this->setIfExists('gender', $data ?? [], 'all');
@@ -1368,6 +1382,22 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
 
         if (!is_null($this->container['sitelinks']) && (count($this->container['sitelinks']) < 2)) {
             $invalidProperties[] = "invalid value for 'sitelinks', number of items must be greater than or equal to 2.";
+        }
+
+        if (!is_null($this->container['callouts']) && (count($this->container['callouts']) > 20)) {
+            $invalidProperties[] = "invalid value for 'callouts', number of items must be less than or equal to 20.";
+        }
+
+        if (!is_null($this->container['callouts']) && (count($this->container['callouts']) < 1)) {
+            $invalidProperties[] = "invalid value for 'callouts', number of items must be greater than or equal to 1.";
+        }
+
+        if (!is_null($this->container['structured_snippets']) && (count($this->container['structured_snippets']) > 20)) {
+            $invalidProperties[] = "invalid value for 'structured_snippets', number of items must be less than or equal to 20.";
+        }
+
+        if (!is_null($this->container['structured_snippets']) && (count($this->container['structured_snippets']) < 1)) {
+            $invalidProperties[] = "invalid value for 'structured_snippets', number of items must be greater than or equal to 1.";
         }
 
         $allowedValues = $this->getAdvantageAudienceAllowableValues();
@@ -3540,6 +3570,74 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('invalid length for $sitelinks when calling CreateStandaloneAdRequest., number of items must be greater than or equal to 2.');
         }
         $this->container['sitelinks'] = $sitelinks;
+
+        return $this;
+    }
+
+    /**
+     * Gets callouts
+     *
+     * @return string[]|null
+     */
+    public function getCallouts()
+    {
+        return $this->container['callouts'];
+    }
+
+    /**
+     * Sets callouts
+     *
+     * @param string[]|null $callouts Google Search only. Short callout texts (max 25 chars each) that appear as non-clickable annotations under the ad, e.g. \"Free shipping\", \"24/7 support\". Each becomes one Asset (`callout_asset`) plus a CampaignAsset link with field_type CALLOUT. Response's creative.callouts[] echoes each input plus its Google resourceName.
+     *
+     * @return self
+     */
+    public function setCallouts($callouts)
+    {
+        if (is_null($callouts)) {
+            throw new \InvalidArgumentException('non-nullable callouts cannot be null');
+        }
+
+        if ((count($callouts) > 20)) {
+            throw new \InvalidArgumentException('invalid value for $callouts when calling CreateStandaloneAdRequest., number of items must be less than or equal to 20.');
+        }
+        if ((count($callouts) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $callouts when calling CreateStandaloneAdRequest., number of items must be greater than or equal to 1.');
+        }
+        $this->container['callouts'] = $callouts;
+
+        return $this;
+    }
+
+    /**
+     * Gets structured_snippets
+     *
+     * @return \Zernio\Model\CreateStandaloneAdRequestStructuredSnippetsInner[]|null
+     */
+    public function getStructuredSnippets()
+    {
+        return $this->container['structured_snippets'];
+    }
+
+    /**
+     * Sets structured_snippets
+     *
+     * @param \Zernio\Model\CreateStandaloneAdRequestStructuredSnippetsInner[]|null $structured_snippets Google Search only. Structured snippets — one header from Google's predefined list plus 3-10 values (max 25 chars each). Each becomes one Asset (`structured_snippet_asset`) plus a CampaignAsset link with field_type STRUCTURED_SNIPPET.
+     *
+     * @return self
+     */
+    public function setStructuredSnippets($structured_snippets)
+    {
+        if (is_null($structured_snippets)) {
+            throw new \InvalidArgumentException('non-nullable structured_snippets cannot be null');
+        }
+
+        if ((count($structured_snippets) > 20)) {
+            throw new \InvalidArgumentException('invalid value for $structured_snippets when calling CreateStandaloneAdRequest., number of items must be less than or equal to 20.');
+        }
+        if ((count($structured_snippets) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $structured_snippets when calling CreateStandaloneAdRequest., number of items must be greater than or equal to 1.');
+        }
+        $this->container['structured_snippets'] = $structured_snippets;
 
         return $this;
     }
