@@ -82,6 +82,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'user_tags' => '\Zernio\Model\InstagramPlatformDataUserTagsInner[]',
         'audio_name' => 'string',
         'audio_configuration' => '\Zernio\Model\InstagramPlatformDataAudioConfiguration',
+        'mute_audio' => 'bool',
         'thumb_offset' => 'int',
         'instagram_thumbnail' => 'string',
         'reel_cover' => 'string',
@@ -186,6 +187,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'user_tags' => null,
         'audio_name' => null,
         'audio_configuration' => null,
+        'mute_audio' => null,
         'thumb_offset' => null,
         'instagram_thumbnail' => 'uri',
         'reel_cover' => 'uri',
@@ -288,6 +290,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'user_tags' => false,
         'audio_name' => false,
         'audio_configuration' => false,
+        'mute_audio' => false,
         'thumb_offset' => false,
         'instagram_thumbnail' => false,
         'reel_cover' => false,
@@ -470,6 +473,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'user_tags' => 'userTags',
         'audio_name' => 'audioName',
         'audio_configuration' => 'audioConfiguration',
+        'mute_audio' => 'muteAudio',
         'thumb_offset' => 'thumbOffset',
         'instagram_thumbnail' => 'instagramThumbnail',
         'reel_cover' => 'reelCover',
@@ -572,6 +576,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'user_tags' => 'setUserTags',
         'audio_name' => 'setAudioName',
         'audio_configuration' => 'setAudioConfiguration',
+        'mute_audio' => 'setMuteAudio',
         'thumb_offset' => 'setThumbOffset',
         'instagram_thumbnail' => 'setInstagramThumbnail',
         'reel_cover' => 'setReelCover',
@@ -674,6 +679,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         'user_tags' => 'getUserTags',
         'audio_name' => 'getAudioName',
         'audio_configuration' => 'getAudioConfiguration',
+        'mute_audio' => 'getMuteAudio',
         'thumb_offset' => 'getThumbOffset',
         'instagram_thumbnail' => 'getInstagramThumbnail',
         'reel_cover' => 'getReelCover',
@@ -946,6 +952,7 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
         $this->setIfExists('user_tags', $data ?? [], null);
         $this->setIfExists('audio_name', $data ?? [], null);
         $this->setIfExists('audio_configuration', $data ?? [], null);
+        $this->setIfExists('mute_audio', $data ?? [], false);
         $this->setIfExists('thumb_offset', $data ?? [], null);
         $this->setIfExists('instagram_thumbnail', $data ?? [], null);
         $this->setIfExists('reel_cover', $data ?? [], null);
@@ -1827,6 +1834,33 @@ class PlatformTargetPlatformSpecificData implements ModelInterface, ArrayAccess,
             throw new \InvalidArgumentException('non-nullable audio_configuration cannot be null');
         }
         $this->container['audio_configuration'] = $audio_configuration;
+
+        return $this;
+    }
+
+    /**
+     * Gets mute_audio
+     *
+     * @return bool|null
+     */
+    public function getMuteAudio()
+    {
+        return $this->container['mute_audio'];
+    }
+
+    /**
+     * Sets mute_audio
+     *
+     * @param bool|null $mute_audio Publish the video without sound. Applies to Reels, Stories, and video carousel slides; ignored for images. Instagram has no mute parameter, so we strip the audio track from the file before handing it to Instagram: the published video is permanently silent and the original audio cannot be restored from Instagram. If the audio cannot be stripped the post fails rather than publishing with sound; videos above 200MB cannot be muted at all, so mute them before uploading. Unrelated to audioConfiguration.videoVolume, which only lowers the original sound when a catalog track is attached.
+     *
+     * @return self
+     */
+    public function setMuteAudio($mute_audio)
+    {
+        if (is_null($mute_audio)) {
+            throw new \InvalidArgumentException('non-nullable mute_audio cannot be null');
+        }
+        $this->container['mute_audio'] = $mute_audio;
 
         return $this;
     }
