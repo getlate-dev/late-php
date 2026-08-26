@@ -60,9 +60,11 @@ class PinterestPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPITypes = [
         'title' => 'string',
         'board_id' => 'string',
+        'board_section_id' => 'string',
         'link' => 'string',
         'cover_image_url' => 'string',
-        'cover_image_key_frame_time' => 'int'
+        'cover_image_key_frame_time' => 'int',
+        'is_ai_generated' => 'bool'
     ];
 
     /**
@@ -75,9 +77,11 @@ class PinterestPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPIFormats = [
         'title' => null,
         'board_id' => null,
+        'board_section_id' => null,
         'link' => 'uri',
         'cover_image_url' => 'uri',
-        'cover_image_key_frame_time' => null
+        'cover_image_key_frame_time' => null,
+        'is_ai_generated' => null
     ];
 
     /**
@@ -88,9 +92,11 @@ class PinterestPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static array $openAPINullables = [
         'title' => false,
         'board_id' => false,
+        'board_section_id' => false,
         'link' => false,
         'cover_image_url' => false,
-        'cover_image_key_frame_time' => false
+        'cover_image_key_frame_time' => false,
+        'is_ai_generated' => false
     ];
 
     /**
@@ -181,9 +187,11 @@ class PinterestPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $attributeMap = [
         'title' => 'title',
         'board_id' => 'boardId',
+        'board_section_id' => 'boardSectionId',
         'link' => 'link',
         'cover_image_url' => 'coverImageUrl',
-        'cover_image_key_frame_time' => 'coverImageKeyFrameTime'
+        'cover_image_key_frame_time' => 'coverImageKeyFrameTime',
+        'is_ai_generated' => 'isAiGenerated'
     ];
 
     /**
@@ -194,9 +202,11 @@ class PinterestPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $setters = [
         'title' => 'setTitle',
         'board_id' => 'setBoardId',
+        'board_section_id' => 'setBoardSectionId',
         'link' => 'setLink',
         'cover_image_url' => 'setCoverImageUrl',
-        'cover_image_key_frame_time' => 'setCoverImageKeyFrameTime'
+        'cover_image_key_frame_time' => 'setCoverImageKeyFrameTime',
+        'is_ai_generated' => 'setIsAiGenerated'
     ];
 
     /**
@@ -207,9 +217,11 @@ class PinterestPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $getters = [
         'title' => 'getTitle',
         'board_id' => 'getBoardId',
+        'board_section_id' => 'getBoardSectionId',
         'link' => 'getLink',
         'cover_image_url' => 'getCoverImageUrl',
-        'cover_image_key_frame_time' => 'getCoverImageKeyFrameTime'
+        'cover_image_key_frame_time' => 'getCoverImageKeyFrameTime',
+        'is_ai_generated' => 'getIsAiGenerated'
     ];
 
     /**
@@ -271,9 +283,11 @@ class PinterestPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('board_id', $data ?? [], null);
+        $this->setIfExists('board_section_id', $data ?? [], null);
         $this->setIfExists('link', $data ?? [], null);
         $this->setIfExists('cover_image_url', $data ?? [], null);
         $this->setIfExists('cover_image_key_frame_time', $data ?? [], null);
+        $this->setIfExists('is_ai_generated', $data ?? [], false);
     }
 
     /**
@@ -381,6 +395,33 @@ class PinterestPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
+     * Gets board_section_id
+     *
+     * @return string|null
+     */
+    public function getBoardSectionId()
+    {
+        return $this->container['board_section_id'];
+    }
+
+    /**
+     * Sets board_section_id
+     *
+     * @param string|null $board_section_id Target section inside the board. Optional; the pin lands on the board itself when omitted. Pinterest rejects the pin if the section does not belong to boardId, so send both together.
+     *
+     * @return self
+     */
+    public function setBoardSectionId($board_section_id)
+    {
+        if (is_null($board_section_id)) {
+            throw new \InvalidArgumentException('non-nullable board_section_id cannot be null');
+        }
+        $this->container['board_section_id'] = $board_section_id;
+
+        return $this;
+    }
+
+    /**
      * Gets link
      *
      * @return string|null
@@ -457,6 +498,33 @@ class PinterestPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable cover_image_key_frame_time cannot be null');
         }
         $this->container['cover_image_key_frame_time'] = $cover_image_key_frame_time;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_ai_generated
+     *
+     * @return bool|null
+     */
+    public function getIsAiGenerated()
+    {
+        return $this->container['is_ai_generated'];
+    }
+
+    /**
+     * Sets is_ai_generated
+     *
+     * @param bool|null $is_ai_generated When true, the Pin is created with Pinterest's AI_MODIFIED disclosure (ai_disclosures), which shows an \"AI modified\" label. Applies to image and video Pins. Pinterest offers no \"not AI\" value, so false simply omits the disclosure. Pinterest may still label a Pin on its own detection.
+     *
+     * @return self
+     */
+    public function setIsAiGenerated($is_ai_generated)
+    {
+        if (is_null($is_ai_generated)) {
+            throw new \InvalidArgumentException('non-nullable is_ai_generated cannot be null');
+        }
+        $this->container['is_ai_generated'] = $is_ai_generated;
 
         return $this;
     }

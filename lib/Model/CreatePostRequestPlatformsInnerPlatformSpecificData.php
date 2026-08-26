@@ -90,6 +90,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'disable_link_preview' => 'bool',
         'reshare_url' => 'string',
         'board_id' => 'string',
+        'board_section_id' => 'string',
         'link' => 'string',
         'cover_image_url' => 'string',
         'cover_image_key_frame_time' => 'int',
@@ -193,6 +194,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'disable_link_preview' => null,
         'reshare_url' => null,
         'board_id' => null,
+        'board_section_id' => null,
         'link' => 'uri',
         'cover_image_url' => 'uri',
         'cover_image_key_frame_time' => null,
@@ -294,6 +296,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'disable_link_preview' => false,
         'reshare_url' => false,
         'board_id' => false,
+        'board_section_id' => false,
         'link' => false,
         'cover_image_url' => false,
         'cover_image_key_frame_time' => false,
@@ -475,6 +478,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'disable_link_preview' => 'disableLinkPreview',
         'reshare_url' => 'reshareUrl',
         'board_id' => 'boardId',
+        'board_section_id' => 'boardSectionId',
         'link' => 'link',
         'cover_image_url' => 'coverImageUrl',
         'cover_image_key_frame_time' => 'coverImageKeyFrameTime',
@@ -576,6 +580,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'disable_link_preview' => 'setDisableLinkPreview',
         'reshare_url' => 'setReshareUrl',
         'board_id' => 'setBoardId',
+        'board_section_id' => 'setBoardSectionId',
         'link' => 'setLink',
         'cover_image_url' => 'setCoverImageUrl',
         'cover_image_key_frame_time' => 'setCoverImageKeyFrameTime',
@@ -677,6 +682,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'disable_link_preview' => 'getDisableLinkPreview',
         'reshare_url' => 'getReshareUrl',
         'board_id' => 'getBoardId',
+        'board_section_id' => 'getBoardSectionId',
         'link' => 'getLink',
         'cover_image_url' => 'getCoverImageUrl',
         'cover_image_key_frame_time' => 'getCoverImageKeyFrameTime',
@@ -948,6 +954,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         $this->setIfExists('disable_link_preview', $data ?? [], null);
         $this->setIfExists('reshare_url', $data ?? [], null);
         $this->setIfExists('board_id', $data ?? [], null);
+        $this->setIfExists('board_section_id', $data ?? [], null);
         $this->setIfExists('link', $data ?? [], null);
         $this->setIfExists('cover_image_url', $data ?? [], null);
         $this->setIfExists('cover_image_key_frame_time', $data ?? [], null);
@@ -1922,7 +1929,7 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
     /**
      * Sets is_ai_generated
      *
-     * @param bool|null $is_ai_generated When true, the post is labeled by Instagram as containing AI-generated media. Per Meta, this self-disclosure label is for AI-generated media, not AI-written captions. Applies to feed posts, Reels, Stories, and carousels.
+     * @param bool|null $is_ai_generated When true, the Pin is created with Pinterest's AI_MODIFIED disclosure (ai_disclosures), which shows an \"AI modified\" label. Applies to image and video Pins. Pinterest offers no \"not AI\" value, so false simply omits the disclosure. Pinterest may still label a Pin on its own detection.
      *
      * @return self
      */
@@ -2067,6 +2074,33 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
             throw new \InvalidArgumentException('non-nullable board_id cannot be null');
         }
         $this->container['board_id'] = $board_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets board_section_id
+     *
+     * @return string|null
+     */
+    public function getBoardSectionId()
+    {
+        return $this->container['board_section_id'];
+    }
+
+    /**
+     * Sets board_section_id
+     *
+     * @param string|null $board_section_id Target section inside the board. Optional; the pin lands on the board itself when omitted. Pinterest rejects the pin if the section does not belong to boardId, so send both together.
+     *
+     * @return self
+     */
+    public function setBoardSectionId($board_section_id)
+    {
+        if (is_null($board_section_id)) {
+            throw new \InvalidArgumentException('non-nullable board_section_id cannot be null');
+        }
+        $this->container['board_section_id'] = $board_section_id;
 
         return $this;
     }
