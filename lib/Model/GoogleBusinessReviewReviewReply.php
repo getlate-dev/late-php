@@ -1,6 +1,6 @@
 <?php
 /**
- * GetGoogleBusinessReviews200Response
+ * GoogleBusinessReviewReviewReply
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * GetGoogleBusinessReviews200Response Class Doc Comment
+ * GoogleBusinessReviewReviewReply Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class GetGoogleBusinessReviews200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GoogleBusinessReviewReviewReply implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class GetGoogleBusinessReviews200Response implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'getGoogleBusinessReviews_200_response';
+    protected static $openAPIModelName = 'GoogleBusinessReview_reviewReply';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,13 +58,8 @@ class GetGoogleBusinessReviews200Response implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'success' => 'bool',
-        'account_id' => 'string',
-        'location_id' => 'string',
-        'reviews' => '\Zernio\Model\GoogleBusinessReview[]',
-        'average_rating' => 'float',
-        'total_review_count' => 'int',
-        'next_page_token' => 'string'
+        'comment' => 'string',
+        'update_time' => '\DateTime'
     ];
 
     /**
@@ -75,13 +70,8 @@ class GetGoogleBusinessReviews200Response implements ModelInterface, ArrayAccess
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'success' => null,
-        'account_id' => null,
-        'location_id' => null,
-        'reviews' => null,
-        'average_rating' => null,
-        'total_review_count' => null,
-        'next_page_token' => null
+        'comment' => null,
+        'update_time' => 'date-time'
     ];
 
     /**
@@ -90,13 +80,8 @@ class GetGoogleBusinessReviews200Response implements ModelInterface, ArrayAccess
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'success' => false,
-        'account_id' => false,
-        'location_id' => false,
-        'reviews' => false,
-        'average_rating' => false,
-        'total_review_count' => false,
-        'next_page_token' => true
+        'comment' => false,
+        'update_time' => false
     ];
 
     /**
@@ -185,13 +170,8 @@ class GetGoogleBusinessReviews200Response implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'success' => 'success',
-        'account_id' => 'accountId',
-        'location_id' => 'locationId',
-        'reviews' => 'reviews',
-        'average_rating' => 'averageRating',
-        'total_review_count' => 'totalReviewCount',
-        'next_page_token' => 'nextPageToken'
+        'comment' => 'comment',
+        'update_time' => 'updateTime'
     ];
 
     /**
@@ -200,13 +180,8 @@ class GetGoogleBusinessReviews200Response implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'success' => 'setSuccess',
-        'account_id' => 'setAccountId',
-        'location_id' => 'setLocationId',
-        'reviews' => 'setReviews',
-        'average_rating' => 'setAverageRating',
-        'total_review_count' => 'setTotalReviewCount',
-        'next_page_token' => 'setNextPageToken'
+        'comment' => 'setComment',
+        'update_time' => 'setUpdateTime'
     ];
 
     /**
@@ -215,13 +190,8 @@ class GetGoogleBusinessReviews200Response implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'success' => 'getSuccess',
-        'account_id' => 'getAccountId',
-        'location_id' => 'getLocationId',
-        'reviews' => 'getReviews',
-        'average_rating' => 'getAverageRating',
-        'total_review_count' => 'getTotalReviewCount',
-        'next_page_token' => 'getNextPageToken'
+        'comment' => 'getComment',
+        'update_time' => 'getUpdateTime'
     ];
 
     /**
@@ -281,13 +251,8 @@ class GetGoogleBusinessReviews200Response implements ModelInterface, ArrayAccess
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('success', $data ?? [], null);
-        $this->setIfExists('account_id', $data ?? [], null);
-        $this->setIfExists('location_id', $data ?? [], null);
-        $this->setIfExists('reviews', $data ?? [], null);
-        $this->setIfExists('average_rating', $data ?? [], null);
-        $this->setIfExists('total_review_count', $data ?? [], null);
-        $this->setIfExists('next_page_token', $data ?? [], null);
+        $this->setIfExists('comment', $data ?? [], null);
+        $this->setIfExists('update_time', $data ?? [], null);
     }
 
     /**
@@ -333,197 +298,55 @@ class GetGoogleBusinessReviews200Response implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets success
-     *
-     * @return bool|null
-     */
-    public function getSuccess()
-    {
-        return $this->container['success'];
-    }
-
-    /**
-     * Sets success
-     *
-     * @param bool|null $success success
-     *
-     * @return self
-     */
-    public function setSuccess($success)
-    {
-        if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
-        }
-        $this->container['success'] = $success;
-
-        return $this;
-    }
-
-    /**
-     * Gets account_id
+     * Gets comment
      *
      * @return string|null
      */
-    public function getAccountId()
+    public function getComment()
     {
-        return $this->container['account_id'];
+        return $this->container['comment'];
     }
 
     /**
-     * Sets account_id
+     * Sets comment
      *
-     * @param string|null $account_id account_id
+     * @param string|null $comment Business owner reply
      *
      * @return self
      */
-    public function setAccountId($account_id)
+    public function setComment($comment)
     {
-        if (is_null($account_id)) {
-            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
+        if (is_null($comment)) {
+            throw new \InvalidArgumentException('non-nullable comment cannot be null');
         }
-        $this->container['account_id'] = $account_id;
+        $this->container['comment'] = $comment;
 
         return $this;
     }
 
     /**
-     * Gets location_id
+     * Gets update_time
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getLocationId()
+    public function getUpdateTime()
     {
-        return $this->container['location_id'];
+        return $this->container['update_time'];
     }
 
     /**
-     * Sets location_id
+     * Sets update_time
      *
-     * @param string|null $location_id location_id
+     * @param \DateTime|null $update_time update_time
      *
      * @return self
      */
-    public function setLocationId($location_id)
+    public function setUpdateTime($update_time)
     {
-        if (is_null($location_id)) {
-            throw new \InvalidArgumentException('non-nullable location_id cannot be null');
+        if (is_null($update_time)) {
+            throw new \InvalidArgumentException('non-nullable update_time cannot be null');
         }
-        $this->container['location_id'] = $location_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets reviews
-     *
-     * @return \Zernio\Model\GoogleBusinessReview[]|null
-     */
-    public function getReviews()
-    {
-        return $this->container['reviews'];
-    }
-
-    /**
-     * Sets reviews
-     *
-     * @param \Zernio\Model\GoogleBusinessReview[]|null $reviews reviews
-     *
-     * @return self
-     */
-    public function setReviews($reviews)
-    {
-        if (is_null($reviews)) {
-            throw new \InvalidArgumentException('non-nullable reviews cannot be null');
-        }
-        $this->container['reviews'] = $reviews;
-
-        return $this;
-    }
-
-    /**
-     * Gets average_rating
-     *
-     * @return float|null
-     */
-    public function getAverageRating()
-    {
-        return $this->container['average_rating'];
-    }
-
-    /**
-     * Sets average_rating
-     *
-     * @param float|null $average_rating Overall average rating
-     *
-     * @return self
-     */
-    public function setAverageRating($average_rating)
-    {
-        if (is_null($average_rating)) {
-            throw new \InvalidArgumentException('non-nullable average_rating cannot be null');
-        }
-        $this->container['average_rating'] = $average_rating;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_review_count
-     *
-     * @return int|null
-     */
-    public function getTotalReviewCount()
-    {
-        return $this->container['total_review_count'];
-    }
-
-    /**
-     * Sets total_review_count
-     *
-     * @param int|null $total_review_count Total number of reviews
-     *
-     * @return self
-     */
-    public function setTotalReviewCount($total_review_count)
-    {
-        if (is_null($total_review_count)) {
-            throw new \InvalidArgumentException('non-nullable total_review_count cannot be null');
-        }
-        $this->container['total_review_count'] = $total_review_count;
-
-        return $this;
-    }
-
-    /**
-     * Gets next_page_token
-     *
-     * @return string|null
-     */
-    public function getNextPageToken()
-    {
-        return $this->container['next_page_token'];
-    }
-
-    /**
-     * Sets next_page_token
-     *
-     * @param string|null $next_page_token Token for next page
-     *
-     * @return self
-     */
-    public function setNextPageToken($next_page_token)
-    {
-        if (is_null($next_page_token)) {
-            array_push($this->openAPINullablesSetToNull, 'next_page_token');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('next_page_token', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['next_page_token'] = $next_page_token;
+        $this->container['update_time'] = $update_time;
 
         return $this;
     }

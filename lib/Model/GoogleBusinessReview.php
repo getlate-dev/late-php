@@ -1,6 +1,6 @@
 <?php
 /**
- * ListInboxReviews200ResponseDataInner
+ * GoogleBusinessReview
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListInboxReviews200ResponseDataInner Class Doc Comment
+ * GoogleBusinessReview Class Doc Comment
  *
  * @category Class
+ * @description A Google Business Profile review, as returned by every gmb-reviews read endpoint.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class GoogleBusinessReview implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listInboxReviews_200_response_data_inner';
+    protected static $openAPIModelName = 'GoogleBusinessReview';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,21 +60,16 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'platform' => 'string',
-        'account_id' => 'string',
-        'account_username' => 'string',
-        'location_id' => 'string',
-        'location_name' => 'string',
-        'reviewer' => '\Zernio\Model\ListInboxReviews200ResponseDataInnerReviewer',
+        'name' => 'string',
+        'reviewer' => '\Zernio\Model\GoogleBusinessReviewReviewer',
         'rating' => 'int',
-        'text' => 'string',
-        'created' => '\DateTime',
-        'has_reply' => 'bool',
-        'has_photos' => 'bool',
+        'star_rating' => 'string',
+        'comment' => 'string',
+        'create_time' => '\DateTime',
+        'update_time' => '\DateTime',
+        'review_reply' => '\Zernio\Model\GoogleBusinessReviewReviewReply',
         'photo_count' => 'int',
-        'photos' => '\Zernio\Model\ListInboxReviews200ResponseDataInnerPhotosInner[]',
-        'reply' => '\Zernio\Model\ListInboxReviews200ResponseDataInnerReply',
-        'review_url' => 'string'
+        'photos' => '\Zernio\Model\ListInboxReviews200ResponseDataInnerPhotosInner[]'
     ];
 
     /**
@@ -85,21 +81,16 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
       */
     protected static $openAPIFormats = [
         'id' => null,
-        'platform' => null,
-        'account_id' => null,
-        'account_username' => null,
-        'location_id' => null,
-        'location_name' => null,
+        'name' => null,
         'reviewer' => null,
         'rating' => null,
-        'text' => null,
-        'created' => 'date-time',
-        'has_reply' => null,
-        'has_photos' => null,
+        'star_rating' => null,
+        'comment' => null,
+        'create_time' => 'date-time',
+        'update_time' => 'date-time',
+        'review_reply' => null,
         'photo_count' => null,
-        'photos' => null,
-        'reply' => null,
-        'review_url' => null
+        'photos' => null
     ];
 
     /**
@@ -109,21 +100,16 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
       */
     protected static array $openAPINullables = [
         'id' => false,
-        'platform' => false,
-        'account_id' => false,
-        'account_username' => false,
-        'location_id' => false,
-        'location_name' => true,
+        'name' => false,
         'reviewer' => false,
         'rating' => false,
-        'text' => false,
-        'created' => false,
-        'has_reply' => false,
-        'has_photos' => false,
+        'star_rating' => false,
+        'comment' => false,
+        'create_time' => false,
+        'update_time' => false,
+        'review_reply' => false,
         'photo_count' => false,
-        'photos' => false,
-        'reply' => false,
-        'review_url' => true
+        'photos' => false
     ];
 
     /**
@@ -213,21 +199,16 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'platform' => 'platform',
-        'account_id' => 'accountId',
-        'account_username' => 'accountUsername',
-        'location_id' => 'locationId',
-        'location_name' => 'locationName',
+        'name' => 'name',
         'reviewer' => 'reviewer',
         'rating' => 'rating',
-        'text' => 'text',
-        'created' => 'created',
-        'has_reply' => 'hasReply',
-        'has_photos' => 'hasPhotos',
+        'star_rating' => 'starRating',
+        'comment' => 'comment',
+        'create_time' => 'createTime',
+        'update_time' => 'updateTime',
+        'review_reply' => 'reviewReply',
         'photo_count' => 'photoCount',
-        'photos' => 'photos',
-        'reply' => 'reply',
-        'review_url' => 'reviewUrl'
+        'photos' => 'photos'
     ];
 
     /**
@@ -237,21 +218,16 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
      */
     protected static $setters = [
         'id' => 'setId',
-        'platform' => 'setPlatform',
-        'account_id' => 'setAccountId',
-        'account_username' => 'setAccountUsername',
-        'location_id' => 'setLocationId',
-        'location_name' => 'setLocationName',
+        'name' => 'setName',
         'reviewer' => 'setReviewer',
         'rating' => 'setRating',
-        'text' => 'setText',
-        'created' => 'setCreated',
-        'has_reply' => 'setHasReply',
-        'has_photos' => 'setHasPhotos',
+        'star_rating' => 'setStarRating',
+        'comment' => 'setComment',
+        'create_time' => 'setCreateTime',
+        'update_time' => 'setUpdateTime',
+        'review_reply' => 'setReviewReply',
         'photo_count' => 'setPhotoCount',
-        'photos' => 'setPhotos',
-        'reply' => 'setReply',
-        'review_url' => 'setReviewUrl'
+        'photos' => 'setPhotos'
     ];
 
     /**
@@ -261,21 +237,16 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
      */
     protected static $getters = [
         'id' => 'getId',
-        'platform' => 'getPlatform',
-        'account_id' => 'getAccountId',
-        'account_username' => 'getAccountUsername',
-        'location_id' => 'getLocationId',
-        'location_name' => 'getLocationName',
+        'name' => 'getName',
         'reviewer' => 'getReviewer',
         'rating' => 'getRating',
-        'text' => 'getText',
-        'created' => 'getCreated',
-        'has_reply' => 'getHasReply',
-        'has_photos' => 'getHasPhotos',
+        'star_rating' => 'getStarRating',
+        'comment' => 'getComment',
+        'create_time' => 'getCreateTime',
+        'update_time' => 'getUpdateTime',
+        'review_reply' => 'getReviewReply',
         'photo_count' => 'getPhotoCount',
-        'photos' => 'getPhotos',
-        'reply' => 'getReply',
-        'review_url' => 'getReviewUrl'
+        'photos' => 'getPhotos'
     ];
 
     /**
@@ -319,6 +290,27 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
         return self::$openAPIModelName;
     }
 
+    public const STAR_RATING_ONE = 'ONE';
+    public const STAR_RATING_TWO = 'TWO';
+    public const STAR_RATING_THREE = 'THREE';
+    public const STAR_RATING_FOUR = 'FOUR';
+    public const STAR_RATING_FIVE = 'FIVE';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStarRatingAllowableValues()
+    {
+        return [
+            self::STAR_RATING_ONE,
+            self::STAR_RATING_TWO,
+            self::STAR_RATING_THREE,
+            self::STAR_RATING_FOUR,
+            self::STAR_RATING_FIVE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -336,21 +328,16 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('platform', $data ?? [], null);
-        $this->setIfExists('account_id', $data ?? [], null);
-        $this->setIfExists('account_username', $data ?? [], null);
-        $this->setIfExists('location_id', $data ?? [], null);
-        $this->setIfExists('location_name', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('reviewer', $data ?? [], null);
         $this->setIfExists('rating', $data ?? [], null);
-        $this->setIfExists('text', $data ?? [], null);
-        $this->setIfExists('created', $data ?? [], null);
-        $this->setIfExists('has_reply', $data ?? [], null);
-        $this->setIfExists('has_photos', $data ?? [], null);
+        $this->setIfExists('star_rating', $data ?? [], null);
+        $this->setIfExists('comment', $data ?? [], null);
+        $this->setIfExists('create_time', $data ?? [], null);
+        $this->setIfExists('update_time', $data ?? [], null);
+        $this->setIfExists('review_reply', $data ?? [], null);
         $this->setIfExists('photo_count', $data ?? [], null);
         $this->setIfExists('photos', $data ?? [], null);
-        $this->setIfExists('reply', $data ?? [], null);
-        $this->setIfExists('review_url', $data ?? [], null);
     }
 
     /**
@@ -380,6 +367,23 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['rating']) && ($this->container['rating'] > 5)) {
+            $invalidProperties[] = "invalid value for 'rating', must be smaller than or equal to 5.";
+        }
+
+        if (!is_null($this->container['rating']) && ($this->container['rating'] < 0)) {
+            $invalidProperties[] = "invalid value for 'rating', must be bigger than or equal to 0.";
+        }
+
+        $allowedValues = $this->getStarRatingAllowableValues();
+        if (!is_null($this->container['star_rating']) && !in_array($this->container['star_rating'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'star_rating', must be one of '%s'",
+                $this->container['star_rating'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -408,7 +412,7 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
     /**
      * Sets id
      *
-     * @param string|null $id Review identifier. For Google Business this is the full review resource name (accounts/{accountId}/locations/{locationId}/reviews/{reviewId}), so it also encodes the location.
+     * @param string|null $id Review ID
      *
      * @return self
      */
@@ -423,143 +427,28 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
     }
 
     /**
-     * Gets platform
+     * Gets name
      *
      * @return string|null
      */
-    public function getPlatform()
+    public function getName()
     {
-        return $this->container['platform'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets platform
+     * Sets name
      *
-     * @param string|null $platform platform
+     * @param string|null $name Full resource name
      *
      * @return self
      */
-    public function setPlatform($platform)
+    public function setName($name)
     {
-        if (is_null($platform)) {
-            throw new \InvalidArgumentException('non-nullable platform cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['platform'] = $platform;
-
-        return $this;
-    }
-
-    /**
-     * Gets account_id
-     *
-     * @return string|null
-     */
-    public function getAccountId()
-    {
-        return $this->container['account_id'];
-    }
-
-    /**
-     * Sets account_id
-     *
-     * @param string|null $account_id account_id
-     *
-     * @return self
-     */
-    public function setAccountId($account_id)
-    {
-        if (is_null($account_id)) {
-            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
-        }
-        $this->container['account_id'] = $account_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets account_username
-     *
-     * @return string|null
-     */
-    public function getAccountUsername()
-    {
-        return $this->container['account_username'];
-    }
-
-    /**
-     * Sets account_username
-     *
-     * @param string|null $account_username account_username
-     *
-     * @return self
-     */
-    public function setAccountUsername($account_username)
-    {
-        if (is_null($account_username)) {
-            throw new \InvalidArgumentException('non-nullable account_username cannot be null');
-        }
-        $this->container['account_username'] = $account_username;
-
-        return $this;
-    }
-
-    /**
-     * Gets location_id
-     *
-     * @return string|null
-     */
-    public function getLocationId()
-    {
-        return $this->container['location_id'];
-    }
-
-    /**
-     * Sets location_id
-     *
-     * @param string|null $location_id Bare GBP location id the review belongs to. Google Business only; absent for other platforms.
-     *
-     * @return self
-     */
-    public function setLocationId($location_id)
-    {
-        if (is_null($location_id)) {
-            throw new \InvalidArgumentException('non-nullable location_id cannot be null');
-        }
-        $this->container['location_id'] = $location_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets location_name
-     *
-     * @return string|null
-     */
-    public function getLocationName()
-    {
-        return $this->container['location_name'];
-    }
-
-    /**
-     * Sets location_name
-     *
-     * @param string|null $location_name Human-readable GBP location display name. Google Business only; absent for other platforms.
-     *
-     * @return self
-     */
-    public function setLocationName($location_name)
-    {
-        if (is_null($location_name)) {
-            array_push($this->openAPINullablesSetToNull, 'location_name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('location_name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['location_name'] = $location_name;
+        $this->container['name'] = $name;
 
         return $this;
     }
@@ -567,7 +456,7 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
     /**
      * Gets reviewer
      *
-     * @return \Zernio\Model\ListInboxReviews200ResponseDataInnerReviewer|null
+     * @return \Zernio\Model\GoogleBusinessReviewReviewer|null
      */
     public function getReviewer()
     {
@@ -577,7 +466,7 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
     /**
      * Sets reviewer
      *
-     * @param \Zernio\Model\ListInboxReviews200ResponseDataInnerReviewer|null $reviewer reviewer
+     * @param \Zernio\Model\GoogleBusinessReviewReviewer|null $reviewer reviewer
      *
      * @return self
      */
@@ -604,7 +493,7 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
     /**
      * Sets rating
      *
-     * @param int|null $rating rating
+     * @param int|null $rating Numeric star rating (0 when Google sends no rating)
      *
      * @return self
      */
@@ -613,115 +502,160 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
         if (is_null($rating)) {
             throw new \InvalidArgumentException('non-nullable rating cannot be null');
         }
+
+        if (($rating > 5)) {
+            throw new \InvalidArgumentException('invalid value for $rating when calling GoogleBusinessReview., must be smaller than or equal to 5.');
+        }
+        if (($rating < 0)) {
+            throw new \InvalidArgumentException('invalid value for $rating when calling GoogleBusinessReview., must be bigger than or equal to 0.');
+        }
+
         $this->container['rating'] = $rating;
 
         return $this;
     }
 
     /**
-     * Gets text
+     * Gets star_rating
      *
      * @return string|null
      */
-    public function getText()
+    public function getStarRating()
     {
-        return $this->container['text'];
+        return $this->container['star_rating'];
     }
 
     /**
-     * Sets text
+     * Sets star_rating
      *
-     * @param string|null $text text
+     * @param string|null $star_rating Google's string rating
      *
      * @return self
      */
-    public function setText($text)
+    public function setStarRating($star_rating)
     {
-        if (is_null($text)) {
-            throw new \InvalidArgumentException('non-nullable text cannot be null');
+        if (is_null($star_rating)) {
+            throw new \InvalidArgumentException('non-nullable star_rating cannot be null');
         }
-        $this->container['text'] = $text;
+        $allowedValues = $this->getStarRatingAllowableValues();
+        if (!in_array($star_rating, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'star_rating', must be one of '%s'",
+                    $star_rating,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['star_rating'] = $star_rating;
 
         return $this;
     }
 
     /**
-     * Gets created
+     * Gets comment
+     *
+     * @return string|null
+     */
+    public function getComment()
+    {
+        return $this->container['comment'];
+    }
+
+    /**
+     * Sets comment
+     *
+     * @param string|null $comment Review text
+     *
+     * @return self
+     */
+    public function setComment($comment)
+    {
+        if (is_null($comment)) {
+            throw new \InvalidArgumentException('non-nullable comment cannot be null');
+        }
+        $this->container['comment'] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Gets create_time
      *
      * @return \DateTime|null
      */
-    public function getCreated()
+    public function getCreateTime()
     {
-        return $this->container['created'];
+        return $this->container['create_time'];
     }
 
     /**
-     * Sets created
+     * Sets create_time
      *
-     * @param \DateTime|null $created created
+     * @param \DateTime|null $create_time create_time
      *
      * @return self
      */
-    public function setCreated($created)
+    public function setCreateTime($create_time)
     {
-        if (is_null($created)) {
-            throw new \InvalidArgumentException('non-nullable created cannot be null');
+        if (is_null($create_time)) {
+            throw new \InvalidArgumentException('non-nullable create_time cannot be null');
         }
-        $this->container['created'] = $created;
+        $this->container['create_time'] = $create_time;
 
         return $this;
     }
 
     /**
-     * Gets has_reply
+     * Gets update_time
      *
-     * @return bool|null
+     * @return \DateTime|null
      */
-    public function getHasReply()
+    public function getUpdateTime()
     {
-        return $this->container['has_reply'];
+        return $this->container['update_time'];
     }
 
     /**
-     * Sets has_reply
+     * Sets update_time
      *
-     * @param bool|null $has_reply has_reply
+     * @param \DateTime|null $update_time update_time
      *
      * @return self
      */
-    public function setHasReply($has_reply)
+    public function setUpdateTime($update_time)
     {
-        if (is_null($has_reply)) {
-            throw new \InvalidArgumentException('non-nullable has_reply cannot be null');
+        if (is_null($update_time)) {
+            throw new \InvalidArgumentException('non-nullable update_time cannot be null');
         }
-        $this->container['has_reply'] = $has_reply;
+        $this->container['update_time'] = $update_time;
 
         return $this;
     }
 
     /**
-     * Gets has_photos
+     * Gets review_reply
      *
-     * @return bool|null
+     * @return \Zernio\Model\GoogleBusinessReviewReviewReply|null
      */
-    public function getHasPhotos()
+    public function getReviewReply()
     {
-        return $this->container['has_photos'];
+        return $this->container['review_reply'];
     }
 
     /**
-     * Sets has_photos
+     * Sets review_reply
      *
-     * @param bool|null $has_photos Whether the review has at least one photo. Google Business only; always false for other platforms.
+     * @param \Zernio\Model\GoogleBusinessReviewReviewReply|null $review_reply review_reply
      *
      * @return self
      */
-    public function setHasPhotos($has_photos)
+    public function setReviewReply($review_reply)
     {
-        if (is_null($has_photos)) {
-            throw new \InvalidArgumentException('non-nullable has_photos cannot be null');
+        if (is_null($review_reply)) {
+            throw new \InvalidArgumentException('non-nullable review_reply cannot be null');
         }
-        $this->container['has_photos'] = $has_photos;
+        $this->container['review_reply'] = $review_reply;
 
         return $this;
     }
@@ -739,7 +673,7 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
     /**
      * Sets photo_count
      *
-     * @param int|null $photo_count Number of photos attached to the review (photos only; videos are not counted). Google Business only; 0 for other platforms.
+     * @param int|null $photo_count Number of photos attached to the review (photos only, videos are not counted)
      *
      * @return self
      */
@@ -766,7 +700,7 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
     /**
      * Sets photos
      *
-     * @param \Zernio\Model\ListInboxReviews200ResponseDataInnerPhotosInner[]|null $photos Photos attached to the review. Google Business only; always an empty array for other platforms.
+     * @param \Zernio\Model\ListInboxReviews200ResponseDataInnerPhotosInner[]|null $photos Photos attached to the review by the reviewer
      *
      * @return self
      */
@@ -776,67 +710,6 @@ class ListInboxReviews200ResponseDataInner implements ModelInterface, ArrayAcces
             throw new \InvalidArgumentException('non-nullable photos cannot be null');
         }
         $this->container['photos'] = $photos;
-
-        return $this;
-    }
-
-    /**
-     * Gets reply
-     *
-     * @return \Zernio\Model\ListInboxReviews200ResponseDataInnerReply|null
-     */
-    public function getReply()
-    {
-        return $this->container['reply'];
-    }
-
-    /**
-     * Sets reply
-     *
-     * @param \Zernio\Model\ListInboxReviews200ResponseDataInnerReply|null $reply reply
-     *
-     * @return self
-     */
-    public function setReply($reply)
-    {
-        if (is_null($reply)) {
-            throw new \InvalidArgumentException('non-nullable reply cannot be null');
-        }
-        $this->container['reply'] = $reply;
-
-        return $this;
-    }
-
-    /**
-     * Gets review_url
-     *
-     * @return string|null
-     */
-    public function getReviewUrl()
-    {
-        return $this->container['review_url'];
-    }
-
-    /**
-     * Sets review_url
-     *
-     * @param string|null $review_url review_url
-     *
-     * @return self
-     */
-    public function setReviewUrl($review_url)
-    {
-        if (is_null($review_url)) {
-            array_push($this->openAPINullablesSetToNull, 'review_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('review_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['review_url'] = $review_url;
 
         return $this;
     }

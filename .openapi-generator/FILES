@@ -640,11 +640,8 @@ docs/Model/GetGoogleBusinessPerformance200ResponseDateRange.md
 docs/Model/GetGoogleBusinessPerformance200ResponseMetricsValue.md
 docs/Model/GetGoogleBusinessPerformance200ResponseMetricsValueValuesInner.md
 docs/Model/GetGoogleBusinessPerformance400Response.md
+docs/Model/GetGoogleBusinessReview200Response.md
 docs/Model/GetGoogleBusinessReviews200Response.md
-docs/Model/GetGoogleBusinessReviews200ResponseReviewsInner.md
-docs/Model/GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner.md
-docs/Model/GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply.md
-docs/Model/GetGoogleBusinessReviews200ResponseReviewsInnerReviewer.md
 docs/Model/GetGoogleBusinessSearchKeywords200Response.md
 docs/Model/GetGoogleBusinessSearchKeywords200ResponseKeywordsInner.md
 docs/Model/GetGoogleBusinessSearchKeywords200ResponseMonthRange.md
@@ -860,6 +857,9 @@ docs/Model/GoogleBusinessPlatformDataEventScheduleEndTime.md
 docs/Model/GoogleBusinessPlatformDataEventScheduleStartDate.md
 docs/Model/GoogleBusinessPlatformDataEventScheduleStartTime.md
 docs/Model/GoogleBusinessPlatformDataOffer.md
+docs/Model/GoogleBusinessReview.md
+docs/Model/GoogleBusinessReviewReviewReply.md
+docs/Model/GoogleBusinessReviewReviewer.md
 docs/Model/HandleOAuthCallbackRequest.md
 docs/Model/HideInboxComment200Response.md
 docs/Model/HideInboxCommentRequest.md
@@ -1014,6 +1014,7 @@ docs/Model/ListInboxMentions200ResponseDataInner.md
 docs/Model/ListInboxMentions200ResponseMeta.md
 docs/Model/ListInboxReviews200Response.md
 docs/Model/ListInboxReviews200ResponseDataInner.md
+docs/Model/ListInboxReviews200ResponseDataInnerPhotosInner.md
 docs/Model/ListInboxReviews200ResponseDataInnerReply.md
 docs/Model/ListInboxReviews200ResponseDataInnerReviewer.md
 docs/Model/ListInboxReviews200ResponseSummary.md
@@ -2430,11 +2431,8 @@ lib/Model/GetGoogleBusinessPerformance200ResponseDateRange.php
 lib/Model/GetGoogleBusinessPerformance200ResponseMetricsValue.php
 lib/Model/GetGoogleBusinessPerformance200ResponseMetricsValueValuesInner.php
 lib/Model/GetGoogleBusinessPerformance400Response.php
+lib/Model/GetGoogleBusinessReview200Response.php
 lib/Model/GetGoogleBusinessReviews200Response.php
-lib/Model/GetGoogleBusinessReviews200ResponseReviewsInner.php
-lib/Model/GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner.php
-lib/Model/GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply.php
-lib/Model/GetGoogleBusinessReviews200ResponseReviewsInnerReviewer.php
 lib/Model/GetGoogleBusinessSearchKeywords200Response.php
 lib/Model/GetGoogleBusinessSearchKeywords200ResponseKeywordsInner.php
 lib/Model/GetGoogleBusinessSearchKeywords200ResponseMonthRange.php
@@ -2650,6 +2648,9 @@ lib/Model/GoogleBusinessPlatformDataEventScheduleEndTime.php
 lib/Model/GoogleBusinessPlatformDataEventScheduleStartDate.php
 lib/Model/GoogleBusinessPlatformDataEventScheduleStartTime.php
 lib/Model/GoogleBusinessPlatformDataOffer.php
+lib/Model/GoogleBusinessReview.php
+lib/Model/GoogleBusinessReviewReviewReply.php
+lib/Model/GoogleBusinessReviewReviewer.php
 lib/Model/HandleOAuthCallbackRequest.php
 lib/Model/HideInboxComment200Response.php
 lib/Model/HideInboxCommentRequest.php
@@ -2804,6 +2805,7 @@ lib/Model/ListInboxMentions200ResponseDataInner.php
 lib/Model/ListInboxMentions200ResponseMeta.php
 lib/Model/ListInboxReviews200Response.php
 lib/Model/ListInboxReviews200ResponseDataInner.php
+lib/Model/ListInboxReviews200ResponseDataInnerPhotosInner.php
 lib/Model/ListInboxReviews200ResponseDataInnerReply.php
 lib/Model/ListInboxReviews200ResponseDataInnerReviewer.php
 lib/Model/ListInboxReviews200ResponseSummary.php
@@ -3581,3 +3583,8 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/GetGoogleBusinessReview200ResponseTest.php
+test/Model/GoogleBusinessReviewReviewReplyTest.php
+test/Model/GoogleBusinessReviewReviewerTest.php
+test/Model/GoogleBusinessReviewTest.php
+test/Model/ListInboxReviews200ResponseDataInnerPhotosInnerTest.php

@@ -8,6 +8,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | ------------- | ------------- | ------------- |
 | [**batchGetGoogleBusinessReviews()**](GMBReviewsApi.md#batchGetGoogleBusinessReviews) | **POST** /v1/accounts/{accountId}/gmb-reviews/batch | Batch get reviews |
 | [**deleteGoogleBusinessReviewReply()**](GMBReviewsApi.md#deleteGoogleBusinessReviewReply) | **DELETE** /v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply | Delete a review reply |
+| [**getGoogleBusinessReview()**](GMBReviewsApi.md#getGoogleBusinessReview) | **GET** /v1/accounts/{accountId}/gmb-reviews/{reviewId} | Get a review |
 | [**getGoogleBusinessReviews()**](GMBReviewsApi.md#getGoogleBusinessReviews) | **GET** /v1/accounts/{accountId}/gmb-reviews | Get reviews |
 | [**replyToGoogleBusinessReview()**](GMBReviewsApi.md#replyToGoogleBusinessReview) | **POST** /v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply | Reply to a review |
 
@@ -122,6 +123,70 @@ try {
 ### Return type
 
 [**\Zernio\Model\DeleteGoogleBusinessReviewReply200Response**](../Model/DeleteGoogleBusinessReviewReply200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getGoogleBusinessReview()`
+
+```php
+getGoogleBusinessReview($account_id, $review_id, $location_id): \Zernio\Model\GetGoogleBusinessReview200Response
+```
+
+Get a review
+
+Returns one Google Business review, in the same shape as the entries of GET /v1/accounts/{accountId}/gmb-reviews. The review is read from the account's selected location unless locationId overrides it, and Google returns 404 for a review id that belongs to another location. Read the review before replying if a human may have answered it already: replies are overwritten in place and Google keeps no history.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\GMBReviewsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The Zernio account ID (from /v1/accounts)
+$review_id = 'review_id_example'; // string | The review ID portion (e.g. \"AIe9_BGx1234567890\"), not the full resource name
+$location_id = 'location_id_example'; // string | Override which location to read the review from. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
+
+try {
+    $result = $apiInstance->getGoogleBusinessReview($account_id, $review_id, $location_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling GMBReviewsApi->getGoogleBusinessReview: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The Zernio account ID (from /v1/accounts) | |
+| **review_id** | **string**| The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name | |
+| **location_id** | **string**| Override which location to read the review from. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
+
+### Return type
+
+[**\Zernio\Model\GetGoogleBusinessReview200Response**](../Model/GetGoogleBusinessReview200Response.md)
 
 ### Authorization
 
