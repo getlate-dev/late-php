@@ -26,7 +26,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 ## `addMessageReaction()`
 
 ```php
-addMessageReaction($conversation_id, $message_id, $add_message_reaction_request): \Zernio\Model\UpdateYoutubeDefaultPlaylist200Response
+addMessageReaction($conversation_id, $message_id, $add_message_reaction_request): \Zernio\Model\AddMessageReaction200Response
 ```
 
 Add reaction
@@ -51,7 +51,7 @@ $apiInstance = new Zernio\Api\MessagesApi(
     $config
 );
 $conversation_id = 'conversation_id_example'; // string | The conversation ID
-$message_id = 'message_id_example'; // string | The platform message ID to react to
+$message_id = 'message_id_example'; // string | The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook)
 $add_message_reaction_request = new \Zernio\Model\AddMessageReactionRequest(); // \Zernio\Model\AddMessageReactionRequest
 
 try {
@@ -67,12 +67,12 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **conversation_id** | **string**| The conversation ID | |
-| **message_id** | **string**| The platform message ID to react to | |
+| **message_id** | **string**| The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) | |
 | **add_message_reaction_request** | [**\Zernio\Model\AddMessageReactionRequest**](../Model/AddMessageReactionRequest.md)|  | |
 
 ### Return type
 
-[**\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response**](../Model/UpdateYoutubeDefaultPlaylist200Response.md)
+[**\Zernio\Model\AddMessageReaction200Response**](../Model/AddMessageReaction200Response.md)
 
 ### Authorization
 
@@ -610,7 +610,7 @@ try {
 ## `removeMessageReaction()`
 
 ```php
-removeMessageReaction($conversation_id, $message_id, $account_id): \Zernio\Model\UpdateYoutubeDefaultPlaylist200Response
+removeMessageReaction($conversation_id, $message_id, $account_id): \Zernio\Model\RemoveMessageReaction200Response
 ```
 
 Remove reaction
@@ -635,7 +635,7 @@ $apiInstance = new Zernio\Api\MessagesApi(
     $config
 );
 $conversation_id = 'conversation_id_example'; // string | The conversation ID
-$message_id = 'message_id_example'; // string | The platform message ID
+$message_id = 'message_id_example'; // string | The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook)
 $account_id = 'account_id_example'; // string | Social account ID
 
 try {
@@ -651,12 +651,12 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **conversation_id** | **string**| The conversation ID | |
-| **message_id** | **string**| The platform message ID | |
+| **message_id** | **string**| The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) | |
 | **account_id** | **string**| Social account ID | |
 
 ### Return type
 
-[**\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response**](../Model/UpdateYoutubeDefaultPlaylist200Response.md)
+[**\Zernio\Model\RemoveMessageReaction200Response**](../Model/RemoveMessageReaction200Response.md)
 
 ### Authorization
 

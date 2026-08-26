@@ -67,7 +67,9 @@ class MetaLeadFormPlatformData implements ModelInterface, ArrayAccess, \JsonSeri
         'thank_you_button_text' => 'string',
         'thank_you_button_type' => 'string',
         'thank_you_website_url' => 'string',
+        'thank_you_enable_messenger' => 'bool',
         'is_optimized_for_quality' => 'bool',
+        'is_phone_sms_verify_enabled' => 'bool',
         'block_display_for_non_targeted_viewer' => 'bool',
         'question_page_custom_headline' => 'string',
         'context_card' => '\Zernio\Model\MetaLeadFormPlatformDataContextCard'
@@ -90,7 +92,9 @@ class MetaLeadFormPlatformData implements ModelInterface, ArrayAccess, \JsonSeri
         'thank_you_button_text' => null,
         'thank_you_button_type' => null,
         'thank_you_website_url' => 'uri',
+        'thank_you_enable_messenger' => null,
         'is_optimized_for_quality' => null,
+        'is_phone_sms_verify_enabled' => null,
         'block_display_for_non_targeted_viewer' => null,
         'question_page_custom_headline' => null,
         'context_card' => null
@@ -111,7 +115,9 @@ class MetaLeadFormPlatformData implements ModelInterface, ArrayAccess, \JsonSeri
         'thank_you_button_text' => false,
         'thank_you_button_type' => false,
         'thank_you_website_url' => false,
+        'thank_you_enable_messenger' => false,
         'is_optimized_for_quality' => false,
+        'is_phone_sms_verify_enabled' => false,
         'block_display_for_non_targeted_viewer' => false,
         'question_page_custom_headline' => false,
         'context_card' => false
@@ -212,7 +218,9 @@ class MetaLeadFormPlatformData implements ModelInterface, ArrayAccess, \JsonSeri
         'thank_you_button_text' => 'thankYouButtonText',
         'thank_you_button_type' => 'thankYouButtonType',
         'thank_you_website_url' => 'thankYouWebsiteUrl',
+        'thank_you_enable_messenger' => 'thankYouEnableMessenger',
         'is_optimized_for_quality' => 'isOptimizedForQuality',
+        'is_phone_sms_verify_enabled' => 'isPhoneSmsVerifyEnabled',
         'block_display_for_non_targeted_viewer' => 'blockDisplayForNonTargetedViewer',
         'question_page_custom_headline' => 'questionPageCustomHeadline',
         'context_card' => 'contextCard'
@@ -233,7 +241,9 @@ class MetaLeadFormPlatformData implements ModelInterface, ArrayAccess, \JsonSeri
         'thank_you_button_text' => 'setThankYouButtonText',
         'thank_you_button_type' => 'setThankYouButtonType',
         'thank_you_website_url' => 'setThankYouWebsiteUrl',
+        'thank_you_enable_messenger' => 'setThankYouEnableMessenger',
         'is_optimized_for_quality' => 'setIsOptimizedForQuality',
+        'is_phone_sms_verify_enabled' => 'setIsPhoneSmsVerifyEnabled',
         'block_display_for_non_targeted_viewer' => 'setBlockDisplayForNonTargetedViewer',
         'question_page_custom_headline' => 'setQuestionPageCustomHeadline',
         'context_card' => 'setContextCard'
@@ -254,7 +264,9 @@ class MetaLeadFormPlatformData implements ModelInterface, ArrayAccess, \JsonSeri
         'thank_you_button_text' => 'getThankYouButtonText',
         'thank_you_button_type' => 'getThankYouButtonType',
         'thank_you_website_url' => 'getThankYouWebsiteUrl',
+        'thank_you_enable_messenger' => 'getThankYouEnableMessenger',
         'is_optimized_for_quality' => 'getIsOptimizedForQuality',
+        'is_phone_sms_verify_enabled' => 'getIsPhoneSmsVerifyEnabled',
         'block_display_for_non_targeted_viewer' => 'getBlockDisplayForNonTargetedViewer',
         'question_page_custom_headline' => 'getQuestionPageCustomHeadline',
         'context_card' => 'getContextCard'
@@ -326,7 +338,9 @@ class MetaLeadFormPlatformData implements ModelInterface, ArrayAccess, \JsonSeri
         $this->setIfExists('thank_you_button_text', $data ?? [], null);
         $this->setIfExists('thank_you_button_type', $data ?? [], null);
         $this->setIfExists('thank_you_website_url', $data ?? [], null);
+        $this->setIfExists('thank_you_enable_messenger', $data ?? [], false);
         $this->setIfExists('is_optimized_for_quality', $data ?? [], null);
+        $this->setIfExists('is_phone_sms_verify_enabled', $data ?? [], false);
         $this->setIfExists('block_display_for_non_targeted_viewer', $data ?? [], null);
         $this->setIfExists('question_page_custom_headline', $data ?? [], null);
         $this->setIfExists('context_card', $data ?? [], null);
@@ -638,6 +652,33 @@ class MetaLeadFormPlatformData implements ModelInterface, ArrayAccess, \JsonSeri
     }
 
     /**
+     * Gets thank_you_enable_messenger
+     *
+     * @return bool|null
+     */
+    public function getThankYouEnableMessenger()
+    {
+        return $this->container['thank_you_enable_messenger'];
+    }
+
+    /**
+     * Sets thank_you_enable_messenger
+     *
+     * @param bool|null $thank_you_enable_messenger Adds a 'Continue in Messenger' option to the thank-you page (Meta thank_you_page.enable_messenger), so the lead can carry on chatting with the Page. Set thankYouButtonType to MESSAGE_BUSINESS or P2B_MESSENGER to make the chat the primary button.
+     *
+     * @return self
+     */
+    public function setThankYouEnableMessenger($thank_you_enable_messenger)
+    {
+        if (is_null($thank_you_enable_messenger)) {
+            throw new \InvalidArgumentException('non-nullable thank_you_enable_messenger cannot be null');
+        }
+        $this->container['thank_you_enable_messenger'] = $thank_you_enable_messenger;
+
+        return $this;
+    }
+
+    /**
      * Gets is_optimized_for_quality
      *
      * @return bool|null
@@ -660,6 +701,33 @@ class MetaLeadFormPlatformData implements ModelInterface, ArrayAccess, \JsonSeri
             throw new \InvalidArgumentException('non-nullable is_optimized_for_quality cannot be null');
         }
         $this->container['is_optimized_for_quality'] = $is_optimized_for_quality;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_phone_sms_verify_enabled
+     *
+     * @return bool|null
+     */
+    public function getIsPhoneSmsVerifyEnabled()
+    {
+        return $this->container['is_phone_sms_verify_enabled'];
+    }
+
+    /**
+     * Sets is_phone_sms_verify_enabled
+     *
+     * @param bool|null $is_phone_sms_verify_enabled Requires the lead to verify their phone number over SMS before the form submits (Meta is_phone_sms_verify_enabled). Only meaningful on a form with a PHONE question. Meta can restrict this parameter to apps holding a capability: when it does, the create fails with a 422 naming platformSpecificData.isPhoneSmsVerifyEnabled, and the toggle then has to be set in Meta's form builder.
+     *
+     * @return self
+     */
+    public function setIsPhoneSmsVerifyEnabled($is_phone_sms_verify_enabled)
+    {
+        if (is_null($is_phone_sms_verify_enabled)) {
+            throw new \InvalidArgumentException('non-nullable is_phone_sms_verify_enabled cannot be null');
+        }
+        $this->container['is_phone_sms_verify_enabled'] = $is_phone_sms_verify_enabled;
 
         return $this;
     }

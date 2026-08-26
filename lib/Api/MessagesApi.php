@@ -176,13 +176,13 @@ class MessagesApi
      * Add reaction
      *
      * @param  string $conversation_id The conversation ID (required)
-     * @param  string $message_id The platform message ID to react to (required)
+     * @param  string $message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) (required)
      * @param  \Zernio\Model\AddMessageReactionRequest $add_message_reaction_request add_message_reaction_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addMessageReaction'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\UpdateYoutubeDefaultPlaylist200Response|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\AddMessageReaction200Response|\Zernio\Model\InlineObject
      */
     public function addMessageReaction($conversation_id, $message_id, $add_message_reaction_request, string $contentType = self::contentTypes['addMessageReaction'][0])
     {
@@ -196,13 +196,13 @@ class MessagesApi
      * Add reaction
      *
      * @param  string $conversation_id The conversation ID (required)
-     * @param  string $message_id The platform message ID to react to (required)
+     * @param  string $message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) (required)
      * @param  \Zernio\Model\AddMessageReactionRequest $add_message_reaction_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addMessageReaction'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\UpdateYoutubeDefaultPlaylist200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\AddMessageReaction200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function addMessageReactionWithHttpInfo($conversation_id, $message_id, $add_message_reaction_request, string $contentType = self::contentTypes['addMessageReaction'][0])
     {
@@ -234,7 +234,7 @@ class MessagesApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response',
+                        '\Zernio\Model\AddMessageReaction200Response',
                         $request,
                         $response,
                     );
@@ -262,7 +262,7 @@ class MessagesApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response',
+                '\Zernio\Model\AddMessageReaction200Response',
                 $request,
                 $response,
             );
@@ -271,7 +271,7 @@ class MessagesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response',
+                        '\Zernio\Model\AddMessageReaction200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -297,7 +297,7 @@ class MessagesApi
      * Add reaction
      *
      * @param  string $conversation_id The conversation ID (required)
-     * @param  string $message_id The platform message ID to react to (required)
+     * @param  string $message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) (required)
      * @param  \Zernio\Model\AddMessageReactionRequest $add_message_reaction_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addMessageReaction'] to see the possible values for this operation
      *
@@ -320,7 +320,7 @@ class MessagesApi
      * Add reaction
      *
      * @param  string $conversation_id The conversation ID (required)
-     * @param  string $message_id The platform message ID to react to (required)
+     * @param  string $message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) (required)
      * @param  \Zernio\Model\AddMessageReactionRequest $add_message_reaction_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addMessageReaction'] to see the possible values for this operation
      *
@@ -329,7 +329,7 @@ class MessagesApi
      */
     public function addMessageReactionAsyncWithHttpInfo($conversation_id, $message_id, $add_message_reaction_request, string $contentType = self::contentTypes['addMessageReaction'][0])
     {
-        $returnType = '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response';
+        $returnType = '\Zernio\Model\AddMessageReaction200Response';
         $request = $this->addMessageReactionRequest($conversation_id, $message_id, $add_message_reaction_request, $contentType);
 
         return $this->client
@@ -372,7 +372,7 @@ class MessagesApi
      * Create request for operation 'addMessageReaction'
      *
      * @param  string $conversation_id The conversation ID (required)
-     * @param  string $message_id The platform message ID to react to (required)
+     * @param  string $message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) (required)
      * @param  \Zernio\Model\AddMessageReactionRequest $add_message_reaction_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addMessageReaction'] to see the possible values for this operation
      *
@@ -3234,13 +3234,13 @@ class MessagesApi
      * Remove reaction
      *
      * @param  string $conversation_id The conversation ID (required)
-     * @param  string $message_id The platform message ID (required)
+     * @param  string $message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) (required)
      * @param  string $account_id Social account ID (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeMessageReaction'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\UpdateYoutubeDefaultPlaylist200Response|\Zernio\Model\InlineObject
+     * @return \Zernio\Model\RemoveMessageReaction200Response|\Zernio\Model\InlineObject
      */
     public function removeMessageReaction($conversation_id, $message_id, $account_id, string $contentType = self::contentTypes['removeMessageReaction'][0])
     {
@@ -3254,13 +3254,13 @@ class MessagesApi
      * Remove reaction
      *
      * @param  string $conversation_id The conversation ID (required)
-     * @param  string $message_id The platform message ID (required)
+     * @param  string $message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) (required)
      * @param  string $account_id Social account ID (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeMessageReaction'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\UpdateYoutubeDefaultPlaylist200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\RemoveMessageReaction200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function removeMessageReactionWithHttpInfo($conversation_id, $message_id, $account_id, string $contentType = self::contentTypes['removeMessageReaction'][0])
     {
@@ -3292,7 +3292,7 @@ class MessagesApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response',
+                        '\Zernio\Model\RemoveMessageReaction200Response',
                         $request,
                         $response,
                     );
@@ -3320,7 +3320,7 @@ class MessagesApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response',
+                '\Zernio\Model\RemoveMessageReaction200Response',
                 $request,
                 $response,
             );
@@ -3329,7 +3329,7 @@ class MessagesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response',
+                        '\Zernio\Model\RemoveMessageReaction200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3355,7 +3355,7 @@ class MessagesApi
      * Remove reaction
      *
      * @param  string $conversation_id The conversation ID (required)
-     * @param  string $message_id The platform message ID (required)
+     * @param  string $message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) (required)
      * @param  string $account_id Social account ID (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeMessageReaction'] to see the possible values for this operation
      *
@@ -3378,7 +3378,7 @@ class MessagesApi
      * Remove reaction
      *
      * @param  string $conversation_id The conversation ID (required)
-     * @param  string $message_id The platform message ID (required)
+     * @param  string $message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) (required)
      * @param  string $account_id Social account ID (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeMessageReaction'] to see the possible values for this operation
      *
@@ -3387,7 +3387,7 @@ class MessagesApi
      */
     public function removeMessageReactionAsyncWithHttpInfo($conversation_id, $message_id, $account_id, string $contentType = self::contentTypes['removeMessageReaction'][0])
     {
-        $returnType = '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response';
+        $returnType = '\Zernio\Model\RemoveMessageReaction200Response';
         $request = $this->removeMessageReactionRequest($conversation_id, $message_id, $account_id, $contentType);
 
         return $this->client
@@ -3430,7 +3430,7 @@ class MessagesApi
      * Create request for operation 'removeMessageReaction'
      *
      * @param  string $conversation_id The conversation ID (required)
-     * @param  string $message_id The platform message ID (required)
+     * @param  string $message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) (required)
      * @param  string $account_id Social account ID (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeMessageReaction'] to see the possible values for this operation
      *

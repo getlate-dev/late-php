@@ -107,6 +107,7 @@ docs/Model/AddConversionAssociations200Response.md
 docs/Model/AddConversionAssociations200ResponseFailedInner.md
 docs/Model/AddConversionAssociationsRequest.md
 docs/Model/AddDiscordMemberRole200Response.md
+docs/Model/AddMessageReaction200Response.md
 docs/Model/AddMessageReactionRequest.md
 docs/Model/AddTrackingTagSharedAccount201Response.md
 docs/Model/AddTrackingTagSharedAccountRequest.md
@@ -1209,6 +1210,7 @@ docs/Model/RemediatePhoneNumberRequestDocumentsInnerOneOf.md
 docs/Model/RemoveBookmark200Response.md
 docs/Model/RemoveConversionAssociations200Response.md
 docs/Model/RemoveDiscordMemberRole200Response.md
+docs/Model/RemoveMessageReaction200Response.md
 docs/Model/RemoveWhatsAppGroupParticipantsRequest.md
 docs/Model/ReplaceAdAudienceCompanies200Response.md
 docs/Model/ReplaceAdAudienceCompaniesRequest.md
@@ -1898,6 +1900,7 @@ lib/Model/AddConversionAssociations200Response.php
 lib/Model/AddConversionAssociations200ResponseFailedInner.php
 lib/Model/AddConversionAssociationsRequest.php
 lib/Model/AddDiscordMemberRole200Response.php
+lib/Model/AddMessageReaction200Response.php
 lib/Model/AddMessageReactionRequest.php
 lib/Model/AddTrackingTagSharedAccount201Response.php
 lib/Model/AddTrackingTagSharedAccountRequest.php
@@ -3001,6 +3004,7 @@ lib/Model/RemediatePhoneNumberRequestDocumentsInnerOneOf.php
 lib/Model/RemoveBookmark200Response.php
 lib/Model/RemoveConversionAssociations200Response.php
 lib/Model/RemoveDiscordMemberRole200Response.php
+lib/Model/RemoveMessageReaction200Response.php
 lib/Model/RemoveWhatsAppGroupParticipantsRequest.php
 lib/Model/ReplaceAdAudienceCompanies200Response.php
 lib/Model/ReplaceAdAudienceCompaniesRequest.php
@@ -3583,3 +3587,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/AddMessageReaction200ResponseTest.php
+test/Model/RemoveMessageReaction200ResponseTest.php
