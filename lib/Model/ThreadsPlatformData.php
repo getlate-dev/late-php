@@ -60,6 +60,7 @@ class ThreadsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static $openAPITypes = [
         'topic_tag' => 'string',
+        'first_comment' => 'string',
         'thread_items' => '\Zernio\Model\TwitterPlatformDataThreadItemsInner[]'
     ];
 
@@ -72,6 +73,7 @@ class ThreadsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static $openAPIFormats = [
         'topic_tag' => null,
+        'first_comment' => null,
         'thread_items' => null
     ];
 
@@ -82,6 +84,7 @@ class ThreadsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static array $openAPINullables = [
         'topic_tag' => false,
+        'first_comment' => false,
         'thread_items' => false
     ];
 
@@ -172,6 +175,7 @@ class ThreadsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $attributeMap = [
         'topic_tag' => 'topic_tag',
+        'first_comment' => 'firstComment',
         'thread_items' => 'threadItems'
     ];
 
@@ -182,6 +186,7 @@ class ThreadsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $setters = [
         'topic_tag' => 'setTopicTag',
+        'first_comment' => 'setFirstComment',
         'thread_items' => 'setThreadItems'
     ];
 
@@ -192,6 +197,7 @@ class ThreadsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $getters = [
         'topic_tag' => 'getTopicTag',
+        'first_comment' => 'getFirstComment',
         'thread_items' => 'getThreadItems'
     ];
 
@@ -253,6 +259,7 @@ class ThreadsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
     public function __construct(?array $data = null)
     {
         $this->setIfExists('topic_tag', $data ?? [], null);
+        $this->setIfExists('first_comment', $data ?? [], null);
         $this->setIfExists('thread_items', $data ?? [], null);
     }
 
@@ -289,6 +296,10 @@ class ThreadsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
 
         if (!is_null($this->container['topic_tag']) && (mb_strlen($this->container['topic_tag']) < 1)) {
             $invalidProperties[] = "invalid value for 'topic_tag', the character length must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['first_comment']) && (mb_strlen($this->container['first_comment']) > 500)) {
+            $invalidProperties[] = "invalid value for 'first_comment', the character length must be smaller than or equal to 500.";
         }
 
         return $invalidProperties;
@@ -336,6 +347,37 @@ class ThreadsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
         }
 
         $this->container['topic_tag'] = $topic_tag;
+
+        return $this;
+    }
+
+    /**
+     * Gets first_comment
+     *
+     * @return string|null
+     */
+    public function getFirstComment()
+    {
+        return $this->container['first_comment'];
+    }
+
+    /**
+     * Sets first_comment
+     *
+     * @param string|null $first_comment Optional first comment to post immediately after publishing, as a reply to the published post. With threadItems, it replies to the root post. Up to 500 characters (the Threads post limit). The reply is itself a Threads post, so it consumes one of the 250 posts a profile may publish per 24 hours.
+     *
+     * @return self
+     */
+    public function setFirstComment($first_comment)
+    {
+        if (is_null($first_comment)) {
+            throw new \InvalidArgumentException('non-nullable first_comment cannot be null');
+        }
+        if ((mb_strlen($first_comment) > 500)) {
+            throw new \InvalidArgumentException('invalid length for $first_comment when calling ThreadsPlatformData., must be smaller than or equal to 500.');
+        }
+
+        $this->container['first_comment'] = $first_comment;
 
         return $this;
     }

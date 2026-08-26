@@ -70,9 +70,9 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'made_with_ai' => 'bool',
         'sensitive_media' => '\Zernio\Model\TwitterPlatformDataSensitiveMedia',
         'topic_tag' => 'string',
+        'first_comment' => 'string',
         'content_type' => 'string',
         'title' => 'string',
-        'first_comment' => 'string',
         'page_id' => 'string',
         'facebook_settings' => '\Zernio\Model\FacebookSettings',
         'share_to_feed' => 'bool',
@@ -174,9 +174,9 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'made_with_ai' => null,
         'sensitive_media' => null,
         'topic_tag' => null,
+        'first_comment' => null,
         'content_type' => null,
         'title' => null,
-        'first_comment' => null,
         'page_id' => null,
         'facebook_settings' => null,
         'share_to_feed' => null,
@@ -276,9 +276,9 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'made_with_ai' => false,
         'sensitive_media' => false,
         'topic_tag' => false,
+        'first_comment' => false,
         'content_type' => false,
         'title' => false,
-        'first_comment' => false,
         'page_id' => false,
         'facebook_settings' => false,
         'share_to_feed' => false,
@@ -458,9 +458,9 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'made_with_ai' => 'madeWithAi',
         'sensitive_media' => 'sensitiveMedia',
         'topic_tag' => 'topic_tag',
+        'first_comment' => 'firstComment',
         'content_type' => 'contentType',
         'title' => 'title',
-        'first_comment' => 'firstComment',
         'page_id' => 'pageId',
         'facebook_settings' => 'facebookSettings',
         'share_to_feed' => 'shareToFeed',
@@ -560,9 +560,9 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'made_with_ai' => 'setMadeWithAi',
         'sensitive_media' => 'setSensitiveMedia',
         'topic_tag' => 'setTopicTag',
+        'first_comment' => 'setFirstComment',
         'content_type' => 'setContentType',
         'title' => 'setTitle',
-        'first_comment' => 'setFirstComment',
         'page_id' => 'setPageId',
         'facebook_settings' => 'setFacebookSettings',
         'share_to_feed' => 'setShareToFeed',
@@ -662,9 +662,9 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'made_with_ai' => 'getMadeWithAi',
         'sensitive_media' => 'getSensitiveMedia',
         'topic_tag' => 'getTopicTag',
+        'first_comment' => 'getFirstComment',
         'content_type' => 'getContentType',
         'title' => 'getTitle',
-        'first_comment' => 'getFirstComment',
         'page_id' => 'getPageId',
         'facebook_settings' => 'getFacebookSettings',
         'share_to_feed' => 'getShareToFeed',
@@ -934,9 +934,9 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         $this->setIfExists('made_with_ai', $data ?? [], false);
         $this->setIfExists('sensitive_media', $data ?? [], null);
         $this->setIfExists('topic_tag', $data ?? [], null);
+        $this->setIfExists('first_comment', $data ?? [], null);
         $this->setIfExists('content_type', $data ?? [], 'story');
         $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('first_comment', $data ?? [], null);
         $this->setIfExists('page_id', $data ?? [], null);
         $this->setIfExists('facebook_settings', $data ?? [], null);
         $this->setIfExists('share_to_feed', $data ?? [], true);
@@ -1062,6 +1062,10 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
             $invalidProperties[] = "invalid value for 'topic_tag', the character length must be bigger than or equal to 1.";
         }
 
+        if (!is_null($this->container['first_comment']) && (mb_strlen($this->container['first_comment']) > 10000)) {
+            $invalidProperties[] = "invalid value for 'first_comment', the character length must be smaller than or equal to 10000.";
+        }
+
         $allowedValues = $this->getContentTypeAllowableValues();
         if (!is_null($this->container['content_type']) && !in_array($this->container['content_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -1073,10 +1077,6 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
 
         if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 300)) {
             $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 300.";
-        }
-
-        if (!is_null($this->container['first_comment']) && (mb_strlen($this->container['first_comment']) > 10000)) {
-            $invalidProperties[] = "invalid value for 'first_comment', the character length must be smaller than or equal to 10000.";
         }
 
         if (!is_null($this->container['thumb_offset']) && ($this->container['thumb_offset'] < 0)) {
@@ -1516,6 +1516,37 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
     }
 
     /**
+     * Gets first_comment
+     *
+     * @return string|null
+     */
+    public function getFirstComment()
+    {
+        return $this->container['first_comment'];
+    }
+
+    /**
+     * Sets first_comment
+     *
+     * @param string|null $first_comment Optional first comment to post immediately after video upload. Up to 10,000 characters (YouTube's comment limit).
+     *
+     * @return self
+     */
+    public function setFirstComment($first_comment)
+    {
+        if (is_null($first_comment)) {
+            throw new \InvalidArgumentException('non-nullable first_comment cannot be null');
+        }
+        if ((mb_strlen($first_comment) > 10000)) {
+            throw new \InvalidArgumentException('invalid length for $first_comment when calling CreatePostRequestPlatformsInnerPlatformSpecificData., must be smaller than or equal to 10000.');
+        }
+
+        $this->container['first_comment'] = $first_comment;
+
+        return $this;
+    }
+
+    /**
      * Gets content_type
      *
      * @return string|null
@@ -1579,37 +1610,6 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         }
 
         $this->container['title'] = $title;
-
-        return $this;
-    }
-
-    /**
-     * Gets first_comment
-     *
-     * @return string|null
-     */
-    public function getFirstComment()
-    {
-        return $this->container['first_comment'];
-    }
-
-    /**
-     * Sets first_comment
-     *
-     * @param string|null $first_comment Optional first comment to post immediately after video upload. Up to 10,000 characters (YouTube's comment limit).
-     *
-     * @return self
-     */
-    public function setFirstComment($first_comment)
-    {
-        if (is_null($first_comment)) {
-            throw new \InvalidArgumentException('non-nullable first_comment cannot be null');
-        }
-        if ((mb_strlen($first_comment) > 10000)) {
-            throw new \InvalidArgumentException('invalid length for $first_comment when calling CreatePostRequestPlatformsInnerPlatformSpecificData., must be smaller than or equal to 10000.');
-        }
-
-        $this->container['first_comment'] = $first_comment;
 
         return $this;
     }
