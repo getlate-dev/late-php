@@ -1,6 +1,6 @@
 <?php
 /**
- * ListUsers200ResponseUsersInner
+ * WebhookPayloadMessageSentMetadata
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListUsers200ResponseUsersInner Class Doc Comment
+ * WebhookPayloadMessageSentMetadata Class Doc Comment
  *
  * @category Class
+ * @description Platform-specific context for the sent message. The key is present only when the send carried some context, and absent otherwise: it is never null and never an empty object.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListUsers200ResponseUsersInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class WebhookPayloadMessageSentMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class ListUsers200ResponseUsersInner implements ModelInterface, ArrayAccess, \Js
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listUsers_200_response_users_inner';
+    protected static $openAPIModelName = 'WebhookPayloadMessageSent_metadata';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,14 +59,8 @@ class ListUsers200ResponseUsersInner implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
-        '_id' => 'string',
-        'name' => 'string',
-        'email' => 'string',
-        'role' => 'string',
-        'is_root' => 'bool',
-        'profile_access' => 'string[]',
-        'created_at' => '\DateTime',
-        'last_login_at' => '\DateTime'
+        'quoted_message_id' => 'string',
+        'thread_ts' => 'string'
     ];
 
     /**
@@ -76,14 +71,8 @@ class ListUsers200ResponseUsersInner implements ModelInterface, ArrayAccess, \Js
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        '_id' => null,
-        'name' => null,
-        'email' => null,
-        'role' => null,
-        'is_root' => null,
-        'profile_access' => null,
-        'created_at' => 'date-time',
-        'last_login_at' => 'date-time'
+        'quoted_message_id' => null,
+        'thread_ts' => null
     ];
 
     /**
@@ -92,14 +81,8 @@ class ListUsers200ResponseUsersInner implements ModelInterface, ArrayAccess, \Js
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        '_id' => false,
-        'name' => false,
-        'email' => false,
-        'role' => false,
-        'is_root' => false,
-        'profile_access' => false,
-        'created_at' => false,
-        'last_login_at' => false
+        'quoted_message_id' => false,
+        'thread_ts' => false
     ];
 
     /**
@@ -188,14 +171,8 @@ class ListUsers200ResponseUsersInner implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
-        '_id' => '_id',
-        'name' => 'name',
-        'email' => 'email',
-        'role' => 'role',
-        'is_root' => 'isRoot',
-        'profile_access' => 'profileAccess',
-        'created_at' => 'createdAt',
-        'last_login_at' => 'lastLoginAt'
+        'quoted_message_id' => 'quotedMessageId',
+        'thread_ts' => 'threadTs'
     ];
 
     /**
@@ -204,14 +181,8 @@ class ListUsers200ResponseUsersInner implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
-        '_id' => 'setId',
-        'name' => 'setName',
-        'email' => 'setEmail',
-        'role' => 'setRole',
-        'is_root' => 'setIsRoot',
-        'profile_access' => 'setProfileAccess',
-        'created_at' => 'setCreatedAt',
-        'last_login_at' => 'setLastLoginAt'
+        'quoted_message_id' => 'setQuotedMessageId',
+        'thread_ts' => 'setThreadTs'
     ];
 
     /**
@@ -220,14 +191,8 @@ class ListUsers200ResponseUsersInner implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
-        '_id' => 'getId',
-        'name' => 'getName',
-        'email' => 'getEmail',
-        'role' => 'getRole',
-        'is_root' => 'getIsRoot',
-        'profile_access' => 'getProfileAccess',
-        'created_at' => 'getCreatedAt',
-        'last_login_at' => 'getLastLoginAt'
+        'quoted_message_id' => 'getQuotedMessageId',
+        'thread_ts' => 'getThreadTs'
     ];
 
     /**
@@ -287,14 +252,8 @@ class ListUsers200ResponseUsersInner implements ModelInterface, ArrayAccess, \Js
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('_id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('email', $data ?? [], null);
-        $this->setIfExists('role', $data ?? [], null);
-        $this->setIfExists('is_root', $data ?? [], null);
-        $this->setIfExists('profile_access', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('last_login_at', $data ?? [], null);
+        $this->setIfExists('quoted_message_id', $data ?? [], null);
+        $this->setIfExists('thread_ts', $data ?? [], null);
     }
 
     /**
@@ -340,217 +299,55 @@ class ListUsers200ResponseUsersInner implements ModelInterface, ArrayAccess, \Js
 
 
     /**
-     * Gets _id
+     * Gets quoted_message_id
      *
      * @return string|null
      */
-    public function getId()
+    public function getQuotedMessageId()
     {
-        return $this->container['_id'];
+        return $this->container['quoted_message_id'];
     }
 
     /**
-     * Sets _id
+     * Sets quoted_message_id
      *
-     * @param string|null $_id _id
+     * @param string|null $quoted_message_id platformMessageId of the message this send is a quote-reply to. Set when the reply was sent through Zernio with `replyTo` on the inbox send API (WhatsApp and Telegram), and when the operator replied from the native WhatsApp Business, Instagram or Messenger app. WhatsApp API sends carry it on the event fired from the delivery status, so it arrives on the same `message.sent` as any other WhatsApp send.
      *
      * @return self
      */
-    public function setId($_id)
+    public function setQuotedMessageId($quoted_message_id)
     {
-        if (is_null($_id)) {
-            throw new \InvalidArgumentException('non-nullable _id cannot be null');
+        if (is_null($quoted_message_id)) {
+            throw new \InvalidArgumentException('non-nullable quoted_message_id cannot be null');
         }
-        $this->container['_id'] = $_id;
+        $this->container['quoted_message_id'] = $quoted_message_id;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets thread_ts
      *
      * @return string|null
      */
-    public function getName()
+    public function getThreadTs()
     {
-        return $this->container['name'];
+        return $this->container['thread_ts'];
     }
 
     /**
-     * Sets name
+     * Sets thread_ts
      *
-     * @param string|null $name name
+     * @param string|null $thread_ts Slack only. Parent thread ts of the sent message. Pass it back as `replyTo` on the inbox send API to keep replying inside the thread.
      *
      * @return self
      */
-    public function setName($name)
+    public function setThreadTs($thread_ts)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($thread_ts)) {
+            throw new \InvalidArgumentException('non-nullable thread_ts cannot be null');
         }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets email
-     *
-     * @return string|null
-     */
-    public function getEmail()
-    {
-        return $this->container['email'];
-    }
-
-    /**
-     * Sets email
-     *
-     * @param string|null $email email
-     *
-     * @return self
-     */
-    public function setEmail($email)
-    {
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
-        }
-        $this->container['email'] = $email;
-
-        return $this;
-    }
-
-    /**
-     * Gets role
-     *
-     * @return string|null
-     */
-    public function getRole()
-    {
-        return $this->container['role'];
-    }
-
-    /**
-     * Sets role
-     *
-     * @param string|null $role role
-     *
-     * @return self
-     */
-    public function setRole($role)
-    {
-        if (is_null($role)) {
-            throw new \InvalidArgumentException('non-nullable role cannot be null');
-        }
-        $this->container['role'] = $role;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_root
-     *
-     * @return bool|null
-     */
-    public function getIsRoot()
-    {
-        return $this->container['is_root'];
-    }
-
-    /**
-     * Sets is_root
-     *
-     * @param bool|null $is_root is_root
-     *
-     * @return self
-     */
-    public function setIsRoot($is_root)
-    {
-        if (is_null($is_root)) {
-            throw new \InvalidArgumentException('non-nullable is_root cannot be null');
-        }
-        $this->container['is_root'] = $is_root;
-
-        return $this;
-    }
-
-    /**
-     * Gets profile_access
-     *
-     * @return string[]|null
-     */
-    public function getProfileAccess()
-    {
-        return $this->container['profile_access'];
-    }
-
-    /**
-     * Sets profile_access
-     *
-     * @param string[]|null $profile_access profile_access
-     *
-     * @return self
-     */
-    public function setProfileAccess($profile_access)
-    {
-        if (is_null($profile_access)) {
-            throw new \InvalidArgumentException('non-nullable profile_access cannot be null');
-        }
-        $this->container['profile_access'] = $profile_access;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_login_at
-     *
-     * @return \DateTime|null
-     */
-    public function getLastLoginAt()
-    {
-        return $this->container['last_login_at'];
-    }
-
-    /**
-     * Sets last_login_at
-     *
-     * @param \DateTime|null $last_login_at Last sign-in, stamped at most once an hour, so it is accurate to within an hour rather than to the exact session. Omitted for members with no recorded sign-in since the field shipped, which does not mean they never signed in.
-     *
-     * @return self
-     */
-    public function setLastLoginAt($last_login_at)
-    {
-        if (is_null($last_login_at)) {
-            throw new \InvalidArgumentException('non-nullable last_login_at cannot be null');
-        }
-        $this->container['last_login_at'] = $last_login_at;
+        $this->container['thread_ts'] = $thread_ts;
 
         return $this;
     }

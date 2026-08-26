@@ -1704,6 +1704,7 @@ docs/Model/WebhookPayloadMessageSent.md
 docs/Model/WebhookPayloadMessageSentMessage.md
 docs/Model/WebhookPayloadMessageSentMessageAttachmentsInner.md
 docs/Model/WebhookPayloadMessageSentMessageSender.md
+docs/Model/WebhookPayloadMessageSentMetadata.md
 docs/Model/WebhookPayloadPost.md
 docs/Model/WebhookPayloadPostPlatform.md
 docs/Model/WebhookPayloadPostPlatformAccount.md
@@ -3498,6 +3499,7 @@ lib/Model/WebhookPayloadMessageSent.php
 lib/Model/WebhookPayloadMessageSentMessage.php
 lib/Model/WebhookPayloadMessageSentMessageAttachmentsInner.php
 lib/Model/WebhookPayloadMessageSentMessageSender.php
+lib/Model/WebhookPayloadMessageSentMetadata.php
 lib/Model/WebhookPayloadPost.php
 lib/Model/WebhookPayloadPostPlatform.php
 lib/Model/WebhookPayloadPostPlatformAccount.php
@@ -3587,3 +3589,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/WebhookPayloadMessageSentMetadataTest.php

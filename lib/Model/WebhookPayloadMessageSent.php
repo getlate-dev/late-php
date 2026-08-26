@@ -64,6 +64,7 @@ class WebhookPayloadMessageSent implements ModelInterface, ArrayAccess, \JsonSer
         'message' => '\Zernio\Model\WebhookPayloadMessageSentMessage',
         'conversation' => '\Zernio\Model\InboxWebhookConversation',
         'account' => '\Zernio\Model\InboxWebhookAccount',
+        'metadata' => '\Zernio\Model\WebhookPayloadMessageSentMetadata',
         'timestamp' => '\DateTime'
     ];
 
@@ -80,6 +81,7 @@ class WebhookPayloadMessageSent implements ModelInterface, ArrayAccess, \JsonSer
         'message' => null,
         'conversation' => null,
         'account' => null,
+        'metadata' => null,
         'timestamp' => 'date-time'
     ];
 
@@ -94,6 +96,7 @@ class WebhookPayloadMessageSent implements ModelInterface, ArrayAccess, \JsonSer
         'message' => false,
         'conversation' => false,
         'account' => false,
+        'metadata' => false,
         'timestamp' => false
     ];
 
@@ -188,6 +191,7 @@ class WebhookPayloadMessageSent implements ModelInterface, ArrayAccess, \JsonSer
         'message' => 'message',
         'conversation' => 'conversation',
         'account' => 'account',
+        'metadata' => 'metadata',
         'timestamp' => 'timestamp'
     ];
 
@@ -202,6 +206,7 @@ class WebhookPayloadMessageSent implements ModelInterface, ArrayAccess, \JsonSer
         'message' => 'setMessage',
         'conversation' => 'setConversation',
         'account' => 'setAccount',
+        'metadata' => 'setMetadata',
         'timestamp' => 'setTimestamp'
     ];
 
@@ -216,6 +221,7 @@ class WebhookPayloadMessageSent implements ModelInterface, ArrayAccess, \JsonSer
         'message' => 'getMessage',
         'conversation' => 'getConversation',
         'account' => 'getAccount',
+        'metadata' => 'getMetadata',
         'timestamp' => 'getTimestamp'
     ];
 
@@ -294,6 +300,7 @@ class WebhookPayloadMessageSent implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('message', $data ?? [], null);
         $this->setIfExists('conversation', $data ?? [], null);
         $this->setIfExists('account', $data ?? [], null);
+        $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('timestamp', $data ?? [], null);
     }
 
@@ -507,6 +514,33 @@ class WebhookPayloadMessageSent implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable account cannot be null');
         }
         $this->container['account'] = $account;
+
+        return $this;
+    }
+
+    /**
+     * Gets metadata
+     *
+     * @return \Zernio\Model\WebhookPayloadMessageSentMetadata|null
+     */
+    public function getMetadata()
+    {
+        return $this->container['metadata'];
+    }
+
+    /**
+     * Sets metadata
+     *
+     * @param \Zernio\Model\WebhookPayloadMessageSentMetadata|null $metadata metadata
+     *
+     * @return self
+     */
+    public function setMetadata($metadata)
+    {
+        if (is_null($metadata)) {
+            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
+        }
+        $this->container['metadata'] = $metadata;
 
         return $this;
     }

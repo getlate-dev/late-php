@@ -293,6 +293,10 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
     public const PLATFORM_FACEBOOK = 'facebook';
     public const PLATFORM_TELEGRAM = 'telegram';
     public const PLATFORM_WHATSAPP = 'whatsapp';
+    public const PLATFORM_TWITTER = 'twitter';
+    public const PLATFORM_REDDIT = 'reddit';
+    public const PLATFORM_BLUESKY = 'bluesky';
+    public const PLATFORM_SLACK = 'slack';
     public const DIRECTION_INCOMING = 'incoming';
     public const DIRECTION_OUTGOING = 'outgoing';
     public const SOURCE_WHATSAPP_BUSINESS_APP = 'whatsapp_business_app';
@@ -310,6 +314,10 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
             self::PLATFORM_FACEBOOK,
             self::PLATFORM_TELEGRAM,
             self::PLATFORM_WHATSAPP,
+            self::PLATFORM_TWITTER,
+            self::PLATFORM_REDDIT,
+            self::PLATFORM_BLUESKY,
+            self::PLATFORM_SLACK,
         ];
     }
 
@@ -533,7 +541,7 @@ class WebhookPayloadMessageSentMessage implements ModelInterface, ArrayAccess, \
     /**
      * Sets platform
      *
-     * @param string $platform platform
+     * @param string $platform Every platform whose outgoing messages Zernio observes. sms is absent on purpose: its carrier receipts update delivery status and never raise message.sent.
      *
      * @return self
      */

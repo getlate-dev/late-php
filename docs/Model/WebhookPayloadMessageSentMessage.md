@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | Internal message ID |
 **conversation_id** | **string** | Internal conversation ID |
-**platform** | **string** |  |
+**platform** | **string** | Every platform whose outgoing messages Zernio observes. sms is absent on purpose: its carrier receipts update delivery status and never raise message.sent. |
 **platform_message_id** | **string** | Platform&#39;s message ID |
 **direction** | **string** |  |
 **text** | **string** | Message text content |

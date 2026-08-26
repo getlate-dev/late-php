@@ -487,7 +487,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets quoted_message_id
      *
-     * @param string|null $quoted_message_id platformMessageId of the message this one is a quote-reply to. WhatsApp (`context.id`), Instagram and Facebook Messenger (`reply_to.mid`). On `message.sent` echoes (operator replied from the native app) this is the only metadata field populated.
+     * @param string|null $quoted_message_id platformMessageId of the message this one is a quote-reply to. WhatsApp (`context.id`), Instagram and Facebook Messenger (`reply_to.mid`). Outgoing quote-replies carry the same field on `message.sent`; see WebhookPayloadMessageSent.metadata.
      *
      * @return self
      */
