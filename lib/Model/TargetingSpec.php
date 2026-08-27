@@ -642,7 +642,7 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets custom_locations
      *
-     * @param \Zernio\Model\TargetingSpecCustomLocationsInner[]|null $custom_locations Point-radius (lat/lng) targeting (Meta custom_locations / Google proximity). Honoured only where the capability map allows radius (Meta).
+     * @param \Zernio\Model\TargetingSpecCustomLocationsInner[]|null $custom_locations Point-radius (lat/lng) targeting (Meta custom_locations / Google proximity). Honoured on Meta and Google; ignored on platforms without radius support.
      *
      * @return self
      */
