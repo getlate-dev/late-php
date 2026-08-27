@@ -434,6 +434,7 @@ docs/Model/DeleteAccountGroup200Response.md
 docs/Model/DeleteAdCampaign200Response.md
 docs/Model/DeleteAdCampaignRequest.md
 docs/Model/DeleteAdCreative200Response.md
+docs/Model/DeleteAdSet200Response.md
 docs/Model/DeleteAdVideo200Response.md
 docs/Model/DeleteDiscordScheduledEvent200Response.md
 docs/Model/DeleteGoogleBusinessMedia200Response.md
@@ -2234,6 +2235,7 @@ lib/Model/DeleteAccountGroup200Response.php
 lib/Model/DeleteAdCampaign200Response.php
 lib/Model/DeleteAdCampaignRequest.php
 lib/Model/DeleteAdCreative200Response.php
+lib/Model/DeleteAdSet200Response.php
 lib/Model/DeleteAdVideo200Response.php
 lib/Model/DeleteDiscordScheduledEvent200Response.php
 lib/Model/DeleteGoogleBusinessMedia200Response.php
@@ -3601,3 +3603,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/DeleteAdSet200ResponseTest.php
