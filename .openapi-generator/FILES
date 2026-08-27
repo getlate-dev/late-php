@@ -1122,6 +1122,7 @@ docs/Model/ListWorkflows200Response.md
 docs/Model/ListWorkflows200ResponseWorkflowsInner.md
 docs/Model/LookupSmsNumber200Response.md
 docs/Model/MarkConversationRead200Response.md
+docs/Model/MediaContentType.md
 docs/Model/MediaItem.md
 docs/Model/MediaUploadResponse.md
 docs/Model/MetaAdsPlatformData.md
@@ -1157,7 +1158,6 @@ docs/Model/PinterestPlatformData.md
 docs/Model/PlatformAnalytics.md
 docs/Model/PlatformTarget.md
 docs/Model/PlatformTargetAccountId.md
-docs/Model/PlatformTargetPlatformSpecificData.md
 docs/Model/Post.md
 docs/Model/PostAnalytics.md
 docs/Model/PostCreateResponse.md
@@ -2922,6 +2922,7 @@ lib/Model/ListWorkflows200Response.php
 lib/Model/ListWorkflows200ResponseWorkflowsInner.php
 lib/Model/LookupSmsNumber200Response.php
 lib/Model/MarkConversationRead200Response.php
+lib/Model/MediaContentType.php
 lib/Model/MediaItem.php
 lib/Model/MediaUploadResponse.php
 lib/Model/MetaAdsPlatformData.php
@@ -2958,7 +2959,6 @@ lib/Model/PinterestPlatformData.php
 lib/Model/PlatformAnalytics.php
 lib/Model/PlatformTarget.php
 lib/Model/PlatformTargetAccountId.php
-lib/Model/PlatformTargetPlatformSpecificData.php
 lib/Model/Post.php
 lib/Model/PostAnalytics.php
 lib/Model/PostCreateResponse.php
@@ -3601,3 +3601,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/MediaContentTypeTest.php

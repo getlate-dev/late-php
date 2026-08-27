@@ -59,7 +59,7 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPITypes = [
         'filename' => 'string',
-        'content_type' => 'string',
+        'content_type' => '\Zernio\Model\MediaContentType',
         'size' => 'int'
     ];
 
@@ -241,57 +241,6 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
         return self::$openAPIModelName;
     }
 
-    public const CONTENT_TYPE_IMAGE_JPEG = 'image/jpeg';
-    public const CONTENT_TYPE_IMAGE_JPG = 'image/jpg';
-    public const CONTENT_TYPE_IMAGE_PNG = 'image/png';
-    public const CONTENT_TYPE_IMAGE_WEBP = 'image/webp';
-    public const CONTENT_TYPE_IMAGE_GIF = 'image/gif';
-    public const CONTENT_TYPE_VIDEO_MP4 = 'video/mp4';
-    public const CONTENT_TYPE_VIDEO_MPEG = 'video/mpeg';
-    public const CONTENT_TYPE_VIDEO_QUICKTIME = 'video/quicktime';
-    public const CONTENT_TYPE_VIDEO_AVI = 'video/avi';
-    public const CONTENT_TYPE_VIDEO_X_MSVIDEO = 'video/x-msvideo';
-    public const CONTENT_TYPE_VIDEO_WEBM = 'video/webm';
-    public const CONTENT_TYPE_VIDEO_X_M4V = 'video/x-m4v';
-    public const CONTENT_TYPE_APPLICATION_PDF = 'application/pdf';
-    public const CONTENT_TYPE_AUDIO_MPEG = 'audio/mpeg';
-    public const CONTENT_TYPE_AUDIO_MP4 = 'audio/mp4';
-    public const CONTENT_TYPE_AUDIO_AAC = 'audio/aac';
-    public const CONTENT_TYPE_AUDIO_OGG = 'audio/ogg';
-    public const CONTENT_TYPE_AUDIO_WAV = 'audio/wav';
-    public const CONTENT_TYPE_AUDIO_WEBM = 'audio/webm';
-    public const CONTENT_TYPE_AUDIO_X_M4A = 'audio/x-m4a';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getContentTypeAllowableValues()
-    {
-        return [
-            self::CONTENT_TYPE_IMAGE_JPEG,
-            self::CONTENT_TYPE_IMAGE_JPG,
-            self::CONTENT_TYPE_IMAGE_PNG,
-            self::CONTENT_TYPE_IMAGE_WEBP,
-            self::CONTENT_TYPE_IMAGE_GIF,
-            self::CONTENT_TYPE_VIDEO_MP4,
-            self::CONTENT_TYPE_VIDEO_MPEG,
-            self::CONTENT_TYPE_VIDEO_QUICKTIME,
-            self::CONTENT_TYPE_VIDEO_AVI,
-            self::CONTENT_TYPE_VIDEO_X_MSVIDEO,
-            self::CONTENT_TYPE_VIDEO_WEBM,
-            self::CONTENT_TYPE_VIDEO_X_M4V,
-            self::CONTENT_TYPE_APPLICATION_PDF,
-            self::CONTENT_TYPE_AUDIO_MPEG,
-            self::CONTENT_TYPE_AUDIO_MP4,
-            self::CONTENT_TYPE_AUDIO_AAC,
-            self::CONTENT_TYPE_AUDIO_OGG,
-            self::CONTENT_TYPE_AUDIO_WAV,
-            self::CONTENT_TYPE_AUDIO_WEBM,
-            self::CONTENT_TYPE_AUDIO_X_M4A,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -346,15 +295,6 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
         if ($this->container['content_type'] === null) {
             $invalidProperties[] = "'content_type' can't be null";
         }
-        $allowedValues = $this->getContentTypeAllowableValues();
-        if (!is_null($this->container['content_type']) && !in_array($this->container['content_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'content_type', must be one of '%s'",
-                $this->container['content_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -400,7 +340,7 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets content_type
      *
-     * @return string
+     * @return \Zernio\Model\MediaContentType
      */
     public function getContentType()
     {
@@ -410,7 +350,7 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets content_type
      *
-     * @param string $content_type MIME type of the file
+     * @param \Zernio\Model\MediaContentType $content_type content_type
      *
      * @return self
      */
@@ -418,16 +358,6 @@ class GetMediaPresignedUrlRequest implements ModelInterface, ArrayAccess, \JsonS
     {
         if (is_null($content_type)) {
             throw new \InvalidArgumentException('non-nullable content_type cannot be null');
-        }
-        $allowedValues = $this->getContentTypeAllowableValues();
-        if (!in_array($content_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'content_type', must be one of '%s'",
-                    $content_type,
-                    implode("', '", $allowedValues)
-                )
-            );
         }
         $this->container['content_type'] = $content_type;
 

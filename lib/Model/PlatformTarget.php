@@ -63,7 +63,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
         'custom_content' => 'string',
         'custom_media' => '\Zernio\Model\MediaItem[]',
         'scheduled_for' => '\DateTime',
-        'platform_specific_data' => '\Zernio\Model\PlatformTargetPlatformSpecificData',
+        'platform_specific_data' => 'array<string,mixed>',
         'status' => 'string',
         'platform_post_id' => 'string',
         'platform_post_url' => 'string',
@@ -623,7 +623,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets platform_specific_data
      *
-     * @return \Zernio\Model\PlatformTargetPlatformSpecificData|null
+     * @return array<string,mixed>|null
      */
     public function getPlatformSpecificData()
     {
@@ -633,7 +633,7 @@ class PlatformTarget implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets platform_specific_data
      *
-     * @param \Zernio\Model\PlatformTargetPlatformSpecificData|null $platform_specific_data platform_specific_data
+     * @param array<string,mixed>|null $platform_specific_data The platform-specific options stored on this target, echoed back as they were sent. Typed per platform on the way in (see the *PlatformData schemas on the request body); free-form on the way out, because a response is not guaranteed to match exactly one of those variants and generated clients that pick a variant by structure reject the entire response when it doesn't. Zernio's internal publishing state (snapshots, container ids, publish stage) is never returned here, and the key is omitted rather than sent as an empty object.
      *
      * @return self
      */
