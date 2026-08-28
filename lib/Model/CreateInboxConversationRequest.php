@@ -69,7 +69,8 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'template_language' => 'string',
         'template_params' => 'string[]',
         'template_button_params' => '\Zernio\Model\CreateInboxConversationRequestTemplateButtonParamsInner[]',
-        'header_media' => '\Zernio\Model\CreateInboxConversationRequestHeaderMedia'
+        'header_media' => '\Zernio\Model\CreateInboxConversationRequestHeaderMedia',
+        'header_location' => '\Zernio\Model\CreateInboxConversationRequestHeaderLocation'
     ];
 
     /**
@@ -91,7 +92,8 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'template_language' => null,
         'template_params' => null,
         'template_button_params' => null,
-        'header_media' => null
+        'header_media' => null,
+        'header_location' => null
     ];
 
     /**
@@ -111,7 +113,8 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'template_language' => false,
         'template_params' => false,
         'template_button_params' => false,
-        'header_media' => false
+        'header_media' => false,
+        'header_location' => false
     ];
 
     /**
@@ -211,7 +214,8 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'template_language' => 'templateLanguage',
         'template_params' => 'templateParams',
         'template_button_params' => 'templateButtonParams',
-        'header_media' => 'headerMedia'
+        'header_media' => 'headerMedia',
+        'header_location' => 'headerLocation'
     ];
 
     /**
@@ -231,7 +235,8 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'template_language' => 'setTemplateLanguage',
         'template_params' => 'setTemplateParams',
         'template_button_params' => 'setTemplateButtonParams',
-        'header_media' => 'setHeaderMedia'
+        'header_media' => 'setHeaderMedia',
+        'header_location' => 'setHeaderLocation'
     ];
 
     /**
@@ -251,7 +256,8 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         'template_language' => 'getTemplateLanguage',
         'template_params' => 'getTemplateParams',
         'template_button_params' => 'getTemplateButtonParams',
-        'header_media' => 'getHeaderMedia'
+        'header_media' => 'getHeaderMedia',
+        'header_location' => 'getHeaderLocation'
     ];
 
     /**
@@ -336,6 +342,7 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('template_params', $data ?? [], null);
         $this->setIfExists('template_button_params', $data ?? [], null);
         $this->setIfExists('header_media', $data ?? [], null);
+        $this->setIfExists('header_location', $data ?? [], null);
     }
 
     /**
@@ -730,6 +737,33 @@ class CreateInboxConversationRequest implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable header_media cannot be null');
         }
         $this->container['header_media'] = $header_media;
+
+        return $this;
+    }
+
+    /**
+     * Gets header_location
+     *
+     * @return \Zernio\Model\CreateInboxConversationRequestHeaderLocation|null
+     */
+    public function getHeaderLocation()
+    {
+        return $this->container['header_location'];
+    }
+
+    /**
+     * Sets header_location
+     *
+     * @param \Zernio\Model\CreateInboxConversationRequestHeaderLocation|null $header_location header_location
+     *
+     * @return self
+     */
+    public function setHeaderLocation($header_location)
+    {
+        if (is_null($header_location)) {
+            throw new \InvalidArgumentException('non-nullable header_location cannot be null');
+        }
+        $this->container['header_location'] = $header_location;
 
         return $this;
     }

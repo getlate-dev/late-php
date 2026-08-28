@@ -907,6 +907,7 @@ Class | Method | HTTP request | Description
 - [CreateInboxConversation422Response](docs/Model/CreateInboxConversation422Response.md)
 - [CreateInboxConversation429Response](docs/Model/CreateInboxConversation429Response.md)
 - [CreateInboxConversationRequest](docs/Model/CreateInboxConversationRequest.md)
+- [CreateInboxConversationRequestHeaderLocation](docs/Model/CreateInboxConversationRequestHeaderLocation.md)
 - [CreateInboxConversationRequestHeaderMedia](docs/Model/CreateInboxConversationRequestHeaderMedia.md)
 - [CreateInboxConversationRequestTemplateButtonParamsInner](docs/Model/CreateInboxConversationRequestTemplateButtonParamsInner.md)
 - [CreateInviteToken201Response](docs/Model/CreateInviteToken201Response.md)
