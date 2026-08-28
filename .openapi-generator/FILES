@@ -329,6 +329,7 @@ docs/Model/CreatePhoneNumberPortIn201ResponseOrdersInner.md
 docs/Model/CreatePhoneNumberPortInRequest.md
 docs/Model/CreatePhoneNumberPortInRequestEndUser.md
 docs/Model/CreatePhoneNumberPortInRequestRequirementsInner.md
+docs/Model/CreatePhoneNumberStockWatchRequest.md
 docs/Model/CreatePinterestBoard201Response.md
 docs/Model/CreatePinterestBoard201ResponseBoard.md
 docs/Model/CreatePinterestBoardRequest.md
@@ -1055,6 +1056,7 @@ docs/Model/ListPhoneNumberCountries200ResponseCountriesInner.md
 docs/Model/ListPhoneNumberCountries200ResponseCountriesInnerTypesInner.md
 docs/Model/ListPhoneNumberPortIns200Response.md
 docs/Model/ListPhoneNumberPortIns200ResponseOrdersInner.md
+docs/Model/ListPhoneNumberStockWatches200Response.md
 docs/Model/ListPhoneNumbers200Response.md
 docs/Model/ListPhoneNumbers200ResponseConnectedInner.md
 docs/Model/ListPhoneNumbers200ResponseNumbersInner.md
@@ -1157,6 +1159,7 @@ docs/Model/OnWhatsAppNumberVerificationRequiredRequest.md
 docs/Model/Pagination.md
 docs/Model/PauseWorkflow200Response.md
 docs/Model/Pending.md
+docs/Model/PhoneNumberStockWatch.md
 docs/Model/PinDiscordMessage200Response.md
 docs/Model/PinterestPlatformData.md
 docs/Model/PlatformAnalytics.md
@@ -1721,6 +1724,9 @@ docs/Model/WebhookPayloadMessageSentMessage.md
 docs/Model/WebhookPayloadMessageSentMessageAttachmentsInner.md
 docs/Model/WebhookPayloadMessageSentMessageSender.md
 docs/Model/WebhookPayloadMessageSentMetadata.md
+docs/Model/WebhookPayloadPhoneNumberStockAvailable.md
+docs/Model/WebhookPayloadPhoneNumberStockAvailableStock.md
+docs/Model/WebhookPayloadPhoneNumberStockAvailableStockTypesInner.md
 docs/Model/WebhookPayloadPost.md
 docs/Model/WebhookPayloadPostPlatform.md
 docs/Model/WebhookPayloadPostPlatformAccount.md
@@ -2139,6 +2145,7 @@ lib/Model/CreatePhoneNumberPortIn201ResponseOrdersInner.php
 lib/Model/CreatePhoneNumberPortInRequest.php
 lib/Model/CreatePhoneNumberPortInRequestEndUser.php
 lib/Model/CreatePhoneNumberPortInRequestRequirementsInner.php
+lib/Model/CreatePhoneNumberStockWatchRequest.php
 lib/Model/CreatePinterestBoard201Response.php
 lib/Model/CreatePinterestBoard201ResponseBoard.php
 lib/Model/CreatePinterestBoardRequest.php
@@ -2865,6 +2872,7 @@ lib/Model/ListPhoneNumberCountries200ResponseCountriesInner.php
 lib/Model/ListPhoneNumberCountries200ResponseCountriesInnerTypesInner.php
 lib/Model/ListPhoneNumberPortIns200Response.php
 lib/Model/ListPhoneNumberPortIns200ResponseOrdersInner.php
+lib/Model/ListPhoneNumberStockWatches200Response.php
 lib/Model/ListPhoneNumbers200Response.php
 lib/Model/ListPhoneNumbers200ResponseConnectedInner.php
 lib/Model/ListPhoneNumbers200ResponseNumbersInner.php
@@ -2968,6 +2976,7 @@ lib/Model/OnWhatsAppNumberVerificationRequiredRequest.php
 lib/Model/Pagination.php
 lib/Model/PauseWorkflow200Response.php
 lib/Model/Pending.php
+lib/Model/PhoneNumberStockWatch.php
 lib/Model/PinDiscordMessage200Response.php
 lib/Model/PinterestPlatformData.php
 lib/Model/PlatformAnalytics.php
@@ -3532,6 +3541,9 @@ lib/Model/WebhookPayloadMessageSentMessage.php
 lib/Model/WebhookPayloadMessageSentMessageAttachmentsInner.php
 lib/Model/WebhookPayloadMessageSentMessageSender.php
 lib/Model/WebhookPayloadMessageSentMetadata.php
+lib/Model/WebhookPayloadPhoneNumberStockAvailable.php
+lib/Model/WebhookPayloadPhoneNumberStockAvailableStock.php
+lib/Model/WebhookPayloadPhoneNumberStockAvailableStockTypesInner.php
 lib/Model/WebhookPayloadPost.php
 lib/Model/WebhookPayloadPostPlatform.php
 lib/Model/WebhookPayloadPostPlatformAccount.php
@@ -3621,9 +3633,9 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/UsageAttributionGroupTest.php
-test/Model/UsageAttributionSliceByProductTest.php
-test/Model/UsageAttributionSliceTest.php
-test/Model/UsageMeteringAttributionTest.php
-test/Model/UsageMeteringScopeOneOfTest.php
-test/Model/UsageMeteringScopeTest.php
+test/Model/CreatePhoneNumberStockWatchRequestTest.php
+test/Model/ListPhoneNumberStockWatches200ResponseTest.php
+test/Model/PhoneNumberStockWatchTest.php
+test/Model/WebhookPayloadPhoneNumberStockAvailableStockTest.php
+test/Model/WebhookPayloadPhoneNumberStockAvailableStockTypesInnerTest.php
+test/Model/WebhookPayloadPhoneNumberStockAvailableTest.php

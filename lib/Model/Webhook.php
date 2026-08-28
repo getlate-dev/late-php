@@ -331,6 +331,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
     public const EVENTS_WHATSAPP_NUMBER_REACTIVATED = 'whatsapp.number.reactivated';
     public const EVENTS_WHATSAPP_NUMBER_RELEASED = 'whatsapp.number.released';
     public const EVENTS_WHATSAPP_NUMBER_KYC_SUBMITTED = 'whatsapp.number.kyc_submitted';
+    public const EVENTS_PHONE_NUMBER_STOCK_AVAILABLE = 'phone_number.stock_available';
     public const EVENTS_VERIFICATION_APPROVED = 'verification.approved';
     public const EVENTS_VERIFICATION_FAILED = 'verification.failed';
     public const DISABLED_RESOURCE_GROUPS_PUBLISHING = 'publishing';
@@ -399,6 +400,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
             self::EVENTS_WHATSAPP_NUMBER_REACTIVATED,
             self::EVENTS_WHATSAPP_NUMBER_RELEASED,
             self::EVENTS_WHATSAPP_NUMBER_KYC_SUBMITTED,
+            self::EVENTS_PHONE_NUMBER_STOCK_AVAILABLE,
             self::EVENTS_VERIFICATION_APPROVED,
             self::EVENTS_VERIFICATION_FAILED,
         ];

@@ -11,6 +11,8 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**checkPhoneNumberPortability()**](PhoneNumbersApi.md#checkPhoneNumberPortability) | **POST** /v1/phone-numbers/port-in/check | Check portability |
 | [**createPhoneNumberKycLink()**](PhoneNumbersApi.md#createPhoneNumberKycLink) | **POST** /v1/phone-numbers/kyc/share | Create a hosted KYC link |
 | [**createPhoneNumberPortIn()**](PhoneNumbersApi.md#createPhoneNumberPortIn) | **POST** /v1/phone-numbers/port-in | Port numbers in |
+| [**createPhoneNumberStockWatch()**](PhoneNumbersApi.md#createPhoneNumberStockWatch) | **POST** /v1/phone-numbers/stock-watches | Watch an out-of-stock country |
+| [**deletePhoneNumberStockWatch()**](PhoneNumbersApi.md#deletePhoneNumberStockWatch) | **DELETE** /v1/phone-numbers/stock-watches/{id} | Stop watching a country |
 | [**getPhoneNumber()**](PhoneNumbersApi.md#getPhoneNumber) | **GET** /v1/phone-numbers/{id} | Get phone number |
 | [**getPhoneNumberKycForm()**](PhoneNumbersApi.md#getPhoneNumberKycForm) | **GET** /v1/phone-numbers/kyc | Get KYC form spec |
 | [**getPhoneNumberPortInOrderRequirements()**](PhoneNumbersApi.md#getPhoneNumberPortInOrderRequirements) | **GET** /v1/phone-numbers/port-in/{id}/requirements | A port-in order&#39;s pending requirements |
@@ -18,6 +20,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**getPhoneNumberRemediation()**](PhoneNumbersApi.md#getPhoneNumberRemediation) | **GET** /v1/phone-numbers/{id}/remediate | Get declined requirements |
 | [**listPhoneNumberCountries()**](PhoneNumbersApi.md#listPhoneNumberCountries) | **GET** /v1/phone-numbers/countries | List offerable number countries |
 | [**listPhoneNumberPortIns()**](PhoneNumbersApi.md#listPhoneNumberPortIns) | **GET** /v1/phone-numbers/port-in | List port-in orders |
+| [**listPhoneNumberStockWatches()**](PhoneNumbersApi.md#listPhoneNumberStockWatches) | **GET** /v1/phone-numbers/stock-watches | List stock watches |
 | [**listPhoneNumbers()**](PhoneNumbersApi.md#listPhoneNumbers) | **GET** /v1/phone-numbers | List phone numbers |
 | [**purchasePhoneNumber()**](PhoneNumbersApi.md#purchasePhoneNumber) | **POST** /v1/phone-numbers/purchase | Purchase phone number |
 | [**releasePhoneNumber()**](PhoneNumbersApi.md#releasePhoneNumber) | **DELETE** /v1/phone-numbers/{id} | Release phone number |
@@ -331,6 +334,124 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createPhoneNumberStockWatch()`
+
+```php
+createPhoneNumberStockWatch($create_phone_number_stock_watch_request): \Zernio\Model\PhoneNumberStockWatch
+```
+
+Watch an out-of-stock country
+
+Get notified the first time an out-of-stock country has deliverable numbers again: an email to the account holder plus the `phone_number.stock_available` webhook. Stock is re-checked every 6h. One watch per country; a repeat request returns the existing watch (200). The watch is consumed when it fires, so re-create it if you miss the stock. Up to 20 countries can be watched at once.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\PhoneNumbersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$create_phone_number_stock_watch_request = new \Zernio\Model\CreatePhoneNumberStockWatchRequest(); // \Zernio\Model\CreatePhoneNumberStockWatchRequest
+
+try {
+    $result = $apiInstance->createPhoneNumberStockWatch($create_phone_number_stock_watch_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PhoneNumbersApi->createPhoneNumberStockWatch: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **create_phone_number_stock_watch_request** | [**\Zernio\Model\CreatePhoneNumberStockWatchRequest**](../Model/CreatePhoneNumberStockWatchRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\PhoneNumberStockWatch**](../Model/PhoneNumberStockWatch.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deletePhoneNumberStockWatch()`
+
+```php
+deletePhoneNumberStockWatch($id): \Zernio\Model\DeleteSmsSenderId200Response
+```
+
+Stop watching a country
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\PhoneNumbersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string
+
+try {
+    $result = $apiInstance->deletePhoneNumberStockWatch($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PhoneNumbersApi->deletePhoneNumberStockWatch: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**|  | |
+
+### Return type
+
+[**\Zernio\Model\DeleteSmsSenderId200Response**](../Model/DeleteSmsSenderId200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
@@ -741,6 +862,61 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**\Zernio\Model\ListPhoneNumberPortIns200Response**](../Model/ListPhoneNumberPortIns200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listPhoneNumberStockWatches()`
+
+```php
+listPhoneNumberStockWatches(): \Zernio\Model\ListPhoneNumberStockWatches200Response
+```
+
+List stock watches
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\PhoneNumbersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+
+try {
+    $result = $apiInstance->listPhoneNumberStockWatches();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PhoneNumbersApi->listPhoneNumberStockWatches: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**\Zernio\Model\ListPhoneNumberStockWatches200Response**](../Model/ListPhoneNumberStockWatches200Response.md)
 
 ### Authorization
 

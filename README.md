@@ -418,6 +418,8 @@ Class | Method | HTTP request | Description
 *PhoneNumbersApi* | [**checkPhoneNumberPortability**](docs/Api/PhoneNumbersApi.md#checkphonenumberportability) | **POST** /v1/phone-numbers/port-in/check | Check portability
 *PhoneNumbersApi* | [**createPhoneNumberKycLink**](docs/Api/PhoneNumbersApi.md#createphonenumberkyclink) | **POST** /v1/phone-numbers/kyc/share | Create a hosted KYC link
 *PhoneNumbersApi* | [**createPhoneNumberPortIn**](docs/Api/PhoneNumbersApi.md#createphonenumberportin) | **POST** /v1/phone-numbers/port-in | Port numbers in
+*PhoneNumbersApi* | [**createPhoneNumberStockWatch**](docs/Api/PhoneNumbersApi.md#createphonenumberstockwatch) | **POST** /v1/phone-numbers/stock-watches | Watch an out-of-stock country
+*PhoneNumbersApi* | [**deletePhoneNumberStockWatch**](docs/Api/PhoneNumbersApi.md#deletephonenumberstockwatch) | **DELETE** /v1/phone-numbers/stock-watches/{id} | Stop watching a country
 *PhoneNumbersApi* | [**getPhoneNumber**](docs/Api/PhoneNumbersApi.md#getphonenumber) | **GET** /v1/phone-numbers/{id} | Get phone number
 *PhoneNumbersApi* | [**getPhoneNumberKycForm**](docs/Api/PhoneNumbersApi.md#getphonenumberkycform) | **GET** /v1/phone-numbers/kyc | Get KYC form spec
 *PhoneNumbersApi* | [**getPhoneNumberPortInOrderRequirements**](docs/Api/PhoneNumbersApi.md#getphonenumberportinorderrequirements) | **GET** /v1/phone-numbers/port-in/{id}/requirements | A port-in order&#39;s pending requirements
@@ -425,6 +427,7 @@ Class | Method | HTTP request | Description
 *PhoneNumbersApi* | [**getPhoneNumberRemediation**](docs/Api/PhoneNumbersApi.md#getphonenumberremediation) | **GET** /v1/phone-numbers/{id}/remediate | Get declined requirements
 *PhoneNumbersApi* | [**listPhoneNumberCountries**](docs/Api/PhoneNumbersApi.md#listphonenumbercountries) | **GET** /v1/phone-numbers/countries | List offerable number countries
 *PhoneNumbersApi* | [**listPhoneNumberPortIns**](docs/Api/PhoneNumbersApi.md#listphonenumberportins) | **GET** /v1/phone-numbers/port-in | List port-in orders
+*PhoneNumbersApi* | [**listPhoneNumberStockWatches**](docs/Api/PhoneNumbersApi.md#listphonenumberstockwatches) | **GET** /v1/phone-numbers/stock-watches | List stock watches
 *PhoneNumbersApi* | [**listPhoneNumbers**](docs/Api/PhoneNumbersApi.md#listphonenumbers) | **GET** /v1/phone-numbers | List phone numbers
 *PhoneNumbersApi* | [**purchasePhoneNumber**](docs/Api/PhoneNumbersApi.md#purchasephonenumber) | **POST** /v1/phone-numbers/purchase | Purchase phone number
 *PhoneNumbersApi* | [**releasePhoneNumber**](docs/Api/PhoneNumbersApi.md#releasephonenumber) | **DELETE** /v1/phone-numbers/{id} | Release phone number
@@ -920,6 +923,7 @@ Class | Method | HTTP request | Description
 - [CreatePhoneNumberPortInRequest](docs/Model/CreatePhoneNumberPortInRequest.md)
 - [CreatePhoneNumberPortInRequestEndUser](docs/Model/CreatePhoneNumberPortInRequestEndUser.md)
 - [CreatePhoneNumberPortInRequestRequirementsInner](docs/Model/CreatePhoneNumberPortInRequestRequirementsInner.md)
+- [CreatePhoneNumberStockWatchRequest](docs/Model/CreatePhoneNumberStockWatchRequest.md)
 - [CreatePinterestBoard201Response](docs/Model/CreatePinterestBoard201Response.md)
 - [CreatePinterestBoard201ResponseBoard](docs/Model/CreatePinterestBoard201ResponseBoard.md)
 - [CreatePinterestBoardRequest](docs/Model/CreatePinterestBoardRequest.md)
@@ -1646,6 +1650,7 @@ Class | Method | HTTP request | Description
 - [ListPhoneNumberCountries200ResponseCountriesInnerTypesInner](docs/Model/ListPhoneNumberCountries200ResponseCountriesInnerTypesInner.md)
 - [ListPhoneNumberPortIns200Response](docs/Model/ListPhoneNumberPortIns200Response.md)
 - [ListPhoneNumberPortIns200ResponseOrdersInner](docs/Model/ListPhoneNumberPortIns200ResponseOrdersInner.md)
+- [ListPhoneNumberStockWatches200Response](docs/Model/ListPhoneNumberStockWatches200Response.md)
 - [ListPhoneNumbers200Response](docs/Model/ListPhoneNumbers200Response.md)
 - [ListPhoneNumbers200ResponseConnectedInner](docs/Model/ListPhoneNumbers200ResponseConnectedInner.md)
 - [ListPhoneNumbers200ResponseNumbersInner](docs/Model/ListPhoneNumbers200ResponseNumbersInner.md)
@@ -1748,6 +1753,7 @@ Class | Method | HTTP request | Description
 - [Pagination](docs/Model/Pagination.md)
 - [PauseWorkflow200Response](docs/Model/PauseWorkflow200Response.md)
 - [Pending](docs/Model/Pending.md)
+- [PhoneNumberStockWatch](docs/Model/PhoneNumberStockWatch.md)
 - [PinDiscordMessage200Response](docs/Model/PinDiscordMessage200Response.md)
 - [PinterestPlatformData](docs/Model/PinterestPlatformData.md)
 - [PlatformAnalytics](docs/Model/PlatformAnalytics.md)
@@ -2312,6 +2318,9 @@ Class | Method | HTTP request | Description
 - [WebhookPayloadMessageSentMessageAttachmentsInner](docs/Model/WebhookPayloadMessageSentMessageAttachmentsInner.md)
 - [WebhookPayloadMessageSentMessageSender](docs/Model/WebhookPayloadMessageSentMessageSender.md)
 - [WebhookPayloadMessageSentMetadata](docs/Model/WebhookPayloadMessageSentMetadata.md)
+- [WebhookPayloadPhoneNumberStockAvailable](docs/Model/WebhookPayloadPhoneNumberStockAvailable.md)
+- [WebhookPayloadPhoneNumberStockAvailableStock](docs/Model/WebhookPayloadPhoneNumberStockAvailableStock.md)
+- [WebhookPayloadPhoneNumberStockAvailableStockTypesInner](docs/Model/WebhookPayloadPhoneNumberStockAvailableStockTypesInner.md)
 - [WebhookPayloadPost](docs/Model/WebhookPayloadPost.md)
 - [WebhookPayloadPostPlatform](docs/Model/WebhookPayloadPostPlatform.md)
 - [WebhookPayloadPostPlatformAccount](docs/Model/WebhookPayloadPostPlatformAccount.md)
