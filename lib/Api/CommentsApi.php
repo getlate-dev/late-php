@@ -2616,15 +2616,16 @@ class CommentsApi
      *
      * @param  string $post_id Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
      * @param  \Zernio\Model\ReplyToInboxPostRequest $reply_to_inbox_post_request reply_to_inbox_post_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['replyToInboxPost'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\ReplyToInboxPost200Response|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse
      */
-    public function replyToInboxPost($post_id, $reply_to_inbox_post_request, string $contentType = self::contentTypes['replyToInboxPost'][0])
+    public function replyToInboxPost($post_id, $reply_to_inbox_post_request, $idempotency_key = null, string $contentType = self::contentTypes['replyToInboxPost'][0])
     {
-        list($response) = $this->replyToInboxPostWithHttpInfo($post_id, $reply_to_inbox_post_request, $contentType);
+        list($response) = $this->replyToInboxPostWithHttpInfo($post_id, $reply_to_inbox_post_request, $idempotency_key, $contentType);
         return $response;
     }
 
@@ -2635,15 +2636,16 @@ class CommentsApi
      *
      * @param  string $post_id Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
      * @param  \Zernio\Model\ReplyToInboxPostRequest $reply_to_inbox_post_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['replyToInboxPost'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\ReplyToInboxPost200Response|\Zernio\Model\InlineObject|\Zernio\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function replyToInboxPostWithHttpInfo($post_id, $reply_to_inbox_post_request, string $contentType = self::contentTypes['replyToInboxPost'][0])
+    public function replyToInboxPostWithHttpInfo($post_id, $reply_to_inbox_post_request, $idempotency_key = null, string $contentType = self::contentTypes['replyToInboxPost'][0])
     {
-        $request = $this->replyToInboxPostRequest($post_id, $reply_to_inbox_post_request, $contentType);
+        $request = $this->replyToInboxPostRequest($post_id, $reply_to_inbox_post_request, $idempotency_key, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2749,14 +2751,15 @@ class CommentsApi
      *
      * @param  string $post_id Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
      * @param  \Zernio\Model\ReplyToInboxPostRequest $reply_to_inbox_post_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['replyToInboxPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function replyToInboxPostAsync($post_id, $reply_to_inbox_post_request, string $contentType = self::contentTypes['replyToInboxPost'][0])
+    public function replyToInboxPostAsync($post_id, $reply_to_inbox_post_request, $idempotency_key = null, string $contentType = self::contentTypes['replyToInboxPost'][0])
     {
-        return $this->replyToInboxPostAsyncWithHttpInfo($post_id, $reply_to_inbox_post_request, $contentType)
+        return $this->replyToInboxPostAsyncWithHttpInfo($post_id, $reply_to_inbox_post_request, $idempotency_key, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2771,15 +2774,16 @@ class CommentsApi
      *
      * @param  string $post_id Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
      * @param  \Zernio\Model\ReplyToInboxPostRequest $reply_to_inbox_post_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['replyToInboxPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function replyToInboxPostAsyncWithHttpInfo($post_id, $reply_to_inbox_post_request, string $contentType = self::contentTypes['replyToInboxPost'][0])
+    public function replyToInboxPostAsyncWithHttpInfo($post_id, $reply_to_inbox_post_request, $idempotency_key = null, string $contentType = self::contentTypes['replyToInboxPost'][0])
     {
         $returnType = '\Zernio\Model\ReplyToInboxPost200Response';
-        $request = $this->replyToInboxPostRequest($post_id, $reply_to_inbox_post_request, $contentType);
+        $request = $this->replyToInboxPostRequest($post_id, $reply_to_inbox_post_request, $idempotency_key, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2822,12 +2826,13 @@ class CommentsApi
      *
      * @param  string $post_id Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. (required)
      * @param  \Zernio\Model\ReplyToInboxPostRequest $reply_to_inbox_post_request (required)
+     * @param  string|null $idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['replyToInboxPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function replyToInboxPostRequest($post_id, $reply_to_inbox_post_request, string $contentType = self::contentTypes['replyToInboxPost'][0])
+    public function replyToInboxPostRequest($post_id, $reply_to_inbox_post_request, $idempotency_key = null, string $contentType = self::contentTypes['replyToInboxPost'][0])
     {
 
         // verify the required parameter 'post_id' is set
@@ -2844,6 +2849,10 @@ class CommentsApi
             );
         }
 
+        if ($idempotency_key !== null && strlen($idempotency_key) > 255) {
+            throw new \InvalidArgumentException('invalid length for "$idempotency_key" when calling CommentsApi.replyToInboxPost, must be smaller than or equal to 255.');
+        }
+        
 
         $resourcePath = '/v1/inbox/comments/{postId}';
         $formParams = [];
@@ -2853,6 +2862,10 @@ class CommentsApi
         $multipart = false;
 
 
+        // header params
+        if ($idempotency_key !== null) {
+            $headerParams['Idempotency-Key'] = ObjectSerializer::toHeaderValue($idempotency_key);
+        }
 
         // path params
         if ($post_id !== null) {

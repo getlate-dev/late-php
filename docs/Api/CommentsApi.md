@@ -488,12 +488,12 @@ try {
 ## `replyToInboxPost()`
 
 ```php
-replyToInboxPost($post_id, $reply_to_inbox_post_request): \Zernio\Model\ReplyToInboxPost200Response
+replyToInboxPost($post_id, $reply_to_inbox_post_request, $idempotency_key): \Zernio\Model\ReplyToInboxPost200Response
 ```
 
 Reply to comment
 
-Post a reply to a post or specific comment. Requires accountId in request body.
+Post a reply to a post or specific comment. Requires accountId in request body.  **Idempotency:** send an `Idempotency-Key` header to make retries safe (e.g. after a client-side timeout where delivery is unknown): same key + same body replays the original response (with `Idempotent-Replayed: true`) instead of posting the comment a second time; same key + different body returns 422; a key still in flight returns 409. Keys are retained for 24 hours and are scoped to the credential and to this exact path, so reusing a key against a different postId returns 422 rather than replaying the other post's response.  Only successful (2xx) responses are stored for replay. If the request throws or returns a non-2xx status the key is released, so the header protects the \"request succeeded but the response was lost\" case. After an ambiguous failure (a 5xx or a network timeout) list the post's comments before retrying with the same key, and treat an empty result as inconclusive rather than as proof nothing was posted.
 
 ### Example
 
@@ -514,9 +514,10 @@ $apiInstance = new Zernio\Api\CommentsApi(
 );
 $post_id = 'post_id_example'; // string | Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID.
 $reply_to_inbox_post_request = new \Zernio\Model\ReplyToInboxPostRequest(); // \Zernio\Model\ReplyToInboxPostRequest
+$idempotency_key = 'idempotency_key_example'; // string | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
 
 try {
-    $result = $apiInstance->replyToInboxPost($post_id, $reply_to_inbox_post_request);
+    $result = $apiInstance->replyToInboxPost($post_id, $reply_to_inbox_post_request, $idempotency_key);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling CommentsApi->replyToInboxPost: ', $e->getMessage(), PHP_EOL;
@@ -529,6 +530,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **post_id** | **string**| Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. | |
 | **reply_to_inbox_post_request** | [**\Zernio\Model\ReplyToInboxPostRequest**](../Model/ReplyToInboxPostRequest.md)|  | |
+| **idempotency_key** | **string**| Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
 ### Return type
 

@@ -3633,9 +3633,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/CreatePhoneNumberStockWatchRequestTest.php
-test/Model/ListPhoneNumberStockWatches200ResponseTest.php
-test/Model/PhoneNumberStockWatchTest.php
-test/Model/WebhookPayloadPhoneNumberStockAvailableStockTest.php
-test/Model/WebhookPayloadPhoneNumberStockAvailableStockTypesInnerTest.php
-test/Model/WebhookPayloadPhoneNumberStockAvailableTest.php

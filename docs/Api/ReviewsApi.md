@@ -154,12 +154,12 @@ try {
 ## `replyToInboxReview()`
 
 ```php
-replyToInboxReview($review_id, $reply_to_inbox_review_request): \Zernio\Model\ReplyToInboxReview200Response
+replyToInboxReview($review_id, $reply_to_inbox_review_request, $idempotency_key): \Zernio\Model\ReplyToInboxReview200Response
 ```
 
 Reply to review
 
-Post a reply to a review. Requires accountId in request body.
+Post a reply to a review. Requires accountId in request body.  **Idempotency:** send an `Idempotency-Key` header to make retries safe (e.g. after a client-side timeout where delivery is unknown): same key + same body replays the original response (with `Idempotent-Replayed: true`) instead of sending the reply to the platform again; same key + different body returns 422; a key still in flight returns 409. Keys are retained for 24 hours and are scoped to the credential and to this exact path, so reusing a key against a different reviewId returns 422 rather than replaying the other review's response.  Only successful (2xx) responses are stored for replay. If the request throws or returns a non-2xx status the key is released, so the header protects the \"request succeeded but the response was lost\" case. After an ambiguous failure (a 5xx or a network timeout) fetch the review before retrying with the same key, and treat a missing reply as inconclusive rather than as proof nothing was sent.
 
 ### Example
 
@@ -180,9 +180,10 @@ $apiInstance = new Zernio\Api\ReviewsApi(
 );
 $review_id = 'review_id_example'; // string | Review ID (URL-encoded for Google Business)
 $reply_to_inbox_review_request = new \Zernio\Model\ReplyToInboxReviewRequest(); // \Zernio\Model\ReplyToInboxReviewRequest
+$idempotency_key = 'idempotency_key_example'; // string | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
 
 try {
-    $result = $apiInstance->replyToInboxReview($review_id, $reply_to_inbox_review_request);
+    $result = $apiInstance->replyToInboxReview($review_id, $reply_to_inbox_review_request, $idempotency_key);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ReviewsApi->replyToInboxReview: ', $e->getMessage(), PHP_EOL;
@@ -195,6 +196,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **review_id** | **string**| Review ID (URL-encoded for Google Business) | |
 | **reply_to_inbox_review_request** | [**\Zernio\Model\ReplyToInboxReviewRequest**](../Model/ReplyToInboxReviewRequest.md)|  | |
+| **idempotency_key** | **string**| Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
 ### Return type
 
