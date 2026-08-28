@@ -269,6 +269,7 @@ Class | Method | HTTP request | Description
 *ConnectApi* | [**getShopifyConnectUrl**](docs/Api/ConnectApi.md#getshopifyconnecturl) | **GET** /v1/connect/shopify | Get Shopify OAuth connect URL
 *ConnectApi* | [**getSubredditRules**](docs/Api/ConnectApi.md#getsubredditrules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules
 *ConnectApi* | [**getTelegramConnectStatus**](docs/Api/ConnectApi.md#gettelegramconnectstatus) | **GET** /v1/connect/telegram | Generate Telegram code
+*ConnectApi* | [**getYoutubeCaptions**](docs/Api/ConnectApi.md#getyoutubecaptions) | **GET** /v1/accounts/{accountId}/youtube-captions | Get a YouTube video transcript
 *ConnectApi* | [**getYoutubePlaylists**](docs/Api/ConnectApi.md#getyoutubeplaylists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists
 *ConnectApi* | [**handleOAuthCallback**](docs/Api/ConnectApi.md#handleoauthcallback) | **POST** /v1/connect/{platform} | Complete OAuth callback
 *ConnectApi* | [**initiateTelegramConnect**](docs/Api/ConnectApi.md#initiatetelegramconnect) | **POST** /v1/connect/telegram | Connect Telegram directly
@@ -1444,6 +1445,9 @@ Class | Method | HTTP request | Description
 - [GetYouTubeDemographics412Response](docs/Model/GetYouTubeDemographics412Response.md)
 - [GetYouTubeDemographics412ResponseScopeStatus](docs/Model/GetYouTubeDemographics412ResponseScopeStatus.md)
 - [GetYouTubeVideoRetention404Response](docs/Model/GetYouTubeVideoRetention404Response.md)
+- [GetYoutubeCaptions200Response](docs/Model/GetYoutubeCaptions200Response.md)
+- [GetYoutubeCaptions200ResponseAvailableTracksInner](docs/Model/GetYoutubeCaptions200ResponseAvailableTracksInner.md)
+- [GetYoutubeCaptions200ResponseCuesInner](docs/Model/GetYoutubeCaptions200ResponseCuesInner.md)
 - [GetYoutubePlaylists200Response](docs/Model/GetYoutubePlaylists200Response.md)
 - [GetYoutubePlaylists200ResponsePlaylistsInner](docs/Model/GetYoutubePlaylists200ResponsePlaylistsInner.md)
 - [GoogleBusinessPlatformData](docs/Model/GoogleBusinessPlatformData.md)

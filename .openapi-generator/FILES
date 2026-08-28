@@ -854,6 +854,9 @@ docs/Model/GetYouTubeDailyViews500Response.md
 docs/Model/GetYouTubeDemographics412Response.md
 docs/Model/GetYouTubeDemographics412ResponseScopeStatus.md
 docs/Model/GetYouTubeVideoRetention404Response.md
+docs/Model/GetYoutubeCaptions200Response.md
+docs/Model/GetYoutubeCaptions200ResponseAvailableTracksInner.md
+docs/Model/GetYoutubeCaptions200ResponseCuesInner.md
 docs/Model/GetYoutubePlaylists200Response.md
 docs/Model/GetYoutubePlaylists200ResponsePlaylistsInner.md
 docs/Model/GoogleBusinessPlatformData.md
@@ -2655,6 +2658,9 @@ lib/Model/GetYouTubeDailyViews500Response.php
 lib/Model/GetYouTubeDemographics412Response.php
 lib/Model/GetYouTubeDemographics412ResponseScopeStatus.php
 lib/Model/GetYouTubeVideoRetention404Response.php
+lib/Model/GetYoutubeCaptions200Response.php
+lib/Model/GetYoutubeCaptions200ResponseAvailableTracksInner.php
+lib/Model/GetYoutubeCaptions200ResponseCuesInner.php
 lib/Model/GetYoutubePlaylists200Response.php
 lib/Model/GetYoutubePlaylists200ResponsePlaylistsInner.php
 lib/Model/GoogleBusinessPlatformData.php
@@ -3603,3 +3609,6 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/GetYoutubeCaptions200ResponseAvailableTracksInnerTest.php
+test/Model/GetYoutubeCaptions200ResponseCuesInnerTest.php
+test/Model/GetYoutubeCaptions200ResponseTest.php

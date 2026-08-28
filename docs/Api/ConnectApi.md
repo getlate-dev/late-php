@@ -30,6 +30,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**getShopifyConnectUrl()**](ConnectApi.md#getShopifyConnectUrl) | **GET** /v1/connect/shopify | Get Shopify OAuth connect URL |
 | [**getSubredditRules()**](ConnectApi.md#getSubredditRules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules |
 | [**getTelegramConnectStatus()**](ConnectApi.md#getTelegramConnectStatus) | **GET** /v1/connect/telegram | Generate Telegram code |
+| [**getYoutubeCaptions()**](ConnectApi.md#getYoutubeCaptions) | **GET** /v1/accounts/{accountId}/youtube-captions | Get a YouTube video transcript |
 | [**getYoutubePlaylists()**](ConnectApi.md#getYoutubePlaylists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists |
 | [**handleOAuthCallback()**](ConnectApi.md#handleOAuthCallback) | **POST** /v1/connect/{platform} | Complete OAuth callback |
 | [**initiateTelegramConnect()**](ConnectApi.md#initiateTelegramConnect) | **POST** /v1/connect/telegram | Connect Telegram directly |
@@ -1525,6 +1526,74 @@ try {
 ### Return type
 
 [**\Zernio\Model\GetTelegramConnectStatus200Response**](../Model/GetTelegramConnectStatus200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getYoutubeCaptions()`
+
+```php
+getYoutubeCaptions($account_id, $video_id, $language, $format, $refresh): \Zernio\Model\GetYoutubeCaptions200Response
+```
+
+Get a YouTube video transcript
+
+Returns the caption track YouTube already holds for one of the connected channel's own videos, as plain text plus timed cues. Use it instead of downloading and transcribing the video yourself.  Auto-generated (ASR) tracks are included: YouTube serves them to the channel owner, which is what the connected account is. Uploaded tracks win over auto-generated ones when both exist for a language.  Caching: we store the transcript on first read and serve it from there afterwards, so you do not need to cache it yourself. A cached read costs no YouTube quota and does not call YouTube at all. `source` tells you which happened (`youtube` on the first read, `cache` after). Pass `refresh=true` only when the captions actually changed on YouTube, since that re-downloads.  Notes: - Only videos owned by this connected channel. Anything else returns 404. - `contentDetails.caption` in YouTube's own API reads `false` on videos that DO have a serving auto-generated track, so it is not a usable availability signal. Call this endpoint and handle the 404. - YouTube generates auto-captions only for videos with recognisable speech, and can take a few hours after upload to publish them.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\ConnectApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The connected YouTube account.
+$video_id = 'video_id_example'; // string | The YouTube video id (the `platformPostId` on a synced external post).
+$language = 'language_example'; // string | BCP-47 language tag as YouTube labels the track. `en` also matches an `en-GB` track. Omit to take the best available track.
+$format = 'json'; // string | `json` returns timed `cues`; `srt` returns the raw SubRip body instead. `text` is present either way.
+$refresh = false; // bool | Re-download from YouTube instead of serving the stored copy. Spends 200 quota units.
+
+try {
+    $result = $apiInstance->getYoutubeCaptions($account_id, $video_id, $language, $format, $refresh);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ConnectApi->getYoutubeCaptions: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The connected YouTube account. | |
+| **video_id** | **string**| The YouTube video id (the &#x60;platformPostId&#x60; on a synced external post). | |
+| **language** | **string**| BCP-47 language tag as YouTube labels the track. &#x60;en&#x60; also matches an &#x60;en-GB&#x60; track. Omit to take the best available track. | [optional] |
+| **format** | **string**| &#x60;json&#x60; returns timed &#x60;cues&#x60;; &#x60;srt&#x60; returns the raw SubRip body instead. &#x60;text&#x60; is present either way. | [optional] [default to &#39;json&#39;] |
+| **refresh** | **bool**| Re-download from YouTube instead of serving the stored copy. Spends 200 quota units. | [optional] [default to false] |
+
+### Return type
+
+[**\Zernio\Model\GetYoutubeCaptions200Response**](../Model/GetYoutubeCaptions200Response.md)
 
 ### Authorization
 
