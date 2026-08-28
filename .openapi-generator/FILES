@@ -543,6 +543,8 @@ docs/Model/GetAccountHealth200ResponsePermissionsPostingInner.md
 docs/Model/GetAccountHealth200ResponsePlatformConnection.md
 docs/Model/GetAccountHealth200ResponsePlatformConnectionMetaError.md
 docs/Model/GetAccountHealth200ResponseTokenStatus.md
+docs/Model/GetAccountPosts200Response.md
+docs/Model/GetAccountPosts200ResponsePostsInner.md
 docs/Model/GetAd200Response.md
 docs/Model/GetAdAccountFinance200Response.md
 docs/Model/GetAdAccountFinance200ResponseFundingSource.md
@@ -2359,6 +2361,8 @@ lib/Model/GetAccountHealth200ResponsePermissionsPostingInner.php
 lib/Model/GetAccountHealth200ResponsePlatformConnection.php
 lib/Model/GetAccountHealth200ResponsePlatformConnectionMetaError.php
 lib/Model/GetAccountHealth200ResponseTokenStatus.php
+lib/Model/GetAccountPosts200Response.php
+lib/Model/GetAccountPosts200ResponsePostsInner.php
 lib/Model/GetAd200Response.php
 lib/Model/GetAdAccountFinance200Response.php
 lib/Model/GetAdAccountFinance200ResponseFundingSource.php

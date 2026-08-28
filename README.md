@@ -86,6 +86,7 @@ Class | Method | HTTP request | Description
 *AccountSettingsApi* | [**setTelegramCommands**](docs/Api/AccountSettingsApi.md#settelegramcommands) | **PUT** /v1/accounts/{accountId}/telegram-commands | Set TG bot commands
 *AccountsApi* | [**deleteAccount**](docs/Api/AccountsApi.md#deleteaccount) | **DELETE** /v1/accounts/{accountId} | Disconnect account
 *AccountsApi* | [**getAccountHealth**](docs/Api/AccountsApi.md#getaccounthealth) | **GET** /v1/accounts/{accountId}/health | Check account health
+*AccountsApi* | [**getAccountPosts**](docs/Api/AccountsApi.md#getaccountposts) | **GET** /v1/accounts/{accountId}/posts | List posts published on the platform
 *AccountsApi* | [**getAllAccountsHealth**](docs/Api/AccountsApi.md#getallaccountshealth) | **GET** /v1/accounts/health | Check accounts health
 *AccountsApi* | [**getBlueskySettings**](docs/Api/AccountsApi.md#getblueskysettings) | **GET** /v1/accounts/{accountId}/bluesky-settings | Get Bluesky account settings
 *AccountsApi* | [**getFollowerStats**](docs/Api/AccountsApi.md#getfollowerstats) | **GET** /v1/accounts/follower-stats | Get follower stats
@@ -1137,6 +1138,8 @@ Class | Method | HTTP request | Description
 - [GetAccountHealth200ResponsePlatformConnection](docs/Model/GetAccountHealth200ResponsePlatformConnection.md)
 - [GetAccountHealth200ResponsePlatformConnectionMetaError](docs/Model/GetAccountHealth200ResponsePlatformConnectionMetaError.md)
 - [GetAccountHealth200ResponseTokenStatus](docs/Model/GetAccountHealth200ResponseTokenStatus.md)
+- [GetAccountPosts200Response](docs/Model/GetAccountPosts200Response.md)
+- [GetAccountPosts200ResponsePostsInner](docs/Model/GetAccountPosts200ResponsePostsInner.md)
 - [GetAd200Response](docs/Model/GetAd200Response.md)
 - [GetAdAccountFinance200Response](docs/Model/GetAdAccountFinance200Response.md)
 - [GetAdAccountFinance200ResponseFundingSource](docs/Model/GetAdAccountFinance200ResponseFundingSource.md)

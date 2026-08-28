@@ -13,7 +13,7 @@
 /**
  * Zernio API
  *
- * API reference for Zernio. Authenticate with a Bearer API key. Base URL: https://zernio.com/api
+ * API reference for Zernio. Authenticate with a Bearer API key. Base URL: https://zernio.com/api  Versioning and deprecation: all endpoints are versioned in the URL path (current version: /v1). Breaking changes only ship in a new path version; existing versions keep working. Deprecated operations are marked 'deprecated: true' in this spec and announced in the changelog (https://zernio.com/changelog) before removal.  Errors: every 4xx/5xx response is application/json with a machine-readable 'code' and a human-readable 'error' message (see the ErrorResponse schema).
  *
  * The version of the OpenAPI document: 1.0.4
  * Contact: support@zernio.com
@@ -59,16 +59,16 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
       */
     protected static $openAPITypes = [
         'id' => 'string',
+        'platform' => 'string',
         'message' => 'string',
         'created_time' => '\DateTime',
-        'picture' => 'string',
         'permalink' => 'string',
+        'picture' => 'string',
         'media_type' => 'string',
         'comment_count' => 'int',
         'like_count' => 'int',
         'reaction_count' => 'int',
         'share_count' => 'int',
-        'platform' => 'string',
         'cid' => 'string',
         'subreddit' => 'string'
     ];
@@ -82,16 +82,16 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
       */
     protected static $openAPIFormats = [
         'id' => null,
+        'platform' => null,
         'message' => null,
         'created_time' => 'date-time',
-        'picture' => null,
         'permalink' => null,
+        'picture' => null,
         'media_type' => null,
         'comment_count' => null,
         'like_count' => null,
         'reaction_count' => null,
         'share_count' => null,
-        'platform' => null,
         'cid' => null,
         'subreddit' => null
     ];
@@ -103,18 +103,18 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
       */
     protected static array $openAPINullables = [
         'id' => false,
+        'platform' => false,
         'message' => false,
         'created_time' => false,
-        'picture' => true,
-        'permalink' => true,
-        'media_type' => true,
-        'comment_count' => true,
-        'like_count' => true,
-        'reaction_count' => true,
-        'share_count' => true,
-        'platform' => false,
-        'cid' => true,
-        'subreddit' => true
+        'permalink' => false,
+        'picture' => false,
+        'media_type' => false,
+        'comment_count' => false,
+        'like_count' => false,
+        'reaction_count' => false,
+        'share_count' => false,
+        'cid' => false,
+        'subreddit' => false
     ];
 
     /**
@@ -204,16 +204,16 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
      */
     protected static $attributeMap = [
         'id' => 'id',
+        'platform' => 'platform',
         'message' => 'message',
         'created_time' => 'createdTime',
-        'picture' => 'picture',
         'permalink' => 'permalink',
+        'picture' => 'picture',
         'media_type' => 'mediaType',
         'comment_count' => 'commentCount',
         'like_count' => 'likeCount',
         'reaction_count' => 'reactionCount',
         'share_count' => 'shareCount',
-        'platform' => 'platform',
         'cid' => 'cid',
         'subreddit' => 'subreddit'
     ];
@@ -225,16 +225,16 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
      */
     protected static $setters = [
         'id' => 'setId',
+        'platform' => 'setPlatform',
         'message' => 'setMessage',
         'created_time' => 'setCreatedTime',
-        'picture' => 'setPicture',
         'permalink' => 'setPermalink',
+        'picture' => 'setPicture',
         'media_type' => 'setMediaType',
         'comment_count' => 'setCommentCount',
         'like_count' => 'setLikeCount',
         'reaction_count' => 'setReactionCount',
         'share_count' => 'setShareCount',
-        'platform' => 'setPlatform',
         'cid' => 'setCid',
         'subreddit' => 'setSubreddit'
     ];
@@ -246,16 +246,16 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
      */
     protected static $getters = [
         'id' => 'getId',
+        'platform' => 'getPlatform',
         'message' => 'getMessage',
         'created_time' => 'getCreatedTime',
-        'picture' => 'getPicture',
         'permalink' => 'getPermalink',
+        'picture' => 'getPicture',
         'media_type' => 'getMediaType',
         'comment_count' => 'getCommentCount',
         'like_count' => 'getLikeCount',
         'reaction_count' => 'getReactionCount',
         'share_count' => 'getShareCount',
-        'platform' => 'getPlatform',
         'cid' => 'getCid',
         'subreddit' => 'getSubreddit'
     ];
@@ -318,16 +318,16 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('platform', $data ?? [], null);
         $this->setIfExists('message', $data ?? [], null);
         $this->setIfExists('created_time', $data ?? [], null);
-        $this->setIfExists('picture', $data ?? [], null);
         $this->setIfExists('permalink', $data ?? [], null);
+        $this->setIfExists('picture', $data ?? [], null);
         $this->setIfExists('media_type', $data ?? [], null);
         $this->setIfExists('comment_count', $data ?? [], null);
         $this->setIfExists('like_count', $data ?? [], null);
         $this->setIfExists('reaction_count', $data ?? [], null);
         $this->setIfExists('share_count', $data ?? [], null);
-        $this->setIfExists('platform', $data ?? [], null);
         $this->setIfExists('cid', $data ?? [], null);
         $this->setIfExists('subreddit', $data ?? [], null);
     }
@@ -387,7 +387,7 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id The platform's own post id (the video ID on YouTube)
      *
      * @return self
      */
@@ -397,6 +397,33 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets platform
+     *
+     * @return string|null
+     */
+    public function getPlatform()
+    {
+        return $this->container['platform'];
+    }
+
+    /**
+     * Sets platform
+     *
+     * @param string|null $platform platform
+     *
+     * @return self
+     */
+    public function setPlatform($platform)
+    {
+        if (is_null($platform)) {
+            throw new \InvalidArgumentException('non-nullable platform cannot be null');
+        }
+        $this->container['platform'] = $platform;
 
         return $this;
     }
@@ -414,7 +441,7 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     /**
      * Sets message
      *
-     * @param string|null $message message
+     * @param string|null $message Caption or title, empty string when the post has no text
      *
      * @return self
      */
@@ -456,40 +483,6 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     }
 
     /**
-     * Gets picture
-     *
-     * @return string|null
-     */
-    public function getPicture()
-    {
-        return $this->container['picture'];
-    }
-
-    /**
-     * Sets picture
-     *
-     * @param string|null $picture picture
-     *
-     * @return self
-     */
-    public function setPicture($picture)
-    {
-        if (is_null($picture)) {
-            array_push($this->openAPINullablesSetToNull, 'picture');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('picture', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['picture'] = $picture;
-
-        return $this;
-    }
-
-    /**
      * Gets permalink
      *
      * @return string|null
@@ -502,23 +495,43 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     /**
      * Sets permalink
      *
-     * @param string|null $permalink permalink
+     * @param string|null $permalink Public URL of the post on the platform
      *
      * @return self
      */
     public function setPermalink($permalink)
     {
         if (is_null($permalink)) {
-            array_push($this->openAPINullablesSetToNull, 'permalink');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('permalink', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable permalink cannot be null');
         }
         $this->container['permalink'] = $permalink;
+
+        return $this;
+    }
+
+    /**
+     * Gets picture
+     *
+     * @return string|null
+     */
+    public function getPicture()
+    {
+        return $this->container['picture'];
+    }
+
+    /**
+     * Sets picture
+     *
+     * @param string|null $picture Thumbnail or media URL
+     *
+     * @return self
+     */
+    public function setPicture($picture)
+    {
+        if (is_null($picture)) {
+            throw new \InvalidArgumentException('non-nullable picture cannot be null');
+        }
+        $this->container['picture'] = $picture;
 
         return $this;
     }
@@ -543,14 +556,7 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     public function setMediaType($media_type)
     {
         if (is_null($media_type)) {
-            array_push($this->openAPINullablesSetToNull, 'media_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('media_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable media_type cannot be null');
         }
         $this->container['media_type'] = $media_type;
 
@@ -577,14 +583,7 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     public function setCommentCount($comment_count)
     {
         if (is_null($comment_count)) {
-            array_push($this->openAPINullablesSetToNull, 'comment_count');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('comment_count', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable comment_count cannot be null');
         }
         $this->container['comment_count'] = $comment_count;
 
@@ -611,14 +610,7 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     public function setLikeCount($like_count)
     {
         if (is_null($like_count)) {
-            array_push($this->openAPINullablesSetToNull, 'like_count');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('like_count', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable like_count cannot be null');
         }
         $this->container['like_count'] = $like_count;
 
@@ -638,21 +630,14 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     /**
      * Sets reaction_count
      *
-     * @param int|null $reaction_count reaction_count
+     * @param int|null $reaction_count Facebook and LinkedIn only
      *
      * @return self
      */
     public function setReactionCount($reaction_count)
     {
         if (is_null($reaction_count)) {
-            array_push($this->openAPINullablesSetToNull, 'reaction_count');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('reaction_count', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable reaction_count cannot be null');
         }
         $this->container['reaction_count'] = $reaction_count;
 
@@ -679,43 +664,9 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     public function setShareCount($share_count)
     {
         if (is_null($share_count)) {
-            array_push($this->openAPINullablesSetToNull, 'share_count');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('share_count', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable share_count cannot be null');
         }
         $this->container['share_count'] = $share_count;
-
-        return $this;
-    }
-
-    /**
-     * Gets platform
-     *
-     * @return string|null
-     */
-    public function getPlatform()
-    {
-        return $this->container['platform'];
-    }
-
-    /**
-     * Sets platform
-     *
-     * @param string|null $platform platform
-     *
-     * @return self
-     */
-    public function setPlatform($platform)
-    {
-        if (is_null($platform)) {
-            throw new \InvalidArgumentException('non-nullable platform cannot be null');
-        }
-        $this->container['platform'] = $platform;
 
         return $this;
     }
@@ -733,21 +684,14 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     /**
      * Sets cid
      *
-     * @param string|null $cid Bluesky only. Content ID needed for fetching replies.
+     * @param string|null $cid Bluesky content id, required to reply to the post
      *
      * @return self
      */
     public function setCid($cid)
     {
         if (is_null($cid)) {
-            array_push($this->openAPINullablesSetToNull, 'cid');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('cid', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable cid cannot be null');
         }
         $this->container['cid'] = $cid;
 
@@ -767,21 +711,14 @@ class GetAccountPosts200ResponsePostsInner implements ModelInterface, ArrayAcces
     /**
      * Sets subreddit
      *
-     * @param string|null $subreddit Reddit only. Subreddit name, needed for fetching comments.
+     * @param string|null $subreddit Reddit only
      *
      * @return self
      */
     public function setSubreddit($subreddit)
     {
         if (is_null($subreddit)) {
-            array_push($this->openAPINullablesSetToNull, 'subreddit');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('subreddit', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable subreddit cannot be null');
         }
         $this->container['subreddit'] = $subreddit;
 
