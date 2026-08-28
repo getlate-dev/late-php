@@ -102,6 +102,9 @@ class WhatsAppApi
         'deleteWhatsAppTemplate' => [
             'application/json',
         ],
+        'deleteWhatsAppTemplateById' => [
+            'application/json',
+        ],
         'deleteWhatsappBusinessUsername' => [
             'application/json',
         ],
@@ -127,6 +130,9 @@ class WhatsAppApi
             'application/json',
         ],
         'getWhatsAppTemplate' => [
+            'application/json',
+        ],
+        'getWhatsAppTemplateById' => [
             'application/json',
         ],
         'getWhatsAppTemplates' => [
@@ -178,6 +184,9 @@ class WhatsAppApi
             'application/json',
         ],
         'updateWhatsAppTemplate' => [
+            'application/json',
+        ],
+        'updateWhatsAppTemplateById' => [
             'application/json',
         ],
         'uploadWhatsAppProfilePhoto' => [
@@ -2727,17 +2736,18 @@ class WhatsAppApi
      *
      * Delete template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $language Delete only this language variant (e.g. es). Omit to delete the whole family. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\UnpublishPost200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
+     * @return \Zernio\Model\DeleteWhatsAppTemplate200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetWhatsAppTemplate409Response
      */
-    public function deleteWhatsAppTemplate($template_name, $account_id, string $contentType = self::contentTypes['deleteWhatsAppTemplate'][0])
+    public function deleteWhatsAppTemplate($template_name, $account_id, $language = null, string $contentType = self::contentTypes['deleteWhatsAppTemplate'][0])
     {
-        list($response) = $this->deleteWhatsAppTemplateWithHttpInfo($template_name, $account_id, $contentType);
+        list($response) = $this->deleteWhatsAppTemplateWithHttpInfo($template_name, $account_id, $language, $contentType);
         return $response;
     }
 
@@ -2746,17 +2756,18 @@ class WhatsAppApi
      *
      * Delete template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $language Delete only this language variant (e.g. es). Omit to delete the whole family. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\UnpublishPost200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\DeleteWhatsAppTemplate200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetWhatsAppTemplate409Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteWhatsAppTemplateWithHttpInfo($template_name, $account_id, string $contentType = self::contentTypes['deleteWhatsAppTemplate'][0])
+    public function deleteWhatsAppTemplateWithHttpInfo($template_name, $account_id, $language = null, string $contentType = self::contentTypes['deleteWhatsAppTemplate'][0])
     {
-        $request = $this->deleteWhatsAppTemplateRequest($template_name, $account_id, $contentType);
+        $request = $this->deleteWhatsAppTemplateRequest($template_name, $account_id, $language, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2784,7 +2795,13 @@ class WhatsAppApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\UnpublishPost200Response',
+                        '\Zernio\Model\DeleteWhatsAppTemplate200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
                         $request,
                         $response,
                     );
@@ -2794,9 +2811,9 @@ class WhatsAppApi
                         $request,
                         $response,
                     );
-                case 404:
+                case 409:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\InlineObject1',
+                        '\Zernio\Model\GetWhatsAppTemplate409Response',
                         $request,
                         $response,
                     );
@@ -2818,7 +2835,7 @@ class WhatsAppApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Zernio\Model\UnpublishPost200Response',
+                '\Zernio\Model\DeleteWhatsAppTemplate200Response',
                 $request,
                 $response,
             );
@@ -2827,7 +2844,15 @@ class WhatsAppApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\UnpublishPost200Response',
+                        '\Zernio\Model\DeleteWhatsAppTemplate200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2840,10 +2865,10 @@ class WhatsAppApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
-                case 404:
+                case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\InlineObject1',
+                        '\Zernio\Model\GetWhatsAppTemplate409Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2860,16 +2885,17 @@ class WhatsAppApi
      *
      * Delete template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $language Delete only this language variant (e.g. es). Omit to delete the whole family. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteWhatsAppTemplateAsync($template_name, $account_id, string $contentType = self::contentTypes['deleteWhatsAppTemplate'][0])
+    public function deleteWhatsAppTemplateAsync($template_name, $account_id, $language = null, string $contentType = self::contentTypes['deleteWhatsAppTemplate'][0])
     {
-        return $this->deleteWhatsAppTemplateAsyncWithHttpInfo($template_name, $account_id, $contentType)
+        return $this->deleteWhatsAppTemplateAsyncWithHttpInfo($template_name, $account_id, $language, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2882,17 +2908,18 @@ class WhatsAppApi
      *
      * Delete template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $language Delete only this language variant (e.g. es). Omit to delete the whole family. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteWhatsAppTemplateAsyncWithHttpInfo($template_name, $account_id, string $contentType = self::contentTypes['deleteWhatsAppTemplate'][0])
+    public function deleteWhatsAppTemplateAsyncWithHttpInfo($template_name, $account_id, $language = null, string $contentType = self::contentTypes['deleteWhatsAppTemplate'][0])
     {
-        $returnType = '\Zernio\Model\UnpublishPost200Response';
-        $request = $this->deleteWhatsAppTemplateRequest($template_name, $account_id, $contentType);
+        $returnType = '\Zernio\Model\DeleteWhatsAppTemplate200Response';
+        $request = $this->deleteWhatsAppTemplateRequest($template_name, $account_id, $language, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2933,14 +2960,15 @@ class WhatsAppApi
     /**
      * Create request for operation 'deleteWhatsAppTemplate'
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $language Delete only this language variant (e.g. es). Omit to delete the whole family. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function deleteWhatsAppTemplateRequest($template_name, $account_id, string $contentType = self::contentTypes['deleteWhatsAppTemplate'][0])
+    public function deleteWhatsAppTemplateRequest($template_name, $account_id, $language = null, string $contentType = self::contentTypes['deleteWhatsAppTemplate'][0])
     {
 
         // verify the required parameter 'template_name' is set
@@ -2956,6 +2984,7 @@ class WhatsAppApi
                 'Missing the required parameter $account_id when calling deleteWhatsAppTemplate'
             );
         }
+
 
 
         $resourcePath = '/v1/whatsapp/templates/{templateName}';
@@ -2974,6 +3003,15 @@ class WhatsAppApi
             true, // explode
             true // required
         ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $language,
+            'language', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -2981,6 +3019,327 @@ class WhatsAppApi
             $resourcePath = str_replace(
                 '{' . 'templateName' . '}',
                 ObjectSerializer::toPathValue($template_name),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deleteWhatsAppTemplateById
+     *
+     * Delete template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\DeleteWhatsAppTemplateById200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
+     */
+    public function deleteWhatsAppTemplateById($template_id, $account_id, string $contentType = self::contentTypes['deleteWhatsAppTemplateById'][0])
+    {
+        list($response) = $this->deleteWhatsAppTemplateByIdWithHttpInfo($template_id, $account_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation deleteWhatsAppTemplateByIdWithHttpInfo
+     *
+     * Delete template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\DeleteWhatsAppTemplateById200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteWhatsAppTemplateByIdWithHttpInfo($template_id, $account_id, string $contentType = self::contentTypes['deleteWhatsAppTemplateById'][0])
+    {
+        $request = $this->deleteWhatsAppTemplateByIdRequest($template_id, $account_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\DeleteWhatsAppTemplateById200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\DeleteWhatsAppTemplateById200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\DeleteWhatsAppTemplateById200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteWhatsAppTemplateByIdAsync
+     *
+     * Delete template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteWhatsAppTemplateByIdAsync($template_id, $account_id, string $contentType = self::contentTypes['deleteWhatsAppTemplateById'][0])
+    {
+        return $this->deleteWhatsAppTemplateByIdAsyncWithHttpInfo($template_id, $account_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteWhatsAppTemplateByIdAsyncWithHttpInfo
+     *
+     * Delete template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteWhatsAppTemplateByIdAsyncWithHttpInfo($template_id, $account_id, string $contentType = self::contentTypes['deleteWhatsAppTemplateById'][0])
+    {
+        $returnType = '\Zernio\Model\DeleteWhatsAppTemplateById200Response';
+        $request = $this->deleteWhatsAppTemplateByIdRequest($template_id, $account_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteWhatsAppTemplateById'
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteWhatsAppTemplateByIdRequest($template_id, $account_id, string $contentType = self::contentTypes['deleteWhatsAppTemplateById'][0])
+    {
+
+        // verify the required parameter 'template_id' is set
+        if ($template_id === null || (is_array($template_id) && count($template_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $template_id when calling deleteWhatsAppTemplateById'
+            );
+        }
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling deleteWhatsAppTemplateById'
+            );
+        }
+
+
+        $resourcePath = '/v1/whatsapp/templates/id/{templateId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $account_id,
+            'accountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+
+
+        // path params
+        if ($template_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'templateId' . '}',
+                ObjectSerializer::toPathValue($template_id),
                 $resourcePath
             );
         }
@@ -5467,17 +5826,18 @@ class WhatsAppApi
      *
      * Get template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $language Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\GetWhatsAppTemplate200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
+     * @return \Zernio\Model\GetWhatsAppTemplate200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetWhatsAppTemplate409Response
      */
-    public function getWhatsAppTemplate($template_name, $account_id, string $contentType = self::contentTypes['getWhatsAppTemplate'][0])
+    public function getWhatsAppTemplate($template_name, $account_id, $language = null, string $contentType = self::contentTypes['getWhatsAppTemplate'][0])
     {
-        list($response) = $this->getWhatsAppTemplateWithHttpInfo($template_name, $account_id, $contentType);
+        list($response) = $this->getWhatsAppTemplateWithHttpInfo($template_name, $account_id, $language, $contentType);
         return $response;
     }
 
@@ -5486,17 +5846,18 @@ class WhatsAppApi
      *
      * Get template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $language Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\GetWhatsAppTemplate200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\GetWhatsAppTemplate200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetWhatsAppTemplate409Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getWhatsAppTemplateWithHttpInfo($template_name, $account_id, string $contentType = self::contentTypes['getWhatsAppTemplate'][0])
+    public function getWhatsAppTemplateWithHttpInfo($template_name, $account_id, $language = null, string $contentType = self::contentTypes['getWhatsAppTemplate'][0])
     {
-        $request = $this->getWhatsAppTemplateRequest($template_name, $account_id, $contentType);
+        $request = $this->getWhatsAppTemplateRequest($template_name, $account_id, $language, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5528,15 +5889,21 @@ class WhatsAppApi
                         $request,
                         $response,
                     );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
                 case 401:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\InlineObject',
                         $request,
                         $response,
                     );
-                case 404:
+                case 409:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\InlineObject1',
+                        '\Zernio\Model\GetWhatsAppTemplate409Response',
                         $request,
                         $response,
                     );
@@ -5572,6 +5939,14 @@ class WhatsAppApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5580,10 +5955,10 @@ class WhatsAppApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
-                case 404:
+                case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\InlineObject1',
+                        '\Zernio\Model\GetWhatsAppTemplate409Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -5600,16 +5975,17 @@ class WhatsAppApi
      *
      * Get template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $language Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getWhatsAppTemplateAsync($template_name, $account_id, string $contentType = self::contentTypes['getWhatsAppTemplate'][0])
+    public function getWhatsAppTemplateAsync($template_name, $account_id, $language = null, string $contentType = self::contentTypes['getWhatsAppTemplate'][0])
     {
-        return $this->getWhatsAppTemplateAsyncWithHttpInfo($template_name, $account_id, $contentType)
+        return $this->getWhatsAppTemplateAsyncWithHttpInfo($template_name, $account_id, $language, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5622,17 +5998,18 @@ class WhatsAppApi
      *
      * Get template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $language Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getWhatsAppTemplateAsyncWithHttpInfo($template_name, $account_id, string $contentType = self::contentTypes['getWhatsAppTemplate'][0])
+    public function getWhatsAppTemplateAsyncWithHttpInfo($template_name, $account_id, $language = null, string $contentType = self::contentTypes['getWhatsAppTemplate'][0])
     {
         $returnType = '\Zernio\Model\GetWhatsAppTemplate200Response';
-        $request = $this->getWhatsAppTemplateRequest($template_name, $account_id, $contentType);
+        $request = $this->getWhatsAppTemplateRequest($template_name, $account_id, $language, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5673,14 +6050,15 @@ class WhatsAppApi
     /**
      * Create request for operation 'getWhatsAppTemplate'
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $language Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getWhatsAppTemplateRequest($template_name, $account_id, string $contentType = self::contentTypes['getWhatsAppTemplate'][0])
+    public function getWhatsAppTemplateRequest($template_name, $account_id, $language = null, string $contentType = self::contentTypes['getWhatsAppTemplate'][0])
     {
 
         // verify the required parameter 'template_name' is set
@@ -5698,6 +6076,7 @@ class WhatsAppApi
         }
 
 
+
         $resourcePath = '/v1/whatsapp/templates/{templateName}';
         $formParams = [];
         $queryParams = [];
@@ -5713,6 +6092,15 @@ class WhatsAppApi
             'form', // style
             true, // explode
             true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $language,
+            'language', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
         ) ?? []);
 
 
@@ -5784,20 +6172,344 @@ class WhatsAppApi
     }
 
     /**
+     * Operation getWhatsAppTemplateById
+     *
+     * Get template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\GetWhatsAppTemplate200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
+     */
+    public function getWhatsAppTemplateById($template_id, $account_id, string $contentType = self::contentTypes['getWhatsAppTemplateById'][0])
+    {
+        list($response) = $this->getWhatsAppTemplateByIdWithHttpInfo($template_id, $account_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getWhatsAppTemplateByIdWithHttpInfo
+     *
+     * Get template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\GetWhatsAppTemplate200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getWhatsAppTemplateByIdWithHttpInfo($template_id, $account_id, string $contentType = self::contentTypes['getWhatsAppTemplateById'][0])
+    {
+        $request = $this->getWhatsAppTemplateByIdRequest($template_id, $account_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GetWhatsAppTemplate200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\GetWhatsAppTemplate200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GetWhatsAppTemplate200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getWhatsAppTemplateByIdAsync
+     *
+     * Get template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getWhatsAppTemplateByIdAsync($template_id, $account_id, string $contentType = self::contentTypes['getWhatsAppTemplateById'][0])
+    {
+        return $this->getWhatsAppTemplateByIdAsyncWithHttpInfo($template_id, $account_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getWhatsAppTemplateByIdAsyncWithHttpInfo
+     *
+     * Get template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getWhatsAppTemplateByIdAsyncWithHttpInfo($template_id, $account_id, string $contentType = self::contentTypes['getWhatsAppTemplateById'][0])
+    {
+        $returnType = '\Zernio\Model\GetWhatsAppTemplate200Response';
+        $request = $this->getWhatsAppTemplateByIdRequest($template_id, $account_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getWhatsAppTemplateById'
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getWhatsAppTemplateByIdRequest($template_id, $account_id, string $contentType = self::contentTypes['getWhatsAppTemplateById'][0])
+    {
+
+        // verify the required parameter 'template_id' is set
+        if ($template_id === null || (is_array($template_id) && count($template_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $template_id when calling getWhatsAppTemplateById'
+            );
+        }
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling getWhatsAppTemplateById'
+            );
+        }
+
+
+        $resourcePath = '/v1/whatsapp/templates/id/{templateId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $account_id,
+            'accountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+
+
+        // path params
+        if ($template_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'templateId' . '}',
+                ObjectSerializer::toPathValue($template_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getWhatsAppTemplates
      *
      * List templates
      *
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $name Exact template name; returns every language variant of that family. (optional)
+     * @param  string|null $language Exact language code (e.g. en_US). (optional)
+     * @param  string|null $status status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplates'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\GetWhatsAppTemplates200Response|\Zernio\Model\InlineObject
      */
-    public function getWhatsAppTemplates($account_id, string $contentType = self::contentTypes['getWhatsAppTemplates'][0])
+    public function getWhatsAppTemplates($account_id, $name = null, $language = null, $status = null, string $contentType = self::contentTypes['getWhatsAppTemplates'][0])
     {
-        list($response) = $this->getWhatsAppTemplatesWithHttpInfo($account_id, $contentType);
+        list($response) = $this->getWhatsAppTemplatesWithHttpInfo($account_id, $name, $language, $status, $contentType);
         return $response;
     }
 
@@ -5807,15 +6519,18 @@ class WhatsAppApi
      * List templates
      *
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $name Exact template name; returns every language variant of that family. (optional)
+     * @param  string|null $language Exact language code (e.g. en_US). (optional)
+     * @param  string|null $status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplates'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\GetWhatsAppTemplates200Response|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getWhatsAppTemplatesWithHttpInfo($account_id, string $contentType = self::contentTypes['getWhatsAppTemplates'][0])
+    public function getWhatsAppTemplatesWithHttpInfo($account_id, $name = null, $language = null, $status = null, string $contentType = self::contentTypes['getWhatsAppTemplates'][0])
     {
-        $request = $this->getWhatsAppTemplatesRequest($account_id, $contentType);
+        $request = $this->getWhatsAppTemplatesRequest($account_id, $name, $language, $status, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5906,14 +6621,17 @@ class WhatsAppApi
      * List templates
      *
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $name Exact template name; returns every language variant of that family. (optional)
+     * @param  string|null $language Exact language code (e.g. en_US). (optional)
+     * @param  string|null $status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getWhatsAppTemplatesAsync($account_id, string $contentType = self::contentTypes['getWhatsAppTemplates'][0])
+    public function getWhatsAppTemplatesAsync($account_id, $name = null, $language = null, $status = null, string $contentType = self::contentTypes['getWhatsAppTemplates'][0])
     {
-        return $this->getWhatsAppTemplatesAsyncWithHttpInfo($account_id, $contentType)
+        return $this->getWhatsAppTemplatesAsyncWithHttpInfo($account_id, $name, $language, $status, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5927,15 +6645,18 @@ class WhatsAppApi
      * List templates
      *
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $name Exact template name; returns every language variant of that family. (optional)
+     * @param  string|null $language Exact language code (e.g. en_US). (optional)
+     * @param  string|null $status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getWhatsAppTemplatesAsyncWithHttpInfo($account_id, string $contentType = self::contentTypes['getWhatsAppTemplates'][0])
+    public function getWhatsAppTemplatesAsyncWithHttpInfo($account_id, $name = null, $language = null, $status = null, string $contentType = self::contentTypes['getWhatsAppTemplates'][0])
     {
         $returnType = '\Zernio\Model\GetWhatsAppTemplates200Response';
-        $request = $this->getWhatsAppTemplatesRequest($account_id, $contentType);
+        $request = $this->getWhatsAppTemplatesRequest($account_id, $name, $language, $status, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5977,12 +6698,15 @@ class WhatsAppApi
      * Create request for operation 'getWhatsAppTemplates'
      *
      * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string|null $name Exact template name; returns every language variant of that family. (optional)
+     * @param  string|null $language Exact language code (e.g. en_US). (optional)
+     * @param  string|null $status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppTemplates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getWhatsAppTemplatesRequest($account_id, string $contentType = self::contentTypes['getWhatsAppTemplates'][0])
+    public function getWhatsAppTemplatesRequest($account_id, $name = null, $language = null, $status = null, string $contentType = self::contentTypes['getWhatsAppTemplates'][0])
     {
 
         // verify the required parameter 'account_id' is set
@@ -5991,6 +6715,9 @@ class WhatsAppApi
                 'Missing the required parameter $account_id when calling getWhatsAppTemplates'
             );
         }
+
+
+
 
 
         $resourcePath = '/v1/whatsapp/templates';
@@ -6008,6 +6735,33 @@ class WhatsAppApi
             'form', // style
             true, // explode
             true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $name,
+            'name', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $language,
+            'language', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
         ) ?? []);
 
 
@@ -10692,13 +11446,13 @@ class WhatsAppApi
      *
      * Update template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  \Zernio\Model\UpdateWhatsAppTemplateRequest $update_whats_app_template_request update_whats_app_template_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\UpdateWhatsAppTemplate200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
+     * @return \Zernio\Model\UpdateWhatsAppTemplate200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetWhatsAppTemplate409Response
      */
     public function updateWhatsAppTemplate($template_name, $update_whats_app_template_request, string $contentType = self::contentTypes['updateWhatsAppTemplate'][0])
     {
@@ -10711,13 +11465,13 @@ class WhatsAppApi
      *
      * Update template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  \Zernio\Model\UpdateWhatsAppTemplateRequest $update_whats_app_template_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWhatsAppTemplate'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\UpdateWhatsAppTemplate200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\UpdateWhatsAppTemplate200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetWhatsAppTemplate409Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateWhatsAppTemplateWithHttpInfo($template_name, $update_whats_app_template_request, string $contentType = self::contentTypes['updateWhatsAppTemplate'][0])
     {
@@ -10753,15 +11507,21 @@ class WhatsAppApi
                         $request,
                         $response,
                     );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
                 case 401:
                     return $this->handleResponseWithDataType(
                         '\Zernio\Model\InlineObject',
                         $request,
                         $response,
                     );
-                case 404:
+                case 409:
                     return $this->handleResponseWithDataType(
-                        '\Zernio\Model\InlineObject1',
+                        '\Zernio\Model\GetWhatsAppTemplate409Response',
                         $request,
                         $response,
                     );
@@ -10797,6 +11557,14 @@ class WhatsAppApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10805,10 +11573,10 @@ class WhatsAppApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
-                case 404:
+                case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Zernio\Model\InlineObject1',
+                        '\Zernio\Model\GetWhatsAppTemplate409Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -10825,7 +11593,7 @@ class WhatsAppApi
      *
      * Update template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  \Zernio\Model\UpdateWhatsAppTemplateRequest $update_whats_app_template_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWhatsAppTemplate'] to see the possible values for this operation
      *
@@ -10847,7 +11615,7 @@ class WhatsAppApi
      *
      * Update template
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  \Zernio\Model\UpdateWhatsAppTemplateRequest $update_whats_app_template_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWhatsAppTemplate'] to see the possible values for this operation
      *
@@ -10898,7 +11666,7 @@ class WhatsAppApi
     /**
      * Create request for operation 'updateWhatsAppTemplate'
      *
-     * @param  string $template_name Template name (required)
+     * @param  string $template_name Template name (the family). (required)
      * @param  \Zernio\Model\UpdateWhatsAppTemplateRequest $update_whats_app_template_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWhatsAppTemplate'] to see the possible values for this operation
      *
@@ -10955,6 +11723,325 @@ class WhatsAppApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_whats_app_template_request));
             } else {
                 $httpBody = $update_whats_app_template_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PATCH',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation updateWhatsAppTemplateById
+     *
+     * Update template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  \Zernio\Model\UpdateWhatsAppTemplateByIdRequest $update_whats_app_template_by_id_request update_whats_app_template_by_id_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\UpdateWhatsAppTemplateById200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject
+     */
+    public function updateWhatsAppTemplateById($template_id, $update_whats_app_template_by_id_request, string $contentType = self::contentTypes['updateWhatsAppTemplateById'][0])
+    {
+        list($response) = $this->updateWhatsAppTemplateByIdWithHttpInfo($template_id, $update_whats_app_template_by_id_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation updateWhatsAppTemplateByIdWithHttpInfo
+     *
+     * Update template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  \Zernio\Model\UpdateWhatsAppTemplateByIdRequest $update_whats_app_template_by_id_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\UpdateWhatsAppTemplateById200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateWhatsAppTemplateByIdWithHttpInfo($template_id, $update_whats_app_template_by_id_request, string $contentType = self::contentTypes['updateWhatsAppTemplateById'][0])
+    {
+        $request = $this->updateWhatsAppTemplateByIdRequest($template_id, $update_whats_app_template_by_id_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\UpdateWhatsAppTemplateById200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\UpdateWhatsAppTemplateById200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\UpdateWhatsAppTemplateById200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateWhatsAppTemplateByIdAsync
+     *
+     * Update template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  \Zernio\Model\UpdateWhatsAppTemplateByIdRequest $update_whats_app_template_by_id_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateWhatsAppTemplateByIdAsync($template_id, $update_whats_app_template_by_id_request, string $contentType = self::contentTypes['updateWhatsAppTemplateById'][0])
+    {
+        return $this->updateWhatsAppTemplateByIdAsyncWithHttpInfo($template_id, $update_whats_app_template_by_id_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateWhatsAppTemplateByIdAsyncWithHttpInfo
+     *
+     * Update template by id
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  \Zernio\Model\UpdateWhatsAppTemplateByIdRequest $update_whats_app_template_by_id_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateWhatsAppTemplateByIdAsyncWithHttpInfo($template_id, $update_whats_app_template_by_id_request, string $contentType = self::contentTypes['updateWhatsAppTemplateById'][0])
+    {
+        $returnType = '\Zernio\Model\UpdateWhatsAppTemplateById200Response';
+        $request = $this->updateWhatsAppTemplateByIdRequest($template_id, $update_whats_app_template_by_id_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateWhatsAppTemplateById'
+     *
+     * @param  string $template_id Meta template id (numeric). (required)
+     * @param  \Zernio\Model\UpdateWhatsAppTemplateByIdRequest $update_whats_app_template_by_id_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWhatsAppTemplateById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function updateWhatsAppTemplateByIdRequest($template_id, $update_whats_app_template_by_id_request, string $contentType = self::contentTypes['updateWhatsAppTemplateById'][0])
+    {
+
+        // verify the required parameter 'template_id' is set
+        if ($template_id === null || (is_array($template_id) && count($template_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $template_id when calling updateWhatsAppTemplateById'
+            );
+        }
+
+        // verify the required parameter 'update_whats_app_template_by_id_request' is set
+        if ($update_whats_app_template_by_id_request === null || (is_array($update_whats_app_template_by_id_request) && count($update_whats_app_template_by_id_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $update_whats_app_template_by_id_request when calling updateWhatsAppTemplateById'
+            );
+        }
+
+
+        $resourcePath = '/v1/whatsapp/templates/id/{templateId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($template_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'templateId' . '}',
+                ObjectSerializer::toPathValue($template_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($update_whats_app_template_by_id_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_whats_app_template_by_id_request));
+            } else {
+                $httpBody = $update_whats_app_template_by_id_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

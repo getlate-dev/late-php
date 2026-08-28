@@ -59,6 +59,7 @@ class UpdateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
       */
     protected static $openAPITypes = [
         'account_id' => 'string',
+        'language' => 'string',
         'components' => '\Zernio\Model\WhatsAppTemplateComponent[]'
     ];
 
@@ -71,6 +72,7 @@ class UpdateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
       */
     protected static $openAPIFormats = [
         'account_id' => null,
+        'language' => null,
         'components' => null
     ];
 
@@ -81,6 +83,7 @@ class UpdateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
       */
     protected static array $openAPINullables = [
         'account_id' => false,
+        'language' => false,
         'components' => false
     ];
 
@@ -171,6 +174,7 @@ class UpdateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $attributeMap = [
         'account_id' => 'accountId',
+        'language' => 'language',
         'components' => 'components'
     ];
 
@@ -181,6 +185,7 @@ class UpdateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $setters = [
         'account_id' => 'setAccountId',
+        'language' => 'setLanguage',
         'components' => 'setComponents'
     ];
 
@@ -191,6 +196,7 @@ class UpdateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $getters = [
         'account_id' => 'getAccountId',
+        'language' => 'getLanguage',
         'components' => 'getComponents'
     ];
 
@@ -252,6 +258,7 @@ class UpdateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
     public function __construct(?array $data = null)
     {
         $this->setIfExists('account_id', $data ?? [], null);
+        $this->setIfExists('language', $data ?? [], null);
         $this->setIfExists('components', $data ?? [], null);
     }
 
@@ -330,6 +337,33 @@ class UpdateWhatsAppTemplateRequest implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable account_id cannot be null');
         }
         $this->container['account_id'] = $account_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets language
+     *
+     * @return string|null
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     *
+     * @param string|null $language Language code of the variant to edit (e.g. en_US, es, pt_BR). Required when the family has several languages. Body only: a language query parameter on PATCH is a 400.
+     *
+     * @return self
+     */
+    public function setLanguage($language)
+    {
+        if (is_null($language)) {
+            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        }
+        $this->container['language'] = $language;
 
         return $this;
     }

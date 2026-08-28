@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateWhatsAppTemplate200ResponseTemplate
+ * UpdateWhatsAppTemplateById200ResponseTemplate
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * UpdateWhatsAppTemplate200ResponseTemplate Class Doc Comment
+ * UpdateWhatsAppTemplateById200ResponseTemplate Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateWhatsAppTemplateById200ResponseTemplate implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       *
       * @var string
       */
-    protected static $openAPIModelName = 'updateWhatsAppTemplate_200_response_template';
+    protected static $openAPIModelName = 'updateWhatsAppTemplateById_200_response_template';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -324,7 +324,7 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
     /**
      * Sets id
      *
-     * @param string|null $id Meta id of the edited variant.
+     * @param string|null $id id
      *
      * @return self
      */
@@ -378,7 +378,7 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
     /**
      * Sets language
      *
-     * @param string|null $language The variant that was edited.
+     * @param string|null $language language
      *
      * @return self
      */

@@ -15,6 +15,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**createWhatsAppTemplate()**](WhatsAppApi.md#createWhatsAppTemplate) | **POST** /v1/whatsapp/templates | Create template |
 | [**deleteWhatsAppGroupChat()**](WhatsAppApi.md#deleteWhatsAppGroupChat) | **DELETE** /v1/whatsapp/wa-groups/{groupId} | Delete group |
 | [**deleteWhatsAppTemplate()**](WhatsAppApi.md#deleteWhatsAppTemplate) | **DELETE** /v1/whatsapp/templates/{templateName} | Delete template |
+| [**deleteWhatsAppTemplateById()**](WhatsAppApi.md#deleteWhatsAppTemplateById) | **DELETE** /v1/whatsapp/templates/id/{templateId} | Delete template by id |
 | [**deleteWhatsappBusinessUsername()**](WhatsAppApi.md#deleteWhatsappBusinessUsername) | **DELETE** /v1/whatsapp/business-profile/username | Delete business username |
 | [**getWhatsAppBlockStatus()**](WhatsAppApi.md#getWhatsAppBlockStatus) | **GET** /v1/whatsapp/block-users/status | Check if a user is blocked |
 | [**getWhatsAppBlockedUsers()**](WhatsAppApi.md#getWhatsAppBlockedUsers) | **GET** /v1/whatsapp/block-users | List blocked users |
@@ -24,6 +25,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**getWhatsAppGroupChat()**](WhatsAppApi.md#getWhatsAppGroupChat) | **GET** /v1/whatsapp/wa-groups/{groupId} | Get group info |
 | [**getWhatsAppMedia()**](WhatsAppApi.md#getWhatsAppMedia) | **GET** /v1/whatsapp/media/{mediaId} | Download WhatsApp media |
 | [**getWhatsAppTemplate()**](WhatsAppApi.md#getWhatsAppTemplate) | **GET** /v1/whatsapp/templates/{templateName} | Get template |
+| [**getWhatsAppTemplateById()**](WhatsAppApi.md#getWhatsAppTemplateById) | **GET** /v1/whatsapp/templates/id/{templateId} | Get template by id |
 | [**getWhatsAppTemplates()**](WhatsAppApi.md#getWhatsAppTemplates) | **GET** /v1/whatsapp/templates | List templates |
 | [**getWhatsappBusinessUsername()**](WhatsAppApi.md#getWhatsappBusinessUsername) | **GET** /v1/whatsapp/business-profile/username | Get business username |
 | [**getWhatsappBusinessUsernameSuggestions()**](WhatsAppApi.md#getWhatsappBusinessUsernameSuggestions) | **GET** /v1/whatsapp/business-profile/username/suggestions | Get username suggestions |
@@ -41,6 +43,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**updateWhatsAppDisplayName()**](WhatsAppApi.md#updateWhatsAppDisplayName) | **POST** /v1/whatsapp/business-profile/display-name | Request display name change |
 | [**updateWhatsAppGroupChat()**](WhatsAppApi.md#updateWhatsAppGroupChat) | **POST** /v1/whatsapp/wa-groups/{groupId} | Update group settings |
 | [**updateWhatsAppTemplate()**](WhatsAppApi.md#updateWhatsAppTemplate) | **PATCH** /v1/whatsapp/templates/{templateName} | Update template |
+| [**updateWhatsAppTemplateById()**](WhatsAppApi.md#updateWhatsAppTemplateById) | **PATCH** /v1/whatsapp/templates/id/{templateId} | Update template by id |
 | [**uploadWhatsAppProfilePhoto()**](WhatsAppApi.md#uploadWhatsAppProfilePhoto) | **POST** /v1/whatsapp/business-profile/photo | Upload profile picture |
 
 
@@ -539,12 +542,12 @@ try {
 ## `deleteWhatsAppTemplate()`
 
 ```php
-deleteWhatsAppTemplate($template_name, $account_id): \Zernio\Model\UnpublishPost200Response
+deleteWhatsAppTemplate($template_name, $account_id, $language): \Zernio\Model\DeleteWhatsAppTemplate200Response
 ```
 
 Delete template
 
-Permanently delete a message template by name.
+Permanently delete a message template.  **Without `language` this deletes every language variant of the name** (Meta's own contract for deletion by name). Pass `language` to delete one variant only; the response `scope` says which happened. Meta keeps a deleted approved template in `PENDING_DELETION` for a while and the name cannot be reused for 30 days.
 
 ### Example
 
@@ -563,11 +566,12 @@ $apiInstance = new Zernio\Api\WhatsAppApi(
     new GuzzleHttp\Client(),
     $config
 );
-$template_name = 'template_name_example'; // string | Template name
+$template_name = 'template_name_example'; // string | Template name (the family).
 $account_id = 'account_id_example'; // string | WhatsApp social account ID
+$language = 'language_example'; // string | Delete only this language variant (e.g. es). Omit to delete the whole family.
 
 try {
-    $result = $apiInstance->deleteWhatsAppTemplate($template_name, $account_id);
+    $result = $apiInstance->deleteWhatsAppTemplate($template_name, $account_id, $language);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling WhatsAppApi->deleteWhatsAppTemplate: ', $e->getMessage(), PHP_EOL;
@@ -578,12 +582,75 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **template_name** | **string**| Template name | |
+| **template_name** | **string**| Template name (the family). | |
+| **account_id** | **string**| WhatsApp social account ID | |
+| **language** | **string**| Delete only this language variant (e.g. es). Omit to delete the whole family. | [optional] |
+
+### Return type
+
+[**\Zernio\Model\DeleteWhatsAppTemplate200Response**](../Model/DeleteWhatsAppTemplate200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteWhatsAppTemplateById()`
+
+```php
+deleteWhatsAppTemplateById($template_id, $account_id): \Zernio\Model\DeleteWhatsAppTemplateById200Response
+```
+
+Delete template by id
+
+Delete one language variant by its Meta id. Other languages of the same name are untouched. The name cannot be reused for 30 days once its last variant is deleted.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\WhatsAppApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$template_id = 'template_id_example'; // string | Meta template id (numeric).
+$account_id = 'account_id_example'; // string | WhatsApp social account ID
+
+try {
+    $result = $apiInstance->deleteWhatsAppTemplateById($template_id, $account_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WhatsAppApi->deleteWhatsAppTemplateById: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **template_id** | **string**| Meta template id (numeric). | |
 | **account_id** | **string**| WhatsApp social account ID | |
 
 ### Return type
 
-[**\Zernio\Model\UnpublishPost200Response**](../Model/UnpublishPost200Response.md)
+[**\Zernio\Model\DeleteWhatsAppTemplateById200Response**](../Model/DeleteWhatsAppTemplateById200Response.md)
 
 ### Authorization
 
@@ -1091,12 +1158,12 @@ try {
 ## `getWhatsAppTemplate()`
 
 ```php
-getWhatsAppTemplate($template_name, $account_id): \Zernio\Model\GetWhatsAppTemplate200Response
+getWhatsAppTemplate($template_name, $account_id, $language): \Zernio\Model\GetWhatsAppTemplate200Response
 ```
 
 Get template
 
-Retrieve a single message template by name.
+Retrieve one message template variant by name.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass `language` to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns `409 ambiguous_template` with `details.languages`. A bare language (`es`) matches a single regional variant (`es_ES`); if the family has several regional variants for it, that is also a 409. A full code (`es_ES`) must match exactly. Variants in `PENDING_DELETION` are not part of the family.
 
 ### Example
 
@@ -1115,11 +1182,12 @@ $apiInstance = new Zernio\Api\WhatsAppApi(
     new GuzzleHttp\Client(),
     $config
 );
-$template_name = 'template_name_example'; // string | Template name
+$template_name = 'template_name_example'; // string | Template name (the family).
 $account_id = 'account_id_example'; // string | WhatsApp social account ID
+$language = 'language_example'; // string | Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages.
 
 try {
-    $result = $apiInstance->getWhatsAppTemplate($template_name, $account_id);
+    $result = $apiInstance->getWhatsAppTemplate($template_name, $account_id, $language);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling WhatsAppApi->getWhatsAppTemplate: ', $e->getMessage(), PHP_EOL;
@@ -1130,7 +1198,70 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **template_name** | **string**| Template name | |
+| **template_name** | **string**| Template name (the family). | |
+| **account_id** | **string**| WhatsApp social account ID | |
+| **language** | **string**| Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages. | [optional] |
+
+### Return type
+
+[**\Zernio\Model\GetWhatsAppTemplate200Response**](../Model/GetWhatsAppTemplate200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getWhatsAppTemplateById()`
+
+```php
+getWhatsAppTemplateById($template_id, $account_id): \Zernio\Model\GetWhatsAppTemplate200Response
+```
+
+Get template by id
+
+Retrieve one template variant by its Meta id, the id every variant of a family has on its own and the one the `whatsapp.template.status_updated` webhook carries.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\WhatsAppApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$template_id = 'template_id_example'; // string | Meta template id (numeric).
+$account_id = 'account_id_example'; // string | WhatsApp social account ID
+
+try {
+    $result = $apiInstance->getWhatsAppTemplateById($template_id, $account_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WhatsAppApi->getWhatsAppTemplateById: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **template_id** | **string**| Meta template id (numeric). | |
 | **account_id** | **string**| WhatsApp social account ID | |
 
 ### Return type
@@ -1153,12 +1284,12 @@ try {
 ## `getWhatsAppTemplates()`
 
 ```php
-getWhatsAppTemplates($account_id): \Zernio\Model\GetWhatsAppTemplates200Response
+getWhatsAppTemplates($account_id, $name, $language, $status): \Zernio\Model\GetWhatsAppTemplates200Response
 ```
 
 List templates
 
-List all message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API.
+List message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API. One entry per **name + language**: a multi-language template appears once per language, each with its own Meta `id`.
 
 ### Example
 
@@ -1178,9 +1309,12 @@ $apiInstance = new Zernio\Api\WhatsAppApi(
     $config
 );
 $account_id = 'account_id_example'; // string | WhatsApp social account ID
+$name = 'name_example'; // string | Exact template name; returns every language variant of that family.
+$language = 'language_example'; // string | Exact language code (e.g. en_US).
+$status = 'status_example'; // string
 
 try {
-    $result = $apiInstance->getWhatsAppTemplates($account_id);
+    $result = $apiInstance->getWhatsAppTemplates($account_id, $name, $language, $status);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling WhatsAppApi->getWhatsAppTemplates: ', $e->getMessage(), PHP_EOL;
@@ -1192,6 +1326,9 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **account_id** | **string**| WhatsApp social account ID | |
+| **name** | **string**| Exact template name; returns every language variant of that family. | [optional] |
+| **language** | **string**| Exact language code (e.g. en_US). | [optional] |
+| **status** | **string**|  | [optional] |
 
 ### Return type
 
@@ -2142,7 +2279,7 @@ updateWhatsAppTemplate($template_name, $update_whats_app_template_request): \Zer
 
 Update template
 
-Update a message template's components. Only certain fields can be updated depending on the template's current approval state. Approved templates can only have components updated.  A successful update sends the template back to Meta for review, so the `status` returned here is normally `PENDING`. The final outcome arrives later on the `whatsapp.template.status_updated` webhook. A template already in `PENDING` cannot be edited again until Meta finishes reviewing it.
+Update one variant's components. Name, language and category cannot change after creation.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass `language` to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns `409 ambiguous_template` with `details.languages`. A bare language (`es`) matches a single regional variant (`es_ES`); if the family has several regional variants for it, that is also a 409. A full code (`es_ES`) must match exactly. Variants in `PENDING_DELETION` are not part of the family.  Meta only allows editing templates in `APPROVED`, `REJECTED` or `PAUSED` state; an approved template can be edited once per 24 hours and up to 10 times per 30 days. A successful update sends the variant back to Meta for review, so the `status` returned here is normally `PENDING`. The final outcome arrives on the `whatsapp.template.status_updated` webhook (which carries the variant's `templateId` and `language`). A variant already in `PENDING` cannot be edited again until Meta finishes reviewing it.
 
 ### Example
 
@@ -2161,8 +2298,8 @@ $apiInstance = new Zernio\Api\WhatsAppApi(
     new GuzzleHttp\Client(),
     $config
 );
-$template_name = 'template_name_example'; // string | Template name
-$update_whats_app_template_request = {"accountId":"507f1f77bcf86cd799439011","components":[{"type":"body","text":"Updated: Your order {{1}} is confirmed. Delivery by {{2}}","example":{"body_text":[["ORD-12345","April 1"]]}},{"type":"buttons","buttons":[{"type":"quick_reply","text":"Track Order"}]}]}; // \Zernio\Model\UpdateWhatsAppTemplateRequest
+$template_name = 'template_name_example'; // string | Template name (the family).
+$update_whats_app_template_request = {"accountId":"507f1f77bcf86cd799439011","language":"es","components":[{"type":"body","text":"Actualizado: tu pedido {{1}} está confirmado. Entrega el {{2}}","example":{"body_text":[["ORD-12345","1 de abril"]]}},{"type":"buttons","buttons":[{"type":"quick_reply","text":"Seguir pedido"}]}]}; // \Zernio\Model\UpdateWhatsAppTemplateRequest
 
 try {
     $result = $apiInstance->updateWhatsAppTemplate($template_name, $update_whats_app_template_request);
@@ -2176,12 +2313,74 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **template_name** | **string**| Template name | |
+| **template_name** | **string**| Template name (the family). | |
 | **update_whats_app_template_request** | [**\Zernio\Model\UpdateWhatsAppTemplateRequest**](../Model/UpdateWhatsAppTemplateRequest.md)|  | |
 
 ### Return type
 
 [**\Zernio\Model\UpdateWhatsAppTemplate200Response**](../Model/UpdateWhatsAppTemplate200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateWhatsAppTemplateById()`
+
+```php
+updateWhatsAppTemplateById($template_id, $update_whats_app_template_by_id_request): \Zernio\Model\UpdateWhatsAppTemplateById200Response
+```
+
+Update template by id
+
+Update one variant's components by its Meta id. Name, language and category cannot change.  Meta only allows editing templates in `APPROVED`, `REJECTED` or `PAUSED` state; an approved template can be edited once per 24 hours and up to 10 times per 30 days. A successful update sends the variant back to Meta for review, so the `status` returned here is normally `PENDING`. The final outcome arrives on the `whatsapp.template.status_updated` webhook (which carries the variant's `templateId` and `language`). A variant already in `PENDING` cannot be edited again until Meta finishes reviewing it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\WhatsAppApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$template_id = 'template_id_example'; // string | Meta template id (numeric).
+$update_whats_app_template_by_id_request = new \Zernio\Model\UpdateWhatsAppTemplateByIdRequest(); // \Zernio\Model\UpdateWhatsAppTemplateByIdRequest
+
+try {
+    $result = $apiInstance->updateWhatsAppTemplateById($template_id, $update_whats_app_template_by_id_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WhatsAppApi->updateWhatsAppTemplateById: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **template_id** | **string**| Meta template id (numeric). | |
+| **update_whats_app_template_by_id_request** | [**\Zernio\Model\UpdateWhatsAppTemplateByIdRequest**](../Model/UpdateWhatsAppTemplateByIdRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\UpdateWhatsAppTemplateById200Response**](../Model/UpdateWhatsAppTemplateById200Response.md)
 
 ### Authorization
 

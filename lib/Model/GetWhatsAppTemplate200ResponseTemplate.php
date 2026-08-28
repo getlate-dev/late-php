@@ -63,7 +63,9 @@ class GetWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAcc
         'status' => 'string',
         'category' => 'string',
         'language' => 'string',
-        'components' => 'object[]'
+        'components' => 'object[]',
+        'rejected_reason' => 'string',
+        'quality_score' => 'object'
     ];
 
     /**
@@ -79,7 +81,9 @@ class GetWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAcc
         'status' => null,
         'category' => null,
         'language' => null,
-        'components' => null
+        'components' => null,
+        'rejected_reason' => null,
+        'quality_score' => null
     ];
 
     /**
@@ -93,7 +97,9 @@ class GetWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAcc
         'status' => false,
         'category' => false,
         'language' => false,
-        'components' => false
+        'components' => false,
+        'rejected_reason' => false,
+        'quality_score' => false
     ];
 
     /**
@@ -187,7 +193,9 @@ class GetWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAcc
         'status' => 'status',
         'category' => 'category',
         'language' => 'language',
-        'components' => 'components'
+        'components' => 'components',
+        'rejected_reason' => 'rejected_reason',
+        'quality_score' => 'quality_score'
     ];
 
     /**
@@ -201,7 +209,9 @@ class GetWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAcc
         'status' => 'setStatus',
         'category' => 'setCategory',
         'language' => 'setLanguage',
-        'components' => 'setComponents'
+        'components' => 'setComponents',
+        'rejected_reason' => 'setRejectedReason',
+        'quality_score' => 'setQualityScore'
     ];
 
     /**
@@ -215,7 +225,9 @@ class GetWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAcc
         'status' => 'getStatus',
         'category' => 'getCategory',
         'language' => 'getLanguage',
-        'components' => 'getComponents'
+        'components' => 'getComponents',
+        'rejected_reason' => 'getRejectedReason',
+        'quality_score' => 'getQualityScore'
     ];
 
     /**
@@ -281,6 +293,8 @@ class GetWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAcc
         $this->setIfExists('category', $data ?? [], null);
         $this->setIfExists('language', $data ?? [], null);
         $this->setIfExists('components', $data ?? [], null);
+        $this->setIfExists('rejected_reason', $data ?? [], null);
+        $this->setIfExists('quality_score', $data ?? [], null);
     }
 
     /**
@@ -338,7 +352,7 @@ class GetWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAcc
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id Meta template id. Unique per language variant; usable on /v1/whatsapp/templates/id/{templateId}.
      *
      * @return self
      */
@@ -446,7 +460,7 @@ class GetWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAcc
     /**
      * Sets language
      *
-     * @param string|null $language language
+     * @param string|null $language The variant actually returned.
      *
      * @return self
      */
@@ -483,6 +497,60 @@ class GetWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAcc
             throw new \InvalidArgumentException('non-nullable components cannot be null');
         }
         $this->container['components'] = $components;
+
+        return $this;
+    }
+
+    /**
+     * Gets rejected_reason
+     *
+     * @return string|null
+     */
+    public function getRejectedReason()
+    {
+        return $this->container['rejected_reason'];
+    }
+
+    /**
+     * Sets rejected_reason
+     *
+     * @param string|null $rejected_reason Only when status is REJECTED.
+     *
+     * @return self
+     */
+    public function setRejectedReason($rejected_reason)
+    {
+        if (is_null($rejected_reason)) {
+            throw new \InvalidArgumentException('non-nullable rejected_reason cannot be null');
+        }
+        $this->container['rejected_reason'] = $rejected_reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets quality_score
+     *
+     * @return object|null
+     */
+    public function getQualityScore()
+    {
+        return $this->container['quality_score'];
+    }
+
+    /**
+     * Sets quality_score
+     *
+     * @param object|null $quality_score Post-approval quality (GREEN/YELLOW/RED), when Meta reports one.
+     *
+     * @return self
+     */
+    public function setQualityScore($quality_score)
+    {
+        if (is_null($quality_score)) {
+            throw new \InvalidArgumentException('non-nullable quality_score cannot be null');
+        }
+        $this->container['quality_score'] = $quality_score;
 
         return $this;
     }

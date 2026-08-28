@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateWhatsAppTemplate200ResponseTemplate
+ * UpdateWhatsAppTemplateById200Response
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * UpdateWhatsAppTemplate200ResponseTemplate Class Doc Comment
+ * UpdateWhatsAppTemplateById200Response Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateWhatsAppTemplateById200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       *
       * @var string
       */
-    protected static $openAPIModelName = 'updateWhatsAppTemplate_200_response_template';
+    protected static $openAPIModelName = 'updateWhatsAppTemplateById_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +58,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'name' => 'string',
-        'language' => 'string',
-        'status' => 'string'
+        'success' => 'bool',
+        'template' => '\Zernio\Model\UpdateWhatsAppTemplateById200ResponseTemplate'
     ];
 
     /**
@@ -72,10 +70,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'name' => null,
-        'language' => null,
-        'status' => null
+        'success' => null,
+        'template' => null
     ];
 
     /**
@@ -84,10 +80,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'name' => false,
-        'language' => false,
-        'status' => false
+        'success' => false,
+        'template' => false
     ];
 
     /**
@@ -176,10 +170,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'name' => 'name',
-        'language' => 'language',
-        'status' => 'status'
+        'success' => 'success',
+        'template' => 'template'
     ];
 
     /**
@@ -188,10 +180,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'name' => 'setName',
-        'language' => 'setLanguage',
-        'status' => 'setStatus'
+        'success' => 'setSuccess',
+        'template' => 'setTemplate'
     ];
 
     /**
@@ -200,10 +190,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'name' => 'getName',
-        'language' => 'getLanguage',
-        'status' => 'getStatus'
+        'success' => 'getSuccess',
+        'template' => 'getTemplate'
     ];
 
     /**
@@ -263,10 +251,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('language', $data ?? [], null);
-        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('success', $data ?? [], null);
+        $this->setIfExists('template', $data ?? [], null);
     }
 
     /**
@@ -312,109 +298,55 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
 
 
     /**
-     * Gets id
+     * Gets success
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getId()
+    public function getSuccess()
     {
-        return $this->container['id'];
+        return $this->container['success'];
     }
 
     /**
-     * Sets id
+     * Sets success
      *
-     * @param string|null $id Meta id of the edited variant.
+     * @param bool|null $success success
      *
      * @return self
      */
-    public function setId($id)
+    public function setSuccess($success)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($success)) {
+            throw new \InvalidArgumentException('non-nullable success cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['success'] = $success;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets template
      *
-     * @return string|null
+     * @return \Zernio\Model\UpdateWhatsAppTemplateById200ResponseTemplate|null
      */
-    public function getName()
+    public function getTemplate()
     {
-        return $this->container['name'];
+        return $this->container['template'];
     }
 
     /**
-     * Sets name
+     * Sets template
      *
-     * @param string|null $name name
+     * @param \Zernio\Model\UpdateWhatsAppTemplateById200ResponseTemplate|null $template template
      *
      * @return self
      */
-    public function setName($name)
+    public function setTemplate($template)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($template)) {
+            throw new \InvalidArgumentException('non-nullable template cannot be null');
         }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets language
-     *
-     * @return string|null
-     */
-    public function getLanguage()
-    {
-        return $this->container['language'];
-    }
-
-    /**
-     * Sets language
-     *
-     * @param string|null $language The variant that was edited.
-     *
-     * @return self
-     */
-    public function setLanguage($language)
-    {
-        if (is_null($language)) {
-            throw new \InvalidArgumentException('non-nullable language cannot be null');
-        }
-        $this->container['language'] = $language;
-
-        return $this;
-    }
-
-    /**
-     * Gets status
-     *
-     * @return string|null
-     */
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    /**
-     * Sets status
-     *
-     * @param string|null $status Approval state read back from Meta after the update, normally PENDING. If the state cannot be read back, the last known status is returned instead.
-     *
-     * @return self
-     */
-    public function setStatus($status)
-    {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
-        }
-        $this->container['status'] = $status;
+        $this->container['template'] = $template;
 
         return $this;
     }

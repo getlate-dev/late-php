@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateWhatsAppTemplate200ResponseTemplate
+ * DeleteWhatsAppTemplateById200Response
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * UpdateWhatsAppTemplate200ResponseTemplate Class Doc Comment
+ * DeleteWhatsAppTemplateById200Response Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAccess, \JsonSerializable
+class DeleteWhatsAppTemplateById200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       *
       * @var string
       */
-    protected static $openAPIModelName = 'updateWhatsAppTemplate_200_response_template';
+    protected static $openAPIModelName = 'deleteWhatsAppTemplateById_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +58,10 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'name' => 'string',
+        'success' => 'bool',
+        'scope' => 'string',
         'language' => 'string',
-        'status' => 'string'
+        'message' => 'string'
     ];
 
     /**
@@ -72,10 +72,10 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'name' => null,
+        'success' => null,
+        'scope' => null,
         'language' => null,
-        'status' => null
+        'message' => null
     ];
 
     /**
@@ -84,10 +84,10 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'name' => false,
+        'success' => false,
+        'scope' => false,
         'language' => false,
-        'status' => false
+        'message' => false
     ];
 
     /**
@@ -176,10 +176,10 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'name' => 'name',
+        'success' => 'success',
+        'scope' => 'scope',
         'language' => 'language',
-        'status' => 'status'
+        'message' => 'message'
     ];
 
     /**
@@ -188,10 +188,10 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'name' => 'setName',
+        'success' => 'setSuccess',
+        'scope' => 'setScope',
         'language' => 'setLanguage',
-        'status' => 'setStatus'
+        'message' => 'setMessage'
     ];
 
     /**
@@ -200,10 +200,10 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'name' => 'getName',
+        'success' => 'getSuccess',
+        'scope' => 'getScope',
         'language' => 'getLanguage',
-        'status' => 'getStatus'
+        'message' => 'getMessage'
     ];
 
     /**
@@ -247,6 +247,19 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
         return self::$openAPIModelName;
     }
 
+    public const SCOPE_LANGUAGE = 'language';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getScopeAllowableValues()
+    {
+        return [
+            self::SCOPE_LANGUAGE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -263,10 +276,10 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('success', $data ?? [], null);
+        $this->setIfExists('scope', $data ?? [], null);
         $this->setIfExists('language', $data ?? [], null);
-        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
     }
 
     /**
@@ -296,6 +309,15 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getScopeAllowableValues();
+        if (!is_null($this->container['scope']) && !in_array($this->container['scope'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'scope', must be one of '%s'",
+                $this->container['scope'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -312,55 +334,65 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
 
 
     /**
-     * Gets id
+     * Gets success
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getId()
+    public function getSuccess()
     {
-        return $this->container['id'];
+        return $this->container['success'];
     }
 
     /**
-     * Sets id
+     * Sets success
      *
-     * @param string|null $id Meta id of the edited variant.
+     * @param bool|null $success success
      *
      * @return self
      */
-    public function setId($id)
+    public function setSuccess($success)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($success)) {
+            throw new \InvalidArgumentException('non-nullable success cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['success'] = $success;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets scope
      *
      * @return string|null
      */
-    public function getName()
+    public function getScope()
     {
-        return $this->container['name'];
+        return $this->container['scope'];
     }
 
     /**
-     * Sets name
+     * Sets scope
      *
-     * @param string|null $name name
+     * @param string|null $scope scope
      *
      * @return self
      */
-    public function setName($name)
+    public function setScope($scope)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($scope)) {
+            throw new \InvalidArgumentException('non-nullable scope cannot be null');
         }
-        $this->container['name'] = $name;
+        $allowedValues = $this->getScopeAllowableValues();
+        if (!in_array($scope, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'scope', must be one of '%s'",
+                    $scope,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['scope'] = $scope;
 
         return $this;
     }
@@ -378,7 +410,7 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
     /**
      * Sets language
      *
-     * @param string|null $language The variant that was edited.
+     * @param string|null $language language
      *
      * @return self
      */
@@ -393,28 +425,28 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
     }
 
     /**
-     * Gets status
+     * Gets message
      *
      * @return string|null
      */
-    public function getStatus()
+    public function getMessage()
     {
-        return $this->container['status'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets status
+     * Sets message
      *
-     * @param string|null $status Approval state read back from Meta after the update, normally PENDING. If the state cannot be read back, the last known status is returned instead.
+     * @param string|null $message message
      *
      * @return self
      */
-    public function setStatus($status)
+    public function setMessage($message)
     {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        $this->container['status'] = $status;
+        $this->container['message'] = $message;
 
         return $this;
     }

@@ -1,11 +1,10 @@
-# # UpdateWhatsAppTemplateRequest
+# # UpdateWhatsAppTemplateByIdRequest
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **account_id** | **string** | WhatsApp social account ID |
-**language** | **string** | Language code of the variant to edit (e.g. en_US, es, pt_BR). Required when the family has several languages. Body only: a language query parameter on PATCH is a 400. | [optional]
 **components** | [**\Zernio\Model\WhatsAppTemplateComponent[]**](WhatsAppTemplateComponent.md) | Updated template components |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

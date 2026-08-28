@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateWhatsAppTemplate200ResponseTemplate
+ * UpdateWhatsAppTemplateByIdRequest
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * UpdateWhatsAppTemplate200ResponseTemplate Class Doc Comment
+ * UpdateWhatsAppTemplateByIdRequest Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateWhatsAppTemplateByIdRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       *
       * @var string
       */
-    protected static $openAPIModelName = 'updateWhatsAppTemplate_200_response_template';
+    protected static $openAPIModelName = 'updateWhatsAppTemplateById_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +58,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'name' => 'string',
-        'language' => 'string',
-        'status' => 'string'
+        'account_id' => 'string',
+        'components' => '\Zernio\Model\WhatsAppTemplateComponent[]'
     ];
 
     /**
@@ -72,10 +70,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'name' => null,
-        'language' => null,
-        'status' => null
+        'account_id' => null,
+        'components' => null
     ];
 
     /**
@@ -84,10 +80,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'name' => false,
-        'language' => false,
-        'status' => false
+        'account_id' => false,
+        'components' => false
     ];
 
     /**
@@ -176,10 +170,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'name' => 'name',
-        'language' => 'language',
-        'status' => 'status'
+        'account_id' => 'accountId',
+        'components' => 'components'
     ];
 
     /**
@@ -188,10 +180,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'name' => 'setName',
-        'language' => 'setLanguage',
-        'status' => 'setStatus'
+        'account_id' => 'setAccountId',
+        'components' => 'setComponents'
     ];
 
     /**
@@ -200,10 +190,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'name' => 'getName',
-        'language' => 'getLanguage',
-        'status' => 'getStatus'
+        'account_id' => 'getAccountId',
+        'components' => 'getComponents'
     ];
 
     /**
@@ -263,10 +251,8 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('language', $data ?? [], null);
-        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
+        $this->setIfExists('components', $data ?? [], null);
     }
 
     /**
@@ -296,6 +282,16 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
     {
         $invalidProperties = [];
 
+        if ($this->container['account_id'] === null) {
+            $invalidProperties[] = "'account_id' can't be null";
+        }
+        if ($this->container['components'] === null) {
+            $invalidProperties[] = "'components' can't be null";
+        }
+        if ((count($this->container['components']) < 1)) {
+            $invalidProperties[] = "invalid value for 'components', number of items must be greater than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -312,109 +308,60 @@ class UpdateWhatsAppTemplate200ResponseTemplate implements ModelInterface, Array
 
 
     /**
-     * Gets id
+     * Gets account_id
      *
-     * @return string|null
+     * @return string
      */
-    public function getId()
+    public function getAccountId()
     {
-        return $this->container['id'];
+        return $this->container['account_id'];
     }
 
     /**
-     * Sets id
+     * Sets account_id
      *
-     * @param string|null $id Meta id of the edited variant.
+     * @param string $account_id WhatsApp social account ID
      *
      * @return self
      */
-    public function setId($id)
+    public function setAccountId($account_id)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets components
      *
-     * @return string|null
+     * @return \Zernio\Model\WhatsAppTemplateComponent[]
      */
-    public function getName()
+    public function getComponents()
     {
-        return $this->container['name'];
+        return $this->container['components'];
     }
 
     /**
-     * Sets name
+     * Sets components
      *
-     * @param string|null $name name
+     * @param \Zernio\Model\WhatsAppTemplateComponent[] $components Updated template components
      *
      * @return self
      */
-    public function setName($name)
+    public function setComponents($components)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($components)) {
+            throw new \InvalidArgumentException('non-nullable components cannot be null');
         }
-        $this->container['name'] = $name;
 
-        return $this;
-    }
 
-    /**
-     * Gets language
-     *
-     * @return string|null
-     */
-    public function getLanguage()
-    {
-        return $this->container['language'];
-    }
-
-    /**
-     * Sets language
-     *
-     * @param string|null $language The variant that was edited.
-     *
-     * @return self
-     */
-    public function setLanguage($language)
-    {
-        if (is_null($language)) {
-            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        if ((count($components) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $components when calling UpdateWhatsAppTemplateByIdRequest., number of items must be greater than or equal to 1.');
         }
-        $this->container['language'] = $language;
-
-        return $this;
-    }
-
-    /**
-     * Gets status
-     *
-     * @return string|null
-     */
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    /**
-     * Sets status
-     *
-     * @param string|null $status Approval state read back from Meta after the update, normally PENDING. If the state cannot be read back, the last known status is returned instead.
-     *
-     * @return self
-     */
-    public function setStatus($status)
-    {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
-        }
-        $this->container['status'] = $status;
+        $this->container['components'] = $components;
 
         return $this;
     }

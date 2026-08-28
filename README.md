@@ -571,6 +571,7 @@ Class | Method | HTTP request | Description
 *WhatsAppApi* | [**createWhatsAppTemplate**](docs/Api/WhatsAppApi.md#createwhatsapptemplate) | **POST** /v1/whatsapp/templates | Create template
 *WhatsAppApi* | [**deleteWhatsAppGroupChat**](docs/Api/WhatsAppApi.md#deletewhatsappgroupchat) | **DELETE** /v1/whatsapp/wa-groups/{groupId} | Delete group
 *WhatsAppApi* | [**deleteWhatsAppTemplate**](docs/Api/WhatsAppApi.md#deletewhatsapptemplate) | **DELETE** /v1/whatsapp/templates/{templateName} | Delete template
+*WhatsAppApi* | [**deleteWhatsAppTemplateById**](docs/Api/WhatsAppApi.md#deletewhatsapptemplatebyid) | **DELETE** /v1/whatsapp/templates/id/{templateId} | Delete template by id
 *WhatsAppApi* | [**deleteWhatsappBusinessUsername**](docs/Api/WhatsAppApi.md#deletewhatsappbusinessusername) | **DELETE** /v1/whatsapp/business-profile/username | Delete business username
 *WhatsAppApi* | [**getWhatsAppBlockStatus**](docs/Api/WhatsAppApi.md#getwhatsappblockstatus) | **GET** /v1/whatsapp/block-users/status | Check if a user is blocked
 *WhatsAppApi* | [**getWhatsAppBlockedUsers**](docs/Api/WhatsAppApi.md#getwhatsappblockedusers) | **GET** /v1/whatsapp/block-users | List blocked users
@@ -580,6 +581,7 @@ Class | Method | HTTP request | Description
 *WhatsAppApi* | [**getWhatsAppGroupChat**](docs/Api/WhatsAppApi.md#getwhatsappgroupchat) | **GET** /v1/whatsapp/wa-groups/{groupId} | Get group info
 *WhatsAppApi* | [**getWhatsAppMedia**](docs/Api/WhatsAppApi.md#getwhatsappmedia) | **GET** /v1/whatsapp/media/{mediaId} | Download WhatsApp media
 *WhatsAppApi* | [**getWhatsAppTemplate**](docs/Api/WhatsAppApi.md#getwhatsapptemplate) | **GET** /v1/whatsapp/templates/{templateName} | Get template
+*WhatsAppApi* | [**getWhatsAppTemplateById**](docs/Api/WhatsAppApi.md#getwhatsapptemplatebyid) | **GET** /v1/whatsapp/templates/id/{templateId} | Get template by id
 *WhatsAppApi* | [**getWhatsAppTemplates**](docs/Api/WhatsAppApi.md#getwhatsapptemplates) | **GET** /v1/whatsapp/templates | List templates
 *WhatsAppApi* | [**getWhatsappBusinessUsername**](docs/Api/WhatsAppApi.md#getwhatsappbusinessusername) | **GET** /v1/whatsapp/business-profile/username | Get business username
 *WhatsAppApi* | [**getWhatsappBusinessUsernameSuggestions**](docs/Api/WhatsAppApi.md#getwhatsappbusinessusernamesuggestions) | **GET** /v1/whatsapp/business-profile/username/suggestions | Get username suggestions
@@ -597,6 +599,7 @@ Class | Method | HTTP request | Description
 *WhatsAppApi* | [**updateWhatsAppDisplayName**](docs/Api/WhatsAppApi.md#updatewhatsappdisplayname) | **POST** /v1/whatsapp/business-profile/display-name | Request display name change
 *WhatsAppApi* | [**updateWhatsAppGroupChat**](docs/Api/WhatsAppApi.md#updatewhatsappgroupchat) | **POST** /v1/whatsapp/wa-groups/{groupId} | Update group settings
 *WhatsAppApi* | [**updateWhatsAppTemplate**](docs/Api/WhatsAppApi.md#updatewhatsapptemplate) | **PATCH** /v1/whatsapp/templates/{templateName} | Update template
+*WhatsAppApi* | [**updateWhatsAppTemplateById**](docs/Api/WhatsAppApi.md#updatewhatsapptemplatebyid) | **PATCH** /v1/whatsapp/templates/id/{templateId} | Update template by id
 *WhatsAppApi* | [**uploadWhatsAppProfilePhoto**](docs/Api/WhatsAppApi.md#uploadwhatsappprofilephoto) | **POST** /v1/whatsapp/business-profile/photo | Upload profile picture
 *WhatsAppCallingApi* | [**disableWhatsAppCalling**](docs/Api/WhatsAppCallingApi.md#disablewhatsappcalling) | **DELETE** /v1/phone-numbers/{id}/whatsapp/calling | Disable calling on a number
 *WhatsAppCallingApi* | [**disableWhatsAppCallingLegacy**](docs/Api/WhatsAppCallingApi.md#disablewhatsappcallinglegacy) | **DELETE** /v1/whatsapp/phone-numbers/{id}/calling | Disable calling on a number
@@ -1042,6 +1045,8 @@ Class | Method | HTTP request | Description
 - [DeleteInboxReviewReplyRequest](docs/Model/DeleteInboxReviewReplyRequest.md)
 - [DeleteSmsSenderId200Response](docs/Model/DeleteSmsSenderId200Response.md)
 - [DeleteValueRuleSet200Response](docs/Model/DeleteValueRuleSet200Response.md)
+- [DeleteWhatsAppTemplate200Response](docs/Model/DeleteWhatsAppTemplate200Response.md)
+- [DeleteWhatsAppTemplateById200Response](docs/Model/DeleteWhatsAppTemplateById200Response.md)
 - [DeleteWhatsappBusinessUsernameRequest](docs/Model/DeleteWhatsappBusinessUsernameRequest.md)
 - [DetachNumberFromSipTrunk200Response](docs/Model/DetachNumberFromSipTrunk200Response.md)
 - [DialVoiceWebCall200Response](docs/Model/DialVoiceWebCall200Response.md)
@@ -1439,6 +1444,8 @@ Class | Method | HTTP request | Description
 - [GetWhatsAppNumberRemediation200Response](docs/Model/GetWhatsAppNumberRemediation200Response.md)
 - [GetWhatsAppTemplate200Response](docs/Model/GetWhatsAppTemplate200Response.md)
 - [GetWhatsAppTemplate200ResponseTemplate](docs/Model/GetWhatsAppTemplate200ResponseTemplate.md)
+- [GetWhatsAppTemplate409Response](docs/Model/GetWhatsAppTemplate409Response.md)
+- [GetWhatsAppTemplate409ResponseDetails](docs/Model/GetWhatsAppTemplate409ResponseDetails.md)
 - [GetWhatsAppTemplates200Response](docs/Model/GetWhatsAppTemplates200Response.md)
 - [GetWhatsAppTemplates200ResponseTemplatesInner](docs/Model/GetWhatsAppTemplates200ResponseTemplatesInner.md)
 - [GetWhatsappBusinessUsername200Response](docs/Model/GetWhatsappBusinessUsername200Response.md)
@@ -2184,6 +2191,9 @@ Class | Method | HTTP request | Description
 - [UpdateWhatsAppGroupChatRequest](docs/Model/UpdateWhatsAppGroupChatRequest.md)
 - [UpdateWhatsAppTemplate200Response](docs/Model/UpdateWhatsAppTemplate200Response.md)
 - [UpdateWhatsAppTemplate200ResponseTemplate](docs/Model/UpdateWhatsAppTemplate200ResponseTemplate.md)
+- [UpdateWhatsAppTemplateById200Response](docs/Model/UpdateWhatsAppTemplateById200Response.md)
+- [UpdateWhatsAppTemplateById200ResponseTemplate](docs/Model/UpdateWhatsAppTemplateById200ResponseTemplate.md)
+- [UpdateWhatsAppTemplateByIdRequest](docs/Model/UpdateWhatsAppTemplateByIdRequest.md)
 - [UpdateWhatsAppTemplateRequest](docs/Model/UpdateWhatsAppTemplateRequest.md)
 - [UpdateWorkflow200Response](docs/Model/UpdateWorkflow200Response.md)
 - [UpdateWorkflow200ResponseWorkflow](docs/Model/UpdateWorkflow200ResponseWorkflow.md)

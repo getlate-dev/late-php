@@ -447,6 +447,8 @@ docs/Model/DeleteInboxReviewReply200Response.md
 docs/Model/DeleteInboxReviewReplyRequest.md
 docs/Model/DeleteSmsSenderId200Response.md
 docs/Model/DeleteValueRuleSet200Response.md
+docs/Model/DeleteWhatsAppTemplate200Response.md
+docs/Model/DeleteWhatsAppTemplateById200Response.md
 docs/Model/DeleteWhatsappBusinessUsernameRequest.md
 docs/Model/DetachNumberFromSipTrunk200Response.md
 docs/Model/DialVoiceWebCall200Response.md
@@ -844,6 +846,8 @@ docs/Model/GetWhatsAppNumberKycForm200ResponseFieldsInner.md
 docs/Model/GetWhatsAppNumberRemediation200Response.md
 docs/Model/GetWhatsAppTemplate200Response.md
 docs/Model/GetWhatsAppTemplate200ResponseTemplate.md
+docs/Model/GetWhatsAppTemplate409Response.md
+docs/Model/GetWhatsAppTemplate409ResponseDetails.md
 docs/Model/GetWhatsAppTemplates200Response.md
 docs/Model/GetWhatsAppTemplates200ResponseTemplatesInner.md
 docs/Model/GetWhatsappBusinessUsername200Response.md
@@ -1589,6 +1593,9 @@ docs/Model/UpdateWhatsAppFlowRequest.md
 docs/Model/UpdateWhatsAppGroupChatRequest.md
 docs/Model/UpdateWhatsAppTemplate200Response.md
 docs/Model/UpdateWhatsAppTemplate200ResponseTemplate.md
+docs/Model/UpdateWhatsAppTemplateById200Response.md
+docs/Model/UpdateWhatsAppTemplateById200ResponseTemplate.md
+docs/Model/UpdateWhatsAppTemplateByIdRequest.md
 docs/Model/UpdateWhatsAppTemplateRequest.md
 docs/Model/UpdateWorkflow200Response.md
 docs/Model/UpdateWorkflow200ResponseWorkflow.md
@@ -2268,6 +2275,8 @@ lib/Model/DeleteInboxReviewReply200Response.php
 lib/Model/DeleteInboxReviewReplyRequest.php
 lib/Model/DeleteSmsSenderId200Response.php
 lib/Model/DeleteValueRuleSet200Response.php
+lib/Model/DeleteWhatsAppTemplate200Response.php
+lib/Model/DeleteWhatsAppTemplateById200Response.php
 lib/Model/DeleteWhatsappBusinessUsernameRequest.php
 lib/Model/DetachNumberFromSipTrunk200Response.php
 lib/Model/DialVoiceWebCall200Response.php
@@ -2665,6 +2674,8 @@ lib/Model/GetWhatsAppNumberKycForm200ResponseFieldsInner.php
 lib/Model/GetWhatsAppNumberRemediation200Response.php
 lib/Model/GetWhatsAppTemplate200Response.php
 lib/Model/GetWhatsAppTemplate200ResponseTemplate.php
+lib/Model/GetWhatsAppTemplate409Response.php
+lib/Model/GetWhatsAppTemplate409ResponseDetails.php
 lib/Model/GetWhatsAppTemplates200Response.php
 lib/Model/GetWhatsAppTemplates200ResponseTemplatesInner.php
 lib/Model/GetWhatsappBusinessUsername200Response.php
@@ -3411,6 +3422,9 @@ lib/Model/UpdateWhatsAppFlowRequest.php
 lib/Model/UpdateWhatsAppGroupChatRequest.php
 lib/Model/UpdateWhatsAppTemplate200Response.php
 lib/Model/UpdateWhatsAppTemplate200ResponseTemplate.php
+lib/Model/UpdateWhatsAppTemplateById200Response.php
+lib/Model/UpdateWhatsAppTemplateById200ResponseTemplate.php
+lib/Model/UpdateWhatsAppTemplateByIdRequest.php
 lib/Model/UpdateWhatsAppTemplateRequest.php
 lib/Model/UpdateWorkflow200Response.php
 lib/Model/UpdateWorkflow200ResponseWorkflow.php
@@ -3643,3 +3657,10 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/DeleteWhatsAppTemplate200ResponseTest.php
+test/Model/DeleteWhatsAppTemplateById200ResponseTest.php
+test/Model/GetWhatsAppTemplate409ResponseDetailsTest.php
+test/Model/GetWhatsAppTemplate409ResponseTest.php
+test/Model/UpdateWhatsAppTemplateById200ResponseTemplateTest.php
+test/Model/UpdateWhatsAppTemplateById200ResponseTest.php
+test/Model/UpdateWhatsAppTemplateByIdRequestTest.php
