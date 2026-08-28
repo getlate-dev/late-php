@@ -1,6 +1,6 @@
 <?php
 /**
- * UsageMeteringCallUsage
+ * UsageMeteringAttribution
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * UsageMeteringCallUsage Class Doc Comment
+ * UsageMeteringAttribution Class Doc Comment
  *
  * @category Class
- * @description Billable call volumes over the window. Null when &#x60;profileId&#x60; / &#x60;accountId&#x60; is set.
+ * @description Present with &#x60;groupBy&#x60;. The window&#39;s spend split per profile or account; &#x60;sum(groups) + unattributed&#x60; equals &#x60;totals&#x60; per product.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerializable
+class UsageMeteringAttribution implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UsageMetering_callUsage';
+    protected static $openAPIModelName = 'UsageMetering_attribution';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +59,11 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'whatsapp' => '\Zernio\Model\UsageMeteringCallUsageWhatsapp',
-        'pstn' => '\Zernio\Model\UsageMeteringCallUsageWhatsapp'
+        'group_by' => 'string',
+        'groups' => '\Zernio\Model\UsageAttributionGroup[]',
+        'unattributed' => '\Zernio\Model\UsageAttributionSlice',
+        'totals' => '\Zernio\Model\UsageAttributionSlice',
+        'restricted' => 'bool'
     ];
 
     /**
@@ -71,8 +74,11 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'whatsapp' => null,
-        'pstn' => null
+        'group_by' => null,
+        'groups' => null,
+        'unattributed' => null,
+        'totals' => null,
+        'restricted' => null
     ];
 
     /**
@@ -81,8 +87,11 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'whatsapp' => false,
-        'pstn' => false
+        'group_by' => false,
+        'groups' => false,
+        'unattributed' => false,
+        'totals' => false,
+        'restricted' => false
     ];
 
     /**
@@ -171,8 +180,11 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'whatsapp' => 'whatsapp',
-        'pstn' => 'pstn'
+        'group_by' => 'groupBy',
+        'groups' => 'groups',
+        'unattributed' => 'unattributed',
+        'totals' => 'totals',
+        'restricted' => 'restricted'
     ];
 
     /**
@@ -181,8 +193,11 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'whatsapp' => 'setWhatsapp',
-        'pstn' => 'setPstn'
+        'group_by' => 'setGroupBy',
+        'groups' => 'setGroups',
+        'unattributed' => 'setUnattributed',
+        'totals' => 'setTotals',
+        'restricted' => 'setRestricted'
     ];
 
     /**
@@ -191,8 +206,11 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'whatsapp' => 'getWhatsapp',
-        'pstn' => 'getPstn'
+        'group_by' => 'getGroupBy',
+        'groups' => 'getGroups',
+        'unattributed' => 'getUnattributed',
+        'totals' => 'getTotals',
+        'restricted' => 'getRestricted'
     ];
 
     /**
@@ -236,6 +254,21 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
+    public const GROUP_BY_PROFILE = 'profile';
+    public const GROUP_BY_ACCOUNT = 'account';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getGroupByAllowableValues()
+    {
+        return [
+            self::GROUP_BY_PROFILE,
+            self::GROUP_BY_ACCOUNT,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -252,8 +285,11 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('whatsapp', $data ?? [], null);
-        $this->setIfExists('pstn', $data ?? [], null);
+        $this->setIfExists('group_by', $data ?? [], null);
+        $this->setIfExists('groups', $data ?? [], null);
+        $this->setIfExists('unattributed', $data ?? [], null);
+        $this->setIfExists('totals', $data ?? [], null);
+        $this->setIfExists('restricted', $data ?? [], null);
     }
 
     /**
@@ -283,6 +319,15 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getGroupByAllowableValues();
+        if (!is_null($this->container['group_by']) && !in_array($this->container['group_by'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'group_by', must be one of '%s'",
+                $this->container['group_by'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -299,55 +344,146 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets whatsapp
+     * Gets group_by
      *
-     * @return \Zernio\Model\UsageMeteringCallUsageWhatsapp|null
+     * @return string|null
      */
-    public function getWhatsapp()
+    public function getGroupBy()
     {
-        return $this->container['whatsapp'];
+        return $this->container['group_by'];
     }
 
     /**
-     * Sets whatsapp
+     * Sets group_by
      *
-     * @param \Zernio\Model\UsageMeteringCallUsageWhatsapp|null $whatsapp whatsapp
+     * @param string|null $group_by group_by
      *
      * @return self
      */
-    public function setWhatsapp($whatsapp)
+    public function setGroupBy($group_by)
     {
-        if (is_null($whatsapp)) {
-            throw new \InvalidArgumentException('non-nullable whatsapp cannot be null');
+        if (is_null($group_by)) {
+            throw new \InvalidArgumentException('non-nullable group_by cannot be null');
         }
-        $this->container['whatsapp'] = $whatsapp;
+        $allowedValues = $this->getGroupByAllowableValues();
+        if (!in_array($group_by, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'group_by', must be one of '%s'",
+                    $group_by,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['group_by'] = $group_by;
 
         return $this;
     }
 
     /**
-     * Gets pstn
+     * Gets groups
      *
-     * @return \Zernio\Model\UsageMeteringCallUsageWhatsapp|null
+     * @return \Zernio\Model\UsageAttributionGroup[]|null
      */
-    public function getPstn()
+    public function getGroups()
     {
-        return $this->container['pstn'];
+        return $this->container['groups'];
     }
 
     /**
-     * Sets pstn
+     * Sets groups
      *
-     * @param \Zernio\Model\UsageMeteringCallUsageWhatsapp|null $pstn pstn
+     * @param \Zernio\Model\UsageAttributionGroup[]|null $groups groups
      *
      * @return self
      */
-    public function setPstn($pstn)
+    public function setGroups($groups)
     {
-        if (is_null($pstn)) {
-            throw new \InvalidArgumentException('non-nullable pstn cannot be null');
+        if (is_null($groups)) {
+            throw new \InvalidArgumentException('non-nullable groups cannot be null');
         }
-        $this->container['pstn'] = $pstn;
+        $this->container['groups'] = $groups;
+
+        return $this;
+    }
+
+    /**
+     * Gets unattributed
+     *
+     * @return \Zernio\Model\UsageAttributionSlice|null
+     */
+    public function getUnattributed()
+    {
+        return $this->container['unattributed'];
+    }
+
+    /**
+     * Sets unattributed
+     *
+     * @param \Zernio\Model\UsageAttributionSlice|null $unattributed Spend no profile/account can claim: credits, 10DLC fees, Verify, and usage whose record no longer resolves to an account. Zero for a restricted principal.
+     *
+     * @return self
+     */
+    public function setUnattributed($unattributed)
+    {
+        if (is_null($unattributed)) {
+            throw new \InvalidArgumentException('non-nullable unattributed cannot be null');
+        }
+        $this->container['unattributed'] = $unattributed;
+
+        return $this;
+    }
+
+    /**
+     * Gets totals
+     *
+     * @return \Zernio\Model\UsageAttributionSlice|null
+     */
+    public function getTotals()
+    {
+        return $this->container['totals'];
+    }
+
+    /**
+     * Sets totals
+     *
+     * @param \Zernio\Model\UsageAttributionSlice|null $totals The window totals; for a restricted principal, the sum of the visible groups.
+     *
+     * @return self
+     */
+    public function setTotals($totals)
+    {
+        if (is_null($totals)) {
+            throw new \InvalidArgumentException('non-nullable totals cannot be null');
+        }
+        $this->container['totals'] = $totals;
+
+        return $this;
+    }
+
+    /**
+     * Gets restricted
+     *
+     * @return bool|null
+     */
+    public function getRestricted()
+    {
+        return $this->container['restricted'];
+    }
+
+    /**
+     * Sets restricted
+     *
+     * @param bool|null $restricted True when the caller (profile-scoped API key or member) cannot see every profile: `groups` are filtered, `totals` sum them, `unattributed` is zero, and the top-level `days` / `totals` / `lineItems` are projected onto the visible groups with `peaks`, `callUsage` and `tax` null.
+     *
+     * @return self
+     */
+    public function setRestricted($restricted)
+    {
+        if (is_null($restricted)) {
+            throw new \InvalidArgumentException('non-nullable restricted cannot be null');
+        }
+        $this->container['restricted'] = $restricted;
 
         return $this;
     }

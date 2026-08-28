@@ -1,6 +1,6 @@
 <?php
 /**
- * UsageMeteringCallUsage
+ * UsageAttributionSlice
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * UsageMeteringCallUsage Class Doc Comment
+ * UsageAttributionSlice Class Doc Comment
  *
  * @category Class
- * @description Billable call volumes over the window. Null when &#x60;profileId&#x60; / &#x60;accountId&#x60; is set.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerializable
+class UsageAttributionSlice implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UsageMetering_callUsage';
+    protected static $openAPIModelName = 'UsageAttributionSlice';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +58,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'whatsapp' => '\Zernio\Model\UsageMeteringCallUsageWhatsapp',
-        'pstn' => '\Zernio\Model\UsageMeteringCallUsageWhatsapp'
+        'by_product' => '\Zernio\Model\UsageAttributionSliceByProduct',
+        'total_usd' => 'float'
     ];
 
     /**
@@ -71,8 +70,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'whatsapp' => null,
-        'pstn' => null
+        'by_product' => null,
+        'total_usd' => null
     ];
 
     /**
@@ -81,8 +80,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'whatsapp' => false,
-        'pstn' => false
+        'by_product' => false,
+        'total_usd' => false
     ];
 
     /**
@@ -171,8 +170,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'whatsapp' => 'whatsapp',
-        'pstn' => 'pstn'
+        'by_product' => 'byProduct',
+        'total_usd' => 'totalUsd'
     ];
 
     /**
@@ -181,8 +180,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'whatsapp' => 'setWhatsapp',
-        'pstn' => 'setPstn'
+        'by_product' => 'setByProduct',
+        'total_usd' => 'setTotalUsd'
     ];
 
     /**
@@ -191,8 +190,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'whatsapp' => 'getWhatsapp',
-        'pstn' => 'getPstn'
+        'by_product' => 'getByProduct',
+        'total_usd' => 'getTotalUsd'
     ];
 
     /**
@@ -252,8 +251,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('whatsapp', $data ?? [], null);
-        $this->setIfExists('pstn', $data ?? [], null);
+        $this->setIfExists('by_product', $data ?? [], null);
+        $this->setIfExists('total_usd', $data ?? [], null);
     }
 
     /**
@@ -299,55 +298,55 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets whatsapp
+     * Gets by_product
      *
-     * @return \Zernio\Model\UsageMeteringCallUsageWhatsapp|null
+     * @return \Zernio\Model\UsageAttributionSliceByProduct|null
      */
-    public function getWhatsapp()
+    public function getByProduct()
     {
-        return $this->container['whatsapp'];
+        return $this->container['by_product'];
     }
 
     /**
-     * Sets whatsapp
+     * Sets by_product
      *
-     * @param \Zernio\Model\UsageMeteringCallUsageWhatsapp|null $whatsapp whatsapp
+     * @param \Zernio\Model\UsageAttributionSliceByProduct|null $by_product by_product
      *
      * @return self
      */
-    public function setWhatsapp($whatsapp)
+    public function setByProduct($by_product)
     {
-        if (is_null($whatsapp)) {
-            throw new \InvalidArgumentException('non-nullable whatsapp cannot be null');
+        if (is_null($by_product)) {
+            throw new \InvalidArgumentException('non-nullable by_product cannot be null');
         }
-        $this->container['whatsapp'] = $whatsapp;
+        $this->container['by_product'] = $by_product;
 
         return $this;
     }
 
     /**
-     * Gets pstn
+     * Gets total_usd
      *
-     * @return \Zernio\Model\UsageMeteringCallUsageWhatsapp|null
+     * @return float|null
      */
-    public function getPstn()
+    public function getTotalUsd()
     {
-        return $this->container['pstn'];
+        return $this->container['total_usd'];
     }
 
     /**
-     * Sets pstn
+     * Sets total_usd
      *
-     * @param \Zernio\Model\UsageMeteringCallUsageWhatsapp|null $pstn pstn
+     * @param float|null $total_usd total_usd
      *
      * @return self
      */
-    public function setPstn($pstn)
+    public function setTotalUsd($total_usd)
     {
-        if (is_null($pstn)) {
-            throw new \InvalidArgumentException('non-nullable pstn cannot be null');
+        if (is_null($total_usd)) {
+            throw new \InvalidArgumentException('non-nullable total_usd cannot be null');
         }
-        $this->container['pstn'] = $pstn;
+        $this->container['total_usd'] = $total_usd;
 
         return $this;
     }

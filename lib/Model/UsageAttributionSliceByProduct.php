@@ -1,6 +1,6 @@
 <?php
 /**
- * UsageMeteringCallUsage
+ * UsageAttributionSliceByProduct
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * UsageMeteringCallUsage Class Doc Comment
+ * UsageAttributionSliceByProduct Class Doc Comment
  *
  * @category Class
- * @description Billable call volumes over the window. Null when &#x60;profileId&#x60; / &#x60;accountId&#x60; is set.
+ * @description USD per product family.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerializable
+class UsageAttributionSliceByProduct implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UsageMetering_callUsage';
+    protected static $openAPIModelName = 'UsageAttributionSlice_byProduct';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +59,15 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'whatsapp' => '\Zernio\Model\UsageMeteringCallUsageWhatsapp',
-        'pstn' => '\Zernio\Model\UsageMeteringCallUsageWhatsapp'
+        'accounts' => 'float',
+        'numbers' => 'float',
+        'calls' => 'float',
+        'sms' => 'float',
+        'verify' => 'float',
+        'dlc' => 'float',
+        'x_api' => 'float',
+        'credits' => 'float',
+        'other' => 'float'
     ];
 
     /**
@@ -71,8 +78,15 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'whatsapp' => null,
-        'pstn' => null
+        'accounts' => null,
+        'numbers' => null,
+        'calls' => null,
+        'sms' => null,
+        'verify' => null,
+        'dlc' => null,
+        'x_api' => null,
+        'credits' => null,
+        'other' => null
     ];
 
     /**
@@ -81,8 +95,15 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'whatsapp' => false,
-        'pstn' => false
+        'accounts' => false,
+        'numbers' => false,
+        'calls' => false,
+        'sms' => false,
+        'verify' => false,
+        'dlc' => false,
+        'x_api' => false,
+        'credits' => false,
+        'other' => false
     ];
 
     /**
@@ -171,8 +192,15 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'whatsapp' => 'whatsapp',
-        'pstn' => 'pstn'
+        'accounts' => 'accounts',
+        'numbers' => 'numbers',
+        'calls' => 'calls',
+        'sms' => 'sms',
+        'verify' => 'verify',
+        'dlc' => 'dlc',
+        'x_api' => 'xApi',
+        'credits' => 'credits',
+        'other' => 'other'
     ];
 
     /**
@@ -181,8 +209,15 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'whatsapp' => 'setWhatsapp',
-        'pstn' => 'setPstn'
+        'accounts' => 'setAccounts',
+        'numbers' => 'setNumbers',
+        'calls' => 'setCalls',
+        'sms' => 'setSms',
+        'verify' => 'setVerify',
+        'dlc' => 'setDlc',
+        'x_api' => 'setXApi',
+        'credits' => 'setCredits',
+        'other' => 'setOther'
     ];
 
     /**
@@ -191,8 +226,15 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'whatsapp' => 'getWhatsapp',
-        'pstn' => 'getPstn'
+        'accounts' => 'getAccounts',
+        'numbers' => 'getNumbers',
+        'calls' => 'getCalls',
+        'sms' => 'getSms',
+        'verify' => 'getVerify',
+        'dlc' => 'getDlc',
+        'x_api' => 'getXApi',
+        'credits' => 'getCredits',
+        'other' => 'getOther'
     ];
 
     /**
@@ -252,8 +294,15 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('whatsapp', $data ?? [], null);
-        $this->setIfExists('pstn', $data ?? [], null);
+        $this->setIfExists('accounts', $data ?? [], null);
+        $this->setIfExists('numbers', $data ?? [], null);
+        $this->setIfExists('calls', $data ?? [], null);
+        $this->setIfExists('sms', $data ?? [], null);
+        $this->setIfExists('verify', $data ?? [], null);
+        $this->setIfExists('dlc', $data ?? [], null);
+        $this->setIfExists('x_api', $data ?? [], null);
+        $this->setIfExists('credits', $data ?? [], null);
+        $this->setIfExists('other', $data ?? [], null);
     }
 
     /**
@@ -299,55 +348,244 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets whatsapp
+     * Gets accounts
      *
-     * @return \Zernio\Model\UsageMeteringCallUsageWhatsapp|null
+     * @return float|null
      */
-    public function getWhatsapp()
+    public function getAccounts()
     {
-        return $this->container['whatsapp'];
+        return $this->container['accounts'];
     }
 
     /**
-     * Sets whatsapp
+     * Sets accounts
      *
-     * @param \Zernio\Model\UsageMeteringCallUsageWhatsapp|null $whatsapp whatsapp
+     * @param float|null $accounts accounts
      *
      * @return self
      */
-    public function setWhatsapp($whatsapp)
+    public function setAccounts($accounts)
     {
-        if (is_null($whatsapp)) {
-            throw new \InvalidArgumentException('non-nullable whatsapp cannot be null');
+        if (is_null($accounts)) {
+            throw new \InvalidArgumentException('non-nullable accounts cannot be null');
         }
-        $this->container['whatsapp'] = $whatsapp;
+        $this->container['accounts'] = $accounts;
 
         return $this;
     }
 
     /**
-     * Gets pstn
+     * Gets numbers
      *
-     * @return \Zernio\Model\UsageMeteringCallUsageWhatsapp|null
+     * @return float|null
      */
-    public function getPstn()
+    public function getNumbers()
     {
-        return $this->container['pstn'];
+        return $this->container['numbers'];
     }
 
     /**
-     * Sets pstn
+     * Sets numbers
      *
-     * @param \Zernio\Model\UsageMeteringCallUsageWhatsapp|null $pstn pstn
+     * @param float|null $numbers numbers
      *
      * @return self
      */
-    public function setPstn($pstn)
+    public function setNumbers($numbers)
     {
-        if (is_null($pstn)) {
-            throw new \InvalidArgumentException('non-nullable pstn cannot be null');
+        if (is_null($numbers)) {
+            throw new \InvalidArgumentException('non-nullable numbers cannot be null');
         }
-        $this->container['pstn'] = $pstn;
+        $this->container['numbers'] = $numbers;
+
+        return $this;
+    }
+
+    /**
+     * Gets calls
+     *
+     * @return float|null
+     */
+    public function getCalls()
+    {
+        return $this->container['calls'];
+    }
+
+    /**
+     * Sets calls
+     *
+     * @param float|null $calls calls
+     *
+     * @return self
+     */
+    public function setCalls($calls)
+    {
+        if (is_null($calls)) {
+            throw new \InvalidArgumentException('non-nullable calls cannot be null');
+        }
+        $this->container['calls'] = $calls;
+
+        return $this;
+    }
+
+    /**
+     * Gets sms
+     *
+     * @return float|null
+     */
+    public function getSms()
+    {
+        return $this->container['sms'];
+    }
+
+    /**
+     * Sets sms
+     *
+     * @param float|null $sms sms
+     *
+     * @return self
+     */
+    public function setSms($sms)
+    {
+        if (is_null($sms)) {
+            throw new \InvalidArgumentException('non-nullable sms cannot be null');
+        }
+        $this->container['sms'] = $sms;
+
+        return $this;
+    }
+
+    /**
+     * Gets verify
+     *
+     * @return float|null
+     */
+    public function getVerify()
+    {
+        return $this->container['verify'];
+    }
+
+    /**
+     * Sets verify
+     *
+     * @param float|null $verify verify
+     *
+     * @return self
+     */
+    public function setVerify($verify)
+    {
+        if (is_null($verify)) {
+            throw new \InvalidArgumentException('non-nullable verify cannot be null');
+        }
+        $this->container['verify'] = $verify;
+
+        return $this;
+    }
+
+    /**
+     * Gets dlc
+     *
+     * @return float|null
+     */
+    public function getDlc()
+    {
+        return $this->container['dlc'];
+    }
+
+    /**
+     * Sets dlc
+     *
+     * @param float|null $dlc dlc
+     *
+     * @return self
+     */
+    public function setDlc($dlc)
+    {
+        if (is_null($dlc)) {
+            throw new \InvalidArgumentException('non-nullable dlc cannot be null');
+        }
+        $this->container['dlc'] = $dlc;
+
+        return $this;
+    }
+
+    /**
+     * Gets x_api
+     *
+     * @return float|null
+     */
+    public function getXApi()
+    {
+        return $this->container['x_api'];
+    }
+
+    /**
+     * Sets x_api
+     *
+     * @param float|null $x_api x_api
+     *
+     * @return self
+     */
+    public function setXApi($x_api)
+    {
+        if (is_null($x_api)) {
+            throw new \InvalidArgumentException('non-nullable x_api cannot be null');
+        }
+        $this->container['x_api'] = $x_api;
+
+        return $this;
+    }
+
+    /**
+     * Gets credits
+     *
+     * @return float|null
+     */
+    public function getCredits()
+    {
+        return $this->container['credits'];
+    }
+
+    /**
+     * Sets credits
+     *
+     * @param float|null $credits credits
+     *
+     * @return self
+     */
+    public function setCredits($credits)
+    {
+        if (is_null($credits)) {
+            throw new \InvalidArgumentException('non-nullable credits cannot be null');
+        }
+        $this->container['credits'] = $credits;
+
+        return $this;
+    }
+
+    /**
+     * Gets other
+     *
+     * @return float|null
+     */
+    public function getOther()
+    {
+        return $this->container['other'];
+    }
+
+    /**
+     * Sets other
+     *
+     * @param float|null $other other
+     *
+     * @return self
+     */
+    public function setOther($other)
+    {
+        if (is_null($other)) {
+            throw new \InvalidArgumentException('non-nullable other cannot be null');
+        }
+        $this->container['other'] = $other;
 
         return $this;
     }

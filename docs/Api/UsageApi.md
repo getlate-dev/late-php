@@ -208,12 +208,12 @@ try {
 ## `getUsage()`
 
 ```php
-getUsage($reconcile, $range, $from, $to, $granularity): \Zernio\Model\GetUsage200Response
+getUsage($reconcile, $range, $from, $to, $granularity, $group_by, $profile_id, $account_id): \Zernio\Model\GetUsage200Response
 ```
 
 Usage snapshot (default) or billed-spend metering (with params)
 
-Dual-mode endpoint, selected by query params — fully backward compatible:  **Without metering params (the default):** the plan / quota / usage snapshot — plan name, billing period, limits, usage counts, access state. Identical to `GET /v1/usage-stats`. Existing integrations keep working unchanged.  **With `range`, `granularity`, `from`, or `to`:** usage METERING — billed spend (USD) by product family (`accounts`, `numbers`, `calls`, `sms`, `dlc`, `xApi`, `credits`, `other`) over the window, at `day` / `month` / `total` granularity, from Metronome's invoice breakdown (the CHARGE view — always reconciles with what gets billed). Also served at `GET /v1/usage/daily`. Usage-based accounts only — legacy Stripe accounts get `{ \"supported\": false, \"days\": [] }`.  For per-domain consumption *volumes* use `GET /v1/usage/calls` and `GET /v1/usage/sms`. For the billing statement (balance, credits, caps, payment status) use `GET /v1/billing`.
+Dual-mode endpoint, selected by query params — fully backward compatible:  **Without metering params (the default):** the plan / quota / usage snapshot — plan name, billing period, limits, usage counts, access state. Identical to `GET /v1/usage-stats`. Existing integrations keep working unchanged.  **With `range`, `granularity`, `from`, or `to`:** usage METERING — billed spend (USD) by product family (`accounts`, `numbers`, `calls`, `sms`, `dlc`, `xApi`, `credits`, `other`) over the window, at `day` / `month` / `total` granularity, from Metronome's invoice breakdown (the CHARGE view — always reconciles with what gets billed). Also served at `GET /v1/usage/daily`. Usage-based accounts only — legacy Stripe accounts get `{ \"supported\": false, \"days\": [] }`.  **Attribution (metering mode):** `groupBy=profile|account` adds an `attribution` breakdown of the window's spend per profile or account, assembled from your own records and pro-rated against the invoice so `sum(groups) + unattributed` equals `totals` exactly. `profileId` / `accountId` instead project the whole payload (`days`, `totals`, `lineItems`) onto that one group; `peaks`, `callUsage` and `tax` are then `null` (workspace-level facts). Projected `days` spread the group's period share over each day (usage is attributed per period, not per day). Profile-scoped API keys and members only see their profiles' groups (`attribution.restricted: true`, with `totals` summing the visible groups). Credits, 10DLC fees and Verify are always unattributed. `profileId` / `accountId` on their own do not select metering mode: pair them with `range`.  For per-domain consumption *volumes* use `GET /v1/usage/calls` and `GET /v1/usage/sms`. For the billing statement (balance, credits, caps, payment status) use `GET /v1/billing`.
 
 ### Example
 
@@ -237,9 +237,12 @@ $range = 'cycle'; // string | Window to report. `cycle` / `prev-cycle` resolve t
 $from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Inclusive start (UTC date). Required when `range=custom`.
 $to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Inclusive end (UTC date). Required when `range=custom`. Max span 366 days.
 $granularity = 'day'; // string | Bucketing of the `days` series: `day` (one row per UTC day), `month` (one row per calendar month, dated to the 1st), or `total` (no series — read `totals`). Does not affect `totals`.
+$group_by = 'group_by_example'; // string | Metering mode. Adds `attribution`: the window's spend split per profile or per account (keys are ids; resolve names via `GET /v1/profiles` / `GET /v1/accounts`).
+$profile_id = 'profile_id_example'; // string | Metering mode (pair with `range`). Project the payload onto this profile's attributed share. Mutually exclusive with `accountId`, and `groupBy` (if given) must be `profile`; 404 when the profile is not in your workspace (or outside a scoped key's profiles).
+$account_id = 'account_id_example'; // string | Metering mode (pair with `range`). Project the payload onto this account's attributed share. Mutually exclusive with `profileId`, and `groupBy` (if given) must be `account`; 404 when the account is not visible to the caller.
 
 try {
-    $result = $apiInstance->getUsage($reconcile, $range, $from, $to, $granularity);
+    $result = $apiInstance->getUsage($reconcile, $range, $from, $to, $granularity, $group_by, $profile_id, $account_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UsageApi->getUsage: ', $e->getMessage(), PHP_EOL;
@@ -255,6 +258,9 @@ try {
 | **from** | **\DateTime**| Inclusive start (UTC date). Required when &#x60;range&#x3D;custom&#x60;. | [optional] |
 | **to** | **\DateTime**| Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days. | [optional] |
 | **granularity** | **string**| Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series — read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;. | [optional] [default to &#39;day&#39;] |
+| **group_by** | **string**| Metering mode. Adds &#x60;attribution&#x60;: the window&#39;s spend split per profile or per account (keys are ids; resolve names via &#x60;GET /v1/profiles&#x60; / &#x60;GET /v1/accounts&#x60;). | [optional] |
+| **profile_id** | **string**| Metering mode (pair with &#x60;range&#x60;). Project the payload onto this profile&#39;s attributed share. Mutually exclusive with &#x60;accountId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;profile&#x60;; 404 when the profile is not in your workspace (or outside a scoped key&#39;s profiles). | [optional] |
+| **account_id** | **string**| Metering mode (pair with &#x60;range&#x60;). Project the payload onto this account&#39;s attributed share. Mutually exclusive with &#x60;profileId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;account&#x60;; 404 when the account is not visible to the caller. | [optional] |
 
 ### Return type
 

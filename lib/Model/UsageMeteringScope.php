@@ -1,6 +1,6 @@
 <?php
 /**
- * UsageMeteringCallUsage
+ * UsageMeteringScope
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * UsageMeteringCallUsage Class Doc Comment
+ * UsageMeteringScope Class Doc Comment
  *
  * @category Class
- * @description Billable call volumes over the window. Null when &#x60;profileId&#x60; / &#x60;accountId&#x60; is set.
+ * @description Present with &#x60;profileId&#x60; / &#x60;accountId&#x60;: echoes the group the payload was projected onto.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerializable
+class UsageMeteringScope implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UsageMetering_callUsage';
+    protected static $openAPIModelName = 'UsageMetering_scope';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +59,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'whatsapp' => '\Zernio\Model\UsageMeteringCallUsageWhatsapp',
-        'pstn' => '\Zernio\Model\UsageMeteringCallUsageWhatsapp'
+        'profile_id' => 'string',
+        'account_id' => 'string'
     ];
 
     /**
@@ -71,8 +71,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'whatsapp' => null,
-        'pstn' => null
+        'profile_id' => null,
+        'account_id' => null
     ];
 
     /**
@@ -81,8 +81,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'whatsapp' => false,
-        'pstn' => false
+        'profile_id' => false,
+        'account_id' => false
     ];
 
     /**
@@ -171,8 +171,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'whatsapp' => 'whatsapp',
-        'pstn' => 'pstn'
+        'profile_id' => 'profileId',
+        'account_id' => 'accountId'
     ];
 
     /**
@@ -181,8 +181,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'whatsapp' => 'setWhatsapp',
-        'pstn' => 'setPstn'
+        'profile_id' => 'setProfileId',
+        'account_id' => 'setAccountId'
     ];
 
     /**
@@ -191,8 +191,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'whatsapp' => 'getWhatsapp',
-        'pstn' => 'getPstn'
+        'profile_id' => 'getProfileId',
+        'account_id' => 'getAccountId'
     ];
 
     /**
@@ -252,8 +252,8 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('whatsapp', $data ?? [], null);
-        $this->setIfExists('pstn', $data ?? [], null);
+        $this->setIfExists('profile_id', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
     }
 
     /**
@@ -283,6 +283,12 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
+        if ($this->container['profile_id'] === null) {
+            $invalidProperties[] = "'profile_id' can't be null";
+        }
+        if ($this->container['account_id'] === null) {
+            $invalidProperties[] = "'account_id' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -299,55 +305,55 @@ class UsageMeteringCallUsage implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets whatsapp
+     * Gets profile_id
      *
-     * @return \Zernio\Model\UsageMeteringCallUsageWhatsapp|null
+     * @return string
      */
-    public function getWhatsapp()
+    public function getProfileId()
     {
-        return $this->container['whatsapp'];
+        return $this->container['profile_id'];
     }
 
     /**
-     * Sets whatsapp
+     * Sets profile_id
      *
-     * @param \Zernio\Model\UsageMeteringCallUsageWhatsapp|null $whatsapp whatsapp
+     * @param string $profile_id profile_id
      *
      * @return self
      */
-    public function setWhatsapp($whatsapp)
+    public function setProfileId($profile_id)
     {
-        if (is_null($whatsapp)) {
-            throw new \InvalidArgumentException('non-nullable whatsapp cannot be null');
+        if (is_null($profile_id)) {
+            throw new \InvalidArgumentException('non-nullable profile_id cannot be null');
         }
-        $this->container['whatsapp'] = $whatsapp;
+        $this->container['profile_id'] = $profile_id;
 
         return $this;
     }
 
     /**
-     * Gets pstn
+     * Gets account_id
      *
-     * @return \Zernio\Model\UsageMeteringCallUsageWhatsapp|null
+     * @return string
      */
-    public function getPstn()
+    public function getAccountId()
     {
-        return $this->container['pstn'];
+        return $this->container['account_id'];
     }
 
     /**
-     * Sets pstn
+     * Sets account_id
      *
-     * @param \Zernio\Model\UsageMeteringCallUsageWhatsapp|null $pstn pstn
+     * @param string $account_id account_id
      *
      * @return self
      */
-    public function setPstn($pstn)
+    public function setAccountId($account_id)
     {
-        if (is_null($pstn)) {
-            throw new \InvalidArgumentException('non-nullable pstn cannot be null');
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
         }
-        $this->container['pstn'] = $pstn;
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }

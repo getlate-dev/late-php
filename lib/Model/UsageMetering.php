@@ -67,7 +67,9 @@ class UsageMetering implements ModelInterface, ArrayAccess, \JsonSerializable
         'peaks' => '\Zernio\Model\UsageMeteringPeaks',
         'call_usage' => '\Zernio\Model\UsageMeteringCallUsage',
         'period' => '\Zernio\Model\UsageMeteringPeriod',
-        'tax' => '\Zernio\Model\UsageMeteringTax'
+        'tax' => '\Zernio\Model\UsageMeteringTax',
+        'attribution' => '\Zernio\Model\UsageMeteringAttribution',
+        'scope' => '\Zernio\Model\UsageMeteringScope'
     ];
 
     /**
@@ -86,7 +88,9 @@ class UsageMetering implements ModelInterface, ArrayAccess, \JsonSerializable
         'peaks' => null,
         'call_usage' => null,
         'period' => null,
-        'tax' => null
+        'tax' => null,
+        'attribution' => null,
+        'scope' => null
     ];
 
     /**
@@ -103,7 +107,9 @@ class UsageMetering implements ModelInterface, ArrayAccess, \JsonSerializable
         'peaks' => false,
         'call_usage' => false,
         'period' => false,
-        'tax' => false
+        'tax' => false,
+        'attribution' => false,
+        'scope' => false
     ];
 
     /**
@@ -200,7 +206,9 @@ class UsageMetering implements ModelInterface, ArrayAccess, \JsonSerializable
         'peaks' => 'peaks',
         'call_usage' => 'callUsage',
         'period' => 'period',
-        'tax' => 'tax'
+        'tax' => 'tax',
+        'attribution' => 'attribution',
+        'scope' => 'scope'
     ];
 
     /**
@@ -217,7 +225,9 @@ class UsageMetering implements ModelInterface, ArrayAccess, \JsonSerializable
         'peaks' => 'setPeaks',
         'call_usage' => 'setCallUsage',
         'period' => 'setPeriod',
-        'tax' => 'setTax'
+        'tax' => 'setTax',
+        'attribution' => 'setAttribution',
+        'scope' => 'setScope'
     ];
 
     /**
@@ -234,7 +244,9 @@ class UsageMetering implements ModelInterface, ArrayAccess, \JsonSerializable
         'peaks' => 'getPeaks',
         'call_usage' => 'getCallUsage',
         'period' => 'getPeriod',
-        'tax' => 'getTax'
+        'tax' => 'getTax',
+        'attribution' => 'getAttribution',
+        'scope' => 'getScope'
     ];
 
     /**
@@ -320,6 +332,8 @@ class UsageMetering implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('call_usage', $data ?? [], null);
         $this->setIfExists('period', $data ?? [], null);
         $this->setIfExists('tax', $data ?? [], null);
+        $this->setIfExists('attribution', $data ?? [], null);
+        $this->setIfExists('scope', $data ?? [], null);
     }
 
     /**
@@ -622,6 +636,60 @@ class UsageMetering implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable tax cannot be null');
         }
         $this->container['tax'] = $tax;
+
+        return $this;
+    }
+
+    /**
+     * Gets attribution
+     *
+     * @return \Zernio\Model\UsageMeteringAttribution|null
+     */
+    public function getAttribution()
+    {
+        return $this->container['attribution'];
+    }
+
+    /**
+     * Sets attribution
+     *
+     * @param \Zernio\Model\UsageMeteringAttribution|null $attribution attribution
+     *
+     * @return self
+     */
+    public function setAttribution($attribution)
+    {
+        if (is_null($attribution)) {
+            throw new \InvalidArgumentException('non-nullable attribution cannot be null');
+        }
+        $this->container['attribution'] = $attribution;
+
+        return $this;
+    }
+
+    /**
+     * Gets scope
+     *
+     * @return \Zernio\Model\UsageMeteringScope|null
+     */
+    public function getScope()
+    {
+        return $this->container['scope'];
+    }
+
+    /**
+     * Sets scope
+     *
+     * @param \Zernio\Model\UsageMeteringScope|null $scope scope
+     *
+     * @return self
+     */
+    public function setScope($scope)
+    {
+        if (is_null($scope)) {
+            throw new \InvalidArgumentException('non-nullable scope cannot be null');
+        }
+        $this->container['scope'] = $scope;
 
         return $this;
     }

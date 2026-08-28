@@ -1098,15 +1098,18 @@ class UsageApi
      * @param  \DateTime|null $from Inclusive start (UTC date). Required when &#x60;range&#x3D;custom&#x60;. (optional)
      * @param  \DateTime|null $to Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days. (optional)
      * @param  string|null $granularity Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series — read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;. (optional, default to 'day')
+     * @param  string|null $group_by Metering mode. Adds &#x60;attribution&#x60;: the window&#39;s spend split per profile or per account (keys are ids; resolve names via &#x60;GET /v1/profiles&#x60; / &#x60;GET /v1/accounts&#x60;). (optional)
+     * @param  string|null $profile_id Metering mode (pair with &#x60;range&#x60;). Project the payload onto this profile&#39;s attributed share. Mutually exclusive with &#x60;accountId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;profile&#x60;; 404 when the profile is not in your workspace (or outside a scoped key&#39;s profiles). (optional)
+     * @param  string|null $account_id Metering mode (pair with &#x60;range&#x60;). Project the payload onto this account&#39;s attributed share. Mutually exclusive with &#x60;profileId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;account&#x60;; 404 when the account is not visible to the caller. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsage'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Zernio\Model\GetUsage200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1
      */
-    public function getUsage($reconcile = null, $range = 'cycle', $from = null, $to = null, $granularity = 'day', string $contentType = self::contentTypes['getUsage'][0])
+    public function getUsage($reconcile = null, $range = 'cycle', $from = null, $to = null, $granularity = 'day', $group_by = null, $profile_id = null, $account_id = null, string $contentType = self::contentTypes['getUsage'][0])
     {
-        list($response) = $this->getUsageWithHttpInfo($reconcile, $range, $from, $to, $granularity, $contentType);
+        list($response) = $this->getUsageWithHttpInfo($reconcile, $range, $from, $to, $granularity, $group_by, $profile_id, $account_id, $contentType);
         return $response;
     }
 
@@ -1120,15 +1123,18 @@ class UsageApi
      * @param  \DateTime|null $from Inclusive start (UTC date). Required when &#x60;range&#x3D;custom&#x60;. (optional)
      * @param  \DateTime|null $to Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days. (optional)
      * @param  string|null $granularity Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series — read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;. (optional, default to 'day')
+     * @param  string|null $group_by Metering mode. Adds &#x60;attribution&#x60;: the window&#39;s spend split per profile or per account (keys are ids; resolve names via &#x60;GET /v1/profiles&#x60; / &#x60;GET /v1/accounts&#x60;). (optional)
+     * @param  string|null $profile_id Metering mode (pair with &#x60;range&#x60;). Project the payload onto this profile&#39;s attributed share. Mutually exclusive with &#x60;accountId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;profile&#x60;; 404 when the profile is not in your workspace (or outside a scoped key&#39;s profiles). (optional)
+     * @param  string|null $account_id Metering mode (pair with &#x60;range&#x60;). Project the payload onto this account&#39;s attributed share. Mutually exclusive with &#x60;profileId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;account&#x60;; 404 when the account is not visible to the caller. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsage'] to see the possible values for this operation
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Zernio\Model\GetUsage200Response|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getUsageWithHttpInfo($reconcile = null, $range = 'cycle', $from = null, $to = null, $granularity = 'day', string $contentType = self::contentTypes['getUsage'][0])
+    public function getUsageWithHttpInfo($reconcile = null, $range = 'cycle', $from = null, $to = null, $granularity = 'day', $group_by = null, $profile_id = null, $account_id = null, string $contentType = self::contentTypes['getUsage'][0])
     {
-        $request = $this->getUsageRequest($reconcile, $range, $from, $to, $granularity, $contentType);
+        $request = $this->getUsageRequest($reconcile, $range, $from, $to, $granularity, $group_by, $profile_id, $account_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1237,14 +1243,17 @@ class UsageApi
      * @param  \DateTime|null $from Inclusive start (UTC date). Required when &#x60;range&#x3D;custom&#x60;. (optional)
      * @param  \DateTime|null $to Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days. (optional)
      * @param  string|null $granularity Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series — read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;. (optional, default to 'day')
+     * @param  string|null $group_by Metering mode. Adds &#x60;attribution&#x60;: the window&#39;s spend split per profile or per account (keys are ids; resolve names via &#x60;GET /v1/profiles&#x60; / &#x60;GET /v1/accounts&#x60;). (optional)
+     * @param  string|null $profile_id Metering mode (pair with &#x60;range&#x60;). Project the payload onto this profile&#39;s attributed share. Mutually exclusive with &#x60;accountId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;profile&#x60;; 404 when the profile is not in your workspace (or outside a scoped key&#39;s profiles). (optional)
+     * @param  string|null $account_id Metering mode (pair with &#x60;range&#x60;). Project the payload onto this account&#39;s attributed share. Mutually exclusive with &#x60;profileId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;account&#x60;; 404 when the account is not visible to the caller. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUsageAsync($reconcile = null, $range = 'cycle', $from = null, $to = null, $granularity = 'day', string $contentType = self::contentTypes['getUsage'][0])
+    public function getUsageAsync($reconcile = null, $range = 'cycle', $from = null, $to = null, $granularity = 'day', $group_by = null, $profile_id = null, $account_id = null, string $contentType = self::contentTypes['getUsage'][0])
     {
-        return $this->getUsageAsyncWithHttpInfo($reconcile, $range, $from, $to, $granularity, $contentType)
+        return $this->getUsageAsyncWithHttpInfo($reconcile, $range, $from, $to, $granularity, $group_by, $profile_id, $account_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1262,15 +1271,18 @@ class UsageApi
      * @param  \DateTime|null $from Inclusive start (UTC date). Required when &#x60;range&#x3D;custom&#x60;. (optional)
      * @param  \DateTime|null $to Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days. (optional)
      * @param  string|null $granularity Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series — read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;. (optional, default to 'day')
+     * @param  string|null $group_by Metering mode. Adds &#x60;attribution&#x60;: the window&#39;s spend split per profile or per account (keys are ids; resolve names via &#x60;GET /v1/profiles&#x60; / &#x60;GET /v1/accounts&#x60;). (optional)
+     * @param  string|null $profile_id Metering mode (pair with &#x60;range&#x60;). Project the payload onto this profile&#39;s attributed share. Mutually exclusive with &#x60;accountId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;profile&#x60;; 404 when the profile is not in your workspace (or outside a scoped key&#39;s profiles). (optional)
+     * @param  string|null $account_id Metering mode (pair with &#x60;range&#x60;). Project the payload onto this account&#39;s attributed share. Mutually exclusive with &#x60;profileId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;account&#x60;; 404 when the account is not visible to the caller. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUsageAsyncWithHttpInfo($reconcile = null, $range = 'cycle', $from = null, $to = null, $granularity = 'day', string $contentType = self::contentTypes['getUsage'][0])
+    public function getUsageAsyncWithHttpInfo($reconcile = null, $range = 'cycle', $from = null, $to = null, $granularity = 'day', $group_by = null, $profile_id = null, $account_id = null, string $contentType = self::contentTypes['getUsage'][0])
     {
         $returnType = '\Zernio\Model\GetUsage200Response';
-        $request = $this->getUsageRequest($reconcile, $range, $from, $to, $granularity, $contentType);
+        $request = $this->getUsageRequest($reconcile, $range, $from, $to, $granularity, $group_by, $profile_id, $account_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1316,13 +1328,19 @@ class UsageApi
      * @param  \DateTime|null $from Inclusive start (UTC date). Required when &#x60;range&#x3D;custom&#x60;. (optional)
      * @param  \DateTime|null $to Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days. (optional)
      * @param  string|null $granularity Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series — read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;. (optional, default to 'day')
+     * @param  string|null $group_by Metering mode. Adds &#x60;attribution&#x60;: the window&#39;s spend split per profile or per account (keys are ids; resolve names via &#x60;GET /v1/profiles&#x60; / &#x60;GET /v1/accounts&#x60;). (optional)
+     * @param  string|null $profile_id Metering mode (pair with &#x60;range&#x60;). Project the payload onto this profile&#39;s attributed share. Mutually exclusive with &#x60;accountId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;profile&#x60;; 404 when the profile is not in your workspace (or outside a scoped key&#39;s profiles). (optional)
+     * @param  string|null $account_id Metering mode (pair with &#x60;range&#x60;). Project the payload onto this account&#39;s attributed share. Mutually exclusive with &#x60;profileId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;account&#x60;; 404 when the account is not visible to the caller. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getUsageRequest($reconcile = null, $range = 'cycle', $from = null, $to = null, $granularity = 'day', string $contentType = self::contentTypes['getUsage'][0])
+    public function getUsageRequest($reconcile = null, $range = 'cycle', $from = null, $to = null, $granularity = 'day', $group_by = null, $profile_id = null, $account_id = null, string $contentType = self::contentTypes['getUsage'][0])
     {
+
+
+
 
 
 
@@ -1377,6 +1395,33 @@ class UsageApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $granularity,
             'granularity', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $group_by,
+            'groupBy', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $profile_id,
+            'profileId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $account_id,
+            'accountId', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
