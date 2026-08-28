@@ -26703,6 +26703,13 @@ paths:
         buttons, templates, and message tags. Attachment and interactive message
         support varies by platform.
 
+        WhatsApp per-recipient rate limit: WhatsApp caps how many messages you may
+        send to the same recipient in a short window and rejects the excess with
+        error code `131056` ("Too many messages sent to this recipient"). Pace
+        sends to a single recipient at roughly 10 per minute; bursts above that
+        return a `400` with code `131056`. Sends to other recipients are
+        unaffected, so parallelise across recipients rather than flooding one.
+
         WhatsApp template messages: to send an approved template into this
         conversation (required when the 24-hour customer-service window is
         closed), use the `template` field with a single element carrying the
