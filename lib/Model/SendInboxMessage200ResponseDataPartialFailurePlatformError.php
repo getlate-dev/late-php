@@ -1,6 +1,6 @@
 <?php
 /**
- * SendInboxMessage200ResponseData
+ * SendInboxMessage200ResponseDataPartialFailurePlatformError
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * SendInboxMessage200ResponseData Class Doc Comment
+ * SendInboxMessage200ResponseDataPartialFailurePlatformError Class Doc Comment
  *
  * @category Class
+ * @description Meta&#39;s own diagnostic fields for the rejected follow-up, same shape as the 400 response&#39;s platformError.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SendInboxMessage200ResponseData implements ModelInterface, ArrayAccess, \JsonSerializable
+class SendInboxMessage200ResponseDataPartialFailurePlatformError implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class SendInboxMessage200ResponseData implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'sendInboxMessage_200_response_data';
+    protected static $openAPIModelName = 'sendInboxMessage_200_response_data_partialFailure_platformError';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +59,10 @@ class SendInboxMessage200ResponseData implements ModelInterface, ArrayAccess, \J
       * @var string[]
       */
     protected static $openAPITypes = [
-        'message_id' => 'string',
-        'conversation_id' => 'string',
-        'attachments' => '\Zernio\Model\SendInboxMessage200ResponseDataAttachmentsInner[]',
-        'message_ids' => 'string[]',
-        'partial_failure' => '\Zernio\Model\SendInboxMessage200ResponseDataPartialFailure'
+        'code' => 'int',
+        'subcode' => 'int',
+        'fbtrace_id' => 'string',
+        'type' => 'string'
     ];
 
     /**
@@ -73,11 +73,10 @@ class SendInboxMessage200ResponseData implements ModelInterface, ArrayAccess, \J
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'message_id' => null,
-        'conversation_id' => null,
-        'attachments' => null,
-        'message_ids' => null,
-        'partial_failure' => null
+        'code' => null,
+        'subcode' => null,
+        'fbtrace_id' => null,
+        'type' => null
     ];
 
     /**
@@ -86,11 +85,10 @@ class SendInboxMessage200ResponseData implements ModelInterface, ArrayAccess, \J
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'message_id' => false,
-        'conversation_id' => false,
-        'attachments' => false,
-        'message_ids' => false,
-        'partial_failure' => false
+        'code' => false,
+        'subcode' => false,
+        'fbtrace_id' => false,
+        'type' => false
     ];
 
     /**
@@ -179,11 +177,10 @@ class SendInboxMessage200ResponseData implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $attributeMap = [
-        'message_id' => 'messageId',
-        'conversation_id' => 'conversationId',
-        'attachments' => 'attachments',
-        'message_ids' => 'messageIds',
-        'partial_failure' => 'partialFailure'
+        'code' => 'code',
+        'subcode' => 'subcode',
+        'fbtrace_id' => 'fbtraceId',
+        'type' => 'type'
     ];
 
     /**
@@ -192,11 +189,10 @@ class SendInboxMessage200ResponseData implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $setters = [
-        'message_id' => 'setMessageId',
-        'conversation_id' => 'setConversationId',
-        'attachments' => 'setAttachments',
-        'message_ids' => 'setMessageIds',
-        'partial_failure' => 'setPartialFailure'
+        'code' => 'setCode',
+        'subcode' => 'setSubcode',
+        'fbtrace_id' => 'setFbtraceId',
+        'type' => 'setType'
     ];
 
     /**
@@ -205,11 +201,10 @@ class SendInboxMessage200ResponseData implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $getters = [
-        'message_id' => 'getMessageId',
-        'conversation_id' => 'getConversationId',
-        'attachments' => 'getAttachments',
-        'message_ids' => 'getMessageIds',
-        'partial_failure' => 'getPartialFailure'
+        'code' => 'getCode',
+        'subcode' => 'getSubcode',
+        'fbtrace_id' => 'getFbtraceId',
+        'type' => 'getType'
     ];
 
     /**
@@ -269,11 +264,10 @@ class SendInboxMessage200ResponseData implements ModelInterface, ArrayAccess, \J
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('message_id', $data ?? [], null);
-        $this->setIfExists('conversation_id', $data ?? [], null);
-        $this->setIfExists('attachments', $data ?? [], null);
-        $this->setIfExists('message_ids', $data ?? [], null);
-        $this->setIfExists('partial_failure', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('subcode', $data ?? [], null);
+        $this->setIfExists('fbtrace_id', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
     }
 
     /**
@@ -319,136 +313,109 @@ class SendInboxMessage200ResponseData implements ModelInterface, ArrayAccess, \J
 
 
     /**
-     * Gets message_id
+     * Gets code
+     *
+     * @return int|null
+     */
+    public function getCode()
+    {
+        return $this->container['code'];
+    }
+
+    /**
+     * Sets code
+     *
+     * @param int|null $code Meta error code
+     *
+     * @return self
+     */
+    public function setCode($code)
+    {
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
+        }
+        $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets subcode
+     *
+     * @return int|null
+     */
+    public function getSubcode()
+    {
+        return $this->container['subcode'];
+    }
+
+    /**
+     * Sets subcode
+     *
+     * @param int|null $subcode Meta error_subcode
+     *
+     * @return self
+     */
+    public function setSubcode($subcode)
+    {
+        if (is_null($subcode)) {
+            throw new \InvalidArgumentException('non-nullable subcode cannot be null');
+        }
+        $this->container['subcode'] = $subcode;
+
+        return $this;
+    }
+
+    /**
+     * Gets fbtrace_id
      *
      * @return string|null
      */
-    public function getMessageId()
+    public function getFbtraceId()
     {
-        return $this->container['message_id'];
+        return $this->container['fbtrace_id'];
     }
 
     /**
-     * Sets message_id
+     * Sets fbtrace_id
      *
-     * @param string|null $message_id Platform id of the sent message (not returned for Reddit). For WhatsApp this is the raw Meta wamid, the same id delivered as message.platformMessageId on webhooks and delivery-status updates, and the value to pass as replyTo to quote-reply.
+     * @param string|null $fbtrace_id Meta fbtrace_id, quote this in a Meta bug report
      *
      * @return self
      */
-    public function setMessageId($message_id)
+    public function setFbtraceId($fbtrace_id)
     {
-        if (is_null($message_id)) {
-            throw new \InvalidArgumentException('non-nullable message_id cannot be null');
+        if (is_null($fbtrace_id)) {
+            throw new \InvalidArgumentException('non-nullable fbtrace_id cannot be null');
         }
-        $this->container['message_id'] = $message_id;
+        $this->container['fbtrace_id'] = $fbtrace_id;
 
         return $this;
     }
 
     /**
-     * Gets conversation_id
+     * Gets type
      *
      * @return string|null
      */
-    public function getConversationId()
+    public function getType()
     {
-        return $this->container['conversation_id'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets conversation_id
+     * Sets type
      *
-     * @param string|null $conversation_id Zernio conversation id, echoed so the thread can be read back or replied to. It equals the id the list-conversations endpoint returns for Telegram, WhatsApp, SMS and Slack; for Facebook, Instagram, Bluesky and Reddit that endpoint returns the platform thread id instead, so do not correlate the two by equality. For X (Twitter), when the request addressed the conversation by its Twitter dm_conversation_id, that platform id is echoed back instead. Omitted when the send succeeded but the conversation could not be resolved to a stored record.
+     * @param string|null $type Meta error type (e.g. OAuthException)
      *
      * @return self
      */
-    public function setConversationId($conversation_id)
+    public function setType($type)
     {
-        if (is_null($conversation_id)) {
-            throw new \InvalidArgumentException('non-nullable conversation_id cannot be null');
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
-        $this->container['conversation_id'] = $conversation_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets attachments
-     *
-     * @return \Zernio\Model\SendInboxMessage200ResponseDataAttachmentsInner[]|null
-     */
-    public function getAttachments()
-    {
-        return $this->container['attachments'];
-    }
-
-    /**
-     * Sets attachments
-     *
-     * @param \Zernio\Model\SendInboxMessage200ResponseDataAttachmentsInner[]|null $attachments Echo of the sent attachment with its resolved public URL, when one is available (Facebook, Instagram, Telegram, WhatsApp).
-     *
-     * @return self
-     */
-    public function setAttachments($attachments)
-    {
-        if (is_null($attachments)) {
-            throw new \InvalidArgumentException('non-nullable attachments cannot be null');
-        }
-        $this->container['attachments'] = $attachments;
-
-        return $this;
-    }
-
-    /**
-     * Gets message_ids
-     *
-     * @return string[]|null
-     */
-    public function getMessageIds()
-    {
-        return $this->container['message_ids'];
-    }
-
-    /**
-     * Sets message_ids
-     *
-     * @param string[]|null $message_ids Facebook/Instagram only. Present when an attachment and text were both requested: Meta has no single body shape for both, so the send is two Meta messages under the hood. First element === messageId (the attachment); second is the follow-up text.
-     *
-     * @return self
-     */
-    public function setMessageIds($message_ids)
-    {
-        if (is_null($message_ids)) {
-            throw new \InvalidArgumentException('non-nullable message_ids cannot be null');
-        }
-        $this->container['message_ids'] = $message_ids;
-
-        return $this;
-    }
-
-    /**
-     * Gets partial_failure
-     *
-     * @return \Zernio\Model\SendInboxMessage200ResponseDataPartialFailure|null
-     */
-    public function getPartialFailure()
-    {
-        return $this->container['partial_failure'];
-    }
-
-    /**
-     * Sets partial_failure
-     *
-     * @param \Zernio\Model\SendInboxMessage200ResponseDataPartialFailure|null $partial_failure partial_failure
-     *
-     * @return self
-     */
-    public function setPartialFailure($partial_failure)
-    {
-        if (is_null($partial_failure)) {
-            throw new \InvalidArgumentException('non-nullable partial_failure cannot be null');
-        }
-        $this->container['partial_failure'] = $partial_failure;
+        $this->container['type'] = $type;
 
         return $this;
     }
