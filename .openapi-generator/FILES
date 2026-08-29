@@ -3657,10 +3657,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/DeleteWhatsAppTemplate200ResponseTest.php
-test/Model/DeleteWhatsAppTemplateById200ResponseTest.php
-test/Model/GetWhatsAppTemplate409ResponseDetailsTest.php
-test/Model/GetWhatsAppTemplate409ResponseTest.php
-test/Model/UpdateWhatsAppTemplateById200ResponseTemplateTest.php
-test/Model/UpdateWhatsAppTemplateById200ResponseTest.php
-test/Model/UpdateWhatsAppTemplateByIdRequestTest.php
