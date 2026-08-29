@@ -1029,7 +1029,7 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets audience_include
      *
-     * @param string[]|null $audience_include Platform audience IDs to include.
+     * @param string[]|null $audience_include Platform audience IDs to include. Not supported on any platform (no builder maps it): rejected with a 400 on ad create, boost, and reach estimate.
      *
      * @return self
      */
@@ -1056,7 +1056,7 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets audience_exclude
      *
-     * @param string[]|null $audience_exclude Platform audience IDs to exclude.
+     * @param string[]|null $audience_exclude Platform audience IDs to exclude. Not supported on any platform (no builder maps it): rejected with a 400 on ad create, boost, and reach estimate.
      *
      * @return self
      */
