@@ -116,7 +116,7 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'saves' => false,
         'clicks' => false,
         'views' => false,
-        'follows' => false,
+        'follows' => true,
         'ig_reels_avg_watch_time' => false,
         'ig_reels_video_view_total_time' => false,
         'reels_skip_rate' => false,
@@ -624,14 +624,21 @@ class PostAnalytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets follows
      *
-     * @param int|null $follows Instagram feed posts and stories only: organic accounts that started following from this post. 0 for reels and other platforms.
+     * @param int|null $follows Instagram feed posts and stories only: organic accounts that started following from this post. Null on Instagram Reels and non-Reels video, where Meta does not expose this metric for the media. 0 for other platforms.
      *
      * @return self
      */
     public function setFollows($follows)
     {
         if (is_null($follows)) {
-            throw new \InvalidArgumentException('non-nullable follows cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'follows');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('follows', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['follows'] = $follows;
 

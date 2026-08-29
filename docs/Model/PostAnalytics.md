@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **saves** | **int** | Number of saves/bookmarks (Instagram, Pinterest, X/Twitter) | [optional]
 **clicks** | **int** |  | [optional]
 **views** | **int** |  | [optional]
-**follows** | **int** | Instagram feed posts and stories only: organic accounts that started following from this post. 0 for reels and other platforms. | [optional]
+**follows** | **int** | Instagram feed posts and stories only: organic accounts that started following from this post. Null on Instagram Reels and non-Reels video, where Meta does not expose this metric for the media. 0 for other platforms. | [optional]
 **ig_reels_avg_watch_time** | **int** | Instagram Reels only: average watch time per play, in milliseconds. 0 for non-Reels media and other platforms. | [optional]
 **ig_reels_video_view_total_time** | **int** | Instagram Reels only: total watch time including replays, in milliseconds. 0 for non-Reels media and other platforms. | [optional]
 **reels_skip_rate** | **float** | Instagram Reels only: the rate of initial views that skipped the reel within its first 3 seconds, as reported by Meta. Passed through exactly as Meta reports it, with no rescaling, so do not assume a 0-1 share. Meta labels the metric estimated and in development, so it can move between syncs. 0 for non-Reels media and other platforms. When a post is published to several accounts, the aggregate is weighted by views. | [optional]
