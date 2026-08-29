@@ -59,6 +59,7 @@ class AttachCampaignAssetsRequest implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPITypes = [
         'account_id' => 'string',
+        'customer_id' => 'string',
         'sitelinks' => '\Zernio\Model\AttachCampaignAssetsRequestSitelinksInner[]',
         'callouts' => 'string[]',
         'structured_snippets' => '\Zernio\Model\AttachCampaignAssetsRequestStructuredSnippetsInner[]'
@@ -73,6 +74,7 @@ class AttachCampaignAssetsRequest implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPIFormats = [
         'account_id' => null,
+        'customer_id' => null,
         'sitelinks' => null,
         'callouts' => null,
         'structured_snippets' => null
@@ -85,6 +87,7 @@ class AttachCampaignAssetsRequest implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static array $openAPINullables = [
         'account_id' => false,
+        'customer_id' => false,
         'sitelinks' => false,
         'callouts' => false,
         'structured_snippets' => false
@@ -177,6 +180,7 @@ class AttachCampaignAssetsRequest implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $attributeMap = [
         'account_id' => 'accountId',
+        'customer_id' => 'customerId',
         'sitelinks' => 'sitelinks',
         'callouts' => 'callouts',
         'structured_snippets' => 'structuredSnippets'
@@ -189,6 +193,7 @@ class AttachCampaignAssetsRequest implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $setters = [
         'account_id' => 'setAccountId',
+        'customer_id' => 'setCustomerId',
         'sitelinks' => 'setSitelinks',
         'callouts' => 'setCallouts',
         'structured_snippets' => 'setStructuredSnippets'
@@ -201,6 +206,7 @@ class AttachCampaignAssetsRequest implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $getters = [
         'account_id' => 'getAccountId',
+        'customer_id' => 'getCustomerId',
         'sitelinks' => 'getSitelinks',
         'callouts' => 'getCallouts',
         'structured_snippets' => 'getStructuredSnippets'
@@ -264,6 +270,7 @@ class AttachCampaignAssetsRequest implements ModelInterface, ArrayAccess, \JsonS
     public function __construct(?array $data = null)
     {
         $this->setIfExists('account_id', $data ?? [], null);
+        $this->setIfExists('customer_id', $data ?? [], null);
         $this->setIfExists('sitelinks', $data ?? [], null);
         $this->setIfExists('callouts', $data ?? [], null);
         $this->setIfExists('structured_snippets', $data ?? [], null);
@@ -361,6 +368,33 @@ class AttachCampaignAssetsRequest implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable account_id cannot be null');
         }
         $this->container['account_id'] = $account_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_id
+     *
+     * @return string|null
+     */
+    public function getCustomerId()
+    {
+        return $this->container['customer_id'];
+    }
+
+    /**
+     * Sets customer_id
+     *
+     * @param string|null $customer_id Numeric Google Ads customer id. Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
+     *
+     * @return self
+     */
+    public function setCustomerId($customer_id)
+    {
+        if (is_null($customer_id)) {
+            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
+        }
+        $this->container['customer_id'] = $customer_id;
 
         return $this;
     }
