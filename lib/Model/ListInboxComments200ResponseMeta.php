@@ -1,6 +1,6 @@
 <?php
 /**
- * ListInboxComments200Response
+ * ListInboxComments200ResponseMeta
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListInboxComments200Response Class Doc Comment
+ * ListInboxComments200ResponseMeta Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListInboxComments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListInboxComments200ResponseMeta implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listInboxComments_200_response';
+    protected static $openAPIModelName = 'listInboxComments_200_response_meta';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +58,11 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data' => '\Zernio\Model\ListInboxComments200ResponseDataInner[]',
-        'pagination' => '\Zernio\Model\ListInboxConversations200ResponsePagination',
-        'meta' => '\Zernio\Model\ListInboxComments200ResponseMeta'
+        'accounts_queried' => 'int',
+        'accounts_failed' => 'int',
+        'failed_accounts' => '\Zernio\Model\ListInboxComments200ResponseMetaFailedAccountsInner[]',
+        'last_updated' => '\DateTime',
+        'accounts_skipped' => '\Zernio\Model\ListInboxConversations200ResponseMetaAccountsSkippedInner[]'
     ];
 
     /**
@@ -71,9 +73,11 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'data' => null,
-        'pagination' => null,
-        'meta' => null
+        'accounts_queried' => null,
+        'accounts_failed' => null,
+        'failed_accounts' => null,
+        'last_updated' => 'date-time',
+        'accounts_skipped' => null
     ];
 
     /**
@@ -82,9 +86,11 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'data' => false,
-        'pagination' => false,
-        'meta' => false
+        'accounts_queried' => false,
+        'accounts_failed' => false,
+        'failed_accounts' => false,
+        'last_updated' => false,
+        'accounts_skipped' => false
     ];
 
     /**
@@ -173,9 +179,11 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data',
-        'pagination' => 'pagination',
-        'meta' => 'meta'
+        'accounts_queried' => 'accountsQueried',
+        'accounts_failed' => 'accountsFailed',
+        'failed_accounts' => 'failedAccounts',
+        'last_updated' => 'lastUpdated',
+        'accounts_skipped' => 'accountsSkipped'
     ];
 
     /**
@@ -184,9 +192,11 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData',
-        'pagination' => 'setPagination',
-        'meta' => 'setMeta'
+        'accounts_queried' => 'setAccountsQueried',
+        'accounts_failed' => 'setAccountsFailed',
+        'failed_accounts' => 'setFailedAccounts',
+        'last_updated' => 'setLastUpdated',
+        'accounts_skipped' => 'setAccountsSkipped'
     ];
 
     /**
@@ -195,9 +205,11 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData',
-        'pagination' => 'getPagination',
-        'meta' => 'getMeta'
+        'accounts_queried' => 'getAccountsQueried',
+        'accounts_failed' => 'getAccountsFailed',
+        'failed_accounts' => 'getFailedAccounts',
+        'last_updated' => 'getLastUpdated',
+        'accounts_skipped' => 'getAccountsSkipped'
     ];
 
     /**
@@ -257,9 +269,11 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('data', $data ?? [], null);
-        $this->setIfExists('pagination', $data ?? [], null);
-        $this->setIfExists('meta', $data ?? [], null);
+        $this->setIfExists('accounts_queried', $data ?? [], null);
+        $this->setIfExists('accounts_failed', $data ?? [], null);
+        $this->setIfExists('failed_accounts', $data ?? [], null);
+        $this->setIfExists('last_updated', $data ?? [], null);
+        $this->setIfExists('accounts_skipped', $data ?? [], null);
     }
 
     /**
@@ -305,82 +319,136 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
 
 
     /**
-     * Gets data
+     * Gets accounts_queried
      *
-     * @return \Zernio\Model\ListInboxComments200ResponseDataInner[]|null
+     * @return int|null
      */
-    public function getData()
+    public function getAccountsQueried()
     {
-        return $this->container['data'];
+        return $this->container['accounts_queried'];
     }
 
     /**
-     * Sets data
+     * Sets accounts_queried
      *
-     * @param \Zernio\Model\ListInboxComments200ResponseDataInner[]|null $data data
+     * @param int|null $accounts_queried accounts_queried
      *
      * @return self
      */
-    public function setData($data)
+    public function setAccountsQueried($accounts_queried)
     {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+        if (is_null($accounts_queried)) {
+            throw new \InvalidArgumentException('non-nullable accounts_queried cannot be null');
         }
-        $this->container['data'] = $data;
+        $this->container['accounts_queried'] = $accounts_queried;
 
         return $this;
     }
 
     /**
-     * Gets pagination
+     * Gets accounts_failed
      *
-     * @return \Zernio\Model\ListInboxConversations200ResponsePagination|null
+     * @return int|null
      */
-    public function getPagination()
+    public function getAccountsFailed()
     {
-        return $this->container['pagination'];
+        return $this->container['accounts_failed'];
     }
 
     /**
-     * Sets pagination
+     * Sets accounts_failed
      *
-     * @param \Zernio\Model\ListInboxConversations200ResponsePagination|null $pagination pagination
+     * @param int|null $accounts_failed accounts_failed
      *
      * @return self
      */
-    public function setPagination($pagination)
+    public function setAccountsFailed($accounts_failed)
     {
-        if (is_null($pagination)) {
-            throw new \InvalidArgumentException('non-nullable pagination cannot be null');
+        if (is_null($accounts_failed)) {
+            throw new \InvalidArgumentException('non-nullable accounts_failed cannot be null');
         }
-        $this->container['pagination'] = $pagination;
+        $this->container['accounts_failed'] = $accounts_failed;
 
         return $this;
     }
 
     /**
-     * Gets meta
+     * Gets failed_accounts
      *
-     * @return \Zernio\Model\ListInboxComments200ResponseMeta|null
+     * @return \Zernio\Model\ListInboxComments200ResponseMetaFailedAccountsInner[]|null
      */
-    public function getMeta()
+    public function getFailedAccounts()
     {
-        return $this->container['meta'];
+        return $this->container['failed_accounts'];
     }
 
     /**
-     * Sets meta
+     * Sets failed_accounts
      *
-     * @param \Zernio\Model\ListInboxComments200ResponseMeta|null $meta meta
+     * @param \Zernio\Model\ListInboxComments200ResponseMetaFailedAccountsInner[]|null $failed_accounts failed_accounts
      *
      * @return self
      */
-    public function setMeta($meta)
+    public function setFailedAccounts($failed_accounts)
     {
-        if (is_null($meta)) {
-            throw new \InvalidArgumentException('non-nullable meta cannot be null');
+        if (is_null($failed_accounts)) {
+            throw new \InvalidArgumentException('non-nullable failed_accounts cannot be null');
         }
-        $this->container['meta'] = $meta;
+        $this->container['failed_accounts'] = $failed_accounts;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_updated
+     *
+     * @return \DateTime|null
+     */
+    public function getLastUpdated()
+    {
+        return $this->container['last_updated'];
+    }
+
+    /**
+     * Sets last_updated
+     *
+     * @param \DateTime|null $last_updated last_updated
+     *
+     * @return self
+     */
+    public function setLastUpdated($last_updated)
+    {
+        if (is_null($last_updated)) {
+            throw new \InvalidArgumentException('non-nullable last_updated cannot be null');
+        }
+        $this->container['last_updated'] = $last_updated;
+
+        return $this;
+    }
+
+    /**
+     * Gets accounts_skipped
+     *
+     * @return \Zernio\Model\ListInboxConversations200ResponseMetaAccountsSkippedInner[]|null
+     */
+    public function getAccountsSkipped()
+    {
+        return $this->container['accounts_skipped'];
+    }
+
+    /**
+     * Sets accounts_skipped
+     *
+     * @param \Zernio\Model\ListInboxConversations200ResponseMetaAccountsSkippedInner[]|null $accounts_skipped Connected accounts that were not queried: their platform does not support this feature, or the account is not enabled for it
+     *
+     * @return self
+     */
+    public function setAccountsSkipped($accounts_skipped)
+    {
+        if (is_null($accounts_skipped)) {
+            throw new \InvalidArgumentException('non-nullable accounts_skipped cannot be null');
+        }
+        $this->container['accounts_skipped'] = $accounts_skipped;
 
         return $this;
     }

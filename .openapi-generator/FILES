@@ -1017,6 +1017,8 @@ docs/Model/ListGoogleBusinessPlaceActions200ResponsePlaceActionLinksInner.md
 docs/Model/ListHighDemandPeriods200Response.md
 docs/Model/ListInboxComments200Response.md
 docs/Model/ListInboxComments200ResponseDataInner.md
+docs/Model/ListInboxComments200ResponseMeta.md
+docs/Model/ListInboxComments200ResponseMetaFailedAccountsInner.md
 docs/Model/ListInboxConversationAnalytics200Response.md
 docs/Model/ListInboxConversationAnalytics200ResponseItemsInner.md
 docs/Model/ListInboxConversationAnalytics200ResponsePagination.md
@@ -2845,6 +2847,8 @@ lib/Model/ListGoogleBusinessPlaceActions200ResponsePlaceActionLinksInner.php
 lib/Model/ListHighDemandPeriods200Response.php
 lib/Model/ListInboxComments200Response.php
 lib/Model/ListInboxComments200ResponseDataInner.php
+lib/Model/ListInboxComments200ResponseMeta.php
+lib/Model/ListInboxComments200ResponseMetaFailedAccountsInner.php
 lib/Model/ListInboxConversationAnalytics200Response.php
 lib/Model/ListInboxConversationAnalytics200ResponseItemsInner.php
 lib/Model/ListInboxConversationAnalytics200ResponsePagination.php
@@ -3657,3 +3661,5 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/ListInboxComments200ResponseMetaFailedAccountsInnerTest.php
+test/Model/ListInboxComments200ResponseMetaTest.php

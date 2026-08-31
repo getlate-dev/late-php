@@ -1,6 +1,6 @@
 <?php
 /**
- * ListInboxComments200Response
+ * ListInboxComments200ResponseMetaFailedAccountsInner
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ListInboxComments200Response Class Doc Comment
+ * ListInboxComments200ResponseMetaFailedAccountsInner Class Doc Comment
  *
  * @category Class
  * @package  Zernio
@@ -41,7 +41,7 @@ use \Zernio\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListInboxComments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListInboxComments200ResponseMetaFailedAccountsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listInboxComments_200_response';
+    protected static $openAPIModelName = 'listInboxComments_200_response_meta_failedAccounts_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +58,12 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data' => '\Zernio\Model\ListInboxComments200ResponseDataInner[]',
-        'pagination' => '\Zernio\Model\ListInboxConversations200ResponsePagination',
-        'meta' => '\Zernio\Model\ListInboxComments200ResponseMeta'
+        'account_id' => 'string',
+        'account_username' => 'string',
+        'platform' => 'string',
+        'error' => 'string',
+        'code' => 'string',
+        'retry_after' => 'int'
     ];
 
     /**
@@ -71,9 +74,12 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'data' => null,
-        'pagination' => null,
-        'meta' => null
+        'account_id' => null,
+        'account_username' => null,
+        'platform' => null,
+        'error' => null,
+        'code' => null,
+        'retry_after' => null
     ];
 
     /**
@@ -82,9 +88,12 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'data' => false,
-        'pagination' => false,
-        'meta' => false
+        'account_id' => false,
+        'account_username' => true,
+        'platform' => false,
+        'error' => false,
+        'code' => true,
+        'retry_after' => true
     ];
 
     /**
@@ -173,9 +182,12 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data',
-        'pagination' => 'pagination',
-        'meta' => 'meta'
+        'account_id' => 'accountId',
+        'account_username' => 'accountUsername',
+        'platform' => 'platform',
+        'error' => 'error',
+        'code' => 'code',
+        'retry_after' => 'retryAfter'
     ];
 
     /**
@@ -184,9 +196,12 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData',
-        'pagination' => 'setPagination',
-        'meta' => 'setMeta'
+        'account_id' => 'setAccountId',
+        'account_username' => 'setAccountUsername',
+        'platform' => 'setPlatform',
+        'error' => 'setError',
+        'code' => 'setCode',
+        'retry_after' => 'setRetryAfter'
     ];
 
     /**
@@ -195,9 +210,12 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData',
-        'pagination' => 'getPagination',
-        'meta' => 'getMeta'
+        'account_id' => 'getAccountId',
+        'account_username' => 'getAccountUsername',
+        'platform' => 'getPlatform',
+        'error' => 'getError',
+        'code' => 'getCode',
+        'retry_after' => 'getRetryAfter'
     ];
 
     /**
@@ -257,9 +275,12 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('data', $data ?? [], null);
-        $this->setIfExists('pagination', $data ?? [], null);
-        $this->setIfExists('meta', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
+        $this->setIfExists('account_username', $data ?? [], null);
+        $this->setIfExists('platform', $data ?? [], null);
+        $this->setIfExists('error', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('retry_after', $data ?? [], null);
     }
 
     /**
@@ -305,82 +326,184 @@ class ListInboxComments200Response implements ModelInterface, ArrayAccess, \Json
 
 
     /**
-     * Gets data
+     * Gets account_id
      *
-     * @return \Zernio\Model\ListInboxComments200ResponseDataInner[]|null
+     * @return string|null
      */
-    public function getData()
+    public function getAccountId()
     {
-        return $this->container['data'];
+        return $this->container['account_id'];
     }
 
     /**
-     * Sets data
+     * Sets account_id
      *
-     * @param \Zernio\Model\ListInboxComments200ResponseDataInner[]|null $data data
+     * @param string|null $account_id account_id
      *
      * @return self
      */
-    public function setData($data)
+    public function setAccountId($account_id)
     {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
         }
-        $this->container['data'] = $data;
+        $this->container['account_id'] = $account_id;
 
         return $this;
     }
 
     /**
-     * Gets pagination
+     * Gets account_username
      *
-     * @return \Zernio\Model\ListInboxConversations200ResponsePagination|null
+     * @return string|null
      */
-    public function getPagination()
+    public function getAccountUsername()
     {
-        return $this->container['pagination'];
+        return $this->container['account_username'];
     }
 
     /**
-     * Sets pagination
+     * Sets account_username
      *
-     * @param \Zernio\Model\ListInboxConversations200ResponsePagination|null $pagination pagination
+     * @param string|null $account_username account_username
      *
      * @return self
      */
-    public function setPagination($pagination)
+    public function setAccountUsername($account_username)
     {
-        if (is_null($pagination)) {
-            throw new \InvalidArgumentException('non-nullable pagination cannot be null');
+        if (is_null($account_username)) {
+            array_push($this->openAPINullablesSetToNull, 'account_username');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('account_username', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['pagination'] = $pagination;
+        $this->container['account_username'] = $account_username;
 
         return $this;
     }
 
     /**
-     * Gets meta
+     * Gets platform
      *
-     * @return \Zernio\Model\ListInboxComments200ResponseMeta|null
+     * @return string|null
      */
-    public function getMeta()
+    public function getPlatform()
     {
-        return $this->container['meta'];
+        return $this->container['platform'];
     }
 
     /**
-     * Sets meta
+     * Sets platform
      *
-     * @param \Zernio\Model\ListInboxComments200ResponseMeta|null $meta meta
+     * @param string|null $platform platform
      *
      * @return self
      */
-    public function setMeta($meta)
+    public function setPlatform($platform)
     {
-        if (is_null($meta)) {
-            throw new \InvalidArgumentException('non-nullable meta cannot be null');
+        if (is_null($platform)) {
+            throw new \InvalidArgumentException('non-nullable platform cannot be null');
         }
-        $this->container['meta'] = $meta;
+        $this->container['platform'] = $platform;
+
+        return $this;
+    }
+
+    /**
+     * Gets error
+     *
+     * @return string|null
+     */
+    public function getError()
+    {
+        return $this->container['error'];
+    }
+
+    /**
+     * Sets error
+     *
+     * @param string|null $error error
+     *
+     * @return self
+     */
+    public function setError($error)
+    {
+        if (is_null($error)) {
+            throw new \InvalidArgumentException('non-nullable error cannot be null');
+        }
+        $this->container['error'] = $error;
+
+        return $this;
+    }
+
+    /**
+     * Gets code
+     *
+     * @return string|null
+     */
+    public function getCode()
+    {
+        return $this->container['code'];
+    }
+
+    /**
+     * Sets code
+     *
+     * @param string|null $code Error code if available (e.g. TOKEN_EXPIRED, or X_INBOX_NOT_ENABLED for an X account whose owner has not enabled X inbox)
+     *
+     * @return self
+     */
+    public function setCode($code)
+    {
+        if (is_null($code)) {
+            array_push($this->openAPINullablesSetToNull, 'code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets retry_after
+     *
+     * @return int|null
+     */
+    public function getRetryAfter()
+    {
+        return $this->container['retry_after'];
+    }
+
+    /**
+     * Sets retry_after
+     *
+     * @param int|null $retry_after Seconds to wait before retry (rate limits)
+     *
+     * @return self
+     */
+    public function setRetryAfter($retry_after)
+    {
+        if (is_null($retry_after)) {
+            array_push($this->openAPINullablesSetToNull, 'retry_after');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('retry_after', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['retry_after'] = $retry_after;
 
         return $this;
     }
