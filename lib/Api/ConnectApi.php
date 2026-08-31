@@ -2435,7 +2435,7 @@ class ConnectApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Zernio\Model\ConnectOpenAIAdsCredentials200Response|\Zernio\Model\ErrorResponse
+     * @return \Zernio\Model\ConnectOpenAIAdsCredentials200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject3
      */
     public function connectOpenAIAdsCredentials($connect_open_ai_ads_credentials_request, string $contentType = self::contentTypes['connectOpenAIAdsCredentials'][0])
     {
@@ -2453,7 +2453,7 @@ class ConnectApi
      *
      * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Zernio\Model\ConnectOpenAIAdsCredentials200Response|\Zernio\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Zernio\Model\ConnectOpenAIAdsCredentials200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject3, HTTP status code, HTTP response headers (array of strings)
      */
     public function connectOpenAIAdsCredentialsWithHttpInfo($connect_open_ai_ads_credentials_request, string $contentType = self::contentTypes['connectOpenAIAdsCredentials'][0])
     {
@@ -2495,6 +2495,12 @@ class ConnectApi
                         $request,
                         $response,
                     );
+                case 402:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject3',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -2531,6 +2537,14 @@ class ConnectApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject3',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

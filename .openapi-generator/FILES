@@ -3661,5 +3661,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/ListInboxComments200ResponseMetaFailedAccountsInnerTest.php
-test/Model/ListInboxComments200ResponseMetaTest.php
