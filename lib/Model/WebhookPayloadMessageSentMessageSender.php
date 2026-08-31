@@ -36,6 +36,7 @@ use \Zernio\ObjectSerializer;
  * WebhookPayloadMessageSentMessageSender Class Doc Comment
  *
  * @category Class
+ * @description **On this event the sender is your own business, not the person you are talking to.** &#x60;id&#x60; is the Zernio account id and &#x60;name&#x60;, &#x60;username&#x60; and &#x60;picture&#x60; are that connected account&#39;s own profile.  Do not read these to name or update a contact: doing so on an echo relabels the customer&#39;s record with your business name. The other party is &#x60;conversation.participantId&#x60; / &#x60;participantName&#x60; / &#x60;participantUsername&#x60;, which are populated in both directions.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -334,7 +335,7 @@ class WebhookPayloadMessageSentMessageSender implements ModelInterface, ArrayAcc
     /**
      * Sets id
      *
-     * @param string $id id
+     * @param string $id The Zernio account id of the connected account that sent the message, not a contact id.
      *
      * @return self
      */
@@ -388,7 +389,7 @@ class WebhookPayloadMessageSentMessageSender implements ModelInterface, ArrayAcc
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name Display name of your connected account.
      *
      * @return self
      */
@@ -415,7 +416,7 @@ class WebhookPayloadMessageSentMessageSender implements ModelInterface, ArrayAcc
     /**
      * Sets username
      *
-     * @param string|null $username username
+     * @param string|null $username Username of your connected account.
      *
      * @return self
      */
@@ -442,7 +443,7 @@ class WebhookPayloadMessageSentMessageSender implements ModelInterface, ArrayAcc
     /**
      * Sets picture
      *
-     * @param string|null $picture picture
+     * @param string|null $picture Profile picture of your connected account.
      *
      * @return self
      */

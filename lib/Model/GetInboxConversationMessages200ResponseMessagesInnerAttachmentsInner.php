@@ -60,6 +60,7 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
     protected static $openAPITypes = [
         'id' => 'string',
         'type' => 'string',
+        'original_type' => 'string',
         'url' => 'string',
         'refresh_url' => 'string',
         'filename' => 'string',
@@ -76,6 +77,7 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
     protected static $openAPIFormats = [
         'id' => null,
         'type' => null,
+        'original_type' => null,
         'url' => null,
         'refresh_url' => null,
         'filename' => null,
@@ -90,6 +92,7 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
     protected static array $openAPINullables = [
         'id' => false,
         'type' => false,
+        'original_type' => false,
         'url' => false,
         'refresh_url' => true,
         'filename' => true,
@@ -184,6 +187,7 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
     protected static $attributeMap = [
         'id' => 'id',
         'type' => 'type',
+        'original_type' => 'originalType',
         'url' => 'url',
         'refresh_url' => 'refreshUrl',
         'filename' => 'filename',
@@ -198,6 +202,7 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
     protected static $setters = [
         'id' => 'setId',
         'type' => 'setType',
+        'original_type' => 'setOriginalType',
         'url' => 'setUrl',
         'refresh_url' => 'setRefreshUrl',
         'filename' => 'setFilename',
@@ -212,6 +217,7 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
     protected static $getters = [
         'id' => 'getId',
         'type' => 'getType',
+        'original_type' => 'getOriginalType',
         'url' => 'getUrl',
         'refresh_url' => 'getRefreshUrl',
         'filename' => 'getFilename',
@@ -300,6 +306,7 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('original_type', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('refresh_url', $data ?? [], null);
         $this->setIfExists('filename', $data ?? [], null);
@@ -417,6 +424,33 @@ class GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner imple
             );
         }
         $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets original_type
+     *
+     * @return string|null
+     */
+    public function getOriginalType()
+    {
+        return $this->container['original_type'];
+    }
+
+    /**
+     * Sets original_type
+     *
+     * @param string|null $original_type Instagram and Facebook only, and present only when it differs from `type`. Meta's own type before normalization: `ig_reel` and `reel` become `video`, while `ig_post`, `post`, `ig_story` and `story_mention` become `share`. A story mention is `type: \"share\"` with `originalType: \"story_mention\"`; render on this field, since `share` alone is ambiguous.
+     *
+     * @return self
+     */
+    public function setOriginalType($original_type)
+    {
+        if (is_null($original_type)) {
+            throw new \InvalidArgumentException('non-nullable original_type cannot be null');
+        }
+        $this->container['original_type'] = $original_type;
 
         return $this;
     }

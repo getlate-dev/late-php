@@ -59,6 +59,7 @@ class WebhookPayloadMessageSentMessageAttachmentsInner implements ModelInterface
       */
     protected static $openAPITypes = [
         'type' => 'string',
+        'original_type' => 'string',
         'url' => 'string',
         'payload' => 'object'
     ];
@@ -72,6 +73,7 @@ class WebhookPayloadMessageSentMessageAttachmentsInner implements ModelInterface
       */
     protected static $openAPIFormats = [
         'type' => null,
+        'original_type' => null,
         'url' => null,
         'payload' => null
     ];
@@ -83,6 +85,7 @@ class WebhookPayloadMessageSentMessageAttachmentsInner implements ModelInterface
       */
     protected static array $openAPINullables = [
         'type' => false,
+        'original_type' => false,
         'url' => false,
         'payload' => false
     ];
@@ -174,6 +177,7 @@ class WebhookPayloadMessageSentMessageAttachmentsInner implements ModelInterface
      */
     protected static $attributeMap = [
         'type' => 'type',
+        'original_type' => 'originalType',
         'url' => 'url',
         'payload' => 'payload'
     ];
@@ -185,6 +189,7 @@ class WebhookPayloadMessageSentMessageAttachmentsInner implements ModelInterface
      */
     protected static $setters = [
         'type' => 'setType',
+        'original_type' => 'setOriginalType',
         'url' => 'setUrl',
         'payload' => 'setPayload'
     ];
@@ -196,6 +201,7 @@ class WebhookPayloadMessageSentMessageAttachmentsInner implements ModelInterface
      */
     protected static $getters = [
         'type' => 'getType',
+        'original_type' => 'getOriginalType',
         'url' => 'getUrl',
         'payload' => 'getPayload'
     ];
@@ -258,6 +264,7 @@ class WebhookPayloadMessageSentMessageAttachmentsInner implements ModelInterface
     public function __construct(?array $data = null)
     {
         $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('original_type', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('payload', $data ?? [], null);
     }
@@ -323,7 +330,7 @@ class WebhookPayloadMessageSentMessageAttachmentsInner implements ModelInterface
     /**
      * Sets type
      *
-     * @param string $type Attachment type (image, video, file, sticker, audio)
+     * @param string $type Attachment type (image, video, file, sticker, audio, share)
      *
      * @return self
      */
@@ -333,6 +340,33 @@ class WebhookPayloadMessageSentMessageAttachmentsInner implements ModelInterface
             throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
         $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets original_type
+     *
+     * @return string|null
+     */
+    public function getOriginalType()
+    {
+        return $this->container['original_type'];
+    }
+
+    /**
+     * Sets original_type
+     *
+     * @param string|null $original_type Instagram and Facebook only, and present only when it differs from `type`. Meta's own attachment type before Zernio normalized it. See the same field on message.received for the full mapping.
+     *
+     * @return self
+     */
+    public function setOriginalType($original_type)
+    {
+        if (is_null($original_type)) {
+            throw new \InvalidArgumentException('non-nullable original_type cannot be null');
+        }
+        $this->container['original_type'] = $original_type;
 
         return $this;
     }
@@ -350,7 +384,7 @@ class WebhookPayloadMessageSentMessageAttachmentsInner implements ModelInterface
     /**
      * Sets url
      *
-     * @param string $url Where to fetch the attachment. For outgoing messages this is the media URL as sent, so for WhatsApp it is the URL you supplied when publishing (WhatsApp sends media by link), not a Zernio endpoint, and it needs no Zernio credentials. Contrast the inbound direction: `message.received` attachment URLs on WhatsApp point at the authenticated `GET /v1/whatsapp/media/{mediaId}`.
+     * @param string $url Where to fetch the attachment. For outgoing messages this is the media URL as sent, so for WhatsApp it is the URL you supplied when publishing (WhatsApp sends media by link), not a Zernio endpoint, and it needs no Zernio credentials. Contrast the inbound direction: `message.received` attachment URLs on WhatsApp point at the authenticated `GET /v1/whatsapp/media/{mediaId}`.  As on `message.received`, webhook attachments carry no `refreshUrl`: that field is stamped only on the REST read. Resolve Instagram and Facebook media through `GET /v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index}?accountId={accountId}`.
      *
      * @return self
      */

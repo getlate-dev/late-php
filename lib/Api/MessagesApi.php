@@ -2175,7 +2175,7 @@ class MessagesApi
      * @param  string $conversation_id The conversation ID (Zernio id or platform conversation id) (required)
      * @param  string $message_id The message id as returned by the list-messages endpoint (the platform message id) (required)
      * @param  int $index Zero-based position of the attachment in the message&#39;s attachments array (required)
-     * @param  string $account_id Social account ID (required)
+     * @param  string $account_id Social account ID. Required: without it the request returns 400 missing_required_field. (required)
      * @param  string|null $format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (optional, default to 'redirect')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMessageAttachment'] to see the possible values for this operation
      *
@@ -2197,7 +2197,7 @@ class MessagesApi
      * @param  string $conversation_id The conversation ID (Zernio id or platform conversation id) (required)
      * @param  string $message_id The message id as returned by the list-messages endpoint (the platform message id) (required)
      * @param  int $index Zero-based position of the attachment in the message&#39;s attachments array (required)
-     * @param  string $account_id Social account ID (required)
+     * @param  string $account_id Social account ID. Required: without it the request returns 400 missing_required_field. (required)
      * @param  string|null $format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (optional, default to 'redirect')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMessageAttachment'] to see the possible values for this operation
      *
@@ -2314,7 +2314,7 @@ class MessagesApi
      * @param  string $conversation_id The conversation ID (Zernio id or platform conversation id) (required)
      * @param  string $message_id The message id as returned by the list-messages endpoint (the platform message id) (required)
      * @param  int $index Zero-based position of the attachment in the message&#39;s attachments array (required)
-     * @param  string $account_id Social account ID (required)
+     * @param  string $account_id Social account ID. Required: without it the request returns 400 missing_required_field. (required)
      * @param  string|null $format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (optional, default to 'redirect')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMessageAttachment'] to see the possible values for this operation
      *
@@ -2339,7 +2339,7 @@ class MessagesApi
      * @param  string $conversation_id The conversation ID (Zernio id or platform conversation id) (required)
      * @param  string $message_id The message id as returned by the list-messages endpoint (the platform message id) (required)
      * @param  int $index Zero-based position of the attachment in the message&#39;s attachments array (required)
-     * @param  string $account_id Social account ID (required)
+     * @param  string $account_id Social account ID. Required: without it the request returns 400 missing_required_field. (required)
      * @param  string|null $format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (optional, default to 'redirect')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMessageAttachment'] to see the possible values for this operation
      *
@@ -2393,7 +2393,7 @@ class MessagesApi
      * @param  string $conversation_id The conversation ID (Zernio id or platform conversation id) (required)
      * @param  string $message_id The message id as returned by the list-messages endpoint (the platform message id) (required)
      * @param  int $index Zero-based position of the attachment in the message&#39;s attachments array (required)
-     * @param  string $account_id Social account ID (required)
+     * @param  string $account_id Social account ID. Required: without it the request returns 400 missing_required_field. (required)
      * @param  string|null $format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (optional, default to 'redirect')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMessageAttachment'] to see the possible values for this operation
      *
