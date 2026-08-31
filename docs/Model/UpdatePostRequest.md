@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **string** |  | [optional]
+**title** | **string** | Stored on the post for reference/display only. This field is NOT used as the video title when publishing. To set a YouTube video title, use platformSpecificData.title on the youtube platform target (falls back to the first line of content when omitted). | [optional]
 **content** | **string** |  | [optional]
 **media_items** | [**\Zernio\Model\MediaItem[]**](MediaItem.md) |  | [optional]
 **platforms** | [**\Zernio\Model\UpdatePostRequestPlatformsInner[]**](UpdatePostRequestPlatformsInner.md) | Target platforms and accounts for this post. Each item must include platform and accountId. | [optional]
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **timezone** | **string** |  | [optional]
 **visibility** | **string** |  | [optional]
 **tags** | **string[]** |  | [optional]
-**hashtags** | **string[]** |  | [optional]
+**hashtags** | **string[]** | Stored for reference only. Hashtags are NOT automatically appended to the caption when publishing. Include hashtags directly in the content field (platforms like Instagram only support hashtags as caption text). For YouTube keywords, use the tags field instead. | [optional]
 **mentions** | **string[]** |  | [optional]
 **crossposting_enabled** | **bool** |  | [optional]
 **metadata** | **array<string,mixed>** |  | [optional]

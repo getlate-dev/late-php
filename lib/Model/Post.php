@@ -548,7 +548,7 @@ class Post implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets title
      *
-     * @param string|null $title YouTube: title must be ≤ 100 characters.
+     * @param string|null $title Stored on the post for reference/display only. This field is NOT used as the video title when publishing. To set a YouTube video title, use platformSpecificData.title on the youtube platform target (falls back to the first line of content when omitted).
      *
      * @return self
      */
@@ -774,7 +774,7 @@ class Post implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets hashtags
      *
-     * @param string[]|null $hashtags hashtags
+     * @param string[]|null $hashtags Stored for reference only. Hashtags are NOT automatically appended to the caption when publishing. Include hashtags directly in the content field (platforms like Instagram only support hashtags as caption text). For YouTube keywords, use the tags field instead.
      *
      * @return self
      */
