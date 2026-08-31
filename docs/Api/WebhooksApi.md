@@ -10,6 +10,7 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**deleteWebhookSettings()**](WebhooksApi.md#deleteWebhookSettings) | **DELETE** /v1/webhooks/settings | Delete webhook |
 | [**getWebhookLogs()**](WebhooksApi.md#getWebhookLogs) | **GET** /v1/webhooks/logs | List webhook delivery logs |
 | [**getWebhookSettings()**](WebhooksApi.md#getWebhookSettings) | **GET** /v1/webhooks/settings | List webhooks |
+| [**redeliverWebhookEvent()**](WebhooksApi.md#redeliverWebhookEvent) | **POST** /v1/webhooks/logs/redeliver | Redeliver a webhook event |
 | [**testWebhook()**](WebhooksApi.md#testWebhook) | **POST** /v1/webhooks/test | Send test webhook |
 | [**updateWebhookSettings()**](WebhooksApi.md#updateWebhookSettings) | **PUT** /v1/webhooks/settings | Update webhook |
 
@@ -255,6 +256,66 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `redeliverWebhookEvent()`
+
+```php
+redeliverWebhookEvent($redeliver_webhook_event_request): \Zernio\Model\UnpublishPost200Response
+```
+
+Redeliver a webhook event
+
+Replay a past delivery: the original payload is re-sent, byte for byte, to the subscription's current URL. The original event ID is preserved so your endpoint can dedupe, and the replay is recorded as a fresh attempt, so it shows up in `GET /v1/webhooks/logs` next to the delivery it replays.  Both `webhookId` and `eventId` come from a row of `GET /v1/webhooks/logs`. Because the stored payload is replayed as-is, a redelivery reflects the event as it was emitted, not the current state of the resource.  Only deliveries inside the 30-day log retention window can be replayed; past that the payload is gone and the request fails with a 500. Replays run the same resource-group checks as live delivery, against both the key's groups and the subscription's `disabledResourceGroups`.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\WebhooksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$redeliver_webhook_event_request = {"webhookId":"507f1f77bcf86cd799439011","eventId":"evt_9f2c1b7a4d8e"}; // \Zernio\Model\RedeliverWebhookEventRequest
+
+try {
+    $result = $apiInstance->redeliverWebhookEvent($redeliver_webhook_event_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WebhooksApi->redeliverWebhookEvent: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **redeliver_webhook_event_request** | [**\Zernio\Model\RedeliverWebhookEventRequest**](../Model/RedeliverWebhookEventRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\UnpublishPost200Response**](../Model/UnpublishPost200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

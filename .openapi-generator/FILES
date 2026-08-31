@@ -1219,6 +1219,7 @@ docs/Model/RecyclingConfig.md
 docs/Model/RecyclingState.md
 docs/Model/RedditPlatformData.md
 docs/Model/RedditPost.md
+docs/Model/RedeliverWebhookEventRequest.md
 docs/Model/RegisterWhatsAppNumber200Response.md
 docs/Model/RegisterWhatsAppNumberRequest.md
 docs/Model/RejectWhatsAppGroupJoinRequestsRequest.md
@@ -3050,6 +3051,7 @@ lib/Model/RecyclingConfig.php
 lib/Model/RecyclingState.php
 lib/Model/RedditPlatformData.php
 lib/Model/RedditPost.php
+lib/Model/RedeliverWebhookEventRequest.php
 lib/Model/RegisterWhatsAppNumber200Response.php
 lib/Model/RegisterWhatsAppNumberRequest.php
 lib/Model/RejectWhatsAppGroupJoinRequestsRequest.php
@@ -3661,3 +3663,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/RedeliverWebhookEventRequestTest.php
