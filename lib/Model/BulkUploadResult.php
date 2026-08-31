@@ -447,7 +447,7 @@ class BulkUploadResult implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets warnings
      *
-     * @param string[]|null $warnings Top-level advisory warnings (e.g. `rows_exceed_advisory_limit:500`). Empty when none.
+     * @param string[]|null $warnings Top-level advisory warnings, e.g. `rows_exceed_advisory_limit:500` or `unknown_columns:<a,b,c>` (comma-separated unrecognized CSV column names). Empty when none.
      *
      * @return self
      */

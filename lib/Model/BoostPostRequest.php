@@ -84,6 +84,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'spark_auth_code' => 'string',
         'dsa_beneficiary' => 'string',
         'dsa_payor' => 'string',
+        'lead_gen_form_id' => 'string',
+        'status' => 'string',
         'optimization_goal' => 'string'
     ];
 
@@ -121,6 +123,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'spark_auth_code' => null,
         'dsa_beneficiary' => null,
         'dsa_payor' => null,
+        'lead_gen_form_id' => null,
+        'status' => null,
         'optimization_goal' => null
     ];
 
@@ -156,6 +160,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'spark_auth_code' => false,
         'dsa_beneficiary' => false,
         'dsa_payor' => false,
+        'lead_gen_form_id' => false,
+        'status' => false,
         'optimization_goal' => false
     ];
 
@@ -271,6 +277,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'spark_auth_code' => 'sparkAuthCode',
         'dsa_beneficiary' => 'dsaBeneficiary',
         'dsa_payor' => 'dsaPayor',
+        'lead_gen_form_id' => 'leadGenFormId',
+        'status' => 'status',
         'optimization_goal' => 'optimizationGoal'
     ];
 
@@ -306,6 +314,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'spark_auth_code' => 'setSparkAuthCode',
         'dsa_beneficiary' => 'setDsaBeneficiary',
         'dsa_payor' => 'setDsaPayor',
+        'lead_gen_form_id' => 'setLeadGenFormId',
+        'status' => 'setStatus',
         'optimization_goal' => 'setOptimizationGoal'
     ];
 
@@ -341,6 +351,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'spark_auth_code' => 'getSparkAuthCode',
         'dsa_beneficiary' => 'getDsaBeneficiary',
         'dsa_payor' => 'getDsaPayor',
+        'lead_gen_form_id' => 'getLeadGenFormId',
+        'status' => 'getStatus',
         'optimization_goal' => 'getOptimizationGoal'
     ];
 
@@ -403,6 +415,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     public const SPECIAL_AD_CATEGORIES_FINANCIAL_PRODUCTS_SERVICES = 'FINANCIAL_PRODUCTS_SERVICES';
     public const SPECIAL_AD_CATEGORIES_ISSUES_ELECTIONS_POLITICS = 'ISSUES_ELECTIONS_POLITICS';
     public const SPECIAL_AD_CATEGORIES_ONLINE_GAMBLING_AND_GAMING = 'ONLINE_GAMBLING_AND_GAMING';
+    public const STATUS_ACTIVE = 'ACTIVE';
+    public const STATUS_PAUSED = 'PAUSED';
 
     /**
      * Gets allowable values of the enum
@@ -456,6 +470,19 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_ACTIVE,
+            self::STATUS_PAUSED,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -496,6 +523,8 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('spark_auth_code', $data ?? [], null);
         $this->setIfExists('dsa_beneficiary', $data ?? [], null);
         $this->setIfExists('dsa_payor', $data ?? [], null);
+        $this->setIfExists('lead_gen_form_id', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('optimization_goal', $data ?? [], null);
     }
 
@@ -574,6 +603,15 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if (!is_null($this->container['dsa_payor']) && (mb_strlen($this->container['dsa_payor']) > 100)) {
             $invalidProperties[] = "invalid value for 'dsa_payor', the character length must be smaller than or equal to 100.";
+        }
+
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
+                implode("', '", $allowedValues)
+            );
         }
 
         return $invalidProperties;
@@ -1343,6 +1381,70 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['dsa_payor'] = $dsa_payor;
+
+        return $this;
+    }
+
+    /**
+     * Gets lead_gen_form_id
+     *
+     * @return string|null
+     */
+    public function getLeadGenFormId()
+    {
+        return $this->container['lead_gen_form_id'];
+    }
+
+    /**
+     * Sets lead_gen_form_id
+     *
+     * @param string|null $lead_gen_form_id Lead Gen form ID to attach to the boosted ad's creative. REQUIRED when `goal` is `lead_generation`. On Meta this is the leadgen_forms ID (create one via POST /v1/ads/lead-forms). On LinkedIn this is the adForm ID (create one via POST /v1/ads/lead-forms with a LinkedIn account); the creative's `leadgenCallToAction.destination` is set to `urn:li:adForm:{id}`. Ignored for other goals.
+     *
+     * @return self
+     */
+    public function setLeadGenFormId($lead_gen_form_id)
+    {
+        if (is_null($lead_gen_form_id)) {
+            throw new \InvalidArgumentException('non-nullable lead_gen_form_id cannot be null');
+        }
+        $this->container['lead_gen_form_id'] = $lead_gen_form_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string|null $status Meta, TikTok, and LinkedIn. Publish state of the created entities. Omitted or ACTIVE publishes live (default); PAUSED creates them paused so you can review before they spend. On LinkedIn the whole campaign group, campaign, and creative hierarchy stays PAUSED (intendedStatus PAUSED on each).
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'status', must be one of '%s'",
+                    $status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
 
         return $this;
     }
