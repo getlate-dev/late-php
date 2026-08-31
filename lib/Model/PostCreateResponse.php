@@ -59,7 +59,8 @@ class PostCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPITypes = [
         'message' => 'string',
-        'post' => '\Zernio\Model\Post'
+        'post' => '\Zernio\Model\Post',
+        'warnings' => 'string[]'
     ];
 
     /**
@@ -71,7 +72,8 @@ class PostCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPIFormats = [
         'message' => null,
-        'post' => null
+        'post' => null,
+        'warnings' => null
     ];
 
     /**
@@ -81,7 +83,8 @@ class PostCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static array $openAPINullables = [
         'message' => false,
-        'post' => false
+        'post' => false,
+        'warnings' => false
     ];
 
     /**
@@ -171,7 +174,8 @@ class PostCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $attributeMap = [
         'message' => 'message',
-        'post' => 'post'
+        'post' => 'post',
+        'warnings' => 'warnings'
     ];
 
     /**
@@ -181,7 +185,8 @@ class PostCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $setters = [
         'message' => 'setMessage',
-        'post' => 'setPost'
+        'post' => 'setPost',
+        'warnings' => 'setWarnings'
     ];
 
     /**
@@ -191,7 +196,8 @@ class PostCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $getters = [
         'message' => 'getMessage',
-        'post' => 'getPost'
+        'post' => 'getPost',
+        'warnings' => 'getWarnings'
     ];
 
     /**
@@ -253,6 +259,7 @@ class PostCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $this->setIfExists('message', $data ?? [], null);
         $this->setIfExists('post', $data ?? [], null);
+        $this->setIfExists('warnings', $data ?? [], null);
     }
 
     /**
@@ -347,6 +354,33 @@ class PostCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable post cannot be null');
         }
         $this->container['post'] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Gets warnings
+     *
+     * @return string[]|null
+     */
+    public function getWarnings()
+    {
+        return $this->container['warnings'];
+    }
+
+    /**
+     * Sets warnings
+     *
+     * @param string[]|null $warnings Advisory notices about a post that was still created: media truncated for a platform, a recycling caveat, or a field that was ignored because it sat outside platforms[].platformSpecificData. Absent when there are none.
+     *
+     * @return self
+     */
+    public function setWarnings($warnings)
+    {
+        if (is_null($warnings)) {
+            throw new \InvalidArgumentException('non-nullable warnings cannot be null');
+        }
+        $this->container['warnings'] = $warnings;
 
         return $this;
     }
