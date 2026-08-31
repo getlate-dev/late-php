@@ -812,7 +812,7 @@ class PlatformTargetAccountId implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets enabled
      *
-     * @param bool|null $enabled Whether the user explicitly activated this account. false means the account was created as a side effect (e.g., posting account auto-created when user connected ads first). Posting UI and scheduler ignore accounts with enabled: false.
+     * @param bool|null $enabled Whether the user explicitly activated this account. false means the account was created as a side effect (e.g., posting account auto-created when user connected ads first). Such accounts are hidden from this list, cannot be posted to (`ACCOUNT_NOT_ENABLED_FOR_POSTING`), and are not billed as connected accounts.
      *
      * @return self
      */

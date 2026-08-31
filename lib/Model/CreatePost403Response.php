@@ -236,6 +236,7 @@ class CreatePost403Response implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     public const CODE_ACCOUNT_DISCONNECTED = 'ACCOUNT_DISCONNECTED';
+    public const CODE_ACCOUNT_NOT_ENABLED_FOR_POSTING = 'ACCOUNT_NOT_ENABLED_FOR_POSTING';
     public const CODE_PROFILE_OVER_LIMIT = 'PROFILE_OVER_LIMIT';
 
     /**
@@ -247,6 +248,7 @@ class CreatePost403Response implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         return [
             self::CODE_ACCOUNT_DISCONNECTED,
+            self::CODE_ACCOUNT_NOT_ENABLED_FOR_POSTING,
             self::CODE_PROFILE_OVER_LIMIT,
         ];
     }
