@@ -270,7 +270,7 @@ redeliverWebhookEvent($redeliver_webhook_event_request): \Zernio\Model\Unpublish
 
 Redeliver a webhook event
 
-Replay a past delivery: the original payload is re-sent, byte for byte, to the subscription's current URL. The original event ID is preserved so your endpoint can dedupe, and the replay is recorded as a fresh attempt, so it shows up in `GET /v1/webhooks/logs` next to the delivery it replays.  Both `webhookId` and `eventId` come from a row of `GET /v1/webhooks/logs`. Because the stored payload is replayed as-is, a redelivery reflects the event as it was emitted, not the current state of the resource.  Only deliveries inside the 30-day log retention window can be replayed; past that the payload is gone and the request fails with a 500. Replays run the same resource-group checks as live delivery, against both the key's groups and the subscription's `disabledResourceGroups`.
+Replay a past delivery: the original payload is re-sent, byte for byte, to the subscription's current URL. The original event ID is preserved so your endpoint can dedupe, and the replay is recorded as a fresh attempt, so it shows up in `GET /v1/webhooks/logs` next to the delivery it replays.  Both `webhookId` and `eventId` come from a row of `GET /v1/webhooks/logs`. Because the stored payload is replayed as-is, a redelivery reflects the event as it was emitted, not the current state of the resource.  Only deliveries inside the 30-day log retention window can be replayed; past that the payload is gone and the request fails with a 422. Replays run the same resource-group checks as live delivery, against both the key's groups and the subscription's `disabledResourceGroups`.
 
 ### Example
 
