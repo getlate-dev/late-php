@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * UpdateAdRequestCreative Class Doc Comment
  *
  * @category Class
- * @description Replace the ad&#39;s creative. Meta, TikTok, and LinkedIn.  - **Meta**: requires &#x60;headline&#x60;, &#x60;body&#x60;, &#x60;callToAction&#x60;, &#x60;linkUrl&#x60;, &#x60;imageUrl&#x60;. The   ad&#39;s existing creative is replaced via a new &#x60;/act_X/adcreatives&#x60; upload + ad   update. The old creative is retained on the ad account for historical reporting. - **TikTok**: patch-style. Pass any subset; &#x60;headline&#x60; is ignored (TikTok creatives   have no headline slot). &#x60;body&#x60; becomes the in-feed &#x60;ad_text&#x60;; &#x60;linkUrl&#x60; becomes   &#x60;landing_page_url&#x60;; &#x60;videoUrl&#x60; triggers a fresh upload. - **LinkedIn**: uploads new media (image via &#x60;imageUrl&#x60; or video via &#x60;videoUrl&#x60;),   creates a new inline media creative on the same campaign, and pauses the old   creative (best-effort). The old creative is retained for historical reporting.
+ * @description Replace or patch the ad&#39;s creative. Meta, TikTok, and LinkedIn.  - **Meta**: patch-style. Pass any subset — fields you omit are preserved from the   live creative, including media (&#x60;image_hash&#x60;/&#x60;video_id&#x60; are reused, no re-upload)   and &#x60;url_tags&#x60;. Sending the full set (&#x60;headline&#x60;, &#x60;body&#x60;, &#x60;callToAction&#x60;,   &#x60;linkUrl&#x60;, &#x60;imageUrl&#x60;) rebuilds the creative from scratch instead. Partial   patching reads the live &#x60;object_story_spec&#x60;, which Meta strips on SHARE /   page-post / dark / asset_feed creatives — those return 422 asking for the full   set. A &#x60;videoUrl&#x60;/&#x60;videoId&#x60; on an image creative is a type change and also   needs the full set. &#x60;existingCreativeId&#x60; repoints the ad at a creative from   GET /v1/ads/creatives and ignores every other field. Meta creatives are   immutable, so any change creates a new creative and repoints the ad; the old   creative is retained on the ad account for historical reporting. - **TikTok**: patch-style. Pass any subset; &#x60;headline&#x60; is ignored (TikTok creatives   have no headline slot). &#x60;body&#x60; becomes the in-feed &#x60;ad_text&#x60;; &#x60;linkUrl&#x60; becomes   &#x60;landing_page_url&#x60;; &#x60;videoUrl&#x60; triggers a fresh upload. &#x60;description&#x60;, &#x60;videoId&#x60;   and &#x60;existingCreativeId&#x60; are Meta-only and return 400. - **LinkedIn**: uploads new media (image via &#x60;imageUrl&#x60; or video via &#x60;videoUrl&#x60;),   creates a new inline media creative on the same campaign, and pauses the old   creative (best-effort). The old creative is retained for historical reporting.   &#x60;videoId&#x60; and &#x60;existingCreativeId&#x60; are Meta-only and return 400.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -61,10 +61,13 @@ class UpdateAdRequestCreative implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $openAPITypes = [
         'headline' => 'string',
         'body' => 'string',
+        'description' => 'string',
         'call_to_action' => 'string',
         'link_url' => 'string',
         'image_url' => 'string',
-        'video_url' => 'string'
+        'video_url' => 'string',
+        'video_id' => 'string',
+        'existing_creative_id' => 'string'
     ];
 
     /**
@@ -77,10 +80,13 @@ class UpdateAdRequestCreative implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $openAPIFormats = [
         'headline' => null,
         'body' => null,
+        'description' => null,
         'call_to_action' => null,
         'link_url' => 'uri',
         'image_url' => 'uri',
-        'video_url' => 'uri'
+        'video_url' => 'uri',
+        'video_id' => null,
+        'existing_creative_id' => null
     ];
 
     /**
@@ -91,10 +97,13 @@ class UpdateAdRequestCreative implements ModelInterface, ArrayAccess, \JsonSeria
     protected static array $openAPINullables = [
         'headline' => false,
         'body' => false,
+        'description' => false,
         'call_to_action' => false,
         'link_url' => false,
         'image_url' => false,
-        'video_url' => false
+        'video_url' => false,
+        'video_id' => false,
+        'existing_creative_id' => false
     ];
 
     /**
@@ -185,10 +194,13 @@ class UpdateAdRequestCreative implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $attributeMap = [
         'headline' => 'headline',
         'body' => 'body',
+        'description' => 'description',
         'call_to_action' => 'callToAction',
         'link_url' => 'linkUrl',
         'image_url' => 'imageUrl',
-        'video_url' => 'videoUrl'
+        'video_url' => 'videoUrl',
+        'video_id' => 'videoId',
+        'existing_creative_id' => 'existingCreativeId'
     ];
 
     /**
@@ -199,10 +211,13 @@ class UpdateAdRequestCreative implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $setters = [
         'headline' => 'setHeadline',
         'body' => 'setBody',
+        'description' => 'setDescription',
         'call_to_action' => 'setCallToAction',
         'link_url' => 'setLinkUrl',
         'image_url' => 'setImageUrl',
-        'video_url' => 'setVideoUrl'
+        'video_url' => 'setVideoUrl',
+        'video_id' => 'setVideoId',
+        'existing_creative_id' => 'setExistingCreativeId'
     ];
 
     /**
@@ -213,10 +228,13 @@ class UpdateAdRequestCreative implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $getters = [
         'headline' => 'getHeadline',
         'body' => 'getBody',
+        'description' => 'getDescription',
         'call_to_action' => 'getCallToAction',
         'link_url' => 'getLinkUrl',
         'image_url' => 'getImageUrl',
-        'video_url' => 'getVideoUrl'
+        'video_url' => 'getVideoUrl',
+        'video_id' => 'getVideoId',
+        'existing_creative_id' => 'getExistingCreativeId'
     ];
 
     /**
@@ -278,10 +296,13 @@ class UpdateAdRequestCreative implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $this->setIfExists('headline', $data ?? [], null);
         $this->setIfExists('body', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('call_to_action', $data ?? [], null);
         $this->setIfExists('link_url', $data ?? [], null);
         $this->setIfExists('image_url', $data ?? [], null);
         $this->setIfExists('video_url', $data ?? [], null);
+        $this->setIfExists('video_id', $data ?? [], null);
+        $this->setIfExists('existing_creative_id', $data ?? [], null);
     }
 
     /**
@@ -311,6 +332,10 @@ class UpdateAdRequestCreative implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 255)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 255.";
+        }
+
         return $invalidProperties;
     }
 
@@ -339,7 +364,7 @@ class UpdateAdRequestCreative implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets headline
      *
-     * @param string|null $headline Meta only
+     * @param string|null $headline Meta and LinkedIn (TikTok has no headline slot)
      *
      * @return self
      */
@@ -376,6 +401,37 @@ class UpdateAdRequestCreative implements ModelInterface, ArrayAccess, \JsonSeria
             throw new \InvalidArgumentException('non-nullable body cannot be null');
         }
         $this->container['body'] = $body;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description Link description slot (Meta `link_data.description` / `video_data.link_description`, LinkedIn creative description).
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+        if ((mb_strlen($description) > 255)) {
+            throw new \InvalidArgumentException('invalid length for $description when calling UpdateAdRequestCreative., must be smaller than or equal to 255.');
+        }
+
+        $this->container['description'] = $description;
 
         return $this;
     }
@@ -484,6 +540,60 @@ class UpdateAdRequestCreative implements ModelInterface, ArrayAccess, \JsonSeria
             throw new \InvalidArgumentException('non-nullable video_url cannot be null');
         }
         $this->container['video_url'] = $video_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets video_id
+     *
+     * @return string|null
+     */
+    public function getVideoId()
+    {
+        return $this->container['video_id'];
+    }
+
+    /**
+     * Sets video_id
+     *
+     * @param string|null $video_id Meta only. Reuse an already-uploaded ad video (from POST /v1/ads/videos or GET /v1/ads/videos) instead of re-uploading via videoUrl.
+     *
+     * @return self
+     */
+    public function setVideoId($video_id)
+    {
+        if (is_null($video_id)) {
+            throw new \InvalidArgumentException('non-nullable video_id cannot be null');
+        }
+        $this->container['video_id'] = $video_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets existing_creative_id
+     *
+     * @return string|null
+     */
+    public function getExistingCreativeId()
+    {
+        return $this->container['existing_creative_id'];
+    }
+
+    /**
+     * Sets existing_creative_id
+     *
+     * @param string|null $existing_creative_id Meta only. Repoint the ad at an existing library creative (from GET /v1/ads/creatives); all other creative fields are ignored.
+     *
+     * @return self
+     */
+    public function setExistingCreativeId($existing_creative_id)
+    {
+        if (is_null($existing_creative_id)) {
+            throw new \InvalidArgumentException('non-nullable existing_creative_id cannot be null');
+        }
+        $this->container['existing_creative_id'] = $existing_creative_id;
 
         return $this;
     }

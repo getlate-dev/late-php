@@ -73,6 +73,9 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
         'languages' => 'string[]',
         'interests' => '\Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]',
         'behaviors' => '\Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]',
+        'work_positions' => '\Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]',
+        'work_employers' => '\Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]',
+        'work_industries' => '\Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]',
         'industries' => 'string[]',
         'company_sizes' => 'string[]',
         'seniorities' => 'string[]',
@@ -103,6 +106,9 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
         'languages' => null,
         'interests' => null,
         'behaviors' => null,
+        'work_positions' => null,
+        'work_employers' => null,
+        'work_industries' => null,
         'industries' => null,
         'company_sizes' => null,
         'seniorities' => null,
@@ -131,6 +137,9 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
         'languages' => false,
         'interests' => false,
         'behaviors' => false,
+        'work_positions' => false,
+        'work_employers' => false,
+        'work_industries' => false,
         'industries' => false,
         'company_sizes' => false,
         'seniorities' => false,
@@ -239,6 +248,9 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
         'languages' => 'languages',
         'interests' => 'interests',
         'behaviors' => 'behaviors',
+        'work_positions' => 'workPositions',
+        'work_employers' => 'workEmployers',
+        'work_industries' => 'workIndustries',
         'industries' => 'industries',
         'company_sizes' => 'companySizes',
         'seniorities' => 'seniorities',
@@ -267,6 +279,9 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
         'languages' => 'setLanguages',
         'interests' => 'setInterests',
         'behaviors' => 'setBehaviors',
+        'work_positions' => 'setWorkPositions',
+        'work_employers' => 'setWorkEmployers',
+        'work_industries' => 'setWorkIndustries',
         'industries' => 'setIndustries',
         'company_sizes' => 'setCompanySizes',
         'seniorities' => 'setSeniorities',
@@ -295,6 +310,9 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
         'languages' => 'getLanguages',
         'interests' => 'getInterests',
         'behaviors' => 'getBehaviors',
+        'work_positions' => 'getWorkPositions',
+        'work_employers' => 'getWorkEmployers',
+        'work_industries' => 'getWorkIndustries',
         'industries' => 'getIndustries',
         'company_sizes' => 'getCompanySizes',
         'seniorities' => 'getSeniorities',
@@ -410,6 +428,9 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('languages', $data ?? [], null);
         $this->setIfExists('interests', $data ?? [], null);
         $this->setIfExists('behaviors', $data ?? [], null);
+        $this->setIfExists('work_positions', $data ?? [], null);
+        $this->setIfExists('work_employers', $data ?? [], null);
+        $this->setIfExists('work_industries', $data ?? [], null);
         $this->setIfExists('industries', $data ?? [], null);
         $this->setIfExists('company_sizes', $data ?? [], null);
         $this->setIfExists('seniorities', $data ?? [], null);
@@ -909,6 +930,87 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets work_positions
+     *
+     * @return \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null
+     */
+    public function getWorkPositions()
+    {
+        return $this->container['work_positions'];
+    }
+
+    /**
+     * Sets work_positions
+     *
+     * @param \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null $work_positions Meta only. Job title entities from /v1/ads/targeting/search?dimension=workPosition. Not interchangeable with the LinkedIn `jobTitles` URN fragments.
+     *
+     * @return self
+     */
+    public function setWorkPositions($work_positions)
+    {
+        if (is_null($work_positions)) {
+            throw new \InvalidArgumentException('non-nullable work_positions cannot be null');
+        }
+        $this->container['work_positions'] = $work_positions;
+
+        return $this;
+    }
+
+    /**
+     * Gets work_employers
+     *
+     * @return \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null
+     */
+    public function getWorkEmployers()
+    {
+        return $this->container['work_employers'];
+    }
+
+    /**
+     * Sets work_employers
+     *
+     * @param \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null $work_employers Meta only. Employer entities from /v1/ads/targeting/search?dimension=workEmployer.
+     *
+     * @return self
+     */
+    public function setWorkEmployers($work_employers)
+    {
+        if (is_null($work_employers)) {
+            throw new \InvalidArgumentException('non-nullable work_employers cannot be null');
+        }
+        $this->container['work_employers'] = $work_employers;
+
+        return $this;
+    }
+
+    /**
+     * Gets work_industries
+     *
+     * @return \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null
+     */
+    public function getWorkIndustries()
+    {
+        return $this->container['work_industries'];
+    }
+
+    /**
+     * Sets work_industries
+     *
+     * @param \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null $work_industries Meta only. Work-industry entities from /v1/ads/targeting/search?dimension=workIndustry. Not interchangeable with the LinkedIn `industries` URN fragments.
+     *
+     * @return self
+     */
+    public function setWorkIndustries($work_industries)
+    {
+        if (is_null($work_industries)) {
+            throw new \InvalidArgumentException('non-nullable work_industries cannot be null');
+        }
+        $this->container['work_industries'] = $work_industries;
+
+        return $this;
+    }
+
+    /**
      * Gets industries
      *
      * @return string[]|null
@@ -1029,7 +1131,7 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets audience_include
      *
-     * @param string[]|null $audience_include Platform audience IDs to include. Not supported on any platform (no builder maps it): rejected with a 400 on ad create, boost, and reach estimate.
+     * @param string[]|null $audience_include Platform audience IDs to include, as returned by GET /v1/ads/audiences (Meta custom audience ids, TikTok audience ids, Pinterest customer list ids, LinkedIn segment ids (bare, urn:li:adSegment or urn:li:dmpSegment forms accepted), Google user list ids, X custom audience ids). Not supported on OpenAI (400).
      *
      * @return self
      */
@@ -1056,7 +1158,7 @@ class TargetingSpec implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets audience_exclude
      *
-     * @param string[]|null $audience_exclude Platform audience IDs to exclude. Not supported on any platform (no builder maps it): rejected with a 400 on ad create, boost, and reach estimate.
+     * @param string[]|null $audience_exclude Platform audience IDs to exclude; same ID formats as audienceInclude. Not supported on OpenAI (400).
      *
      * @return self
      */

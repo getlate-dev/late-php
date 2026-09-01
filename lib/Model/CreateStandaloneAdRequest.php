@@ -107,6 +107,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'metros' => '\Zernio\Model\BoostPostRequestTargetingRegionsInner[]',
         'custom_locations' => '\Zernio\Model\CreateStandaloneAdRequestCustomLocationsInner[]',
         'behaviors' => '\Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]',
+        'work_positions' => '\Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]',
+        'work_employers' => '\Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]',
+        'work_industries' => '\Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]',
         'income_tier' => 'string',
         'languages' => 'string[]',
         'placements' => '\Zernio\Model\CreateStandaloneAdRequestPlacements',
@@ -205,6 +208,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'metros' => null,
         'custom_locations' => null,
         'behaviors' => null,
+        'work_positions' => null,
+        'work_employers' => null,
+        'work_industries' => null,
         'income_tier' => null,
         'languages' => null,
         'placements' => null,
@@ -301,6 +307,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'metros' => false,
         'custom_locations' => false,
         'behaviors' => false,
+        'work_positions' => false,
+        'work_employers' => false,
+        'work_industries' => false,
         'income_tier' => false,
         'languages' => false,
         'placements' => false,
@@ -477,6 +486,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'metros' => 'metros',
         'custom_locations' => 'customLocations',
         'behaviors' => 'behaviors',
+        'work_positions' => 'workPositions',
+        'work_employers' => 'workEmployers',
+        'work_industries' => 'workIndustries',
         'income_tier' => 'incomeTier',
         'languages' => 'languages',
         'placements' => 'placements',
@@ -573,6 +585,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'metros' => 'setMetros',
         'custom_locations' => 'setCustomLocations',
         'behaviors' => 'setBehaviors',
+        'work_positions' => 'setWorkPositions',
+        'work_employers' => 'setWorkEmployers',
+        'work_industries' => 'setWorkIndustries',
         'income_tier' => 'setIncomeTier',
         'languages' => 'setLanguages',
         'placements' => 'setPlacements',
@@ -669,6 +684,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'metros' => 'getMetros',
         'custom_locations' => 'getCustomLocations',
         'behaviors' => 'getBehaviors',
+        'work_positions' => 'getWorkPositions',
+        'work_employers' => 'getWorkEmployers',
+        'work_industries' => 'getWorkIndustries',
         'income_tier' => 'getIncomeTier',
         'languages' => 'getLanguages',
         'placements' => 'getPlacements',
@@ -1137,6 +1155,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('metros', $data ?? [], null);
         $this->setIfExists('custom_locations', $data ?? [], null);
         $this->setIfExists('behaviors', $data ?? [], null);
+        $this->setIfExists('work_positions', $data ?? [], null);
+        $this->setIfExists('work_employers', $data ?? [], null);
+        $this->setIfExists('work_industries', $data ?? [], null);
         $this->setIfExists('income_tier', $data ?? [], null);
         $this->setIfExists('languages', $data ?? [], null);
         $this->setIfExists('placements', $data ?? [], null);
@@ -2926,6 +2947,87 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable behaviors cannot be null');
         }
         $this->container['behaviors'] = $behaviors;
+
+        return $this;
+    }
+
+    /**
+     * Gets work_positions
+     *
+     * @return \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null
+     */
+    public function getWorkPositions()
+    {
+        return $this->container['work_positions'];
+    }
+
+    /**
+     * Sets work_positions
+     *
+     * @param \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null $work_positions Meta only. Job title entities from /v1/ads/targeting/search?dimension=workPosition. Each must include id. Rejected on other platforms (use LinkedIn's `jobTitles` there).
+     *
+     * @return self
+     */
+    public function setWorkPositions($work_positions)
+    {
+        if (is_null($work_positions)) {
+            throw new \InvalidArgumentException('non-nullable work_positions cannot be null');
+        }
+        $this->container['work_positions'] = $work_positions;
+
+        return $this;
+    }
+
+    /**
+     * Gets work_employers
+     *
+     * @return \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null
+     */
+    public function getWorkEmployers()
+    {
+        return $this->container['work_employers'];
+    }
+
+    /**
+     * Sets work_employers
+     *
+     * @param \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null $work_employers Meta only. Employer entities from /v1/ads/targeting/search?dimension=workEmployer. Each must include id.
+     *
+     * @return self
+     */
+    public function setWorkEmployers($work_employers)
+    {
+        if (is_null($work_employers)) {
+            throw new \InvalidArgumentException('non-nullable work_employers cannot be null');
+        }
+        $this->container['work_employers'] = $work_employers;
+
+        return $this;
+    }
+
+    /**
+     * Gets work_industries
+     *
+     * @return \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null
+     */
+    public function getWorkIndustries()
+    {
+        return $this->container['work_industries'];
+    }
+
+    /**
+     * Sets work_industries
+     *
+     * @param \Zernio\Model\CreateStandaloneAdRequestBehaviorsInner[]|null $work_industries Meta only. Work-industry entities from /v1/ads/targeting/search?dimension=workIndustry. Each must include id. Rejected on other platforms (use LinkedIn's `industries` there).
+     *
+     * @return self
+     */
+    public function setWorkIndustries($work_industries)
+    {
+        if (is_null($work_industries)) {
+            throw new \InvalidArgumentException('non-nullable work_industries cannot be null');
+        }
+        $this->container['work_industries'] = $work_industries;
 
         return $this;
     }
