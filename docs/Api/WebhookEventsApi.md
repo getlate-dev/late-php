@@ -1070,7 +1070,7 @@ onMessageSent($webhook_payload_message_sent)
 
 Message sent event
 
-Fired when a message is sent via the API, or from the WhatsApp Business app on Coexistence numbers. Sends that carry platform-specific context deliver it under `metadata`, so a quote-reply arrives with `metadata.quotedMessageId` and mirroring CRMs can thread it without a lookup.
+Fired when a message is sent via the API, or from the WhatsApp Business app on Coexistence numbers. Sends that carry platform-specific context deliver it under `metadata`, so a quote-reply sent through the API arrives with `metadata.quotedMessageId` and mirroring CRMs can thread it without a lookup. Which surfaces actually carry that reference is documented on `WebhookPayloadMessageSent.metadata.quotedMessageId`; a quote-reply sent from the WhatsApp Business or Instagram app is not one of them.
 
 ### Example
 

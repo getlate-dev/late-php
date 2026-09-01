@@ -608,7 +608,7 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id The platform's own message id: the `wamid` on WhatsApp, the `mid` on Instagram and Facebook Messenger. This is what `metadata.quotedMessageId` points at, the value to pass as `replyTo` on the platforms that support quote-replies, and the `{messageId}` segment of the attachment-resolve URL. Webhooks deliver the same value as `message.platformMessageId`; this response has no field by that name.
      *
      * @return self
      */
@@ -1417,7 +1417,7 @@ class GetInboxConversationMessages200ResponseMessagesInner implements ModelInter
     /**
      * Sets metadata
      *
-     * @param array<string,mixed>|null $metadata Platform-specific extras. Free-form, but commonly includes: `quotedMessageId` (platformMessageId this message replies to), `waInteractive` (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow / location_request), and for inbound interactive taps `interactiveType` / `interactiveId`. It can also carry `source` (`whatsapp_business_app` / `coexistence_history` on a WhatsApp Coexistence number, `bulk-api` on a POST /v1/whatsapp/bulk send), which is where the message reached us from rather than who produced it: read `sentVia` for that.
+     * @param array<string,mixed>|null $metadata Platform-specific extras. Free-form, but commonly includes: `quotedMessageId` (the `id` of the message this one replies to, delivered as `message.platformMessageId` on webhooks), `waInteractive` (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow / location_request), and for inbound interactive taps `interactiveType` / `interactiveId`. It can also carry `source` (`whatsapp_business_app` / `coexistence_history` on a WhatsApp Coexistence number, `bulk-api` on a POST /v1/whatsapp/bulk send), which is where the message reached us from rather than who produced it: read `sentVia` for that.
      *
      * @return self
      */
