@@ -289,6 +289,33 @@ class CreateContactRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         return self::$openAPIModelName;
     }
 
+    public const PLATFORM_INSTAGRAM = 'instagram';
+    public const PLATFORM_FACEBOOK = 'facebook';
+    public const PLATFORM_TELEGRAM = 'telegram';
+    public const PLATFORM_TWITTER = 'twitter';
+    public const PLATFORM_BLUESKY = 'bluesky';
+    public const PLATFORM_REDDIT = 'reddit';
+    public const PLATFORM_WHATSAPP = 'whatsapp';
+    public const PLATFORM_SLACK = 'slack';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPlatformAllowableValues()
+    {
+        return [
+            self::PLATFORM_INSTAGRAM,
+            self::PLATFORM_FACEBOOK,
+            self::PLATFORM_TELEGRAM,
+            self::PLATFORM_TWITTER,
+            self::PLATFORM_BLUESKY,
+            self::PLATFORM_REDDIT,
+            self::PLATFORM_WHATSAPP,
+            self::PLATFORM_SLACK,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -351,6 +378,15 @@ class CreateContactRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
+        $allowedValues = $this->getPlatformAllowableValues();
+        if (!is_null($this->container['platform']) && !in_array($this->container['platform'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'platform', must be one of '%s'",
+                $this->container['platform'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -595,7 +631,7 @@ class CreateContactRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets platform
      *
-     * @param string|null $platform platform
+     * @param string|null $platform Channel platform. Only the enum values support contact channels; any other platform is rejected with code platform_not_supported.
      *
      * @return self
      */
@@ -603,6 +639,16 @@ class CreateContactRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         if (is_null($platform)) {
             throw new \InvalidArgumentException('non-nullable platform cannot be null');
+        }
+        $allowedValues = $this->getPlatformAllowableValues();
+        if (!in_array($platform, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'platform', must be one of '%s'",
+                    $platform,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
         $this->container['platform'] = $platform;
 
