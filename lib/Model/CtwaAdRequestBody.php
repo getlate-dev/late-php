@@ -92,7 +92,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'bid_amount' => 'float',
         'roas_average_floor' => 'float',
         'dsa_beneficiary' => 'string',
-        'dsa_payor' => 'string'
+        'dsa_payor' => 'string',
+        'regional_regulated_categories' => 'string[]'
     ];
 
     /**
@@ -136,7 +137,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'bid_amount' => null,
         'roas_average_floor' => null,
         'dsa_beneficiary' => null,
-        'dsa_payor' => null
+        'dsa_payor' => null,
+        'regional_regulated_categories' => null
     ];
 
     /**
@@ -178,7 +180,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'bid_amount' => false,
         'roas_average_floor' => false,
         'dsa_beneficiary' => false,
-        'dsa_payor' => false
+        'dsa_payor' => false,
+        'regional_regulated_categories' => false
     ];
 
     /**
@@ -300,7 +303,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'bid_amount' => 'bidAmount',
         'roas_average_floor' => 'roasAverageFloor',
         'dsa_beneficiary' => 'dsaBeneficiary',
-        'dsa_payor' => 'dsaPayor'
+        'dsa_payor' => 'dsaPayor',
+        'regional_regulated_categories' => 'regionalRegulatedCategories'
     ];
 
     /**
@@ -342,7 +346,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'bid_amount' => 'setBidAmount',
         'roas_average_floor' => 'setRoasAverageFloor',
         'dsa_beneficiary' => 'setDsaBeneficiary',
-        'dsa_payor' => 'setDsaPayor'
+        'dsa_payor' => 'setDsaPayor',
+        'regional_regulated_categories' => 'setRegionalRegulatedCategories'
     ];
 
     /**
@@ -384,7 +389,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'bid_amount' => 'getBidAmount',
         'roas_average_floor' => 'getRoasAverageFloor',
         'dsa_beneficiary' => 'getDsaBeneficiary',
-        'dsa_payor' => 'getDsaPayor'
+        'dsa_payor' => 'getDsaPayor',
+        'regional_regulated_categories' => 'getRegionalRegulatedCategories'
     ];
 
     /**
@@ -574,6 +580,7 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('roas_average_floor', $data ?? [], null);
         $this->setIfExists('dsa_beneficiary', $data ?? [], null);
         $this->setIfExists('dsa_payor', $data ?? [], null);
+        $this->setIfExists('regional_regulated_categories', $data ?? [], null);
     }
 
     /**
@@ -1778,6 +1785,33 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['dsa_payor'] = $dsa_payor;
+
+        return $this;
+    }
+
+    /**
+     * Gets regional_regulated_categories
+     *
+     * @return string[]|null
+     */
+    public function getRegionalRegulatedCategories()
+    {
+        return $this->container['regional_regulated_categories'];
+    }
+
+    /**
+     * Sets regional_regulated_categories
+     *
+     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.
+     *
+     * @return self
+     */
+    public function setRegionalRegulatedCategories($regional_regulated_categories)
+    {
+        if (is_null($regional_regulated_categories)) {
+            throw new \InvalidArgumentException('non-nullable regional_regulated_categories cannot be null');
+        }
+        $this->container['regional_regulated_categories'] = $regional_regulated_categories;
 
         return $this;
     }

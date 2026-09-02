@@ -92,6 +92,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'roas_average_floor' => 'float',
         'dsa_beneficiary' => 'string',
         'dsa_payor' => 'string',
+        'regional_regulated_categories' => 'string[]',
         'destination' => 'string'
     ];
 
@@ -137,6 +138,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'roas_average_floor' => null,
         'dsa_beneficiary' => null,
         'dsa_payor' => null,
+        'regional_regulated_categories' => null,
         'destination' => null
     ];
 
@@ -180,6 +182,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'roas_average_floor' => false,
         'dsa_beneficiary' => false,
         'dsa_payor' => false,
+        'regional_regulated_categories' => false,
         'destination' => false
     ];
 
@@ -303,6 +306,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'roas_average_floor' => 'roasAverageFloor',
         'dsa_beneficiary' => 'dsaBeneficiary',
         'dsa_payor' => 'dsaPayor',
+        'regional_regulated_categories' => 'regionalRegulatedCategories',
         'destination' => 'destination'
     ];
 
@@ -346,6 +350,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'roas_average_floor' => 'setRoasAverageFloor',
         'dsa_beneficiary' => 'setDsaBeneficiary',
         'dsa_payor' => 'setDsaPayor',
+        'regional_regulated_categories' => 'setRegionalRegulatedCategories',
         'destination' => 'setDestination'
     ];
 
@@ -389,6 +394,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         'roas_average_floor' => 'getRoasAverageFloor',
         'dsa_beneficiary' => 'getDsaBeneficiary',
         'dsa_payor' => 'getDsaPayor',
+        'regional_regulated_categories' => 'getRegionalRegulatedCategories',
         'destination' => 'getDestination'
     ];
 
@@ -596,6 +602,7 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         $this->setIfExists('roas_average_floor', $data ?? [], null);
         $this->setIfExists('dsa_beneficiary', $data ?? [], null);
         $this->setIfExists('dsa_payor', $data ?? [], null);
+        $this->setIfExists('regional_regulated_categories', $data ?? [], null);
         $this->setIfExists('destination', $data ?? [], null);
     }
 
@@ -1813,6 +1820,33 @@ class CreateMessagingAdRequest implements ModelInterface, ArrayAccess, \JsonSeri
         }
 
         $this->container['dsa_payor'] = $dsa_payor;
+
+        return $this;
+    }
+
+    /**
+     * Gets regional_regulated_categories
+     *
+     * @return string[]|null
+     */
+    public function getRegionalRegulatedCategories()
+    {
+        return $this->container['regional_regulated_categories'];
+    }
+
+    /**
+     * Sets regional_regulated_categories
+     *
+     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.
+     *
+     * @return self
+     */
+    public function setRegionalRegulatedCategories($regional_regulated_categories)
+    {
+        if (is_null($regional_regulated_categories)) {
+            throw new \InvalidArgumentException('non-nullable regional_regulated_categories cannot be null');
+        }
+        $this->container['regional_regulated_categories'] = $regional_regulated_categories;
 
         return $this;
     }

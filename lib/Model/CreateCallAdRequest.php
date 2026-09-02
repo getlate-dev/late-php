@@ -92,6 +92,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'roas_average_floor' => 'float',
         'dsa_beneficiary' => 'string',
         'dsa_payor' => 'string',
+        'regional_regulated_categories' => 'string[]',
         'phone_number' => 'string',
         'link_url' => 'string'
     ];
@@ -138,6 +139,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'roas_average_floor' => null,
         'dsa_beneficiary' => null,
         'dsa_payor' => null,
+        'regional_regulated_categories' => null,
         'phone_number' => null,
         'link_url' => 'uri'
     ];
@@ -182,6 +184,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'roas_average_floor' => false,
         'dsa_beneficiary' => false,
         'dsa_payor' => false,
+        'regional_regulated_categories' => false,
         'phone_number' => false,
         'link_url' => false
     ];
@@ -306,6 +309,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'roas_average_floor' => 'roasAverageFloor',
         'dsa_beneficiary' => 'dsaBeneficiary',
         'dsa_payor' => 'dsaPayor',
+        'regional_regulated_categories' => 'regionalRegulatedCategories',
         'phone_number' => 'phoneNumber',
         'link_url' => 'linkUrl'
     ];
@@ -350,6 +354,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'roas_average_floor' => 'setRoasAverageFloor',
         'dsa_beneficiary' => 'setDsaBeneficiary',
         'dsa_payor' => 'setDsaPayor',
+        'regional_regulated_categories' => 'setRegionalRegulatedCategories',
         'phone_number' => 'setPhoneNumber',
         'link_url' => 'setLinkUrl'
     ];
@@ -394,6 +399,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'roas_average_floor' => 'getRoasAverageFloor',
         'dsa_beneficiary' => 'getDsaBeneficiary',
         'dsa_payor' => 'getDsaPayor',
+        'regional_regulated_categories' => 'getRegionalRegulatedCategories',
         'phone_number' => 'getPhoneNumber',
         'link_url' => 'getLinkUrl'
     ];
@@ -585,6 +591,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('roas_average_floor', $data ?? [], null);
         $this->setIfExists('dsa_beneficiary', $data ?? [], null);
         $this->setIfExists('dsa_payor', $data ?? [], null);
+        $this->setIfExists('regional_regulated_categories', $data ?? [], null);
         $this->setIfExists('phone_number', $data ?? [], null);
         $this->setIfExists('link_url', $data ?? [], null);
     }
@@ -1797,6 +1804,33 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         }
 
         $this->container['dsa_payor'] = $dsa_payor;
+
+        return $this;
+    }
+
+    /**
+     * Gets regional_regulated_categories
+     *
+     * @return string[]|null
+     */
+    public function getRegionalRegulatedCategories()
+    {
+        return $this->container['regional_regulated_categories'];
+    }
+
+    /**
+     * Sets regional_regulated_categories
+     *
+     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.
+     *
+     * @return self
+     */
+    public function setRegionalRegulatedCategories($regional_regulated_categories)
+    {
+        if (is_null($regional_regulated_categories)) {
+            throw new \InvalidArgumentException('non-nullable regional_regulated_categories cannot be null');
+        }
+        $this->container['regional_regulated_categories'] = $regional_regulated_categories;
 
         return $this;
     }

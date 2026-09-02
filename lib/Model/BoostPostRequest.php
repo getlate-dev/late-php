@@ -79,6 +79,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'tracking' => '\Zernio\Model\BoostPostRequestTracking',
         'special_ad_categories' => 'string[]',
         'special_ad_category_country' => 'string[]',
+        'regional_regulated_categories' => 'string[]',
         'link_url' => 'string',
         'call_to_action' => 'string',
         'spark_auth_code' => 'string',
@@ -118,6 +119,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'tracking' => null,
         'special_ad_categories' => null,
         'special_ad_category_country' => null,
+        'regional_regulated_categories' => null,
         'link_url' => 'uri',
         'call_to_action' => null,
         'spark_auth_code' => null,
@@ -155,6 +157,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'tracking' => false,
         'special_ad_categories' => false,
         'special_ad_category_country' => false,
+        'regional_regulated_categories' => false,
         'link_url' => false,
         'call_to_action' => false,
         'spark_auth_code' => false,
@@ -272,6 +275,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'tracking' => 'tracking',
         'special_ad_categories' => 'specialAdCategories',
         'special_ad_category_country' => 'specialAdCategoryCountry',
+        'regional_regulated_categories' => 'regionalRegulatedCategories',
         'link_url' => 'linkUrl',
         'call_to_action' => 'callToAction',
         'spark_auth_code' => 'sparkAuthCode',
@@ -309,6 +313,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'tracking' => 'setTracking',
         'special_ad_categories' => 'setSpecialAdCategories',
         'special_ad_category_country' => 'setSpecialAdCategoryCountry',
+        'regional_regulated_categories' => 'setRegionalRegulatedCategories',
         'link_url' => 'setLinkUrl',
         'call_to_action' => 'setCallToAction',
         'spark_auth_code' => 'setSparkAuthCode',
@@ -346,6 +351,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'tracking' => 'getTracking',
         'special_ad_categories' => 'getSpecialAdCategories',
         'special_ad_category_country' => 'getSpecialAdCategoryCountry',
+        'regional_regulated_categories' => 'getRegionalRegulatedCategories',
         'link_url' => 'getLinkUrl',
         'call_to_action' => 'getCallToAction',
         'spark_auth_code' => 'getSparkAuthCode',
@@ -518,6 +524,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('tracking', $data ?? [], null);
         $this->setIfExists('special_ad_categories', $data ?? [], null);
         $this->setIfExists('special_ad_category_country', $data ?? [], null);
+        $this->setIfExists('regional_regulated_categories', $data ?? [], null);
         $this->setIfExists('link_url', $data ?? [], null);
         $this->setIfExists('call_to_action', $data ?? [], null);
         $this->setIfExists('spark_auth_code', $data ?? [], null);
@@ -1238,6 +1245,33 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable special_ad_category_country cannot be null');
         }
         $this->container['special_ad_category_country'] = $special_ad_category_country;
+
+        return $this;
+    }
+
+    /**
+     * Gets regional_regulated_categories
+     *
+     * @return string[]|null
+     */
+    public function getRegionalRegulatedCategories()
+    {
+        return $this->container['regional_regulated_categories'];
+    }
+
+    /**
+     * Sets regional_regulated_categories
+     *
+     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.
+     *
+     * @return self
+     */
+    public function setRegionalRegulatedCategories($regional_regulated_categories)
+    {
+        if (is_null($regional_regulated_categories)) {
+            throw new \InvalidArgumentException('non-nullable regional_regulated_categories cannot be null');
+        }
+        $this->container['regional_regulated_categories'] = $regional_regulated_categories;
 
         return $this;
     }

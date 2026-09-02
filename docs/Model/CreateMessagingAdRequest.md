@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **roas_average_floor** | **float** | Decimal ROAS multiplier (e.g. &#x60;2.0&#x60; &#x3D; 2.0× ROAS floor). Required when &#x60;bidStrategy&#x60; is &#x60;LOWEST_COST_WITH_MIN_ROAS&#x60;; rejected otherwise. Meta enforces its own upper bound server-side. | [optional]
 **dsa_beneficiary** | **string** | Legal entity that benefits from the ad. Required when targeting EU users (EU DSA, Article 26). Optional if the ad account has a default beneficiary: set it once via &#x60;PATCH /v1/ads/accounts&#x60; or in Meta Ads Manager, and Meta fills it in whenever the field is omitted. | [optional]
 **dsa_payor** | **string** | Legal entity that pays for the ad. Can differ from &#x60;dsaBeneficiary&#x60; (for example, an agency paying for a client&#39;s ads). Same rules as &#x60;dsaBeneficiary&#x60;: required for EU targeting unless the ad account has a default payor. | [optional]
+**regional_regulated_categories** | **string[]** | Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set. | [optional]
 **destination** | **string** | Where the conversation opens when the ad is tapped. |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
