@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ad_account_id** | **string** | Meta ad account id (act_&lt;n&gt;). |
+**ad_account_id** | **string** | Platform ad account id (Meta act_&lt;n&gt;, Google customer id, LinkedIn account id, ...). |
 **name** | **string** | Also the reuse key, together with pixelId. |
 **pixel_id** | **string** | Meta pixel id (event_source_id). From GET /v1/accounts/{accountId}/tracking-tags. |
 **custom_event_type** | **string** | Meta custom_event_type, e.g. LEAD, PURCHASE, OTHER. |

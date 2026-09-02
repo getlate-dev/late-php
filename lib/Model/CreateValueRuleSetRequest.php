@@ -352,7 +352,7 @@ class CreateValueRuleSetRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets account_id
      *
-     * @param string $account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+     * @param string $account_id Zernio SocialAccount id (posting or ads variant); its platform decides where the campaign is created.
      *
      * @return self
      */
@@ -379,7 +379,7 @@ class CreateValueRuleSetRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets ad_account_id
      *
-     * @param string $ad_account_id Meta ad account id (act_<n>).
+     * @param string $ad_account_id Platform ad account id (Meta act_<n>, Google customer id, LinkedIn account id, ...).
      *
      * @return self
      */

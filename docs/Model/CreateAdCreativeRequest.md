@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **account_id** | **string** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token and Page. |
-**ad_account_id** | **string** | Meta ad account id (act_&lt;n&gt;). |
+**ad_account_id** | **string** | Platform ad account id (Meta act_&lt;n&gt;, Google customer id, LinkedIn account id, ...). |
 **headline** | **string** |  |
 **body** | **string** | Primary text |
 **description** | **string** | Link description below the headline; omitted &#x3D; Meta scrapes the destination&#39;s OG description. | [optional]
