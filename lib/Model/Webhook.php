@@ -300,6 +300,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
     public const EVENTS_ACCOUNT_CONNECTED = 'account.connected';
     public const EVENTS_ACCOUNT_DISCONNECTED = 'account.disconnected';
     public const EVENTS_ACCOUNT_ADS_INITIAL_SYNC_COMPLETED = 'account.ads.initial_sync_completed';
+    public const EVENTS_ANALYTICS_SYNCED = 'analytics.synced';
     public const EVENTS_MESSAGE_RECEIVED = 'message.received';
     public const EVENTS_CONVERSATION_STARTED = 'conversation.started';
     public const EVENTS_CALL_RECEIVED = 'call.received';
@@ -369,6 +370,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
             self::EVENTS_ACCOUNT_CONNECTED,
             self::EVENTS_ACCOUNT_DISCONNECTED,
             self::EVENTS_ACCOUNT_ADS_INITIAL_SYNC_COMPLETED,
+            self::EVENTS_ANALYTICS_SYNCED,
             self::EVENTS_MESSAGE_RECEIVED,
             self::EVENTS_CONVERSATION_STARTED,
             self::EVENTS_CALL_RECEIVED,

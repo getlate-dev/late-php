@@ -78,6 +78,9 @@ class AnalyticsApi
         'getAnalytics' => [
             'application/json',
         ],
+        'getAnalyticsDelta' => [
+            'application/json',
+        ],
         'getBestTimeToPost' => [
             'application/json',
         ],
@@ -656,6 +659,422 @@ class AnalyticsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $order,
             'order', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getAnalyticsDelta
+     *
+     * Analytics changed since a cursor
+     *
+     * @param  string|null $cursor Opaque cursor from a previous response&#39;s &#x60;nextCursor&#x60;. Omit it to start from now: the response is then an empty page carrying the feed&#39;s current position. Rejected with a &#x60;400&#x60; when malformed, or when older than the retention window. (optional)
+     * @param  int|null $limit Page size. Out-of-range values are a 400, never a silent clamp. (optional, default to 50)
+     * @param  string|null $platform Filter to a single platform (for example \&quot;youtube\&quot;). Omit for every platform. (optional)
+     * @param  string|null $profile_id Filter by profile ID (default \&quot;all\&quot;). Must be a valid profile ID or \&quot;all\&quot;. (optional, default to 'all')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAnalyticsDelta'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\AnalyticsDeltaResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetAnalytics402Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1|\Zernio\Model\ErrorResponse|\Zernio\Model\ErrorResponse
+     */
+    public function getAnalyticsDelta($cursor = null, $limit = 50, $platform = null, $profile_id = 'all', string $contentType = self::contentTypes['getAnalyticsDelta'][0])
+    {
+        list($response) = $this->getAnalyticsDeltaWithHttpInfo($cursor, $limit, $platform, $profile_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAnalyticsDeltaWithHttpInfo
+     *
+     * Analytics changed since a cursor
+     *
+     * @param  string|null $cursor Opaque cursor from a previous response&#39;s &#x60;nextCursor&#x60;. Omit it to start from now: the response is then an empty page carrying the feed&#39;s current position. Rejected with a &#x60;400&#x60; when malformed, or when older than the retention window. (optional)
+     * @param  int|null $limit Page size. Out-of-range values are a 400, never a silent clamp. (optional, default to 50)
+     * @param  string|null $platform Filter to a single platform (for example \&quot;youtube\&quot;). Omit for every platform. (optional)
+     * @param  string|null $profile_id Filter by profile ID (default \&quot;all\&quot;). Must be a valid profile ID or \&quot;all\&quot;. (optional, default to 'all')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAnalyticsDelta'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\AnalyticsDeltaResponse|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\GetAnalytics402Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject1|\Zernio\Model\ErrorResponse|\Zernio\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAnalyticsDeltaWithHttpInfo($cursor = null, $limit = 50, $platform = null, $profile_id = 'all', string $contentType = self::contentTypes['getAnalyticsDelta'][0])
+    {
+        $request = $this->getAnalyticsDeltaRequest($cursor, $limit, $platform, $profile_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\AnalyticsDeltaResponse',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+                case 402:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GetAnalytics402Response',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject1',
+                        $request,
+                        $response,
+                    );
+                case 500:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 503:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\AnalyticsDeltaResponse',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\AnalyticsDeltaResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GetAnalytics402Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject1',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 503:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAnalyticsDeltaAsync
+     *
+     * Analytics changed since a cursor
+     *
+     * @param  string|null $cursor Opaque cursor from a previous response&#39;s &#x60;nextCursor&#x60;. Omit it to start from now: the response is then an empty page carrying the feed&#39;s current position. Rejected with a &#x60;400&#x60; when malformed, or when older than the retention window. (optional)
+     * @param  int|null $limit Page size. Out-of-range values are a 400, never a silent clamp. (optional, default to 50)
+     * @param  string|null $platform Filter to a single platform (for example \&quot;youtube\&quot;). Omit for every platform. (optional)
+     * @param  string|null $profile_id Filter by profile ID (default \&quot;all\&quot;). Must be a valid profile ID or \&quot;all\&quot;. (optional, default to 'all')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAnalyticsDelta'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAnalyticsDeltaAsync($cursor = null, $limit = 50, $platform = null, $profile_id = 'all', string $contentType = self::contentTypes['getAnalyticsDelta'][0])
+    {
+        return $this->getAnalyticsDeltaAsyncWithHttpInfo($cursor, $limit, $platform, $profile_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAnalyticsDeltaAsyncWithHttpInfo
+     *
+     * Analytics changed since a cursor
+     *
+     * @param  string|null $cursor Opaque cursor from a previous response&#39;s &#x60;nextCursor&#x60;. Omit it to start from now: the response is then an empty page carrying the feed&#39;s current position. Rejected with a &#x60;400&#x60; when malformed, or when older than the retention window. (optional)
+     * @param  int|null $limit Page size. Out-of-range values are a 400, never a silent clamp. (optional, default to 50)
+     * @param  string|null $platform Filter to a single platform (for example \&quot;youtube\&quot;). Omit for every platform. (optional)
+     * @param  string|null $profile_id Filter by profile ID (default \&quot;all\&quot;). Must be a valid profile ID or \&quot;all\&quot;. (optional, default to 'all')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAnalyticsDelta'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAnalyticsDeltaAsyncWithHttpInfo($cursor = null, $limit = 50, $platform = null, $profile_id = 'all', string $contentType = self::contentTypes['getAnalyticsDelta'][0])
+    {
+        $returnType = '\Zernio\Model\AnalyticsDeltaResponse';
+        $request = $this->getAnalyticsDeltaRequest($cursor, $limit, $platform, $profile_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAnalyticsDelta'
+     *
+     * @param  string|null $cursor Opaque cursor from a previous response&#39;s &#x60;nextCursor&#x60;. Omit it to start from now: the response is then an empty page carrying the feed&#39;s current position. Rejected with a &#x60;400&#x60; when malformed, or when older than the retention window. (optional)
+     * @param  int|null $limit Page size. Out-of-range values are a 400, never a silent clamp. (optional, default to 50)
+     * @param  string|null $platform Filter to a single platform (for example \&quot;youtube\&quot;). Omit for every platform. (optional)
+     * @param  string|null $profile_id Filter by profile ID (default \&quot;all\&quot;). Must be a valid profile ID or \&quot;all\&quot;. (optional, default to 'all')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAnalyticsDelta'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAnalyticsDeltaRequest($cursor = null, $limit = 50, $platform = null, $profile_id = 'all', string $contentType = self::contentTypes['getAnalyticsDelta'][0])
+    {
+
+
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsApi.getAnalyticsDelta, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsApi.getAnalyticsDelta, must be bigger than or equal to 1.');
+        }
+        
+
+
+
+        $resourcePath = '/v1/analytics/delta';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $cursor,
+            'cursor', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $platform,
+            'platform', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $profile_id,
+            'profileId', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
