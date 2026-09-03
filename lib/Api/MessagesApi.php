@@ -1493,7 +1493,7 @@ class MessagesApi
      *
      * Get conversation
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  string $account_id The social account ID (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxConversation'] to see the possible values for this operation
      *
@@ -1512,7 +1512,7 @@ class MessagesApi
      *
      * Get conversation
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  string $account_id The social account ID (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxConversation'] to see the possible values for this operation
      *
@@ -1612,7 +1612,7 @@ class MessagesApi
      *
      * Get conversation
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  string $account_id The social account ID (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxConversation'] to see the possible values for this operation
      *
@@ -1634,7 +1634,7 @@ class MessagesApi
      *
      * Get conversation
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  string $account_id The social account ID (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxConversation'] to see the possible values for this operation
      *
@@ -1685,7 +1685,7 @@ class MessagesApi
     /**
      * Create request for operation 'getInboxConversation'
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  string $account_id The social account ID (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getInboxConversation'] to see the possible values for this operation
      *
@@ -1800,7 +1800,7 @@ class MessagesApi
      *
      * List messages
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  string $account_id Social account ID (required)
      * @param  int|null $limit Number of messages to return per page. Default 100, max 100. (optional, default to 100)
      * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page. (optional)
@@ -1822,7 +1822,7 @@ class MessagesApi
      *
      * List messages
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  string $account_id Social account ID (required)
      * @param  int|null $limit Number of messages to return per page. Default 100, max 100. (optional, default to 100)
      * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page. (optional)
@@ -1939,7 +1939,7 @@ class MessagesApi
      *
      * List messages
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  string $account_id Social account ID (required)
      * @param  int|null $limit Number of messages to return per page. Default 100, max 100. (optional, default to 100)
      * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page. (optional)
@@ -1964,7 +1964,7 @@ class MessagesApi
      *
      * List messages
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  string $account_id Social account ID (required)
      * @param  int|null $limit Number of messages to return per page. Default 100, max 100. (optional, default to 100)
      * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page. (optional)
@@ -2018,7 +2018,7 @@ class MessagesApi
     /**
      * Create request for operation 'getInboxConversationMessages'
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  string $account_id Social account ID (required)
      * @param  int|null $limit Number of messages to return per page. Default 100, max 100. (optional, default to 100)
      * @param  string|null $cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page. (optional)
@@ -4600,7 +4600,7 @@ class MessagesApi
      *
      * Update conversation status
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  \Zernio\Model\UpdateInboxConversationRequest $update_inbox_conversation_request update_inbox_conversation_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInboxConversation'] to see the possible values for this operation
      *
@@ -4619,7 +4619,7 @@ class MessagesApi
      *
      * Update conversation status
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  \Zernio\Model\UpdateInboxConversationRequest $update_inbox_conversation_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInboxConversation'] to see the possible values for this operation
      *
@@ -4719,7 +4719,7 @@ class MessagesApi
      *
      * Update conversation status
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  \Zernio\Model\UpdateInboxConversationRequest $update_inbox_conversation_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInboxConversation'] to see the possible values for this operation
      *
@@ -4741,7 +4741,7 @@ class MessagesApi
      *
      * Update conversation status
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  \Zernio\Model\UpdateInboxConversationRequest $update_inbox_conversation_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInboxConversation'] to see the possible values for this operation
      *
@@ -4792,7 +4792,7 @@ class MessagesApi
     /**
      * Create request for operation 'updateInboxConversation'
      *
-     * @param  string $conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. (required)
+     * @param  string $conversation_id Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. (required)
      * @param  \Zernio\Model\UpdateInboxConversationRequest $update_inbox_conversation_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInboxConversation'] to see the possible values for this operation
      *
