@@ -93,7 +93,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'roas_average_floor' => 'float',
         'dsa_beneficiary' => 'string',
         'dsa_payor' => 'string',
-        'regional_regulated_categories' => 'string[]'
+        'regional_regulated_categories' => 'string[]',
+        'regional_regulation_identities' => 'array<string,int>'
     ];
 
     /**
@@ -138,7 +139,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'roas_average_floor' => null,
         'dsa_beneficiary' => null,
         'dsa_payor' => null,
-        'regional_regulated_categories' => null
+        'regional_regulated_categories' => null,
+        'regional_regulation_identities' => null
     ];
 
     /**
@@ -181,7 +183,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'roas_average_floor' => false,
         'dsa_beneficiary' => false,
         'dsa_payor' => false,
-        'regional_regulated_categories' => false
+        'regional_regulated_categories' => false,
+        'regional_regulation_identities' => false
     ];
 
     /**
@@ -304,7 +307,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'roas_average_floor' => 'roasAverageFloor',
         'dsa_beneficiary' => 'dsaBeneficiary',
         'dsa_payor' => 'dsaPayor',
-        'regional_regulated_categories' => 'regionalRegulatedCategories'
+        'regional_regulated_categories' => 'regionalRegulatedCategories',
+        'regional_regulation_identities' => 'regionalRegulationIdentities'
     ];
 
     /**
@@ -347,7 +351,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'roas_average_floor' => 'setRoasAverageFloor',
         'dsa_beneficiary' => 'setDsaBeneficiary',
         'dsa_payor' => 'setDsaPayor',
-        'regional_regulated_categories' => 'setRegionalRegulatedCategories'
+        'regional_regulated_categories' => 'setRegionalRegulatedCategories',
+        'regional_regulation_identities' => 'setRegionalRegulationIdentities'
     ];
 
     /**
@@ -390,7 +395,8 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         'roas_average_floor' => 'getRoasAverageFloor',
         'dsa_beneficiary' => 'getDsaBeneficiary',
         'dsa_payor' => 'getDsaPayor',
-        'regional_regulated_categories' => 'getRegionalRegulatedCategories'
+        'regional_regulated_categories' => 'getRegionalRegulatedCategories',
+        'regional_regulation_identities' => 'getRegionalRegulationIdentities'
     ];
 
     /**
@@ -581,6 +587,7 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('dsa_beneficiary', $data ?? [], null);
         $this->setIfExists('dsa_payor', $data ?? [], null);
         $this->setIfExists('regional_regulated_categories', $data ?? [], null);
+        $this->setIfExists('regional_regulation_identities', $data ?? [], null);
     }
 
     /**
@@ -1802,7 +1809,7 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets regional_regulated_categories
      *
-     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.
+     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. BRAZIL_REGULATION, SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV). Forwarded to the ad set.
      *
      * @return self
      */
@@ -1812,6 +1819,33 @@ class CtwaAdRequestBody implements ModelInterface, ArrayAccess, \JsonSerializabl
             throw new \InvalidArgumentException('non-nullable regional_regulated_categories cannot be null');
         }
         $this->container['regional_regulated_categories'] = $regional_regulated_categories;
+
+        return $this;
+    }
+
+    /**
+     * Gets regional_regulation_identities
+     *
+     * @return array<string,int>|null
+     */
+    public function getRegionalRegulationIdentities()
+    {
+        return $this->container['regional_regulation_identities'];
+    }
+
+    /**
+     * Sets regional_regulation_identities
+     *
+     * @param array<string,int>|null $regional_regulation_identities Meta only. Beneficiary/payer entity IDs required alongside regionalRegulatedCategories. Values are numeric IDs from the advertiser's Meta verification/authorization setup. Keys depend on the declared category: BRAZIL_REGULATION and THAILAND_UNIVERSAL use universal_beneficiary / universal_payer; SINGAPORE_UNIVERSAL uses singapore_universal_beneficiary / singapore_universal_payer; TAIWAN_UNIVERSAL uses taiwan_universal_beneficiary / taiwan_universal_payer; TAIWAN_FINSERV uses taiwan_finserv_beneficiary / taiwan_finserv_payer; AUSTRALIA_FINSERV uses australia_finserv_beneficiary / australia_finserv_payer; INDIA_FINSERV uses india_finserv_beneficiary / india_finserv_payer. Both beneficiary and payer must be included. If omitted and the advertiser has set defaults in Meta Ads Manager advertising settings, Meta auto-fills them.
+     *
+     * @return self
+     */
+    public function setRegionalRegulationIdentities($regional_regulation_identities)
+    {
+        if (is_null($regional_regulation_identities)) {
+            throw new \InvalidArgumentException('non-nullable regional_regulation_identities cannot be null');
+        }
+        $this->container['regional_regulation_identities'] = $regional_regulation_identities;
 
         return $this;
     }

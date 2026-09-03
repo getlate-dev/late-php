@@ -1177,8 +1177,23 @@ components:
             a default payor.
         regionalRegulatedCategories:
           type: array
-          description: 'Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.'
+          description: 'Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. BRAZIL_REGULATION, SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV). Forwarded to the ad set.'
           items: { type: string }
+        regionalRegulationIdentities:
+          type: object
+          additionalProperties: { type: integer }
+          description: |
+            Meta only. Beneficiary/payer entity IDs required alongside regionalRegulatedCategories.
+            Values are numeric IDs from the advertiser's Meta verification/authorization setup.
+            Keys depend on the declared category: BRAZIL_REGULATION and THAILAND_UNIVERSAL use
+            universal_beneficiary / universal_payer; SINGAPORE_UNIVERSAL uses
+            singapore_universal_beneficiary / singapore_universal_payer; TAIWAN_UNIVERSAL uses
+            taiwan_universal_beneficiary / taiwan_universal_payer; TAIWAN_FINSERV uses
+            taiwan_finserv_beneficiary / taiwan_finserv_payer; AUSTRALIA_FINSERV uses
+            australia_finserv_beneficiary / australia_finserv_payer; INDIA_FINSERV uses
+            india_finserv_beneficiary / india_finserv_payer.
+            Both beneficiary and payer must be included. If omitted and the advertiser has
+            set defaults in Meta Ads Manager advertising settings, Meta auto-fills them.
     WorkflowNode:
       type: object
       required: [id, type]
@@ -44320,8 +44335,12 @@ paths:
                   items: { type: string }
                 regionalRegulatedCategories:
                   type: array
-                  description: 'Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.'
+                  description: 'Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. BRAZIL_REGULATION, SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV). Forwarded to the ad set.'
                   items: { type: string }
+                regionalRegulationIdentities:
+                  type: object
+                  additionalProperties: { type: integer }
+                  description: 'Meta only. Beneficiary/payer entity IDs for regionalRegulatedCategories. Values are numeric IDs from Meta verification. Keys vary by category (e.g. universal_beneficiary / universal_payer for BRAZIL_REGULATION and THAILAND_UNIVERSAL). If omitted, Meta uses Ads Manager defaults when configured.'
                 linkUrl:
                   type: string
                   format: uri
@@ -44863,10 +44882,18 @@ paths:
                   type: array
                   description: |
                     Meta only. Regional regulation categories required when the ad set targets certain countries.
-                    Known values: SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV,
-                    INDIA_FINSERV, TAIWAN_FINSERV. Meta rejects the ad set without this when the targeting geo
-                    includes the corresponding country.
+                    Known values: BRAZIL_REGULATION, SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL,
+                    AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV. Meta rejects the ad set without this when
+                    the targeting geo includes the corresponding country.
                   items: { type: string }
+                regionalRegulationIdentities:
+                  type: object
+                  additionalProperties: { type: integer }
+                  description: |
+                    Meta only. Beneficiary/payer entity IDs for regionalRegulatedCategories. Values are
+                    numeric IDs from Meta verification. Keys vary by category (e.g. universal_beneficiary /
+                    universal_payer for BRAZIL_REGULATION and THAILAND_UNIVERSAL). If omitted, Meta uses
+                    Ads Manager defaults when configured.
                 endDate: { type: string, format: date-time, description: Required for lifetime budgets }
                 startDate:
                   type: string

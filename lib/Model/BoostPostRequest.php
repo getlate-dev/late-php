@@ -80,6 +80,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'special_ad_categories' => 'string[]',
         'special_ad_category_country' => 'string[]',
         'regional_regulated_categories' => 'string[]',
+        'regional_regulation_identities' => 'array<string,int>',
         'link_url' => 'string',
         'call_to_action' => 'string',
         'spark_auth_code' => 'string',
@@ -120,6 +121,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'special_ad_categories' => null,
         'special_ad_category_country' => null,
         'regional_regulated_categories' => null,
+        'regional_regulation_identities' => null,
         'link_url' => 'uri',
         'call_to_action' => null,
         'spark_auth_code' => null,
@@ -158,6 +160,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'special_ad_categories' => false,
         'special_ad_category_country' => false,
         'regional_regulated_categories' => false,
+        'regional_regulation_identities' => false,
         'link_url' => false,
         'call_to_action' => false,
         'spark_auth_code' => false,
@@ -276,6 +279,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'special_ad_categories' => 'specialAdCategories',
         'special_ad_category_country' => 'specialAdCategoryCountry',
         'regional_regulated_categories' => 'regionalRegulatedCategories',
+        'regional_regulation_identities' => 'regionalRegulationIdentities',
         'link_url' => 'linkUrl',
         'call_to_action' => 'callToAction',
         'spark_auth_code' => 'sparkAuthCode',
@@ -314,6 +318,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'special_ad_categories' => 'setSpecialAdCategories',
         'special_ad_category_country' => 'setSpecialAdCategoryCountry',
         'regional_regulated_categories' => 'setRegionalRegulatedCategories',
+        'regional_regulation_identities' => 'setRegionalRegulationIdentities',
         'link_url' => 'setLinkUrl',
         'call_to_action' => 'setCallToAction',
         'spark_auth_code' => 'setSparkAuthCode',
@@ -352,6 +357,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'special_ad_categories' => 'getSpecialAdCategories',
         'special_ad_category_country' => 'getSpecialAdCategoryCountry',
         'regional_regulated_categories' => 'getRegionalRegulatedCategories',
+        'regional_regulation_identities' => 'getRegionalRegulationIdentities',
         'link_url' => 'getLinkUrl',
         'call_to_action' => 'getCallToAction',
         'spark_auth_code' => 'getSparkAuthCode',
@@ -525,6 +531,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('special_ad_categories', $data ?? [], null);
         $this->setIfExists('special_ad_category_country', $data ?? [], null);
         $this->setIfExists('regional_regulated_categories', $data ?? [], null);
+        $this->setIfExists('regional_regulation_identities', $data ?? [], null);
         $this->setIfExists('link_url', $data ?? [], null);
         $this->setIfExists('call_to_action', $data ?? [], null);
         $this->setIfExists('spark_auth_code', $data ?? [], null);
@@ -1262,7 +1269,7 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets regional_regulated_categories
      *
-     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.
+     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. BRAZIL_REGULATION, SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV). Forwarded to the ad set.
      *
      * @return self
      */
@@ -1272,6 +1279,33 @@ class BoostPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable regional_regulated_categories cannot be null');
         }
         $this->container['regional_regulated_categories'] = $regional_regulated_categories;
+
+        return $this;
+    }
+
+    /**
+     * Gets regional_regulation_identities
+     *
+     * @return array<string,int>|null
+     */
+    public function getRegionalRegulationIdentities()
+    {
+        return $this->container['regional_regulation_identities'];
+    }
+
+    /**
+     * Sets regional_regulation_identities
+     *
+     * @param array<string,int>|null $regional_regulation_identities Meta only. Beneficiary/payer entity IDs for regionalRegulatedCategories. Values are numeric IDs from Meta verification. Keys vary by category (e.g. universal_beneficiary / universal_payer for BRAZIL_REGULATION and THAILAND_UNIVERSAL). If omitted, Meta uses Ads Manager defaults when configured.
+     *
+     * @return self
+     */
+    public function setRegionalRegulationIdentities($regional_regulation_identities)
+    {
+        if (is_null($regional_regulation_identities)) {
+            throw new \InvalidArgumentException('non-nullable regional_regulation_identities cannot be null');
+        }
+        $this->container['regional_regulation_identities'] = $regional_regulation_identities;
 
         return $this;
     }

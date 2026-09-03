@@ -3675,9 +3675,3 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/AnalyticsDeltaEntryMetricsTest.php
-test/Model/AnalyticsDeltaEntryTest.php
-test/Model/AnalyticsDeltaResponseTest.php
-test/Model/WebhookPayloadAnalyticsSyncedAccountTest.php
-test/Model/WebhookPayloadAnalyticsSyncedSyncTest.php
-test/Model/WebhookPayloadAnalyticsSyncedTest.php

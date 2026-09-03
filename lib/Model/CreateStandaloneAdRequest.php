@@ -118,6 +118,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'special_ad_categories' => 'string[]',
         'special_ad_category_country' => 'string[]',
         'regional_regulated_categories' => 'string[]',
+        'regional_regulation_identities' => 'array<string,int>',
         'end_date' => '\DateTime',
         'start_date' => '\DateTime',
         'instagram_account_id' => 'string',
@@ -220,6 +221,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'special_ad_categories' => null,
         'special_ad_category_country' => null,
         'regional_regulated_categories' => null,
+        'regional_regulation_identities' => null,
         'end_date' => 'date-time',
         'start_date' => 'date-time',
         'instagram_account_id' => null,
@@ -320,6 +322,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'special_ad_categories' => false,
         'special_ad_category_country' => false,
         'regional_regulated_categories' => false,
+        'regional_regulation_identities' => false,
         'end_date' => false,
         'start_date' => false,
         'instagram_account_id' => false,
@@ -500,6 +503,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'special_ad_categories' => 'specialAdCategories',
         'special_ad_category_country' => 'specialAdCategoryCountry',
         'regional_regulated_categories' => 'regionalRegulatedCategories',
+        'regional_regulation_identities' => 'regionalRegulationIdentities',
         'end_date' => 'endDate',
         'start_date' => 'startDate',
         'instagram_account_id' => 'instagramAccountId',
@@ -600,6 +604,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'special_ad_categories' => 'setSpecialAdCategories',
         'special_ad_category_country' => 'setSpecialAdCategoryCountry',
         'regional_regulated_categories' => 'setRegionalRegulatedCategories',
+        'regional_regulation_identities' => 'setRegionalRegulationIdentities',
         'end_date' => 'setEndDate',
         'start_date' => 'setStartDate',
         'instagram_account_id' => 'setInstagramAccountId',
@@ -700,6 +705,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'special_ad_categories' => 'getSpecialAdCategories',
         'special_ad_category_country' => 'getSpecialAdCategoryCountry',
         'regional_regulated_categories' => 'getRegionalRegulatedCategories',
+        'regional_regulation_identities' => 'getRegionalRegulationIdentities',
         'end_date' => 'getEndDate',
         'start_date' => 'getStartDate',
         'instagram_account_id' => 'getInstagramAccountId',
@@ -1172,6 +1178,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('special_ad_categories', $data ?? [], null);
         $this->setIfExists('special_ad_category_country', $data ?? [], null);
         $this->setIfExists('regional_regulated_categories', $data ?? [], null);
+        $this->setIfExists('regional_regulation_identities', $data ?? [], null);
         $this->setIfExists('end_date', $data ?? [], null);
         $this->setIfExists('start_date', $data ?? [], null);
         $this->setIfExists('instagram_account_id', $data ?? [], null);
@@ -3260,7 +3267,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets regional_regulated_categories
      *
-     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries. Known values: SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV. Meta rejects the ad set without this when the targeting geo includes the corresponding country.
+     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries. Known values: BRAZIL_REGULATION, SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV. Meta rejects the ad set without this when the targeting geo includes the corresponding country.
      *
      * @return self
      */
@@ -3270,6 +3277,33 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable regional_regulated_categories cannot be null');
         }
         $this->container['regional_regulated_categories'] = $regional_regulated_categories;
+
+        return $this;
+    }
+
+    /**
+     * Gets regional_regulation_identities
+     *
+     * @return array<string,int>|null
+     */
+    public function getRegionalRegulationIdentities()
+    {
+        return $this->container['regional_regulation_identities'];
+    }
+
+    /**
+     * Sets regional_regulation_identities
+     *
+     * @param array<string,int>|null $regional_regulation_identities Meta only. Beneficiary/payer entity IDs for regionalRegulatedCategories. Values are numeric IDs from Meta verification. Keys vary by category (e.g. universal_beneficiary / universal_payer for BRAZIL_REGULATION and THAILAND_UNIVERSAL). If omitted, Meta uses Ads Manager defaults when configured.
+     *
+     * @return self
+     */
+    public function setRegionalRegulationIdentities($regional_regulation_identities)
+    {
+        if (is_null($regional_regulation_identities)) {
+            throw new \InvalidArgumentException('non-nullable regional_regulation_identities cannot be null');
+        }
+        $this->container['regional_regulation_identities'] = $regional_regulation_identities;
 
         return $this;
     }

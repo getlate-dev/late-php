@@ -93,6 +93,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'dsa_beneficiary' => 'string',
         'dsa_payor' => 'string',
         'regional_regulated_categories' => 'string[]',
+        'regional_regulation_identities' => 'array<string,int>',
         'phone_number' => 'string',
         'link_url' => 'string'
     ];
@@ -140,6 +141,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'dsa_beneficiary' => null,
         'dsa_payor' => null,
         'regional_regulated_categories' => null,
+        'regional_regulation_identities' => null,
         'phone_number' => null,
         'link_url' => 'uri'
     ];
@@ -185,6 +187,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'dsa_beneficiary' => false,
         'dsa_payor' => false,
         'regional_regulated_categories' => false,
+        'regional_regulation_identities' => false,
         'phone_number' => false,
         'link_url' => false
     ];
@@ -310,6 +313,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'dsa_beneficiary' => 'dsaBeneficiary',
         'dsa_payor' => 'dsaPayor',
         'regional_regulated_categories' => 'regionalRegulatedCategories',
+        'regional_regulation_identities' => 'regionalRegulationIdentities',
         'phone_number' => 'phoneNumber',
         'link_url' => 'linkUrl'
     ];
@@ -355,6 +359,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'dsa_beneficiary' => 'setDsaBeneficiary',
         'dsa_payor' => 'setDsaPayor',
         'regional_regulated_categories' => 'setRegionalRegulatedCategories',
+        'regional_regulation_identities' => 'setRegionalRegulationIdentities',
         'phone_number' => 'setPhoneNumber',
         'link_url' => 'setLinkUrl'
     ];
@@ -400,6 +405,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         'dsa_beneficiary' => 'getDsaBeneficiary',
         'dsa_payor' => 'getDsaPayor',
         'regional_regulated_categories' => 'getRegionalRegulatedCategories',
+        'regional_regulation_identities' => 'getRegionalRegulationIdentities',
         'phone_number' => 'getPhoneNumber',
         'link_url' => 'getLinkUrl'
     ];
@@ -592,6 +598,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('dsa_beneficiary', $data ?? [], null);
         $this->setIfExists('dsa_payor', $data ?? [], null);
         $this->setIfExists('regional_regulated_categories', $data ?? [], null);
+        $this->setIfExists('regional_regulation_identities', $data ?? [], null);
         $this->setIfExists('phone_number', $data ?? [], null);
         $this->setIfExists('link_url', $data ?? [], null);
     }
@@ -1821,7 +1828,7 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets regional_regulated_categories
      *
-     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.
+     * @param string[]|null $regional_regulated_categories Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. BRAZIL_REGULATION, SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV). Forwarded to the ad set.
      *
      * @return self
      */
@@ -1831,6 +1838,33 @@ class CreateCallAdRequest implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable regional_regulated_categories cannot be null');
         }
         $this->container['regional_regulated_categories'] = $regional_regulated_categories;
+
+        return $this;
+    }
+
+    /**
+     * Gets regional_regulation_identities
+     *
+     * @return array<string,int>|null
+     */
+    public function getRegionalRegulationIdentities()
+    {
+        return $this->container['regional_regulation_identities'];
+    }
+
+    /**
+     * Sets regional_regulation_identities
+     *
+     * @param array<string,int>|null $regional_regulation_identities Meta only. Beneficiary/payer entity IDs required alongside regionalRegulatedCategories. Values are numeric IDs from the advertiser's Meta verification/authorization setup. Keys depend on the declared category: BRAZIL_REGULATION and THAILAND_UNIVERSAL use universal_beneficiary / universal_payer; SINGAPORE_UNIVERSAL uses singapore_universal_beneficiary / singapore_universal_payer; TAIWAN_UNIVERSAL uses taiwan_universal_beneficiary / taiwan_universal_payer; TAIWAN_FINSERV uses taiwan_finserv_beneficiary / taiwan_finserv_payer; AUSTRALIA_FINSERV uses australia_finserv_beneficiary / australia_finserv_payer; INDIA_FINSERV uses india_finserv_beneficiary / india_finserv_payer. Both beneficiary and payer must be included. If omitted and the advertiser has set defaults in Meta Ads Manager advertising settings, Meta auto-fills them.
+     *
+     * @return self
+     */
+    public function setRegionalRegulationIdentities($regional_regulation_identities)
+    {
+        if (is_null($regional_regulation_identities)) {
+            throw new \InvalidArgumentException('non-nullable regional_regulation_identities cannot be null');
+        }
+        $this->container['regional_regulation_identities'] = $regional_regulation_identities;
 
         return $this;
     }
