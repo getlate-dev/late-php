@@ -1735,6 +1735,7 @@ docs/Model/WebhookPayloadMessageMessageSenderInstagramProfile.md
 docs/Model/WebhookPayloadMessageMetadata.md
 docs/Model/WebhookPayloadMessageMetadataOrder.md
 docs/Model/WebhookPayloadMessageMetadataOrderProductItemsInner.md
+docs/Model/WebhookPayloadMessageMetadataQuotedMessage.md
 docs/Model/WebhookPayloadMessageMetadataReferral.md
 docs/Model/WebhookPayloadMessageMetadataReferralAdsContextData.md
 docs/Model/WebhookPayloadMessageMetadataReferredProduct.md
@@ -3573,6 +3574,7 @@ lib/Model/WebhookPayloadMessageMessageSenderInstagramProfile.php
 lib/Model/WebhookPayloadMessageMetadata.php
 lib/Model/WebhookPayloadMessageMetadataOrder.php
 lib/Model/WebhookPayloadMessageMetadataOrderProductItemsInner.php
+lib/Model/WebhookPayloadMessageMetadataQuotedMessage.php
 lib/Model/WebhookPayloadMessageMetadataReferral.php
 lib/Model/WebhookPayloadMessageMetadataReferralAdsContextData.php
 lib/Model/WebhookPayloadMessageMetadataReferredProduct.php
@@ -3675,3 +3677,4 @@ lib/Model/YouTubeVideoRetentionResponse.php
 lib/Model/YouTubeVideoRetentionResponseRetentionCurveInner.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/WebhookPayloadMessageMetadataQuotedMessageTest.php

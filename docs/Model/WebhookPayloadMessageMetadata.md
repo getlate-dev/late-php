@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quoted_message_id** | **string** | platformMessageId of the message this one is a quote-reply to. WhatsApp (&#x60;context.id&#x60;), Instagram and Facebook Messenger (&#x60;reply_to.mid&#x60;). On outgoing messages the same field appears on &#x60;message.sent&#x60;, but only on some surfaces: see WebhookPayloadMessageSent.metadata.quotedMessageId. | [optional]
+**quoted_message_id** | **string** | Raw platform envelope id (WhatsApp &#x60;context.id&#x60;; Instagram and Facebook Messenger &#x60;reply_to.mid&#x60;) of the message this one is a quote-reply to, forwarded verbatim. It may not equal the stored id of that message (see &#x60;quotedMessage.platformMessageId&#x60;). On outgoing messages the same field appears on &#x60;message.sent&#x60;, but only on some surfaces: see WebhookPayloadMessageSent.metadata.quotedMessageId. | [optional]
+**quoted_message** | [**\Zernio\Model\WebhookPayloadMessageMetadataQuotedMessage**](WebhookPayloadMessageMetadataQuotedMessage.md) |  | [optional]
 **quick_reply_payload** | **string** | Payload from a quick reply tap (Facebook/Instagram Messenger). | [optional]
 **postback_payload** | **string** | Payload from a postback button tap (Facebook/Instagram Messenger). | [optional]
 **postback_title** | **string** | Title of the tapped postback button (Facebook/Instagram Messenger). | [optional]

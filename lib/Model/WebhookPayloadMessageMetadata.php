@@ -60,6 +60,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
       */
     protected static $openAPITypes = [
         'quoted_message_id' => 'string',
+        'quoted_message' => '\Zernio\Model\WebhookPayloadMessageMetadataQuotedMessage',
         'quick_reply_payload' => 'string',
         'postback_payload' => 'string',
         'postback_title' => 'string',
@@ -90,6 +91,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
       */
     protected static $openAPIFormats = [
         'quoted_message_id' => null,
+        'quoted_message' => null,
         'quick_reply_payload' => null,
         'postback_payload' => null,
         'postback_title' => null,
@@ -118,6 +120,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
       */
     protected static array $openAPINullables = [
         'quoted_message_id' => false,
+        'quoted_message' => false,
         'quick_reply_payload' => false,
         'postback_payload' => false,
         'postback_title' => false,
@@ -226,6 +229,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $attributeMap = [
         'quoted_message_id' => 'quotedMessageId',
+        'quoted_message' => 'quotedMessage',
         'quick_reply_payload' => 'quickReplyPayload',
         'postback_payload' => 'postbackPayload',
         'postback_title' => 'postbackTitle',
@@ -254,6 +258,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $setters = [
         'quoted_message_id' => 'setQuotedMessageId',
+        'quoted_message' => 'setQuotedMessage',
         'quick_reply_payload' => 'setQuickReplyPayload',
         'postback_payload' => 'setPostbackPayload',
         'postback_title' => 'setPostbackTitle',
@@ -282,6 +287,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $getters = [
         'quoted_message_id' => 'getQuotedMessageId',
+        'quoted_message' => 'getQuotedMessage',
         'quick_reply_payload' => 'getQuickReplyPayload',
         'postback_payload' => 'getPostbackPayload',
         'postback_title' => 'getPostbackTitle',
@@ -393,6 +399,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
     public function __construct(?array $data = null)
     {
         $this->setIfExists('quoted_message_id', $data ?? [], null);
+        $this->setIfExists('quoted_message', $data ?? [], null);
         $this->setIfExists('quick_reply_payload', $data ?? [], null);
         $this->setIfExists('postback_payload', $data ?? [], null);
         $this->setIfExists('postback_title', $data ?? [], null);
@@ -487,7 +494,7 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets quoted_message_id
      *
-     * @param string|null $quoted_message_id platformMessageId of the message this one is a quote-reply to. WhatsApp (`context.id`), Instagram and Facebook Messenger (`reply_to.mid`). On outgoing messages the same field appears on `message.sent`, but only on some surfaces: see WebhookPayloadMessageSent.metadata.quotedMessageId.
+     * @param string|null $quoted_message_id Raw platform envelope id (WhatsApp `context.id`; Instagram and Facebook Messenger `reply_to.mid`) of the message this one is a quote-reply to, forwarded verbatim. It may not equal the stored id of that message (see `quotedMessage.platformMessageId`). On outgoing messages the same field appears on `message.sent`, but only on some surfaces: see WebhookPayloadMessageSent.metadata.quotedMessageId.
      *
      * @return self
      */
@@ -497,6 +504,33 @@ class WebhookPayloadMessageMetadata implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable quoted_message_id cannot be null');
         }
         $this->container['quoted_message_id'] = $quoted_message_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets quoted_message
+     *
+     * @return \Zernio\Model\WebhookPayloadMessageMetadataQuotedMessage|null
+     */
+    public function getQuotedMessage()
+    {
+        return $this->container['quoted_message'];
+    }
+
+    /**
+     * Sets quoted_message
+     *
+     * @param \Zernio\Model\WebhookPayloadMessageMetadataQuotedMessage|null $quoted_message quoted_message
+     *
+     * @return self
+     */
+    public function setQuotedMessage($quoted_message)
+    {
+        if (is_null($quoted_message)) {
+            throw new \InvalidArgumentException('non-nullable quoted_message cannot be null');
+        }
+        $this->container['quoted_message'] = $quoted_message;
 
         return $this;
     }

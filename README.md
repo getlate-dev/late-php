@@ -2335,6 +2335,7 @@ Class | Method | HTTP request | Description
 - [WebhookPayloadMessageMetadata](docs/Model/WebhookPayloadMessageMetadata.md)
 - [WebhookPayloadMessageMetadataOrder](docs/Model/WebhookPayloadMessageMetadataOrder.md)
 - [WebhookPayloadMessageMetadataOrderProductItemsInner](docs/Model/WebhookPayloadMessageMetadataOrderProductItemsInner.md)
+- [WebhookPayloadMessageMetadataQuotedMessage](docs/Model/WebhookPayloadMessageMetadataQuotedMessage.md)
 - [WebhookPayloadMessageMetadataReferral](docs/Model/WebhookPayloadMessageMetadataReferral.md)
 - [WebhookPayloadMessageMetadataReferralAdsContextData](docs/Model/WebhookPayloadMessageMetadataReferralAdsContextData.md)
 - [WebhookPayloadMessageMetadataReferredProduct](docs/Model/WebhookPayloadMessageMetadataReferredProduct.md)
