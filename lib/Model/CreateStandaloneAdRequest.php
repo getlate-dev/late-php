@@ -83,6 +83,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'long_headline' => 'string',
         'body' => 'string',
         'description' => 'string',
+        'bodies' => 'string[]',
+        'headlines' => 'string[]',
+        'descriptions' => 'string[]',
         'call_to_action' => 'string',
         'link_url' => 'string',
         'lead_gen_form_id' => 'string',
@@ -186,6 +189,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'long_headline' => null,
         'body' => null,
         'description' => null,
+        'bodies' => null,
+        'headlines' => null,
+        'descriptions' => null,
         'call_to_action' => null,
         'link_url' => 'uri',
         'lead_gen_form_id' => null,
@@ -287,6 +293,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'long_headline' => false,
         'body' => false,
         'description' => false,
+        'bodies' => false,
+        'headlines' => false,
+        'descriptions' => false,
         'call_to_action' => false,
         'link_url' => false,
         'lead_gen_form_id' => false,
@@ -468,6 +477,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'long_headline' => 'longHeadline',
         'body' => 'body',
         'description' => 'description',
+        'bodies' => 'bodies',
+        'headlines' => 'headlines',
+        'descriptions' => 'descriptions',
         'call_to_action' => 'callToAction',
         'link_url' => 'linkUrl',
         'lead_gen_form_id' => 'leadGenFormId',
@@ -569,6 +581,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'long_headline' => 'setLongHeadline',
         'body' => 'setBody',
         'description' => 'setDescription',
+        'bodies' => 'setBodies',
+        'headlines' => 'setHeadlines',
+        'descriptions' => 'setDescriptions',
         'call_to_action' => 'setCallToAction',
         'link_url' => 'setLinkUrl',
         'lead_gen_form_id' => 'setLeadGenFormId',
@@ -670,6 +685,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         'long_headline' => 'getLongHeadline',
         'body' => 'getBody',
         'description' => 'getDescription',
+        'bodies' => 'getBodies',
+        'headlines' => 'getHeadlines',
+        'descriptions' => 'getDescriptions',
         'call_to_action' => 'getCallToAction',
         'link_url' => 'getLinkUrl',
         'lead_gen_form_id' => 'getLeadGenFormId',
@@ -1143,6 +1161,9 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('long_headline', $data ?? [], null);
         $this->setIfExists('body', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('bodies', $data ?? [], null);
+        $this->setIfExists('headlines', $data ?? [], null);
+        $this->setIfExists('descriptions', $data ?? [], null);
         $this->setIfExists('call_to_action', $data ?? [], null);
         $this->setIfExists('link_url', $data ?? [], null);
         $this->setIfExists('lead_gen_form_id', $data ?? [], null);
@@ -1342,6 +1363,30 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
 
         if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 255)) {
             $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 255.";
+        }
+
+        if (!is_null($this->container['bodies']) && (count($this->container['bodies']) > 5)) {
+            $invalidProperties[] = "invalid value for 'bodies', number of items must be less than or equal to 5.";
+        }
+
+        if (!is_null($this->container['bodies']) && (count($this->container['bodies']) < 1)) {
+            $invalidProperties[] = "invalid value for 'bodies', number of items must be greater than or equal to 1.";
+        }
+
+        if (!is_null($this->container['headlines']) && (count($this->container['headlines']) > 5)) {
+            $invalidProperties[] = "invalid value for 'headlines', number of items must be less than or equal to 5.";
+        }
+
+        if (!is_null($this->container['headlines']) && (count($this->container['headlines']) < 1)) {
+            $invalidProperties[] = "invalid value for 'headlines', number of items must be greater than or equal to 1.";
+        }
+
+        if (!is_null($this->container['descriptions']) && (count($this->container['descriptions']) > 5)) {
+            $invalidProperties[] = "invalid value for 'descriptions', number of items must be less than or equal to 5.";
+        }
+
+        if (!is_null($this->container['descriptions']) && (count($this->container['descriptions']) < 1)) {
+            $invalidProperties[] = "invalid value for 'descriptions', number of items must be greater than or equal to 1.";
         }
 
         $allowedValues = $this->getCallToActionAllowableValues();
@@ -2264,7 +2309,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets description
      *
-     * @param string|null $description Meta only (facebook/instagram). Link description — the secondary text shown below the headline (Meta's link_data.description; on video creatives mapped to video_data.link_description). When omitted, Meta auto-pulls the destination URL's OpenGraph description. Applies on legacy, attach, and placementAssets shapes; for multi-creative use creatives[].description (this field is the shared fallback). For multi-text variations use dynamicCreative.descriptions instead.
+     * @param string|null $description Meta only (facebook/instagram). Link description — the secondary text shown below the headline (Meta's link_data.description; on video creatives mapped to video_data.link_description). When omitted, Meta auto-pulls the destination URL's OpenGraph description. Applies on legacy, attach, and placementAssets shapes; for multi-creative use creatives[].description (this field is the shared fallback). For multi-text variations use `descriptions` (array) instead.
      *
      * @return self
      */
@@ -2278,6 +2323,108 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
         }
 
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets bodies
+     *
+     * @return string[]|null
+     */
+    public function getBodies()
+    {
+        return $this->container['bodies'];
+    }
+
+    /**
+     * Sets bodies
+     *
+     * @param string[]|null $bodies Meta only. Multiple Text Options (Advantage+ Flexible Format): supply 1-5 primary-text variations and Meta optimises delivery across them, WITHOUT enabling full Dynamic Creative (`dynamicCreative`). Uses `optimization_type: DEGREES_OF_FREEDOM` on the asset feed, so multiple ads per ad set are allowed (unlike `dynamicCreative` which is limited to one). Requires `imageUrl` or `video`, `linkUrl`, and `callToAction`. When set, the top-level `body` field is used as the `object_story_spec.link_data.message` (the preview text) and `headlines` must also be present. Mutually exclusive with `dynamicCreative`, `placementAssets`, `carouselCards`, and `creatives[]`.
+     *
+     * @return self
+     */
+    public function setBodies($bodies)
+    {
+        if (is_null($bodies)) {
+            throw new \InvalidArgumentException('non-nullable bodies cannot be null');
+        }
+
+        if ((count($bodies) > 5)) {
+            throw new \InvalidArgumentException('invalid value for $bodies when calling CreateStandaloneAdRequest., number of items must be less than or equal to 5.');
+        }
+        if ((count($bodies) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $bodies when calling CreateStandaloneAdRequest., number of items must be greater than or equal to 1.');
+        }
+        $this->container['bodies'] = $bodies;
+
+        return $this;
+    }
+
+    /**
+     * Gets headlines
+     *
+     * @return string[]|null
+     */
+    public function getHeadlines()
+    {
+        return $this->container['headlines'];
+    }
+
+    /**
+     * Sets headlines
+     *
+     * @param string[]|null $headlines Meta only. Headline variations for Multiple Text Options. Must be sent alongside `bodies`. The top-level `headline` field is used as the `object_story_spec.link_data.name`.
+     *
+     * @return self
+     */
+    public function setHeadlines($headlines)
+    {
+        if (is_null($headlines)) {
+            throw new \InvalidArgumentException('non-nullable headlines cannot be null');
+        }
+
+        if ((count($headlines) > 5)) {
+            throw new \InvalidArgumentException('invalid value for $headlines when calling CreateStandaloneAdRequest., number of items must be less than or equal to 5.');
+        }
+        if ((count($headlines) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $headlines when calling CreateStandaloneAdRequest., number of items must be greater than or equal to 1.');
+        }
+        $this->container['headlines'] = $headlines;
+
+        return $this;
+    }
+
+    /**
+     * Gets descriptions
+     *
+     * @return string[]|null
+     */
+    public function getDescriptions()
+    {
+        return $this->container['descriptions'];
+    }
+
+    /**
+     * Sets descriptions
+     *
+     * @param string[]|null $descriptions Meta only. Optional description variations for Multiple Text Options. Sent alongside `bodies` and `headlines`.
+     *
+     * @return self
+     */
+    public function setDescriptions($descriptions)
+    {
+        if (is_null($descriptions)) {
+            throw new \InvalidArgumentException('non-nullable descriptions cannot be null');
+        }
+
+        if ((count($descriptions) > 5)) {
+            throw new \InvalidArgumentException('invalid value for $descriptions when calling CreateStandaloneAdRequest., number of items must be less than or equal to 5.');
+        }
+        if ((count($descriptions) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $descriptions when calling CreateStandaloneAdRequest., number of items must be greater than or equal to 1.');
+        }
+        $this->container['descriptions'] = $descriptions;
 
         return $this;
     }
