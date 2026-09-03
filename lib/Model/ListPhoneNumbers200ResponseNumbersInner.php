@@ -653,7 +653,7 @@ class ListPhoneNumbers200ResponseNumbersInner implements ModelInterface, ArrayAc
     /**
      * Sets monthly_cents
      *
-     * @param int|null $monthly_cents Per-country monthly price in cents ($2..$25).
+     * @param int|null $monthly_cents What this number bills each month, in cents. Stamped when the number was bought, so an existing number keeps its price when the rate card changes.
      *
      * @return self
      */

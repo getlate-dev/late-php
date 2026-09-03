@@ -509,7 +509,7 @@ class ListPhoneNumberCountries200ResponseCountriesInnerTypesInner implements Mod
     /**
      * Sets monthly_cents
      *
-     * @param int|null $monthly_cents monthly_cents
+     * @param int|null $monthly_cents Price a NEW number of this type costs per month, in cents.
      *
      * @return self
      */

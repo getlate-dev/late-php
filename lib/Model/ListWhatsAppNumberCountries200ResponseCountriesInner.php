@@ -423,7 +423,7 @@ class ListWhatsAppNumberCountries200ResponseCountriesInner implements ModelInter
     /**
      * Sets monthly_cents
      *
-     * @param int|null $monthly_cents monthly_cents
+     * @param int|null $monthly_cents Price a NEW number in this country costs per month, in cents, for the default (first) type. 1.5x the carrier's monthly cost, rounded up to a whole dollar, minimum $3.
      *
      * @return self
      */
