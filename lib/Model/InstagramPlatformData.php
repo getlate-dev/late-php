@@ -71,7 +71,11 @@ class InstagramPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
         'thumb_offset' => 'int',
         'instagram_thumbnail' => 'string',
         'reel_cover' => 'string',
-        'is_ai_generated' => 'bool'
+        'is_ai_generated' => 'bool',
+        'is_paid_partnership' => 'bool',
+        'branded_content_sponsors' => 'string[]',
+        'comments_enabled' => 'bool',
+        'location_id' => 'string'
     ];
 
     /**
@@ -94,7 +98,11 @@ class InstagramPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
         'thumb_offset' => null,
         'instagram_thumbnail' => 'uri',
         'reel_cover' => 'uri',
-        'is_ai_generated' => null
+        'is_ai_generated' => null,
+        'is_paid_partnership' => null,
+        'branded_content_sponsors' => null,
+        'comments_enabled' => null,
+        'location_id' => null
     ];
 
     /**
@@ -115,7 +123,11 @@ class InstagramPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
         'thumb_offset' => false,
         'instagram_thumbnail' => false,
         'reel_cover' => false,
-        'is_ai_generated' => false
+        'is_ai_generated' => false,
+        'is_paid_partnership' => false,
+        'branded_content_sponsors' => false,
+        'comments_enabled' => false,
+        'location_id' => false
     ];
 
     /**
@@ -216,7 +228,11 @@ class InstagramPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
         'thumb_offset' => 'thumbOffset',
         'instagram_thumbnail' => 'instagramThumbnail',
         'reel_cover' => 'reelCover',
-        'is_ai_generated' => 'isAiGenerated'
+        'is_ai_generated' => 'isAiGenerated',
+        'is_paid_partnership' => 'isPaidPartnership',
+        'branded_content_sponsors' => 'brandedContentSponsors',
+        'comments_enabled' => 'commentsEnabled',
+        'location_id' => 'locationId'
     ];
 
     /**
@@ -237,7 +253,11 @@ class InstagramPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
         'thumb_offset' => 'setThumbOffset',
         'instagram_thumbnail' => 'setInstagramThumbnail',
         'reel_cover' => 'setReelCover',
-        'is_ai_generated' => 'setIsAiGenerated'
+        'is_ai_generated' => 'setIsAiGenerated',
+        'is_paid_partnership' => 'setIsPaidPartnership',
+        'branded_content_sponsors' => 'setBrandedContentSponsors',
+        'comments_enabled' => 'setCommentsEnabled',
+        'location_id' => 'setLocationId'
     ];
 
     /**
@@ -258,7 +278,11 @@ class InstagramPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
         'thumb_offset' => 'getThumbOffset',
         'instagram_thumbnail' => 'getInstagramThumbnail',
         'reel_cover' => 'getReelCover',
-        'is_ai_generated' => 'getIsAiGenerated'
+        'is_ai_generated' => 'getIsAiGenerated',
+        'is_paid_partnership' => 'getIsPaidPartnership',
+        'branded_content_sponsors' => 'getBrandedContentSponsors',
+        'comments_enabled' => 'getCommentsEnabled',
+        'location_id' => 'getLocationId'
     ];
 
     /**
@@ -344,6 +368,10 @@ class InstagramPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('instagram_thumbnail', $data ?? [], null);
         $this->setIfExists('reel_cover', $data ?? [], null);
         $this->setIfExists('is_ai_generated', $data ?? [], false);
+        $this->setIfExists('is_paid_partnership', $data ?? [], false);
+        $this->setIfExists('branded_content_sponsors', $data ?? [], null);
+        $this->setIfExists('comments_enabled', $data ?? [], true);
+        $this->setIfExists('location_id', $data ?? [], null);
     }
 
     /**
@@ -384,6 +412,14 @@ class InstagramPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
 
         if (!is_null($this->container['thumb_offset']) && ($this->container['thumb_offset'] < 0)) {
             $invalidProperties[] = "invalid value for 'thumb_offset', must be bigger than or equal to 0.";
+        }
+
+        if (!is_null($this->container['branded_content_sponsors']) && (count($this->container['branded_content_sponsors']) > 2)) {
+            $invalidProperties[] = "invalid value for 'branded_content_sponsors', number of items must be less than or equal to 2.";
+        }
+
+        if (!is_null($this->container['location_id']) && !preg_match("/^[0-9]+$/", $this->container['location_id'])) {
+            $invalidProperties[] = "invalid value for 'location_id', must be conform to the pattern /^[0-9]+$/.";
         }
 
         return $invalidProperties;
@@ -763,6 +799,123 @@ class InstagramPlatformData implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable is_ai_generated cannot be null');
         }
         $this->container['is_ai_generated'] = $is_ai_generated;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_paid_partnership
+     *
+     * @return bool|null
+     */
+    public function getIsPaidPartnership()
+    {
+        return $this->container['is_paid_partnership'];
+    }
+
+    /**
+     * Sets is_paid_partnership
+     *
+     * @param bool|null $is_paid_partnership When true, Instagram shows the \"Paid partnership\" label on the post. Applies to feed posts, Reels, and carousels; not supported on Stories (400). Requires an Instagram account connected via Facebook Login; classic Instagram Login accounts get a 400 (instagram_paid_partnership_requires_facebook_login). Implied when brandedContentSponsors is set.
+     *
+     * @return self
+     */
+    public function setIsPaidPartnership($is_paid_partnership)
+    {
+        if (is_null($is_paid_partnership)) {
+            throw new \InvalidArgumentException('non-nullable is_paid_partnership cannot be null');
+        }
+        $this->container['is_paid_partnership'] = $is_paid_partnership;
+
+        return $this;
+    }
+
+    /**
+     * Gets branded_content_sponsors
+     *
+     * @return string[]|null
+     */
+    public function getBrandedContentSponsors()
+    {
+        return $this->container['branded_content_sponsors'];
+    }
+
+    /**
+     * Sets branded_content_sponsors
+     *
+     * @param string[]|null $branded_content_sponsors Up to 2 brands to tag as sponsors, each an Instagram username (leading @ optional) or a numeric Instagram user ID. Usernames are resolved at publish time via the Business Discovery API on the publishing account; a sponsor that cannot be resolved (private, personal, or nonexistent account) fails the post with a user error naming it. Sponsors must be professional (Business or Creator) accounts. A brand that has pre-approved the creator shows as \"Paid partnership with @brand\" immediately; otherwise the plain label shows and the brand receives an approval request. Sets isPaidPartnership. Same login and content-type rules as isPaidPartnership.
+     *
+     * @return self
+     */
+    public function setBrandedContentSponsors($branded_content_sponsors)
+    {
+        if (is_null($branded_content_sponsors)) {
+            throw new \InvalidArgumentException('non-nullable branded_content_sponsors cannot be null');
+        }
+
+        if ((count($branded_content_sponsors) > 2)) {
+            throw new \InvalidArgumentException('invalid value for $branded_content_sponsors when calling InstagramPlatformData., number of items must be less than or equal to 2.');
+        }
+        $this->container['branded_content_sponsors'] = $branded_content_sponsors;
+
+        return $this;
+    }
+
+    /**
+     * Gets comments_enabled
+     *
+     * @return bool|null
+     */
+    public function getCommentsEnabled()
+    {
+        return $this->container['comments_enabled'];
+    }
+
+    /**
+     * Sets comments_enabled
+     *
+     * @param bool|null $comments_enabled When false, comments are turned off on the post right after it is published (Meta exposes this as comment_enabled on the media object). Applies to feed posts, Reels, and carousels; ignored for Stories, which have no comments. Works with both Instagram connection methods. Best-effort: if the toggle fails after a successful publish, the post still succeeds and stays live with comments on.
+     *
+     * @return self
+     */
+    public function setCommentsEnabled($comments_enabled)
+    {
+        if (is_null($comments_enabled)) {
+            throw new \InvalidArgumentException('non-nullable comments_enabled cannot be null');
+        }
+        $this->container['comments_enabled'] = $comments_enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets location_id
+     *
+     * @return string|null
+     */
+    public function getLocationId()
+    {
+        return $this->container['location_id'];
+    }
+
+    /**
+     * Sets location_id
+     *
+     * @param string|null $location_id Tags the post with a location. The ID of a Facebook Page that has location data (digits only); it is sent to Instagram as location_id. Applies to feed posts, Reels, and the carousel as a whole; Stories and individual carousel slides are unsupported (a Story with locationId is rejected with a 400). A Page without location data or that does not exist fails the post with a user error at publish time.
+     *
+     * @return self
+     */
+    public function setLocationId($location_id)
+    {
+        if (is_null($location_id)) {
+            throw new \InvalidArgumentException('non-nullable location_id cannot be null');
+        }
+
+        if ((!preg_match("/^[0-9]+$/", ObjectSerializer::toString($location_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$location_id when calling InstagramPlatformData., must conform to the pattern /^[0-9]+$/.");
+        }
+
+        $this->container['location_id'] = $location_id;
 
         return $this;
     }

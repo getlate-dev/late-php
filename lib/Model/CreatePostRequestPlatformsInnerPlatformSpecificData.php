@@ -86,6 +86,10 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'instagram_thumbnail' => 'string',
         'reel_cover' => 'string',
         'is_ai_generated' => 'bool',
+        'is_paid_partnership' => 'bool',
+        'branded_content_sponsors' => 'string[]',
+        'comments_enabled' => 'bool',
+        'location_id' => 'string',
         'document_title' => 'string',
         'organization_urn' => 'string',
         'disable_link_preview' => 'bool',
@@ -100,7 +104,6 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'contains_synthetic_media' => 'bool',
         'category_id' => 'string',
         'playlist_id' => 'string',
-        'location_id' => 'string',
         'language_code' => 'string',
         'topic_type' => 'string',
         'call_to_action' => '\Zernio\Model\GoogleBusinessPlatformDataCallToAction',
@@ -191,6 +194,10 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'instagram_thumbnail' => 'uri',
         'reel_cover' => 'uri',
         'is_ai_generated' => null,
+        'is_paid_partnership' => null,
+        'branded_content_sponsors' => null,
+        'comments_enabled' => null,
+        'location_id' => null,
         'document_title' => null,
         'organization_urn' => null,
         'disable_link_preview' => null,
@@ -205,7 +212,6 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'contains_synthetic_media' => null,
         'category_id' => null,
         'playlist_id' => null,
-        'location_id' => null,
         'language_code' => null,
         'topic_type' => null,
         'call_to_action' => null,
@@ -294,6 +300,10 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'instagram_thumbnail' => false,
         'reel_cover' => false,
         'is_ai_generated' => false,
+        'is_paid_partnership' => false,
+        'branded_content_sponsors' => false,
+        'comments_enabled' => false,
+        'location_id' => false,
         'document_title' => false,
         'organization_urn' => false,
         'disable_link_preview' => false,
@@ -308,7 +318,6 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'contains_synthetic_media' => false,
         'category_id' => false,
         'playlist_id' => false,
-        'location_id' => false,
         'language_code' => false,
         'topic_type' => false,
         'call_to_action' => false,
@@ -477,6 +486,10 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'instagram_thumbnail' => 'instagramThumbnail',
         'reel_cover' => 'reelCover',
         'is_ai_generated' => 'isAiGenerated',
+        'is_paid_partnership' => 'isPaidPartnership',
+        'branded_content_sponsors' => 'brandedContentSponsors',
+        'comments_enabled' => 'commentsEnabled',
+        'location_id' => 'locationId',
         'document_title' => 'documentTitle',
         'organization_urn' => 'organizationUrn',
         'disable_link_preview' => 'disableLinkPreview',
@@ -491,7 +504,6 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'contains_synthetic_media' => 'containsSyntheticMedia',
         'category_id' => 'categoryId',
         'playlist_id' => 'playlistId',
-        'location_id' => 'locationId',
         'language_code' => 'languageCode',
         'topic_type' => 'topicType',
         'call_to_action' => 'callToAction',
@@ -580,6 +592,10 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'instagram_thumbnail' => 'setInstagramThumbnail',
         'reel_cover' => 'setReelCover',
         'is_ai_generated' => 'setIsAiGenerated',
+        'is_paid_partnership' => 'setIsPaidPartnership',
+        'branded_content_sponsors' => 'setBrandedContentSponsors',
+        'comments_enabled' => 'setCommentsEnabled',
+        'location_id' => 'setLocationId',
         'document_title' => 'setDocumentTitle',
         'organization_urn' => 'setOrganizationUrn',
         'disable_link_preview' => 'setDisableLinkPreview',
@@ -594,7 +610,6 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'contains_synthetic_media' => 'setContainsSyntheticMedia',
         'category_id' => 'setCategoryId',
         'playlist_id' => 'setPlaylistId',
-        'location_id' => 'setLocationId',
         'language_code' => 'setLanguageCode',
         'topic_type' => 'setTopicType',
         'call_to_action' => 'setCallToAction',
@@ -683,6 +698,10 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'instagram_thumbnail' => 'getInstagramThumbnail',
         'reel_cover' => 'getReelCover',
         'is_ai_generated' => 'getIsAiGenerated',
+        'is_paid_partnership' => 'getIsPaidPartnership',
+        'branded_content_sponsors' => 'getBrandedContentSponsors',
+        'comments_enabled' => 'getCommentsEnabled',
+        'location_id' => 'getLocationId',
         'document_title' => 'getDocumentTitle',
         'organization_urn' => 'getOrganizationUrn',
         'disable_link_preview' => 'getDisableLinkPreview',
@@ -697,7 +716,6 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         'contains_synthetic_media' => 'getContainsSyntheticMedia',
         'category_id' => 'getCategoryId',
         'playlist_id' => 'getPlaylistId',
-        'location_id' => 'getLocationId',
         'language_code' => 'getLanguageCode',
         'topic_type' => 'getTopicType',
         'call_to_action' => 'getCallToAction',
@@ -956,6 +974,10 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         $this->setIfExists('instagram_thumbnail', $data ?? [], null);
         $this->setIfExists('reel_cover', $data ?? [], null);
         $this->setIfExists('is_ai_generated', $data ?? [], false);
+        $this->setIfExists('is_paid_partnership', $data ?? [], false);
+        $this->setIfExists('branded_content_sponsors', $data ?? [], null);
+        $this->setIfExists('comments_enabled', $data ?? [], true);
+        $this->setIfExists('location_id', $data ?? [], null);
         $this->setIfExists('document_title', $data ?? [], null);
         $this->setIfExists('organization_urn', $data ?? [], null);
         $this->setIfExists('disable_link_preview', $data ?? [], null);
@@ -970,7 +992,6 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
         $this->setIfExists('contains_synthetic_media', $data ?? [], false);
         $this->setIfExists('category_id', $data ?? [], '22');
         $this->setIfExists('playlist_id', $data ?? [], null);
-        $this->setIfExists('location_id', $data ?? [], null);
         $this->setIfExists('language_code', $data ?? [], null);
         $this->setIfExists('topic_type', $data ?? [], 'STANDARD');
         $this->setIfExists('call_to_action', $data ?? [], null);
@@ -1088,6 +1109,10 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
 
         if (!is_null($this->container['thumb_offset']) && ($this->container['thumb_offset'] < 0)) {
             $invalidProperties[] = "invalid value for 'thumb_offset', must be bigger than or equal to 0.";
+        }
+
+        if (!is_null($this->container['branded_content_sponsors']) && (count($this->container['branded_content_sponsors']) > 2)) {
+            $invalidProperties[] = "invalid value for 'branded_content_sponsors', number of items must be less than or equal to 2.";
         }
 
         $allowedValues = $this->getVisibilityAllowableValues();
@@ -1978,6 +2003,118 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
     }
 
     /**
+     * Gets is_paid_partnership
+     *
+     * @return bool|null
+     */
+    public function getIsPaidPartnership()
+    {
+        return $this->container['is_paid_partnership'];
+    }
+
+    /**
+     * Sets is_paid_partnership
+     *
+     * @param bool|null $is_paid_partnership When true, Instagram shows the \"Paid partnership\" label on the post. Applies to feed posts, Reels, and carousels; not supported on Stories (400). Requires an Instagram account connected via Facebook Login; classic Instagram Login accounts get a 400 (instagram_paid_partnership_requires_facebook_login). Implied when brandedContentSponsors is set.
+     *
+     * @return self
+     */
+    public function setIsPaidPartnership($is_paid_partnership)
+    {
+        if (is_null($is_paid_partnership)) {
+            throw new \InvalidArgumentException('non-nullable is_paid_partnership cannot be null');
+        }
+        $this->container['is_paid_partnership'] = $is_paid_partnership;
+
+        return $this;
+    }
+
+    /**
+     * Gets branded_content_sponsors
+     *
+     * @return string[]|null
+     */
+    public function getBrandedContentSponsors()
+    {
+        return $this->container['branded_content_sponsors'];
+    }
+
+    /**
+     * Sets branded_content_sponsors
+     *
+     * @param string[]|null $branded_content_sponsors Up to 2 brands to tag as sponsors, each an Instagram username (leading @ optional) or a numeric Instagram user ID. Usernames are resolved at publish time via the Business Discovery API on the publishing account; a sponsor that cannot be resolved (private, personal, or nonexistent account) fails the post with a user error naming it. Sponsors must be professional (Business or Creator) accounts. A brand that has pre-approved the creator shows as \"Paid partnership with @brand\" immediately; otherwise the plain label shows and the brand receives an approval request. Sets isPaidPartnership. Same login and content-type rules as isPaidPartnership.
+     *
+     * @return self
+     */
+    public function setBrandedContentSponsors($branded_content_sponsors)
+    {
+        if (is_null($branded_content_sponsors)) {
+            throw new \InvalidArgumentException('non-nullable branded_content_sponsors cannot be null');
+        }
+
+        if ((count($branded_content_sponsors) > 2)) {
+            throw new \InvalidArgumentException('invalid value for $branded_content_sponsors when calling CreatePostRequestPlatformsInnerPlatformSpecificData., number of items must be less than or equal to 2.');
+        }
+        $this->container['branded_content_sponsors'] = $branded_content_sponsors;
+
+        return $this;
+    }
+
+    /**
+     * Gets comments_enabled
+     *
+     * @return bool|null
+     */
+    public function getCommentsEnabled()
+    {
+        return $this->container['comments_enabled'];
+    }
+
+    /**
+     * Sets comments_enabled
+     *
+     * @param bool|null $comments_enabled When false, comments are turned off on the post right after it is published (Meta exposes this as comment_enabled on the media object). Applies to feed posts, Reels, and carousels; ignored for Stories, which have no comments. Works with both Instagram connection methods. Best-effort: if the toggle fails after a successful publish, the post still succeeds and stays live with comments on.
+     *
+     * @return self
+     */
+    public function setCommentsEnabled($comments_enabled)
+    {
+        if (is_null($comments_enabled)) {
+            throw new \InvalidArgumentException('non-nullable comments_enabled cannot be null');
+        }
+        $this->container['comments_enabled'] = $comments_enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets location_id
+     *
+     * @return string|null
+     */
+    public function getLocationId()
+    {
+        return $this->container['location_id'];
+    }
+
+    /**
+     * Sets location_id
+     *
+     * @param string|null $location_id Target GBP location ID (e.g. \"locations/123456789\"). If omitted, uses the default location. Use GET /v1/accounts/{id}/gmb-locations to list locations.
+     *
+     * @return self
+     */
+    public function setLocationId($location_id)
+    {
+        if (is_null($location_id)) {
+            throw new \InvalidArgumentException('non-nullable location_id cannot be null');
+        }
+        $this->container['location_id'] = $location_id;
+
+        return $this;
+    }
+
+    /**
      * Gets document_title
      *
      * @return string|null
@@ -2361,33 +2498,6 @@ class CreatePostRequestPlatformsInnerPlatformSpecificData implements ModelInterf
             throw new \InvalidArgumentException('non-nullable playlist_id cannot be null');
         }
         $this->container['playlist_id'] = $playlist_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets location_id
-     *
-     * @return string|null
-     */
-    public function getLocationId()
-    {
-        return $this->container['location_id'];
-    }
-
-    /**
-     * Sets location_id
-     *
-     * @param string|null $location_id Target GBP location ID (e.g. \"locations/123456789\"). If omitted, uses the default location. Use GET /v1/accounts/{id}/gmb-locations to list locations.
-     *
-     * @return self
-     */
-    public function setLocationId($location_id)
-    {
-        if (is_null($location_id)) {
-            throw new \InvalidArgumentException('non-nullable location_id cannot be null');
-        }
-        $this->container['location_id'] = $location_id;
 
         return $this;
     }
