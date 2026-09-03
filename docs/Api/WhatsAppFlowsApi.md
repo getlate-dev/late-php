@@ -12,11 +12,13 @@ All URIs are relative to https://zernio.com/api, except if the operation defines
 | [**getWhatsAppFlow()**](WhatsAppFlowsApi.md#getWhatsAppFlow) | **GET** /v1/whatsapp/flows/{flowId} | Get flow |
 | [**getWhatsAppFlowJson()**](WhatsAppFlowsApi.md#getWhatsAppFlowJson) | **GET** /v1/whatsapp/flows/{flowId}/json | Get flow JSON asset |
 | [**getWhatsAppFlowPreview()**](WhatsAppFlowsApi.md#getWhatsAppFlowPreview) | **GET** /v1/whatsapp/flows/{flowId}/preview | Get flow preview URL |
+| [**getWhatsAppFlowsEncryptionKey()**](WhatsAppFlowsApi.md#getWhatsAppFlowsEncryptionKey) | **GET** /v1/whatsapp/flows/encryption-key | Get Flows encryption key status |
 | [**listWhatsAppFlowResponses()**](WhatsAppFlowsApi.md#listWhatsAppFlowResponses) | **GET** /v1/whatsapp/flow-responses | List flow responses |
 | [**listWhatsAppFlowVersions()**](WhatsAppFlowsApi.md#listWhatsAppFlowVersions) | **GET** /v1/whatsapp/flows/{flowId}/versions | List flow versions |
 | [**listWhatsAppFlows()**](WhatsAppFlowsApi.md#listWhatsAppFlows) | **GET** /v1/whatsapp/flows | List flows |
 | [**publishWhatsAppFlow()**](WhatsAppFlowsApi.md#publishWhatsAppFlow) | **POST** /v1/whatsapp/flows/{flowId}/publish | Publish flow |
 | [**sendWhatsAppFlowMessage()**](WhatsAppFlowsApi.md#sendWhatsAppFlowMessage) | **POST** /v1/whatsapp/flows/send | Send flow message |
+| [**setWhatsAppFlowsEncryptionKey()**](WhatsAppFlowsApi.md#setWhatsAppFlowsEncryptionKey) | **POST** /v1/whatsapp/flows/encryption-key | Register a Flows encryption key |
 | [**updateWhatsAppFlow()**](WhatsAppFlowsApi.md#updateWhatsAppFlow) | **PATCH** /v1/whatsapp/flows/{flowId} | Update flow |
 | [**uploadWhatsAppFlowJson()**](WhatsAppFlowsApi.md#uploadWhatsAppFlowJson) | **PUT** /v1/whatsapp/flows/{flowId}/json | Upload flow JSON |
 
@@ -395,6 +397,66 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getWhatsAppFlowsEncryptionKey()`
+
+```php
+getWhatsAppFlowsEncryptionKey($account_id): \Zernio\Model\GetWhatsAppFlowsEncryptionKey200Response
+```
+
+Get Flows encryption key status
+
+Read the RSA business public key registered on the phone number for WhatsApp Flows endpoint encryption. Only one key is active per phone number at a time. Flows that use flow_action: data_exchange (an endpoint-backed flow) stop working at runtime until the endpoint serves the matching private key, and Meta rejects publish with error code 139002 (\"Missing Flows Signed Public Key\") when no key is registered. `registered` reflects whether a key is present, never `signatureStatus` alone: Meta reports an unregistered key as MISMATCH rather than a null/absent value.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\WhatsAppFlowsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | WhatsApp social account ID
+
+try {
+    $result = $apiInstance->getWhatsAppFlowsEncryptionKey($account_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WhatsAppFlowsApi->getWhatsAppFlowsEncryptionKey: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| WhatsApp social account ID | |
+
+### Return type
+
+[**\Zernio\Model\GetWhatsAppFlowsEncryptionKey200Response**](../Model/GetWhatsAppFlowsEncryptionKey200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listWhatsAppFlowResponses()`
 
 ```php
@@ -689,6 +751,66 @@ try {
 ### Return type
 
 [**\Zernio\Model\SendWhatsAppFlowMessage200Response**](../Model/SendWhatsAppFlowMessage200Response.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `setWhatsAppFlowsEncryptionKey()`
+
+```php
+setWhatsAppFlowsEncryptionKey($set_whats_app_flows_encryption_key_request): \Zernio\Model\UpdateYoutubeDefaultPlaylist200Response
+```
+
+Register a Flows encryption key
+
+Register (or replace) the RSA business public key for WhatsApp Flows endpoint encryption on the phone number. Uploading a new key replaces the previous one: only one key is active per phone number. The corresponding private key must be served by the flow's endpoint, or endpoint-backed flows (flow_action: data_exchange) will fail at runtime even though the key is registered.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = Zernio\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Zernio\Api\WhatsAppFlowsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$set_whats_app_flows_encryption_key_request = new \Zernio\Model\SetWhatsAppFlowsEncryptionKeyRequest(); // \Zernio\Model\SetWhatsAppFlowsEncryptionKeyRequest
+
+try {
+    $result = $apiInstance->setWhatsAppFlowsEncryptionKey($set_whats_app_flows_encryption_key_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WhatsAppFlowsApi->setWhatsAppFlowsEncryptionKey: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **set_whats_app_flows_encryption_key_request** | [**\Zernio\Model\SetWhatsAppFlowsEncryptionKeyRequest**](../Model/SetWhatsAppFlowsEncryptionKeyRequest.md)|  | |
+
+### Return type
+
+[**\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response**](../Model/UpdateYoutubeDefaultPlaylist200Response.md)
 
 ### Authorization
 

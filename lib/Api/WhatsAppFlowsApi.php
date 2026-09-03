@@ -93,6 +93,9 @@ class WhatsAppFlowsApi
         'getWhatsAppFlowPreview' => [
             'application/json',
         ],
+        'getWhatsAppFlowsEncryptionKey' => [
+            'application/json',
+        ],
         'listWhatsAppFlowResponses' => [
             'application/json',
         ],
@@ -106,6 +109,9 @@ class WhatsAppFlowsApi
             'application/json',
         ],
         'sendWhatsAppFlowMessage' => [
+            'application/json',
+        ],
+        'setWhatsAppFlowsEncryptionKey' => [
             'application/json',
         ],
         'updateWhatsAppFlow' => [
@@ -2011,6 +2017,321 @@ class WhatsAppFlowsApi
     }
 
     /**
+     * Operation getWhatsAppFlowsEncryptionKey
+     *
+     * Get Flows encryption key status
+     *
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppFlowsEncryptionKey'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\GetWhatsAppFlowsEncryptionKey200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject2
+     */
+    public function getWhatsAppFlowsEncryptionKey($account_id, string $contentType = self::contentTypes['getWhatsAppFlowsEncryptionKey'][0])
+    {
+        list($response) = $this->getWhatsAppFlowsEncryptionKeyWithHttpInfo($account_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getWhatsAppFlowsEncryptionKeyWithHttpInfo
+     *
+     * Get Flows encryption key status
+     *
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppFlowsEncryptionKey'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\GetWhatsAppFlowsEncryptionKey200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject2, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getWhatsAppFlowsEncryptionKeyWithHttpInfo($account_id, string $contentType = self::contentTypes['getWhatsAppFlowsEncryptionKey'][0])
+    {
+        $request = $this->getWhatsAppFlowsEncryptionKeyRequest($account_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\GetWhatsAppFlowsEncryptionKey200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject2',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\GetWhatsAppFlowsEncryptionKey200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\GetWhatsAppFlowsEncryptionKey200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject2',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getWhatsAppFlowsEncryptionKeyAsync
+     *
+     * Get Flows encryption key status
+     *
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppFlowsEncryptionKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getWhatsAppFlowsEncryptionKeyAsync($account_id, string $contentType = self::contentTypes['getWhatsAppFlowsEncryptionKey'][0])
+    {
+        return $this->getWhatsAppFlowsEncryptionKeyAsyncWithHttpInfo($account_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getWhatsAppFlowsEncryptionKeyAsyncWithHttpInfo
+     *
+     * Get Flows encryption key status
+     *
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppFlowsEncryptionKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getWhatsAppFlowsEncryptionKeyAsyncWithHttpInfo($account_id, string $contentType = self::contentTypes['getWhatsAppFlowsEncryptionKey'][0])
+    {
+        $returnType = '\Zernio\Model\GetWhatsAppFlowsEncryptionKey200Response';
+        $request = $this->getWhatsAppFlowsEncryptionKeyRequest($account_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getWhatsAppFlowsEncryptionKey'
+     *
+     * @param  string $account_id WhatsApp social account ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhatsAppFlowsEncryptionKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getWhatsAppFlowsEncryptionKeyRequest($account_id, string $contentType = self::contentTypes['getWhatsAppFlowsEncryptionKey'][0])
+    {
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling getWhatsAppFlowsEncryptionKey'
+            );
+        }
+
+
+        $resourcePath = '/v1/whatsapp/flows/encryption-key';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $account_id,
+            'accountId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation listWhatsAppFlowResponses
      *
      * List flow responses
@@ -3463,6 +3784,319 @@ class WhatsAppFlowsApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($send_whats_app_flow_message_request));
             } else {
                 $httpBody = $send_whats_app_flow_message_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation setWhatsAppFlowsEncryptionKey
+     *
+     * Register a Flows encryption key
+     *
+     * @param  \Zernio\Model\SetWhatsAppFlowsEncryptionKeyRequest $set_whats_app_flows_encryption_key_request set_whats_app_flows_encryption_key_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setWhatsAppFlowsEncryptionKey'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Zernio\Model\UpdateYoutubeDefaultPlaylist200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject2
+     */
+    public function setWhatsAppFlowsEncryptionKey($set_whats_app_flows_encryption_key_request, string $contentType = self::contentTypes['setWhatsAppFlowsEncryptionKey'][0])
+    {
+        list($response) = $this->setWhatsAppFlowsEncryptionKeyWithHttpInfo($set_whats_app_flows_encryption_key_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation setWhatsAppFlowsEncryptionKeyWithHttpInfo
+     *
+     * Register a Flows encryption key
+     *
+     * @param  \Zernio\Model\SetWhatsAppFlowsEncryptionKeyRequest $set_whats_app_flows_encryption_key_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setWhatsAppFlowsEncryptionKey'] to see the possible values for this operation
+     *
+     * @throws \Zernio\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Zernio\Model\UpdateYoutubeDefaultPlaylist200Response|\Zernio\Model\ErrorResponse|\Zernio\Model\InlineObject|\Zernio\Model\InlineObject2, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function setWhatsAppFlowsEncryptionKeyWithHttpInfo($set_whats_app_flows_encryption_key_request, string $contentType = self::contentTypes['setWhatsAppFlowsEncryptionKey'][0])
+    {
+        $request = $this->setWhatsAppFlowsEncryptionKeyRequest($set_whats_app_flows_encryption_key_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\ErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\Zernio\Model\InlineObject2',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Zernio\Model\InlineObject2',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation setWhatsAppFlowsEncryptionKeyAsync
+     *
+     * Register a Flows encryption key
+     *
+     * @param  \Zernio\Model\SetWhatsAppFlowsEncryptionKeyRequest $set_whats_app_flows_encryption_key_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setWhatsAppFlowsEncryptionKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function setWhatsAppFlowsEncryptionKeyAsync($set_whats_app_flows_encryption_key_request, string $contentType = self::contentTypes['setWhatsAppFlowsEncryptionKey'][0])
+    {
+        return $this->setWhatsAppFlowsEncryptionKeyAsyncWithHttpInfo($set_whats_app_flows_encryption_key_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation setWhatsAppFlowsEncryptionKeyAsyncWithHttpInfo
+     *
+     * Register a Flows encryption key
+     *
+     * @param  \Zernio\Model\SetWhatsAppFlowsEncryptionKeyRequest $set_whats_app_flows_encryption_key_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setWhatsAppFlowsEncryptionKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function setWhatsAppFlowsEncryptionKeyAsyncWithHttpInfo($set_whats_app_flows_encryption_key_request, string $contentType = self::contentTypes['setWhatsAppFlowsEncryptionKey'][0])
+    {
+        $returnType = '\Zernio\Model\UpdateYoutubeDefaultPlaylist200Response';
+        $request = $this->setWhatsAppFlowsEncryptionKeyRequest($set_whats_app_flows_encryption_key_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'setWhatsAppFlowsEncryptionKey'
+     *
+     * @param  \Zernio\Model\SetWhatsAppFlowsEncryptionKeyRequest $set_whats_app_flows_encryption_key_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setWhatsAppFlowsEncryptionKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function setWhatsAppFlowsEncryptionKeyRequest($set_whats_app_flows_encryption_key_request, string $contentType = self::contentTypes['setWhatsAppFlowsEncryptionKey'][0])
+    {
+
+        // verify the required parameter 'set_whats_app_flows_encryption_key_request' is set
+        if ($set_whats_app_flows_encryption_key_request === null || (is_array($set_whats_app_flows_encryption_key_request) && count($set_whats_app_flows_encryption_key_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $set_whats_app_flows_encryption_key_request when calling setWhatsAppFlowsEncryptionKey'
+            );
+        }
+
+
+        $resourcePath = '/v1/whatsapp/flows/encryption-key';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($set_whats_app_flows_encryption_key_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($set_whats_app_flows_encryption_key_request));
+            } else {
+                $httpBody = $set_whats_app_flows_encryption_key_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
