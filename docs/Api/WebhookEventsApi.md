@@ -2487,7 +2487,7 @@ onWhatsAppAutomaticEvent($on_whats_app_automatic_event_request)
 
 WhatsApp automatic event detected
 
-Fired when Meta's automatic event identification (opt-in during Embedded Signup; not available for EU/UK/JP businesses) detects a lead or purchase in a Click-to-WhatsApp conversation. Branch on `eventName` (`LeadSubmitted` | `Purchase`). Carries the `ctwa_clid` even on coexistence numbers where the inbound referral omits it (this webhook is the only surface that delivers it there); the clid is also written back onto the conversation, so POST /v1/whatsapp/conversions becomes usable for the thread.
+Fired when Meta's automatic event identification (opt-in during Embedded Signup; not available for EU/UK/JP businesses) detects a lead or purchase in a Click-to-WhatsApp conversation. Branch on `eventName` (`LeadSubmitted` | `Purchase`). Carries the `ctwa_clid`. Meta omits that clid on a minority of referrals on any number (coexistence or not, most often WhatsApp Status placements); when it does, this event can supply it and Zernio writes it back onto the conversation, so POST /v1/whatsapp/conversions becomes usable for the thread.
 
 ### Example
 
