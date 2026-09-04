@@ -1456,6 +1456,10 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
             );
         }
 
+        if (!is_null($this->container['keywords']) && (count($this->container['keywords']) > 1000)) {
+            $invalidProperties[] = "invalid value for 'keywords', number of items must be less than or equal to 1000.";
+        }
+
         if (!is_null($this->container['sitelinks']) && (count($this->container['sitelinks']) > 20)) {
             $invalidProperties[] = "invalid value for 'sitelinks', number of items must be less than or equal to 20.";
         }
@@ -3762,7 +3766,7 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets keywords
      *
-     * @param string[]|null $keywords Google Search only. BROAD-match keywords on the new ad group (first 20).
+     * @param string[]|null $keywords Google Search only. BROAD-match keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.keywords, which also sets match types.
      *
      * @return self
      */
@@ -3770,6 +3774,10 @@ class CreateStandaloneAdRequest implements ModelInterface, ArrayAccess, \JsonSer
     {
         if (is_null($keywords)) {
             throw new \InvalidArgumentException('non-nullable keywords cannot be null');
+        }
+
+        if ((count($keywords) > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $keywords when calling CreateStandaloneAdRequest., number of items must be less than or equal to 1000.');
         }
         $this->container['keywords'] = $keywords;
 

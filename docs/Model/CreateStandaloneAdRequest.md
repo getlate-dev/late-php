@@ -78,7 +78,7 @@ Name | Type | Description | Notes
 **placement_assets** | [**\Zernio\Model\CreateStandaloneAdRequestPlacementAssets**](CreateStandaloneAdRequestPlacementAssets.md) |  | [optional]
 **audience_id** | **string** | Custom audience ID for targeting | [optional]
 **campaign_type** | **string** | Google only | [optional] [default to 'display']
-**keywords** | **string[]** | Google Search only. BROAD-match keywords on the new ad group (first 20). | [optional]
+**keywords** | **string[]** | Google Search only. BROAD-match keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.keywords, which also sets match types. | [optional]
 **negative_keywords** | **string[]** | Google Search only; other platforms return 400. BROAD-match negative keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.negativeKeywords. | [optional]
 **additional_headlines** | **string[]** | Google Search RSA only. Extra headlines. | [optional]
 **additional_descriptions** | **string[]** | Google Search RSA only. Extra descriptions. | [optional]
