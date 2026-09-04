@@ -67,6 +67,7 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
         'permissions' => '\Zernio\Model\GetAccountHealth200ResponsePermissions',
         'issues' => 'string[]',
         'recommendations' => 'string[]',
+        'messaging_restriction' => '\Zernio\Model\GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction',
         'platform_connection' => '\Zernio\Model\GetAccountHealth200ResponsePlatformConnection'
     ];
 
@@ -87,6 +88,7 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
         'permissions' => null,
         'issues' => null,
         'recommendations' => null,
+        'messaging_restriction' => null,
         'platform_connection' => null
     ];
 
@@ -105,6 +107,7 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
         'permissions' => false,
         'issues' => false,
         'recommendations' => false,
+        'messaging_restriction' => false,
         'platform_connection' => false
     ];
 
@@ -203,6 +206,7 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
         'permissions' => 'permissions',
         'issues' => 'issues',
         'recommendations' => 'recommendations',
+        'messaging_restriction' => 'messagingRestriction',
         'platform_connection' => 'platformConnection'
     ];
 
@@ -221,6 +225,7 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
         'permissions' => 'setPermissions',
         'issues' => 'setIssues',
         'recommendations' => 'setRecommendations',
+        'messaging_restriction' => 'setMessagingRestriction',
         'platform_connection' => 'setPlatformConnection'
     ];
 
@@ -239,6 +244,7 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
         'permissions' => 'getPermissions',
         'issues' => 'getIssues',
         'recommendations' => 'getRecommendations',
+        'messaging_restriction' => 'getMessagingRestriction',
         'platform_connection' => 'getPlatformConnection'
     ];
 
@@ -325,6 +331,7 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('permissions', $data ?? [], null);
         $this->setIfExists('issues', $data ?? [], null);
         $this->setIfExists('recommendations', $data ?? [], null);
+        $this->setIfExists('messaging_restriction', $data ?? [], null);
         $this->setIfExists('platform_connection', $data ?? [], null);
     }
 
@@ -628,6 +635,33 @@ class GetAccountHealth200Response implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable recommendations cannot be null');
         }
         $this->container['recommendations'] = $recommendations;
+
+        return $this;
+    }
+
+    /**
+     * Gets messaging_restriction
+     *
+     * @return \Zernio\Model\GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction|null
+     */
+    public function getMessagingRestriction()
+    {
+        return $this->container['messaging_restriction'];
+    }
+
+    /**
+     * Sets messaging_restriction
+     *
+     * @param \Zernio\Model\GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction|null $messaging_restriction messaging_restriction
+     *
+     * @return self
+     */
+    public function setMessagingRestriction($messaging_restriction)
+    {
+        if (is_null($messaging_restriction)) {
+            throw new \InvalidArgumentException('non-nullable messaging_restriction cannot be null');
+        }
+        $this->container['messaging_restriction'] = $messaging_restriction;
 
         return $this;
     }

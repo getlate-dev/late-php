@@ -69,7 +69,8 @@ class GetAllAccountsHealth200ResponseAccountsInner implements ModelInterface, Ar
         'token_valid' => 'bool',
         'token_expires_at' => '\DateTime',
         'needs_reconnect' => 'bool',
-        'issues' => 'string[]'
+        'issues' => 'string[]',
+        'messaging_restriction' => '\Zernio\Model\GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction'
     ];
 
     /**
@@ -91,7 +92,8 @@ class GetAllAccountsHealth200ResponseAccountsInner implements ModelInterface, Ar
         'token_valid' => null,
         'token_expires_at' => 'date-time',
         'needs_reconnect' => null,
-        'issues' => null
+        'issues' => null,
+        'messaging_restriction' => null
     ];
 
     /**
@@ -111,7 +113,8 @@ class GetAllAccountsHealth200ResponseAccountsInner implements ModelInterface, Ar
         'token_valid' => false,
         'token_expires_at' => false,
         'needs_reconnect' => false,
-        'issues' => false
+        'issues' => false,
+        'messaging_restriction' => false
     ];
 
     /**
@@ -211,7 +214,8 @@ class GetAllAccountsHealth200ResponseAccountsInner implements ModelInterface, Ar
         'token_valid' => 'tokenValid',
         'token_expires_at' => 'tokenExpiresAt',
         'needs_reconnect' => 'needsReconnect',
-        'issues' => 'issues'
+        'issues' => 'issues',
+        'messaging_restriction' => 'messagingRestriction'
     ];
 
     /**
@@ -231,7 +235,8 @@ class GetAllAccountsHealth200ResponseAccountsInner implements ModelInterface, Ar
         'token_valid' => 'setTokenValid',
         'token_expires_at' => 'setTokenExpiresAt',
         'needs_reconnect' => 'setNeedsReconnect',
-        'issues' => 'setIssues'
+        'issues' => 'setIssues',
+        'messaging_restriction' => 'setMessagingRestriction'
     ];
 
     /**
@@ -251,7 +256,8 @@ class GetAllAccountsHealth200ResponseAccountsInner implements ModelInterface, Ar
         'token_valid' => 'getTokenValid',
         'token_expires_at' => 'getTokenExpiresAt',
         'needs_reconnect' => 'getNeedsReconnect',
-        'issues' => 'getIssues'
+        'issues' => 'getIssues',
+        'messaging_restriction' => 'getMessagingRestriction'
     ];
 
     /**
@@ -340,6 +346,7 @@ class GetAllAccountsHealth200ResponseAccountsInner implements ModelInterface, Ar
         $this->setIfExists('token_expires_at', $data ?? [], null);
         $this->setIfExists('needs_reconnect', $data ?? [], null);
         $this->setIfExists('issues', $data ?? [], null);
+        $this->setIfExists('messaging_restriction', $data ?? [], null);
     }
 
     /**
@@ -723,6 +730,33 @@ class GetAllAccountsHealth200ResponseAccountsInner implements ModelInterface, Ar
             throw new \InvalidArgumentException('non-nullable issues cannot be null');
         }
         $this->container['issues'] = $issues;
+
+        return $this;
+    }
+
+    /**
+     * Gets messaging_restriction
+     *
+     * @return \Zernio\Model\GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction|null
+     */
+    public function getMessagingRestriction()
+    {
+        return $this->container['messaging_restriction'];
+    }
+
+    /**
+     * Sets messaging_restriction
+     *
+     * @param \Zernio\Model\GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction|null $messaging_restriction messaging_restriction
+     *
+     * @return self
+     */
+    public function setMessagingRestriction($messaging_restriction)
+    {
+        if (is_null($messaging_restriction)) {
+            throw new \InvalidArgumentException('non-nullable messaging_restriction cannot be null');
+        }
+        $this->container['messaging_restriction'] = $messaging_restriction;
 
         return $this;
     }

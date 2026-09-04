@@ -16,5 +16,6 @@ Name | Type | Description | Notes
 **token_expires_at** | **\DateTime** |  | [optional]
 **needs_reconnect** | **bool** |  | [optional]
 **issues** | **string[]** |  | [optional]
+**messaging_restriction** | [**\Zernio\Model\GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction**](GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **permissions** | [**\Zernio\Model\GetAccountHealth200ResponsePermissions**](GetAccountHealth200ResponsePermissions.md) |  | [optional]
 **issues** | **string[]** | List of issues found | [optional]
 **recommendations** | **string[]** | Actionable recommendations to fix issues | [optional]
+**messaging_restriction** | [**\Zernio\Model\GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction**](GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction.md) |  | [optional]
 **platform_connection** | [**\Zernio\Model\GetAccountHealth200ResponsePlatformConnection**](GetAccountHealth200ResponsePlatformConnection.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -1,6 +1,6 @@
 <?php
 /**
- * ErrorResponse
+ * GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Zernio\ObjectSerializer;
 
 /**
- * ErrorResponse Class Doc Comment
+ * GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction Class Doc Comment
  *
  * @category Class
- * @description Canonical error envelope. &#x60;error&#x60; is the human-readable message; &#x60;type&#x60;, &#x60;code&#x60;, &#x60;param&#x60;, &#x60;platform&#x60;, and &#x60;platformError&#x60; are top-level siblings for programmatic handling. For upstream platform failures (&#x60;type: platform_error&#x60;), &#x60;platformError&#x60; carries the provider&#39;s raw payload verbatim (for Meta: &#x60;error_subcode&#x60;, &#x60;error_user_title&#x60;, &#x60;error_user_msg&#x60;).
+ * @description Observed from Meta&#39;s own error subcodes on our own sends (2534122, 1893063, 2534029), not a live probe. Set on the first refused send and cleared when a later send succeeds, so it lags reality by one send in each direction.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ErrorResponse';
+    protected static $openAPIModelName = 'getAllAccountsHealth_200_response_accounts_inner_messagingRestriction';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,13 +59,10 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'error' => 'string',
-        'type' => 'string',
-        'code' => 'string',
-        'param' => 'string',
-        'platform' => 'string',
-        'platform_error' => 'array<string,mixed>',
-        'details' => 'array<string,mixed>'
+        'subcode' => 'int',
+        'message' => 'string',
+        'first_seen_at' => '\DateTime',
+        'last_seen_at' => '\DateTime'
     ];
 
     /**
@@ -76,13 +73,10 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'error' => null,
-        'type' => null,
-        'code' => null,
-        'param' => null,
-        'platform' => null,
-        'platform_error' => null,
-        'details' => null
+        'subcode' => null,
+        'message' => null,
+        'first_seen_at' => 'date-time',
+        'last_seen_at' => 'date-time'
     ];
 
     /**
@@ -91,13 +85,10 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'error' => false,
-        'type' => false,
-        'code' => false,
-        'param' => false,
-        'platform' => false,
-        'platform_error' => false,
-        'details' => false
+        'subcode' => false,
+        'message' => false,
+        'first_seen_at' => false,
+        'last_seen_at' => false
     ];
 
     /**
@@ -186,13 +177,10 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'error' => 'error',
-        'type' => 'type',
-        'code' => 'code',
-        'param' => 'param',
-        'platform' => 'platform',
-        'platform_error' => 'platformError',
-        'details' => 'details'
+        'subcode' => 'subcode',
+        'message' => 'message',
+        'first_seen_at' => 'firstSeenAt',
+        'last_seen_at' => 'lastSeenAt'
     ];
 
     /**
@@ -201,13 +189,10 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'error' => 'setError',
-        'type' => 'setType',
-        'code' => 'setCode',
-        'param' => 'setParam',
-        'platform' => 'setPlatform',
-        'platform_error' => 'setPlatformError',
-        'details' => 'setDetails'
+        'subcode' => 'setSubcode',
+        'message' => 'setMessage',
+        'first_seen_at' => 'setFirstSeenAt',
+        'last_seen_at' => 'setLastSeenAt'
     ];
 
     /**
@@ -216,13 +201,10 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'error' => 'getError',
-        'type' => 'getType',
-        'code' => 'getCode',
-        'param' => 'getParam',
-        'platform' => 'getPlatform',
-        'platform_error' => 'getPlatformError',
-        'details' => 'getDetails'
+        'subcode' => 'getSubcode',
+        'message' => 'getMessage',
+        'first_seen_at' => 'getFirstSeenAt',
+        'last_seen_at' => 'getLastSeenAt'
     ];
 
     /**
@@ -266,31 +248,6 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const TYPE_INVALID_REQUEST_ERROR = 'invalid_request_error';
-    public const TYPE_AUTHENTICATION_ERROR = 'authentication_error';
-    public const TYPE_PERMISSION_ERROR = 'permission_error';
-    public const TYPE_NOT_FOUND = 'not_found';
-    public const TYPE_RATE_LIMIT_ERROR = 'rate_limit_error';
-    public const TYPE_PLATFORM_ERROR = 'platform_error';
-    public const TYPE_API_ERROR = 'api_error';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues()
-    {
-        return [
-            self::TYPE_INVALID_REQUEST_ERROR,
-            self::TYPE_AUTHENTICATION_ERROR,
-            self::TYPE_PERMISSION_ERROR,
-            self::TYPE_NOT_FOUND,
-            self::TYPE_RATE_LIMIT_ERROR,
-            self::TYPE_PLATFORM_ERROR,
-            self::TYPE_API_ERROR,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -307,13 +264,10 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('error', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('param', $data ?? [], null);
-        $this->setIfExists('platform', $data ?? [], null);
-        $this->setIfExists('platform_error', $data ?? [], null);
-        $this->setIfExists('details', $data ?? [], null);
+        $this->setIfExists('subcode', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('first_seen_at', $data ?? [], null);
+        $this->setIfExists('last_seen_at', $data ?? [], null);
     }
 
     /**
@@ -343,15 +297,6 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'type', must be one of '%s'",
-                $this->container['type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -368,200 +313,109 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets error
+     * Gets subcode
+     *
+     * @return int|null
+     */
+    public function getSubcode()
+    {
+        return $this->container['subcode'];
+    }
+
+    /**
+     * Sets subcode
+     *
+     * @param int|null $subcode subcode
+     *
+     * @return self
+     */
+    public function setSubcode($subcode)
+    {
+        if (is_null($subcode)) {
+            throw new \InvalidArgumentException('non-nullable subcode cannot be null');
+        }
+        $this->container['subcode'] = $subcode;
+
+        return $this;
+    }
+
+    /**
+     * Gets message
      *
      * @return string|null
      */
-    public function getError()
+    public function getMessage()
     {
-        return $this->container['error'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets error
+     * Sets message
      *
-     * @param string|null $error Human-readable error message.
+     * @param string|null $message message
      *
      * @return self
      */
-    public function setError($error)
+    public function setMessage($message)
     {
-        if (is_null($error)) {
-            throw new \InvalidArgumentException('non-nullable error cannot be null');
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        $this->container['error'] = $error;
+        $this->container['message'] = $message;
 
         return $this;
     }
 
     /**
-     * Gets type
+     * Gets first_seen_at
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getType()
+    public function getFirstSeenAt()
     {
-        return $this->container['type'];
+        return $this->container['first_seen_at'];
     }
 
     /**
-     * Sets type
+     * Sets first_seen_at
      *
-     * @param string|null $type Error class for programmatic handling.
+     * @param \DateTime|null $first_seen_at first_seen_at
      *
      * @return self
      */
-    public function setType($type)
+    public function setFirstSeenAt($first_seen_at)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($first_seen_at)) {
+            throw new \InvalidArgumentException('non-nullable first_seen_at cannot be null');
         }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'type', must be one of '%s'",
-                    $type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['type'] = $type;
+        $this->container['first_seen_at'] = $first_seen_at;
 
         return $this;
     }
 
     /**
-     * Gets code
+     * Gets last_seen_at
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getCode()
+    public function getLastSeenAt()
     {
-        return $this->container['code'];
+        return $this->container['last_seen_at'];
     }
 
     /**
-     * Sets code
+     * Sets last_seen_at
      *
-     * @param string|null $code Stable machine-readable error code.
+     * @param \DateTime|null $last_seen_at last_seen_at
      *
      * @return self
      */
-    public function setCode($code)
+    public function setLastSeenAt($last_seen_at)
     {
-        if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
+        if (is_null($last_seen_at)) {
+            throw new \InvalidArgumentException('non-nullable last_seen_at cannot be null');
         }
-        $this->container['code'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * Gets param
-     *
-     * @return string|null
-     */
-    public function getParam()
-    {
-        return $this->container['param'];
-    }
-
-    /**
-     * Sets param
-     *
-     * @param string|null $param The request field that caused the error, when applicable.
-     *
-     * @return self
-     */
-    public function setParam($param)
-    {
-        if (is_null($param)) {
-            throw new \InvalidArgumentException('non-nullable param cannot be null');
-        }
-        $this->container['param'] = $param;
-
-        return $this;
-    }
-
-    /**
-     * Gets platform
-     *
-     * @return string|null
-     */
-    public function getPlatform()
-    {
-        return $this->container['platform'];
-    }
-
-    /**
-     * Sets platform
-     *
-     * @param string|null $platform Upstream platform (e.g. meta, google, tiktok) — present when type is platform_error.
-     *
-     * @return self
-     */
-    public function setPlatform($platform)
-    {
-        if (is_null($platform)) {
-            throw new \InvalidArgumentException('non-nullable platform cannot be null');
-        }
-        $this->container['platform'] = $platform;
-
-        return $this;
-    }
-
-    /**
-     * Gets platform_error
-     *
-     * @return array<string,mixed>|null
-     */
-    public function getPlatformError()
-    {
-        return $this->container['platform_error'];
-    }
-
-    /**
-     * Sets platform_error
-     *
-     * @param array<string,mixed>|null $platform_error Raw error payload from the upstream platform, passed through verbatim so integrators can read provider-specific codes. For Meta this includes error_subcode, error_user_title, and error_user_msg.
-     *
-     * @return self
-     */
-    public function setPlatformError($platform_error)
-    {
-        if (is_null($platform_error)) {
-            throw new \InvalidArgumentException('non-nullable platform_error cannot be null');
-        }
-        $this->container['platform_error'] = $platform_error;
-
-        return $this;
-    }
-
-    /**
-     * Gets details
-     *
-     * @return array<string,mixed>|null
-     */
-    public function getDetails()
-    {
-        return $this->container['details'];
-    }
-
-    /**
-     * Sets details
-     *
-     * @param array<string,mixed>|null $details Additional structured context (e.g. field-level validation errors), for example `privateReplyConsumed` on the private-reply endpoint's 400 when the comment's single reply is already spent.
-     *
-     * @return self
-     */
-    public function setDetails($details)
-    {
-        if (is_null($details)) {
-            throw new \InvalidArgumentException('non-nullable details cannot be null');
-        }
-        $this->container['details'] = $details;
+        $this->container['last_seen_at'] = $last_seen_at;
 
         return $this;
     }
