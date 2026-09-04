@@ -63,6 +63,8 @@ class UpdateAdSetRequestPlatformSpecificData implements ModelInterface, ArrayAcc
         'billing_event' => 'string',
         'start_date' => 'string',
         'end_date' => 'string',
+        'daily_min_spend_target' => 'float',
+        'lifetime_min_spend_target' => 'float',
         'promoted_object' => '\Zernio\Model\UpdateAdSetRequestPlatformSpecificDataPromotedObject'
     ];
 
@@ -78,6 +80,8 @@ class UpdateAdSetRequestPlatformSpecificData implements ModelInterface, ArrayAcc
         'billing_event' => null,
         'start_date' => null,
         'end_date' => null,
+        'daily_min_spend_target' => null,
+        'lifetime_min_spend_target' => null,
         'promoted_object' => null
     ];
 
@@ -91,6 +95,8 @@ class UpdateAdSetRequestPlatformSpecificData implements ModelInterface, ArrayAcc
         'billing_event' => false,
         'start_date' => false,
         'end_date' => false,
+        'daily_min_spend_target' => false,
+        'lifetime_min_spend_target' => false,
         'promoted_object' => false
     ];
 
@@ -184,6 +190,8 @@ class UpdateAdSetRequestPlatformSpecificData implements ModelInterface, ArrayAcc
         'billing_event' => 'billingEvent',
         'start_date' => 'startDate',
         'end_date' => 'endDate',
+        'daily_min_spend_target' => 'dailyMinSpendTarget',
+        'lifetime_min_spend_target' => 'lifetimeMinSpendTarget',
         'promoted_object' => 'promotedObject'
     ];
 
@@ -197,6 +205,8 @@ class UpdateAdSetRequestPlatformSpecificData implements ModelInterface, ArrayAcc
         'billing_event' => 'setBillingEvent',
         'start_date' => 'setStartDate',
         'end_date' => 'setEndDate',
+        'daily_min_spend_target' => 'setDailyMinSpendTarget',
+        'lifetime_min_spend_target' => 'setLifetimeMinSpendTarget',
         'promoted_object' => 'setPromotedObject'
     ];
 
@@ -210,6 +220,8 @@ class UpdateAdSetRequestPlatformSpecificData implements ModelInterface, ArrayAcc
         'billing_event' => 'getBillingEvent',
         'start_date' => 'getStartDate',
         'end_date' => 'getEndDate',
+        'daily_min_spend_target' => 'getDailyMinSpendTarget',
+        'lifetime_min_spend_target' => 'getLifetimeMinSpendTarget',
         'promoted_object' => 'getPromotedObject'
     ];
 
@@ -274,6 +286,8 @@ class UpdateAdSetRequestPlatformSpecificData implements ModelInterface, ArrayAcc
         $this->setIfExists('billing_event', $data ?? [], null);
         $this->setIfExists('start_date', $data ?? [], null);
         $this->setIfExists('end_date', $data ?? [], null);
+        $this->setIfExists('daily_min_spend_target', $data ?? [], null);
+        $this->setIfExists('lifetime_min_spend_target', $data ?? [], null);
         $this->setIfExists('promoted_object', $data ?? [], null);
     }
 
@@ -423,6 +437,60 @@ class UpdateAdSetRequestPlatformSpecificData implements ModelInterface, ArrayAcc
             throw new \InvalidArgumentException('non-nullable end_date cannot be null');
         }
         $this->container['end_date'] = $end_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets daily_min_spend_target
+     *
+     * @return float|null
+     */
+    public function getDailyMinSpendTarget()
+    {
+        return $this->container['daily_min_spend_target'];
+    }
+
+    /**
+     * Sets daily_min_spend_target
+     *
+     * @param float|null $daily_min_spend_target Meta `daily_min_spend_target`: the least this ad set should spend per day, in whole currency units of the ad account. It reserves a share of a CAMPAIGN budget for one ad set, so it requires a campaign using Advantage campaign budget (CBO). On an ad set that owns its budget (ABO) this returns 409 — move the budget to the campaign with `PUT /v1/ads/campaigns/{campaignId}` first. Meta treats it as a target, not a guarantee, and rejects the combined minimum of a campaign's ad sets going over the campaign budget. Mutually exclusive with `lifetimeMinSpendTarget` (400): the flavour must match the campaign budget type, a daily budget takes a daily target. Read it back with `GET /v1/ads/ad-sets/{adSetId}?fields=daily_min_spend_target`.
+     *
+     * @return self
+     */
+    public function setDailyMinSpendTarget($daily_min_spend_target)
+    {
+        if (is_null($daily_min_spend_target)) {
+            throw new \InvalidArgumentException('non-nullable daily_min_spend_target cannot be null');
+        }
+        $this->container['daily_min_spend_target'] = $daily_min_spend_target;
+
+        return $this;
+    }
+
+    /**
+     * Gets lifetime_min_spend_target
+     *
+     * @return float|null
+     */
+    public function getLifetimeMinSpendTarget()
+    {
+        return $this->container['lifetime_min_spend_target'];
+    }
+
+    /**
+     * Sets lifetime_min_spend_target
+     *
+     * @param float|null $lifetime_min_spend_target Meta `lifetime_min_spend_target`: the lifetime-budget flavour of `dailyMinSpendTarget`, in whole currency units. Send this one when the campaign budget is a lifetime budget. Same rules and same rejections.
+     *
+     * @return self
+     */
+    public function setLifetimeMinSpendTarget($lifetime_min_spend_target)
+    {
+        if (is_null($lifetime_min_spend_target)) {
+            throw new \InvalidArgumentException('non-nullable lifetime_min_spend_target cannot be null');
+        }
+        $this->container['lifetime_min_spend_target'] = $lifetime_min_spend_target;
 
         return $this;
     }

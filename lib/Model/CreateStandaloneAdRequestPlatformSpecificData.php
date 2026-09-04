@@ -36,7 +36,7 @@ use \Zernio\ObjectSerializer;
  * CreateStandaloneAdRequestPlatformSpecificData Class Doc Comment
  *
  * @category Class
- * @description Platform-specific options. The platform is derived from &#x60;accountId&#x60;; sending options for a different platform returns a 400. LinkedIn (campaign bidding and delivery controls) and Meta (the bid trio) have options today.  **Meta**: &#x60;bidStrategy&#x60;, &#x60;bidAmount&#x60; and &#x60;roasAverageFloor&#x60; may be sent here instead of at the root — the preferred home going forward. Sending the bid fields in BOTH places returns a 400 (&#x60;mutually_exclusive_fields&#x60;), and sending any of them in &#x60;adSetId&#x60; attach mode is a 400 too (the ad set already has its bid).
+ * @description Platform-specific options. The platform is derived from &#x60;accountId&#x60;; sending options for a different platform returns a 400. LinkedIn (campaign bidding and delivery controls) and Meta (the bid trio) have options today.  **Meta**: &#x60;bidStrategy&#x60;, &#x60;bidAmount&#x60; and &#x60;roasAverageFloor&#x60; may be sent here instead of at the root — the preferred home going forward. Sending the bid fields in BOTH places returns a 400 (&#x60;mutually_exclusive_fields&#x60;), and sending any of them in &#x60;adSetId&#x60; attach mode is a 400 too (the ad set already has its bid). &#x60;dailyMinSpendTarget&#x60; / &#x60;lifetimeMinSpendTarget&#x60; set the new ad set&#39;s minimum spend and live here only; they are rejected in &#x60;adSetId&#x60; attach mode as well.
  * @package  Zernio
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -77,7 +77,9 @@ class CreateStandaloneAdRequestPlatformSpecificData implements ModelInterface, A
         'thought_leader' => '\Zernio\Model\LinkedInAdsPlatformDataThoughtLeader',
         'bid_strategy' => '\Zernio\Model\BidStrategy',
         'bid_amount' => 'float',
-        'roas_average_floor' => 'float'
+        'roas_average_floor' => 'float',
+        'daily_min_spend_target' => 'float',
+        'lifetime_min_spend_target' => 'float'
     ];
 
     /**
@@ -106,7 +108,9 @@ class CreateStandaloneAdRequestPlatformSpecificData implements ModelInterface, A
         'thought_leader' => null,
         'bid_strategy' => null,
         'bid_amount' => null,
-        'roas_average_floor' => null
+        'roas_average_floor' => null,
+        'daily_min_spend_target' => null,
+        'lifetime_min_spend_target' => null
     ];
 
     /**
@@ -133,7 +137,9 @@ class CreateStandaloneAdRequestPlatformSpecificData implements ModelInterface, A
         'thought_leader' => false,
         'bid_strategy' => false,
         'bid_amount' => false,
-        'roas_average_floor' => false
+        'roas_average_floor' => false,
+        'daily_min_spend_target' => false,
+        'lifetime_min_spend_target' => false
     ];
 
     /**
@@ -240,7 +246,9 @@ class CreateStandaloneAdRequestPlatformSpecificData implements ModelInterface, A
         'thought_leader' => 'thoughtLeader',
         'bid_strategy' => 'bidStrategy',
         'bid_amount' => 'bidAmount',
-        'roas_average_floor' => 'roasAverageFloor'
+        'roas_average_floor' => 'roasAverageFloor',
+        'daily_min_spend_target' => 'dailyMinSpendTarget',
+        'lifetime_min_spend_target' => 'lifetimeMinSpendTarget'
     ];
 
     /**
@@ -267,7 +275,9 @@ class CreateStandaloneAdRequestPlatformSpecificData implements ModelInterface, A
         'thought_leader' => 'setThoughtLeader',
         'bid_strategy' => 'setBidStrategy',
         'bid_amount' => 'setBidAmount',
-        'roas_average_floor' => 'setRoasAverageFloor'
+        'roas_average_floor' => 'setRoasAverageFloor',
+        'daily_min_spend_target' => 'setDailyMinSpendTarget',
+        'lifetime_min_spend_target' => 'setLifetimeMinSpendTarget'
     ];
 
     /**
@@ -294,7 +304,9 @@ class CreateStandaloneAdRequestPlatformSpecificData implements ModelInterface, A
         'thought_leader' => 'getThoughtLeader',
         'bid_strategy' => 'getBidStrategy',
         'bid_amount' => 'getBidAmount',
-        'roas_average_floor' => 'getRoasAverageFloor'
+        'roas_average_floor' => 'getRoasAverageFloor',
+        'daily_min_spend_target' => 'getDailyMinSpendTarget',
+        'lifetime_min_spend_target' => 'getLifetimeMinSpendTarget'
     ];
 
     /**
@@ -405,6 +417,8 @@ class CreateStandaloneAdRequestPlatformSpecificData implements ModelInterface, A
         $this->setIfExists('bid_strategy', $data ?? [], null);
         $this->setIfExists('bid_amount', $data ?? [], null);
         $this->setIfExists('roas_average_floor', $data ?? [], null);
+        $this->setIfExists('daily_min_spend_target', $data ?? [], null);
+        $this->setIfExists('lifetime_min_spend_target', $data ?? [], null);
     }
 
     /**
@@ -996,6 +1010,60 @@ class CreateStandaloneAdRequestPlatformSpecificData implements ModelInterface, A
             throw new \InvalidArgumentException('non-nullable roas_average_floor cannot be null');
         }
         $this->container['roas_average_floor'] = $roas_average_floor;
+
+        return $this;
+    }
+
+    /**
+     * Gets daily_min_spend_target
+     *
+     * @return float|null
+     */
+    public function getDailyMinSpendTarget()
+    {
+        return $this->container['daily_min_spend_target'];
+    }
+
+    /**
+     * Sets daily_min_spend_target
+     *
+     * @param float|null $daily_min_spend_target Meta daily_min_spend_target on the ad set being created: the least it should spend per day, in whole currency units. It reserves a share of a CAMPAIGN budget, so it requires budgetLevel campaign or an existingCampaignId whose campaign has the budget (Advantage campaign budget / CBO); with an ad-set budget it is a 400, because Meta rejects a spend limit on an ad set that owns its budget. A target, not a guarantee. Mutually exclusive with lifetimeMinSpendTarget: the flavour must match the campaign budget type. Rejected with 400 on POST /v1/ads/boost and in adSetId attach mode: use PUT /v1/ads/ad-sets/{adSetId} for an ad set that already exists.
+     *
+     * @return self
+     */
+    public function setDailyMinSpendTarget($daily_min_spend_target)
+    {
+        if (is_null($daily_min_spend_target)) {
+            throw new \InvalidArgumentException('non-nullable daily_min_spend_target cannot be null');
+        }
+        $this->container['daily_min_spend_target'] = $daily_min_spend_target;
+
+        return $this;
+    }
+
+    /**
+     * Gets lifetime_min_spend_target
+     *
+     * @return float|null
+     */
+    public function getLifetimeMinSpendTarget()
+    {
+        return $this->container['lifetime_min_spend_target'];
+    }
+
+    /**
+     * Sets lifetime_min_spend_target
+     *
+     * @param float|null $lifetime_min_spend_target Meta lifetime_min_spend_target: the lifetime-budget flavour of dailyMinSpendTarget, in whole currency units. Same rules and same rejections.
+     *
+     * @return self
+     */
+    public function setLifetimeMinSpendTarget($lifetime_min_spend_target)
+    {
+        if (is_null($lifetime_min_spend_target)) {
+            throw new \InvalidArgumentException('non-nullable lifetime_min_spend_target cannot be null');
+        }
+        $this->container['lifetime_min_spend_target'] = $lifetime_min_spend_target;
 
         return $this;
     }

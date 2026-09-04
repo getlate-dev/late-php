@@ -61,7 +61,9 @@ class MetaAdsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static $openAPITypes = [
         'bid_strategy' => '\Zernio\Model\BidStrategy',
         'bid_amount' => 'float',
-        'roas_average_floor' => 'float'
+        'roas_average_floor' => 'float',
+        'daily_min_spend_target' => 'float',
+        'lifetime_min_spend_target' => 'float'
     ];
 
     /**
@@ -74,7 +76,9 @@ class MetaAdsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static $openAPIFormats = [
         'bid_strategy' => null,
         'bid_amount' => null,
-        'roas_average_floor' => null
+        'roas_average_floor' => null,
+        'daily_min_spend_target' => null,
+        'lifetime_min_spend_target' => null
     ];
 
     /**
@@ -85,7 +89,9 @@ class MetaAdsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static array $openAPINullables = [
         'bid_strategy' => false,
         'bid_amount' => false,
-        'roas_average_floor' => false
+        'roas_average_floor' => false,
+        'daily_min_spend_target' => false,
+        'lifetime_min_spend_target' => false
     ];
 
     /**
@@ -176,7 +182,9 @@ class MetaAdsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static $attributeMap = [
         'bid_strategy' => 'bidStrategy',
         'bid_amount' => 'bidAmount',
-        'roas_average_floor' => 'roasAverageFloor'
+        'roas_average_floor' => 'roasAverageFloor',
+        'daily_min_spend_target' => 'dailyMinSpendTarget',
+        'lifetime_min_spend_target' => 'lifetimeMinSpendTarget'
     ];
 
     /**
@@ -187,7 +195,9 @@ class MetaAdsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static $setters = [
         'bid_strategy' => 'setBidStrategy',
         'bid_amount' => 'setBidAmount',
-        'roas_average_floor' => 'setRoasAverageFloor'
+        'roas_average_floor' => 'setRoasAverageFloor',
+        'daily_min_spend_target' => 'setDailyMinSpendTarget',
+        'lifetime_min_spend_target' => 'setLifetimeMinSpendTarget'
     ];
 
     /**
@@ -198,7 +208,9 @@ class MetaAdsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static $getters = [
         'bid_strategy' => 'getBidStrategy',
         'bid_amount' => 'getBidAmount',
-        'roas_average_floor' => 'getRoasAverageFloor'
+        'roas_average_floor' => 'getRoasAverageFloor',
+        'daily_min_spend_target' => 'getDailyMinSpendTarget',
+        'lifetime_min_spend_target' => 'getLifetimeMinSpendTarget'
     ];
 
     /**
@@ -261,6 +273,8 @@ class MetaAdsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('bid_strategy', $data ?? [], null);
         $this->setIfExists('bid_amount', $data ?? [], null);
         $this->setIfExists('roas_average_floor', $data ?? [], null);
+        $this->setIfExists('daily_min_spend_target', $data ?? [], null);
+        $this->setIfExists('lifetime_min_spend_target', $data ?? [], null);
     }
 
     /**
@@ -382,6 +396,60 @@ class MetaAdsPlatformData implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable roas_average_floor cannot be null');
         }
         $this->container['roas_average_floor'] = $roas_average_floor;
+
+        return $this;
+    }
+
+    /**
+     * Gets daily_min_spend_target
+     *
+     * @return float|null
+     */
+    public function getDailyMinSpendTarget()
+    {
+        return $this->container['daily_min_spend_target'];
+    }
+
+    /**
+     * Sets daily_min_spend_target
+     *
+     * @param float|null $daily_min_spend_target Meta daily_min_spend_target on the ad set being created: the least it should spend per day, in whole currency units. It reserves a share of a CAMPAIGN budget, so it requires budgetLevel campaign or an existingCampaignId whose campaign has the budget (Advantage campaign budget / CBO); with an ad-set budget it is a 400, because Meta rejects a spend limit on an ad set that owns its budget. A target, not a guarantee. Mutually exclusive with lifetimeMinSpendTarget: the flavour must match the campaign budget type. Rejected with 400 on POST /v1/ads/boost and in adSetId attach mode: use PUT /v1/ads/ad-sets/{adSetId} for an ad set that already exists.
+     *
+     * @return self
+     */
+    public function setDailyMinSpendTarget($daily_min_spend_target)
+    {
+        if (is_null($daily_min_spend_target)) {
+            throw new \InvalidArgumentException('non-nullable daily_min_spend_target cannot be null');
+        }
+        $this->container['daily_min_spend_target'] = $daily_min_spend_target;
+
+        return $this;
+    }
+
+    /**
+     * Gets lifetime_min_spend_target
+     *
+     * @return float|null
+     */
+    public function getLifetimeMinSpendTarget()
+    {
+        return $this->container['lifetime_min_spend_target'];
+    }
+
+    /**
+     * Sets lifetime_min_spend_target
+     *
+     * @param float|null $lifetime_min_spend_target Meta lifetime_min_spend_target: the lifetime-budget flavour of dailyMinSpendTarget, in whole currency units. Same rules and same rejections.
+     *
+     * @return self
+     */
+    public function setLifetimeMinSpendTarget($lifetime_min_spend_target)
+    {
+        if (is_null($lifetime_min_spend_target)) {
+            throw new \InvalidArgumentException('non-nullable lifetime_min_spend_target cannot be null');
+        }
+        $this->container['lifetime_min_spend_target'] = $lifetime_min_spend_target;
 
         return $this;
     }
