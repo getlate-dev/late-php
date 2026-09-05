@@ -717,7 +717,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets failure_count
      *
-     * @param int|null $failure_count Consecutive delivery failures (resets on success, webhook disabled at 10)
+     * @param int|null $failure_count Consecutive terminal delivery failures (resets to 0 on any successful delivery). Auto-disable only triggers when the endpoint has had no successful delivery within a 3-day window AND either reaches 20 consecutive terminal failures or has been failing continuously for 3 days; any success within that window keeps the endpoint enabled regardless of the count.
      *
      * @return self
      */
