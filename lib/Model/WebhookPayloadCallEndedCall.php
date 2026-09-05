@@ -71,6 +71,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'end_reason' => 'string',
         'hangup_cause' => 'string',
         'sip_hangup_cause' => 'string',
+        'is_voicemail' => 'bool',
+        'call_errors' => '\Zernio\Model\CallRecordCallErrorsInner[]',
         'recording_url' => 'string',
         'recording_expires_at' => '\DateTime',
         'billing' => '\Zernio\Model\WebhookPayloadCallEndedCallBilling'
@@ -97,6 +99,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'end_reason' => null,
         'hangup_cause' => null,
         'sip_hangup_cause' => null,
+        'is_voicemail' => null,
+        'call_errors' => null,
         'recording_url' => null,
         'recording_expires_at' => 'date-time',
         'billing' => null
@@ -121,6 +125,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'end_reason' => false,
         'hangup_cause' => true,
         'sip_hangup_cause' => true,
+        'is_voicemail' => false,
+        'call_errors' => false,
         'recording_url' => false,
         'recording_expires_at' => false,
         'billing' => false
@@ -225,6 +231,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'end_reason' => 'endReason',
         'hangup_cause' => 'hangupCause',
         'sip_hangup_cause' => 'sipHangupCause',
+        'is_voicemail' => 'isVoicemail',
+        'call_errors' => 'callErrors',
         'recording_url' => 'recordingUrl',
         'recording_expires_at' => 'recordingExpiresAt',
         'billing' => 'billing'
@@ -249,6 +257,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'end_reason' => 'setEndReason',
         'hangup_cause' => 'setHangupCause',
         'sip_hangup_cause' => 'setSipHangupCause',
+        'is_voicemail' => 'setIsVoicemail',
+        'call_errors' => 'setCallErrors',
         'recording_url' => 'setRecordingUrl',
         'recording_expires_at' => 'setRecordingExpiresAt',
         'billing' => 'setBilling'
@@ -273,6 +283,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         'end_reason' => 'getEndReason',
         'hangup_cause' => 'getHangupCause',
         'sip_hangup_cause' => 'getSipHangupCause',
+        'is_voicemail' => 'getIsVoicemail',
+        'call_errors' => 'getCallErrors',
         'recording_url' => 'getRecordingUrl',
         'recording_expires_at' => 'getRecordingExpiresAt',
         'billing' => 'getBilling'
@@ -382,6 +394,8 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('end_reason', $data ?? [], null);
         $this->setIfExists('hangup_cause', $data ?? [], null);
         $this->setIfExists('sip_hangup_cause', $data ?? [], null);
+        $this->setIfExists('is_voicemail', $data ?? [], null);
+        $this->setIfExists('call_errors', $data ?? [], null);
         $this->setIfExists('recording_url', $data ?? [], null);
         $this->setIfExists('recording_expires_at', $data ?? [], null);
         $this->setIfExists('billing', $data ?? [], null);
@@ -835,6 +849,60 @@ class WebhookPayloadCallEndedCall implements ModelInterface, ArrayAccess, \JsonS
             }
         }
         $this->container['sip_hangup_cause'] = $sip_hangup_cause;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_voicemail
+     *
+     * @return bool|null
+     */
+    public function getIsVoicemail()
+    {
+        return $this->container['is_voicemail'];
+    }
+
+    /**
+     * Sets is_voicemail
+     *
+     * @param bool|null $is_voicemail True when the inbound call was handled by voicemail, whether scheduled or because the forward did not connect.
+     *
+     * @return self
+     */
+    public function setIsVoicemail($is_voicemail)
+    {
+        if (is_null($is_voicemail)) {
+            throw new \InvalidArgumentException('non-nullable is_voicemail cannot be null');
+        }
+        $this->container['is_voicemail'] = $is_voicemail;
+
+        return $this;
+    }
+
+    /**
+     * Gets call_errors
+     *
+     * @return \Zernio\Model\CallRecordCallErrorsInner[]|null
+     */
+    public function getCallErrors()
+    {
+        return $this->container['call_errors'];
+    }
+
+    /**
+     * Sets call_errors
+     *
+     * @param \Zernio\Model\CallRecordCallErrorsInner[]|null $call_errors Failures recorded on the call up to hangup (bridge failed, dial failed, recording error). Empty on a clean call. `message` is free-form diagnostic text and is not stable, do not parse it. `code` is 0 unless a provider code is known. Errors the carrier reports after hangup appear only on GET /v1/calls/{id}.
+     *
+     * @return self
+     */
+    public function setCallErrors($call_errors)
+    {
+        if (is_null($call_errors)) {
+            throw new \InvalidArgumentException('non-nullable call_errors cannot be null');
+        }
+        $this->container['call_errors'] = $call_errors;
 
         return $this;
     }
